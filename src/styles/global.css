@@ -1,0 +1,87 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+
+  line-height: 1;
+  color: inherit;
+
+  scroll-behavior: smooth;
+  scrollbar-width: thin;
+  scrollbar-color: var(--pal-color-a-l1) transparent;
+}
+
+html {
+  --document-background-color: var(--pal-color-gs-50);
+
+  text-rendering: optimizeLegibility;
+  background-color: var(--document-background-color);
+}
+
+::selection {
+  color: var(--pal-color-white);
+  background-color: var(--pal-color-a-d1);
+}
+
+:is(h1, h2, h3, h4),
+:is(h1, h2, h3, h4) > * {
+  margin: 0;
+
+  font-family: var(--pal-font-b);
+  font-weight: 500;
+  word-spacing: initial;
+  letter-spacing: initial;
+}
+
+h1,
+h1 > * {
+  font-size: var(--pal-size-font-3xl);
+}
+
+h2,
+h2 > * {
+  font-size: var(--pal-size-font-2xl);
+}
+
+h3,
+h3 > * {
+  font-size: var(--pal-size-font-m);
+  font-family: var(--pal-font-a);
+  font-weight: 600;
+}
+
+small {
+  font-size: var(--pal-size-font-xs);
+}
+
+ul,
+ol {
+  display: flex;
+  list-style: none;
+}
+
+hr {
+  border: none;
+}
+
+span {
+  display: block;
+}
+
+input,
+textarea {
+  outline: none;
+}
+
+button {
+  border: none;
+
+  background-color: transparent;
+  cursor: pointer;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--pal-size-l);
+}
