@@ -1,0 +1,3 @@
+.cmp-state-button {
+  transition: background-color var(--pal-time-s) ease-out;
+}

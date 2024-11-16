@@ -11,9 +11,12 @@
   scrollbar-color: var(--pal-color-a-l1) transparent;
 }
 
-html {
+:root {
+  --line-thickness: 0.0625rem;
   --document-background-color: var(--pal-color-gs-50);
+}
 
+html {
   text-rendering: optimizeLegibility;
   background-color: var(--document-background-color);
 }

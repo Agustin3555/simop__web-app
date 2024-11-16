@@ -140,7 +140,7 @@
     flex-direction: column;
     align-items: center;
     gap: 4rem;
-    border-width: var(--glb-line-width);
+    border-width: var(--line-thickness);
     border-style: solid;
     border-color: var(--pal-color-a-l2);
     padding: var(--pal-size-xl);
@@ -180,7 +180,7 @@
 
   input,
   textarea {
-    border-width: var(--glb-line-width);
+    border-width: var(--line-thickness);
     border-style: solid;
     border-color: rgba(var(--pal-color-base-a-d1), 0.375);
     width: 100%;

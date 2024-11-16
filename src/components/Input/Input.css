@@ -1,0 +1,6 @@
+.cmp-input input {
+  padding-inline: var(--pal-size-s);
+  height: var(--pal-size-2xl);
+
+  line-height: 1;
+}
