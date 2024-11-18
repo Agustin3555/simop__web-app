@@ -170,6 +170,7 @@
     gap: var(--pal-size-xs);
 
     font-size: var(--pal-size-font-xs);
+    font-weight: 500;
 
     color: var(--pal-color-a-d2);
 
@@ -198,4 +199,10 @@
       color: var(--pal-color-black);
     }
   }
+}
+
+.fields {
+  display: grid;
+  gap: var(--pal-size-m);
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 20rem), 1fr));
 }

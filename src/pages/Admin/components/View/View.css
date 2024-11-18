@@ -1,0 +1,60 @@
+.cmp-view {
+  position: absolute;
+
+  display: none;
+  flex-direction: column;
+  gap: var(--pal-size-m);
+  padding: var(--pal-size-m);
+  width: 100%;
+
+  > fieldset {
+    display: flex;
+    gap: var(--pal-size-m);
+    margin-left: calc(var(--pal-size-2xl) + var(--pal-size-m));
+    border: none;
+
+    > label {
+      display: flex;
+      align-items: center;
+      gap: var(--pal-size-s);
+      padding-inline: var(--pal-size-l);
+      height: var(--pal-size-2xl);
+
+      border-radius: var(--pal-size-2xs);
+      cursor: pointer;
+
+      > input {
+        display: none;
+      }
+
+      &:hover {
+        background-color: rgba(var(--pal-color-base-a), 0.125);
+      }
+
+      &:has(input:checked) {
+        color: var(--pal-color-white);
+
+        background-color: var(--pal-color-a-l1);
+      }
+    }
+  }
+
+  > .local-views {
+    position: relative;
+
+    > * {
+      position: absolute;
+
+      display: none;
+      width: 100%;
+
+      &.active {
+        display: initial;
+      }
+    }
+  }
+
+  &.active {
+    display: flex;
+  }
+}

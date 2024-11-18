@@ -1,11 +1,24 @@
 import './Login.css'
 import { useSubmitAction } from '@/hooks'
 import { Input, StateButton } from '@/components'
+import { useLocation } from 'wouter'
 
 const Login = () => {
+  const [_, navigate] = useLocation()
+
   const { handleSubmit, actionState } = useSubmitAction(
     async ({ formData, setLoading, setError, setSuccess }) => {
-      console.log(formData.get('pass'))
+      setLoading()
+
+      const pass = formData.get('pass')
+
+      if (pass === import.meta.env.VITE_UNIQUE_PASS) {
+        setSuccess()
+
+        navigate('/admin')
+      } else {
+        setError()
+      }
     }
   )
 
@@ -13,7 +26,7 @@ const Login = () => {
     <article className="cmp-login">
       <img src="/src/assets/isologotipo-gobierno-del-chaco.webp" />
       <form onSubmit={handleSubmit}>
-        <Input id="pass" title="Contraseña" type="password" />
+        <Input id="pass" title="Contraseña" type="password" required />
         <StateButton
           title="Acceder"
           text="Acceder"

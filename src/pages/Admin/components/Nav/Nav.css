@@ -1,0 +1,68 @@
+.cmp-nav {
+  position: relative;
+  z-index: 1;
+
+  > .backdrop {
+    position: absolute;
+    z-index: -1;
+    top: 0;
+    left: 0;
+
+    display: none;
+    width: 100dvw;
+    height: 100dvh;
+
+    background-color: var(--pal-color-black);
+    opacity: 0;
+
+    transition: opacity var(--pal-time-m) ease,
+      display var(--pal-time-m) ease allow-discrete;
+  }
+
+  .cmp-button {
+    --gap: var(--pal-size-m);
+
+    position: absolute;
+    z-index: -1;
+    top: var(--gap);
+    left: var(--gap);
+
+    padding: 0;
+    width: var(--pal-size-2xl);
+  }
+
+  > nav {
+    --items-gap: var(--pal-size-2xs);
+
+    position: absolute;
+
+    display: flex;
+    flex-direction: column;
+    gap: var(--items-gap);
+    padding: var(--pal-size-l);
+    width: fit-content;
+    height: 100dvh;
+
+    background-color: var(--pal-color-a-l2);
+    box-shadow: var(--pal-shadow-1);
+    translate: -100%;
+
+    transition: translate var(--pal-time-m) ease;
+  }
+
+  &.open {
+    > .backdrop {
+      display: initial;
+
+      opacity: 0.5;
+
+      @starting-style {
+        opacity: 0;
+      }
+    }
+
+    > nav {
+      translate: initial;
+    }
+  }
+}

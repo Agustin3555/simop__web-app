@@ -1,0 +1,18 @@
+:root {
+  --cmp-separator-long: auto;
+  --cmp-separator-thick: var(--line-thickness);
+  --cmp-separator-color: var(--pal-color-a-l2);
+}
+
+.cmp-separator {
+  border: none;
+  width: var(--cmp-separator-long);
+  height: var(--cmp-separator-thick);
+
+  background-color: var(--cmp-separator-color);
+
+  &.invert {
+    width: var(--cmp-separator-thick);
+    height: var(--cmp-separator-long);
+  }
+}
