@@ -1,3 +1,4 @@
+// @ts-ignore
 import { AppError, ERRORS, getErrorInterpretation } from '@/helpers'
 
 export const catchError = (error: any) => {
