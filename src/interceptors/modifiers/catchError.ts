@@ -1,4 +1,3 @@
-// @ts-ignore
 import { AppError, ERRORS, getErrorInterpretation } from '@/helpers'
 
 export const catchError = (error: any) => {
@@ -12,8 +11,7 @@ export const catchError = (error: any) => {
     if (apiErrorCode) return new AppError(apiErrorCode)
     else {
       // No existe el código de error, por lo tanto es un error "no controlado"
-
-      const errorMessage = getErrorInterpretation(ERRORS.unknown)
+      // const errorMessage = getErrorInterpretation(ERRORS.unknown)
     }
   } else {
     // No se ha completado la solicitud, el error se ha producido
