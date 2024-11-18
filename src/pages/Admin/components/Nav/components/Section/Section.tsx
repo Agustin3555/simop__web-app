@@ -17,7 +17,7 @@ const Section = ({ title, sections, viewKey }: SectionNode) => {
   return (
     <div className={classList('cmp-section', { open: isOpen })}>
       <button className={classList({ active })} onClick={handleClick}>
-        {sections && <Icon faIcon="fa-solid fa-angle-down" />}
+        {sections && <Icon faIcon="fa-solid fa-angle-right" />}
         {title}
       </button>
       {sections && (

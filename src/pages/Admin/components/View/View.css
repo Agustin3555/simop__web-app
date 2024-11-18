@@ -54,6 +54,12 @@
     }
   }
 
+  .cmp-state-button {
+    align-self: flex-end;
+
+    width: 10rem;
+  }
+
   &.active {
     display: flex;
   }

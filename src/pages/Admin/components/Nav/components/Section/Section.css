@@ -45,7 +45,7 @@
     height: auto;
 
     > button > .cmp-icon {
-      rotate: 0.5turn;
+      rotate: 0.25turn;
     }
   }
 }
