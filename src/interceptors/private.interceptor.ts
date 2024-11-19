@@ -1,5 +1,5 @@
-import { addToken, catchError } from './modifiers'
-import { privateInstance } from '@/helpers'
+import { privateInstance } from '@/services/config'
+import { addToken, catchError } from './config'
 
 export const PrivateInterceptor = () => {
   privateInstance.interceptors.response.use(undefined, catchError)

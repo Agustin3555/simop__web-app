@@ -1,4 +1,4 @@
-import { AppError, ERRORS, getErrorInterpretation } from '@/helpers'
+import { AppError, ERRORS, getErrorInterpretation } from '@/services/config'
 
 export const catchError = (error: any) => {
   // console.log({ error })

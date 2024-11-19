@@ -1,1 +1,1 @@
-export * as AppointmentAdapter from './appointment.adapter'
+export * as SubSecretariaAdapter from './subScretaria.adapter'

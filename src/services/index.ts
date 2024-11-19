@@ -1,1 +1,1 @@
-export * as AppointmentService from './appointment.service'
+export * as SubSecretariaService from './subSecretaria.service'

@@ -1,1 +1,1 @@
-export * as AppointmentModel from './appointment.model'
+export * as SubSecretariaModel from './subSecretaria.model'
