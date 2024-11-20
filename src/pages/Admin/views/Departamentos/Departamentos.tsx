@@ -1,20 +1,9 @@
 import { View } from '../../components'
-import { Input } from '@/components'
+import { Add } from './components'
 import { ViewKey } from '../../enums'
 
 const Departamentos = () => {
-  return (
-    <View
-      view={ViewKey.DEPARTAMENTOS}
-      items={[
-        { title: 'Agregar', faIcon: 'fa-solid fa-plus' },
-        { title: 'Modificar', faIcon: 'fa-solid fa-pen-to-square' },
-      ]}
-    >
-      <Input />
-      <Input />
-    </View>
-  )
+  return <View view={ViewKey.DEPARTAMENTOS} add={<Add />} />
 }
 
 export default Departamentos

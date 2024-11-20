@@ -1,28 +1,65 @@
 import './View.css'
-import { ChangeEventHandler, ReactNode, useCallback, useState } from 'react'
+import {
+  ChangeEventHandler,
+  ReactNode,
+  useCallback,
+  useMemo,
+  useState,
+} from 'react'
 import { useViewActive } from '../../contexts'
 import { ViewKey } from '../../enums'
-import { classList } from '@/helpers'
+import { addIfExist, classList } from '@/helpers'
 import { Icon, Separator } from '@/components'
+
+type LocalViewKey = 'query' | 'add' | 'update'
 
 interface Props {
   view: ViewKey
-  items: {
-    title: string
-    faIcon?: string
-  }[]
-  children: ReactNode[]
+  query?: ReactNode
+  add?: ReactNode
+  update?: ReactNode
 }
 
-const View = ({ view, items, children }: Props) => {
-  const [localView, setLocalView] = useState(0)
+const View = ({ view, query, add, update }: Props) => {
   const active = useViewActive(view)
+
+  const localViews = useMemo(
+    () =>
+      addIfExist<{
+        title: string
+        faIcon: string
+        localViewKey: LocalViewKey
+        component: ReactNode
+      }>([
+        query && {
+          title: 'Consultar',
+          faIcon: 'fa-solid fa-search',
+          localViewKey: 'query',
+          component: query,
+        },
+        add && {
+          title: 'Agregar',
+          faIcon: 'fa-solid fa-plus',
+          localViewKey: 'add',
+          component: add,
+        },
+        update && {
+          title: 'Modificar',
+          faIcon: 'fa-solid fa-pen-to-square',
+          localViewKey: 'update',
+          component: update,
+        },
+      ]),
+    [query, add, update]
+  )
+
+  const [localView, setLocalView] = useState(localViews[0].localViewKey)
 
   const handleChange = useCallback<ChangeEventHandler<HTMLInputElement>>(
     event => {
-      const newIndex = Number(event.target.id)
+      const newLocalView = event.target.id
 
-      setLocalView(newIndex)
+      setLocalView(newLocalView as LocalViewKey)
     },
     []
   )
@@ -30,15 +67,15 @@ const View = ({ view, items, children }: Props) => {
   return (
     <div className={classList('cmp-view', view, { active })}>
       <fieldset>
-        {items.map(({ title, faIcon }, index) => (
+        {localViews.map(({ title, faIcon, localViewKey }) => (
           <label key={title}>
             {faIcon && <Icon {...{ faIcon }} />}
             {title}
             <input
               type="radio"
-              name={view}
-              id={String(index)}
-              checked={index === localView}
+              id={localViewKey}
+              name={['tabbed', view].join('-')}
+              checked={localViewKey === localView}
               onChange={handleChange}
             />
           </label>
@@ -46,12 +83,12 @@ const View = ({ view, items, children }: Props) => {
       </fieldset>
       <Separator />
       <div className="local-views">
-        {children.map((child, index) => (
+        {localViews.map(({ localViewKey, component }) => (
           <div
-            key={index}
-            className={classList({ active: index === localView })}
+            key={localViewKey}
+            className={classList({ active: localViewKey === localView })}
           >
-            {child}
+            {component}
           </div>
         ))}
       </div>
