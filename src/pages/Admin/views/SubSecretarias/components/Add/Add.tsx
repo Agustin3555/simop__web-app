@@ -1,23 +1,29 @@
 import { useSubmitAction } from '@/hooks'
-import { Input, StateButton } from '@/components'
+import { Input } from '@/components'
+import { LocalAdd } from '@/pages/Admin/components'
+import { SubSecretariaService } from '@/pages/Admin/services'
 
 const Add = () => {
-  const { handleSubmit, actionState } = useSubmitAction(
-    async ({ formData, setLoading, setError, setSuccess }) => {}
+  const submitActionResult = useSubmitAction(
+    async ({ formData, setLoading, setError, setSuccess }) => {
+      setLoading()
+
+      const response = await SubSecretariaService.create({
+        nombre: formData.get('nombre') as string,
+      })
+
+      if (response) {
+        setSuccess()
+      } else {
+        setError()
+      }
+    }
   )
 
   return (
-    <form onSubmit={handleSubmit}>
-      <div className="fields">
-        <Input id="nombre" title="Nombre de la Subsecretaría" required />
-      </div>
-      <StateButton
-        title="Confirmar"
-        text="Confirmar"
-        faIcon="fa-solid fa-check"
-        {...{ actionState }}
-      />
-    </form>
+    <LocalAdd {...submitActionResult}>
+      <Input id="nombre" title="Nombre" required />
+    </LocalAdd>
   )
 }
 

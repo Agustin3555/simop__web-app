@@ -1,5 +1,5 @@
-import { SubSecretariaModel } from '@/models'
-import { InputAdapter, OutputAdapter } from './config'
+import { InputAdapter, OutputAdapter } from '@/adapters/config'
+import { SubSecretariaModel } from '../models'
 
 export const getAll: {
   output: OutputAdapter<

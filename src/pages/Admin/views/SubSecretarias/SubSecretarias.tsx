@@ -3,14 +3,7 @@ import { Add } from './components'
 import { ViewKey } from '../../enums'
 
 const SubSecretarias = () => {
-  return (
-    <View
-      view={ViewKey.SUB_SECRETARIAS}
-      query={<Add />}
-      add={<Add />}
-      update={<Add />}
-    />
-  )
+  return <View view={ViewKey.SUB_SECRETARIAS} add={<Add />} />
 }
 
 export default SubSecretarias

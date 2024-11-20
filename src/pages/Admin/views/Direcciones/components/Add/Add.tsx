@@ -1,23 +1,16 @@
 import { useSubmitAction } from '@/hooks'
-import { Input, StateButton } from '@/components'
+import { Input } from '@/components'
+import { LocalAdd } from '@/pages/Admin/components'
 
 const Add = () => {
-  const { handleSubmit, actionState } = useSubmitAction(
+  const submitActionResult = useSubmitAction(
     async ({ formData, setLoading, setError, setSuccess }) => {}
   )
 
   return (
-    <form onSubmit={handleSubmit}>
-      <div className="fields">
-        <Input id="nombre" title="Nombre de la Subsecretaría" required />
-      </div>
-      <StateButton
-        title="Confirmar"
-        text="Confirmar"
-        faIcon="fa-solid fa-check"
-        {...{ actionState }}
-      />
-    </form>
+    <LocalAdd {...submitActionResult}>
+      <Input id="nombre" title="Nombre" required />
+    </LocalAdd>
   )
 }
 

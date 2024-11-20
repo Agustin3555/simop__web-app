@@ -1,6 +1,6 @@
-import { SubSecretariaModel } from '@/models'
-import { SubSecretariaAdapter } from '@/adapters'
-import { AppError, publicInstance } from './config'
+import { AppError, publicInstance } from '@/services/config'
+import { SubSecretariaModel } from '../models'
+import { SubSecretariaAdapter } from '../adapters'
 
 const collection = '/sub-secretarias'
 

@@ -1,0 +1,35 @@
+:root {
+  --cmp-secure-hold-button-progress-color: var(--pal-color-a);
+}
+
+.cmp-secure-hold-button {
+  transition: background-color var(--pal-time-s) ease-out;
+
+  &::after {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+
+    width: 0;
+    height: var(--pal-size-2xs);
+
+    content: '';
+
+    border-radius: var(--pal-size-3xl);
+    background-color: var(--cmp-secure-hold-button-progress-color);
+
+    transition: width 3000ms ease-out, height var(--pal-time-s) ease-out;
+  }
+
+  &:active {
+    &::after {
+      width: 100%;
+    }
+  }
+
+  &:disabled {
+    &::after {
+      height: 0;
+    }
+  }
+}

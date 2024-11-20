@@ -1,3 +1,5 @@
 export { default as Content } from './Content/Content'
+export { default as LocalAdd } from './LocalAdd/LocalAdd'
 export { default as Nav } from './Nav/Nav'
+export { default as SecureHoldButton } from './SecureHoldButton/SecureHoldButton'
 export { default as View } from './View/View'
