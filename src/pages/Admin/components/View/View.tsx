@@ -1,15 +1,10 @@
 import './View.css'
-import {
-  ChangeEventHandler,
-  ReactNode,
-  useCallback,
-  useMemo,
-  useState,
-} from 'react'
+import { ReactNode, useMemo, useState } from 'react'
 import { useViewActive } from '../../contexts'
 import { ViewKey } from '../../enums'
 import { addIfExist, classList } from '@/helpers'
 import { Icon, Separator } from '@/components'
+import { useChangeHandler } from '../../hooks'
 
 type LocalViewKey = 'query' | 'add' | 'update'
 
@@ -55,13 +50,8 @@ const View = ({ view, query, add, update }: Props) => {
 
   const [localView, setLocalView] = useState(localViews[0].localViewKey)
 
-  const handleChange = useCallback<ChangeEventHandler<HTMLInputElement>>(
-    event => {
-      const newLocalView = event.target.id
-
-      setLocalView(newLocalView as LocalViewKey)
-    },
-    []
+  const handleChange = useChangeHandler(newLocalView =>
+    setLocalView(newLocalView as LocalViewKey)
   )
 
   return (

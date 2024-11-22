@@ -1,12 +1,12 @@
-import './Input.css'
-import { InputHTMLAttributes } from 'react'
+import './InputArea.css'
+import { TextareaHTMLAttributes } from 'react'
 import { useLabel } from '@/hooks'
 
-interface Props extends InputHTMLAttributes<HTMLInputElement> {
+interface Props extends TextareaHTMLAttributes<HTMLTextAreaElement> {
   hideLabel?: boolean
 }
 
-const Input = ({
+const InputArea = ({
   name,
   title,
   hideLabel = false,
@@ -16,10 +16,10 @@ const Input = ({
   const { content, controlTitle } = useLabel({ title, required })
 
   return (
-    <div className="cmp-input control">
+    <div className="cmp-text-area control">
       {!hideLabel && <label className="label">{content}</label>}
-      <input
-        className="input box"
+      <textarea
+        className="text box input"
         title={controlTitle}
         {...{ name, required }}
         {...rest}
@@ -28,4 +28,4 @@ const Input = ({
   )
 }
 
-export default Input
+export default InputArea

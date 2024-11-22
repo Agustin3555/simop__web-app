@@ -8,7 +8,7 @@
 
   scroll-behavior: smooth;
   scrollbar-width: thin;
-  scrollbar-color: var(--pal-color-a-l1) transparent;
+  scrollbar-color: var(--pal-color-a-l2) transparent;
 }
 
 :root {

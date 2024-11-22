@@ -8,14 +8,25 @@ export const getAll: {
   >
 } = {
   output: response => {
-    const convertedResource: SubSecretariaModel.Entity[] = response.map(
-      item => ({
-        id: item.id,
-        nombre: item.nombre,
-        creado: item.creado,
-        modificado: item.modificado,
-      })
-    )
+    const convertedResource = response.map<SubSecretariaModel.Entity>(item => ({
+      id: item.id,
+      nombre: item.nombre,
+      creado: item.creado,
+      modificado: item.modificado,
+    }))
+
+    return convertedResource
+  },
+}
+
+export const getForConnect: {
+  output: OutputAdapter<SubSecretariaModel.RawRef[], SubSecretariaModel.Ref[]>
+} = {
+  output: response => {
+    const convertedResource = response.map<SubSecretariaModel.Ref>(item => ({
+      id: item.id,
+      nombre: item.nombre,
+    }))
 
     return convertedResource
   },
@@ -23,12 +34,12 @@ export const getAll: {
 
 export const create: {
   input: InputAdapter<
-    SubSecretariaModel.CreateData,
-    SubSecretariaModel.CreateBody
+    SubSecretariaModel.CreateUpdateData,
+    SubSecretariaModel.CreateUpdateBody
   >
 } = {
   input: data => {
-    const convertedResource: SubSecretariaModel.CreateBody = {
+    const convertedResource: SubSecretariaModel.CreateUpdateBody = {
       nombre: data.nombre,
     }
 
@@ -38,12 +49,12 @@ export const create: {
 
 export const update: {
   input: InputAdapter<
-    SubSecretariaModel.UpdateData,
-    SubSecretariaModel.UpdateBody
+    SubSecretariaModel.CreateUpdateData,
+    SubSecretariaModel.CreateUpdateBody
   >
 } = {
   input: data => {
-    const convertedResource: SubSecretariaModel.UpdateBody = {
+    const convertedResource: SubSecretariaModel.CreateUpdateBody = {
       nombre: data.nombre,
     }
 

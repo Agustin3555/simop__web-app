@@ -1,4 +1,8 @@
+export { default as Combobox } from './Combobox/Combobox'
+export { default as ComboboxLayout } from './ComboboxLayout/ComboboxLayout'
 export { default as Content } from './Content/Content'
+export { default as InputArea } from './InputArea/InputArea'
+export { default as InputCombobox } from './InputCombobox/InputCombobox'
 export { default as LocalAdd } from './LocalAdd/LocalAdd'
 export { default as Nav } from './Nav/Nav'
 export { default as SecureHoldButton } from './SecureHoldButton/SecureHoldButton'

@@ -1,0 +1,10 @@
+.cmp-text-area {
+  grid-column: span 2;
+
+  > .input {
+    resize: none;
+    padding: var(--pal-size-s);
+    min-height: 8rem;
+    field-sizing: content;
+  }
+}

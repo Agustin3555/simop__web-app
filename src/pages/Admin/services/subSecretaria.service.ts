@@ -13,7 +13,16 @@ export const getAll = async () => {
   return SubSecretariaAdapter.getAll.output(response.data)
 }
 
-export const create = async (data: SubSecretariaModel.CreateData) => {
+export const getForConnect = async () => {
+  const response = await publicInstance.get(`${collection}/for-connect`)
+
+  if (!response || response instanceof AppError)
+    return response as unknown as AppError
+
+  return SubSecretariaAdapter.getForConnect.output(response.data)
+}
+
+export const create = async (data: SubSecretariaModel.CreateUpdateData) => {
   const adaptedInput = SubSecretariaAdapter.create.input(data)
 
   const response = await publicInstance.post(collection, adaptedInput)
@@ -24,10 +33,10 @@ export const create = async (data: SubSecretariaModel.CreateData) => {
   return true
 }
 
-export const update = async (data: SubSecretariaModel.UpdateData) => {
+export const update = async (data: SubSecretariaModel.CreateUpdateData) => {
   const adaptedInput = SubSecretariaAdapter.update.input(data)
 
-  const response = await publicInstance.post(collection, adaptedInput)
+  const response = await publicInstance.put(collection, adaptedInput)
 
   if (!response || response instanceof AppError)
     return response as unknown as AppError

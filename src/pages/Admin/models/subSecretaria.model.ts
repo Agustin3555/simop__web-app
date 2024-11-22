@@ -12,18 +12,20 @@ export interface Entity {
   modificado: string
 }
 
-export interface CreateData {
+export interface RawRef {
+  id: number
   nombre: string
 }
 
-export interface CreateBody {
+export interface Ref {
+  id: number
   nombre: string
 }
 
-export interface UpdateData {
+export interface CreateUpdateData {
   nombre: string
 }
 
-export interface UpdateBody {
+export interface CreateUpdateBody {
   nombre: string
 }
