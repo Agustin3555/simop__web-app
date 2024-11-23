@@ -1,7 +1,7 @@
 import './ComboboxLayout.css'
 import { ReactNode } from 'react'
 import { BasicProps } from '../../hooks'
-import { Icon } from '@/components'
+import { Icon, Loader } from '@/components'
 import { classList } from '@/helpers'
 
 interface ComboboxLayoutProps extends BasicProps {
@@ -17,17 +17,20 @@ const ComboboxLayout = ({
   const {
     comboboxLayoutRef,
     open,
+    handleEnter,
     content,
     controlTitle,
     handleToggleClick,
     search,
     handleSearchChange,
+    loading,
   } = basicProps
 
   return (
     <div
       ref={comboboxLayoutRef}
       className={classList('cmp-combobox-layout', 'control', { open })}
+      onMouseEnter={handleEnter}
     >
       <small className="label">{content}</small>
       <header className="box" title={controlTitle} onClick={handleToggleClick}>
@@ -43,7 +46,13 @@ const ComboboxLayout = ({
           placeholder="Buscar ..."
           onChange={handleSearchChange}
         />
-        {fieldset}
+        {loading ? (
+          <div className="loader-container">
+            <Loader />
+          </div>
+        ) : (
+          fieldset
+        )}
       </div>
     </div>
   )

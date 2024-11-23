@@ -6,8 +6,10 @@ export const useHandleAction = <E = Element>(
 ) => {
   const { actionState, setLoading, setError, setSuccess } = useActionState()
 
-  const handleAction: MouseEventHandler<E> = async event =>
-    await clickCallback({ event, setLoading, setError, setSuccess })
+  const handleAction: MouseEventHandler<E> = async event => {
+    await setLoading()
+    await clickCallback({ event, setError, setSuccess })
+  }
 
   return { actionState, handleAction }
 }

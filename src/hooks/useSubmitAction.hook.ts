@@ -7,7 +7,7 @@ export interface SubmitActionResult {
 }
 
 export const useSubmitAction = (
-  submitCallback: ActionCallback<{ formData: FormData }>
+  submitCallback: ActionCallback<{ formData: FormData; resetForm: () => void }>
 ): SubmitActionResult => {
   const { actionState, setLoading, setError, setSuccess } = useActionState()
 
@@ -15,8 +15,10 @@ export const useSubmitAction = (
     event.preventDefault()
 
     const formData = new FormData(event.currentTarget)
+    const resetForm = event.currentTarget.reset
 
-    await submitCallback({ formData, setLoading, setError, setSuccess })
+    await setLoading()
+    await submitCallback({ formData, resetForm, setError, setSuccess })
   }
 
   return { handleSubmit, actionState }

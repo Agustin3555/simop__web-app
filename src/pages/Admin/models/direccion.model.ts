@@ -1,6 +1,7 @@
 export interface RawEntity {
   id: number
   nombre: string
+  subSecretariaId?: number
   creado: string
   modificado: string
 }
@@ -8,6 +9,7 @@ export interface RawEntity {
 export interface Entity {
   id: number
   nombre: string
+  subSecretariaId?: number
   creado: string
   modificado: string
 }
@@ -19,8 +21,10 @@ export interface RawRef {
 
 export interface CreateUpdateData {
   nombre: string
+  subSecretariaId: number
 }
 
 export interface CreateUpdateBody {
   nombre: string
+  subSecretariaId: number
 }

@@ -1,55 +1,55 @@
-import {
-  ChangeEventHandler,
-  MutableRefObject,
-  useCallback,
-  useEffect,
-  useMemo,
-  useRef,
-  useState,
-} from 'react'
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { useLabel, UseLabelProps } from '@/hooks'
 import { useInputHandler } from '.'
+import { AppError } from '@/services/config'
+import { Control } from '../types'
 
 export interface Options {
   id: number
   title: string
 }
 
-interface UseComboboxProps extends UseLabelProps {
-  options: Options[]
+export interface Provider {
+  provider: () => Promise<Options[] | AppError>
 }
 
-export interface BasicProps {
-  basicProps: {
-    open: boolean
-    controlTitle: string
-    search: string
-    content: JSX.Element
-    comboboxLayoutRef: MutableRefObject<HTMLDivElement>
-    handleToggleClick: () => void
-    handleSearchChange: ChangeEventHandler<HTMLInputElement>
-  }
-}
+export interface ComboboxProps extends UseLabelProps, Control, Provider {}
 
-export interface UseComboboxResult extends BasicProps {
-  sortedOptions: Options[]
-}
+interface UseComboboxProps extends UseLabelProps, Provider {}
 
 export const useCombobox = ({
   title,
   required,
-  options,
-}: UseComboboxProps): UseComboboxResult => {
+  provider,
+}: UseComboboxProps) => {
   const { content, controlTitle } = useLabel({ title, required })
+  const [options, setOptions] = useState<Options[]>()
   const [open, setOpen] = useState(false)
   const [search, setSearch] = useState('')
+  const [firstLoad, setFirstLoad] = useState(false)
   const comboboxLayoutRef = useRef<HTMLDivElement>(null)
+
+  const loading = useMemo(() => options === undefined, [options])
+
+  const handleEnter = useCallback(() => setFirstLoad(true), [])
+
+  const fetchAsync = useCallback(async () => {
+    const response = await provider()
+
+    if (response && !(response instanceof AppError)) setOptions(response)
+  }, [provider])
+
+  useEffect(() => {
+    if (firstLoad) fetchAsync()
+  }, [fetchAsync, firstLoad])
 
   const handleSearchChange = useInputHandler(newValue => setSearch(newValue))
 
   const handleToggleClick = useCallback(() => setOpen(prev => !prev), [])
 
   const sortedOptions = useMemo(() => {
+    if (!options) return
+
     const lowerSearch = search.trim().toLowerCase()
 
     // Si el campo de búsqueda está vacío, no modificar el orden
@@ -94,13 +94,20 @@ export const useCombobox = ({
   return {
     basicProps: {
       open,
+      loading,
       controlTitle,
       search,
       content,
       comboboxLayoutRef,
+      handleEnter,
       handleToggleClick,
       handleSearchChange,
     },
+    options,
     sortedOptions,
   }
+}
+
+export interface BasicProps {
+  basicProps: ReturnType<typeof useCombobox>['basicProps']
 }

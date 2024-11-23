@@ -1,15 +1,34 @@
 import { useSubmitAction } from '@/hooks'
 import { Input } from '@/components'
-import { LocalAdd } from '@/pages/Admin/components'
+import { Combobox, LocalAdd } from '@/pages/Admin/components'
+import { DepartamentoService, DireccionService } from '@/pages/Admin/services'
+import { AppError } from '@/services/config'
 
 const Add = () => {
   const submitActionResult = useSubmitAction(
-    async ({ formData, setLoading, setError, setSuccess }) => {}
+    async ({ formData, resetForm, setError, setSuccess }) => {
+      const createResponse = await DepartamentoService.create({
+        nombre: formData.get('nombre') as string,
+        direccionId: Number(formData.get('direccionId')),
+      })
+
+      if (!createResponse || createResponse instanceof AppError) {
+        setError()
+      } else {
+        setSuccess()
+        resetForm()
+      }
+    }
   )
 
   return (
     <LocalAdd {...submitActionResult}>
-      <Input id="nombre" title="Nombre" required />
+      <Input name="nombre" title="Nombre" required />
+      <Combobox
+        name="direccionId"
+        title="Dirección"
+        provider={DireccionService.getForConnect}
+      />
     </LocalAdd>
   )
 }

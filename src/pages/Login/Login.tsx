@@ -4,12 +4,10 @@ import { Input, StateButton } from '@/components'
 import { useLocation } from 'wouter'
 
 const Login = () => {
-  const [_, navigate] = useLocation()
+  const [, navigate] = useLocation()
 
   const { handleSubmit, actionState } = useSubmitAction(
-    async ({ formData, setLoading, setError, setSuccess }) => {
-      setLoading()
-
+    async ({ formData, setError, setSuccess }) => {
       const pass = formData.get('pass')
 
       if (pass === import.meta.env.VITE_UNIQUE_PASS) {

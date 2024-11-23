@@ -1,17 +1,15 @@
 import { InputAdapter, OutputAdapter } from '@/adapters/config'
-import { SubSecretariaModel } from '../models'
+import { DireccionModel } from '../models'
 import { Options } from '../hooks'
 
 export const getAll: {
-  output: OutputAdapter<
-    SubSecretariaModel.RawEntity[],
-    SubSecretariaModel.Entity[]
-  >
+  output: OutputAdapter<DireccionModel.RawEntity[], DireccionModel.Entity[]>
 } = {
   output: response => {
-    const convertedResource = response.map<SubSecretariaModel.Entity>(item => ({
+    const convertedResource = response.map<DireccionModel.Entity>(item => ({
       id: item.id,
       nombre: item.nombre,
+      subSecretariaId: item.subSecretariaId,
       creado: item.creado,
       modificado: item.modificado,
     }))
@@ -21,7 +19,7 @@ export const getAll: {
 }
 
 export const getForConnect: {
-  output: OutputAdapter<SubSecretariaModel.RawRef[], Options[]>
+  output: OutputAdapter<DireccionModel.RawRef[], Options[]>
 } = {
   output: response => {
     const convertedResource = response.map<Options>(item => ({
@@ -35,13 +33,14 @@ export const getForConnect: {
 
 export const create: {
   input: InputAdapter<
-    SubSecretariaModel.CreateUpdateData,
-    SubSecretariaModel.CreateUpdateBody
+    DireccionModel.CreateUpdateData,
+    DireccionModel.CreateUpdateBody
   >
 } = {
   input: data => {
-    const convertedResource: SubSecretariaModel.CreateUpdateBody = {
+    const convertedResource: DireccionModel.CreateUpdateBody = {
       nombre: data.nombre,
+      subSecretariaId: data.subSecretariaId,
     }
 
     return convertedResource
@@ -50,13 +49,14 @@ export const create: {
 
 export const update: {
   input: InputAdapter<
-    SubSecretariaModel.CreateUpdateData,
-    SubSecretariaModel.CreateUpdateBody
+    DireccionModel.CreateUpdateData,
+    DireccionModel.CreateUpdateBody
   >
 } = {
   input: data => {
-    const convertedResource: SubSecretariaModel.CreateUpdateBody = {
+    const convertedResource: DireccionModel.CreateUpdateBody = {
       nombre: data.nombre,
+      subSecretariaId: data.subSecretariaId,
     }
 
     return convertedResource

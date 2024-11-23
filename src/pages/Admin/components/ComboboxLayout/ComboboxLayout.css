@@ -96,6 +96,17 @@
       border-radius: 0;
     }
 
+    > .loader-container {
+      align-content: center;
+      height: var(--control-height);
+
+      color: var(--pal-color-a-l1);
+
+      > * {
+        margin-inline: auto;
+      }
+    }
+
     > fieldset {
       display: flex;
       flex-direction: column;

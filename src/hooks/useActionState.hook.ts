@@ -4,11 +4,9 @@ import { sleep } from '@/helpers'
 export type ActionState = 'loading' | 'error' | 'success' | 'ready'
 
 export type ActionCallback<ExtraProps> = ({
-  setLoading,
   setError,
   setSuccess,
 }: {
-  setLoading: () => Promise<void>
   setError: () => Promise<void>
   setSuccess: () => Promise<void>
 } & ExtraProps) => Promise<void>

@@ -212,6 +212,7 @@
 .fields {
   display: grid;
   align-items: flex-start;
+  grid-auto-flow: dense;
   grid-template-columns: repeat(auto-fill, minmax(min(100%, 18rem), 1fr));
   gap: var(--pal-size-m);
 }

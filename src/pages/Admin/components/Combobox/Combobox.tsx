@@ -1,11 +1,12 @@
 import { MouseEventHandler, useCallback, useState } from 'react'
-import { UseLabelProps } from '@/hooks'
-import { Options, useCombobox, useInputHandler } from '../../hooks'
+import {
+  ComboboxProps,
+  Options,
+  useCombobox,
+  useInputHandler,
+} from '../../hooks'
 import { Button } from '@/components'
 import { ComboboxLayout } from '..'
-import { Control } from '../../types'
-
-interface Props extends UseLabelProps, Control {}
 
 const init: Options[] = [
   { id: 1, title: 'Aloe vera' },
@@ -32,13 +33,17 @@ const init: Options[] = [
 
 // TODO: agregar un botón para actualizar las opciones
 
-const Combobox = ({ name, title, required = false }: Props) => {
-  const [options, setOptions] = useState<Options[]>(init)
+const Combobox = ({
+  name,
+  title,
+  required = false,
+  provider,
+}: ComboboxProps) => {
   const [selected, setSelected] = useState<Options>()
-  const { basicProps, sortedOptions } = useCombobox({
+  const { basicProps, options, sortedOptions } = useCombobox({
     title,
     required,
-    options,
+    provider,
   })
 
   const handleOptionChange = useInputHandler(newSelectedId => {
@@ -76,23 +81,21 @@ const Combobox = ({ name, title, required = false }: Props) => {
         </div>
       }
       fieldset={
-        sortedOptions.length !== 0 && (
-          <fieldset className="drop-down">
-            {sortedOptions.map(({ id, title }) => (
-              <label key={id} className="option">
-                {title}
-                <input
-                  type="radio"
-                  value={id}
-                  name={name}
-                  checked={selected ? id === selected.id : false}
-                  {...{ required }}
-                  onChange={handleOptionChange}
-                />
-              </label>
-            ))}
-          </fieldset>
-        )
+        <fieldset className="drop-down">
+          {sortedOptions?.map(({ id, title }) => (
+            <label key={id} className="option">
+              {title}
+              <input
+                type="radio"
+                value={id}
+                name={name}
+                checked={selected ? id === selected.id : false}
+                {...{ required }}
+                onChange={handleOptionChange}
+              />
+            </label>
+          ))}
+        </fieldset>
       }
     />
   )

@@ -1,17 +1,18 @@
 import { InputAdapter, OutputAdapter } from '@/adapters/config'
-import { SubSecretariaModel } from '../models'
+import { DepartamentoModel } from '../models'
 import { Options } from '../hooks'
 
 export const getAll: {
   output: OutputAdapter<
-    SubSecretariaModel.RawEntity[],
-    SubSecretariaModel.Entity[]
+    DepartamentoModel.RawEntity[],
+    DepartamentoModel.Entity[]
   >
 } = {
   output: response => {
-    const convertedResource = response.map<SubSecretariaModel.Entity>(item => ({
+    const convertedResource = response.map<DepartamentoModel.Entity>(item => ({
       id: item.id,
       nombre: item.nombre,
+      direccionId: item.direccionId,
       creado: item.creado,
       modificado: item.modificado,
     }))
@@ -21,7 +22,7 @@ export const getAll: {
 }
 
 export const getForConnect: {
-  output: OutputAdapter<SubSecretariaModel.RawRef[], Options[]>
+  output: OutputAdapter<DepartamentoModel.RawRef[], Options[]>
 } = {
   output: response => {
     const convertedResource = response.map<Options>(item => ({
@@ -35,13 +36,14 @@ export const getForConnect: {
 
 export const create: {
   input: InputAdapter<
-    SubSecretariaModel.CreateUpdateData,
-    SubSecretariaModel.CreateUpdateBody
+    DepartamentoModel.CreateUpdateData,
+    DepartamentoModel.CreateUpdateBody
   >
 } = {
   input: data => {
-    const convertedResource: SubSecretariaModel.CreateUpdateBody = {
+    const convertedResource: DepartamentoModel.CreateUpdateBody = {
       nombre: data.nombre,
+      direccionId: data.direccionId,
     }
 
     return convertedResource
@@ -50,13 +52,14 @@ export const create: {
 
 export const update: {
   input: InputAdapter<
-    SubSecretariaModel.CreateUpdateData,
-    SubSecretariaModel.CreateUpdateBody
+    DepartamentoModel.CreateUpdateData,
+    DepartamentoModel.CreateUpdateBody
   >
 } = {
   input: data => {
-    const convertedResource: SubSecretariaModel.CreateUpdateBody = {
+    const convertedResource: DepartamentoModel.CreateUpdateBody = {
       nombre: data.nombre,
+      direccionId: data.direccionId,
     }
 
     return convertedResource
