@@ -55,7 +55,7 @@ export const useCombobox = ({
     // Si el campo de búsqueda está vacío, no modificar el orden
     if (!lowerSearch) return options
 
-    return [...options].sort((a, b) => {
+    return options.toSorted((a, b) => {
       const aTitle = a.title.toLowerCase()
       const bTitle = b.title.toLowerCase()
 
