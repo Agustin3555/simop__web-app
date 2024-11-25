@@ -2,6 +2,7 @@ import './StateButton.css'
 import { Icon, Loader } from '..'
 import { ActionState } from '@/hooks'
 import { classList } from '@/helpers'
+import { MouseEventHandler } from 'react'
 
 interface Props {
   text?: string
@@ -9,6 +10,7 @@ interface Props {
   faIcon?: string
   actionState: ActionState
   type?: 'secondary'
+  handleAction?: MouseEventHandler<HTMLButtonElement>
 }
 
 const StateButton = ({
@@ -17,11 +19,13 @@ const StateButton = ({
   faIcon = 'fa-solid fa-arrow-right',
   actionState,
   type,
+  handleAction,
 }: Props) => (
   <button
     className={classList('cmp-state-button', 'button-look', 'state', type)}
     title={title}
     disabled={actionState !== 'ready'}
+    onClick={handleAction}
   >
     <Loader handlingClass={classList({ active: actionState === 'loading' })} />
     <Icon

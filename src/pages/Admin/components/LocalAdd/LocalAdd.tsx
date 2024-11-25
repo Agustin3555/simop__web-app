@@ -1,3 +1,4 @@
+import './LocalAdd.css'
 import { ReactNode } from 'react'
 import { SubmitActionResult } from '@/hooks'
 import { StateButton } from '@/components'
@@ -8,15 +9,17 @@ interface Props extends SubmitActionResult {
 
 const LocalAdd = ({ handleSubmit, actionState, children }: Props) => {
   return (
-    <form onSubmit={handleSubmit}>
-      <div className="fields">{children}</div>
-      <StateButton
-        title="Confirmar"
-        text="Confirmar"
-        faIcon="fa-solid fa-check"
-        {...{ actionState }}
-      />
-    </form>
+    <div className="cmp-local-add">
+      <form onSubmit={handleSubmit}>
+        <div className="fields">{children}</div>
+        <StateButton
+          title="Confirmar"
+          text="Confirmar"
+          faIcon="fa-solid fa-check"
+          {...{ actionState }}
+        />
+      </form>
+    </div>
   )
 }
 

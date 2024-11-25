@@ -22,7 +22,6 @@ const Nav = () => {
         title={open ? 'Cerrar' : 'Abrir'}
         faIcon="fa-solid fa-bars-staggered"
         hideText
-        _type="secondary"
         onClick={toggleHandleClick}
       />
       <nav>

@@ -28,29 +28,19 @@
 
   /* COLOR */
 
-  --pal-color-base-a-d2: 38, 42, 88;
-  --pal-color-base-a-d1: 59, 65, 138;
+  --pal-color-base-a-d3: 12, 13, 28;
+  --pal-color-base-a-d2: 35, 39, 82;
+  --pal-color-base-a-d1: 57, 64, 135;
   --pal-color-base-a: 80, 89, 188;
-  --pal-color-base-a-l1: 126, 133, 206;
-  --pal-color-base-a-l2: 173, 177, 224;
+  --pal-color-base-a-l1: 130, 136, 207;
+  --pal-color-base-a-l2: 179, 183, 226;
+  --pal-color-base-a-l3: 229, 230, 245;
 
   --pal-color-base-b-d2: 65, 72, 33;
   --pal-color-base-b-d1: 101, 113, 51;
   --pal-color-base-b: 138, 154, 70;
   --pal-color-base-b-l1: 169, 181, 119;
   --pal-color-base-b-l2: 200, 208, 168;
-
-  --pal-color-base-c-d2: 0, 0, 0;
-  --pal-color-base-c-d1: 0, 0, 0;
-  --pal-color-base-c: 0, 0, 0;
-  --pal-color-base-c-l1: 0, 0, 0;
-  --pal-color-base-c-l2: 0, 0, 0;
-
-  --pal-color-base-d-d2: 0, 0, 0;
-  --pal-color-base-d-d1: 0, 0, 0;
-  --pal-color-base-d: 0, 0, 0;
-  --pal-color-base-d-l1: 0, 0, 0;
-  --pal-color-base-d-l2: 0, 0, 0;
 
   --pal-color-base-black: 0, 0, 0;
   --pal-color-base-gs-950: 13, 13, 13;
@@ -74,29 +64,19 @@
   --pal-color-base-gs-50: 242, 242, 242;
   --pal-color-base-white: 255, 255, 255;
 
+  --pal-color-a-d3: rgb(var(--pal-color-base-a-d3));
   --pal-color-a-d2: rgb(var(--pal-color-base-a-d2));
   --pal-color-a-d1: rgb(var(--pal-color-base-a-d1));
   --pal-color-a: rgb(var(--pal-color-base-a));
   --pal-color-a-l1: rgb(var(--pal-color-base-a-l1));
   --pal-color-a-l2: rgb(var(--pal-color-base-a-l2));
+  --pal-color-a-l3: rgb(var(--pal-color-base-a-l3));
 
   --pal-color-b-d2: rgb(var(--pal-color-base-b-d2));
   --pal-color-b-d1: rgb(var(--pal-color-base-b-d1));
   --pal-color-b: rgb(var(--pal-color-base-b));
   --pal-color-b-l1: rgb(var(--pal-color-base-b-l1));
   --pal-color-b-l2: rgb(var(--pal-color-base-b-l2));
-
-  --pal-color-c-d2: rgb(var(--pal-color-base-c-d2));
-  --pal-color-c-d1: rgb(var(--pal-color-base-c-d1));
-  --pal-color-c: rgb(var(--pal-color-base-c));
-  --pal-color-c-l1: rgb(var(--pal-color-base-c-l1));
-  --pal-color-c-l2: rgb(var(--pal-color-base-c-l2));
-
-  --pal-color-d-d2: rgb(var(--pal-color-base-d-d2));
-  --pal-color-d-d1: rgb(var(--pal-color-base-d-d1));
-  --pal-color-d: rgb(var(--pal-color-base-d));
-  --pal-color-d-l1: rgb(var(--pal-color-base-d-l1));
-  --pal-color-d-l2: rgb(var(--pal-color-base-d-l2));
 
   --pal-color-black: rgb(var(--pal-color-base-black));
   --pal-color-gs-950: rgb(var(--pal-color-base-gs-950));

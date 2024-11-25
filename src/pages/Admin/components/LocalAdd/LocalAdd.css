@@ -1,0 +1,15 @@
+.cmp-local-add > form {
+  > .fields {
+    display: grid;
+    align-items: flex-start;
+    grid-auto-flow: dense;
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 18rem), 1fr));
+    gap: var(--pal-size-m);
+  }
+
+  > .cmp-state-button {
+    align-self: flex-end;
+
+    width: 10rem;
+  }
+}

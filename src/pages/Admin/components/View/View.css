@@ -20,6 +20,9 @@
       padding-inline: var(--pal-size-l);
       height: var(--pal-size-2xl);
 
+      font-weight: 500;
+      color: var(--pal-color-a-d2);
+
       border-radius: var(--pal-size-2xs);
       cursor: pointer;
 
@@ -31,13 +34,11 @@
       }
 
       &:hover {
-        background-color: rgba(var(--pal-color-base-a), 0.125);
+        background-color: var(--pal-color-a-l3);
       }
 
       &:has(input:checked) {
-        color: var(--pal-color-white);
-
-        background-color: var(--pal-color-a-l1);
+        background-color: var(--pal-color-a-l2);
       }
     }
   }
@@ -55,12 +56,6 @@
         display: initial;
       }
     }
-  }
-
-  .cmp-state-button {
-    align-self: flex-end;
-
-    width: 10rem;
   }
 
   &.active {
