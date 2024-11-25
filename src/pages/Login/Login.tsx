@@ -8,14 +8,14 @@ const Login = () => {
 
   const { handleSubmit, actionState } = useSubmitAction(
     async ({ formData, setError, setSuccess }) => {
-      const pass = formData.get('pass')
+      const pass = formData.get('pass') as string
 
       if (pass === import.meta.env.VITE_UNIQUE_PASS) {
-        setSuccess()
+        await setSuccess()
 
         navigate('/admin')
       } else {
-        setError()
+        await setError()
       }
     }
   )
@@ -24,7 +24,7 @@ const Login = () => {
     <article className="cmp-login">
       <img src="/isologotipo-gobierno-del-chaco.webp" />
       <form onSubmit={handleSubmit}>
-        <Input id="pass" title="Contraseña" type="password" required />
+        <Input name="pass" title="Contraseña" type="password" required />
         <StateButton
           title="Acceder"
           text="Acceder"
