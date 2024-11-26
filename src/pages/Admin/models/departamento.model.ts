@@ -1,7 +1,9 @@
+import { Ref } from '../types'
+
 export interface RawEntity {
   id: number
   nombre: string
-  direccionId?: number
+  direccion?: { id: number; nombre: string }
   creado: string
   modificado: string
 }
@@ -9,7 +11,7 @@ export interface RawEntity {
 export interface Entity {
   id: number
   nombre: string
-  direccionId?: number
+  direccion?: Ref
   creado: string
   modificado: string
 }

@@ -1,0 +1,14 @@
+.cmp-cell-ref {
+  display: flex;
+  flex-direction: column;
+  gap: var(--pal-size-2xs);
+
+  > small {
+    font-size: var(--pal-size-font-2xs);
+    font-weight: 500;
+    color: var(--pal-color-a-l1);
+  }
+
+  > p {
+  }
+}

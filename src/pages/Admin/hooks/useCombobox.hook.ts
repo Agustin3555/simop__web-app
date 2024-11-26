@@ -2,15 +2,10 @@ import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { useLabel, UseLabelProps } from '@/hooks'
 import { useInputHandler } from '.'
 import { AppError } from '@/services/config'
-import { Control } from '../types'
-
-export interface Options {
-  id: number
-  title: string
-}
+import { Control, Ref } from '../types'
 
 export interface Provider {
-  provider: () => Promise<Options[] | AppError>
+  provider: () => Promise<Ref[] | AppError>
 }
 
 export interface ComboboxProps extends UseLabelProps, Control, Provider {}
@@ -23,7 +18,7 @@ export const useCombobox = ({
   provider,
 }: UseComboboxProps) => {
   const { content, controlTitle } = useLabel({ title, required })
-  const [options, setOptions] = useState<Options[]>()
+  const [options, setOptions] = useState<Ref[]>()
   const [open, setOpen] = useState(false)
   const [search, setSearch] = useState('')
   const [firstLoad, setFirstLoad] = useState(false)

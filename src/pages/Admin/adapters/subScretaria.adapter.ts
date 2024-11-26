@@ -1,6 +1,6 @@
 import { InputAdapter, OutputAdapter } from '@/adapters/config'
 import { SubSecretariaModel } from '../models'
-import { Options } from '../hooks'
+import { Ref } from '../types'
 
 export const getAll: {
   output: OutputAdapter<
@@ -21,10 +21,10 @@ export const getAll: {
 }
 
 export const getForConnect: {
-  output: OutputAdapter<SubSecretariaModel.RawRef[], Options[]>
+  output: OutputAdapter<SubSecretariaModel.RawRef[], Ref[]>
 } = {
   output: response => {
-    const convertedResource = response.map<Options>(item => ({
+    const convertedResource = response.map<Ref>(item => ({
       id: item.id,
       title: item.nombre,
     }))

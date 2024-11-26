@@ -1,6 +1,6 @@
 import { InputAdapter, OutputAdapter } from '@/adapters/config'
 import { DepartamentoModel } from '../models'
-import { Options } from '../hooks'
+import { Ref } from '../types'
 
 export const getAll: {
   output: OutputAdapter<
@@ -12,7 +12,10 @@ export const getAll: {
     const convertedResource = response.map<DepartamentoModel.Entity>(item => ({
       id: item.id,
       nombre: item.nombre,
-      direccionId: item.direccionId,
+      direccion: item.direccion && {
+        id: item.direccion.id,
+        title: item.direccion.nombre,
+      },
       creado: item.creado,
       modificado: item.modificado,
     }))
@@ -22,10 +25,10 @@ export const getAll: {
 }
 
 export const getForConnect: {
-  output: OutputAdapter<DepartamentoModel.RawRef[], Options[]>
+  output: OutputAdapter<DepartamentoModel.RawRef[], Ref[]>
 } = {
   output: response => {
-    const convertedResource = response.map<Options>(item => ({
+    const convertedResource = response.map<Ref>(item => ({
       id: item.id,
       title: item.nombre,
     }))

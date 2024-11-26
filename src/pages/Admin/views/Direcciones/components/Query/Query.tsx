@@ -1,5 +1,5 @@
 import { LocalQuery } from '@/pages/Admin/components'
-import { DireccionService } from '@/pages/Admin/services'
+import { DireccionService, SubSecretariaService } from '@/pages/Admin/services'
 
 const Query = () => {
   return (
@@ -16,7 +16,11 @@ const Query = () => {
         },
         {
           header: 'Subsecretaría',
-          accessorKey: 'subSecretariaId',
+          accessorKey: 'subSecretaria',
+          ref: {
+            provider: SubSecretariaService.getOne,
+            field: 'Nombre',
+          },
         },
         {
           header: 'Fecha de creación',

@@ -1,6 +1,6 @@
 import { InputAdapter, OutputAdapter } from '@/adapters/config'
 import { DireccionModel } from '../models'
-import { Options } from '../hooks'
+import { Ref } from '../types'
 
 export const getAll: {
   output: OutputAdapter<DireccionModel.RawEntity[], DireccionModel.Entity[]>
@@ -9,7 +9,10 @@ export const getAll: {
     const convertedResource = response.map<DireccionModel.Entity>(item => ({
       id: item.id,
       nombre: item.nombre,
-      subSecretariaId: item.subSecretariaId,
+      subSecretaria: item.subSecretaria && {
+        id: item.subSecretaria.id,
+        title: item.subSecretaria.nombre,
+      },
       creado: item.creado,
       modificado: item.modificado,
     }))
@@ -19,10 +22,10 @@ export const getAll: {
 }
 
 export const getForConnect: {
-  output: OutputAdapter<DireccionModel.RawRef[], Options[]>
+  output: OutputAdapter<DireccionModel.RawRef[], Ref[]>
 } = {
   output: response => {
-    const convertedResource = response.map<Options>(item => ({
+    const convertedResource = response.map<Ref>(item => ({
       id: item.id,
       title: item.nombre,
     }))

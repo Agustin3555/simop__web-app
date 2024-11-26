@@ -1,10 +1,7 @@
 .cmp-local-query {
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
   gap: var(--pal-size-m);
-
-  overflow: auto;
 
   /* mask-image: linear-gradient(to right, #fff 95%, transparent); */
 
@@ -19,72 +16,88 @@
     }
   }
 
-  > table {
-    margin-bottom: var(--pal-size-xs);
-    border-width: var(--line-thickness);
-    border-style: solid;
-    border-collapse: collapse;
+  > .table-container {
+    flex-grow: 1;
 
-    white-space: nowrap;
+    max-width: max-content;
 
-    border-radius: var(--pal-size-xs);
-    background-color: var(--pal-color-white);
-    overflow: hidden;
+    overflow: auto;
 
-    th,
-    td {
-      padding-inline: var(--pal-size-m);
-      height: var(--pal-size-2xl);
-    }
+    > table {
+      border-width: var(--line-thickness);
+      border-style: solid;
+      border-collapse: collapse;
 
-    thead {
-      background-color: var(--pal-color-a-l2);
+      white-space: nowrap;
 
-      th {
-        font-weight: 600;
-        text-align: start;
-        color: var(--pal-color-a-d1);
+      border-radius: var(--pal-size-xs);
+      background-color: var(--pal-color-white);
+      overflow: hidden;
 
-        border-inline-style: solid;
-        border-inline-width: var(--line-thickness);
-        border-inline-color: var(--pal-color-white);
+      th,
+      td {
+        padding-inline: var(--pal-size-m);
       }
-    }
 
-    tbody {
-      tr {
-        position: relative;
+      thead {
+        background-color: var(--pal-color-a-l2);
 
-        border-width: 0;
-        border-style: solid;
-        border-color: var(--pal-color-gs-50);
-        border-block-width: var(--line-thickness);
+        th {
+          height: var(--pal-size-2xl);
 
-        /* "Sobrescribe" el border actual y del elemento anterior */
-        &::after {
-          --position: calc(var(--line-thickness) * -1.5);
+          font-weight: 600;
+          text-align: start;
+          color: var(--pal-color-a-d1);
 
-          position: absolute;
-          inset: 0;
-          top: var(--position);
-          bottom: var(--position);
+          border-inline-style: solid;
+          border-inline-width: var(--line-thickness);
+          border-inline-color: var(--pal-color-white);
 
-          border-block-style: solid;
-          border-block-width: 0;
-          border-block-color: var(--pal-color-white);
-
-          content: '';
-        }
-
-        &:hover {
-          background-color: var(--pal-color-a-l3);
-
-          &::after {
-            border-block-width: var(--line-thickness);
+          /* Corrige el border excedente */
+          &:last-of-type {
+            border: none;
           }
         }
+      }
 
-        td {
+      tbody {
+        tr {
+          position: relative;
+
+          border-width: 0;
+          border-style: solid;
+          border-color: var(--pal-color-gs-50);
+          border-block-width: var(--line-thickness);
+
+          /* "Sobrescribe" el border actual y del elemento anterior */
+          &::after {
+            --position: calc(var(--line-thickness) * -1.5);
+
+            position: absolute;
+            inset: 0;
+            top: var(--position);
+            bottom: var(--position);
+
+            pointer-events: none;
+
+            border-block-style: solid;
+            border-block-width: 0;
+            border-block-color: var(--pal-color-white);
+
+            content: '';
+          }
+
+          &:hover {
+            background-color: var(--pal-color-a-l3);
+
+            &::after {
+              border-block-width: var(--line-thickness);
+            }
+          }
+
+          td {
+            height: 4rem;
+          }
         }
       }
     }
