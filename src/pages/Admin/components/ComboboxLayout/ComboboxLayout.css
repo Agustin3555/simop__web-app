@@ -36,15 +36,16 @@
         }
 
         > .cmp-button {
-          background-color: var(--pal-color-a-l2);
-
           padding: 0;
           aspect-ratio: 1;
           height: calc(
             var(--control-height) - (var(--padding) + var(--line-thickness)) * 2
           );
 
+          color: var(--pal-color-white);
+
           border-radius: var(--border-radius);
+          background-color: var(--pal-color-a-l2);
         }
       }
     }

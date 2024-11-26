@@ -10,9 +10,9 @@ import {
   useReactTable,
 } from '@tanstack/react-table'
 import { StateButton } from '@/components'
+import { CellRef, Provider } from './components'
 import { AppError } from '@/services/config'
 import { format as tempoFormat } from '@formkit/tempo'
-import { CellRef, Provider } from './components'
 import { Ref } from '../../types'
 
 type Format = 'dateTime'

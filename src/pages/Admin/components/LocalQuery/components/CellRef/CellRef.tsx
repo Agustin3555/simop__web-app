@@ -11,7 +11,7 @@ interface CellRefProps {
 const CellRef = ({ value, provider }: CellRefProps) => {
   return (
     <div className="cmp-cell-ref">
-      <Button title={String(value)} faIcon="fa-solid fa-eye"></Button>
+      <Button title={String(value)} faIcon="fa-solid fa-eye" />
     </div>
   )
 }
