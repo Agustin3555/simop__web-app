@@ -1,5 +1,4 @@
 import './CellRef.css'
-import { useHandleAction } from '@/hooks'
 import { Button } from '@/components'
 
 export type Provider = (id: number) => Promise<any>
@@ -10,8 +9,6 @@ interface CellRefProps {
 }
 
 const CellRef = ({ value, provider }: CellRefProps) => {
-  const handleActionResult = useHandleAction(({ setError, setSuccess }) => {})
-
   return (
     <div className="cmp-cell-ref">
       <Button title={String(value)} faIcon="fa-solid fa-eye"></Button>
