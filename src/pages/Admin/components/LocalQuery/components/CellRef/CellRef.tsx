@@ -1,22 +1,20 @@
 import './CellRef.css'
 import { Icon } from '@/components'
 
-interface CellRefProps {
-  value: string
-  field: string
-  provider: () => Promise<unknown>
+export interface CellRefProps {
+  value: number | string
+  provider: (id: number) => Promise<unknown>
 }
 
-const CellRef = ({ value, field, provider }: CellRefProps) => {
+const CellRef = ({ value, provider }: CellRefProps) => {
   return (
-    <div className="cmp-cell-ref">
-      <small>{field}</small>
-      <p>{value}</p>
+    <button className="cmp-cell-ref">
+      {value}
       {/* <button>
         <p>{value}</p>
         <Icon faIcon="fa-solid fa-angle-right" />
       </button> */}
-    </div>
+    </button>
   )
 }
 

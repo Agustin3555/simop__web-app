@@ -12,7 +12,7 @@ import {
 import { StateButton } from '@/components'
 import { AppError } from '@/services/config'
 import { format as tempoFormat } from '@formkit/tempo'
-import { CellRef } from './components'
+import { CellRef, CellRefProps } from './components'
 import { Ref } from '../../types'
 
 type Format = 'dateTime'
@@ -21,7 +21,7 @@ interface Extension<T> {
   accessorKey: keyof T
   format?: Format
   ref?: {
-    provider: (id: number) => Promise<unknown>
+    provider: Pick<CellRefProps, 'provider'>
     field: string
   }
 }
