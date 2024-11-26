@@ -24,6 +24,25 @@ export const getAll: {
   },
 }
 
+export const getOne: {
+  output: OutputAdapter<DepartamentoModel.RawEntity, DepartamentoModel.Entity>
+} = {
+  output: response => {
+    const convertedResource = {
+      id: response.id,
+      nombre: response.nombre,
+      direccion: response.direccion && {
+        id: response.direccion.id,
+        title: response.direccion.nombre,
+      },
+      creado: response.creado,
+      modificado: response.modificado,
+    }
+
+    return convertedResource
+  },
+}
+
 export const getForConnect: {
   output: OutputAdapter<DepartamentoModel.RawRef[], Ref[]>
 } = {

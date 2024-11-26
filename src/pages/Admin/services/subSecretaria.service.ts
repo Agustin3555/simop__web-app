@@ -13,6 +13,15 @@ export const getAll = async () => {
   return SubSecretariaAdapter.getAll.output(response.data)
 }
 
+export const getOne = async (id: number) => {
+  const response = await publicInstance.get(`${collection}/${id}`)
+
+  if (!response || response instanceof AppError)
+    return response as unknown as AppError
+
+  return SubSecretariaAdapter.getOne.output(response.data)
+}
+
 export const getForConnect = async () => {
   const response = await publicInstance.get(`${collection}/for-connect`)
 

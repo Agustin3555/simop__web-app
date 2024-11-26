@@ -21,7 +21,7 @@ interface Extension<T> {
   accessorKey: keyof T
   format?: Format
   ref?: {
-    provider: () => Promise<unknown>
+    provider: (id: number) => Promise<unknown>
     field: string
   }
 }

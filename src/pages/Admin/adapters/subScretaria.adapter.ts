@@ -20,6 +20,21 @@ export const getAll: {
   },
 }
 
+export const getOne: {
+  output: OutputAdapter<SubSecretariaModel.RawEntity, SubSecretariaModel.Entity>
+} = {
+  output: response => {
+    const convertedResource = {
+      id: response.id,
+      nombre: response.nombre,
+      creado: response.creado,
+      modificado: response.modificado,
+    }
+
+    return convertedResource
+  },
+}
+
 export const getForConnect: {
   output: OutputAdapter<SubSecretariaModel.RawRef[], Ref[]>
 } = {
