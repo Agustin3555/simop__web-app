@@ -1,12 +1,24 @@
 .cmp-login {
-  display: flex;
-  flex-direction: column;
-  gap: var(--pal-size-2xl);
-  max-width: 20rem;
+  align-content: center;
+  height: 100dvh;
 
-  > form {
+  > .content {
     display: flex;
     flex-direction: column;
-    gap: var(--pal-size-m);
+    gap: var(--pal-size-2xl);
+    margin-inline: auto;
+    max-width: 20rem;
+
+    > form {
+      display: flex;
+      flex-direction: column;
+      gap: var(--pal-size-m);
+
+      > .cmp-state-button {
+        color: var(--pal-color-white);
+
+        background-color: var(--pal-color-a);
+      }
+    }
   }
 }

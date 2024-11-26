@@ -27,8 +27,11 @@
     top: var(--gap);
     left: var(--gap);
 
+    border-color: var(--pal-color-a-l2);
     padding: 0;
     width: var(--pal-size-2xl);
+
+    color: var(--pal-color-a-d2);
   }
 
   > nav {

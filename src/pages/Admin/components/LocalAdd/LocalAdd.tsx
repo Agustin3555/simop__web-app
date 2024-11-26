@@ -13,7 +13,6 @@ const LocalAdd = ({ handleSubmit, actionState, children }: Props) => {
       <form onSubmit={handleSubmit}>
         <div className="fields">{children}</div>
         <StateButton
-          title="Confirmar"
           text="Confirmar"
           faIcon="fa-solid fa-check"
           {...{ actionState }}

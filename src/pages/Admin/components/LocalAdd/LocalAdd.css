@@ -11,5 +11,9 @@
     align-self: flex-end;
 
     width: 10rem;
+
+    color: var(--pal-color-white);
+
+    background-color: var(--pal-color-a);
   }
 }

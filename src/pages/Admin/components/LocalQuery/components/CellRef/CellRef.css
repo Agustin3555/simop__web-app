@@ -1,5 +1,14 @@
 .cmp-cell-ref {
-  display: flex;
-  flex-direction: column;
-  gap: var(--pal-size-2xs);
+  > .cmp-button {
+    justify-content: space-between;
+    width: 100%;
+
+    background-color: var(--pal-color-white);
+
+    > .cmp-icon {
+      --cmp-icon-size: var(--pal-size-s);
+
+      color: var(--pal-color-a-l2);
+    }
+  }
 }

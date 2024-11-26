@@ -22,16 +22,17 @@ const Login = () => {
 
   return (
     <article className="cmp-login">
-      <img src="/isologotipo-gobierno-del-chaco.webp" />
-      <form onSubmit={handleSubmit}>
-        <Input name="pass" title="Contraseña" type="password" required />
-        <StateButton
-          title="Acceder"
-          text="Acceder"
-          faIcon="fa-solid fa-arrow-right"
-          {...{ actionState }}
-        />
-      </form>
+      <div className="content">
+        <img src="/isologotipo-gobierno-del-chaco.webp" />
+        <form onSubmit={handleSubmit}>
+          <Input name="pass" title="Contraseña" type="password" required />
+          <StateButton
+            text="Acceder"
+            faIcon="fa-solid fa-arrow-right"
+            {...{ actionState }}
+          />
+        </form>
+      </div>
     </article>
   )
 }

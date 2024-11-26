@@ -58,12 +58,10 @@ const LocalQuery = <T,>({ provider, columns: originalColumns }: Props<T>) => {
               <small>{ref.field}</small>
             </div>
           ),
-          cell: (info: CellContext<T, Ref>) => {
-            const value = info.getValue().title
-            const { provider } = ref
-
-            return value && <CellRef {...{ value, provider }} />
-          },
+          cell: (info: CellContext<T, Ref>) =>
+            info.getValue() && (
+              <CellRef value={info.getValue().title} provider={ref.provider} />
+            ),
         }),
       })),
     [originalColumns]
@@ -94,7 +92,8 @@ const LocalQuery = <T,>({ provider, columns: originalColumns }: Props<T>) => {
     <div className="cmp-local-query">
       <header>
         <StateButton
-          title="Consultar los datos"
+          text="Traer los datos"
+          hiddenText
           faIcon="fa-solid fa-cloud-arrow-down"
           {...handleActionResult}
         />

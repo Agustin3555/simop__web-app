@@ -5,25 +5,35 @@ import { classList } from '@/helpers'
 import { MouseEventHandler } from 'react'
 
 interface Props {
-  text?: string
-  title: string
+  text: number | string
+  hiddenText?: boolean
+  title?: number | string
   faIcon?: string
   actionState: ActionState
   type?: 'secondary'
+  handlingClass?: string
   handleAction?: MouseEventHandler<HTMLButtonElement>
 }
 
 const StateButton = ({
   text,
+  hiddenText = false,
   title,
   faIcon = 'fa-solid fa-arrow-right',
   actionState,
   type,
+  handlingClass,
   handleAction,
 }: Props) => (
   <button
-    className={classList('cmp-state-button', 'button-look', 'state', type)}
-    title={title}
+    className={classList(
+      'cmp-state-button',
+      'button-look',
+      'state',
+      type,
+      handlingClass
+    )}
+    title={String(title || text)}
     disabled={actionState !== 'ready'}
     onClick={handleAction}
   >
@@ -37,7 +47,7 @@ const StateButton = ({
       handlingClass={classList({ active: actionState === 'success' })}
     />
     <div className={classList('body', { active: actionState === 'ready' })}>
-      {text}
+      {!hiddenText && text}
       <Icon faIcon={faIcon} />
     </div>
   </button>

@@ -13,6 +13,10 @@
     > .cmp-state-button {
       padding: 0;
       aspect-ratio: 1;
+
+      color: var(--pal-color-white);
+
+      background-color: var(--pal-color-a);
     }
   }
 
