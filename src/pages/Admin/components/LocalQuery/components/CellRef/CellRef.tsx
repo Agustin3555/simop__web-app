@@ -1,9 +1,11 @@
 import './CellRef.css'
 import { Icon } from '@/components'
 
-export interface CellRefProps {
+export type Provider = (id: number) => Promise<any>
+
+interface CellRefProps {
   value: number | string
-  provider: (id: number) => Promise<unknown>
+  provider: Provider
 }
 
 const CellRef = ({ value, provider }: CellRefProps) => {

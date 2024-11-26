@@ -12,7 +12,7 @@ import {
 import { StateButton } from '@/components'
 import { AppError } from '@/services/config'
 import { format as tempoFormat } from '@formkit/tempo'
-import { CellRef, CellRefProps } from './components'
+import { CellRef, Provider } from './components'
 import { Ref } from '../../types'
 
 type Format = 'dateTime'
@@ -21,7 +21,7 @@ interface Extension<T> {
   accessorKey: keyof T
   format?: Format
   ref?: {
-    provider: Pick<CellRefProps, 'provider'>
+    provider: Provider
     field: string
   }
 }
@@ -59,8 +59,10 @@ const LocalQuery = <T,>({ provider, columns: originalColumns }: Props<T>) => {
             </div>
           ),
           cell: (info: CellContext<T, Ref>) => {
-            const value = info.getValue()
-            return value && <CellRef value={value.title} {...ref} />
+            const value = info.getValue().title
+            const { provider } = ref
+
+            return value && <CellRef {...{ value, provider }} />
           },
         }),
       })),
