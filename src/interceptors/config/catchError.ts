@@ -1,6 +1,10 @@
 import { AppError } from '@/services/config'
 import { AxiosError } from 'axios'
 
+interface ApiErrorData {
+  code?: string
+}
+
 export const catchError = (error: AxiosError) => {
   let code: string | undefined = undefined
 
@@ -11,7 +15,7 @@ export const catchError = (error: AxiosError) => {
       servidor). Extraemos un código de error personalizado enviado en la
       respuesta.
     */
-    code = error.response.data.code
+    code = (error.response.data as ApiErrorData).code
   } else if (error.request) {
     /*
       La solicitud fue enviada, pero no se recibió respuesta.
