@@ -34,7 +34,7 @@ export const ERROR_MESSAGE = {
 const UNKNOWN_ERROR_MESSAGE = 'Se ha producido un error desconocido.'
 
 export class AppError extends Error {
-  constructor(private code?: string) {
+  constructor(public code?: string) {
     const message = ERROR_MESSAGE[code] || UNKNOWN_ERROR_MESSAGE
 
     super(message)
