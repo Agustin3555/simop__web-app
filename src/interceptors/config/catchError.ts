@@ -1,34 +1,32 @@
-import { AppError, ERRORS, getErrorInterpretation } from '@/services/config'
+import { AppError } from '@/services/config'
+import { AxiosError } from 'axios'
 
-export const catchError = (error: any) => {
-  // console.log({ error })
+export const catchError = (error: AxiosError) => {
+  let code: string | undefined = undefined
 
-  // Se verifica si la solicitud a la API se ha completado
   if (error.response) {
-    const apiErrorCode = error.response.data.errorCode
-
-    // Se verifica si existe un código de error dado por la API
-    if (apiErrorCode) return new AppError(apiErrorCode)
-    else {
-      // No existe el código de error, por lo tanto es un error "no controlado"
-      // const errorMessage = getErrorInterpretation(ERRORS.unknown)
-    }
-  } else {
-    // No se ha completado la solicitud, el error se ha producido
-
-    const axiosErrorCode = error.code
-
-    let errorMessage = getErrorInterpretation(axiosErrorCode)
-
-    if (!errorMessage) {
-      /*
-        No se puede interpretar el error, por lo tanto es un error "no
-        controlado".
-      */
-
-      errorMessage = getErrorInterpretation(ERRORS.unknown)
-    }
-
-    return
+    /*
+      La API respondió, pero con un código de estado fuera del rango 2xx.
+      Esto incluye errores como 4xx (errores del cliente) y 5xx (errores del
+      servidor). Extraemos un código de error personalizado enviado en la
+      respuesta.
+    */
+    code = error.response.data.code
+  } else if (error.request) {
+    /*
+      La solicitud fue enviada, pero no se recibió respuesta.
+      Esto puede ocurrir por problemas de red o porque el servidor no
+      respondió.
+    */
+    code = error.code
   }
+
+  /*
+    Si el error no tiene respuesta ni solicitud, se trata de un problema
+    inesperado como un error en la configuración de Axios o un problema del
+    cliente.
+    En todos los casos, convertimos el error en una instancia de AppError para
+    manejarlo de manera consistente.
+  */
+  return Promise.reject(new AppError(code))
 }

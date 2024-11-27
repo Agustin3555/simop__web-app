@@ -21,12 +21,12 @@ export interface RawRef {
   nombre: string
 }
 
-export interface CreateUpdateData {
+export interface CreateData {
   nombre: string
   subSecretariaId: number
 }
 
-export interface CreateUpdateBody {
+export interface CreateBody {
   nombre: string
   subSecretariaId: number
 }

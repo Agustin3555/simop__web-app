@@ -10,8 +10,7 @@ import {
   useReactTable,
 } from '@tanstack/react-table'
 import { StateButton } from '@/components'
-import { CellRef, Provider } from './components'
-import { AppError } from '@/services/config'
+import { CellRef, RefProvider } from './components'
 import { format as tempoFormat } from '@formkit/tempo'
 import { Ref } from '../../types'
 
@@ -21,13 +20,13 @@ interface Extension<T> {
   accessorKey: keyof T
   format?: Format
   ref?: {
-    provider: Provider
+    provider: RefProvider
     field: string
   }
 }
 
 interface Props<T> {
-  provider: () => Promise<T[] | AppError>
+  provider: () => Promise<T[]>
   columns: (ColumnDef<T> & Extension<T>)[]
 }
 
@@ -76,14 +75,13 @@ const LocalQuery = <T,>({ provider, columns: originalColumns }: Props<T>) => {
 
   const handleActionResult = useHandleAction(
     async ({ setError, setSuccess }) => {
-      const response = await provider()
-
-      if (!response || response instanceof AppError) {
-        await setError()
-      } else {
+      try {
+        const response = await provider()
         setData(response)
 
         await setSuccess()
+      } catch (error) {
+        await setError()
       }
     }
   )

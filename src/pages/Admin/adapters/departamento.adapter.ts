@@ -24,6 +24,19 @@ export const getAll: {
   },
 }
 
+export const getForConnect: {
+  output: OutputAdapter<DepartamentoModel.RawRef[], Ref[]>
+} = {
+  output: response => {
+    const convertedResource = response.map<Ref>(item => ({
+      id: item.id,
+      title: item.nombre,
+    }))
+
+    return convertedResource
+  },
+}
+
 export const getOne: {
   output: OutputAdapter<DepartamentoModel.RawEntity, DepartamentoModel.Entity>
 } = {
@@ -43,43 +56,14 @@ export const getOne: {
   },
 }
 
-export const getForConnect: {
-  output: OutputAdapter<DepartamentoModel.RawRef[], Ref[]>
-} = {
-  output: response => {
-    const convertedResource = response.map<Ref>(item => ({
-      id: item.id,
-      title: item.nombre,
-    }))
-
-    return convertedResource
-  },
-}
-
 export const create: {
   input: InputAdapter<
-    DepartamentoModel.CreateUpdateData,
-    DepartamentoModel.CreateUpdateBody
+    DepartamentoModel.CreateData,
+    DepartamentoModel.CreateBody
   >
 } = {
   input: data => {
-    const convertedResource: DepartamentoModel.CreateUpdateBody = {
-      nombre: data.nombre,
-      direccionId: data.direccionId,
-    }
-
-    return convertedResource
-  },
-}
-
-export const update: {
-  input: InputAdapter<
-    DepartamentoModel.CreateUpdateData,
-    DepartamentoModel.CreateUpdateBody
-  >
-} = {
-  input: data => {
-    const convertedResource: DepartamentoModel.CreateUpdateBody = {
+    const convertedResource: DepartamentoModel.CreateBody = {
       nombre: data.nombre,
       direccionId: data.direccionId,
     }

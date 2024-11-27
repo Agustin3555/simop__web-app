@@ -1,11 +1,11 @@
 import './CellRef.css'
 import { Button } from '@/components'
 
-export type Provider = (id: number) => Promise<any>
+export type RefProvider = (id: number) => Promise<any>
 
 interface CellRefProps {
   value: number | string
-  provider: Provider
+  provider: RefProvider
 }
 
 const CellRef = ({ value, provider }: CellRefProps) => {

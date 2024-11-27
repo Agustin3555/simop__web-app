@@ -2,21 +2,20 @@ import { useSubmitAction } from '@/hooks'
 import { Input } from '@/components'
 import { Combobox, LocalAdd } from '@/pages/Admin/components'
 import { DepartamentoService, DireccionService } from '@/pages/Admin/services'
-import { AppError } from '@/services/config'
 
 const Add = () => {
   const submitActionResult = useSubmitAction(
     async ({ formData, resetForm, setError, setSuccess }) => {
-      const createResponse = await DepartamentoService.create({
-        nombre: formData.get('nombre') as string,
-        direccionId: Number(formData.get('direccionId')),
-      })
+      try {
+        await DepartamentoService.create({
+          nombre: formData.get('nombre') as string,
+          direccionId: Number(formData.get('direccionId')),
+        })
 
-      if (!createResponse || createResponse instanceof AppError) {
-        setError()
-      } else {
-        setSuccess()
         resetForm()
+        await setSuccess()
+      } catch (error) {
+        setError()
       }
     }
   )

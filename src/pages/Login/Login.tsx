@@ -11,9 +11,9 @@ const Login = () => {
       const pass = formData.get('pass') as string
 
       if (pass === import.meta.env.VITE_UNIQUE_PASS) {
-        await setSuccess()
-
         navigate('/admin')
+
+        await setSuccess()
       } else {
         await setError()
       }

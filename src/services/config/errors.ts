@@ -1,39 +1,42 @@
-export enum ERRORS {
-  unknown = 'ERR_UNKNOWN',
-  client_fieldRequired = 'ERR_REQUIRED',
-  client_fieldsErrors = 'ERR_FIELDS_ERRORS',
-  ws_network = 'TransportError',
-  api_network = 'ERR_NETWORK',
-  api_login = 'ERR_LOGIN',
-  api_nameUnique = 'ERR_NAME_UNIQUE',
-  api_product_charsKeyUnique = 'ERR_PRODUCT_CHARS_KEY_UNIQUE',
+export const ERROR_MESSAGE = {
+  /*
+    AXIOS ERROR CODES
+    Lista completa en:
+    https://github.com/axios/axios?tab=readme-ov-file#error-types
+  */
+  ERR_BAD_OPTION_VALUE:
+    'Se proporcionó un valor no válido o no compatible en la configuración de Axios.',
+  ERR_BAD_OPTION:
+    'Se proporcionó una opción no válida en la configuración de Axios.',
+  ECONNABORTED:
+    'La solicitud excedió el tiempo límite configurado y se abortó.',
+  ETIMEDOUT:
+    'La solicitud excedió el tiempo de espera predeterminado y no obtuvo respuesta a tiempo.',
+  ERR_NETWORK:
+    'Hubo un problema relacionado con la red (como pérdida de conexión).',
+  ERR_FR_TOO_MANY_REDIRECTS:
+    'La solicitud fue redirigida demasiadas veces, superando el máximo permitido en la configuración.',
+  ERR_DEPRECATED: 'Se utilizó una característica o método obsoleto en Axios.',
+  ERR_BAD_RESPONSE:
+    'La respuesta no se puede analizar correctamente o está en un formato inesperado.',
+  ERR_BAD_REQUEST:
+    'La solicitud tiene un formato inesperado o le faltan parámetros necesarios.',
+  ERR_CANCELED: 'La solicitud fue cancelada explícitamente por el usuario.',
+  ERR_NOT_SUPPORT:
+    'La característica o método no es compatible en el entorno actual de Axios.',
+  ERR_INVALID_URL:
+    'Se proporcionó una URL no válida para la solicitud de Axios.',
+
+  // CUSTOM CODES
+  ERR_LOGIN: 'Email o contraseña incorrectos.',
 }
 
-export const ERROR_MATCHER: { [key: string]: string } = {
-  [ERRORS.unknown]: 'Se ha producido un error desconocido.',
-  [ERRORS.client_fieldRequired]: 'Campo obligatorio',
-  [ERRORS.client_fieldsErrors]:
-    'No se puede completar porque existen errores en los campos.',
-  [ERRORS.ws_network]:
-    'No se puede establecer una conexión con el servidor. Reintentando ...',
-  [ERRORS.api_network]: 'No se puede obtener datos del servidor.',
-  [ERRORS.api_login]: 'Email o contraseña incorrectos.',
-  [ERRORS.api_nameUnique]: 'Ya existe un recurso con el mismo "Nombre".',
-  [ERRORS.api_product_charsKeyUnique]:
-    'No se permiten "Características" con el mismo "Nombre".',
-}
-
-export const getErrorInterpretation = (errorCode: string) =>
-  ERROR_MATCHER[errorCode] || undefined
+const UNKNOWN_ERROR_MESSAGE = 'Se ha producido un error desconocido.'
 
 export class AppError extends Error {
-  code: ERRORS
+  constructor(private code?: string) {
+    const message = ERROR_MESSAGE[code] || UNKNOWN_ERROR_MESSAGE
 
-  constructor(code: ERRORS) {
-    const message = getErrorInterpretation(code)
     super(message)
-
-    this.name = 'AppError'
-    this.code = code
   }
 }
