@@ -7,6 +7,7 @@ import {
   getFacetedMinMaxValues,
   getFacetedUniqueValues,
   getFilteredRowModel,
+  getSortedRowModel,
   RowData,
   useReactTable,
 } from '@tanstack/react-table'
@@ -38,9 +39,12 @@ interface Props<T> {
   columns: Column<T>[]
 }
 
+// TODO: crear un componente Table para que solo se llame cuando exista data
+
 const LocalQuery = <T,>({ provider, columns }: Props<T>) => {
   const [data, setData] = useState<T[]>()
   const [columnFilters, setColumnFilters] = useState([])
+  const [sortState, setSortState] = useState([])
 
   const tableColumns = useRef<ColumnDef<T>[]>(
     columns.map(({ header, key, type, ref }) => ({
@@ -71,12 +75,16 @@ const LocalQuery = <T,>({ provider, columns }: Props<T>) => {
   const table = useReactTable({
     data,
     columns: tableColumns.current,
-    state: { columnFilters },
+    state: { columnFilters, sorting: sortState },
+    onSortingChange: setSortState,
     onColumnFiltersChange: setColumnFilters,
     getCoreRowModel: getCoreRowModel(),
     getFilteredRowModel: getFilteredRowModel(),
     getFacetedMinMaxValues: getFacetedMinMaxValues(),
     getFacetedUniqueValues: getFacetedUniqueValues(),
+    getSortedRowModel: getSortedRowModel(),
+    enableMultiSort: true,
+    enableSortingRemoval: false,
   })
 
   const handleActionResult = useHandleAction(
@@ -110,7 +118,11 @@ const LocalQuery = <T,>({ provider, columns }: Props<T>) => {
               {table.getHeaderGroups().map(headerGroup => (
                 <tr key={headerGroup.id}>
                   {headerGroup.headers.map(header => (
-                    <Header key={header.id} {...header} />
+                    <Header
+                      key={header.id}
+                      {...header}
+                      {...{ sortState, setSortState }}
+                    />
                   ))}
                 </tr>
               ))}

@@ -26,7 +26,11 @@ const Cell = ({ column, getValue }: TanstackCell<any, unknown>) => {
     <td className="cmp-cell">
       {value &&
         (ref ? (
-          <Button title={String(value)} faIcon="fa-solid fa-eye" />
+          <Button
+            title={String(value)}
+            faIcon="fa-solid fa-eye"
+            _type="secondary"
+          />
         ) : (
           String(value)
         ))}

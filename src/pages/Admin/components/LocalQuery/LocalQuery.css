@@ -28,6 +28,7 @@
     overflow: auto;
 
     > table {
+      --cell-padding-inline: var(--pal-size-m);
       --table-border-radius: var(--pal-size-xs);
 
       border-width: var(--line-thickness);

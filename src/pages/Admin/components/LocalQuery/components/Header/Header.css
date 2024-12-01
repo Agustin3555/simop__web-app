@@ -1,5 +1,4 @@
 .cmp-header {
-  font-weight: initial;
   vertical-align: bottom;
 
   border-inline-style: solid;
@@ -15,26 +14,41 @@
     display: flex;
     flex-direction: column;
 
-    > header {
+    > button {
       display: flex;
       align-items: center;
-      gap: var(--pal-size-m);
-      padding: var(--pal-size-m);
+      justify-content: space-between;
+      gap: var(--cell-padding-inline);
+      padding: var(--cell-padding-inline);
 
       > .title {
-        font-weight: 600;
-        color: var(--pal-color-a-d1);
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: var(--pal-size-xs);
+
+        font-weight: 650;
+        color: var(--pal-color-a-d2);
+
+        > small {
+          font-size: var(--pal-size-font-2xs);
+          color: var(--pal-color-a);
+        }
       }
 
-      > small {
-        padding-block: var(--pal-size-2xs);
-        padding-inline: var(--pal-size-xs);
+      > .sort {
+        --cmp-icon-size: var(--pal-size-s);
+
+        display: flex;
+        align-items: center;
+        gap: var(--pal-size-xs);
+        padding: var(--pal-size-xs);
 
         font-weight: 500;
-        color: var(--pal-color-a);
+        color: var(--pal-color-a-l3);
 
-        border-radius: var(--pal-size-3xl);
-        background-color: var(--pal-color-a-l3);
+        border-radius: var(--pal-size-2xs);
+        background-color: var(--pal-color-a);
       }
     }
 
@@ -49,7 +63,7 @@
 
       .input {
         padding-inline: calc(var(--control-padding-inline) - var(--gap));
-        padding-right: 0;
+        padding-right: var(--pal-size-xs);
         min-width: 7rem;
 
         border-radius: calc(var(--table-border-radius) - var(--gap));
