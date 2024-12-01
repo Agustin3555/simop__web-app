@@ -1,23 +1,22 @@
 import './View.css'
 import { ReactNode, useMemo, useState } from 'react'
-import { useViewActive } from '../../contexts'
-import { ViewKey } from '../../enums'
-import { addIfExist, classList } from '@/helpers'
-import { Icon, Separator } from '@/components'
 import { useChangeHandler } from '../../hooks'
+import { useViewActive } from '../../contexts'
+import { Icon, Separator } from '@/components'
+import { VIEW_INFO, ViewKey } from '../../constants'
+import { addIfExist, classList } from '@/helpers'
 
 type LocalViewKey = 'query' | 'add' | 'update'
 
 interface Props {
-  title: string
-  view: ViewKey
+  viewKey: ViewKey
   query?: ReactNode
   add?: ReactNode
   update?: ReactNode
 }
 
-const View = ({ title, view, query, add, update }: Props) => {
-  const active = useViewActive(view)
+const View = ({ viewKey, query, add, update }: Props) => {
+  const active = useViewActive(viewKey)
 
   const localViews = useMemo(
     () =>
@@ -56,7 +55,7 @@ const View = ({ title, view, query, add, update }: Props) => {
   )
 
   return (
-    <div className={classList('cmp-view', view, { active })}>
+    <div className={classList('cmp-view', viewKey, { active })}>
       <header>
         <fieldset>
           {localViews.map(({ title, faIcon, localViewKey }) => (
@@ -66,14 +65,14 @@ const View = ({ title, view, query, add, update }: Props) => {
               <input
                 type="radio"
                 id={localViewKey}
-                name={['tabbed', view].join('-')}
+                name={['tabbed', viewKey].join('-')}
                 checked={localViewKey === localView}
                 onChange={handleChange}
               />
             </label>
           ))}
         </fieldset>
-        <h1>{title}</h1>
+        <h1>{VIEW_INFO[viewKey].title}</h1>
       </header>
       <Separator />
       <div className="local-views">

@@ -1,14 +1,9 @@
 import { View } from '../../components'
 import { Add, Query } from './components'
-import { ViewKey } from '../../enums'
+import { ViewKey } from '../../constants'
 
 const Departamentos = () => (
-  <View
-    title="Departamentos"
-    view={ViewKey.DEPARTAMENTOS}
-    add={<Add />}
-    query={<Query />}
-  />
+  <View viewKey={ViewKey.DEPARTAMENTOS} add={<Add />} query={<Query />} />
 )
 
 export default Departamentos

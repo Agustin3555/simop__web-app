@@ -1,6 +1,6 @@
 import { ViewActiveProvider } from './contexts'
 import { Content, Nav } from './components'
-import { ViewKey } from './enums'
+import { ViewKey } from './constants'
 
 /*
   TODO: en un futuro se podría obtener por local storage o por la cuenta la

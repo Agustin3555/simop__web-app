@@ -1,5 +1,5 @@
 import { createContext, ReactNode, useContext, useState } from 'react'
-import { ViewKey } from '../enums'
+import { ViewKey } from '../constants'
 
 interface ViewActiveContextProps {
   activeView: ViewKey
