@@ -7,6 +7,7 @@ import {
   getFacetedMinMaxValues,
   getFacetedUniqueValues,
   getFilteredRowModel,
+  RowData,
   useReactTable,
 } from '@tanstack/react-table'
 import { StateButton } from '@/components'
@@ -24,7 +25,7 @@ interface Meta {
 }
 
 declare module '@tanstack/react-table' {
-  interface ColumnMeta extends Meta {}
+  interface ColumnMeta<TData extends RowData, TValue> extends Meta {}
 }
 
 interface Column<T> extends Meta {
