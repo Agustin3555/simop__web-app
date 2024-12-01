@@ -1,46 +1,78 @@
 .cmp-view {
+  --gap: var(--pal-size-m);
+
   position: absolute;
 
   display: none;
   flex-direction: column;
-  gap: var(--pal-size-m);
-  padding: var(--pal-size-m);
+  gap: var(--gap);
+  padding: var(--gap);
   width: 100%;
   height: 100dvh;
 
-  > fieldset {
+  > header {
     display: flex;
-    gap: var(--pal-size-m);
-    margin-left: calc(var(--pal-size-2xl) + var(--pal-size-m));
-    border: none;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--gap);
 
-    > label {
+    > fieldset {
       display: flex;
-      align-items: center;
-      gap: var(--pal-size-s);
-      padding-inline: var(--pal-size-l);
-      height: var(--pal-size-2xl);
+      gap: var(--gap);
+      margin-left: calc(var(--pal-size-2xl) + var(--gap));
+      border: none;
 
-      font-weight: 500;
-      color: var(--pal-color-a-d2);
+      > label {
+        --height: var(--pal-size-2xl);
 
-      border-radius: var(--pal-size-2xs);
-      cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: var(--pal-size-s);
+        padding-inline: var(--pal-size-l);
+        height: var(--height);
 
-      transition: color var(--pal-time-xs) ease-out,
-        background-color var(--pal-time-xs) ease-out;
+        font-weight: 500;
+        color: var(--pal-color-a-d2);
 
-      > input {
-        display: none;
+        border-radius: var(--pal-size-2xs);
+        cursor: pointer;
+
+        transition: color var(--pal-time-xs) ease-out,
+          background-color var(--pal-time-xs) ease-out;
+
+        @media (width < 45rem) {
+          padding: 0;
+          width: var(--height);
+
+          > .text {
+            display: none;
+          }
+        }
+
+        > input {
+          display: none;
+        }
+
+        &:hover {
+          background-color: var(--pal-color-a-l3);
+        }
+
+        &:has(input:checked) {
+          background-color: var(--pal-color-a-l2);
+        }
       }
+    }
 
-      &:hover {
-        background-color: var(--pal-color-a-l3);
-      }
+    > h1 {
+      padding-right: var(--gap);
 
-      &:has(input:checked) {
-        background-color: var(--pal-color-a-l2);
-      }
+      font-size: clamp(var(--pal-size-font-s), 3dvw, var(--pal-size-font-m));
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      color: var(--pal-color-a-l1);
+
+      overflow: hidden;
     }
   }
 

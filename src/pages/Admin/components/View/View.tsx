@@ -9,13 +9,14 @@ import { useChangeHandler } from '../../hooks'
 type LocalViewKey = 'query' | 'add' | 'update'
 
 interface Props {
+  title: string
   view: ViewKey
   query?: ReactNode
   add?: ReactNode
   update?: ReactNode
 }
 
-const View = ({ view, query, add, update }: Props) => {
+const View = ({ title, view, query, add, update }: Props) => {
   const active = useViewActive(view)
 
   const localViews = useMemo(
@@ -56,21 +57,24 @@ const View = ({ view, query, add, update }: Props) => {
 
   return (
     <div className={classList('cmp-view', view, { active })}>
-      <fieldset>
-        {localViews.map(({ title, faIcon, localViewKey }) => (
-          <label key={title}>
-            {faIcon && <Icon {...{ faIcon }} />}
-            {title}
-            <input
-              type="radio"
-              id={localViewKey}
-              name={['tabbed', view].join('-')}
-              checked={localViewKey === localView}
-              onChange={handleChange}
-            />
-          </label>
-        ))}
-      </fieldset>
+      <header>
+        <fieldset>
+          {localViews.map(({ title, faIcon, localViewKey }) => (
+            <label key={title}>
+              {faIcon && <Icon {...{ faIcon }} />}
+              <div className="text">{title}</div>
+              <input
+                type="radio"
+                id={localViewKey}
+                name={['tabbed', view].join('-')}
+                checked={localViewKey === localView}
+                onChange={handleChange}
+              />
+            </label>
+          ))}
+        </fieldset>
+        <h1>{title}</h1>
+      </header>
       <Separator />
       <div className="local-views">
         {localViews.map(({ localViewKey, component }) => (
