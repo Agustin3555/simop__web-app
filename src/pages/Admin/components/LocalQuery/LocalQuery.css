@@ -28,40 +28,20 @@
     overflow: auto;
 
     > table {
+      --table-border-radius: var(--pal-size-xs);
+
       border-width: var(--line-thickness);
       border-style: solid;
       border-collapse: collapse;
 
       white-space: nowrap;
 
-      border-radius: var(--pal-size-xs);
+      border-radius: var(--table-border-radius);
       background-color: var(--pal-color-white);
       overflow: hidden;
 
-      th,
-      td {
-        padding-inline: var(--pal-size-m);
-      }
-
       thead {
         background-color: var(--pal-color-a-l2);
-
-        th {
-          height: var(--pal-size-2xl);
-
-          font-weight: 600;
-          text-align: start;
-          color: var(--pal-color-a-d1);
-
-          border-inline-style: solid;
-          border-inline-width: var(--line-thickness);
-          border-inline-color: var(--pal-color-white);
-
-          /* Corrige el border excedente */
-          &:last-of-type {
-            border: none;
-          }
-        }
       }
 
       tbody {
@@ -97,10 +77,6 @@
             &::after {
               border-block-width: var(--line-thickness);
             }
-          }
-
-          td {
-            height: 4rem;
           }
         }
       }

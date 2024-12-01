@@ -1,7 +1,12 @@
-.cmp-cell-ref {
+.cmp-cell {
+  padding-inline: var(--pal-size-m);
+  height: 4rem;
+
   > .cmp-button {
     justify-content: flex-start;
     width: 100%;
+
+    color: var(--pal-color-a-d1);
 
     background-color: var(--pal-color-white);
 

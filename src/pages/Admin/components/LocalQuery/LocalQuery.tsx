@@ -1,76 +1,81 @@
 import './LocalQuery.css'
-import { useMemo, useRef, useState } from 'react'
+import { useRef, useState } from 'react'
 import { useHandleAction } from '@/hooks'
 import {
-  CellContext,
   ColumnDef,
-  ColumnDefTemplate,
-  flexRender,
   getCoreRowModel,
+  getFacetedMinMaxValues,
+  getFacetedUniqueValues,
+  getFilteredRowModel,
   useReactTable,
 } from '@tanstack/react-table'
 import { StateButton } from '@/components'
-import { CellRef, RefProvider } from './components'
-import { format as tempoFormat } from '@formkit/tempo'
+import { Cell, Header } from './components'
 import { Ref } from '../../types'
 
-type Format = 'dateTime'
+export type TypeMeta = 'text' | 'number' | 'date' | 'dateTime' | 'option'
 
-interface Extension<T> {
-  accessorKey: keyof T
-  format?: Format
+interface Meta {
+  type: TypeMeta
   ref?: {
-    provider: RefProvider
     field: string
+    provider: (id: number) => Promise<unknown>
   }
+}
+
+declare module '@tanstack/react-table' {
+  interface ColumnMeta extends Meta {}
+}
+
+interface Column<T> extends Meta {
+  key: keyof T
+  header: string
 }
 
 interface Props<T> {
   provider: () => Promise<T[]>
-  columns: (ColumnDef<T> & Extension<T>)[]
+  columns: Column<T>[]
 }
 
-const LocalQuery = <T,>({ provider, columns: originalColumns }: Props<T>) => {
+const LocalQuery = <T,>({ provider, columns }: Props<T>) => {
   const [data, setData] = useState<T[]>()
+  const [columnFilters, setColumnFilters] = useState([])
 
-  const formatMatcher = useRef<
-    Record<Format, ColumnDefTemplate<CellContext<T, unknown>>>
-  >({
-    dateTime: info =>
-      tempoFormat(info.getValue() as string, {
-        date: 'medium',
-        time: 'short',
+  const tableColumns = useRef<ColumnDef<T>[]>(
+    columns.map(({ header, key, type, ref }) => ({
+      header,
+      accessorKey: key,
+      meta: { type, ref },
+      ...(type === 'dateTime' && {
+        filterFn: (row, columnId, filterValue) => {
+          if (!filterValue) return true // No hay filtro, muestra todo
+
+          const { min, max } = filterValue
+          const rowDate = new Date(row.getValue(columnId))
+
+          const isAfterMin = min ? rowDate >= new Date(min) : true
+          const isBeforeMax = max ? rowDate <= new Date(max) : true
+
+          return isAfterMin && isBeforeMax
+        },
       }),
-  })
-
-  const columns = useMemo<ColumnDef<T>[]>(
-    () =>
-      originalColumns.map(({ format, ref, ...rest }) => ({
-        ...rest,
-        ...(format && {
-          cell: formatMatcher.current[format],
-        }),
-        ...(ref && {
-          header: () => (
-            <div>
-              {rest.header as string}
-              <small>{ref.field}</small>
-            </div>
-          ),
-          cell: (info: CellContext<T, Ref>) =>
-            info.getValue() && (
-              <CellRef value={info.getValue().title} provider={ref.provider} />
-            ),
-        }),
-      })),
-    [originalColumns]
+      ...(ref && {
+        accessorFn: row => {
+          return (row[key] as Ref)?.title ?? ''
+        },
+      }),
+    }))
   )
 
   const table = useReactTable({
     data,
-    columns,
-    // TODO: quizás no se utilice en el futuro ya que controlaremos el renderizado
+    columns: tableColumns.current,
+    state: { columnFilters },
+    onColumnFiltersChange: setColumnFilters,
     getCoreRowModel: getCoreRowModel(),
+    getFilteredRowModel: getFilteredRowModel(),
+    getFacetedMinMaxValues: getFacetedMinMaxValues(),
+    getFacetedUniqueValues: getFacetedUniqueValues(),
   })
 
   const handleActionResult = useHandleAction(
@@ -104,12 +109,7 @@ const LocalQuery = <T,>({ provider, columns: originalColumns }: Props<T>) => {
               {table.getHeaderGroups().map(headerGroup => (
                 <tr key={headerGroup.id}>
                   {headerGroup.headers.map(header => (
-                    <th key={header.id}>
-                      {flexRender(
-                        header.column.columnDef.header,
-                        header.getContext()
-                      )}
-                    </th>
+                    <Header key={header.id} {...header} />
                   ))}
                 </tr>
               ))}
@@ -118,13 +118,7 @@ const LocalQuery = <T,>({ provider, columns: originalColumns }: Props<T>) => {
               {table.getRowModel().rows.map(row => (
                 <tr key={row.id}>
                   {row.getVisibleCells().map(cell => (
-                    <td key={cell.id}>
-                      {/* TODO: Crear un componente Cell y envolver lo siguiente */}
-                      {flexRender(
-                        cell.column.columnDef.cell,
-                        cell.getContext()
-                      )}
-                    </td>
+                    <Cell key={cell.id} {...cell} />
                   ))}
                 </tr>
               ))}
