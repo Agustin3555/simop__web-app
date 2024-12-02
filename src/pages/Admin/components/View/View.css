@@ -67,7 +67,7 @@
     > h1 {
       padding-right: var(--gap);
 
-      font-size: clamp(var(--pal-size-font-s), 3dvw, var(--pal-size-font-m));
+      font-size: clamp(var(--pal-size-font-s), 2.5dvw, var(--pal-size-font-l));
       white-space: nowrap;
       text-overflow: ellipsis;
       color: var(--pal-color-a-l1);

@@ -1,0 +1,59 @@
+.cmp-row-selector-cell {
+  padding: var(--cell-padding-inline);
+
+  > .content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--pal-size-s);
+
+    > label {
+      display: block;
+      align-content: center;
+      border-width: var(--line-thickness);
+      border-style: solid;
+      border-color: var(--pal-color-a-l2);
+      aspect-ratio: 1;
+      width: var(--pal-size-l);
+
+      border-radius: var(--pal-size-2xs);
+      cursor: pointer;
+
+      transition: background-color var(--pal-time-xs) ease-out;
+
+      &:has(input:checked) {
+        border: none;
+
+        background-color: var(--pal-color-a);
+
+        > .cmp-icon {
+          scale: initial;
+        }
+      }
+
+      > input {
+        display: none;
+      }
+
+      > .cmp-icon {
+        --cmp-icon-size: var(--pal-size-s);
+
+        margin-inline: auto;
+
+        color: var(--pal-color-white);
+        scale: 0;
+
+        transition: scale var(--pal-time-s) ease;
+      }
+    }
+
+    > small {
+      font-weight: 650;
+      color: var(--pal-color-a-d1);
+    }
+  }
+
+  &.header .content label {
+    border-color: var(--pal-color-a-l1);
+  }
+}

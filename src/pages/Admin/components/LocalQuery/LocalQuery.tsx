@@ -1,5 +1,5 @@
 import './LocalQuery.css'
-import { useRef, useState } from 'react'
+import { useMemo, useState } from 'react'
 import { useHandleAction } from '@/hooks'
 import {
   ColumnDef,
@@ -11,8 +11,8 @@ import {
   RowData,
   useReactTable,
 } from '@tanstack/react-table'
-import { StateButton } from '@/components'
-import { Cell, Header } from './components'
+import { Icon, StateButton } from '@/components'
+import { Cell, Header, RowSelectorCell } from './components'
 import { Ref } from '../../types'
 
 export type TypeMeta = 'text' | 'number' | 'date' | 'dateTime' | 'option'
@@ -39,43 +39,60 @@ interface Props<T> {
   columns: Column<T>[]
 }
 
+const SELECT_COLUMN = 'select'
+
 // TODO: crear un componente Table para que solo se llame cuando exista data
 
-const LocalQuery = <T,>({ provider, columns }: Props<T>) => {
+const LocalQuery = <T extends { id: number }>({
+  provider,
+  columns,
+}: Props<T>) => {
   const [data, setData] = useState<T[]>()
   const [columnFilters, setColumnFilters] = useState([])
   const [sortState, setSortState] = useState([])
+  const [rowSelection, setRowSelection] = useState({})
 
-  const tableColumns = useRef<ColumnDef<T>[]>(
-    columns.map(({ header, key, type, ref }) => ({
-      header,
-      accessorKey: key,
-      meta: { type, ref },
-      ...(type === 'dateTime' && {
-        filterFn: (row, columnId, filterValue) => {
-          if (!filterValue) return true // No hay filtro, muestra todo
+  const selectedRowIds = Object.keys(rowSelection)
+    .filter(id => rowSelection[id])
+    .map(Number)
 
-          const { min, max } = filterValue
-          const rowDate = new Date(row.getValue(columnId))
+  const tableColumns = useMemo(
+    () => [
+      { id: SELECT_COLUMN },
+      ...columns.map<ColumnDef<T>>(({ header, key, type, ref }) => ({
+        header,
+        accessorKey: key,
+        meta: { type, ref },
+        ...(type === 'dateTime' && {
+          filterFn: (row, columnId, filterValue) => {
+            if (!filterValue) return true // No hay filtro, muestra todo
 
-          const isAfterMin = min ? rowDate >= new Date(min) : true
-          const isBeforeMax = max ? rowDate <= new Date(max) : true
+            const { min, max } = filterValue
+            const rowDate = new Date(row.getValue(columnId))
 
-          return isAfterMin && isBeforeMax
-        },
-      }),
-      ...(ref && {
-        accessorFn: row => {
-          return (row[key] as Ref)?.title ?? ''
-        },
-      }),
-    }))
+            const isAfterMin = min ? rowDate >= new Date(min) : true
+            const isBeforeMax = max ? rowDate <= new Date(max) : true
+
+            return isAfterMin && isBeforeMax
+          },
+        }),
+        ...(ref && {
+          accessorFn: row => {
+            return (row[key] as Ref)?.title ?? ''
+          },
+        }),
+      })),
+    ],
+    [columns]
   )
 
   const table = useReactTable({
     data,
-    columns: tableColumns.current,
-    state: { columnFilters, sorting: sortState },
+    getRowId: row => String(row.id),
+    columns: tableColumns,
+    state: { rowSelection, columnFilters, sorting: sortState },
+    enableRowSelection: true,
+    onRowSelectionChange: setRowSelection,
     onSortingChange: setSortState,
     onColumnFiltersChange: setColumnFilters,
     getCoreRowModel: getCoreRowModel(),
@@ -109,7 +126,12 @@ const LocalQuery = <T,>({ provider, columns }: Props<T>) => {
           faIcon="fa-solid fa-cloud-arrow-down"
           {...handleActionResult}
         />
-        {data && <div>{data.length}</div>}
+        {data && (
+          <div className="total-items">
+            <Icon faIcon="fa-solid fa-cubes-stacked" />
+            <p>{data.length}</p>
+          </div>
+        )}
       </header>
       <div className="table-container">
         {data && (
@@ -117,22 +139,45 @@ const LocalQuery = <T,>({ provider, columns }: Props<T>) => {
             <thead>
               {table.getHeaderGroups().map(headerGroup => (
                 <tr key={headerGroup.id}>
-                  {headerGroup.headers.map(header => (
-                    <Header
-                      key={header.id}
-                      {...header}
-                      {...{ sortState, setSortState }}
-                    />
-                  ))}
+                  {headerGroup.headers.map(header =>
+                    header.id === SELECT_COLUMN ? (
+                      <RowSelectorCell
+                        key={header.id}
+                        checked={table.getIsAllRowsSelected()}
+                        indeterminate={table.getIsSomeRowsSelected()}
+                        onChange={table.getToggleAllRowsSelectedHandler()}
+                        asHeader
+                        selectionCounter={selectedRowIds.length}
+                      />
+                    ) : (
+                      <Header
+                        key={header.id}
+                        {...header}
+                        {...{ sortState, setSortState }}
+                      />
+                    )
+                  )}
                 </tr>
               ))}
             </thead>
             <tbody>
               {table.getRowModel().rows.map(row => (
                 <tr key={row.id}>
-                  {row.getVisibleCells().map(cell => (
-                    <Cell key={cell.id} {...cell} />
-                  ))}
+                  {row
+                    .getVisibleCells()
+                    .map(cell =>
+                      cell.column.columnDef.id === SELECT_COLUMN ? (
+                        <RowSelectorCell
+                          key={cell.id}
+                          checked={row.getIsSelected()}
+                          disabled={!row.getCanSelect()}
+                          indeterminate={row.getIsSomeSelected()}
+                          onChange={row.getToggleSelectedHandler()}
+                        />
+                      ) : (
+                        <Cell key={cell.id} {...cell} />
+                      )
+                    )}
                 </tr>
               ))}
             </tbody>

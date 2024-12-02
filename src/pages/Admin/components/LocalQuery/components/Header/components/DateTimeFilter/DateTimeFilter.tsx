@@ -24,8 +24,8 @@ const DateRangeFilter = ({
   }, [type])
 
   const inputs = [
-    { title: 'Desde', key: 'min', value: columnFilterValue.min },
     { title: 'Hasta', key: 'max', value: columnFilterValue.max },
+    { title: 'Desde', key: 'min', value: columnFilterValue.min },
   ]
 
   const handleChange = useCallback(
