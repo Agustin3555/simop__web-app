@@ -1,3 +1,6 @@
+//estas interfaces son contratos para los datos que manejo en la app,
+//transformo los datos crudos en una entidad para usar referencias simples(ref)
+//con crateData/Body puedo crear nuevas entidades por medeio de slicitudes http
 import { Ref } from '../types'
 
 export interface RawEntity {

@@ -10,7 +10,7 @@ export const getAll: {
       id: item.id,
       nombre: item.nombre,
       subSecretaria: item.subSecretaria && {
-        id: item.subSecretaria.id,
+        id: item.subSecretaria.id, 
         title: item.subSecretaria.nombre,
       },
       creado: item.creado,

@@ -1,11 +1,25 @@
 import './Content.css'
-import { Departamentos, Direcciones, SubSecretarias } from '../../views'
+import { Departamentos, Direcciones, Pais, Provincia, SubSecretarias,Localidad, EstadoObra, Financiamiento, ParalizacionObra, ProgramaObra,RepresentanteEmpresa, Tramite, Inspector, ModificacionObra  } from '../../views'
+
 
 const Content = () => (
   <div className="cmp-content">
     <SubSecretarias />
     <Direcciones />
     <Departamentos />
+    <Pais/>
+    <Provincia/>
+    <Localidad/>
+    <EstadoObra/>
+    <Financiamiento/>
+    <ModificacionObra/>
+    <ParalizacionObra/>
+    <ProgramaObra/>
+    <RepresentanteEmpresa/>
+    <Tramite/>
+    <Inspector/>
+
+    
   </div>
 )
 
