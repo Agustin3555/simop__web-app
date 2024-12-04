@@ -64,7 +64,7 @@
       .input {
         padding-inline: calc(var(--control-padding-inline) - var(--gap));
         padding-right: var(--pal-size-xs);
-        min-width: 7rem;
+        min-width: 8rem;
 
         border-radius: calc(var(--table-border-radius) - var(--gap));
 

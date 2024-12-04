@@ -8,7 +8,9 @@ export interface Provider {
   provider: () => Promise<Ref[] | AppError>
 }
 
-export interface ComboboxProps extends UseLabelProps, Control, Provider {}
+export interface ComboboxProps extends UseLabelProps, Control, Provider {
+  multiple?: boolean
+}
 
 interface UseComboboxProps extends UseLabelProps, Provider {}
 

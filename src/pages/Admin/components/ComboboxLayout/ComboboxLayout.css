@@ -4,6 +4,8 @@
   > header {
     display: flex;
     justify-content: space-between;
+    height: auto;
+    min-height: var(--control-height);
 
     overflow: hidden;
     cursor: pointer;
@@ -11,13 +13,12 @@
     transition: border-color var(--pal-time-xs) ease-out;
 
     > .selected-items {
-      --padding: var(--pal-size-2xs);
+      --padding: 0.3125rem;
       --border-radius: var(--pal-size-3xs);
-
-      flex-grow: 1;
 
       display: flex;
       flex-wrap: wrap;
+      gap: var(--padding);
       padding: var(--padding);
 
       cursor: default;
@@ -51,9 +52,11 @@
     }
 
     > .arrow {
+      flex-shrink: 0;
+
       align-content: center;
-      aspect-ratio: 1;
-      height: 100%;
+      width: var(--control-height);
+      min-height: 100%;
 
       color: var(--pal-color-a);
 
