@@ -23,19 +23,17 @@ const Combobox = ({
   const handleOptionChange = useInputHandler(id => {
     const newSelected = options.find(option => String(option.id) === id)
 
-    if (multiple) {
-      setSelected(prev => {
-        const exists = prev.some(item => item.id === Number(id))
+    setSelected(
+      multiple
+        ? prev => {
+            const exists = prev.some(item => item.id === Number(id))
 
-        return exists
-          ? prev.filter(item => item.id !== Number(id))
-          : [...prev, newSelected]
-      })
-
-      return
-    }
-
-    setSelected([newSelected])
+            return exists
+              ? prev.filter(item => item.id !== Number(id))
+              : [...prev, newSelected]
+          }
+        : [newSelected]
+    )
   })
 
   const handleDeleteClick = useCallback<MouseEventHandler<HTMLButtonElement>>(
