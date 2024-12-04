@@ -27,7 +27,10 @@ const Nav = () => {
       />
       <nav>
         {TREE.map(section => (
-          <Section key={section.viewKey || section.title} {...section} />
+          <Section
+            key={section.title || String(section.viewKey)}
+            {...section}
+          />
         ))}
       </nav>
     </div>

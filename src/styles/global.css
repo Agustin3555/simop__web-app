@@ -31,26 +31,9 @@ html {
   margin: 0;
 
   font-family: var(--pal-font-b);
-  font-weight: 500;
+  font-weight: 550;
   word-spacing: initial;
   letter-spacing: initial;
-}
-
-h1,
-h1 > * {
-  font-size: var(--pal-size-font-3xl);
-}
-
-h2,
-h2 > * {
-  font-size: var(--pal-size-font-2xl);
-}
-
-h3,
-h3 > * {
-  font-size: var(--pal-size-font-m);
-  font-family: var(--pal-font-a);
-  font-weight: 600;
 }
 
 small {

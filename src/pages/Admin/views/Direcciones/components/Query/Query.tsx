@@ -1,40 +1,41 @@
 import { LocalQuery } from '@/pages/Admin/components'
 import { DireccionService, SubSecretariaService } from '@/pages/Admin/services'
 
-const Query = () => {
-  return (
-    <LocalQuery
-      provider={DireccionService.getAll}
-      columns={[
-        {
-          header: 'ID',
-          accessorKey: 'id',
+const Query = () => (
+  <LocalQuery
+    provider={DireccionService.getAll}
+    columns={[
+      {
+        header: 'ID',
+        key: 'id',
+        type: 'number',
+      },
+      {
+        header: 'Nombre',
+        key: 'nombre',
+        type: 'text',
+      },
+      {
+        header: 'Subsecretaría',
+        key: 'subSecretaria',
+        type: 'text',
+        ref: {
+          field: 'Nombre',
+          provider: SubSecretariaService.getOne,
         },
-        {
-          header: 'Nombre',
-          accessorKey: 'nombre',
-        },
-        {
-          header: 'Subsecretaría',
-          accessorKey: 'subSecretaria',
-          ref: {
-            provider: SubSecretariaService.getOne,
-            field: 'Nombre',
-          },
-        },
-        {
-          header: 'Fecha de creación',
-          accessorKey: 'creado',
-          format: 'dateTime',
-        },
-        {
-          header: 'Fecha de modificación',
-          accessorKey: 'modificado',
-          format: 'dateTime',
-        },
-      ]}
-    />
-  )
-}
+      },
+      {
+        header: 'Fecha de creación',
+        key: 'creado',
+        type: 'dateTime',
+      },
+      {
+        header: 'Fecha de modificación',
+        key: 'modificado',
+        type: 'dateTime',
+      },
+    ]}
+  />
+)
 
 export default Query
