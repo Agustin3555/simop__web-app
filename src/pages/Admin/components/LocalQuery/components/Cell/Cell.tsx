@@ -1,39 +1,54 @@
 import './Cell.css'
-import { useMemo } from 'react'
 import { Cell as TanstackCell } from '@tanstack/react-table'
-import { Button } from '@/components'
 import { Ref } from '@/pages/Admin/types'
 import { format } from '@formkit/tempo'
+import { useCallback } from 'react'
+import { FetchRef } from './components'
 
-const Cell = ({ column, getValue }: TanstackCell<any, unknown>) => {
+// TODO: admitir booleanos
+
+type Value = number | string | Ref | Ref[]
+
+const Cell = ({ column, row }: TanstackCell<any, Value>) => {
   const { type, ref } = column.columnDef.meta
-  const rawValue = getValue()
 
-  const value = useMemo(() => {
-    if (!rawValue) return null
+  /*
+    No se usa 'getValue' porque se necesita tener el valor original. 'getValue'
+    obtiene un valor procesado porque en la definición de las columnas se
+    provee un método 'accessorFn'
+  */
+  const value: Value = row.original[column.id]
 
-    if (ref && typeof rawValue === 'object') return (rawValue as Ref).title
+  const formatIfDateTime = useCallback(
+    <T,>(value: T) => {
+      const isDateTime =
+        (type === 'date' || type === 'dateTime') && typeof value === 'string'
 
-    const isDateTime =
-      (type === 'date' || type === 'dateTime') && typeof rawValue === 'string'
-
-    if (isDateTime) return format(rawValue, { date: 'medium', time: 'short' })
-
-    return rawValue
-  }, [rawValue, type, ref])
+      return isDateTime
+        ? format(value, { date: 'medium', time: 'short' })
+        : value
+    },
+    [type],
+  )
 
   return (
     <td className="cmp-cell">
-      {value &&
-        (ref ? (
-          <Button
-            title={String(value)}
-            faIcon="fa-solid fa-eye"
-            _type="secondary"
+      {Array.isArray(value) ? (
+        value.map(({ id, title }) => (
+          <FetchRef
+            key={id}
+            value={formatIfDateTime(title)}
+            provider={ref.provider}
           />
-        ) : (
-          String(value)
-        ))}
+        ))
+      ) : typeof value === 'object' ? (
+        <FetchRef
+          value={formatIfDateTime(value.title)}
+          provider={ref.provider}
+        />
+      ) : (
+        formatIfDateTime(value)
+      )}
     </td>
   )
 }
