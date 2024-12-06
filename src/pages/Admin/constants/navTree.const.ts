@@ -18,6 +18,27 @@ export const TREE: SectionNode[] = [
           { viewKey: ViewKey.DEPARTAMENTOS },
         ],
       },
-    ],
+      {
+        title: 'Ubicacion Geográfica',
+        sections: [
+          { viewKey: ViewKey.PAIS },
+          { viewKey: ViewKey.PROVINCIA },
+          { viewKey: ViewKey.LOCALIDAD },
+        ],
+      },
+      {
+      title: 'Tipo',
+        sections: [
+        { viewKey: ViewKey.ESTADO_OBRA },
+        { viewKey: ViewKey.FIANCIAMIENTO },
+        { viewKey: ViewKey.MODIFICACION_OBRA},
+        { viewKey: ViewKey.PARALIZACION_OBRA },
+        { viewKey: ViewKey.PROGRAMA_OBRA},
+        { viewKey: ViewKey.REPRESENTANTE_EMPRESA},
+        { viewKey: ViewKey.TRAMITE},   
+        { viewKey: ViewKey.INSPECTOR}, 
+      ]
+    }
+      ]
   },
 ]

@@ -1,4 +1,4 @@
-import { ViewKey } from '../enums'
+import { ViewKey } from './views.const'
 
 export interface SectionNode {
   title: string

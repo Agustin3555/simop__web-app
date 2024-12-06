@@ -12,4 +12,3 @@ export * as ProgramaObraModel from './programaObra.model'
 export * as RepresentanteEmpresaModel from './representanteEmpresa.model'
 export * as TramiteModel from './tramite.model'
 export * as InspectorModel from './inspector.model'
-
