@@ -8,21 +8,23 @@ const Query = () => {
       columns={[
         {
           header: 'ID',
-          accessorKey: 'id',
+          key: 'id',
+          type: 'number'
         },
         {
           header: 'Nombre',
-          accessorKey: 'nombre',
+          key: 'nombre',
+          type: 'number'
         },
         {
           header: 'Fecha de creación',
-          accessorKey: 'creado',
-          format: 'dateTime',
+          key: 'creado',
+          type: 'dateTime',
         },
         {
           header: 'Fecha de modificación',
-          accessorKey: 'modificado',
-          format: 'dateTime',
+          key: 'modificado',
+          type: 'dateTime',
         },
       ]}
     />

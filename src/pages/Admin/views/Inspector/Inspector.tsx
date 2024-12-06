@@ -1,9 +1,9 @@
 import { View } from '../../components'
 import { Add, Query } from './components'
-import { ViewKey } from '../../enums'
+import { ViewKey } from '../../constants'
 
 const Inspector = () => {
-  return <View view={ViewKey.INSPECTOR} add={<Add />} query={<Query />} />
+  return <View viewKey={ViewKey.INSPECTOR} add={<Add />} query={<Query />} />
 }
 
 export default Inspector

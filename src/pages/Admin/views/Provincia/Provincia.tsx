@@ -1,9 +1,9 @@
 import { View } from '../../components'
 import { Add, Query } from './components'
-import { ViewKey } from '../../enums'
+import { ViewKey } from '../../constants'
 
-const Provincia= () => {
-  return <View view={ViewKey.PROVINCIA} add={<Add />} query={<Query />} />
+const Inspector = () => {
+  return <View viewKey={ViewKey.PROVINCIA} add={<Add />} query={<Query />} />
 }
 
-export default Provincia
+export default Inspector
