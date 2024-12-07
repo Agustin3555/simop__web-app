@@ -1,10 +1,10 @@
 import { LocalQuery } from '@/pages/Admin/components'
-import { InspectorService } from '@/pages/Admin/services'
+import { TipoInspectorService } from '@/pages/Admin/services'
 
 const Query = () => {
   return (
     <LocalQuery
-      provider={InspectorService.getAll}
+      provider={TipoInspectorService.getAll}
       columns={[
         {
           header: 'ID',
@@ -12,19 +12,9 @@ const Query = () => {
           type: 'number',
         },
         {
-          header: 'Apellido',
-          key: 'apellido',
-          type: 'text',
-        },
-        {
           header: 'Nombre',
           key: 'nombre',
-          type: 'text',
-        },
-        {
-          header: 'Profesiones',
-          key: 'tiposProfesiones',
-          type: 'text',
+          type: 'number',
         },
         {
           header: 'Fecha de creación',

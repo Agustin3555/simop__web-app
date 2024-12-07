@@ -1,14 +1,13 @@
 import { useSubmitAction } from '@/hooks'
 import { Input } from '@/components'
 import { LocalAdd } from '@/pages/Admin/components'
-import { InspectorService } from '@/pages/Admin/services'
+import { TipoInspectorService } from '@/pages/Admin/services'
 
 const Add = () => {
   const submitActionResult = useSubmitAction(
     async ({ formData, resetForm, setError, setSuccess }) => {
       try {
-        await InspectorService.create({
-          apellido: formData.get('apellido') as string,
+        await TipoInspectorService.create({
           nombre: formData.get('nombre') as string,
         })
 
@@ -22,7 +21,6 @@ const Add = () => {
 
   return (
     <LocalAdd {...submitActionResult}>
-      <Input name="apellido" title="Apellido" required />
       <Input name="nombre" title="Nombre" required />
     </LocalAdd>
   )
