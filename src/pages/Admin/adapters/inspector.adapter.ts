@@ -8,6 +8,7 @@ export const getAll: {
   output: response => {
     const convertedResource = response.map<InspectorModel.Entity>(item => ({
       id: item.id,
+      cuil: item.cuil,
       apellido: item.apellido,
       nombre: item.nombre,
       tiposProfesiones: item.tiposProfesiones.map<Ref>(item => ({
@@ -41,6 +42,7 @@ export const getOne: {
   output: response => {
     const convertedResource = {
       id: response.id,
+      cuil: response.cuil,
       apellido: response.apellido,
       nombre: response.nombre,
       tiposProfesiones: response.tiposProfesiones.map<Ref>(item => ({
@@ -60,9 +62,10 @@ export const create: {
 } = {
   input: data => {
     const convertedResource: InspectorModel.CreateBody = {
+      cuil: data.cuil,
       apellido: data.apellido,
       nombre: data.nombre,
-      tiposProfesiones: data.tiposProfesiones,
+      tiposProfesiones: data?.tiposProfesiones,
     }
 
     return convertedResource

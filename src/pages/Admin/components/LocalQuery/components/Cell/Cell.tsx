@@ -34,15 +34,19 @@ const Cell = ({ column, row }: TanstackCell<any, Value>) => {
   return (
     <td className="cmp-cell">
       {Array.isArray(value) ? (
-        value.map(({ id, title }) => (
-          <FetchRef
-            key={id}
-            value={formatIfDateTime(title)}
-            provider={ref.provider}
-          />
-        ))
+        <div className="items">
+          {value.map(({ id, title }) => (
+            <FetchRef
+              key={id}
+              id={id}
+              value={formatIfDateTime(title)}
+              provider={ref.provider}
+            />
+          ))}
+        </div>
       ) : typeof value === 'object' ? (
         <FetchRef
+          id={value.id}
           value={formatIfDateTime(value.title)}
           provider={ref.provider}
         />

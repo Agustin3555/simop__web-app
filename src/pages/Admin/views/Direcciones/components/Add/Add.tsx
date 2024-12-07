@@ -5,19 +5,18 @@ import { DireccionService, SubSecretariaService } from '@/pages/Admin/services'
 
 const Add = () => {
   const submitActionResult = useSubmitAction(
-    async ({ formData, resetForm, setError, setSuccess }) => {
+    async ({ formData, setError, setSuccess }) => {
       try {
         await DireccionService.create({
           nombre: formData.get('nombre') as string,
           subSecretariaId: Number(formData.get('subSecretariaId')),
         })
 
-        resetForm()
         await setSuccess()
       } catch (error) {
-        setError()
+        await setError()
       }
-    }
+    },
   )
 
   return (

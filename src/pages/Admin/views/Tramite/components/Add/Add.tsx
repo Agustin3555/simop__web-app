@@ -5,18 +5,17 @@ import { TramiteService } from '@/pages/Admin/services'
 
 const Add = () => {
   const submitActionResult = useSubmitAction(
-    async ({ formData, resetForm, setError, setSuccess }) => {
+    async ({ formData, setError, setSuccess }) => {
       try {
         await TramiteService.create({
           nombre: formData.get('nombre') as string,
         })
 
-        resetForm()
         await setSuccess()
       } catch (error) {
-        setError()
+        await setError()
       }
-    }
+    },
   )
 
   return (
@@ -27,4 +26,3 @@ const Add = () => {
 }
 
 export default Add
-
