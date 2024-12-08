@@ -11,4 +11,5 @@ export { default as ParalizacionObra } from './ParalizacionObra/ParalizacionObra
 export { default as ProgramaObra } from './ProgramaObra/ProgramaObra'
 export { default as RepresentanteEmpresa } from './RepresentanteEmpresa/RepresentanteEmpresa'
 export { default as Tramite} from './Tramite/Tramite'
+export { default as TipoInspector} from './TipoInspector/TipoInspector'
 export { default as Inspector } from './Inspector/Inspector'

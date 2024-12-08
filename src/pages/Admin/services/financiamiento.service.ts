@@ -2,7 +2,7 @@ import { publicInstance } from '@/services/config'
 import { FinanciamientoModel } from '../models'
 import { FinanciamientoAdapter } from '../adapters'
 
-const collection = '/financiamientos'
+const collection = '/tipo-financiamientos-obras'
 
 export const getAll = async () => {
   const response = await publicInstance.get(collection)

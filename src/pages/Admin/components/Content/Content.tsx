@@ -1,5 +1,6 @@
 import './Content.css'
-import { Departamentos, Direcciones, Pais, Provincia, SubSecretarias,Localidad, EstadoObra, Financiamiento, ParalizacionObra, ProgramaObra,RepresentanteEmpresa, Tramite, Inspector, ModificacionObra  } from '../../views'
+import { Departamentos, Direcciones, Pais, Provincia, SubSecretarias,Localidad, EstadoObra, Financiamiento, ParalizacionObra, ProgramaObra,RepresentanteEmpresa, Tramite, Inspector, ModificacionObra, TipoInspector } from '../../views'
+
 
 
 const Content = () => (
@@ -17,6 +18,7 @@ const Content = () => (
     <ProgramaObra/>
     <RepresentanteEmpresa/>
     <Tramite/>
+    <TipoInspector/>
     <Inspector/>
 
     

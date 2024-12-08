@@ -12,7 +12,9 @@ export enum ViewKey {
   PROGRAMA_OBRA,
   REPRESENTANTE_EMPRESA,
   TRAMITE,
+  TIPO_INSPECTOR,
   INSPECTOR,
+  
 }
 
 interface Info {
@@ -30,7 +32,7 @@ export const VIEW_INFO: Record<ViewKey, Info> = {
     title: 'Departamentos',
   },
   [ViewKey.PAIS]: {
-    title: 'Pais',
+    title: 'País',
   },
   [ViewKey.PROVINCIA]: {
     title: 'Provincia',
@@ -45,10 +47,10 @@ export const VIEW_INFO: Record<ViewKey, Info> = {
     title: 'Financiamiento',
   },
   [ViewKey.MODIFICACION_OBRA]: {
-    title: 'Modificacion Obra',
+    title: 'Modificación Obra',
   },
-  [ViewKey. PARALIZACION_OBRA]: {
-    title: 'Paralizacion Obra',
+  [ViewKey.PARALIZACION_OBRA]: {
+    title: 'Paralización Obra',
   },
   [ViewKey.PROGRAMA_OBRA]: {
     title: 'Programa Obra',
@@ -57,27 +59,12 @@ export const VIEW_INFO: Record<ViewKey, Info> = {
     title: 'Representante Empresa',
   },
   [ViewKey.TRAMITE]: {
-    title: 'Tramite',
+    title: 'Trámite',
+  },
+  [ViewKey.TIPO_INSPECTOR]: {
+    title: 'Tipo Inspector',
   },
   [ViewKey.INSPECTOR]: {
     title: 'Inspector',
   },
 }
-
-/**export enum ViewKey {
-  SUB_SECRETARIAS = 'sub-secretarias',
-  DIRECCIONES = 'direcciones',
-  DEPARTAMENTOS = 'departamentos',
-  PAIS='pais',
-  PROVINCIA='provincia',
-  LOCALIDAD='localidad',
-  ESTADO_OBRA='estado-obra',
-  FIANCIAMIENTO='financiamiento',
-  MODIFICACION_OBRA='modificacion-obra',
-  PARALIZACION_OBRA='paralizacion-obra',
-  PROGRAMA_OBRA='programa-obra',
-  REPRESENTANTE_EMPRESA='representante-empresa',
-  TRAMITE='tramite',
-  INSPECTOR='inspector',
-}
- */

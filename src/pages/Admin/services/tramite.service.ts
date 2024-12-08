@@ -2,7 +2,7 @@ import { publicInstance } from '@/services/config'
 import { TramiteModel } from '../models'
 import { TramiteAdapter } from '../adapters'
 
-const collection = '/tramites'
+const collection = '/tipo-tramites-obras'
 
 export const getAll = async () => {
   const response = await publicInstance.get(collection)
