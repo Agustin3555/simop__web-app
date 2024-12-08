@@ -22,8 +22,8 @@ export const getOne = async (id: number) => {
   return InspectorAdapter.getOne.output(response.data)
 }
 
-export const create = async (data:InspectorModel.CreateData) => {
-  const adaptedInput =InspectorAdapter.create.input(data)
+export const create = async (data: InspectorModel.CreateData) => {
+  const adaptedInput = InspectorAdapter.create.input(data)
 
   const response = await publicInstance.post(collection, adaptedInput)
 

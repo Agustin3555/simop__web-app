@@ -13,13 +13,13 @@ export const TREE: SectionNode[] = [
       {
         title: 'Organigrama',
         sections: [
-          { viewKey: ViewKey.SUB_SECRETARIAS },
-          { viewKey: ViewKey.DIRECCIONES },
-          { viewKey: ViewKey.DEPARTAMENTOS },
+          { viewKey: ViewKey.SUB_SECRETARIA },
+          { viewKey: ViewKey.DIRECCION },
+          { viewKey: ViewKey.DEPARTAMENTO },
         ],
       },
       {
-        title: 'Ubicacion Geográfica',
+        title: 'Ubicación Geográfica',
         sections: [
           { viewKey: ViewKey.PAIS },
           { viewKey: ViewKey.PROVINCIA },
@@ -27,22 +27,23 @@ export const TREE: SectionNode[] = [
         ],
       },
       {
-        title: 'Tipo',
+        title: 'Tipos',
         sections: [
           { viewKey: ViewKey.ESTADO_OBRA },
-          { viewKey: ViewKey.FIANCIAMIENTO },
+          { viewKey: ViewKey.FINANCIAMIENTO },
           { viewKey: ViewKey.MODIFICACION_OBRA },
           { viewKey: ViewKey.PARALIZACION_OBRA },
           { viewKey: ViewKey.PROGRAMA_OBRA },
           { viewKey: ViewKey.REPRESENTANTE_EMPRESA },
           { viewKey: ViewKey.TRAMITE },
+          { viewKey: ViewKey.TIPO_PROFESION },
         ],
       },
       {
-        title: 'Inspector',
+        title: 'Sobre Inspectores',
         sections: [
-          { viewKey: ViewKey.INSPECTOR },
           { viewKey: ViewKey.TIPO_INSPECTOR },
+          { viewKey: ViewKey.INSPECTOR },
         ],
       },
     ],

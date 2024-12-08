@@ -5,19 +5,18 @@ import { LocalidadService, ProvinciaService } from '@/pages/Admin/services'
 
 const Add = () => {
   const submitActionResult = useSubmitAction(
-    async ({ formData, resetForm, setError, setSuccess }) => {
+    async ({ formData, setError, setSuccess }) => {
       try {
         await LocalidadService.create({
           nombre: formData.get('nombre') as string,
           provinciaId: Number(formData.get('provinciaId')),
         })
 
-        resetForm()
         await setSuccess()
       } catch (error) {
-        setError()
+        await setError()
       }
-    }
+    },
   )
 
   return (

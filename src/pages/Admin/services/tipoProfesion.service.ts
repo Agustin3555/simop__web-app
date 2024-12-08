@@ -1,29 +1,29 @@
 import { publicInstance } from '@/services/config'
-import { TipoInspectorModel } from '../models'
-import { TipoInspectorAdapter } from '../adapters'
+import { TipoProfesionModel } from '../models'
+import { TipoProfesionAdapter } from '../adapters'
 
-const collection = '/tipos-inspectores'
+const collection = '/tipos-profesiones'
 
 export const getAll = async () => {
   const response = await publicInstance.get(collection)
 
-  return TipoInspectorAdapter.getAll.output(response.data)
+  return TipoProfesionAdapter.getAll.output(response.data)
 }
 
 export const getForConnect = async () => {
   const response = await publicInstance.get(`${collection}/for-connect`)
 
-  return TipoInspectorAdapter.getForConnect.output(response.data)
+  return TipoProfesionAdapter.getForConnect.output(response.data)
 }
 
 export const getOne = async (id: number) => {
   const response = await publicInstance.get(`${collection}/${id}`)
 
-  return TipoInspectorAdapter.getOne.output(response.data)
+  return TipoProfesionAdapter.getOne.output(response.data)
 }
 
-export const create = async (data: TipoInspectorModel.CreateData) => {
-  const adaptedInput = TipoInspectorAdapter.create.input(data)
+export const create = async (data: TipoProfesionModel.CreateData) => {
+  const adaptedInput = TipoProfesionAdapter.create.input(data)
 
   const response = await publicInstance.post(collection, adaptedInput)
 

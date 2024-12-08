@@ -68,6 +68,7 @@
       padding-right: var(--gap);
 
       font-size: clamp(var(--pal-size-font-s), 2.5dvw, var(--pal-size-font-l));
+      line-height: initial;
       white-space: nowrap;
       text-overflow: ellipsis;
       color: var(--pal-color-a-l1);

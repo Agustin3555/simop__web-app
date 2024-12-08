@@ -1,18 +1,17 @@
 import { InputAdapter, OutputAdapter } from '@/adapters/config'
-import { DireccionModel } from '../models'
+import { TipoProfesionModel } from '../models'
 import { Ref } from '../types'
 
 export const getAll: {
-  output: OutputAdapter<DireccionModel.RawEntity[], DireccionModel.Entity[]>
+  output: OutputAdapter<
+    TipoProfesionModel.RawEntity[],
+    TipoProfesionModel.Entity[]
+  >
 } = {
   output: response => {
-    const convertedResource = response.map<DireccionModel.Entity>(item => ({
+    const convertedResource = response.map<TipoProfesionModel.Entity>(item => ({
       id: item.id,
       nombre: item.nombre,
-      subSecretaria: item.subSecretaria && {
-        id: item.subSecretaria.id,
-        title: item.subSecretaria.nombre,
-      },
       creado: item.creado,
       modificado: item.modificado,
     }))
@@ -22,7 +21,7 @@ export const getAll: {
 }
 
 export const getForConnect: {
-  output: OutputAdapter<DireccionModel.RawRef[], Ref[]>
+  output: OutputAdapter<TipoProfesionModel.RawRef[], Ref[]>
 } = {
   output: response => {
     const convertedResource = response.map<Ref>(item => ({
@@ -35,16 +34,12 @@ export const getForConnect: {
 }
 
 export const getOne: {
-  output: OutputAdapter<DireccionModel.RawEntity, DireccionModel.Entity>
+  output: OutputAdapter<TipoProfesionModel.RawEntity, TipoProfesionModel.Entity>
 } = {
   output: response => {
     const convertedResource = {
       id: response.id,
       nombre: response.nombre,
-      subSecretaria: response.subSecretaria && {
-        id: response.subSecretaria.id,
-        title: response.subSecretaria.nombre,
-      },
       creado: response.creado,
       modificado: response.modificado,
     }
@@ -54,12 +49,14 @@ export const getOne: {
 }
 
 export const create: {
-  input: InputAdapter<DireccionModel.CreateData, DireccionModel.CreateBody>
+  input: InputAdapter<
+    TipoProfesionModel.CreateData,
+    TipoProfesionModel.CreateBody
+  >
 } = {
   input: data => {
-    const convertedResource: DireccionModel.CreateBody = {
+    const convertedResource: TipoProfesionModel.CreateBody = {
       nombre: data.nombre,
-      subSecretariaId: data.subSecretariaId,
     }
 
     return convertedResource

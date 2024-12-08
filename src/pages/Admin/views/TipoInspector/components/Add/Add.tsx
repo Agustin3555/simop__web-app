@@ -5,26 +5,24 @@ import { TipoInspectorService } from '@/pages/Admin/services'
 
 const Add = () => {
   const submitActionResult = useSubmitAction(
-    async ({ formData, resetForm, setError, setSuccess }) => {
+    async ({ formData, setError, setSuccess }) => {
       try {
         await TipoInspectorService.create({
           nombre: formData.get('nombre') as string,
         })
 
-        resetForm()
         await setSuccess()
       } catch (error) {
-        setError()
+        await setError()
       }
-    }
+    },
   )
 
   return (
     <LocalAdd {...submitActionResult}>
-      <Input name="nombre" title="Tipo Inspector" required />
+      <Input name="nombre" title="Nombre" required />
     </LocalAdd>
   )
 }
 
 export default Add
-

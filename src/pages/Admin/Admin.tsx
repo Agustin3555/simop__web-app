@@ -7,7 +7,7 @@ import { ViewKey } from './constants'
   última view visitada
 */
 const Admin = () => (
-  <ViewActiveProvider initView={ViewKey.SUB_SECRETARIAS}>
+  <ViewActiveProvider initView={ViewKey.SUB_SECRETARIA}>
     <Nav />
     <Content />
   </ViewActiveProvider>

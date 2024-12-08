@@ -9,12 +9,12 @@ const Query = () => {
         {
           header: 'ID',
           key: 'id',
-          type: 'number'
+          type: 'number',
         },
         {
           header: 'Nombre',
           key: 'nombre',
-          type: 'number'
+          type: 'number',
         },
         {
           header: 'Fecha de creación',

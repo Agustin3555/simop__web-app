@@ -1,17 +1,18 @@
 export enum ViewKey {
-  SUB_SECRETARIAS,
-  DIRECCIONES,
-  DEPARTAMENTOS,
+  SUB_SECRETARIA,
+  DIRECCION,
+  DEPARTAMENTO,
   PAIS,
   PROVINCIA,
   LOCALIDAD,
   ESTADO_OBRA,
-  FIANCIAMIENTO,
+  FINANCIAMIENTO,
   MODIFICACION_OBRA,
   PARALIZACION_OBRA,
   PROGRAMA_OBRA,
   REPRESENTANTE_EMPRESA,
   TRAMITE,
+  TIPO_PROFESION,
   TIPO_INSPECTOR,
   INSPECTOR,
   
@@ -22,49 +23,52 @@ interface Info {
 }
 
 export const VIEW_INFO: Record<ViewKey, Info> = {
-  [ViewKey.SUB_SECRETARIAS]: {
+  [ViewKey.SUB_SECRETARIA]: {
     title: 'Subsecretarías',
   },
-  [ViewKey.DIRECCIONES]: {
+  [ViewKey.DIRECCION]: {
     title: 'Direcciones',
   },
-  [ViewKey.DEPARTAMENTOS]: {
+  [ViewKey.DEPARTAMENTO]: {
     title: 'Departamentos',
   },
   [ViewKey.PAIS]: {
-    title: 'País',
+    title: 'Países',
   },
   [ViewKey.PROVINCIA]: {
-    title: 'Provincia',
+    title: 'Provincias',
   },
   [ViewKey.LOCALIDAD]: {
-    title: 'Localidad',
+    title: 'Localidades',
   },
   [ViewKey.ESTADO_OBRA]: {
-    title: 'Estado Obra',
+    title: 'Estados de Obra',
   },
-  [ViewKey.FIANCIAMIENTO]: {
-    title: 'Financiamiento',
+  [ViewKey.FINANCIAMIENTO]: {
+    title: 'Financiamientos',
   },
   [ViewKey.MODIFICACION_OBRA]: {
-    title: 'Modificación Obra',
+    title: 'Modificaciones de Obra',
   },
   [ViewKey.PARALIZACION_OBRA]: {
-    title: 'Paralización Obra',
+    title: 'Paralizaciones de Obra',
   },
   [ViewKey.PROGRAMA_OBRA]: {
-    title: 'Programa Obra',
+    title: 'Programas de Obra',
   },
   [ViewKey.REPRESENTANTE_EMPRESA]: {
-    title: 'Representante Empresa',
+    title: 'Representantes de Empresa',
   },
   [ViewKey.TRAMITE]: {
-    title: 'Trámite',
+    title: 'Trámites',
+  },
+  [ViewKey.TIPO_PROFESION]: {
+    title: 'Profesiones',
   },
   [ViewKey.TIPO_INSPECTOR]: {
-    title: 'Tipo Inspector',
+    title: 'Tipos de Inspector',
   },
   [ViewKey.INSPECTOR]: {
-    title: 'Inspector',
+    title: 'Inspectores',
   },
 }

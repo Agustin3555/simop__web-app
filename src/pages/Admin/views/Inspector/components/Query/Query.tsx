@@ -1,5 +1,5 @@
 import { LocalQuery } from '@/pages/Admin/components'
-import { InspectorService } from '@/pages/Admin/services'
+import { InspectorService, TipoInspectorService } from '@/pages/Admin/services'
 
 const Query = () => {
   return (
@@ -9,12 +9,31 @@ const Query = () => {
         {
           header: 'ID',
           key: 'id',
-          type: 'number'
+          type: 'number',
+        },
+        {
+          header: 'CUIL',
+          key: 'cuil',
+          type: 'number',
+        },
+        {
+          header: 'Apellido',
+          key: 'apellido',
+          type: 'text',
         },
         {
           header: 'Nombre',
           key: 'nombre',
-          type: 'number'
+          type: 'text',
+        },
+        {
+          header: 'Profesiones',
+          key: 'tiposProfesiones',
+          type: 'text',
+          ref: {
+            field: 'Nombre',
+            provider: TipoInspectorService.getOne,
+          },
         },
         {
           header: 'Fecha de creación',
