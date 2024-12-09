@@ -1,15 +1,13 @@
 import './Cell.css'
 import { Cell as TanstackCell } from '@tanstack/react-table'
-import { Ref } from '@/pages/Admin/types'
 import { format } from '@formkit/tempo'
 import { useCallback } from 'react'
 import { FetchRef } from './components'
+import { Value } from '../../../../types'
 
 // TODO: admitir booleanos
 
-type Value = number | string | Ref | Ref[]
-
-const Cell = ({ column, row }: TanstackCell<any, Value>) => {
+const Cell = <T,>({ column, row }: TanstackCell<T, unknown>) => {
   const { type, ref } = column.columnDef.meta
 
   /*

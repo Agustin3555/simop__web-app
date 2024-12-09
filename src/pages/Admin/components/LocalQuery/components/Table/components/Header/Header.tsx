@@ -5,9 +5,9 @@ import {
   SortDirection,
   Header as TanstackHeader,
 } from '@tanstack/react-table'
-import { NumberFilter, TextFilter, DateTimeFilter } from './components'
-import { TypeMeta } from '../../LocalQuery'
 import { Icon } from '@/components'
+import { NumberFilter, TextFilter, DateTimeFilter } from './components'
+import { TypeMeta } from '../../../../types'
 
 const sortIconMatcher: Record<SortDirection, string> = {
   asc: 'fa-solid fa-arrow-up-wide-short',
@@ -41,7 +41,7 @@ const Header = ({
 
   const sortIcon = useMemo(
     () => sortIconMatcher[sortValue] ?? null,
-    [sortValue]
+    [sortValue],
   )
 
   const filterMatcher = useMemo<Partial<Record<TypeMeta, ReactNode>>>(() => {
@@ -75,7 +75,7 @@ const Header = ({
         } else {
           // Alterna de ascendente a descendente
           return prev.map(sort =>
-            sort.id === column.id ? { ...sort, desc: true } : sort
+            sort.id === column.id ? { ...sort, desc: true } : sort,
           )
         }
       } else {
