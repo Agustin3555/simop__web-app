@@ -6,7 +6,7 @@ const collection = '/provincias'
 
 export const getAll = async () => {
   const response = await publicInstance.get(collection)
-
+  
   return ProvinciaAdapter.getAll.output(response.data)
 }
 

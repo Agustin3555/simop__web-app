@@ -13,4 +13,6 @@ export { default as RepresentanteEmpresa } from './RepresentanteEmpresa/Represen
 export { default as Tramite } from './Tramite/Tramite'
 export { default as TipoProfesion } from './TipoProfesion/TipoProfesion'
 export { default as TipoInspector } from './TipoInspector/TipoInspector'
+export { default as TipoRepresentanteEmpresa } from './TipoRepresentanteEmpresa/TipoRepresentanteEmpresa'
 export { default as Inspector } from './Inspector/Inspector'
+export { default as Datos } from './Datos/Datos'

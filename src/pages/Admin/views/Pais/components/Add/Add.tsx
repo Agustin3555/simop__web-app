@@ -20,7 +20,7 @@ const Add = () => {
 
   return (
     <LocalAdd {...submitActionResult}>
-      <Input name="nombre" title="Pais" required />
+      <Input name="nombre" title="Nombre" required />
     </LocalAdd>
   )
 }

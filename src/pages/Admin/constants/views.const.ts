@@ -10,11 +10,15 @@ export enum ViewKey {
   MODIFICACION_OBRA,
   PARALIZACION_OBRA,
   PROGRAMA_OBRA,
-  REPRESENTANTE_EMPRESA,
   TRAMITE,
   TIPO_PROFESION,
   TIPO_INSPECTOR,
+  TIPO_REPRESENTANTE_EMPRESA,
   INSPECTOR,
+  REPRESENTANTE_EMPRESA,
+  EMPRESA,
+  DATOS,
+  
   
 }
 
@@ -56,7 +60,7 @@ export const VIEW_INFO: Record<ViewKey, Info> = {
   [ViewKey.PROGRAMA_OBRA]: {
     title: 'Programas de Obra',
   },
-  [ViewKey.REPRESENTANTE_EMPRESA]: {
+  [ViewKey.TIPO_REPRESENTANTE_EMPRESA]: {
     title: 'Representantes de Empresa',
   },
   [ViewKey.TRAMITE]: {
@@ -70,5 +74,14 @@ export const VIEW_INFO: Record<ViewKey, Info> = {
   },
   [ViewKey.INSPECTOR]: {
     title: 'Inspectores',
+  },
+  [ViewKey.REPRESENTANTE_EMPRESA]: {
+    title: 'Representantes de Empresa',
+  },
+  [ViewKey.EMPRESA]: {
+    title: 'Empresa',
+  },
+  [ViewKey.DATOS]: {
+    title: 'Datos',
   },
 }

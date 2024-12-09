@@ -1,9 +1,10 @@
+import { PaisModel } from '.'
 import { Ref } from '../types'
 
 export interface RawEntity {
   id: number
   nombre: string
-  pais?: { id: number; nombre: string }
+  pais?: PaisModel.RawRef
   creado: string
   modificado: string
 }

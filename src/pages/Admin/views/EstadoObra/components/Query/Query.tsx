@@ -1,8 +1,8 @@
 import { LocalQuery } from '@/pages/Admin/components'
 import { EstadoObraService } from '@/pages/Admin/services'
 
-const Query = () => {
-  return (
+const Query = () => (
+   (
     <LocalQuery
       provider={EstadoObraService.getAll}
       columns={[
@@ -14,7 +14,7 @@ const Query = () => {
         {
           header: 'Nombre',
           key: 'nombre',
-          type: 'number'
+          type: 'text'
         },
         {
           header: 'Fecha de creación',
@@ -29,6 +29,6 @@ const Query = () => {
       ]}
     />
   )
-}
+)
 
 export default Query
