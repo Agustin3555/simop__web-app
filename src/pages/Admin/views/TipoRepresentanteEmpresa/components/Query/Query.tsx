@@ -1,29 +1,20 @@
 import { LocalQuery } from '@/pages/Admin/components'
-import { ProvinciaService, PaisService } from '@/pages/Admin/services'
+import { TipoRepresentanteEmpresaService } from '@/pages/Admin/services'
 
-const Query = () => (
-  
-     <LocalQuery
-      provider={ProvinciaService.getAll}
+const Query = () => {
+  return (
+    <LocalQuery
+      provider={TipoRepresentanteEmpresaService.getAll}
       columns={[
         {
           header: 'ID',
           key: 'id',
-          type: 'number'
+          type: 'number',
         },
         {
           header: 'Nombre',
           key: 'nombre',
-          type: 'text',
-        },
-        {
-          header: 'País',
-          key: 'pais',
-          type: 'text',
-          ref: {
-            field: 'Nombre',
-            provider: PaisService.getOne,
-          },
+          type: 'number',
         },
         {
           header: 'Fecha de creación',
@@ -37,6 +28,7 @@ const Query = () => (
         },
       ]}
     />
-    )
+  )
+}
 
 export default Query

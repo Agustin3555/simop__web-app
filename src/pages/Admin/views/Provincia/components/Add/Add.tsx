@@ -23,8 +23,8 @@ const Add = () => {
     <LocalAdd {...submitActionResult}>
       <Input name="nombre" title="Nombre" required />
       <Combobox
-        name="PaisId"
-        title="Provincia"
+        name="paisId"
+        title="País"
         provider={PaisService.getForConnect}
       />
     </LocalAdd>

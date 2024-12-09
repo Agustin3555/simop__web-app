@@ -1,29 +1,29 @@
 import { publicInstance } from '@/services/config'
-import { PaisModel } from '../models'
-import { PaisAdapter } from '../adapters'
+import { DatosModel } from '../models'
+import { DatosAdapter } from '../adapters'
 
-const collection = '/pais'
+const collection = '/datos'
 
 export const getAll = async () => {
   const response = await publicInstance.get(collection)
 
-  return PaisAdapter.getAll.output(response.data)
+  return DatosAdapter.getAll.output(response.data)
 }
 
 export const getForConnect = async () => {
   const response = await publicInstance.get(`${collection}/for-connect`)
 
-  return PaisAdapter.getForConnect.output(response.data)
+  return DatosAdapter.getForConnect.output(response.data)
 }
 
 export const getOne = async (id: number) => {
   const response = await publicInstance.get(`${collection}/${id}`)
 
-  return PaisAdapter.getOne.output(response.data)
+  return DatosAdapter.getOne.output(response.data)
 }
 
-export const create = async (data: PaisModel.CreateData) => {
-  const adaptedInput = PaisAdapter.create.input(data)
+export const create = async (data: DatosModel.CreateData) => {
+  const adaptedInput = DatosAdapter.create.input(data)
 
   const response = await publicInstance.post(collection, adaptedInput)
 

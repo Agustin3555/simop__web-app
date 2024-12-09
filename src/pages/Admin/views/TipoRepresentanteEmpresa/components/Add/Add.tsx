@@ -1,13 +1,13 @@
 import { useSubmitAction } from '@/hooks'
 import { Input } from '@/components'
 import { LocalAdd } from '@/pages/Admin/components'
-import { FinanciamientoService } from '@/pages/Admin/services'
+import { TipoRepresentanteEmpresaService } from '@/pages/Admin/services'
 
 const Add = () => {
   const submitActionResult = useSubmitAction(
     async ({ formData, setError, setSuccess }) => {
       try {
-        await FinanciamientoService.create({
+        await TipoRepresentanteEmpresaService.create({
           nombre: formData.get('nombre') as string,
         })
 
