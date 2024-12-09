@@ -7,13 +7,24 @@
     gap: var(--pal-size-m);
   }
 
-  > .cmp-state-button {
-    align-self: flex-end;
+  > .actions {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: var(--pal-size-m);
 
-    width: 10rem;
+    > .cmp-button {
+      border-color: var(--pal-color-a-l2);
 
-    color: var(--pal-color-white);
+      color: var(--pal-color-a);
+    }
 
-    background-color: var(--pal-color-a);
+    > .cmp-state-button {
+      width: 9rem;
+
+      color: var(--pal-color-white);
+
+      background-color: var(--pal-color-a);
+    }
   }
 }
