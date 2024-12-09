@@ -1,19 +1,19 @@
 import { HTMLInputTypeAttribute, useCallback, useMemo } from 'react'
 import { Updater } from '@tanstack/react-table'
 import { DebouncedInput } from '..'
-import { TypeMeta } from '../../../../LocalQuery'
+import { TypeMeta } from '@/pages/Admin/components/LocalQuery/types'
 
-interface DateRangeFilterProps {
+interface DateTimeFilterProps {
   type: TypeMeta
   columnFilterValue: { min?: string; max?: string }
   setFilterValue: (updater: Updater<any>) => void
 }
 
-const DateRangeFilter = ({
+const DateTimeFilter = ({
   type,
   columnFilterValue = {},
   setFilterValue,
-}: DateRangeFilterProps) => {
+}: DateTimeFilterProps) => {
   const inputType = useMemo(() => {
     const matcher: Partial<Record<TypeMeta, HTMLInputTypeAttribute>> = {
       date: 'date',
@@ -31,7 +31,7 @@ const DateRangeFilter = ({
   const handleChange = useCallback(
     (key: string) => (newValue: string) =>
       setFilterValue(prev => ({ ...prev, [key]: newValue })),
-    [setFilterValue]
+    [setFilterValue],
   )
 
   return (
@@ -48,4 +48,4 @@ const DateRangeFilter = ({
   )
 }
 
-export default DateRangeFilter
+export default DateTimeFilter
