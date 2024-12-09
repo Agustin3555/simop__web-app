@@ -1,3 +1,4 @@
+export { default as Checkbox } from './Checkbox/Checkbox'
 export { default as Combobox } from './Combobox/Combobox'
 export { default as ComboboxLayout } from './ComboboxLayout/ComboboxLayout'
 export { default as Content } from './Content/Content'
