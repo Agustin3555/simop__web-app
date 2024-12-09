@@ -1,5 +1,5 @@
 import './Table.css'
-import { useMemo, useState } from 'react'
+import { Dispatch, SetStateAction, useEffect, useMemo, useState } from 'react'
 import {
   ColumnDef,
   getCoreRowModel,
@@ -21,18 +21,29 @@ declare module '@tanstack/react-table' {
 interface TableProps<T> {
   data: T[]
   columns: Columns<T>
+  selectedRowIds: number[]
+  setSelectedRowIds: Dispatch<SetStateAction<number[]>>
 }
 
 const SELECT_COLUMN = 'select'
 
-const Table = <T extends { id: number }>({ data, columns }: TableProps<T>) => {
+const Table = <T extends { id: number }>({
+  data,
+  columns,
+  selectedRowIds,
+  setSelectedRowIds,
+}: TableProps<T>) => {
   const [columnFilters, setColumnFilters] = useState([])
   const [sortState, setSortState] = useState([])
   const [rowSelection, setRowSelection] = useState({})
 
-  const selectedRowIds = Object.keys(rowSelection)
-    .filter(id => rowSelection[id])
-    .map(Number)
+  useEffect(() => {
+    setSelectedRowIds(
+      Object.keys(rowSelection)
+        .filter(id => rowSelection[id])
+        .map(Number),
+    )
+  }, [rowSelection])
 
   const tableColumns = useMemo(
     () => [

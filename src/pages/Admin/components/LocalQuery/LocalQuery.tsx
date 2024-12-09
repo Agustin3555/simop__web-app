@@ -1,9 +1,10 @@
 import './LocalQuery.css'
-import { useState } from 'react'
+import { useCallback, useState } from 'react'
 import { useHandleAction } from '@/hooks'
-import { Icon, StateButton } from '@/components'
+import { Button, Icon, StateButton } from '@/components'
 import { Table } from './components'
 import { Columns } from './types'
+import { utils, writeFile } from 'xlsx'
 
 interface LocalQueryProps<T> {
   provider: () => Promise<T[]>
@@ -15,6 +16,7 @@ const LocalQuery = <T extends { id: number }>({
   columns,
 }: LocalQueryProps<T>) => {
   const [data, setData] = useState<T[]>()
+  const [selectedRowIds, setSelectedRowIds] = useState<number[]>([])
 
   const handleActionResult = useHandleAction(
     async ({ setError, setSuccess }) => {
@@ -29,23 +31,54 @@ const LocalQuery = <T extends { id: number }>({
     },
   )
 
+  const handleExportClick = useCallback(() => {
+    const selectedData =
+      selectedRowIds.length === 0
+        ? data
+        : data.filter(({ id }) => selectedRowIds.includes(id))
+
+    const worksheet = utils.json_to_sheet(selectedData)
+
+    // Crea el libro de trabajo y agrega una hoja
+    const workbook = utils.book_new()
+    utils.book_append_sheet(workbook, worksheet, 'Datos')
+
+    // TODO: agregar el nombre de la vista
+    const date = new Date().toISOString().slice(0, 10)
+    const fileName = `datos_${date}.xlsx`
+
+    writeFile(workbook, fileName)
+  }, [data, selectedRowIds])
+
   return (
     <div className="cmp-local-query">
       <header>
-        <StateButton
-          text="Traer los datos"
-          hiddenText
-          faIcon="fa-solid fa-cloud-arrow-down"
-          {...handleActionResult}
-        />
+        <div className="left">
+          <StateButton
+            text="Traer los datos"
+            hiddenText
+            faIcon="fa-solid fa-cloud-arrow-down"
+            {...handleActionResult}
+          />
+          {data && (
+            <div className="total-items">
+              <Icon faIcon="fa-solid fa-cubes-stacked" />
+              <p>{data.length}</p>
+            </div>
+          )}
+        </div>
         {data && (
-          <div className="total-items">
-            <Icon faIcon="fa-solid fa-cubes-stacked" />
-            <p>{data.length}</p>
-          </div>
+          <Button
+            title="Descargar Excel"
+            faIcon="fa-solid fa-file-excel"
+            _type="secondary"
+            onClick={handleExportClick}
+          />
         )}
       </header>
-      {data && <Table {...{ data, columns }} />}
+      {data && (
+        <Table {...{ data, columns, selectedRowIds, setSelectedRowIds }} />
+      )}
     </div>
   )
 }
