@@ -2,7 +2,7 @@ import { publicInstance } from '@/services/config'
 import { ProgramaObraModel } from '../models'
 import { ProgramaObraAdapter } from '../adapters'
 
-const collection = '/programas-obras'
+const collection = '/tipos-programas-obras'
 
 export const getAll = async () => {
   const response = await publicInstance.get(collection)
@@ -22,8 +22,8 @@ export const getOne = async (id: number) => {
   return ProgramaObraAdapter.getOne.output(response.data)
 }
 
-export const create = async (data:ProgramaObraModel.CreateData) => {
-  const adaptedInput =ProgramaObraAdapter.create.input(data)
+export const create = async (data: ProgramaObraModel.CreateData) => {
+  const adaptedInput = ProgramaObraAdapter.create.input(data)
 
   const response = await publicInstance.post(collection, adaptedInput)
 

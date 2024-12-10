@@ -15,14 +15,16 @@ const Add = () => {
       try {
         await RepresentanteEmpresaService.create({
           nombre: formData.get('nombre') as string,
+          apellidos: formData.get('apellidos') as string,
+          cuitRepresentante: Number(formData.get('cuitRepresentante')),
+          cuitEmpresa: Number(formData.get('cuitEmpresa')),
+          direccionDeclarada: formData.get('direccionDeclarada') as string,
           paisId: Number(formData.get('paisId')),
           provinciaId: Number(formData.get('provinciaId')),
           localidadId: Number(formData.get('localidadId')),
-          tipoRepresentanteEmpresaId: Number(
-            formData.get('tipoRepresentanteEmpresaId'),
-          ),
+          tipoRepresentanteEmpresaId: Number(formData.get('numeroMatricula')),
+          numeroMatricula: Number(formData.get('numeroMatricula')),
         })
-
         await setSuccess()
       } catch (error) {
         await setError()
@@ -40,7 +42,7 @@ const Add = () => {
       />
       <Input name="cuitEmpresa" title="CUIT Empresa" type="number" required />
       <Input name="nombre" title="Nombre" required />
-      <Input name="direccionDeclarada" title="Direccion Declarada" required />
+      <Input name="apellidos" title="Apellidos" required />
       <Input name="direccionDeclarada" title="Direccion Declarada" required />
       <Combobox
         name="paisId"
@@ -60,7 +62,7 @@ const Add = () => {
       <Combobox
         name="tipoRepresentanteEmpresaId"
         title="Tipo Representante Empresa"
-        provider={RepresentanteEmpresaService.getForConnect}
+        provider={TipoRepresentanteEmpresaService.getForConnect}
       />
       <Input
         name="numeroMatricula"

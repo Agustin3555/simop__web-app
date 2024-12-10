@@ -2,8 +2,8 @@ import { View } from '../../components'
 import { Add, Query } from './components'
 import { ViewKey } from '../../constants'
 
-const Inspector = () => {
+const Pais = () => {
   return <View viewKey={ViewKey.PAIS} add={<Add />} query={<Query />} />
 }
 
-export default Inspector
+export default Pais

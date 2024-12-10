@@ -44,18 +44,25 @@ export interface RawRef {
 
 export interface CreateData {
   nombre: string
-}
-export interface CreateData {
-  nombre: string
+  cuitRepresentante: number
+  cuitEmpresa: number
+  apellidos: string
+  direccionDeclarada: string
   paisId: number
   tipoRepresentanteEmpresaId: number
   provinciaId: number
   localidadId: number
+  numeroMatricula: number
 }
 export interface CreateBody {
   nombre: string
+  cuitRepresentante: number
+  cuitEmpresa: number
+  apellidos: string
+  direccionDeclarada: string
+  tipoRepresentanteEmpresaId: number
   paisId: number
   provinciaId: number
   localidadId: number
-  tipoRepresentanteEmpresaId: number
+  numeroMatricula: number
 }

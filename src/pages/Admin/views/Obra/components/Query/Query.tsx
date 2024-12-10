@@ -1,10 +1,18 @@
 import { LocalQuery } from '@/pages/Admin/components'
-import { EmpresaService, PaisService } from '@/pages/Admin/services'
+import {
+  EmpresaService,
+  LocalidadService,
+  PaisService,
+  ProvinciaService,
+  ObraService,
+  FinanciamientoService,
+  EstadoObraService,
+} from '@/pages/Admin/services'
 
 const Query = () => {
   return (
     <LocalQuery
-      provider={EmpresaService.getAll}
+      provider={ObraService.getAll}
       columns={[
         {
           header: 'ID',
@@ -12,39 +20,120 @@ const Query = () => {
           type: 'number',
         },
         {
-          header: 'CUIT',
-          key: 'cuitEmpresa',
+          header: 'Nombre',
+          key: 'nombre',
+          type: 'text',
+        },
+        {
+          header: 'Numero de Resolucion',
+          key: 'numeroResolucion',
           type: 'number',
         },
         {
-          header: 'NombreEmpresa',
-          key: 'nombreEmpresa',
+          header: 'Año de Resolucion',
+          key: 'anioResolucion',
+          type: 'number',
+        },
+        {
+          header: 'Número Contratacion',
+          key: 'numeroContratacion',
+          type: 'number',
+        },
+        {
+          header: 'Año Contratacion',
+          key: 'anioContratacion',
+          type: 'number',
+        },
+        {
+          header: 'Monto Contratacion',
+          key: 'montoContratacion',
+          type: 'number',
+        },
+        {
+          header: 'Número Expediente',
+          key: 'numeroExpediente',
+          type: 'number',
+        },
+        {
+          header: 'Plazo Días',
+          key: 'plazoDias',
+          type: 'number',
+        },
+        {
+          header: 'Fecha Inicio',
+          key: 'fechaInicio',
           type: 'text',
         },
         {
-          header: 'DireccionDeclarada',
-          key: 'direccionDeclarada',
+          header: 'Fecha Inicio',
+          key: 'fechaInicio',
           type: 'text',
         },
         {
-          header: 'Pais',
+          header: 'Fecha Fin',
+          key: 'fechaFin',
+          type: 'text',
+        },
+        {
+          header: 'Observaciones',
+          key: 'observaciones',
+          type: 'text',
+        },
+        {
+          header: 'Empresa',
+          key: 'empresaId',
+          ref: {
+            provider: EmpresaService.getOne,
+            field: 'Nombre',
+          },
+          type: 'number',
+        },
+        {
+          header: 'País ',
+          key: 'pais',
           ref: {
             provider: PaisService.getOne,
             field: 'Nombre',
           },
           type: 'number',
-          key: 'id',
         },
         {
-          header: 'Email',
-          key: 'email',
-          type: 'text',
-        },
-        {
-          header: 'NumeroContacto',
-          key: 'numeroContacto',
+          header: 'Provincia ',
+          key: 'provincia',
+          ref: {
+            provider: ProvinciaService.getOne,
+            field: 'Nombre',
+          },
           type: 'number',
         },
+        {
+          header: 'Localidad',
+          key: 'localidad',
+          ref: {
+            provider: LocalidadService.getOne,
+            field: 'Nombre',
+          },
+          type: 'number',
+        },
+        {
+          header: 'Financiamiento',
+          key: 'id',
+          ref: {
+            provider: FinanciamientoService.getOne,
+            field: 'Nombre',
+          },
+          type: 'number',
+        },
+        {
+          header: 'Estado de Obra',
+          key: 'id',
+          ref: {
+            provider: EstadoObraService.getOne,
+            field: 'Nombre',
+          },
+          type: 'number',
+        },
+
         {
           header: 'Fecha de creación',
           key: 'creado',
