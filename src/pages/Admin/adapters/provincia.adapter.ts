@@ -10,7 +10,7 @@ export const getAll: {
       id: item.id,
       nombre: item.nombre,
       pais: item.pais && {
-        id: item.pais.id, 
+        id: item.pais.id,
         title: item.pais.nombre,
       },
       creado: item.creado,

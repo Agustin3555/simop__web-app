@@ -17,7 +17,8 @@ import {
   TipoInspector,
   Inspector,
   TipoRepresentanteEmpresa,
-  Datos,
+  Empresa,
+  Obra,
 } from '../../views'
 
 const Content = () => (
@@ -39,7 +40,8 @@ const Content = () => (
     <TipoInspector />
     <TipoRepresentanteEmpresa />
     <Inspector />
-    <Datos />
+    <Empresa />
+    <Obra />
   </div>
 )
 

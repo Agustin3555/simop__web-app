@@ -2,7 +2,7 @@ import { publicInstance } from '@/services/config'
 import { RepresentanteEmpresaModel } from '../models'
 import { RepresentanteEmpresaAdapter } from '../adapters'
 
-const collection = '/tipo-representantes-empresas-obras'
+const collection = '/representantes-empresas'
 
 export const getAll = async () => {
   const response = await publicInstance.get(collection)

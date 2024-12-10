@@ -24,7 +24,7 @@ const Add = () => {
       <Input name="nombre" title="Nombre" required />
       <Combobox
         name="provinciaId"
-        title="Dirección"
+        title="Provincia"
         provider={ProvinciaService.getForConnect}
       />
     </LocalAdd>

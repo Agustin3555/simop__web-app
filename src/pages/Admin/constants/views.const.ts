@@ -17,9 +17,7 @@ export enum ViewKey {
   INSPECTOR,
   REPRESENTANTE_EMPRESA,
   EMPRESA,
-  DATOS,
-  
-  
+  OBRA,
 }
 
 interface Info {
@@ -81,7 +79,7 @@ export const VIEW_INFO: Record<ViewKey, Info> = {
   [ViewKey.EMPRESA]: {
     title: 'Empresa',
   },
-  [ViewKey.DATOS]: {
-    title: 'Datos',
+  [ViewKey.OBRA]: {
+    title: 'Obra',
   },
 }

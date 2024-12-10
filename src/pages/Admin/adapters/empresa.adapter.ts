@@ -1,17 +1,17 @@
 import { InputAdapter, OutputAdapter } from '@/adapters/config'
-import { DatosModel } from '../models'
+import { EmpresaModel } from '../models'
 import { Ref } from '../types'
 
 export const getAll: {
-  output: OutputAdapter<DatosModel.RawEntity[], DatosModel.Entity[]>
+  output: OutputAdapter<EmpresaModel.RawEntity[], EmpresaModel.Entity[]>
 } = {
   output: response => {
-    const convertedResource = response.map<DatosModel.Entity>(item => ({
+    const convertedResource = response.map<EmpresaModel.Entity>(item => ({
       id: item.id,
-      cuit: item.cuit,
+      cuitEmpresa: item.cuitEmpresa,
       nombreEmpresa: item.nombreEmpresa,
       pais: item.pais && {
-        id: item.pais.id, 
+        id: item.pais.id,
         title: item.pais.nombre,
       },
       direccionDeclarada: item.direccionDeclarada,
@@ -26,7 +26,7 @@ export const getAll: {
 }
 
 export const getForConnect: {
-  output: OutputAdapter<DatosModel.RawRef[], Ref[]>
+  output: OutputAdapter<EmpresaModel.RawRef[], Ref[]>
 } = {
   output: response => {
     const convertedResource = response.map<Ref>(item => ({
@@ -39,12 +39,12 @@ export const getForConnect: {
 }
 
 export const getOne: {
-  output: OutputAdapter<DatosModel.RawEntity, DatosModel.Entity>
+  output: OutputAdapter<EmpresaModel.RawEntity, EmpresaModel.Entity>
 } = {
   output: response => {
     const convertedResource = {
       id: response.id,
-      cuit: response.cuit,
+      cuitEmpresa: response.cuitEmpresa,
       nombreEmpresa: response.nombreEmpresa,
       pais: response.pais && {
         id: response.pais.id,
@@ -62,16 +62,18 @@ export const getOne: {
 }
 
 export const create: {
-  input: InputAdapter<DatosModel.CreateData, DatosModel.CreateBody>
+  input: InputAdapter<EmpresaModel.CreateData, EmpresaModel.CreateBody>
 } = {
   input: data => {
-    const convertedResource: DatosModel.CreateBody = {
-      cuit: data.cuit,
+    const convertedResource: EmpresaModel.CreateBody = {
+      cuitEmpresa: data.cuitEmpresa,
       nombreEmpresa: data.nombreEmpresa,
       direccionDeclarada: data.direccionDeclarada,
       paisId: data.paisId,
       email: data.email,
       numeroContacto: data.numeroContacto,
+      provinciaId: data.provinciaId,
+      localidadId: data.localidadId,
     }
 
     return convertedResource

@@ -1,13 +1,14 @@
-import { DatosModel } from '.'
+import { LocalidadModel, PaisModel, ProvinciaModel } from '.'
 import { Ref } from '../types'
 
 export interface RawEntity {
-  cuit: any
   id: number
   cuitEmpresa: number
   nombreEmpresa: string
   direccionDeclarada: string
-  pais?: { id: number; nombre: string }
+  pais?: PaisModel.RawRef
+  provincia?: ProvinciaModel.RawRef
+  localidad?: LocalidadModel.RawRef
   numeroContacto: number
   email: string
   creado: string
@@ -16,10 +17,12 @@ export interface RawEntity {
 
 export interface Entity {
   id: number
-  cuit: any
+  cuitEmpresa: number
   nombreEmpresa: string
   direccionDeclarada: string
   pais?: Ref
+  provincia?: Ref
+  localidad?: Ref
   numeroContacto: number
   email: string
   creado: string
@@ -29,28 +32,27 @@ export interface Entity {
 export interface RawRef {
   id: number
   nombreEmpresa: string
+  cuitEmpresa: number
 }
 
 export interface CreateData {
-  cuit: number
+  cuitEmpresa: number
   nombreEmpresa: string
   direccionDeclarada: string
   numeroContacto: number
   email: string
+  paisId: number
+  provinciaId: number
+  localidadId: number
 }
 
 export interface CreateBody {
-  cuit: number
+  cuitEmpresa: number
   nombreEmpresa: string
   direccionDeclarada: string
   numeroContacto: number
   email: string
-}
-export interface CreateData {
   paisId: number
+  provinciaId: number
+  localidadId: number
 }
-
-export interface CreateBody {
-  paisId: number
-}
-

@@ -1,17 +1,25 @@
 import { useSubmitAction } from '@/hooks'
 import { Input } from '@/components'
 import { Combobox, LocalAdd } from '@/pages/Admin/components'
-import { DatosService, PaisService } from '@/pages/Admin/services'
+import {
+  EmpresaService,
+  LocalidadService,
+  PaisService,
+  ProvinciaService,
+  RepresentanteEmpresaService,
+} from '@/pages/Admin/services'
 
 const Add = () => {
   const submitActionResult = useSubmitAction(
     async ({ formData, setError, setSuccess }) => {
       try {
-        await DatosService.create({
-          cuit: Number(formData.get('cuit')),
+        await EmpresaService.create({
+          cuitEmpresa: Number(formData.get('cuitEmpresa')),
           nombreEmpresa: formData.get('nombreEmpresa') as string,
           direccionDeclarada: formData.get('direccionDeclarada') as string,
           paisId: Number(formData.get('paisId')),
+          provinciaId: Number(formData.get('provinciaId')),
+          localidadId: Number(formData.get('localidadId')),
           numeroContacto: Number(formData.get('numeroContacto')),
           email: formData.get('email') as string,
         })
@@ -25,7 +33,7 @@ const Add = () => {
 
   return (
     <LocalAdd {...submitActionResult}>
-      <Input name="cuit" title="CUIT" type="number" required />
+      <Input name="cuitEmpresa" title="CUIT" type="number" required />
       <Input name="nombreEmpresa" title="Nombre Empresa" required />
       <Input name="direccionDeclarada" title="Dirección Declarada" required />
       <Combobox
@@ -33,8 +41,29 @@ const Add = () => {
         title="Pais"
         provider={PaisService.getForConnect}
       />
+      <Combobox
+        name="provinciaId"
+        title="Provincia"
+        provider={ProvinciaService.getForConnect}
+      />
+      <Combobox
+        name="localidadId"
+        title="Localidad"
+        provider={LocalidadService.getForConnect}
+      />
+      <Combobox
+        name="tipoRepresentanteEmpresaId"
+        title="Tipo Representante Empresa"
+        provider={RepresentanteEmpresaService.getForConnect}
+      />
+
       <Input name="email" title="Email" required />
-      <Input name="numeroContacto" title="Número Contacto" type="number" required />
+      <Input
+        name="numeroContacto"
+        title="Número Contacto"
+        type="number"
+        required
+      />
     </LocalAdd>
   )
 }

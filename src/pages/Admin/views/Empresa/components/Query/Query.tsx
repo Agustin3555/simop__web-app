@@ -1,10 +1,10 @@
 import { LocalQuery } from '@/pages/Admin/components'
-import { DatosService,PaisService } from '@/pages/Admin/services'
+import { EmpresaService, PaisService } from '@/pages/Admin/services'
 
 const Query = () => {
   return (
     <LocalQuery
-      provider={DatosService.getAll}
+      provider={EmpresaService.getAll}
       columns={[
         {
           header: 'ID',
@@ -13,7 +13,7 @@ const Query = () => {
         },
         {
           header: 'CUIT',
-          key: 'cuit',
+          key: 'cuitEmpresa',
           type: 'number',
         },
         {
@@ -28,24 +28,23 @@ const Query = () => {
         },
         {
           header: 'Pais',
-
           ref: {
             provider: PaisService.getOne,
             field: 'Nombre',
           },
           type: 'number',
-          key: 'id'
+          key: 'id',
         },
         {
-            header: 'Email',
-            key: 'email',
-            type: 'text',
-          },
-          {
-            header: 'NumeroContacto',
-            key: 'numeroContacto',
-            type: 'number',
-          },
+          header: 'Email',
+          key: 'email',
+          type: 'text',
+        },
+        {
+          header: 'NumeroContacto',
+          key: 'numeroContacto',
+          type: 'number',
+        },
         {
           header: 'Fecha de creación',
           key: 'creado',
