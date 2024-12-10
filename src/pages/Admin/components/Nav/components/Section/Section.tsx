@@ -8,7 +8,7 @@ import { Icon } from '@/components'
 const Section = ({ title, sections, viewKey }: SectionNode) => {
   const hasView = viewKey !== undefined
 
-  const [isOpen, setOpen] = useState(true)
+  const [isOpen, setOpen] = useState(false)
   const navigate = useViewNavigation()
   const active = useViewActive(viewKey)
 

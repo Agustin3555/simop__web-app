@@ -55,7 +55,7 @@ const LocalQuery = <T extends { id: number }>({
       <header>
         <div className="left">
           <StateButton
-            text="Traer los datos"
+            text="Consultar datos"
             hiddenText
             faIcon="fa-solid fa-cloud-arrow-down"
             {...handleActionResult}

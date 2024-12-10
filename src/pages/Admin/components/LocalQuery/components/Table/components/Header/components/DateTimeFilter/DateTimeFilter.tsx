@@ -24,8 +24,8 @@ const DateTimeFilter = ({
   }, [type])
 
   const inputs = [
-    { title: 'Hasta', key: 'max', value: columnFilterValue.max },
     { title: 'Desde', key: 'min', value: columnFilterValue.min },
+    { title: 'Hasta', key: 'max', value: columnFilterValue.max },
   ]
 
   const handleChange = useCallback(

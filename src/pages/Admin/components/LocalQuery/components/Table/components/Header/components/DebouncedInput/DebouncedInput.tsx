@@ -2,7 +2,7 @@ import { InputHTMLAttributes, useEffect, useState } from 'react'
 import { useInputHandler } from '@/pages/Admin/hooks'
 import { Input } from '@/components'
 
-interface DebouncedInputProps
+export interface DebouncedInputProps
   extends Omit<InputHTMLAttributes<HTMLInputElement>, 'onChange'> {
   value: string | number
   onChange: (value: string | number) => void
