@@ -1,6 +1,6 @@
 import { useSubmitAction } from '@/hooks'
 import { Input } from '@/components'
-import { LocalAdd, Combobox } from '@/pages/Admin/components'
+import { LocalAdd, Combobox, InputArea } from '@/pages/Admin/components'
 import {
   ObraService,
   PaisService,
@@ -50,15 +50,11 @@ const Add = () => {
 
   return (
     <LocalAdd {...submitActionResult}>
-      <Input name="nombre" title="Nombre" required />
-      <Input
-        name="nomenclaturaCatastral"
-        title="Nomenclatura Catastral"
-        required
+      <Combobox
+        name="empresaId"
+        title="Empresa"
+        provider={EmpresaService.getForConnect}
       />
-      <Input name="fechaInicio" title="Fecha de Inicio" required />
-      <Input name="fechaFin" title="Fecha de Fin" required />
-      <Input name="observaciones" title="Observaciones" />
       <Input
         name="numeroResolucion"
         title="Numero de Resolución"
@@ -71,6 +67,19 @@ const Add = () => {
         type="number"
         required
       />
+      <Input name="nombre" title="Nombre" required />
+      <Combobox
+        name="financiamientoId"
+        title="Financiamiento"
+        provider={LocalidadService.getForConnect}
+      />
+      <Input
+        name="nomenclaturaCatastral"
+        title="Nomenclatura Catastral"
+        required
+      />
+      <Input name="fechaInicio" title="Fecha de Inicio" type="date" required />
+      <Input name="fechaFin" title="Fecha de Fin" type="date" required />
       <Input
         name="numeroContratacion"
         title="Número de Contratacion"
@@ -111,16 +120,7 @@ const Add = () => {
         title="Estado de Obra"
         provider={EstadoObraService.getForConnect}
       />
-      <Combobox
-        name="financiamientoId"
-        title="Financiamiento"
-        provider={LocalidadService.getForConnect}
-      />
-      <Combobox
-        name="empresaId"
-        title="Empresa"
-        provider={EmpresaService.getForConnect}
-      />
+      <InputArea name="observaciones" title="Observaciones" />
     </LocalAdd>
   )
 }

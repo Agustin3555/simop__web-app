@@ -1,10 +1,9 @@
 import { useSubmitAction } from '@/hooks'
 import { Input } from '@/components'
-import { Combobox, LocalAdd } from '@/pages/Admin/components'
+import { Checkbox, Combobox, LocalAdd } from '@/pages/Admin/components'
 import {
   RepresentanteEmpresaService,
   PaisService,
-  TipoRepresentanteEmpresaService,
   ProvinciaService,
   LocalidadService,
 } from '@/pages/Admin/services'
@@ -14,17 +13,18 @@ const Add = () => {
     async ({ formData, setError, setSuccess }) => {
       try {
         await RepresentanteEmpresaService.create({
+          cuit: Number(formData.get('cuit')),
+          apellido: formData.get('apellido') as string,
           nombre: formData.get('nombre') as string,
-          apellidos: formData.get('apellidos') as string,
-          cuitRepresentante: Number(formData.get('cuitRepresentante')),
-          cuitEmpresa: Number(formData.get('cuitEmpresa')),
-          direccionDeclarada: formData.get('direccionDeclarada') as string,
+          direccion: formData.get('direccion') as string,
+          numeroMatricula: formData.get('numeroMatricula') as string,
+          vigencia: formData.get('vigencia') === 'on',
+
           paisId: Number(formData.get('paisId')),
           provinciaId: Number(formData.get('provinciaId')),
           localidadId: Number(formData.get('localidadId')),
-          tipoRepresentanteEmpresaId: Number(formData.get('numeroMatricula')),
-          numeroMatricula: Number(formData.get('numeroMatricula')),
         })
+
         await setSuccess()
       } catch (error) {
         await setError()
@@ -34,16 +34,10 @@ const Add = () => {
 
   return (
     <LocalAdd {...submitActionResult}>
-      <Input
-        name="cuitRepresentante"
-        title="CUIT Representante"
-        type="number"
-        required
-      />
-      <Input name="cuitEmpresa" title="CUIT Empresa" type="number" required />
+      <Input name="cuit" title="CUIT" type="number" required />
+      <Input name="apellido" title="Apellido" required />
       <Input name="nombre" title="Nombre" required />
-      <Input name="apellidos" title="Apellidos" required />
-      <Input name="direccionDeclarada" title="Direccion Declarada" required />
+      <Input name="direccion" title="Dirección Declarada" required />
       <Combobox
         name="paisId"
         title="País"
@@ -59,16 +53,12 @@ const Add = () => {
         title="Localidad"
         provider={LocalidadService.getForConnect}
       />
-      <Combobox
-        name="tipoRepresentanteEmpresaId"
-        title="Tipo Representante Empresa"
-        provider={TipoRepresentanteEmpresaService.getForConnect}
-      />
-      <Input
-        name="numeroMatricula"
-        title="Numero Matrícula"
-        type="number"
-        required
+      <Input name="numeroMatricula" title="Número de Matrícula" required />
+      <Checkbox
+        name="vigencia"
+        title="Vigencia"
+        falseText="No vigente"
+        trueText="Vigente"
       />
     </LocalAdd>
   )

@@ -9,21 +9,21 @@ const Query = () => {
         {
           header: 'ID',
           key: 'id',
-          type: 'number'
+          type: 'number',
         },
         {
           header: 'Nombre',
           key: 'nombre',
-          type: 'number'
+          type: 'text',
         },
         {
-          header: 'Dirección',
+          header: 'Provincia',
           key: 'provincia',
           ref: {
             provider: ProvinciaService.getOne,
             field: 'Nombre',
           },
-          type: 'number'
+          type: 'text',
         },
         {
           header: 'Fecha de creación',

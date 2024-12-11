@@ -34,16 +34,17 @@ export const TREE: SectionNode[] = [
           { viewKey: ViewKey.MODIFICACION_OBRA },
           { viewKey: ViewKey.PARALIZACION_OBRA },
           { viewKey: ViewKey.PROGRAMA_OBRA },
+          { viewKey: ViewKey.TIPO_TEMATICA_OBRA },
           { viewKey: ViewKey.TIPO_REPRESENTANTE_EMPRESA },
           { viewKey: ViewKey.TRAMITE },
           { viewKey: ViewKey.TIPO_PROFESION },
         ],
       },
       {
-        title: 'Sobre Inspectores',
+        title: 'Inspectores',
         sections: [
-          { viewKey: ViewKey.TIPO_INSPECTOR },
           { viewKey: ViewKey.INSPECTOR },
+          { viewKey: ViewKey.TIPO_INSPECTOR },
         ],
       },
     ],
@@ -57,9 +58,6 @@ export const TREE: SectionNode[] = [
   },
   {
     title: 'Obras',
-    sections: [
-      { viewKey: ViewKey.OBRA },
-      { viewKey: ViewKey.REPRESENTANTE_EMPRESA },
-    ],
+    sections: [{ viewKey: ViewKey.OBRA }],
   },
 ]

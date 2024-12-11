@@ -1,15 +1,14 @@
 import { useSubmitAction } from '@/hooks'
 import { Input } from '@/components'
-import { Combobox, LocalAdd } from '@/pages/Admin/components'
-import { DepartamentoService, DireccionService } from '@/pages/Admin/services'
+import { LocalAdd } from '@/pages/Admin/components'
+import { TipoTematicaObraService } from '@/pages/Admin/services'
 
 const Add = () => {
   const submitActionResult = useSubmitAction(
     async ({ formData, setError, setSuccess }) => {
       try {
-        await DepartamentoService.create({
+        await TipoTematicaObraService.create({
           nombre: formData.get('nombre') as string,
-          direccionId: Number(formData.get('direccionId')),
         })
 
         await setSuccess()
@@ -21,11 +20,6 @@ const Add = () => {
 
   return (
     <LocalAdd {...submitActionResult}>
-      <Combobox
-        name="direccionId"
-        title="Dirección"
-        provider={DireccionService.getForConnect}
-      />
       <Input name="nombre" title="Nombre" required />
     </LocalAdd>
   )

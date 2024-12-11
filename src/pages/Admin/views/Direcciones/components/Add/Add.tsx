@@ -21,12 +21,12 @@ const Add = () => {
 
   return (
     <LocalAdd {...submitActionResult}>
-      <Input name="nombre" title="Nombre" required />
       <Combobox
         name="subSecretariaId"
         title="Subsecretaría"
         provider={SubSecretariaService.getForConnect}
       />
+      <Input name="nombre" title="Nombre" required />
     </LocalAdd>
   )
 }

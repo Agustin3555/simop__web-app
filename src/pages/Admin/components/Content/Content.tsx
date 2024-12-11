@@ -11,6 +11,7 @@ import {
   ModificacionObra,
   ParalizacionObra,
   ProgramaObra,
+  TipoTematicaObra,
   RepresentanteEmpresa,
   Tramite,
   TipoProfesion,
@@ -34,6 +35,7 @@ const Content = () => (
     <ModificacionObra />
     <ParalizacionObra />
     <ProgramaObra />
+    <TipoTematicaObra />
     <RepresentanteEmpresa />
     <Tramite />
     <TipoProfesion />

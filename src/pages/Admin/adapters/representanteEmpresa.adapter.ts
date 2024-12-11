@@ -12,11 +12,13 @@ export const getAll: {
     const convertedResource = response.map<RepresentanteEmpresaModel.Entity>(
       item => ({
         id: item.id,
-        cuitRepresentante: item.cuitRepresentante,
-        cuitEmpresa: item.cuitEmpresa,
-        apellidos: item.apellidos,
+        cuit: item.cuit,
+        apellido: item.apellido,
         nombre: item.nombre,
-        direccionDeclarada: item.direccionDeclarada,
+        direccion: item.direccion,
+        numeroMatricula: item.numeroMatricula,
+        vigencia: item.vigencia,
+
         pais: item.pais && {
           id: item.pais.id,
           title: item.pais.nombre,
@@ -33,7 +35,7 @@ export const getAll: {
           id: item.tipoRepresentanteEmpresa.id,
           title: item.tipoRepresentanteEmpresa.nombre,
         },
-        numeroMatricula: item.numeroMatricula,
+
         creado: item.creado,
         modificado: item.modificado,
       }),
@@ -65,11 +67,13 @@ export const getOne: {
   output: response => {
     const convertedResource = {
       id: response.id,
-      cuitRepresentante: response.cuitRepresentante,
-      cuitEmpresa: response.cuitEmpresa,
-      apellidos: response.apellidos,
+      cuit: response.cuit,
+      apellido: response.apellido,
       nombre: response.nombre,
-      direccionDeclarada: response.direccionDeclarada,
+      direccion: response.direccion,
+      numeroMatricula: response.numeroMatricula,
+      vigencia: response.vigencia,
+
       pais: response.pais && {
         id: response.pais.id,
         title: response.pais.nombre,
@@ -86,7 +90,7 @@ export const getOne: {
         id: response.tipoRepresentanteEmpresa.id,
         title: response.tipoRepresentanteEmpresa.nombre,
       },
-      numeroMatricula: response.numeroMatricula,
+
       creado: response.creado,
       modificado: response.modificado,
     }
@@ -103,7 +107,13 @@ export const create: {
 } = {
   input: data => {
     const convertedResource: RepresentanteEmpresaModel.CreateBody = {
+      cuit: data.cuit,
+      apellido: data.apellido,
       nombre: data.nombre,
+      direccion: data.direccion,
+      numeroMatricula: data.numeroMatricula,
+      vigencia: data.vigencia,
+
       paisId: data.paisId,
       provinciaId: data.provinciaId,
       localidadId: data.localidadId,

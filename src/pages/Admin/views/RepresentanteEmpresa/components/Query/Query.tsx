@@ -1,7 +1,6 @@
 import { LocalQuery } from '@/pages/Admin/components'
 import {
   RepresentanteEmpresaService,
-  TipoRepresentanteEmpresaService,
   PaisService,
   ProvinciaService,
   LocalidadService,
@@ -18,10 +17,66 @@ const Query = () => {
           type: 'number',
         },
         {
+          header: 'CUIT',
+          key: 'cuit',
+          type: 'number',
+        },
+        {
+          header: 'Apellido',
+          key: 'apellido',
+          type: 'text',
+        },
+        {
           header: 'Nombre',
           key: 'nombre',
           type: 'text',
         },
+        {
+          header: 'Dirección Declarada',
+          key: 'direccion',
+          type: 'text',
+        },
+        {
+          header: 'País',
+          key: 'pais',
+          ref: {
+            provider: PaisService.getOne,
+            field: 'Nombre',
+          },
+          type: 'text',
+        },
+        {
+          header: 'Provincia',
+          key: 'provincia',
+          ref: {
+            provider: ProvinciaService.getOne,
+            field: 'Nombre',
+          },
+          type: 'text',
+        },
+        {
+          header: 'Localidad',
+          key: 'localidad',
+          ref: {
+            provider: LocalidadService.getOne,
+            field: 'Nombre',
+          },
+          type: 'text',
+        },
+        {
+          header: 'Número de Matricula',
+          key: 'numeroMatricula',
+          type: 'text',
+        },
+        // {
+        //   header: 'Vigencia',
+        //   key: 'numeroMatricula',
+        //   type: 'bool',
+        //   boolConfig: {
+        //     false: { text: 'No vigente', color: 'c' },
+        //     true: { text: 'Vigente', color: 'b' },
+        //   },
+        // },
         {
           header: 'Fecha de creación',
           key: 'creado',
@@ -31,67 +86,6 @@ const Query = () => {
           header: 'Fecha de modificación',
           key: 'modificado',
           type: 'dateTime',
-        },
-        {
-          header: 'Apellidos',
-          key: 'apellidos',
-          type: 'text',
-        },
-        {
-          header: 'Dirección declarada',
-          key: 'direccionDeclarada',
-          type: 'text',
-        },
-        {
-          header: 'CUIT Representante',
-          key: 'cuitRepresentante',
-          type: 'number',
-        },
-        {
-          header: 'CUIT Empresa',
-          key: 'cuitEmpresa',
-          type: 'number',
-        },
-        {
-          header: 'Numero de Matricula',
-          key: 'numeroMatricula',
-          type: 'number',
-        },
-        {
-          header: 'País ',
-          key: 'pais',
-          ref: {
-            provider: PaisService.getOne,
-            field: 'Nombre',
-          },
-          type: 'number',
-        },
-        {
-          header: 'Provincia ',
-          key: 'provincia',
-          ref: {
-            provider: ProvinciaService.getOne,
-            field: 'Nombre',
-          },
-          type: 'number',
-        },
-        {
-          header: 'Localidad',
-          key: 'localidad',
-          ref: {
-            provider: LocalidadService.getOne,
-            field: 'Nombre',
-          },
-          type: 'number',
-        },
-        {
-          header: 'Numero de Matrícula',
-          key: 'numeroMatricula',
-          ref: {
-            provider: TipoRepresentanteEmpresaService.getOne,
-            field: 'Nombre',
-          },
-          type: 'number',
         },
       ]}
     />

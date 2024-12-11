@@ -1,28 +1,29 @@
 import { InputAdapter, OutputAdapter } from '@/adapters/config'
-import { TipoRepresentanteEmpresaModel } from '../models'
+import { TipoTematicaObraModel } from '../models'
 import { Ref } from '../types'
 
 export const getAll: {
   output: OutputAdapter<
-    TipoRepresentanteEmpresaModel.RawEntity[],
-    TipoRepresentanteEmpresaModel.Entity[]
+    TipoTematicaObraModel.RawEntity[],
+    TipoTematicaObraModel.Entity[]
   >
 } = {
   output: response => {
-    const convertedResource =
-      response.map<TipoRepresentanteEmpresaModel.Entity>(item => ({
+    const convertedResource = response.map<TipoTematicaObraModel.Entity>(
+      item => ({
         id: item.id,
         nombre: item.nombre,
         creado: item.creado,
         modificado: item.modificado,
-      }))
+      }),
+    )
 
     return convertedResource
   },
 }
 
 export const getForConnect: {
-  output: OutputAdapter<TipoRepresentanteEmpresaModel.RawRef[], Ref[]>
+  output: OutputAdapter<TipoTematicaObraModel.RawRef[], Ref[]>
 } = {
   output: response => {
     const convertedResource = response.map<Ref>(item => ({
@@ -36,8 +37,8 @@ export const getForConnect: {
 
 export const getOne: {
   output: OutputAdapter<
-    TipoRepresentanteEmpresaModel.RawEntity,
-    TipoRepresentanteEmpresaModel.Entity
+    TipoTematicaObraModel.RawEntity,
+    TipoTematicaObraModel.Entity
   >
 } = {
   output: response => {
@@ -54,12 +55,12 @@ export const getOne: {
 
 export const create: {
   input: InputAdapter<
-    TipoRepresentanteEmpresaModel.CreateData,
-    TipoRepresentanteEmpresaModel.CreateBody
+    TipoTematicaObraModel.CreateData,
+    TipoTematicaObraModel.CreateBody
   >
 } = {
   input: data => {
-    const convertedResource: TipoRepresentanteEmpresaModel.CreateBody = {
+    const convertedResource: TipoTematicaObraModel.CreateBody = {
       nombre: data.nombre,
     }
 

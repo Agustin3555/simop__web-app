@@ -5,34 +5,39 @@ import {
   LocalidadModel,
 } from '.'
 import { Ref } from '../types'
+
 export interface RawEntity {
   id: number
-  cuitRepresentante: number
-  cuitEmpresa: number
-  apellidos: string
+  cuit: number
+  apellido: string
   nombre: string
-  direccionDeclarada: string
+  direccion: string
+  numeroMatricula: string
+  vigencia: boolean
+
   pais?: PaisModel.RawRef
   provincia?: ProvinciaModel.RawRef
   localidad?: LocalidadModel.RawRef
   tipoRepresentanteEmpresa?: TipoRepresentanteEmpresaModel.RawRef
-  numeroMatricula: number
+
   creado: string
   modificado: string
 }
 
 export interface Entity {
   id: number
-  cuitRepresentante: number
-  cuitEmpresa: number
-  apellidos: string
+  cuit: number
+  apellido: string
   nombre: string
-  direccionDeclarada: string
+  direccion: string
+  numeroMatricula: string
+  vigencia: boolean
+
   pais?: Ref
   provincia?: Ref
   localidad?: Ref
   tipoRepresentanteEmpresa?: Ref
-  numeroMatricula: number
+
   creado: string
   modificado: string
 }
@@ -43,26 +48,29 @@ export interface RawRef {
 }
 
 export interface CreateData {
+  cuit: number
+  apellido: string
   nombre: string
-  cuitRepresentante: number
-  cuitEmpresa: number
-  apellidos: string
-  direccionDeclarada: string
+  direccion: string
+  numeroMatricula: string
+  vigencia: boolean
+
   paisId: number
-  tipoRepresentanteEmpresaId: number
   provinciaId: number
   localidadId: number
-  numeroMatricula: number
+  tipoRepresentanteEmpresaId?: number
 }
+
 export interface CreateBody {
+  cuit: number
+  apellido: string
   nombre: string
-  cuitRepresentante: number
-  cuitEmpresa: number
-  apellidos: string
-  direccionDeclarada: string
-  tipoRepresentanteEmpresaId: number
+  direccion: string
+  numeroMatricula: string
+  vigencia: boolean
+
   paisId: number
   provinciaId: number
   localidadId: number
-  numeroMatricula: number
+  tipoRepresentanteEmpresaId?: number
 }
