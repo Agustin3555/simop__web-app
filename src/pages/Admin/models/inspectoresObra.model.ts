@@ -1,4 +1,4 @@
-import { Ref } from '../types'
+import { Ref } from '@/types'
 import { InspectorModel, TipoInspectorModel, TipoProfesionModel } from '.'
 export interface RawEntity {
   id: number

@@ -16,6 +16,7 @@ const ComboboxLayout = ({
 }: ComboboxLayoutProps) => {
   const {
     comboboxLayoutRef,
+    long = 'm',
     open,
     handleEnter,
     content,
@@ -26,10 +27,12 @@ const ComboboxLayout = ({
     loading,
   } = basicProps
 
+  // TODO: long debería ser 'l' si es multiple
+
   return (
     <div
       ref={comboboxLayoutRef}
-      className={classList('cmp-combobox-layout', 'control', { open })}
+      className={classList('cmp-combobox-layout', 'control', long, { open })}
       onMouseEnter={handleEnter}
     >
       <small className="label">{content}</small>

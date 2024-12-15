@@ -4,7 +4,7 @@ import { LocalidadService, ProvinciaService } from '@/pages/Admin/services'
 const Query = () => {
   return (
     <LocalQuery
-      provider={LocalidadService.getAll}
+      getAllProvider={LocalidadService.getAll}
       columns={[
         {
           header: 'ID',
@@ -20,7 +20,7 @@ const Query = () => {
           header: 'Provincia',
           key: 'provincia',
           ref: {
-            provider: ProvinciaService.getOne,
+            getOneProvider: ProvinciaService.getOne,
             field: 'Nombre',
           },
           type: 'text',

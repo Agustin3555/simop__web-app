@@ -9,7 +9,7 @@ import {
 const Query = () => {
   return (
     <LocalQuery
-      provider={RepresentanteEmpresaService.getAll}
+      getAllProvider={RepresentanteEmpresaService.getAll}
       columns={[
         {
           header: 'ID',
@@ -40,7 +40,7 @@ const Query = () => {
           header: 'País',
           key: 'pais',
           ref: {
-            provider: PaisService.getOne,
+            getOneProvider: PaisService.getOne,
             field: 'Nombre',
           },
           type: 'text',
@@ -49,7 +49,7 @@ const Query = () => {
           header: 'Provincia',
           key: 'provincia',
           ref: {
-            provider: ProvinciaService.getOne,
+            getOneProvider: ProvinciaService.getOne,
             field: 'Nombre',
           },
           type: 'text',
@@ -58,7 +58,7 @@ const Query = () => {
           header: 'Localidad',
           key: 'localidad',
           ref: {
-            provider: LocalidadService.getOne,
+            getOneProvider: LocalidadService.getOne,
             field: 'Nombre',
           },
           type: 'text',

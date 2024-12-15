@@ -4,7 +4,7 @@ import { TipoInspectorService } from '@/pages/Admin/services'
 const Query = () => {
   return (
     <LocalQuery
-      provider={TipoInspectorService.getAll}
+      getAllProvider={TipoInspectorService.getAll}
       columns={[
         {
           header: 'ID',

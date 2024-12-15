@@ -1,13 +1,10 @@
 //adaptador sirve para mostrar la informacion que trae la api en el front,
 import { InputAdapter, OutputAdapter } from '@/adapters/config'
 import { PaisModel } from '../models'
-import { Ref } from '../types'
+import { Ref } from '@/types'
 
 export const getAll: {
-  output: OutputAdapter<
-    PaisModel.RawEntity[],
-    PaisModel.Entity[]
-  >
+  output: OutputAdapter<PaisModel.RawEntity[], PaisModel.Entity[]>
 } = {
   output: response => {
     const convertedResource = response.map<PaisModel.Entity>(item => ({
@@ -33,7 +30,7 @@ export const getForConnect: {
     return convertedResource
   },
 }
- 
+
 export const getOne: {
   output: OutputAdapter<PaisModel.RawEntity, PaisModel.Entity>
 } = {
@@ -50,10 +47,7 @@ export const getOne: {
 }
 
 export const create: {
-  input: InputAdapter<
-    PaisModel.CreateData,
-    PaisModel.CreateBody
-  >
+  input: InputAdapter<PaisModel.CreateData, PaisModel.CreateBody>
 } = {
   input: data => {
     const convertedResource: PaisModel.CreateBody = {

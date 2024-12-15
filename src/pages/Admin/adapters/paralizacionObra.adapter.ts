@@ -1,6 +1,6 @@
 import { InputAdapter, OutputAdapter } from '@/adapters/config'
 import { ParalizacionObraModel } from '../models'
-import { Ref } from '../types'
+import { Ref } from '@/types'
 
 export const getAll: {
   output: OutputAdapter<
@@ -9,12 +9,14 @@ export const getAll: {
   >
 } = {
   output: response => {
-    const convertedResource = response.map<ParalizacionObraModel.Entity>(item => ({
-      id: item.id,
-      nombre: item.nombre,
-      creado: item.creado,
-      modificado: item.modificado,
-    }))
+    const convertedResource = response.map<ParalizacionObraModel.Entity>(
+      item => ({
+        id: item.id,
+        nombre: item.nombre,
+        creado: item.creado,
+        modificado: item.modificado,
+      }),
+    )
 
     return convertedResource
   },
@@ -34,7 +36,10 @@ export const getForConnect: {
 }
 
 export const getOne: {
-  output: OutputAdapter<ParalizacionObraModel.RawEntity, ParalizacionObraModel.Entity>
+  output: OutputAdapter<
+    ParalizacionObraModel.RawEntity,
+    ParalizacionObraModel.Entity
+  >
 } = {
   output: response => {
     const convertedResource = {

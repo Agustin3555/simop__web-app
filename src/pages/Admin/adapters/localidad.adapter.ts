@@ -1,12 +1,9 @@
 import { InputAdapter, OutputAdapter } from '@/adapters/config'
 import { LocalidadModel } from '../models'
-import { Ref } from '../types'
+import { Ref } from '@/types'
 
 export const getAll: {
-  output: OutputAdapter<
-    LocalidadModel.RawEntity[],
-    LocalidadModel.Entity[]
-  >
+  output: OutputAdapter<LocalidadModel.RawEntity[], LocalidadModel.Entity[]>
 } = {
   output: response => {
     const convertedResource = response.map<LocalidadModel.Entity>(item => ({
@@ -57,10 +54,7 @@ export const getOne: {
 }
 
 export const create: {
-  input: InputAdapter<
-    LocalidadModel.CreateData,
-    LocalidadModel.CreateBody
-  >
+  input: InputAdapter<LocalidadModel.CreateData, LocalidadModel.CreateBody>
 } = {
   input: data => {
     const convertedResource: LocalidadModel.CreateBody = {

@@ -39,22 +39,22 @@ const Add = () => {
       <Combobox
         name="PaisId"
         title="Pais"
-        provider={PaisService.getForConnect}
+        getForConnectProvider={PaisService.getForConnect}
       />
       <Combobox
         name="provinciaId"
         title="Provincia"
-        provider={ProvinciaService.getForConnect}
+        getForConnectProvider={ProvinciaService.getForConnect}
       />
       <Combobox
         name="localidadId"
         title="Localidad"
-        provider={LocalidadService.getForConnect}
+        getForConnectProvider={LocalidadService.getForConnect}
       />
       <Combobox
         name="tipoRepresentanteEmpresaId"
         title="Tipo Representante Empresa"
-        provider={RepresentanteEmpresaService.getForConnect}
+        getForConnectProvider={RepresentanteEmpresaService.getForConnect}
       />
 
       <Input name="email" title="Email" required />

@@ -4,17 +4,17 @@ import { TramiteService } from '@/pages/Admin/services'
 const Query = () => {
   return (
     <LocalQuery
-      provider={TramiteService.getAll}
+      getAllProvider={TramiteService.getAll}
       columns={[
         {
           header: 'ID',
           key: 'id',
-          type: 'number'
+          type: 'number',
         },
         {
           header: 'Nombre',
           key: 'nombre',
-          type: 'text'
+          type: 'text',
         },
         {
           header: 'Fecha de creación',

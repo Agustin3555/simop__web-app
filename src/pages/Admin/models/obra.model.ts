@@ -6,7 +6,7 @@ import {
   PaisModel,
   ProvinciaModel,
 } from '.'
-import { Ref } from '../types'
+import { Ref } from '@/types'
 
 export interface RawEntity {
   id: number

@@ -1,5 +1,5 @@
 import { SubSecretariaModel } from '.'
-import { Ref } from '../types'
+import { Ref } from '@/types'
 
 export interface RawEntity {
   id: number

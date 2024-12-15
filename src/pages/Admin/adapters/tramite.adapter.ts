@@ -1,12 +1,9 @@
 import { InputAdapter, OutputAdapter } from '@/adapters/config'
 import { TramiteModel } from '../models'
-import { Ref } from '../types'
+import { Ref } from '@/types'
 
 export const getAll: {
-  output: OutputAdapter<
-    TramiteModel.RawEntity[],
-    TramiteModel.Entity[]
-  >
+  output: OutputAdapter<TramiteModel.RawEntity[], TramiteModel.Entity[]>
 } = {
   output: response => {
     const convertedResource = response.map<TramiteModel.Entity>(item => ({
@@ -49,10 +46,7 @@ export const getOne: {
 }
 
 export const create: {
-  input: InputAdapter<
-    TramiteModel.CreateData,
-    TramiteModel.CreateBody
-  >
+  input: InputAdapter<TramiteModel.CreateData, TramiteModel.CreateBody>
 } = {
   input: data => {
     const convertedResource: TramiteModel.CreateBody = {

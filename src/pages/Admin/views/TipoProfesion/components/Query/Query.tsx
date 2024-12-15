@@ -3,7 +3,7 @@ import { TipoProfesionService } from '@/pages/Admin/services'
 
 const Query = () => (
   <LocalQuery
-    provider={TipoProfesionService.getAll}
+    getAllProvider={TipoProfesionService.getAll}
     columns={[
       {
         header: 'ID',

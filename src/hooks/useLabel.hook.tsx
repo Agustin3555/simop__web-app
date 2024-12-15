@@ -5,10 +5,12 @@ export interface UseLabelProps {
   required?: boolean
 }
 
+// TODO: debería ser un componente
+
 export const useLabel = ({ title, required = false }: UseLabelProps) => {
   const controlTitle = useMemo(
     () => (required ? `${title} (Requerido)` : title),
-    [required, title]
+    [required, title],
   )
 
   return {

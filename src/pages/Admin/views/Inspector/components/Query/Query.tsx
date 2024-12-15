@@ -4,7 +4,7 @@ import { InspectorService, TipoInspectorService } from '@/pages/Admin/services'
 const Query = () => {
   return (
     <LocalQuery
-      provider={InspectorService.getAll}
+      getAllProvider={InspectorService.getAll}
       columns={[
         {
           header: 'ID',
@@ -32,7 +32,7 @@ const Query = () => {
           type: 'text',
           ref: {
             field: 'Nombre',
-            provider: TipoInspectorService.getOne,
+            getOneProvider: TipoInspectorService.getOne,
           },
         },
         {

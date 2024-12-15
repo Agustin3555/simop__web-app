@@ -3,7 +3,7 @@ import { TipoTematicaObraService } from '@/pages/Admin/services'
 
 const Query = () => (
   <LocalQuery
-    provider={TipoTematicaObraService.getAll}
+    getAllProvider={TipoTematicaObraService.getAll}
     columns={[
       {
         header: 'ID',

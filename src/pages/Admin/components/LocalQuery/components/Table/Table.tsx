@@ -12,7 +12,7 @@ import {
 } from '@tanstack/react-table'
 import { Cell, Header, RowSelectorCell } from './components'
 import { Columns, Meta } from '../../types'
-import { Ref } from '@/pages/Admin/types'
+import { Ref } from '@/types'
 
 declare module '@tanstack/react-table' {
   interface ColumnMeta<TData extends RowData, TValue> extends Meta {}

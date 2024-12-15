@@ -13,7 +13,11 @@
 
 :root {
   --line-thickness: 0.0625rem;
-  --document-background-color: var(--pal-color-gs-50);
+  --document-background-color: color-mix(
+    in srgb,
+    var(--pal-color-a-l3),
+    var(--pal-color-white)
+  );
 }
 
 html {

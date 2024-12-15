@@ -24,7 +24,7 @@ const Add = () => {
       <Combobox
         name="direccionId"
         title="Dirección"
-        provider={DireccionService.getForConnect}
+        getForConnectProvider={DireccionService.getForConnect}
       />
       <Input name="nombre" title="Nombre" required />
     </LocalAdd>

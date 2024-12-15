@@ -30,7 +30,7 @@ const Add = () => {
         name="tiposProfesiones"
         title="Profesiones"
         multiple
-        provider={TipoProfesionService.getForConnect}
+        getForConnectProvider={TipoProfesionService.getForConnect}
       />
     </LocalAdd>
   )

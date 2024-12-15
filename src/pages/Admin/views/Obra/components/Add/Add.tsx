@@ -1,128 +1,295 @@
-import { useSubmitAction } from '@/hooks'
 import { Input } from '@/components'
-import { LocalAdd, Combobox, InputArea } from '@/pages/Admin/components'
+import {
+  Combobox,
+  InputArea,
+  Checkbox,
+  LocalAdd2,
+} from '@/pages/Admin/components'
 import {
   ObraService,
-  PaisService,
-  ProvinciaService,
   LocalidadService,
   EstadoObraService,
   EmpresaService,
+  TipoTematicaObraService,
+  ProgramaObraService,
+  FinanciamientoService,
 } from '@/pages/Admin/services'
 
-const Add = () => {
-  const submitActionResult = useSubmitAction(
-    async ({ formData, setError, setSuccess }) => {
-      try {
-        await ObraService.create({
-          empresaId: Number(formData.get('empresaId')),
-          nombre: formData.get('nombre') as string,
-          paisId: Number(formData.get('paisId')),
-          provinciaId: Number(formData.get('provinciaId')),
-          localidadId: Number(formData.get('localidadId')),
-          id: Number(formData.get('Id')),
-          numeroResolucion: Number(formData.get('numeroResolucion')),
-          anioResolucion: Number(formData.get('anioResolucion')),
-          numeroContratacion: Number(formData.get('numeroContratacion')),
-          anioContratacion: Number(formData.get('anioContratacion')),
-          montoContratacion: Number(formData.get('montoContratacion')),
-          numeroExpediente: Number(formData.get('numeroExpediente')),
-          nomenclaturaCatastral: formData.get(
-            'nomenclaturaCatastral',
-          ) as string,
-          plazoMeses: Number(formData.get('plazoMeses')),
-          plazoDias: Number(formData.get('plazoDias')),
-          fechaInicio: formData.get('fechaInicio') as string,
-          fechaFin: formData.get('fechaFin') as string,
-          observaciones: formData.get('observaciones') as string,
-          creado: formData.get('creado') as string,
-          modificado: formData.get('modificado') as string,
-          estadoObraId: Number(formData.get('estadoObraId')),
-          financiamientoId: Number(formData.get('financiamientoId')),
-        })
-
-        await setSuccess()
-      } catch (error) {
-        await setError()
-      }
-    },
-  )
-
-  return (
-    <LocalAdd {...submitActionResult}>
-      <Combobox
-        name="empresaId"
-        title="Empresa"
-        provider={EmpresaService.getForConnect}
-      />
-      <Input
-        name="numeroResolucion"
-        title="Numero de Resolución"
-        type="number"
-        required
-      />
-      <Input
-        name="anioResolucion"
-        title="Año de Resolución"
-        type="number"
-        required
-      />
-      <Input name="nombre" title="Nombre" required />
-      <Combobox
-        name="financiamientoId"
-        title="Financiamiento"
-        provider={LocalidadService.getForConnect}
-      />
-      <Input
-        name="nomenclaturaCatastral"
-        title="Nomenclatura Catastral"
-        required
-      />
-      <Input name="fechaInicio" title="Fecha de Inicio" type="date" required />
-      <Input name="fechaFin" title="Fecha de Fin" type="date" required />
-      <Input
-        name="numeroContratacion"
-        title="Número de Contratacion"
-        type="number"
-        required
-      />
-      <Input
-        name="montoContratacion"
-        title="Monto de Contratacion"
-        type="number"
-        required
-      />
-      <Input
-        name="numeroExpediente"
-        title="Número de Expediente"
-        type="number"
-        required
-      />
-      <Input name="plazoMeses" title="Plazo en Meses" type="number" required />
-      <Input name="plazoDias" title="Plazo en Días" type="number" required />
-      <Combobox
-        name="PaisId"
-        title="País"
-        provider={PaisService.getForConnect}
-      />
-      <Combobox
-        name="provinciaId"
-        title="Provincia"
-        provider={ProvinciaService.getForConnect}
-      />
-      <Combobox
-        name="localidadId"
-        title="Localidad"
-        provider={LocalidadService.getForConnect}
-      />
-      <Combobox
-        name="estadoObraId"
-        title="Estado de Obra"
-        provider={EstadoObraService.getForConnect}
-      />
-      <InputArea name="observaciones" title="Observaciones" />
-    </LocalAdd>
-  )
-}
+const Add = () => (
+  <LocalAdd2
+    createProvider={ObraService.create}
+    fieldGroups={[
+      {
+        fields: [
+          {
+            accessorKey: 'numero',
+            getValue: data => data.get.number,
+            component: <Input title="Número de Obra" type="number" required />,
+          },
+          {
+            accessorKey: 'nombre',
+            getValue: data => data.get.string,
+            component: <Input title="Nombre de Obra" required />,
+          },
+          {
+            accessorKey: 'numeroExpediente',
+            getValue: data => data.get.number,
+            component: (
+              <Input title="Número de Expediente" type="number" required />
+            ),
+          },
+          {
+            accessorKey: 'numeroResolucion',
+            getValue: data => data.get.number,
+            component: (
+              <Input title="Numero de Resolución" type="number" required />
+            ),
+          },
+          {
+            accessorKey: 'anioResolucion',
+            getValue: data => data.get.number,
+            component: (
+              <Input
+                title="Año de Resolución"
+                type="number"
+                required
+                long="s"
+              />
+            ),
+          },
+          {
+            accessorKey: 'numeroContratacion',
+            getValue: data => data.get.number,
+            component: (
+              <Input title="Número de Contratación" type="number" required />
+            ),
+          },
+          {
+            accessorKey: 'anioContratacion',
+            getValue: data => data.get.number,
+            component: (
+              <Input
+                title="Año de Contratación"
+                type="number"
+                required
+                long="s"
+              />
+            ),
+          },
+          {
+            accessorKey: 'montoContratacion',
+            getValue: data => data.get.number,
+            component: (
+              <Input title="Monto de Contratación" type="number" required />
+            ),
+          },
+          {
+            accessorKey: 'tipoContratacionId',
+            getValue: data => data.get.number,
+            component: (
+              <Combobox
+                title="Tipo de Contratación"
+                getForConnectProvider={FinanciamientoService.getForConnect} // TODO
+                required
+              />
+            ),
+          },
+          {
+            accessorKey: 'tipoFinanciamientoId',
+            getValue: data => data.get.number,
+            component: (
+              <Combobox
+                title="Financiamiento"
+                getForConnectProvider={FinanciamientoService.getForConnect}
+                required
+              />
+            ),
+          },
+          {
+            accessorKey: 'tipoProgramaId',
+            getValue: data => data.get.number,
+            component: (
+              <Combobox
+                title="Programa"
+                getForConnectProvider={ProgramaObraService.getForConnect}
+                required
+              />
+            ),
+          },
+          {
+            accessorKey: 'tipoTematicaId',
+            getValue: data => data.get.number,
+            component: (
+              <Combobox
+                title="Temática"
+                getForConnectProvider={TipoTematicaObraService.getForConnect}
+                required
+              />
+            ),
+          },
+          {
+            accessorKey: 'tipoEstadoId',
+            getValue: data => data.get.number,
+            component: (
+              <Combobox
+                title="Estado"
+                getForConnectProvider={EstadoObraService.getForConnect}
+                required
+              />
+            ),
+          },
+          {
+            accessorKey: 'fechaInicio',
+            getValue: data => data.get.string,
+            component: <Input title="Fecha de Inicio" type="date" required />,
+          },
+          {
+            accessorKey: 'fechaFin',
+            getValue: data => data.get.string,
+            component: <Input title="Fecha de Fin" type="date" required />,
+          },
+          {
+            accessorKey: 'plazoMeses',
+            getValue: data => data.get.number,
+            component: (
+              <Input title="Plazo en Meses" type="number" required long="s" />
+            ),
+          },
+          {
+            accessorKey: 'plazoDias',
+            getValue: data => data.get.number,
+            component: (
+              <Input title="Plazo en Días" type="number" required long="s" />
+            ),
+          },
+          {
+            accessorKey: 'localidadId',
+            getValue: data => data.get.number,
+            component: (
+              <Combobox
+                title="Localidad"
+                getForConnectProvider={LocalidadService.getForConnect}
+                required
+              />
+            ),
+          },
+          {
+            accessorKey: 'direccion',
+            getValue: data => data.get.string,
+            component: <Input title="Dirección" required />,
+          },
+          {
+            accessorKey: 'lugar',
+            getValue: data => data.get.string,
+            component: <Input title="Lugar" required />,
+          },
+          {
+            accessorKey: 'nomenclaturaCatastral',
+            getValue: data => data.get.string,
+            component: <Input title="Nomenclatura Catastral" required />,
+          },
+          {
+            accessorKey: 'observaciones',
+            getValue: data => data.get.string,
+            component: <InputArea title="Observaciones generales" />,
+          },
+        ],
+      },
+      {
+        title: 'Modalidad',
+        fields: [
+          {
+            accessorKey: 'obraNueva',
+            getValue: data => data.get.boolean,
+            component: <Checkbox title="Obra nueva" />,
+          },
+          {
+            accessorKey: 'porcentajeObraNueva',
+            getValue: data => data.get.number,
+            component: (
+              <Input title="Porcentaje de obra nueva" type="number" long="s" />
+            ),
+          },
+          {
+            accessorKey: 'metrosCuadradosObraNueva',
+            getValue: data => data.get.number,
+            component: (
+              <Input
+                title="m² (metros cuadrados) de obra nueva"
+                type="number"
+                long="s"
+              />
+            ),
+          },
+          {
+            accessorKey: 'metrosLinealesObraNueva',
+            getValue: data => data.get.number,
+            component: (
+              <Input
+                title="m (metros lineales) de obra nueva"
+                type="number"
+                long="s"
+              />
+            ),
+          },
+          {
+            accessorKey: 'observacionesObraNueva',
+            getValue: data => data.get.string,
+            component: <InputArea title="Observaciones de obra nueva" />,
+          },
+          {
+            accessorKey: 'obraRefaccionada',
+            getValue: data => data.get.boolean,
+            component: <Checkbox title="Obra refaccionada" />,
+          },
+          {
+            accessorKey: 'porcentajeObraRefaccionada',
+            getValue: data => data.get.number,
+            component: (
+              <Input
+                title="Porcentaje de obra refaccionada"
+                type="number"
+                long="s"
+              />
+            ),
+          },
+          {
+            accessorKey: 'metrosCuadradosObraRefaccionada',
+            getValue: data => data.get.number,
+            component: (
+              <Input
+                title="m² (metros cuadrados) de obra refaccionada"
+                type="number"
+                long="s"
+              />
+            ),
+          },
+          {
+            accessorKey: 'metrosLinealesObraRefaccionada',
+            getValue: data => data.get.number,
+            component: (
+              <Input
+                title="m (metros lineales) de obra refaccionada"
+                type="number"
+                long="s"
+              />
+            ),
+          },
+          {
+            accessorKey: 'observacionesObraRefaccionada',
+            getValue: data => data.get.string,
+            component: <InputArea title="Observaciones de obra refaccionada" />,
+          },
+        ],
+      },
+      {
+        title: 'Profesionales',
+        // TODO: Representantes
+        // TODO: Inspectores
+        fields: [],
+      },
+    ]}
+  />
+)
 
 export default Add

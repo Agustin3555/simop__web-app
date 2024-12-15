@@ -7,8 +7,8 @@ const Login = () => {
   const [, navigate] = useLocation()
 
   const { handleSubmit, actionState } = useSubmitAction(
-    async ({ formData, setError, setSuccess }) => {
-      const pass = formData.get('pass') as string
+    async ({ formValues, setError, setSuccess }) => {
+      const pass = formValues.get.string('pass')
 
       if (pass === import.meta.env.VITE_UNIQUE_PASS) {
         navigate('/admin')
@@ -17,7 +17,7 @@ const Login = () => {
       } else {
         await setError()
       }
-    }
+    },
   )
 
   return (

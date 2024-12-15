@@ -38,7 +38,7 @@ const Cell = <T,>({ column, row }: TanstackCell<T, unknown>) => {
               key={id}
               id={id}
               value={formatIfDateTime(title)}
-              provider={ref.provider}
+              getOneProvider={ref.getOneProvider}
             />
           ))}
         </div>
@@ -46,7 +46,7 @@ const Cell = <T,>({ column, row }: TanstackCell<T, unknown>) => {
         <FetchRef
           id={value.id}
           value={formatIfDateTime(value.title)}
-          provider={ref.provider}
+          getOneProvider={ref.getOneProvider}
         />
       ) : (
         formatIfDateTime(value)

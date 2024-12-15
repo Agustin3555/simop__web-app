@@ -1,23 +1,22 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { useLabel, UseLabelProps } from '@/hooks'
 import { useInputHandler } from '.'
-import { AppError } from '@/services/config'
-import { Control, Ref } from '../types'
+import { Control, GetForConnectProvider, Long, Ref } from '@/types'
 
-export interface Provider {
-  provider: () => Promise<Ref[] | AppError>
-}
-
-export interface ComboboxProps extends UseLabelProps, Control, Provider {
+export interface ComboboxProps
+  extends UseLabelProps,
+    Control,
+    GetForConnectProvider {
   multiple?: boolean
 }
 
-interface UseComboboxProps extends UseLabelProps, Provider {}
+interface UseComboboxProps extends UseLabelProps, GetForConnectProvider, Long {}
 
 export const useCombobox = ({
   title,
   required,
-  provider,
+  getForConnectProvider,
+  long,
 }: UseComboboxProps) => {
   const { content, controlTitle } = useLabel({ title, required })
   const [options, setOptions] = useState<Ref[]>()
@@ -31,10 +30,12 @@ export const useCombobox = ({
   const handleEnter = useCallback(() => setFirstLoad(true), [])
 
   const fetchAsync = useCallback(async () => {
-    const response = await provider()
+    try {
+      const response = await getForConnectProvider()
 
-    if (response && !(response instanceof AppError)) setOptions(response)
-  }, [provider])
+      setOptions(response)
+    } catch (error) {}
+  }, [getForConnectProvider])
 
   useEffect(() => {
     if (firstLoad) fetchAsync()
@@ -99,6 +100,7 @@ export const useCombobox = ({
       handleEnter,
       handleToggleClick,
       handleSearchChange,
+      long,
     },
     options,
     sortedOptions,

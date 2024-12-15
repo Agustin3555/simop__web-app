@@ -41,17 +41,17 @@ const Add = () => {
       <Combobox
         name="paisId"
         title="País"
-        provider={PaisService.getForConnect}
+        getForConnectProvider={PaisService.getForConnect}
       />
       <Combobox
         name="provinciaId"
         title="Provincia"
-        provider={ProvinciaService.getForConnect}
+        getForConnectProvider={ProvinciaService.getForConnect}
       />
       <Combobox
         name="localidadId"
         title="Localidad"
-        provider={LocalidadService.getForConnect}
+        getForConnectProvider={LocalidadService.getForConnect}
       />
       <Input name="numeroMatricula" title="Número de Matrícula" required />
       <Checkbox

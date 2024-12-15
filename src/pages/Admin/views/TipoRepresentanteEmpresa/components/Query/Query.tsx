@@ -4,7 +4,7 @@ import { TipoRepresentanteEmpresaService } from '@/pages/Admin/services'
 const Query = () => {
   return (
     <LocalQuery
-      provider={TipoRepresentanteEmpresaService.getAll}
+      getAllProvider={TipoRepresentanteEmpresaService.getAll}
       columns={[
         {
           header: 'ID',

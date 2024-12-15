@@ -1,6 +1,6 @@
 import { InputAdapter, OutputAdapter } from '@/adapters/config'
 import { ObraModel } from '../models'
-import { Ref } from '../types'
+import { Ref } from '@/types'
 
 export const getAll: {
   output: OutputAdapter<ObraModel.RawEntity[], ObraModel.Entity[]>

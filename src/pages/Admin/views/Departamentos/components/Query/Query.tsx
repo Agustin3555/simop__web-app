@@ -3,7 +3,7 @@ import { DepartamentoService, DireccionService } from '@/pages/Admin/services'
 
 const Query = () => (
   <LocalQuery
-    provider={DepartamentoService.getAll}
+    getAllProvider={DepartamentoService.getAll}
     columns={[
       {
         header: 'ID',
@@ -21,7 +21,7 @@ const Query = () => (
         type: 'text',
         ref: {
           field: 'Nombre',
-          provider: DireccionService.getOne,
+          getOneProvider: DireccionService.getOne,
         },
       },
       {

@@ -1,10 +1,16 @@
 .cmp-text-area {
+  --lines: 2;
+
   grid-column: span 2;
 
   > .input {
     resize: none;
     padding: var(--pal-size-s);
-    min-height: 8rem;
+    /* TODO: conseguir los valores */
+    min-height: calc(
+      4.0625rem * var(--lines) + var(--gap) * (var(--lines) - 1) -
+        (var(--pal-size-font-xs) + var(--pal-size-s))
+    );
     field-sizing: content;
   }
 }

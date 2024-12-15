@@ -1,12 +1,9 @@
 import { InputAdapter, OutputAdapter } from '@/adapters/config'
 import { EstadoObraModel } from '../models'
-import { Ref } from '../types'
+import { Ref } from '@/types'
 
 export const getAll: {
-  output: OutputAdapter<
-    EstadoObraModel.RawEntity[],
-    EstadoObraModel.Entity[]
-  >
+  output: OutputAdapter<EstadoObraModel.RawEntity[], EstadoObraModel.Entity[]>
 } = {
   output: response => {
     const convertedResource = response.map<EstadoObraModel.Entity>(item => ({
@@ -49,10 +46,7 @@ export const getOne: {
 }
 
 export const create: {
-  input: InputAdapter<
-    EstadoObraModel.CreateData,
-    EstadoObraModel.CreateBody
-  >
+  input: InputAdapter<EstadoObraModel.CreateData, EstadoObraModel.CreateBody>
 } = {
   input: data => {
     const convertedResource: EstadoObraModel.CreateBody = {

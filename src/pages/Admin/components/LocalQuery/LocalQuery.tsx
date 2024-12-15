@@ -5,14 +5,14 @@ import { Button, Icon, StateButton } from '@/components'
 import { Table } from './components'
 import { Columns } from './types'
 import { utils, writeFile } from 'xlsx'
+import { GetAllProvider } from '@/types'
 
-interface LocalQueryProps<T> {
-  provider: () => Promise<T[]>
+interface LocalQueryProps<T> extends GetAllProvider<T> {
   columns: Columns<T>
 }
 
 const LocalQuery = <T extends { id: number }>({
-  provider,
+  getAllProvider,
   columns,
 }: LocalQueryProps<T>) => {
   const [data, setData] = useState<T[]>()
@@ -21,7 +21,7 @@ const LocalQuery = <T extends { id: number }>({
   const handleActionResult = useHandleAction(
     async ({ setError, setSuccess }) => {
       try {
-        const response = await provider()
+        const response = await getAllProvider()
         setData(response)
 
         await setSuccess()

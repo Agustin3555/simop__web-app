@@ -1,6 +1,6 @@
 import { InputAdapter, OutputAdapter } from '@/adapters/config'
 import { ProvinciaModel } from '../models'
-import { Ref } from '../types'
+import { Ref } from '@/types'
 
 export const getAll: {
   output: OutputAdapter<ProvinciaModel.RawEntity[], ProvinciaModel.Entity[]>

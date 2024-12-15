@@ -8,20 +8,22 @@ const InputCombobox = ({
   name,
   title,
   required = false,
-  provider,
+  getForConnectProvider,
+  long,
 }: ComboboxProps) => {
   const [value, setValue] = useState('')
   const { basicProps, sortedOptions } = useCombobox({
     title,
     required,
-    provider,
+    getForConnectProvider,
+    long,
   })
 
   const handleInputChange = useInputHandler(newValue => setValue(newValue))
 
   const handleOptionClick = useCallback(
     (value: string) => () => setValue(value),
-    []
+    [],
   )
 
   return (

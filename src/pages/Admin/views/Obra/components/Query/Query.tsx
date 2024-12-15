@@ -12,7 +12,7 @@ import {
 const Query = () => {
   return (
     <LocalQuery
-      provider={ObraService.getAll}
+      getAllProvider={ObraService.getAll}
       columns={[
         {
           header: 'ID',
@@ -83,7 +83,7 @@ const Query = () => {
           header: 'Empresa',
           key: 'empresaId',
           ref: {
-            provider: EmpresaService.getOne,
+            getOneProvider: EmpresaService.getOne,
             field: 'Nombre',
           },
           type: 'number',
@@ -92,7 +92,7 @@ const Query = () => {
           header: 'País ',
           key: 'pais',
           ref: {
-            provider: PaisService.getOne,
+            getOneProvider: PaisService.getOne,
             field: 'Nombre',
           },
           type: 'number',
@@ -101,7 +101,7 @@ const Query = () => {
           header: 'Provincia ',
           key: 'provincia',
           ref: {
-            provider: ProvinciaService.getOne,
+            getOneProvider: ProvinciaService.getOne,
             field: 'Nombre',
           },
           type: 'number',
@@ -110,7 +110,7 @@ const Query = () => {
           header: 'Localidad',
           key: 'localidad',
           ref: {
-            provider: LocalidadService.getOne,
+            getOneProvider: LocalidadService.getOne,
             field: 'Nombre',
           },
           type: 'number',
@@ -119,7 +119,7 @@ const Query = () => {
           header: 'Financiamiento',
           key: 'id',
           ref: {
-            provider: FinanciamientoService.getOne,
+            getOneProvider: FinanciamientoService.getOne,
             field: 'Nombre',
           },
           type: 'number',
@@ -128,7 +128,7 @@ const Query = () => {
           header: 'Estado de Obra',
           key: 'id',
           ref: {
-            provider: EstadoObraService.getOne,
+            getOneProvider: EstadoObraService.getOne,
             field: 'Nombre',
           },
           type: 'number',

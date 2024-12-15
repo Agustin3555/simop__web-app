@@ -2,8 +2,10 @@ import './Checkbox.css'
 import { InputHTMLAttributes } from 'react'
 import { useLabel } from '@/hooks'
 import { Icon } from '@/components'
+import { Control } from '@/types'
+import { classList } from '@/helpers'
 
-interface CheckboxProps extends InputHTMLAttributes<HTMLInputElement> {
+interface CheckboxProps extends InputHTMLAttributes<HTMLInputElement>, Control {
   hideLabel?: boolean
   falseText?: string
   trueText?: string
@@ -15,12 +17,13 @@ const Checkbox = ({
   falseText = 'No',
   trueText = 'Si',
   hideLabel = false,
+  long = 's',
   ...rest
 }: CheckboxProps) => {
   const { content, controlTitle } = useLabel({ title })
 
   return (
-    <div className="cmp-checkbox control">
+    <div className={classList('cmp-checkbox', 'control', long)}>
       {!hideLabel && (
         <label htmlFor={name} className="label">
           {content}

@@ -2,7 +2,7 @@ import { MouseEventHandler, useCallback, useState } from 'react'
 import { ComboboxProps, useCombobox, useInputHandler } from '../../hooks'
 import { Button } from '@/components'
 import { ComboboxLayout } from '..'
-import { Ref } from '../../types'
+import { Ref } from '@/types'
 
 // TODO: agregar un botón para actualizar las opciones
 
@@ -11,13 +11,15 @@ const Combobox = ({
   title,
   multiple = false,
   required = false,
-  provider,
+  getForConnectProvider,
+  long,
 }: ComboboxProps) => {
   const [selected, setSelected] = useState<Ref[]>([])
   const { basicProps, options, sortedOptions } = useCombobox({
     title,
     required,
-    provider,
+    getForConnectProvider,
+    long,
   })
 
   const handleOptionChange = useInputHandler(id => {
@@ -32,7 +34,7 @@ const Combobox = ({
               ? prev.filter(item => item.id !== Number(id))
               : [...prev, newSelected]
           }
-        : [newSelected]
+        : [newSelected],
     )
   })
 
@@ -45,7 +47,7 @@ const Combobox = ({
 
       setSelected(prev => prev.filter(item => item.id !== Number(id)))
     },
-    []
+    [],
   )
 
   return (
