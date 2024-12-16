@@ -1,6 +1,6 @@
 import './Nav.css'
 import { useCallback, useState } from 'react'
-import { Button } from '@/components'
+import { Button, ExternalLink } from '@/components'
 import { Section } from './components'
 import { TREE } from '../../constants'
 import { classList } from '@/helpers'
@@ -26,12 +26,19 @@ const Nav = () => {
         onClick={toggleHandleClick}
       />
       <nav>
-        {TREE.map(section => (
-          <Section
-            key={section.title || String(section.viewKey)}
-            {...section}
-          />
-        ))}
+        <div className="tree">
+          {TREE.map(section => (
+            <Section
+              key={section.title || String(section.viewKey)}
+              {...section}
+            />
+          ))}
+        </div>
+        <ExternalLink
+          title="Manual"
+          faIcon="fa-solid fa-book"
+          url="https://almondine-week-483.notion.site/SIMOP-Manual-del-Usuario-1528314303d88055a9c1da4222bea187"
+        />
       </nav>
     </div>
   )
