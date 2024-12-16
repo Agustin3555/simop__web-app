@@ -18,3 +18,4 @@ export * as TipoRepresentanteEmpresaAdapter from './tipoRepresentanteEmpresa.ada
 export * as InspectorAdapter from './inspector.adapter'
 export * as EmpresaAdapter from './empresa.adapter'
 export * as ObraAdapter from './obra.adapter'
+export * as TipoContratacionObraAdapter from './tipoContratacionObra.adapter'

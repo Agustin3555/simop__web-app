@@ -1,9 +1,9 @@
 import { LocalQuery } from '@/pages/Admin/components'
-import { DireccionService, SubSecretariaService } from '@/pages/Admin/services'
+import { TipoContratacionObraService } from '@/pages/Admin/services'
 
 const Query = () => (
   <LocalQuery
-    getAllProvider={DireccionService.getAll}
+    getAllProvider={TipoContratacionObraService.getAll}
     columns={[
       {
         header: 'ID',
@@ -14,15 +14,6 @@ const Query = () => (
         header: 'Nombre',
         key: 'nombre',
         type: 'text',
-      },
-      {
-        header: 'Subsecretaría',
-        key: 'subSecretaria',
-        type: 'text',
-        ref: {
-          field: 'Nombre',
-          getOneProvider: SubSecretariaService.getOne,
-        },
       },
       {
         header: 'Creación del recurso',

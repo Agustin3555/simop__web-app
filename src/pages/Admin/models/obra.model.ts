@@ -3,112 +3,166 @@ import {
   FinanciamientoModel,
   LocalidadModel,
   EmpresaModel,
-  PaisModel,
-  ProvinciaModel,
+  ProgramaObraModel,
+  TipoTematicaObraModel,
 } from '.'
 import { Ref } from '@/types'
 
 export interface RawEntity {
-  id: number
-  nombre: String
-  numeroResolucion: number
-  anioResolucion: number
-  empresaId?: EmpresaModel.RawRef
-  pais?: PaisModel.RawRef
-  provincia?: ProvinciaModel.RawRef
+  numero: number
+  nombre: string
+  numeroExpediente?: number
+  numeroResolucion?: number
+  anioResolucion?: string
+  numeroContratacion?: number
+  anioContratacion?: number
+  montoContratacion?: number
+  fechaInicio?: string
+  fechaFin?: string
+  plazoMeses?: number
+  plazoDias?: number
+  direccion?: string
+  lugar?: string
+  nomenclaturaCatastral?: string
+  observaciones?: string
+  obraNueva: boolean
+  porcentajeObraNueva?: number
+  metrosCuadradosObraNueva?: number
+  metrosLinealesObraNueva?: number
+  observacionesObraNueva?: string
+  obraRefaccionada: boolean
+  porcentajeObraRefaccionada?: number
+  metrosCuadradosObraRefaccionada?: number
+  metrosLinealesObraRefaccionada?: number
+  observacionesObraRefaccionada?: string
+
+  empresa?: EmpresaModel.RawRef
+  tipoContratacionObra?: TipoTematicaObraModel.RawRef
+  tipoFinanciamientoObra?: FinanciamientoModel.RawRef
+  tipoProgramaObra?: ProgramaObraModel.RawRef
+  tipoTematicaObra?: TipoTematicaObraModel.RawRef
+  tipoEstadoObra?: EstadoObraModel.RawRef
   localidad?: LocalidadModel.RawRef
-  financiamiento?: FinanciamientoModel.RawRef
-  numeroContratacion: number
-  anioContratacion: number
-  montoContratacion: number
-  numeroExpediente: number
-  nomenclaturaCatastral: String
-  estadoObra?: EstadoObraModel.RawRef
-  plazoMeses: number
-  plazoDias: number
-  fechaInicio: string
-  fechaFin: string
-  observaciones: String
+
   creado: string
   modificado: string
 }
 
 export interface Entity {
   id: number
-  nombre: String
-  numeroResolucion: number
-  anioResolucion: number
-  empresaId?: Ref
-  pais?: Ref
-  provincia?: Ref
+  nombre: string
+  numeroExpediente?: number
+  numeroResolucion?: number
+  anioResolucion?: string
+  numeroContratacion?: number
+  anioContratacion?: number
+  montoContratacion?: number
+  fechaInicio?: string
+  fechaFin?: string
+  plazoMeses?: number
+  plazoDias?: number
+  direccion?: string
+  lugar?: string
+  nomenclaturaCatastral?: string
+  observaciones?: string
+  obraNueva: boolean
+  porcentajeObraNueva?: number
+  metrosCuadradosObraNueva?: number
+  metrosLinealesObraNueva?: number
+  observacionesObraNueva?: string
+  obraRefaccionada: boolean
+  porcentajeObraRefaccionada?: number
+  metrosCuadradosObraRefaccionada?: number
+  metrosLinealesObraRefaccionada?: number
+  observacionesObraRefaccionada?: string
+
+  empresa?: Ref
+  tipoContratacionObra?: Ref
+  tipoFinanciamientoObra?: Ref
+  tipoProgramaObra?: Ref
+  tipoTematicaObra?: Ref
+  tipoEstadoObra?: Ref
   localidad?: Ref
-  financiamiento?: Ref
-  numeroContratacion: number
-  anioContratacion: number
-  montoContratacion: number
-  numeroExpediente: number
-  nomenclaturaCatastral: String
-  estadoObra?: Ref
-  plazoMeses: number
-  plazoDias: number
-  fechaInicio: string
-  fechaFin: string
-  observaciones: String
+
   creado: string
   modificado: string
 }
 
 export interface RawRef {
-  id: number
+  numero: number
   nombre: string
 }
 
 export interface CreateData {
-  id: number
-  nombre: String
-  numeroResolucion: number
-  anioResolucion: number
-  numeroContratacion: number
-  anioContratacion: number
-  montoContratacion: number
-  numeroExpediente: number
-  nomenclaturaCatastral: String
-  plazoMeses: number
-  plazoDias: number
-  fechaInicio: string
-  fechaFin: string
-  observaciones: String
-  creado: string
-  modificado: string
-  empresaId: number
-  estadoObraId: number
-  financiamientoId: number
-  paisId: number
-  provinciaId: number
-  localidadId: number
+  numero: number
+  nombre: string
+  numeroExpediente?: number
+  numeroResolucion?: number
+  anioResolucion?: string
+  numeroContratacion?: number
+  anioContratacion?: number
+  montoContratacion?: number
+  fechaInicio?: string
+  fechaFin?: string
+  plazoMeses?: number
+  plazoDias?: number
+  direccion?: string
+  lugar?: string
+  nomenclaturaCatastral?: string
+  observaciones?: string
+  obraNueva: boolean
+  porcentajeObraNueva?: number
+  metrosCuadradosObraNueva?: number
+  metrosLinealesObraNueva?: number
+  observacionesObraNueva?: string
+  obraRefaccionada: boolean
+  porcentajeObraRefaccionada?: number
+  metrosCuadradosObraRefaccionada?: number
+  metrosLinealesObraRefaccionada?: number
+  observacionesObraRefaccionada?: string
+
+  empresaId?: number
+  tipoContratacionObraId?: number
+  tipoFinanciamientoObraId?: number
+  tipoProgramaObraId?: number
+  tipoTematicaObraId?: number
+  tipoEstadoObraId?: number
+  localidadId?: number
 }
 
 export interface CreateBody {
-  id: number
-  nombre: String
-  numeroResolucion: number
-  anioResolucion: number
-  numeroContratacion: number
-  anioContratacion: number
-  montoContratacion: number
-  numeroExpediente: number
-  nomenclaturaCatastral: String
-  fechaInicio: string
-  fechaFin: string
-  plazoMeses: number
-  plazoDias: number
-  observaciones: String
-  creado: string
-  modificado: string
-  empresaId: number
-  estadoObraId: number
-  financiamientoId: number
-  paisId: number
-  provinciaId: number
-  localidadId: number
+  numero: number
+  nombre: string
+  numeroExpediente?: number
+  numeroResolucion?: number
+  anioResolucion?: string
+  numeroContratacion?: number
+  anioContratacion?: number
+  montoContratacion?: number
+  fechaInicio?: string
+  fechaFin?: string
+  plazoMeses?: number
+  plazoDias?: number
+  direccion?: string
+  lugar?: string
+  nomenclaturaCatastral?: string
+  observaciones?: string
+  obraNueva: boolean
+  porcentajeObraNueva?: number
+  metrosCuadradosObraNueva?: number
+  metrosLinealesObraNueva?: number
+  observacionesObraNueva?: string
+  obraRefaccionada: boolean
+  porcentajeObraRefaccionada?: number
+  metrosCuadradosObraRefaccionada?: number
+  metrosLinealesObraRefaccionada?: number
+  observacionesObraRefaccionada?: string
+
+  empresaId?: number
+  tipoContratacionObraId?: number
+  tipoFinanciamientoObraId?: number
+  tipoProgramaObraId?: number
+  tipoTematicaObraId?: number
+  tipoEstadoObraId?: number
+  localidadId?: number
 }

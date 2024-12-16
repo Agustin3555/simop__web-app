@@ -14,9 +14,9 @@ const Add = () => {
     async ({ formData, setError, setSuccess }) => {
       try {
         await EmpresaService.create({
-          cuitEmpresa: Number(formData.get('cuitEmpresa')),
-          nombreEmpresa: formData.get('nombreEmpresa') as string,
-          direccionDeclarada: formData.get('direccionDeclarada') as string,
+          cuit: Number(formData.get('cuit')),
+          nombre: formData.get('nombre') as string,
+          direccion: formData.get('direccion') as string,
           paisId: Number(formData.get('paisId')),
           provinciaId: Number(formData.get('provinciaId')),
           localidadId: Number(formData.get('localidadId')),
@@ -33,9 +33,9 @@ const Add = () => {
 
   return (
     <LocalAdd {...submitActionResult}>
-      <Input name="cuitEmpresa" title="CUIT" type="number" required />
-      <Input name="nombreEmpresa" title="Nombre Empresa" required />
-      <Input name="direccionDeclarada" title="Dirección Declarada" required />
+      <Input name="cuit" title="CUIT" type="number" required />
+      <Input name="nombre" title="Nombre Empresa" required />
+      <Input name="direccion" title="Dirección Declarada" required />
       <Combobox
         name="PaisId"
         title="Pais"

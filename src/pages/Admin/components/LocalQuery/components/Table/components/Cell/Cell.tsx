@@ -1,30 +1,33 @@
 import './Cell.css'
 import { Cell as TanstackCell } from '@tanstack/react-table'
 import { format } from '@formkit/tempo'
-import { useCallback } from 'react'
+import { useCallback, useMemo } from 'react'
 import { FetchRef } from './components'
 import { Value } from '../../../../types'
-
-// TODO: admitir booleanos
 
 const Cell = <T,>({ column, row }: TanstackCell<T, unknown>) => {
   const { type, ref } = column.columnDef.meta
 
   /*
-    No se usa 'getValue' porque se necesita tener el valor original. 'getValue'
-    obtiene un valor procesado porque en la definición de las columnas se
-    provee un método 'accessorFn'
+  No se usa 'getValue' porque se necesita tener el valor original. 'getValue'
+  obtiene un valor procesado porque en la definición de las columnas se
+  provee un método 'accessorFn'
   */
-  const value: Value = row.original[column.id]
+  const value: Value = useMemo(() => row.original[column.id], [])
 
   const formatIfDateTime = useCallback(
     <T,>(value: T) => {
-      const isDateTime =
-        (type === 'date' || type === 'dateTime') && typeof value === 'string'
+      if (type === 'date' && typeof value === 'string')
+        return format(value, { date: 'medium' })
 
-      return isDateTime
-        ? format(value, { date: 'medium', time: 'short' })
-        : value
+      if (type === 'dateTime' && typeof value === 'string')
+        return format(value, { date: 'medium', time: 'short' })
+
+      // TODO: hacer que se pueda pasar los textos
+      if (type === 'boolean' && typeof value === 'boolean')
+        return value ? 'Si' : 'No'
+
+      return value
     },
     [type],
   )

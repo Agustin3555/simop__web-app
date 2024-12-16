@@ -29,11 +29,12 @@ export const TREE: SectionNode[] = [
       {
         title: 'Tipos',
         sections: [
-          { viewKey: ViewKey.ESTADO_OBRA },
-          { viewKey: ViewKey.FINANCIAMIENTO },
+          { viewKey: ViewKey.TIPO_CONTRATACION_OBRA },
+          { viewKey: ViewKey.TIPO_ESTADO_OBRA },
+          { viewKey: ViewKey.TIPO_FINANCIAMIENTO_OBRA },
           { viewKey: ViewKey.MODIFICACION_OBRA },
           { viewKey: ViewKey.PARALIZACION_OBRA },
-          { viewKey: ViewKey.PROGRAMA_OBRA },
+          { viewKey: ViewKey.TIPO_PROGRAMA_OBRA },
           { viewKey: ViewKey.TIPO_TEMATICA_OBRA },
           { viewKey: ViewKey.TIPO_REPRESENTANTE_EMPRESA },
           { viewKey: ViewKey.TRAMITE },

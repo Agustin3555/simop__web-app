@@ -52,7 +52,7 @@ const Table = <T extends { id: number }>({
         header,
         accessorKey: key,
         meta: { type, ref },
-        ...(type === 'dateTime' && {
+        ...((type === 'date' || type === 'dateTime') && {
           filterFn: (row, columnId, filterValue) => {
             if (!filterValue) return true // No hay filtro, muestra todo
 

@@ -18,3 +18,4 @@ export { default as TipoRepresentanteEmpresa } from './TipoRepresentanteEmpresa/
 export { default as Empresa } from './Empresa/Empresa'
 export { default as Obra } from './Obra/Obra'
 export { default as Inspector } from './Inspector/Inspector'
+export { default as TipoContratacionObra } from './TipoContratacionObra/TipoContratacionObra'

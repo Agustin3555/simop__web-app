@@ -20,6 +20,7 @@ import {
   TipoRepresentanteEmpresa,
   Empresa,
   Obra,
+  TipoContratacionObra,
 } from '../../views'
 
 const Content = () => (
@@ -30,6 +31,7 @@ const Content = () => (
     <Pais />
     <Provincia />
     <Localidad />
+    <TipoContratacionObra />
     <EstadoObra />
     <Financiamiento />
     <ModificacionObra />

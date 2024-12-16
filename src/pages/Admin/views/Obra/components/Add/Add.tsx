@@ -13,6 +13,7 @@ import {
   TipoTematicaObraService,
   ProgramaObraService,
   FinanciamientoService,
+  TipoContratacionObraService,
 } from '@/pages/Admin/services'
 
 const Add = () => (
@@ -32,6 +33,16 @@ const Add = () => (
             component: <Input title="Nombre de Obra" required />,
           },
           {
+            accessorKey: 'empresaId',
+            getValue: data => data.get.number,
+            component: (
+              <Combobox
+                title="Empresa"
+                getForConnectProvider={EmpresaService.getForConnect}
+              />
+            ),
+          },
+          {
             accessorKey: 'numeroExpediente',
             getValue: data => data.get.number,
             component: (
@@ -42,7 +53,7 @@ const Add = () => (
             accessorKey: 'numeroResolucion',
             getValue: data => data.get.number,
             component: (
-              <Input title="Numero de Resolución" type="number" required />
+              <Input title="Número de Resolución" type="number" required />
             ),
           },
           {
@@ -84,57 +95,54 @@ const Add = () => (
             ),
           },
           {
-            accessorKey: 'tipoContratacionId',
+            accessorKey: 'tipoContratacionObraId',
             getValue: data => data.get.number,
             component: (
               <Combobox
                 title="Tipo de Contratación"
-                getForConnectProvider={FinanciamientoService.getForConnect} // TODO
-                required
+                getForConnectProvider={
+                  TipoContratacionObraService.getForConnect
+                }
               />
             ),
           },
           {
-            accessorKey: 'tipoFinanciamientoId',
+            accessorKey: 'tipoFinanciamientoObraId',
             getValue: data => data.get.number,
             component: (
               <Combobox
                 title="Financiamiento"
                 getForConnectProvider={FinanciamientoService.getForConnect}
-                required
               />
             ),
           },
           {
-            accessorKey: 'tipoProgramaId',
+            accessorKey: 'tipoProgramaObraId',
             getValue: data => data.get.number,
             component: (
               <Combobox
                 title="Programa"
                 getForConnectProvider={ProgramaObraService.getForConnect}
-                required
               />
             ),
           },
           {
-            accessorKey: 'tipoTematicaId',
+            accessorKey: 'tipoTematicaObraId',
             getValue: data => data.get.number,
             component: (
               <Combobox
                 title="Temática"
                 getForConnectProvider={TipoTematicaObraService.getForConnect}
-                required
               />
             ),
           },
           {
-            accessorKey: 'tipoEstadoId',
+            accessorKey: 'tipoEstadoObraId',
             getValue: data => data.get.number,
             component: (
               <Combobox
                 title="Estado"
                 getForConnectProvider={EstadoObraService.getForConnect}
-                required
               />
             ),
           },
@@ -169,7 +177,6 @@ const Add = () => (
               <Combobox
                 title="Localidad"
                 getForConnectProvider={LocalidadService.getForConnect}
-                required
               />
             ),
           },

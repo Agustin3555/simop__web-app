@@ -5,11 +5,12 @@ export enum ViewKey {
   PAIS,
   PROVINCIA,
   LOCALIDAD,
-  ESTADO_OBRA,
-  FINANCIAMIENTO,
+  TIPO_CONTRATACION_OBRA,
+  TIPO_ESTADO_OBRA,
+  TIPO_FINANCIAMIENTO_OBRA,
   MODIFICACION_OBRA,
   PARALIZACION_OBRA,
-  PROGRAMA_OBRA,
+  TIPO_PROGRAMA_OBRA,
   TIPO_TEMATICA_OBRA,
   TRAMITE,
   TIPO_PROFESION,
@@ -44,10 +45,13 @@ export const VIEW_INFO: Record<ViewKey, Info> = {
   [ViewKey.LOCALIDAD]: {
     title: 'Localidades',
   },
-  [ViewKey.ESTADO_OBRA]: {
+  [ViewKey.TIPO_CONTRATACION_OBRA]: {
+    title: 'Contrataciones de Obra',
+  },
+  [ViewKey.TIPO_ESTADO_OBRA]: {
     title: 'Estados de Obra',
   },
-  [ViewKey.FINANCIAMIENTO]: {
+  [ViewKey.TIPO_FINANCIAMIENTO_OBRA]: {
     title: 'Financiamientos',
   },
   [ViewKey.MODIFICACION_OBRA]: {
@@ -56,7 +60,7 @@ export const VIEW_INFO: Record<ViewKey, Info> = {
   [ViewKey.PARALIZACION_OBRA]: {
     title: 'Paralizaciones de Obra',
   },
-  [ViewKey.PROGRAMA_OBRA]: {
+  [ViewKey.TIPO_PROGRAMA_OBRA]: {
     title: 'Programas de Obra',
   },
   [ViewKey.TIPO_TEMATICA_OBRA]: {

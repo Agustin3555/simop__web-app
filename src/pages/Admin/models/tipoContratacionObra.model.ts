@@ -1,6 +1,7 @@
 export interface RawEntity {
   id: number
   nombre: string
+
   creado: string
   modificado: string
 }
@@ -8,6 +9,7 @@ export interface RawEntity {
 export interface Entity {
   id: number
   nombre: string
+
   creado: string
   modificado: string
 }

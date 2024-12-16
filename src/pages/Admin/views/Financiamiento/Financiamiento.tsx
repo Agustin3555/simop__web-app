@@ -4,8 +4,12 @@ import { ViewKey } from '../../constants'
 
 const Financiamiento = () => {
   return (
-    <View viewKey={ViewKey.FINANCIAMIENTO} add={<Add />} query={<Query />} />
+    <View
+      viewKey={ViewKey.TIPO_FINANCIAMIENTO_OBRA}
+      add={<Add />}
+      query={<Query />}
+    />
   )
 }
 
-export default Financiamiento 
+export default Financiamiento

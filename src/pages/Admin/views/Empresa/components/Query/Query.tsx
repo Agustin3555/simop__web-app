@@ -1,5 +1,10 @@
 import { LocalQuery } from '@/pages/Admin/components'
-import { EmpresaService, PaisService } from '@/pages/Admin/services'
+import {
+  EmpresaService,
+  LocalidadService,
+  PaisService,
+  ProvinciaService,
+} from '@/pages/Admin/services'
 
 const Query = () => {
   return (
@@ -13,27 +18,45 @@ const Query = () => {
         },
         {
           header: 'CUIT',
-          key: 'cuitEmpresa',
+          key: 'cuit',
           type: 'number',
         },
         {
           header: 'NombreEmpresa',
-          key: 'nombreEmpresa',
+          key: 'nombre',
           type: 'text',
         },
         {
           header: 'DireccionDeclarada',
-          key: 'direccionDeclarada',
+          key: 'direccion',
           type: 'text',
         },
         {
-          header: 'Pais',
+          header: 'País',
+          key: 'pais',
           ref: {
             getOneProvider: PaisService.getOne,
             field: 'Nombre',
           },
-          type: 'number',
-          key: 'id',
+          type: 'text',
+        },
+        {
+          header: 'Provincia',
+          key: 'provincia',
+          ref: {
+            getOneProvider: ProvinciaService.getOne,
+            field: 'Nombre',
+          },
+          type: 'text',
+        },
+        {
+          header: 'Localidad',
+          key: 'localidad',
+          ref: {
+            getOneProvider: LocalidadService.getOne,
+            field: 'Nombre',
+          },
+          type: 'text',
         },
         {
           header: 'Email',
@@ -46,12 +69,12 @@ const Query = () => {
           type: 'number',
         },
         {
-          header: 'Fecha de creación',
+          header: 'Creación del recurso',
           key: 'creado',
           type: 'dateTime',
         },
         {
-          header: 'Fecha de modificación',
+          header: 'Modificación del recurso',
           key: 'modificado',
           type: 'dateTime',
         },

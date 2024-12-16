@@ -78,12 +78,12 @@ const Query = () => {
         //   },
         // },
         {
-          header: 'Fecha de creación',
+          header: 'Creación del recurso',
           key: 'creado',
           type: 'dateTime',
         },
         {
-          header: 'Fecha de modificación',
+          header: 'Modificación del recurso',
           key: 'modificado',
           type: 'dateTime',
         },
