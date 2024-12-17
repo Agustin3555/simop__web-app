@@ -1,0 +1,23 @@
+.cmp-field-generator {
+  display: flex;
+  flex-direction: column;
+  gap: var(--pal-size-m);
+
+  > .content {
+    --cmp-separator-thick: var(--pal-size-3xs);
+
+    display: flex;
+    gap: var(--pal-size-m);
+
+    > .fields-container {
+      display: flex;
+      flex-direction: column;
+      gap: var(--pal-size-m);
+
+      > .fields {
+        display: flex;
+        gap: var(--pal-size-m);
+      }
+    }
+  }
+}
