@@ -1,6 +1,5 @@
-import { useSubmitAction } from '@/hooks'
 import { Input } from '@/components'
-import { Checkbox, Combobox, LocalAdd } from '@/pages/Admin/components'
+import { Checkbox, Combobox, LocalAdd2 } from '@/pages/Admin/components'
 import {
   RepresentanteEmpresaService,
   PaisService,
@@ -8,60 +7,81 @@ import {
   LocalidadService,
 } from '@/pages/Admin/services'
 
-const Add = () => {
-  const submitActionResult = useSubmitAction(
-    async ({ formData, setError, setSuccess }) => {
-      try {
-        await RepresentanteEmpresaService.create({
-          cuit: Number(formData.get('cuit')),
-          apellido: formData.get('apellido') as string,
-          nombre: formData.get('nombre') as string,
-          direccion: formData.get('direccion') as string,
-          numeroMatricula: formData.get('numeroMatricula') as string,
-          vigencia: formData.get('vigencia') === 'on',
-
-          paisId: Number(formData.get('paisId')),
-          provinciaId: Number(formData.get('provinciaId')),
-          localidadId: Number(formData.get('localidadId')),
-        })
-
-        await setSuccess()
-      } catch (error) {
-        await setError()
-      }
-    },
-  )
-
-  return (
-    <LocalAdd {...submitActionResult}>
-      <Input name="cuit" title="CUIT" type="number" required />
-      <Input name="apellido" title="Apellido" required />
-      <Input name="nombre" title="Nombre" required />
-      <Input name="direccion" title="Dirección Declarada" required />
-      <Combobox
-        name="paisId"
-        title="País"
-        getForConnectProvider={PaisService.getForConnect}
-      />
-      <Combobox
-        name="provinciaId"
-        title="Provincia"
-        getForConnectProvider={ProvinciaService.getForConnect}
-      />
-      <Combobox
-        name="localidadId"
-        title="Localidad"
-        getForConnectProvider={LocalidadService.getForConnect}
-      />
-      <Input name="numeroMatricula" title="Número de Matrícula" required />
-      <Checkbox
-        name="vigencia"
-        title="Vigencia"
-        falseText="No vigente"
-        trueText="Vigente"
-      />
-    </LocalAdd>
-  )
-}
+const Add = () => (
+  <LocalAdd2
+    createProvider={RepresentanteEmpresaService.create}
+    fieldGroups={[
+      {
+        fields: [
+          {
+            accessorKey: 'cuit',
+            getValue: data => data.get.number,
+            component: <Input title="CUIT" required />,
+          },
+          {
+            accessorKey: 'apellido',
+            getValue: data => data.get.string,
+            component: <Input title="Apellido" required />,
+          },
+          {
+            accessorKey: 'nombre',
+            getValue: data => data.get.string,
+            component: <Input title="Nombre" required />,
+          },
+          {
+            accessorKey: 'direccion',
+            getValue: data => data.get.string,
+            component: <Input title="Dirección" required />,
+          },
+          {
+            accessorKey: 'numeroMatricula',
+            getValue: data => data.get.string,
+            component: <Input title="Número de Matrícula" required />,
+          },
+          {
+            accessorKey: 'vigencia',
+            getValue: data => data.get.boolean,
+            component: <Checkbox title="Vigencia" />,
+          },
+          {
+            accessorKey: 'paisId',
+            getValue: data => data.get.number,
+            component: (
+              <Combobox
+                title="País"
+                getForConnectProvider={PaisService.getForConnect}
+              />
+            ),
+          },
+          {
+            accessorKey: 'provinciaId',
+            getValue: data => data.get.number,
+            component: (
+              <Combobox
+                title="Provincia"
+                getForConnectProvider={ProvinciaService.getForConnect}
+              />
+            ),
+          },
+          {
+            accessorKey: 'localidadId',
+            getValue: data => data.get.number,
+            component: (
+              <Combobox
+                title="Localidad"
+                getForConnectProvider={LocalidadService.getForConnect}
+              />
+            ),
+          },
+          {
+            accessorKey: 'tipoRepresentanteEmpresaId',
+            getValue: data => data.get.number,
+            component: <Input title="Tipo Representante Empresa" />,
+          },
+        ],
+      },
+    ]}
+  />
+)
 
 export default Add

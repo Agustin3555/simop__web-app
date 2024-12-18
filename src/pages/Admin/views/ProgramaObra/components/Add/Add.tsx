@@ -1,28 +1,22 @@
-import { useSubmitAction } from '@/hooks'
 import { Input } from '@/components'
-import { LocalAdd } from '@/pages/Admin/components'
+import { LocalAdd2 } from '@/pages/Admin/components'
 import { ProgramaObraService } from '@/pages/Admin/services'
 
-const Add = () => {
-  const submitActionResult = useSubmitAction(
-    async ({ formData, setError, setSuccess }) => {
-      try {
-        await ProgramaObraService.create({
-          nombre: formData.get('nombre') as string,
-        })
-
-        await setSuccess()
-      } catch (error) {
-        await setError()
-      }
-    },
-  )
-
-  return (
-    <LocalAdd {...submitActionResult}>
-      <Input name="nombre" title="Nombre" required />
-    </LocalAdd>
-  )
-}
+const Add = () => (
+  <LocalAdd2
+    createProvider={ProgramaObraService.create}
+    fieldGroups={[
+      {
+        fields: [
+          {
+            accessorKey: 'nombre',
+            getValue: data => data.get.string,
+            component: <Input title="Nombre" required />,
+          },
+        ],
+      },
+    ]}
+  />
+)
 
 export default Add
