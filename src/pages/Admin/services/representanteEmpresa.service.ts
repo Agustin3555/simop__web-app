@@ -22,8 +22,8 @@ export const getOne = async (id: number) => {
   return RepresentanteEmpresaAdapter.getOne.output(response.data)
 }
 
-export const create = async (data:RepresentanteEmpresaModel.CreateData) => {
-  const adaptedInput =RepresentanteEmpresaAdapter.create.input(data)
+export const create = async (data: RepresentanteEmpresaModel.CreateData) => {
+  const adaptedInput = RepresentanteEmpresaAdapter.create.input(data)
 
   const response = await publicInstance.post(collection, adaptedInput)
 

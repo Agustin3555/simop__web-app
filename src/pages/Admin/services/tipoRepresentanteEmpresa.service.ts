@@ -2,7 +2,7 @@ import { publicInstance } from '@/services/config'
 import { TipoRepresentanteEmpresaModel } from '../models'
 import { TipoRepresentanteEmpresaAdapter } from '../adapters'
 
-const collection = '/tipos-representantes-empresa'
+const collection = '/tipos-representantes'
 
 export const getAll = async () => {
   const response = await publicInstance.get(collection)
@@ -22,7 +22,9 @@ export const getOne = async (id: number) => {
   return TipoRepresentanteEmpresaAdapter.getOne.output(response.data)
 }
 
-export const create = async (data: TipoRepresentanteEmpresaModel.CreateData) => {
+export const create = async (
+  data: TipoRepresentanteEmpresaModel.CreateData,
+) => {
   const adaptedInput = TipoRepresentanteEmpresaAdapter.create.input(data)
 
   const response = await publicInstance.post(collection, adaptedInput)

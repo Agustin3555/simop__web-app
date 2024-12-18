@@ -14,7 +14,7 @@ const Query = () => {
         {
           header: 'Nombre',
           key: 'nombre',
-          type: 'number',
+          type: 'text',
         },
         {
           header: 'Creación del recurso',

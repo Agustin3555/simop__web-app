@@ -4,6 +4,7 @@ import {
   InputArea,
   Checkbox,
   LocalAdd2,
+  FieldGenerator,
 } from '@/pages/Admin/components'
 import {
   ObraService,
@@ -14,6 +15,10 @@ import {
   ProgramaObraService,
   FinanciamientoService,
   TipoContratacionObraService,
+  RepresentanteEmpresaService,
+  TipoRepresentanteEmpresaService,
+  TipoProfesionService,
+  InspectorService,
 } from '@/pages/Admin/services'
 
 const Add = () => (
@@ -293,7 +298,42 @@ const Add = () => (
         title: 'Profesionales',
         // TODO: Representantes
         // TODO: Inspectores
-        fields: [],
+        fields: [
+          // {
+          //   accessorKey: 'representantes',
+          //   component: (
+          //     <FieldGenerator title="Representantes">
+          //       <Combobox
+          //         title="Representante"
+          //         getForConnectProvider={
+          //           RepresentanteEmpresaService.getForConnect
+          //         }
+          //       />
+          //       <Combobox
+          //         title="Tipo de Representante"
+          //         getForConnectProvider={
+          //           TipoRepresentanteEmpresaService.getForConnect
+          //         }
+          //       />
+          //     </FieldGenerator>
+          //   ),
+          // },
+          // {
+          //   accessorKey: 'inspectores',
+          //   component: (
+          //     <FieldGenerator title="Inspectores">
+          //       <Combobox
+          //         title="Inspector"
+          //         getForConnectProvider={InspectorService.getForConnect}
+          //       />
+          //       <Combobox
+          //         title="Profesión"
+          //         getForConnectProvider={TipoProfesionService.getForConnect}
+          //       />
+          //     </FieldGenerator>
+          //   ),
+          // },
+        ],
       },
     ]}
   />
