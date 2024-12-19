@@ -2,6 +2,7 @@ import { Input } from '@/components'
 import { Checkbox, Combobox, LocalAdd2 } from '@/pages/Admin/components'
 import {
   RepresentanteEmpresaService,
+  TipoRepresentanteEmpresaService,
   PaisService,
   ProvinciaService,
   LocalidadService,
@@ -74,9 +75,16 @@ const Add = () => (
             ),
           },
           {
-            accessorKey: 'tipoRepresentanteEmpresaId',
+            accessorKey: 'tipoRepresentanteId',
             getValue: data => data.get.number,
-            component: <Input title="Tipo Representante Empresa" />,
+            component: (
+              <Combobox
+                title="Tipo Representante "
+                getForConnectProvider={
+                  TipoRepresentanteEmpresaService.getForConnect
+                }
+              />
+            ),
           },
         ],
       },

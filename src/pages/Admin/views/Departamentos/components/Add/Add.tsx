@@ -1,34 +1,32 @@
-import { useSubmitAction } from '@/hooks'
 import { Input } from '@/components'
-import { Combobox, LocalAdd } from '@/pages/Admin/components'
+import { Combobox, LocalAdd2 } from '@/pages/Admin/components'
 import { DepartamentoService, DireccionService } from '@/pages/Admin/services'
 
-const Add = () => {
-  const submitActionResult = useSubmitAction(
-    async ({ formData, setError, setSuccess }) => {
-      try {
-        await DepartamentoService.create({
-          nombre: formData.get('nombre') as string,
-          direccionId: Number(formData.get('direccionId')),
-        })
-
-        await setSuccess()
-      } catch (error) {
-        await setError()
-      }
-    },
-  )
-
-  return (
-    <LocalAdd {...submitActionResult}>
-      <Combobox
-        name="direccionId"
-        title="Dirección"
-        getForConnectProvider={DireccionService.getForConnect}
-      />
-      <Input name="nombre" title="Nombre" required />
-    </LocalAdd>
-  )
-}
+const Add = () => (
+  <LocalAdd2
+    createProvider={DepartamentoService.create}
+    fieldGroups={[
+      {
+        fields: [
+          {
+            accessorKey: 'direccionId',
+            getValue: data => data.get.number,
+            component: (
+              <Combobox
+                title="Dirección"
+                getForConnectProvider={DireccionService.getForConnect}
+              />
+            ),
+          },
+          {
+            accessorKey: 'nombre',
+            getValue: data => data.get.string,
+            component: <Input title="Nombre" required />,
+          },
+        ],
+      },
+    ]}
+  />
+)
 
 export default Add
