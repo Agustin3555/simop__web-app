@@ -58,7 +58,7 @@ export interface CreateData {
   paisId: number
   provinciaId: number
   localidadId: number
-  tipoRepresentanteEmpresaId?: number
+  tipoRepresentanteId?: number
 }
 
 export interface CreateBody {
@@ -72,5 +72,5 @@ export interface CreateBody {
   paisId: number
   provinciaId: number
   localidadId: number
-  tipoRepresentanteEmpresaId?: number
+  tipoRepresentanteId?: number
 }

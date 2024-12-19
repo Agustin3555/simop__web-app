@@ -1,39 +1,43 @@
-import { useSubmitAction } from '@/hooks'
 import { Input } from '@/components'
-import { Combobox, LocalAdd } from '@/pages/Admin/components'
+import { Combobox, LocalAdd2 } from '@/pages/Admin/components'
 import { InspectorService, TipoProfesionService } from '@/pages/Admin/services'
 
-const Add = () => {
-  const submitActionResult = useSubmitAction(
-    async ({ formData, setError, setSuccess }) => {
-      try {
-        await InspectorService.create({
-          cuil: Number(formData.get('cuil')),
-          apellido: formData.get('apellido') as string,
-          nombre: formData.get('nombre') as string,
-          tiposProfesiones: formData.getAll('tiposProfesiones').map(Number),
-        })
-
-        await setSuccess()
-      } catch (error) {
-        await setError()
-      }
-    },
-  )
-
-  return (
-    <LocalAdd {...submitActionResult}>
-      <Input name="cuil" title="CUIL" type="number" required />
-      <Input name="apellido" title="Apellido" required />
-      <Input name="nombre" title="Nombre" required />
-      <Combobox
-        name="tiposProfesiones"
-        title="Profesiones"
-        multiple
-        getForConnectProvider={TipoProfesionService.getForConnect}
-      />
-    </LocalAdd>
-  )
-}
+const Add = () => (
+  <LocalAdd2
+    createProvider={InspectorService.create}
+    fieldGroups={[
+      {
+        fields: [
+          {
+            accessorKey: 'tiposProfesiones',
+            getValue: data => data.get.number,
+            component: (
+              <Combobox
+                multiple={true}
+                title="Profesiones"
+                getForConnectProvider={TipoProfesionService.getForConnect}
+              />
+            ),
+          },
+          {
+            accessorKey: 'nombre',
+            getValue: data => data.get.string,
+            component: <Input title="Nombre" required />,
+          },
+          {
+            accessorKey: 'apellido',
+            getValue: data => data.get.string,
+            component: <Input title="Apellido" required />,
+          },
+          {
+            accessorKey: 'cuil',
+            getValue: data => data.get.number,
+            component: <Input title="CUIL" required />,
+          },
+        ],
+      },
+    ]}
+  />
+)
 
 export default Add
