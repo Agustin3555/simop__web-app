@@ -59,6 +59,11 @@ export const TREE: SectionNode[] = [
   },
   {
     title: 'Obras',
-    sections: [{ viewKey: ViewKey.OBRA }],
+    sections: [
+      { viewKey: ViewKey.OBRA },
+      { viewKey: ViewKey.FOJA_MEDICION },
+      { viewKey: ViewKey.CERTIFICACION },
+      { viewKey: ViewKey.PAGO_CERTIFICACION },
+    ],
   },
 ]
