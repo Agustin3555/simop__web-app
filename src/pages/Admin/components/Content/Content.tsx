@@ -21,6 +21,9 @@ import {
   Empresa,
   Obra,
   TipoContratacionObra,
+  FojaMedicion,
+  Certificacion,
+  PagoCertificacion,
 } from '../../views'
 
 const Content = () => (
@@ -46,6 +49,9 @@ const Content = () => (
     <Inspector />
     <Empresa />
     <Obra />
+    <FojaMedicion />
+    <Certificacion />
+    <PagoCertificacion />
   </div>
 )
 

@@ -89,6 +89,7 @@ export interface Entity {
 }
 
 export interface RawRef {
+  id: number
   numero: number
   nombre: string
 }

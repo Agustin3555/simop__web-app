@@ -117,7 +117,7 @@ export const create: {
       paisId: data.paisId,
       provinciaId: data.provinciaId,
       localidadId: data.localidadId,
-      tipoRepresentanteEmpresaId: data.tipoRepresentanteEmpresaId,
+      tipoRepresentanteId: data.tipoRepresentanteId,
     }
 
     return convertedResource

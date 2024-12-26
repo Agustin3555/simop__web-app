@@ -20,6 +20,9 @@ export enum ViewKey {
   REPRESENTANTE_EMPRESA,
   EMPRESA,
   OBRA,
+  FOJA_MEDICION,
+  CERTIFICACION,
+  PAGO_CERTIFICACION,
 }
 
 interface Info {
@@ -89,5 +92,14 @@ export const VIEW_INFO: Record<ViewKey, Info> = {
   },
   [ViewKey.OBRA]: {
     title: 'Datos de Obra',
+  },
+  [ViewKey.FOJA_MEDICION]: {
+    title: 'Foja de medicón',
+  },
+  [ViewKey.CERTIFICACION]: {
+    title: 'Certificación',
+  },
+  [ViewKey.PAGO_CERTIFICACION]: {
+    title: 'Pago Certificación',
   },
 }

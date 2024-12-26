@@ -18,4 +18,7 @@ export * as TipoRepresentanteEmpresaAdapter from './tipoRepresentanteEmpresa.ada
 export * as InspectorAdapter from './inspector.adapter'
 export * as EmpresaAdapter from './empresa.adapter'
 export * as ObraAdapter from './obra.adapter'
+export * as FojaMedicionAdapter from './fojaMedicion.adapter'
+export * as PagoCertificacionAdapter from './pagoCertificacion.adapter'
+export * as CertificacionAdapter from './certificacion.adapter'
 export * as TipoContratacionObraAdapter from './tipoContratacionObra.adapter'
