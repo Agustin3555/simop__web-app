@@ -121,7 +121,7 @@ const empresa: Scheme<keyof EmpresaModel.RawEntity> = {
 }
 
 const obra: Scheme<keyof ObraModel.Entity> = {
-  title: 
+  title: 'Obra',
   service: ObraService,
   props: {
     nombre: {
