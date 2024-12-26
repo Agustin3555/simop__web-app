@@ -6,7 +6,7 @@ import { FetchRef } from './components'
 import { Value } from '../../../../types'
 
 const Cell = <T,>({ column, row }: TanstackCell<T, unknown>) => {
-  const { type, ref } = column.columnDef.meta
+  const { type, ref } = column.columnDef.meta ?? {}
 
   /*
   No se usa 'getValue' porque se necesita tener el valor original. 'getValue'

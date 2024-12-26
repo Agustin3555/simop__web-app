@@ -20,13 +20,16 @@ const LocalAdd2 = <T,>({ createProvider, fieldGroups }: Props<T>) => {
   const { handleSubmit, actionState } = useSubmitAction(
     async ({ formValues, setError, setSuccess }) => {
       try {
-        const createData = fieldGroups.reduce((acc, { fields }) => {
-          fields.forEach(({ accessorKey, getValue }) => {
-            acc[accessorKey] = getValue(formValues)(accessorKey as string)
-          })
+        const createData = fieldGroups.reduce(
+          (acc, { fields }) => {
+            fields.forEach(({ accessorKey, getValue }) => {
+              acc[accessorKey] = getValue(formValues)(accessorKey as string)
+            })
 
-          return acc
-        }, {} as Record<keyof T, any>)
+            return acc
+          },
+          {} as Record<keyof T, any>,
+        )
 
         await createProvider(createData)
 
