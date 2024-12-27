@@ -145,3 +145,7 @@ const obra: Scheme<keyof ObraModel.Entity> = {
     },
   },
 }
+
+const a = [1, 'name']
+
+a.forEach((_, index) => {})
