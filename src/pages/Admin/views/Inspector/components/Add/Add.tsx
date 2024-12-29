@@ -1,9 +1,9 @@
 import { Input } from '@/components'
-import { Combobox, LocalAdd2 } from '@/pages/Admin/components'
+import { Combobox, LocalAdd } from '@/pages/Admin/components'
 import { InspectorService, TipoProfesionService } from '@/pages/Admin/services'
 
 const Add = () => (
-  <LocalAdd2
+  <LocalAdd
     createProvider={InspectorService.create}
     fieldGroups={[
       {

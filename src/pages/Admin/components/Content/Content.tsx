@@ -1,34 +1,34 @@
 import './Content.css'
 import {
-  SubSecretarias,
-  Direcciones,
-  Departamentos,
-  Pais,
-  Provincia,
-  Localidad,
-  EstadoObra,
-  Financiamiento,
-  ModificacionObra,
-  ParalizacionObra,
-  ProgramaObra,
-  TipoTematicaObra,
-  RepresentanteEmpresa,
-  Tramite,
-  TipoProfesion,
-  TipoInspector,
-  Inspector,
-  TipoRepresentanteEmpresa,
+  // SubSecretarias,
+  // Direcciones,
+  // Departamentos,
+  // Pais,
+  // Provincia,
+  // Localidad,
+  // EstadoObra,
+  // Financiamiento,
+  // ModificacionObra,
+  // ParalizacionObra,
+  // ProgramaObra,
+  // TipoTematicaObra,
+  // RepresentanteEmpresa,
+  // Tramite,
+  // TipoProfesion,
+  // TipoInspector,
+  // Inspector,
+  // TipoRepresentanteEmpresa,
   Empresa,
-  Obra,
-  TipoContratacionObra,
-  FojaMedicion,
-  Certificacion,
-  PagoCertificacion,
+  // Obra,
+  // TipoContratacionObra,
+  // FojaMedicion,
+  // Certificacion,
+  // PagoCertificacion,
 } from '../../views'
 
 const Content = () => (
   <div className="cmp-content">
-    <SubSecretarias />
+    {/* <SubSecretarias />
     <Direcciones />
     <Departamentos />
     <Pais />
@@ -46,12 +46,12 @@ const Content = () => (
     <TipoProfesion />
     <TipoInspector />
     <TipoRepresentanteEmpresa />
-    <Inspector />
+    <Inspector /> */}
     <Empresa />
-    <Obra />
+    {/* <Obra />
     <FojaMedicion />
     <Certificacion />
-    <PagoCertificacion />
+    <PagoCertificacion /> */}
   </div>
 )
 

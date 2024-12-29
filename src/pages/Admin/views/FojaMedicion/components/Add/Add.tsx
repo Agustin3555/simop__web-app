@@ -1,5 +1,5 @@
 import { Input } from '@/components'
-import { Combobox, LocalAdd2 } from '@/pages/Admin/components'
+import { Combobox, LocalAdd } from '@/pages/Admin/components'
 import {
   FojaMedicionService,
   ObraService,
@@ -7,7 +7,7 @@ import {
 } from '@/pages/Admin/services'
 
 const Add = () => (
-  <LocalAdd2
+  <LocalAdd
     createProvider={FojaMedicionService.create}
     fieldGroups={[
       {

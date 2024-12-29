@@ -1,3 +1,5 @@
 export * from './useChangeHandler.hook'
 export * from './useCombobox.hook'
 export * from './useInputHandler.hook'
+export * from './useScheme.hook'
+export * from './views.hook'

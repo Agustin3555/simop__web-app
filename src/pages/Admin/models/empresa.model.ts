@@ -1,5 +1,8 @@
 import { LocalidadModel, PaisModel, ProvinciaModel } from '.'
 import { Ref } from '@/types'
+import { Scheme } from '@/models/config'
+import { EmpresaService } from '../services'
+import { COMMON_PROPS } from '@/constants'
 
 export interface RawEntity {
   id: number
@@ -60,4 +63,70 @@ export interface CreateBody {
   paisId?: number
   provinciaId?: number
   localidadId?: number
+}
+
+export const scheme: Scheme<Entity> = {
+  accessorKey: 'empresa',
+  service: EmpresaService,
+  title: {
+    singular: 'Empresa',
+    plural: 'Empresas',
+  },
+
+  groups: [
+    {
+      props: {
+        ...COMMON_PROPS,
+        cuit: {
+          accessorKey: 'cuit',
+          title: 'CUIT',
+          type: 'number',
+        },
+        nombre: {
+          accessorKey: 'nombre',
+          title: 'Nombre',
+          type: 'text',
+        },
+        direccion: {
+          accessorKey: 'direccion',
+          title: 'Dirección declarada',
+          type: 'text',
+        },
+        numeroContacto: {
+          accessorKey: 'numeroContacto',
+          title: 'Número de contacto',
+          type: 'number',
+        },
+        email: {
+          accessorKey: 'email',
+          title: 'Email',
+          type: 'text',
+        },
+        // pais: {
+        //   accessorKey: 'pais',
+        //   title: 'País',
+        //   type: 'ref',
+        //   refConfig: {
+        //     getScheme: () => PaisModel.scheme,
+        //   },
+        // },
+        // provincia: {
+        //   accessorKey: 'provincia',
+        //   title: 'Provincia',
+        //   type: 'ref',
+        //   refConfig: {
+        //     getScheme: () => ProvinciaModel.scheme,
+        //   },
+        // },
+        // localidad: {
+        //   accessorKey: 'localidad',
+        //   title: 'Localidad',
+        //   type: 'ref',
+        //   refConfig: {
+        //     getScheme: () => LocalidadModel.scheme,
+        //   },
+        // },
+      },
+    },
+  ],
 }

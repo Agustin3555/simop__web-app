@@ -1,5 +1,5 @@
 import { Input } from '@/components'
-import { Checkbox, Combobox, LocalAdd2 } from '@/pages/Admin/components'
+import { Checkbox, Combobox, LocalAdd } from '@/pages/Admin/components'
 import {
   RepresentanteEmpresaService,
   TipoRepresentanteEmpresaService,
@@ -9,7 +9,7 @@ import {
 } from '@/pages/Admin/services'
 
 const Add = () => (
-  <LocalAdd2
+  <LocalAdd
     createProvider={RepresentanteEmpresaService.create}
     fieldGroups={[
       {

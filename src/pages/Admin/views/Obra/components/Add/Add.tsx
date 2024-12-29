@@ -3,7 +3,7 @@ import {
   Combobox,
   InputArea,
   Checkbox,
-  LocalAdd2,
+  LocalAdd,
   FieldGenerator,
 } from '@/pages/Admin/components'
 import {
@@ -22,7 +22,7 @@ import {
 } from '@/pages/Admin/services'
 
 const Add = () => (
-  <LocalAdd2
+  <LocalAdd
     createProvider={ObraService.create}
     fieldGroups={[
       {

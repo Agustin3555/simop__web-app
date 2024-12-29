@@ -1,32 +1,33 @@
 import './Section.css'
 import { useCallback, useState } from 'react'
-import { useViewActive, useViewNavigation } from '@/pages/Admin/contexts'
-import { SectionNode, VIEW_INFO } from '@/pages/Admin/constants'
+import { useViewActive, useViewNavigation } from '@/pages/Admin/hooks'
+import { SectionNode } from '@/pages/Admin/constants'
 import { classList } from '@/helpers'
 import { Icon } from '@/components'
 
-const Section = ({ title, sections, viewKey }: SectionNode) => {
-  const hasView = viewKey !== undefined
+const Section = ({ title, sections, scheme }: SectionNode) => {
+  const hasView = scheme !== undefined
 
   const [isOpen, setOpen] = useState(false)
-  const navigate = useViewNavigation()
-  const active = useViewActive(viewKey)
+  const viewNavigate = useViewNavigation()
+  const isActive = useViewActive(scheme?.accessorKey ?? '')
 
-  const handleClick = useCallback(() => {
-    hasView ? navigate(viewKey) : setOpen(prev => !prev)
-  }, [])
+  const handleClick = useCallback(
+    () => (hasView ? viewNavigate(scheme.accessorKey) : setOpen(prev => !prev)),
+    [],
+  )
 
   return (
     <div className={classList('cmp-section', { open: isOpen })}>
-      <button className={classList({ active })} onClick={handleClick}>
+      <button className={classList({ active: isActive })} onClick={handleClick}>
         {sections && <Icon faIcon="fa-solid fa-angle-right" />}
-        {hasView ? VIEW_INFO[viewKey].title : title}
+        {hasView ? scheme.title.plural : title}
       </button>
       {sections && (
         <div className="sections">
           {sections.map(section => (
             <Section
-              key={section.title || String(section.viewKey)}
+              key={section.title || section.scheme?.title.plural}
               {...section}
             />
           ))}

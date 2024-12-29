@@ -1,9 +1,6 @@
 import { View } from '../../components'
-import { Add, Query } from './components'
-import { ViewKey } from '../../constants'
+import { EmpresaModel } from '../../models'
 
-const Empresa = () => (
-  <View viewKey={ViewKey.EMPRESA} add={<Add />} query={<Query />} />
-)
+const Empresa = () => <View scheme={EmpresaModel.scheme} />
 
 export default Empresa

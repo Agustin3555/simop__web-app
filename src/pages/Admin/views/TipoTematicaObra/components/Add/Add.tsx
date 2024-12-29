@@ -1,9 +1,9 @@
 import { Input } from '@/components'
-import { LocalAdd2 } from '@/pages/Admin/components'
+import { LocalAdd } from '@/pages/Admin/components'
 import { TipoTematicaObraService } from '@/pages/Admin/services'
 
 const Add = () => (
-  <LocalAdd2
+  <LocalAdd
     createProvider={TipoTematicaObraService.create}
     fieldGroups={[
       {

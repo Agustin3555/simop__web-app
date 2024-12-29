@@ -1,61 +1,61 @@
 import './View.css'
 import { ReactNode, useMemo, useState } from 'react'
-import { useChangeHandler } from '../../hooks'
-import { useViewActive } from '../../contexts'
+import { useChangeHandler, useViewActive } from '../../hooks'
 import { Icon, Separator } from '@/components'
-import { VIEW_INFO, ViewKey } from '../../constants'
-import { addIfExist, classList } from '@/helpers'
+import { SchemeContext } from '../../contexts'
+import { Scheme } from '@/models/config'
+import { LocalAdd, LocalQuery } from '..'
+import { addIf, classList } from '@/helpers'
 
-type LocalViewKey = 'query' | 'add' | 'update'
+type LocalViewKey = 'query' | 'add'
+
+// TODO: admitir vistas locales custom
 
 interface Props {
-  viewKey: ViewKey
-  query?: ReactNode
-  add?: ReactNode
-  update?: ReactNode
+  scheme: Scheme<unknown>
+  notQuery?: boolean
+  notAdd?: boolean
+  notUpdate?: boolean
 }
 
-const View = ({ viewKey, query, add, update }: Props) => {
-  const active = useViewActive(viewKey)
+const View = ({ scheme, notQuery = false, notAdd = false }: Props) => {
+  const { accessorKey } = scheme
 
   const localViews = useMemo(
     () =>
-      addIfExist<{
+      addIf<{
         title: string
         faIcon: string
         localViewKey: LocalViewKey
         component: ReactNode
       }>([
-        query && {
+        !notQuery && {
           title: 'Consultar',
           faIcon: 'fa-solid fa-search',
           localViewKey: 'query',
-          component: query,
+          // component: <LocalQuery />,
+          component: <h1>LocalQuery</h1>,
         },
-        add && {
+        !notAdd && {
           title: 'Agregar',
           faIcon: 'fa-solid fa-plus',
           localViewKey: 'add',
-          component: add,
-        },
-        update && {
-          title: 'Modificar',
-          faIcon: 'fa-solid fa-pen-to-square',
-          localViewKey: 'update',
-          component: update,
+          // component: <LocalAdd />,
+          component: <h1>LocalAdd</h1>,
         },
       ]),
-    [query, add, update]
+    [],
   )
 
+  const isActive = useViewActive(accessorKey)
   const [localView, setLocalView] = useState(localViews[0].localViewKey)
 
   const handleChange = useChangeHandler(newLocalView =>
-    setLocalView(newLocalView as LocalViewKey)
+    setLocalView(newLocalView as LocalViewKey),
   )
 
   return (
-    <div className={classList('cmp-view', viewKey, { active })}>
+    <div className={classList('cmp-view', accessorKey, { active: isActive })}>
       <header>
         <fieldset>
           {localViews.map(({ title, faIcon, localViewKey }) => (
@@ -65,25 +65,27 @@ const View = ({ viewKey, query, add, update }: Props) => {
               <input
                 type="radio"
                 id={localViewKey}
-                name={['tabbed', viewKey].join('-')}
+                name={['tabbed', accessorKey].join('-')}
                 checked={localViewKey === localView}
                 onChange={handleChange}
               />
             </label>
           ))}
         </fieldset>
-        <h1>{VIEW_INFO[viewKey].title}</h1>
+        <h1>{scheme.title.plural}</h1>
       </header>
       <Separator />
       <div className="local-views">
-        {localViews.map(({ localViewKey, component }) => (
-          <div
-            key={localViewKey}
-            className={classList({ active: localViewKey === localView })}
-          >
-            {component}
-          </div>
-        ))}
+        <SchemeContext.Provider value={{ scheme }}>
+          {localViews.map(({ localViewKey, component }) => (
+            <div
+              key={localViewKey}
+              className={classList({ active: localViewKey === localView })}
+            >
+              {component}
+            </div>
+          ))}
+        </SchemeContext.Provider>
       </div>
     </div>
   )

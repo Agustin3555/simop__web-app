@@ -1,13 +1,12 @@
-import { ViewActiveProvider } from './contexts'
-import { Content, Nav } from './components'
-import { ViewKey } from './constants'
+import { Content, Nav, ViewActiveProvider } from './components'
+import { EmpresaModel } from './models'
 
 /*
   TODO: en un futuro se podría obtener por local storage o por la cuenta la
   última view visitada
 */
 const Admin = () => (
-  <ViewActiveProvider initView={ViewKey.SUB_SECRETARIA}>
+  <ViewActiveProvider initView={EmpresaModel.scheme.accessorKey}>
     <Nav />
     <Content />
   </ViewActiveProvider>

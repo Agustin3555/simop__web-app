@@ -29,7 +29,7 @@ const Nav = () => {
         <div className="tree">
           {TREE.map(section => (
             <Section
-              key={section.title || String(section.viewKey)}
+              key={section.title || section.scheme?.title.plural}
               {...section}
             />
           ))}

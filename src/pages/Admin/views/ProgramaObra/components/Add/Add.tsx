@@ -1,9 +1,9 @@
 import { Input } from '@/components'
-import { LocalAdd2 } from '@/pages/Admin/components'
+import { LocalAdd } from '@/pages/Admin/components'
 import { ProgramaObraService } from '@/pages/Admin/services'
 
 const Add = () => (
-  <LocalAdd2
+  <LocalAdd
     createProvider={ProgramaObraService.create}
     fieldGroups={[
       {
