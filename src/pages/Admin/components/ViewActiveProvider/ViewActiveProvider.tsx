@@ -1,5 +1,6 @@
-import { ReactNode, useState } from 'react'
+import { ReactNode, useEffect, useState } from 'react'
 import { ViewActiveContext } from '../../contexts'
+import { lastVisitedViewEntity } from '@/services/localStorage'
 
 const ViewActiveProvider = ({
   initView,
@@ -9,6 +10,8 @@ const ViewActiveProvider = ({
   children: ReactNode
 }) => {
   const [activeView, setActiveView] = useState(initView)
+
+  useEffect(() => lastVisitedViewEntity.set(activeView), [activeView])
 
   return (
     <ViewActiveContext.Provider value={{ activeView, setActiveView }}>
