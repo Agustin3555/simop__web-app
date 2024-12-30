@@ -3,7 +3,7 @@ import {
   // SubSecretarias,
   // Direcciones,
   // Departamentos,
-  // Pais,
+  Pais,
   // Provincia,
   // Localidad,
   // EstadoObra,
@@ -28,30 +28,30 @@ import {
 
 const Content = () => (
   <div className="cmp-content">
-    {/* <SubSecretarias />
-    <Direcciones />
-    <Departamentos />
+    {/* <SubSecretarias /> */}
+    {/* <Direcciones /> */}
+    {/* <Departamentos /> */}
     <Pais />
-    <Provincia />
-    <Localidad />
-    <TipoContratacionObra />
-    <EstadoObra />
-    <Financiamiento />
-    <ModificacionObra />
-    <ParalizacionObra />
-    <ProgramaObra />
-    <TipoTematicaObra />
-    <RepresentanteEmpresa />
-    <Tramite />
-    <TipoProfesion />
-    <TipoInspector />
-    <TipoRepresentanteEmpresa />
-    <Inspector /> */}
+    {/* <Provincia /> */}
+    {/* <Localidad /> */}
+    {/* <TipoContratacionObra /> */}
+    {/* <EstadoObra /> */}
+    {/* <Financiamiento /> */}
+    {/* <ModificacionObra /> */}
+    {/* <ParalizacionObra /> */}
+    {/* <ProgramaObra /> */}
+    {/* <TipoTematicaObra /> */}
+    {/* <RepresentanteEmpresa /> */}
+    {/* <Tramite /> */}
+    {/* <TipoProfesion /> */}
+    {/* <TipoInspector /> */}
+    {/* <TipoRepresentanteEmpresa /> */}
+    {/* <Inspector /> */}
     <Empresa />
-    {/* <Obra />
-    <FojaMedicion />
-    <Certificacion />
-    <PagoCertificacion /> */}
+    {/* <Obra /> */}
+    {/* <FojaMedicion /> */}
+    {/* <Certificacion /> */}
+    {/* <PagoCertificacion /> */}
   </div>
 )
 

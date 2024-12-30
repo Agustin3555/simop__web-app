@@ -1,31 +1,32 @@
-import { publicInstance } from '@/services/config'
+import { publicInstance, Service } from '@/services/config'
 import { PaisModel } from '../models'
 import { PaisAdapter } from '../adapters'
+import { buildPath } from '@/helpers'
 
-const collection = '/pais'
+const collection = buildPath('pais')
 
-export const getAll = async () => {
-  const response = await publicInstance.get(collection)
+export const PaisService: Service<PaisModel.Entity, PaisModel.CreateData> = {
+  getAll: async () => {
+    const response = await publicInstance.get(collection())
 
-  return PaisAdapter.getAll.output(response.data)
-}
+    return PaisAdapter.getAll.output(response.data)
+  },
 
-export const getForConnect = async () => {
-  const response = await publicInstance.get(`${collection}/for-connect`)
+  getForConnect: async () => {
+    const response = await publicInstance.get(collection('for-connect'))
 
-  return PaisAdapter.getForConnect.output(response.data)
-}
+    return PaisAdapter.getForConnect.output(response.data)
+  },
 
-export const getOne = async (id: number) => {
-  const response = await publicInstance.get(`${collection}/${id}`)
+  getOne: async id => {
+    const response = await publicInstance.get(collection(id))
 
-  return PaisAdapter.getOne.output(response.data)
-}
+    return PaisAdapter.getOne.output(response.data)
+  },
 
-export const create = async (data: PaisModel.CreateData) => {
-  const adaptedInput = PaisAdapter.create.input(data)
+  create: async data => {
+    const adaptedInput = PaisAdapter.create.input(data)
 
-  const response = await publicInstance.post(collection, adaptedInput)
-
-  return true
+    await publicInstance.post(collection(), adaptedInput)
+  },
 }

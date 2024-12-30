@@ -31,21 +31,16 @@ export type Type =
 
 type Color = 'blue' | 'green' | 'yellow' | 'red' | 'grey'
 
-interface Field<T> {
-  field?:
-    | boolean
-    | (T & {
-        disabled?: boolean
-        title?: string
-      })
+interface Column<T = unknown> {
+  column?: T & {
+    title?: string
+  }
 }
 
-interface Column<T> {
-  column?:
-    | boolean
-    | (T & {
-        title?: string
-      })
+interface Field<T = unknown> {
+  field?: T & {
+    title?: string
+  }
 }
 
 interface Required {
@@ -85,17 +80,26 @@ interface BooleanConfig
   referencias circulares.
 */
 interface GetScheme {
-  getScheme: () => Scheme<unknown>
+  getScheme: () => Scheme
 }
 
-interface RefConfig extends Column<{ option?: boolean }>, GetScheme {}
+interface RefConfig
+  extends Column<{ option?: boolean }>,
+    Field<Required>,
+    GetScheme {}
 
-interface RefListConfig extends Column<{ option?: boolean }>, GetScheme {}
+interface RefListConfig
+  extends Column<{ option?: boolean }>,
+    Field,
+    GetScheme {}
 
 export interface PropScheme<T> {
   accessorKey: keyof T
   title: string
   type: Type
+
+  column?: boolean
+  field?: boolean
 
   textConfig?: TextConfig
   textAreaConfig?: TextAreaConfig
@@ -107,7 +111,7 @@ export interface PropScheme<T> {
   refListConfig?: RefListConfig
 }
 
-export interface Scheme<T> {
+export interface Scheme<T = unknown> {
   accessorKey: string
   title: {
     singular: string

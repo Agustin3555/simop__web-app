@@ -8,14 +8,14 @@ const InputCombobox = ({
   name,
   title,
   required = false,
-  getForConnectProvider,
+  getForConnect,
   long,
 }: ComboboxProps) => {
   const [value, setValue] = useState('')
   const { basicProps, sortedOptions } = useCombobox({
     title,
     required,
-    getForConnectProvider,
+    getForConnect,
     long,
   })
 

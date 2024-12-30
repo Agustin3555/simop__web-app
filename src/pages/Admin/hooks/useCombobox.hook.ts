@@ -1,7 +1,8 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { useLabel, UseLabelProps } from '@/hooks'
 import { useInputHandler } from '.'
-import { Control, GetForConnectProvider, Long, Ref } from '@/types'
+import { Control, Long, Ref } from '@/types'
+import { GetForConnectProvider } from '@/services/config'
 
 export interface ComboboxProps
   extends UseLabelProps,
@@ -15,7 +16,7 @@ interface UseComboboxProps extends UseLabelProps, GetForConnectProvider, Long {}
 export const useCombobox = ({
   title,
   required,
-  getForConnectProvider,
+  getForConnect,
   long,
 }: UseComboboxProps) => {
   const { content, controlTitle } = useLabel({ title, required })
@@ -31,11 +32,11 @@ export const useCombobox = ({
 
   const fetchAsync = useCallback(async () => {
     try {
-      const response = await getForConnectProvider()
+      const response = await getForConnect()
 
       setOptions(response)
     } catch (error) {}
-  }, [getForConnectProvider])
+  }, [getForConnect])
 
   useEffect(() => {
     if (firstLoad) fetchAsync()

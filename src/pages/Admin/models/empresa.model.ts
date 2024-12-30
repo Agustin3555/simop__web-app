@@ -102,14 +102,14 @@ export const scheme: Scheme<Entity> = {
           title: 'Email',
           type: 'text',
         },
-        // pais: {
-        //   accessorKey: 'pais',
-        //   title: 'País',
-        //   type: 'ref',
-        //   refConfig: {
-        //     getScheme: () => PaisModel.scheme,
-        //   },
-        // },
+        pais: {
+          accessorKey: 'pais',
+          title: 'País',
+          type: 'ref',
+          refConfig: {
+            getScheme: () => PaisModel.scheme,
+          },
+        },
         // provincia: {
         //   accessorKey: 'provincia',
         //   title: 'Provincia',

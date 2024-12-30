@@ -1,7 +1,7 @@
 export * as SubSecretariaService from './subSecretaria.service'
 export * as DireccionService from './direccion.service'
 export * as DepartamentoService from './departamento.service'
-export * as PaisService from './pais.service'
+export * from './pais.service'
 export * as ProvinciaService from './provincia.service'
 export * as LocalidadService from './localidad.service'
 export * as EstadoObraService from './estadoObra.service'

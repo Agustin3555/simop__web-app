@@ -14,24 +14,21 @@ export const COMMON_PROPS: Record<
     accessorKey: 'id',
     title: 'ID',
     type: 'number',
-    numberConfig: {
-      field: false,
-    },
+
+    field: false,
   },
   creado: {
     accessorKey: 'creado',
     title: 'Creación del recurso',
     type: 'dateTime',
-    dateTimeConfig: {
-      field: false,
-    },
+
+    field: false,
   },
   modificado: {
     accessorKey: 'modificado',
     title: 'Modificación del recurso',
     type: 'dateTime',
-    dateTimeConfig: {
-      field: false,
-    },
+
+    field: false,
   },
 }

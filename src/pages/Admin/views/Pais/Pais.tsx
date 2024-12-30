@@ -1,9 +1,6 @@
 import { View } from '../../components'
-import { Add, Query } from './components'
-import { ViewKey } from '../../constants'
+import { PaisModel } from '../../models'
 
-const Pais = () => {
-  return <View viewKey={ViewKey.PAIS} add={<Add />} query={<Query />} />
-}
+const Pais = () => <View scheme={PaisModel.scheme} />
 
 export default Pais

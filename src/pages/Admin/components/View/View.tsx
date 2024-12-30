@@ -1,6 +1,6 @@
 import './View.css'
 import { ReactNode, useMemo, useState } from 'react'
-import { useChangeHandler, useViewActive } from '../../hooks'
+import { useChangeHandler, useScheme, useViewActive } from '../../hooks'
 import { Icon, Separator } from '@/components'
 import { SchemeContext } from '../../contexts'
 import { Scheme } from '@/models/config'
@@ -12,14 +12,13 @@ type LocalViewKey = 'query' | 'add'
 // TODO: admitir vistas locales custom
 
 interface Props {
-  scheme: Scheme<unknown>
   notQuery?: boolean
   notAdd?: boolean
   notUpdate?: boolean
 }
 
-const View = ({ scheme, notQuery = false, notAdd = false }: Props) => {
-  const { accessorKey } = scheme
+const HydratedView = ({ notQuery = false, notAdd = false }: Props) => {
+  const { accessorKey, title } = useScheme()
 
   const localViews = useMemo(
     () =>
@@ -40,8 +39,7 @@ const View = ({ scheme, notQuery = false, notAdd = false }: Props) => {
           title: 'Agregar',
           faIcon: 'fa-solid fa-plus',
           localViewKey: 'add',
-          // component: <LocalAdd />,
-          component: <h1>LocalAdd</h1>,
+          component: <LocalAdd />,
         },
       ]),
     [],
@@ -72,23 +70,27 @@ const View = ({ scheme, notQuery = false, notAdd = false }: Props) => {
             </label>
           ))}
         </fieldset>
-        <h1>{scheme.title.plural}</h1>
+        <h1>{title.plural}</h1>
       </header>
       <Separator />
       <div className="local-views">
-        <SchemeContext.Provider value={{ scheme }}>
-          {localViews.map(({ localViewKey, component }) => (
-            <div
-              key={localViewKey}
-              className={classList({ active: localViewKey === localView })}
-            >
-              {component}
-            </div>
-          ))}
-        </SchemeContext.Provider>
+        {localViews.map(({ localViewKey, component }) => (
+          <div
+            key={localViewKey}
+            className={classList({ active: localViewKey === localView })}
+          >
+            {component}
+          </div>
+        ))}
       </div>
     </div>
   )
 }
+
+const View = ({ scheme, ...rest }: Props & { scheme: Scheme }) => (
+  <SchemeContext.Provider value={{ scheme }}>
+    <HydratedView {...rest} />
+  </SchemeContext.Provider>
+)
 
 export default View

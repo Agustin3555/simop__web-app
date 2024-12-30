@@ -11,14 +11,14 @@ const Combobox = ({
   title,
   multiple = false,
   required = false,
-  getForConnectProvider,
+  getForConnect,
   long,
 }: ComboboxProps) => {
   const [selected, setSelected] = useState<Ref[]>([])
   const { basicProps, options, sortedOptions } = useCombobox({
     title,
     required,
-    getForConnectProvider,
+    getForConnect,
     long,
   })
 
