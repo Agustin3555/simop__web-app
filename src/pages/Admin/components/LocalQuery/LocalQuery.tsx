@@ -1,27 +1,22 @@
 import './LocalQuery.css'
 import { useCallback, useState } from 'react'
 import { useHandleAction } from '@/hooks'
+import { useScheme } from '../../hooks'
 import { Button, Icon, StateButton } from '@/components'
 import { Table } from './components'
-import { Columns } from './types'
 import { utils, writeFile } from 'xlsx'
-import { GetAllProvider } from '@/types'
 
-interface LocalQueryProps<T> extends GetAllProvider<T> {
-  columns: Columns<T>
-}
+const LocalQuery = () => {
+  const scheme = useScheme()
+  const { title, service } = scheme
 
-const LocalQuery = <T extends { id: number }>({
-  getAllProvider,
-  columns,
-}: LocalQueryProps<T>) => {
-  const [data, setData] = useState<T[]>()
+  const [data, setData] = useState<{ id: number }[]>()
   const [selectedRowIds, setSelectedRowIds] = useState<number[]>([])
 
   const handleActionResult = useHandleAction(
     async ({ setError, setSuccess }) => {
       try {
-        const response = await getAllProvider()
+        const response = await service.getAll()
         setData(response)
 
         await setSuccess()
@@ -32,6 +27,8 @@ const LocalQuery = <T extends { id: number }>({
   )
 
   const handleExportClick = useCallback(() => {
+    if (!data) return
+
     const selectedData =
       selectedRowIds.length === 0
         ? data
@@ -43,9 +40,8 @@ const LocalQuery = <T extends { id: number }>({
     const workbook = utils.book_new()
     utils.book_append_sheet(workbook, worksheet, 'Datos')
 
-    // TODO: agregar el nombre de la vista
     const date = new Date().toISOString().slice(0, 10)
-    const fileName = `datos_${date}.xlsx`
+    const fileName = `${title}_${date}.xlsx`
 
     writeFile(workbook, fileName)
   }, [data, selectedRowIds])
@@ -76,9 +72,7 @@ const LocalQuery = <T extends { id: number }>({
           />
         )}
       </header>
-      {data && (
-        <Table {...{ data, columns, selectedRowIds, setSelectedRowIds }} />
-      )}
+      {data && <Table {...{ data, selectedRowIds, setSelectedRowIds }} />}
     </div>
   )
 }

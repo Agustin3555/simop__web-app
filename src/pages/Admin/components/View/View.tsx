@@ -3,7 +3,7 @@ import { ReactNode, useMemo, useState } from 'react'
 import { useChangeHandler, useScheme, useViewActive } from '../../hooks'
 import { Icon, Separator } from '@/components'
 import { SchemeContext } from '../../contexts'
-import { Scheme } from '@/models/config'
+import { Scheme } from '../../services/config'
 import { LocalAdd, LocalQuery } from '..'
 import { addIf, classList } from '@/helpers'
 
@@ -18,7 +18,7 @@ interface Props {
 }
 
 const HydratedView = ({ notQuery = false, notAdd = false }: Props) => {
-  const { accessorKey, title } = useScheme()
+  const { key: accessorKey, title } = useScheme()
 
   const localViews = useMemo(
     () =>
@@ -32,8 +32,7 @@ const HydratedView = ({ notQuery = false, notAdd = false }: Props) => {
           title: 'Consultar',
           faIcon: 'fa-solid fa-search',
           localViewKey: 'query',
-          // component: <LocalQuery />,
-          component: <h1>LocalQuery</h1>,
+          component: <LocalQuery />,
         },
         !notAdd && {
           title: 'Agregar',

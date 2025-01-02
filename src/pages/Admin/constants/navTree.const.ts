@@ -1,4 +1,4 @@
-import { Scheme } from '@/models/config'
+import { Scheme } from '../services/config'
 import { EmpresaModel, PaisModel } from '../models'
 
 export interface SectionNode {

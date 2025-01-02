@@ -1,8 +1,8 @@
 import { LocalidadModel, PaisModel, ProvinciaModel } from '.'
 import { Ref } from '@/types'
-import { Scheme } from '@/models/config'
+import { NumberProp, RefProp, Scheme, TextProp } from '../services/config'
 import { EmpresaService } from '../services'
-import { COMMON_PROPS } from '@/constants'
+import { COMMON_PROPS } from '../constants'
 
 export interface RawEntity {
   id: number
@@ -66,7 +66,7 @@ export interface CreateBody {
 }
 
 export const scheme: Scheme<Entity> = {
-  accessorKey: 'empresa',
+  key: 'empresa',
   service: EmpresaService,
   title: {
     singular: 'Empresa',
@@ -77,39 +77,34 @@ export const scheme: Scheme<Entity> = {
     {
       props: {
         ...COMMON_PROPS,
-        cuit: {
-          accessorKey: 'cuit',
-          title: 'CUIT',
-          type: 'number',
-        },
-        nombre: {
-          accessorKey: 'nombre',
-          title: 'Nombre',
-          type: 'text',
-        },
-        direccion: {
-          accessorKey: 'direccion',
-          title: 'Dirección declarada',
-          type: 'text',
-        },
-        numeroContacto: {
-          accessorKey: 'numeroContacto',
-          title: 'Número de contacto',
-          type: 'number',
-        },
-        email: {
-          accessorKey: 'email',
-          title: 'Email',
-          type: 'text',
-        },
-        pais: {
-          accessorKey: 'pais',
-          title: 'País',
-          type: 'ref',
-          refConfig: {
-            getScheme: () => PaisModel.scheme,
+        cuit: new NumberProp('cuit', 'CUIT', {
+          field: {
+            required: true,
           },
-        },
+        }),
+        nombre: new TextProp('nombre', 'Nombre', {
+          field: {
+            required: true,
+          },
+        }),
+        direccion: new TextProp('direccion', 'Dirección declarada', {
+          field: {
+            required: true,
+          },
+        }),
+        numeroContacto: new NumberProp('numeroContacto', 'Número de contacto', {
+          field: {
+            required: true,
+          },
+        }),
+        email: new TextProp('email', 'Email', {
+          field: {
+            required: true,
+          },
+        }),
+        pais: new RefProp('pais', 'País', {
+          getScheme: () => PaisModel.scheme,
+        }),
         // provincia: {
         //   accessorKey: 'provincia',
         //   title: 'Provincia',

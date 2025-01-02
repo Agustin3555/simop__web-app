@@ -1,6 +1,6 @@
-import { Scheme } from '@/models/config'
+import { Scheme, TextProp } from '../services/config'
 import { PaisService } from '../services'
-import { COMMON_PROPS } from '@/constants'
+import { COMMON_PROPS } from '../constants'
 
 export interface RawEntity {
   id: number
@@ -30,7 +30,7 @@ export interface CreateBody {
 }
 
 export const scheme: Scheme<Entity> = {
-  accessorKey: 'pais',
+  key: 'pais',
   service: PaisService,
   title: {
     singular: 'País',
@@ -41,11 +41,11 @@ export const scheme: Scheme<Entity> = {
     {
       props: {
         ...COMMON_PROPS,
-        nombre: {
-          accessorKey: 'nombre',
-          title: 'Nombre',
-          type: 'text',
-        },
+        nombre: new TextProp('nombre', 'Nombre', {
+          field: {
+            required: true,
+          },
+        }),
       },
     },
   ],

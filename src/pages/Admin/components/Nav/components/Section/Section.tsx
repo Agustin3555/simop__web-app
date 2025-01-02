@@ -10,10 +10,10 @@ const Section = ({ title, sections, scheme }: SectionNode) => {
 
   const [isOpen, setOpen] = useState(false)
   const viewNavigate = useViewNavigation()
-  const isActive = useViewActive(scheme?.accessorKey ?? '')
+  const isActive = useViewActive(scheme?.key ?? '')
 
   const handleClick = useCallback(
-    () => (hasView ? viewNavigate(scheme.accessorKey) : setOpen(prev => !prev)),
+    () => (hasView ? viewNavigate(scheme.key) : setOpen(prev => !prev)),
     [],
   )
 

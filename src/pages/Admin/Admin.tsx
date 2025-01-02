@@ -5,9 +5,7 @@ import { EmpresaModel } from './models'
 const lastVisitedView = lastVisitedViewEntity.get()
 
 const Admin = () => (
-  <ViewActiveProvider
-    initView={lastVisitedView || EmpresaModel.scheme.accessorKey}
-  >
+  <ViewActiveProvider initView={lastVisitedView || EmpresaModel.scheme.key}>
     <Nav />
     <Content />
   </ViewActiveProvider>

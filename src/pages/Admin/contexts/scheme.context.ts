@@ -1,5 +1,5 @@
 import { createContext } from 'react'
-import { Scheme } from '@/models/config'
+import { Scheme } from '../services/config'
 
 interface SchemeContextProps {
   scheme: Scheme
