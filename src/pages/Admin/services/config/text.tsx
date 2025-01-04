@@ -1,8 +1,10 @@
+import { EntityKey, Entity } from '@/services/config'
 import { ForView, PropScheme, Required } from './utils'
 import { FormValues } from '@/hooks'
 import { Input } from '@/components'
+import { Row } from '@tanstack/react-table'
 
-export class TextProp<T extends string> implements PropScheme<T> {
+export class TextProp<T extends EntityKey> implements PropScheme {
   constructor(
     public key: T,
     public title: string,
@@ -31,5 +33,13 @@ export class TextProp<T extends string> implements PropScheme<T> {
     if (hidden === true) return
 
     return formValues.get.string(key)
+  }
+
+  getCellComponent = (row: Row<Entity>) => {
+    const { key } = this
+
+    const value = row.original[key] as string
+
+    return <p>{value}</p>
   }
 }

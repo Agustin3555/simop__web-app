@@ -18,11 +18,13 @@ const RowSelectorCell = ({
   const inputRef = useRef<HTMLInputElement>(null)
 
   useEffect(() => {
+    if (!inputRef.current) return
+
     if (typeof indeterminate === 'boolean')
       inputRef.current.indeterminate = !rest.checked && indeterminate
   }, [inputRef, indeterminate])
 
-  // TODO: mostrar algo por el estado indeterminate (:indeterminate)
+  // TODO: diferenciar el estado indeterminate (en CSS -> :indeterminate)
 
   return (
     <td className={classList('cmp-row-selector-cell', { header: asHeader })}>

@@ -1,8 +1,11 @@
+import { Entity, EntityKey } from '@/services/config'
 import { ForView, GetScheme, PropScheme } from './utils'
 import { FormValues } from '@/hooks'
-import { Combobox } from '@/pages/Admin/components'
+import { Combobox, FetchRef } from '../../components'
+import { Ref } from '@/types'
+import { AccessorFn, Row } from '@tanstack/react-table'
 
-export class RefProp<T extends string> implements PropScheme<T> {
+export class RefProp<T extends EntityKey> implements PropScheme {
   constructor(
     public key: T,
     public title: string,
@@ -35,5 +38,23 @@ export class RefProp<T extends string> implements PropScheme<T> {
     if (hidden === true) return
 
     return formValues.get.number(key)
+  }
+
+  getCellComponent = (row: Row<Entity>) => {
+    const { key, config } = this
+    const { getScheme } = config ?? {}
+
+    const { getOne } = getScheme!().service
+    const value = row.original[key] as Ref
+
+    return <FetchRef {...value} {...{ getOne }} />
+  }
+
+  accessorFn: AccessorFn<Entity> = row => {
+    const { key } = this
+
+    const { title } = (row[key] as Ref) ?? {}
+
+    return title ?? ''
   }
 }

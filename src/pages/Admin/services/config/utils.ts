@@ -1,21 +1,8 @@
 import { FormValues } from '@/hooks'
 import { ReactNode } from 'react'
 import { Scheme } from './scheme'
-
-// text     string        Input
-// textArea string        InputArea           cellStyle
-// number   number        Input
-// date     string        Input     transform
-// dateTime string        Input     transform
-// boolean  boolean       Checkbox  transform cellStyle
-// ref      {id, title}   Combobox  transform cellStyle
-// refList  {id, title}[] Combobox  transform cellStyle
-
-/*
-  TODO: Solamente para visualizar los vínculos de uno a muchos que no tengan
-  atributos de vinculo y que no sean relaciones ternarias, si lo es, se debe
-  convertir en un modulo aparte.
-*/
+import { AccessorFn, FilterFn, Row } from '@tanstack/react-table'
+import { Entity, EntityKey } from '@/services/config'
 
 export type Color = 'blue' | 'green' | 'yellow' | 'red' | 'grey'
 
@@ -36,11 +23,15 @@ export interface GetScheme {
   getScheme: () => Scheme
 }
 
-export interface PropScheme<T> {
+export interface PropScheme<T = EntityKey, D = Entity> {
   key: T
   title: string
   config?: unknown
 
   getFieldComponent: () => ReactNode
   getFieldValue: (formValues: FormValues) => undefined | unknown
+
+  getCellComponent: (row: Row<D>) => ReactNode
+  accessorFn?: AccessorFn<D>
+  filterFn?: FilterFn<D>
 }

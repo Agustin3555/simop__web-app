@@ -1,4 +1,4 @@
-import { Service } from '@/services/config'
+import { Entity, Service } from '@/services/config'
 import { PropScheme } from './utils'
 
 // interface RefConfig
@@ -11,7 +11,7 @@ import { PropScheme } from './utils'
 //     Field,
 //     GetScheme {}
 
-export interface Scheme<T = unknown> {
+export interface Scheme<T = Entity> {
   key: string
   title: {
     singular: string
@@ -21,6 +21,6 @@ export interface Scheme<T = unknown> {
 
   groups: {
     title?: string
-    props: Partial<Record<keyof T, PropScheme<keyof T>>>
+    props: Record<keyof T, PropScheme<keyof T>>
   }[]
 }

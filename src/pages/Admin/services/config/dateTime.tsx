@@ -1,8 +1,11 @@
+import { Entity, EntityKey } from '@/services/config'
 import { ForView, PropScheme, Required } from './utils'
 import { FormValues } from '@/hooks'
 import { Input } from '@/components'
+import { FilterFn, Row } from '@tanstack/react-table'
+import { format } from '@formkit/tempo'
 
-export class DateTimeProp<T extends string> implements PropScheme<T> {
+export class DateTimeProp<T extends EntityKey> implements PropScheme {
   constructor(
     public key: T,
     public title: string,
@@ -38,5 +41,25 @@ export class DateTimeProp<T extends string> implements PropScheme<T> {
     if (hidden === true) return
 
     return formValues.get.string(key)
+  }
+
+  getCellComponent = (row: Row<Entity>) => {
+    const { key } = this
+
+    const value = row.original[key] as string
+
+    return <p>{format(value, { date: 'medium', time: 'short' })}</p>
+  }
+
+  filterFn?: FilterFn<Entity> = (row, columnId, filterValue) => {
+    if (!filterValue) return true
+
+    const { min, max } = filterValue
+    const rowDate = new Date(row.getValue(columnId))
+
+    const isAfterMin = min ? rowDate >= new Date(min) : true
+    const isBeforeMax = max ? rowDate <= new Date(max) : true
+
+    return isAfterMin && isBeforeMax
   }
 }

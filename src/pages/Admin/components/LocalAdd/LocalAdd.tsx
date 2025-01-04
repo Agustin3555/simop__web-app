@@ -5,11 +5,12 @@ import { useScheme } from '../../hooks'
 import { Button, StateButton } from '@/components'
 
 const LocalAdd = () => {
-  const scheme = useScheme()
+  const { scheme } = useScheme()
+  const { service, groups } = scheme
 
   const fieldGroups = useMemo(
     () =>
-      scheme.groups.map(({ title, props }) => ({
+      groups.map(({ title, props }) => ({
         title,
         fields: Object.values(props).map(({ getFieldComponent }) =>
           getFieldComponent(),
@@ -21,7 +22,7 @@ const LocalAdd = () => {
   const { handleSubmit, actionState } = useSubmitAction(
     async ({ formValues, setError, setSuccess }) => {
       try {
-        const createData = scheme.groups.reduce((acc, { props }) => {
+        const createData = groups.reduce((acc, { props }) => {
           Object.values(props).forEach(({ key, getFieldValue }) => {
             const value = getFieldValue(formValues)
 
@@ -31,7 +32,7 @@ const LocalAdd = () => {
           return acc
         }, {} as Record<string, unknown>)
 
-        await scheme.service.create!(createData)
+        await service.create!(createData)
 
         await setSuccess()
       } catch (error) {

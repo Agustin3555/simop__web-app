@@ -5,10 +5,7 @@ import { buildPath } from '@/helpers'
 
 const collection = buildPath('empresas')
 
-export const EmpresaService: Service<
-  EmpresaModel.Entity,
-  EmpresaModel.CreateData
-> = {
+export const EmpresaService: Service<EmpresaModel.Entity> = {
   getAll: async () => {
     const response = await publicInstance.get(collection())
 
@@ -27,7 +24,7 @@ export const EmpresaService: Service<
     return EmpresaAdapter.getOne.output(response.data)
   },
 
-  create: async data => {
+  create: async (data: EmpresaModel.CreateData) => {
     const adaptedInput = EmpresaAdapter.create.input(data)
 
     await publicInstance.post(collection(), adaptedInput)

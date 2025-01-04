@@ -1,41 +1,36 @@
 import './Table.css'
 import { Dispatch, SetStateAction, useEffect, useMemo, useState } from 'react'
+import { useScheme } from '@/pages/Admin/hooks'
 import {
   ColumnDef,
+  ColumnFiltersState,
   getCoreRowModel,
   getFacetedMinMaxValues,
   getFacetedUniqueValues,
   getFilteredRowModel,
   getSortedRowModel,
-  RowData,
+  RowSelectionState,
+  SortingState,
   useReactTable,
 } from '@tanstack/react-table'
 import { Cell, Header, RowSelectorCell } from './components'
-import { Columns, Meta } from '../../types'
-import { Ref } from '@/types'
+import { Entity } from '@/services/config'
 
-declare module '@tanstack/react-table' {
-  interface ColumnMeta<TData extends RowData, TValue> extends Meta {}
-}
-
-interface TableProps<T> {
-  data: T[]
-  columns: Columns<T>
+interface TableProps {
+  data: Entity[]
   selectedRowIds: number[]
   setSelectedRowIds: Dispatch<SetStateAction<number[]>>
 }
 
 const SELECT_COLUMN = 'select'
 
-const Table = <T extends { id: number }>({
-  data,
-  columns,
-  selectedRowIds,
-  setSelectedRowIds,
-}: TableProps<T>) => {
-  const [columnFilters, setColumnFilters] = useState([])
-  const [sortState, setSortState] = useState([])
-  const [rowSelection, setRowSelection] = useState({})
+const Table = ({ data, selectedRowIds, setSelectedRowIds }: TableProps) => {
+  const { scheme, flatProps } = useScheme()
+  const { groups } = scheme
+
+  const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([])
+  const [sortState, setSortState] = useState<SortingState>([])
+  const [rowSelection, setRowSelection] = useState<RowSelectionState>({})
 
   useEffect(() => {
     setSelectedRowIds(
@@ -45,50 +40,38 @@ const Table = <T extends { id: number }>({
     )
   }, [rowSelection])
 
-  const tableColumns = useMemo(
+  const columns = useMemo(
     () => [
       { id: SELECT_COLUMN },
-      ...columns.map<ColumnDef<T>>(({ header, key, type, ref }) => ({
-        header,
-        accessorKey: key,
-        meta: { type, ref },
-        ...((type === 'date' || type === 'dateTime') && {
-          filterFn: (row, columnId, filterValue) => {
-            if (!filterValue) return true // No hay filtro, muestra todo
-
-            const { min, max } = filterValue
-            const rowDate = new Date(row.getValue(columnId))
-
-            const isAfterMin = min ? rowDate >= new Date(min) : true
-            const isBeforeMax = max ? rowDate <= new Date(max) : true
-
-            return isAfterMin && isBeforeMax
-          },
-        }),
-        ...(ref && {
-          accessorFn: row => {
-            return (row[key] as Ref)?.title ?? ''
-          },
-        }),
-      })),
+      ...groups.flatMap<ColumnDef<Entity>>(({ props }) =>
+        Object.values(props).map(({ key, accessorFn, filterFn }) => ({
+          header: key,
+          accessorKey: key,
+          accessorFn,
+          ...filterFn,
+        })),
+      ),
     ],
-    [columns],
+    [],
   )
 
   const table = useReactTable({
     data,
-    getRowId: row => String(row.id),
-    columns: tableColumns,
+    columns,
     state: { rowSelection, columnFilters, sorting: sortState },
-    enableRowSelection: true,
+    getRowId: row => String(row.id),
+
     onRowSelectionChange: setRowSelection,
     onSortingChange: setSortState,
     onColumnFiltersChange: setColumnFilters,
+
     getCoreRowModel: getCoreRowModel(),
     getFilteredRowModel: getFilteredRowModel(),
     getFacetedMinMaxValues: getFacetedMinMaxValues(),
     getFacetedUniqueValues: getFacetedUniqueValues(),
     getSortedRowModel: getSortedRowModel(),
+
+    enableRowSelection: true,
     enableMultiSort: true,
     enableSortingRemoval: false,
   })
@@ -135,7 +118,7 @@ const Table = <T extends { id: number }>({
                       onChange={row.getToggleSelectedHandler()}
                     />
                   ) : (
-                    <Cell key={cell.id} {...cell} />
+                    <Cell key={cell.id} {...{ flatProps, cell }} />
                   ),
                 )}
             </tr>

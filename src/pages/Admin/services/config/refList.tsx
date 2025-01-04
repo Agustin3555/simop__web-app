@@ -1,7 +1,17 @@
+import { Entity, EntityKey } from '@/services/config'
 import { ForView, GetScheme, PropScheme } from './utils'
 import { FormValues } from '@/hooks'
+import { FetchRef } from '../../components'
+import { Ref } from '@/types'
+import { Row } from '@tanstack/react-table'
 
-export class RefListProp<T extends string> implements PropScheme<T> {
+/*
+  TODO: Solamente para visualizar los vínculos de uno a muchos que no tengan
+  atributos de vinculo y que no sean relaciones ternarias, si lo es, se debe
+  convertir en un modulo aparte.
+*/
+
+export class RefListProp<T extends EntityKey> implements PropScheme {
   constructor(
     public key: T,
     public title: string,
@@ -32,5 +42,21 @@ export class RefListProp<T extends string> implements PropScheme<T> {
     if (hidden === true) return
 
     return undefined
+  }
+
+  getCellComponent = (row: Row<Entity>) => {
+    const { key, config } = this
+    const { getScheme } = config ?? {}
+
+    const { getOne } = getScheme!().service
+    const value = row.original[key] as Ref[]
+
+    return (
+      <div>
+        {value.map(item => (
+          <FetchRef {...item} {...{ getOne }} />
+        ))}
+      </div>
+    )
   }
 }

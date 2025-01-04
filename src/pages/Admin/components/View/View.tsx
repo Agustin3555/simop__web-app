@@ -18,7 +18,8 @@ interface Props {
 }
 
 const HydratedView = ({ notQuery = false, notAdd = false }: Props) => {
-  const { key: accessorKey, title } = useScheme()
+  const { scheme } = useScheme()
+  const { key: accessorKey, title } = scheme
 
   const localViews = useMemo(
     () =>

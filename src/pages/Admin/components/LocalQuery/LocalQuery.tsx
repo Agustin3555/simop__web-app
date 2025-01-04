@@ -4,13 +4,14 @@ import { useHandleAction } from '@/hooks'
 import { useScheme } from '../../hooks'
 import { Button, Icon, StateButton } from '@/components'
 import { Table } from './components'
+import { Entity } from '@/services/config'
 import { utils, writeFile } from 'xlsx'
 
 const LocalQuery = () => {
-  const scheme = useScheme()
+  const { scheme } = useScheme()
   const { title, service } = scheme
 
-  const [data, setData] = useState<{ id: number }[]>()
+  const [data, setData] = useState<Entity[]>()
   const [selectedRowIds, setSelectedRowIds] = useState<number[]>([])
 
   const handleActionResult = useHandleAction(
@@ -41,7 +42,7 @@ const LocalQuery = () => {
     utils.book_append_sheet(workbook, worksheet, 'Datos')
 
     const date = new Date().toISOString().slice(0, 10)
-    const fileName = `${title}_${date}.xlsx`
+    const fileName = `${title.plural} (${date}).xlsx`
 
     writeFile(workbook, fileName)
   }, [data, selectedRowIds])

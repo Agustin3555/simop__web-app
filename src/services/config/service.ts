@@ -1,10 +1,15 @@
 import { Ref } from '@/types'
 
-export interface Service<Entity = any, CreateData = any> {
-  getAll: () => Promise<Entity[]>
+export type EntityKey = string
+export type EntityValue = undefined | string | number | boolean | Ref | Ref[]
+
+export type Entity = Record<EntityKey, EntityValue> & { id: number }
+
+export interface Service<T = unknown> {
+  getAll: () => Promise<T[]>
   getForConnect: () => Promise<Ref[]>
-  getOne: (id: number) => Promise<Entity>
-  create?: (data: CreateData) => Promise<void>
+  getOne: (id: number) => Promise<T>
+  create?: (data: any) => Promise<void>
 }
 
 export type GetAllProvider = Pick<Service, 'getAll'>
