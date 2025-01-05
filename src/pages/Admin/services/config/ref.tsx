@@ -40,6 +40,14 @@ export class RefProp<T extends EntityKey> implements PropScheme {
     return formValues.get.number(key)
   }
 
+  accessorFn: AccessorFn<Entity> = row => {
+    const { key } = this
+
+    const { title } = (row[key] as Ref) ?? {}
+
+    return title ?? ''
+  }
+
   getCellComponent = (row: Row<Entity>) => {
     const { key, config } = this
     const { getScheme } = config ?? {}
@@ -48,13 +56,5 @@ export class RefProp<T extends EntityKey> implements PropScheme {
     const value = row.original[key] as Ref
 
     return <FetchRef {...value} {...{ getOne }} />
-  }
-
-  accessorFn: AccessorFn<Entity> = row => {
-    const { key } = this
-
-    const { title } = (row[key] as Ref) ?? {}
-
-    return title ?? ''
   }
 }

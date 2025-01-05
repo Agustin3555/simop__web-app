@@ -10,8 +10,8 @@ import { Entity } from '@/services/config'
 */
 
 interface Props {
-  cell: TanstackCell<Entity, unknown>
   flatProps: ReturnType<typeof useScheme>['flatProps']
+  cell: TanstackCell<Entity, unknown>
 }
 
 const Cell = ({ flatProps, cell }: Props) => {

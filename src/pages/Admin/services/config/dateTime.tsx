@@ -2,8 +2,10 @@ import { Entity, EntityKey } from '@/services/config'
 import { ForView, PropScheme, Required } from './utils'
 import { FormValues } from '@/hooks'
 import { Input } from '@/components'
-import { FilterFn, Row } from '@tanstack/react-table'
+import { Column, FilterFn, Row } from '@tanstack/react-table'
 import { format } from '@formkit/tempo'
+import { DateTimeFilter } from '../../components'
+import { ReactNode } from 'react'
 
 export class DateTimeProp<T extends EntityKey> implements PropScheme {
   constructor(
@@ -43,16 +45,8 @@ export class DateTimeProp<T extends EntityKey> implements PropScheme {
     return formValues.get.string(key)
   }
 
-  getCellComponent = (row: Row<Entity>) => {
-    const { key } = this
-
-    const value = row.original[key] as string
-
-    return <p>{format(value, { date: 'medium', time: 'short' })}</p>
-  }
-
-  filterFn?: FilterFn<Entity> = (row, columnId, filterValue) => {
-    if (!filterValue) return true
+  filterFn: FilterFn<Entity> = (row, columnId, filterValue) => {
+    if (!filterValue) return true // No hay filtro, muestra todo
 
     const { min, max } = filterValue
     const rowDate = new Date(row.getValue(columnId))
@@ -61,5 +55,24 @@ export class DateTimeProp<T extends EntityKey> implements PropScheme {
     const isBeforeMax = max ? rowDate <= new Date(max) : true
 
     return isAfterMin && isBeforeMax
+  }
+
+  getHeader = (column: Column<Entity>) => {
+    const { title } = this
+
+    const { getFilterValue, setFilterValue } = column
+    const filterValue = getFilterValue() || { min: '', max: '' }
+
+    const filter = <DateTimeFilter {...{ filterValue, setFilterValue }} />
+
+    return { title, filter }
+  }
+
+  getCellComponent = (row: Row<Entity>) => {
+    const { key } = this
+
+    const value = row.original[key] as string
+
+    return <p>{format(value, { date: 'medium', time: 'short' })}</p>
   }
 }

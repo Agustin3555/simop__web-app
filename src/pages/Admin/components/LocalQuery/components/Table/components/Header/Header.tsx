@@ -1,107 +1,80 @@
 import './Header.css'
-import { Dispatch, ReactNode, SetStateAction, useMemo } from 'react'
+import { Dispatch, SetStateAction, useMemo } from 'react'
+import { useScheme } from '@/pages/Admin/hooks'
+import { Icon } from '@/components'
 import {
-  flexRender,
   SortDirection,
+  SortingState,
   Header as TanstackHeader,
 } from '@tanstack/react-table'
-import { Icon } from '@/components'
-import { NumberFilter, TextFilter, DateTimeFilter } from './components'
+import { Entity } from '@/services/config'
 
 const sortIconMatcher: Record<SortDirection, string> = {
   asc: 'fa-solid fa-arrow-up-wide-short',
   desc: 'fa-solid fa-arrow-down-short-wide',
 }
 
-interface HeaderProps extends TanstackHeader<any, unknown> {
-  sortState: any[]
-  setSortState: Dispatch<SetStateAction<any[]>>
+interface Props {
+  flatProps: ReturnType<typeof useScheme>['flatProps']
+  header: TanstackHeader<Entity, unknown>
+  sorting: SortingState
+  setSorting: Dispatch<SetStateAction<SortingState>>
 }
 
-const Header = ({
-  column,
-  getContext,
-  sortState,
-  setSortState,
-}: HeaderProps) => {
-  const {
-    columnDef,
-    getFilterValue,
-    getFacetedMinMaxValues,
-    getFacetedUniqueValues,
-    setFilterValue,
-    getIsSorted,
-    getSortIndex,
-  } = column
+const Header = ({ flatProps, header, sorting, setSorting }: Props) => {
+  const { column } = header
+  const { getIsSorted, getSortIndex } = column
 
-  // const { type, ref } = columnDef.meta
+  const { getHeader } = flatProps[column.id]
 
-  // const sortValue = getIsSorted() || null
+  if (!getHeader) return
 
-  // const sortIcon = useMemo(
-  //   () => sortIconMatcher[sortValue] ?? null,
-  //   [sortValue],
-  // )
+  const { title, subtitle, filter } = getHeader(column) ?? {}
 
-  // const filterMatcher = useMemo<Partial<Record<TypeMeta, ReactNode>>>(() => {
-  //   const columnFilterValue = getFilterValue()
-  //   const filterProps = { columnFilterValue, setFilterValue }
+  const sortValue = getIsSorted() || null
 
-  //   return {
-  //     text: <TextFilter {...{ getFacetedUniqueValues, ...filterProps }} />,
-  //     number: <NumberFilter {...{ getFacetedMinMaxValues, ...filterProps }} />,
-  //     date: <DateTimeFilter {...{ type, ...filterProps }} />,
-  //     dateTime: <DateTimeFilter {...{ type, ...filterProps }} />,
-  //   }
-  // }, [
-  //   getFacetedUniqueValues,
-  //   getFacetedMinMaxValues,
-  //   getFilterValue,
-  //   setFilterValue,
-  //   type,
-  // ])
+  const sortIcon = useMemo(
+    () => sortIconMatcher[sortValue] ?? null,
+    [sortValue],
+  )
 
-  // const filterComponent = filterMatcher[type]
+  const handleSortingClick = () => {
+    const isAlreadySorted = sorting.find(sort => sort.id === column.id)
 
-  // const handleSortingClick = () => {
-  //   const isAlreadySorted = sortState.find(sort => sort.id === column.id)
-
-  //   setSortState(prev => {
-  //     if (isAlreadySorted) {
-  //       if (isAlreadySorted.desc) {
-  //         // Si está en descendente, lo elimina (sin pasar a ascendente)
-  //         return prev.filter(sort => sort.id !== column.id)
-  //       } else {
-  //         // Alterna de ascendente a descendente
-  //         return prev.map(sort =>
-  //           sort.id === column.id ? { ...sort, desc: true } : sort,
-  //         )
-  //       }
-  //     } else {
-  //       // Agrega la columna al ordenamiento
-  //       return [...prev, { id: column.id, desc: false }]
-  //     }
-  //   })
-  // }
+    setSorting(prev => {
+      if (isAlreadySorted) {
+        if (isAlreadySorted.desc) {
+          // Si está en descendente, lo elimina (sin pasar a ascendente)
+          return prev.filter(sort => sort.id !== column.id)
+        } else {
+          // Alterna de ascendente a descendente
+          return prev.map(sort =>
+            sort.id === column.id ? { ...sort, desc: true } : sort,
+          )
+        }
+      } else {
+        // Agrega la columna al ordenamiento
+        return [...prev, { id: column.id, desc: false }]
+      }
+    })
+  }
 
   return (
     <th className="cmp-header">
       <div className="content">
-        <button
-        // onClick={handleSortingClick}
-        >
+        <button onClick={handleSortingClick}>
           <div className="title">
-            {flexRender(columnDef.header, getContext())}
-            {/* {ref && <small>{ref.field}</small>} */}
+            {title}
+            {subtitle && <small>{subtitle}</small>}
           </div>
-          {/* {sortIcon && (
+          {sortIcon && (
             <div className="sort">
               <Icon faIcon={sortIcon} />
               <small>{getSortIndex() + 1}</small>
             </div>
-          )} */}
+          )}
         </button>
-        {/* {filterComponent && <div className="filter">{filterComponent}</div>} */}
+        {filter && <div className="filters">{filter}</div>}
       </div>
     </th>
   )

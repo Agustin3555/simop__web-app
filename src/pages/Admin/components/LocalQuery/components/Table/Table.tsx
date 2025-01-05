@@ -28,8 +28,8 @@ const Table = ({ data, selectedRowIds, setSelectedRowIds }: TableProps) => {
   const { scheme, flatProps } = useScheme()
   const { groups } = scheme
 
+  const [sorting, setSorting] = useState<SortingState>([])
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([])
-  const [sortState, setSortState] = useState<SortingState>([])
   const [rowSelection, setRowSelection] = useState<RowSelectionState>({})
 
   useEffect(() => {
@@ -47,8 +47,8 @@ const Table = ({ data, selectedRowIds, setSelectedRowIds }: TableProps) => {
         Object.values(props).map(({ key, accessorFn, filterFn }) => ({
           header: key,
           accessorKey: key,
-          accessorFn,
-          ...filterFn,
+          ...(accessorFn && { accessorFn }),
+          ...(filterFn && { filterFn }),
         })),
       ),
     ],
@@ -58,12 +58,12 @@ const Table = ({ data, selectedRowIds, setSelectedRowIds }: TableProps) => {
   const table = useReactTable({
     data,
     columns,
-    state: { rowSelection, columnFilters, sorting: sortState },
+    state: { rowSelection, columnFilters, sorting },
     getRowId: row => String(row.id),
 
-    onRowSelectionChange: setRowSelection,
-    onSortingChange: setSortState,
+    onSortingChange: setSorting,
     onColumnFiltersChange: setColumnFilters,
+    onRowSelectionChange: setRowSelection,
 
     getCoreRowModel: getCoreRowModel(),
     getFilteredRowModel: getFilteredRowModel(),
@@ -95,8 +95,7 @@ const Table = ({ data, selectedRowIds, setSelectedRowIds }: TableProps) => {
                 ) : (
                   <Header
                     key={header.id}
-                    {...header}
-                    {...{ sortState, setSortState }}
+                    {...{ flatProps, header, sorting, setSorting }}
                   />
                 ),
               )}

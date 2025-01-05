@@ -1,8 +1,8 @@
 import { Entity, EntityKey } from '@/services/config'
 import { ForView, PropScheme, Required } from './utils'
 import { FormValues } from '@/hooks'
-import { InputArea } from '@/pages/Admin/components'
-import { Row } from '@tanstack/react-table'
+import { Column, Row } from '@tanstack/react-table'
+import { InputArea, TextFilter } from '../../components'
 
 export class TextLongProp<T extends EntityKey> implements PropScheme {
   constructor(
@@ -33,6 +33,21 @@ export class TextLongProp<T extends EntityKey> implements PropScheme {
     if (hidden === true) return
 
     return formValues.get.string(key)
+  }
+
+  getHeader = (column: Column<Entity>) => {
+    const { title } = this
+
+    const { getFacetedUniqueValues, getFilterValue, setFilterValue } = column
+    const filterValue = getFilterValue()
+
+    const filter = (
+      <TextFilter
+        {...{ filterValue, getFacetedUniqueValues, setFilterValue }}
+      />
+    )
+
+    return { title, filter }
   }
 
   getCellComponent = (row: Row<Entity>) => {

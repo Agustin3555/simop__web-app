@@ -52,7 +52,7 @@
       }
     }
 
-    > .filter {
+    > .filters {
       --gap: var(--pal-size-3xs);
 
       display: flex;

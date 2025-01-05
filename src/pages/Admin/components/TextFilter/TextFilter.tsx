@@ -1,20 +1,20 @@
 import { Updater } from '@tanstack/react-table'
 import { DebouncedInput } from '..'
 
-interface NumberFilterProps {
-  columnFilterValue: unknown
+interface Props {
+  filterValue: unknown
   getFacetedUniqueValues: () => Map<any, number>
   setFilterValue: (updater: Updater<any>) => void
 }
 
 const TextFilter = ({
-  columnFilterValue,
+  filterValue,
   getFacetedUniqueValues,
   setFilterValue,
-}: NumberFilterProps) => (
+}: Props) => (
   <DebouncedInput
     type="text"
-    value={(columnFilterValue ?? '') as string}
+    value={(filterValue ?? '') as string}
     placeholder={`Buscar... (${getFacetedUniqueValues().size})`}
     onChange={value => setFilterValue(value)}
   />
