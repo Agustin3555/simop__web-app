@@ -1,6 +1,11 @@
+import { Scheme, TextProp } from '../services/config'
+import { SubSecretariaService } from '../services'
+import { COMMON_PROPS } from '../constants'
+
 export interface RawEntity {
   id: number
   nombre: string
+
   creado: string
   modificado: string
 }
@@ -8,6 +13,7 @@ export interface RawEntity {
 export interface Entity {
   id: number
   nombre: string
+
   creado: string
   modificado: string
 }
@@ -23,4 +29,26 @@ export interface CreateData {
 
 export interface CreateBody {
   nombre: string
+}
+
+export const scheme: Scheme<Entity> = {
+  key: 'subSecretaria',
+  service: SubSecretariaService,
+  title: {
+    singular: 'Subsecretaría',
+    plural: 'Subsecretarías',
+  },
+
+  groups: [
+    {
+      props: {
+        ...COMMON_PROPS,
+        nombre: new TextProp('nombre', 'Nombre', {
+          field: {
+            required: true,
+          },
+        }),
+      },
+    },
+  ],
 }

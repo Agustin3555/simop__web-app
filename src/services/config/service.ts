@@ -7,7 +7,7 @@ export type Entity = Record<EntityKey, EntityValue> & { id: number }
 
 export interface Service<T = unknown> {
   getAll: () => Promise<T[]>
-  getForConnect: () => Promise<Ref[]>
+  getForConnect?: () => Promise<Ref[]>
   getOne: (id: number) => Promise<T>
   create?: (data: any) => Promise<void>
 }

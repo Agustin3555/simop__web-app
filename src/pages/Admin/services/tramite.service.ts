@@ -2,7 +2,7 @@ import { publicInstance } from '@/services/config'
 import { TramiteModel } from '../models'
 import { TramiteAdapter } from '../adapters'
 
-const collection = '/tipo-tramites-obras'
+const collection = '/tipos-tramites-obra'
 
 export const getAll = async () => {
   const response = await publicInstance.get(collection)
@@ -22,8 +22,8 @@ export const getOne = async (id: number) => {
   return TramiteAdapter.getOne.output(response.data)
 }
 
-export const create = async (data:TramiteModel.CreateData) => {
-  const adaptedInput =TramiteAdapter.create.input(data)
+export const create = async (data: TramiteModel.CreateData) => {
+  const adaptedInput = TramiteAdapter.create.input(data)
 
   const response = await publicInstance.post(collection, adaptedInput)
 

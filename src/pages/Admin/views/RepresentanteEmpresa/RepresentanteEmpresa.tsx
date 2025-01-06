@@ -1,9 +1,8 @@
 import { View } from '../../components'
-import { Add, Query } from './components'
-import { ViewKey } from '../../constants'
+import { RepresentanteEmpresaModel } from '../../models'
 
-const RepresentanteEmpresa = () => {
-  return <View viewKey={ViewKey.REPRESENTANTE_EMPRESA} add={<Add />} query={<Query />} />
-}
+const RepresentanteEmpresa = () => (
+  <View scheme={RepresentanteEmpresaModel.scheme} />
+)
 
 export default RepresentanteEmpresa

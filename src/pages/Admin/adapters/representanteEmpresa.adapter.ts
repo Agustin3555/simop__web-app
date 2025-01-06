@@ -1,6 +1,5 @@
 import { InputAdapter, OutputAdapter } from '@/adapters/config'
 import { RepresentanteEmpresaModel } from '../models'
-import { Ref } from '@/types'
 
 export const getAll: {
   output: OutputAdapter<
@@ -12,47 +11,24 @@ export const getAll: {
     const convertedResource = response.map<RepresentanteEmpresaModel.Entity>(
       item => ({
         id: item.id,
-        cuit: item.cuit,
-        apellido: item.apellido,
-        nombre: item.nombre,
-        direccion: item.direccion,
-        numeroMatricula: item.numeroMatricula,
-        vigencia: item.vigencia,
 
-        pais: item.pais && {
-          id: item.pais.id,
-          title: item.pais.nombre,
+        empresa: item.empresa && {
+          id: item.empresa.id,
+          title: item.empresa.nombre,
         },
-        provincia: item.provincia && {
-          id: item.provincia.id,
-          title: item.provincia.nombre,
+        representante: item.representante && {
+          id: item.representante.id,
+          title: item.representante.apellido,
         },
-        localidad: item.localidad && {
-          id: item.localidad.id,
-          title: item.localidad.nombre,
-        },
-        tipoRepresentanteEmpresa: item.tipoRepresentanteEmpresa && {
-          id: item.tipoRepresentanteEmpresa.id,
-          title: item.tipoRepresentanteEmpresa.nombre,
+        tipoRepresentante: item.tipoRepresentante && {
+          id: item.tipoRepresentante.id,
+          title: item.tipoRepresentante.nombre,
         },
 
         creado: item.creado,
         modificado: item.modificado,
       }),
     )
-
-    return convertedResource
-  },
-}
-
-export const getForConnect: {
-  output: OutputAdapter<RepresentanteEmpresaModel.RawRef[], Ref[]>
-} = {
-  output: response => {
-    const convertedResource = response.map<Ref>(item => ({
-      id: item.id,
-      title: item.nombre,
-    }))
 
     return convertedResource
   },
@@ -67,28 +43,18 @@ export const getOne: {
   output: response => {
     const convertedResource = {
       id: response.id,
-      cuit: response.cuit,
-      apellido: response.apellido,
-      nombre: response.nombre,
-      direccion: response.direccion,
-      numeroMatricula: response.numeroMatricula,
-      vigencia: response.vigencia,
 
-      pais: response.pais && {
-        id: response.pais.id,
-        title: response.pais.nombre,
+      empresa: response.empresa && {
+        id: response.empresa.id,
+        title: response.empresa.nombre,
       },
-      provincia: response.provincia && {
-        id: response.provincia.id,
-        title: response.provincia.nombre,
+      representante: response.representante && {
+        id: response.representante.id,
+        title: response.representante.apellido,
       },
-      localidad: response.localidad && {
-        id: response.localidad.id,
-        title: response.localidad.nombre,
-      },
-      tipoRepresentanteEmpresa: response.tipoRepresentanteEmpresa && {
-        id: response.tipoRepresentanteEmpresa.id,
-        title: response.tipoRepresentanteEmpresa.nombre,
+      tipoRepresentante: response.tipoRepresentante && {
+        id: response.tipoRepresentante.id,
+        title: response.tipoRepresentante.nombre,
       },
 
       creado: response.creado,
@@ -107,16 +73,8 @@ export const create: {
 } = {
   input: data => {
     const convertedResource: RepresentanteEmpresaModel.CreateBody = {
-      cuit: data.cuit,
-      apellido: data.apellido,
-      nombre: data.nombre,
-      direccion: data.direccion,
-      numeroMatricula: data.numeroMatricula,
-      vigencia: data.vigencia,
-
-      paisId: data.paisId,
-      provinciaId: data.provinciaId,
-      localidadId: data.localidadId,
+      empresaId: data.empresaId,
+      representanteId: data.representanteId,
       tipoRepresentanteId: data.tipoRepresentanteId,
     }
 

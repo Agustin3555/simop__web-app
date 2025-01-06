@@ -1,10 +1,15 @@
-import { DireccionModel } from '.'
 import { Ref } from '@/types'
+import { DireccionModel } from '.'
+import { RefProp, Scheme, TextProp } from '../services/config'
+import { DepartamentoService } from '../services'
+import { COMMON_PROPS } from '../constants'
 
 export interface RawEntity {
   id: number
   nombre: string
+
   direccion?: DireccionModel.RawRef
+
   creado: string
   modificado: string
 }
@@ -12,7 +17,9 @@ export interface RawEntity {
 export interface Entity {
   id: number
   nombre: string
+
   direccion?: Ref
+
   creado: string
   modificado: string
 }
@@ -24,10 +31,37 @@ export interface RawRef {
 
 export interface CreateData {
   nombre: string
+
   direccionId: number
 }
 
 export interface CreateBody {
   nombre: string
+
   direccionId: number
+}
+
+export const scheme: Scheme<Entity> = {
+  key: 'departamento',
+  service: DepartamentoService,
+  title: {
+    singular: 'Departamento',
+    plural: 'Departamentos',
+  },
+
+  groups: [
+    {
+      props: {
+        ...COMMON_PROPS,
+        nombre: new TextProp('nombre', 'Nombre', {
+          field: {
+            required: true,
+          },
+        }),
+        direccion: new RefProp('direccion', {
+          getScheme: () => DireccionModel.scheme,
+        }),
+      },
+    },
+  ],
 }

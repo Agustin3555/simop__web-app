@@ -1,31 +1,32 @@
-import { publicInstance } from '@/services/config'
+import { publicInstance, Service } from '@/services/config'
 import { ProvinciaModel } from '../models'
 import { ProvinciaAdapter } from '../adapters'
+import { buildPath } from '@/helpers'
 
-const collection = '/provincias'
+const collection = buildPath('provincias')
 
-export const getAll = async () => {
-  const response = await publicInstance.get(collection)
-  
-  return ProvinciaAdapter.getAll.output(response.data)
-}
+export const ProvinciaService: Service<ProvinciaModel.Entity> = {
+  getAll: async () => {
+    const response = await publicInstance.get(collection())
 
-export const getOne = async (id: number) => {
-  const response = await publicInstance.get(`${collection}/${id}`)
+    return ProvinciaAdapter.getAll.output(response.data)
+  },
 
-  return ProvinciaAdapter.getOne.output(response.data)
-}
+  getForConnect: async () => {
+    const response = await publicInstance.get(collection('for-connect'))
 
-export const getForConnect = async () => {
-  const response = await publicInstance.get(`${collection}/for-connect`)
+    return ProvinciaAdapter.getForConnect.output(response.data)
+  },
 
-  return ProvinciaAdapter.getForConnect.output(response.data)
-}
+  getOne: async id => {
+    const response = await publicInstance.get(collection(id))
 
-export const create = async (data: ProvinciaModel.CreateData) => {
-  const adaptedInput = ProvinciaAdapter.create.input(data)
+    return ProvinciaAdapter.getOne.output(response.data)
+  },
 
-  const response = await publicInstance.post(collection, adaptedInput)
+  create: async (data: ProvinciaModel.CreateData) => {
+    const adaptedInput = ProvinciaAdapter.create.input(data)
 
-  return true
+    await publicInstance.post(collection(), adaptedInput)
+  },
 }

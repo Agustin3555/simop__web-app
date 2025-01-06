@@ -5,7 +5,7 @@ import { buildPath } from '@/helpers'
 
 const collection = buildPath('pais')
 
-export const PaisService: Service<PaisModel.Entity, PaisModel.CreateData> = {
+export const PaisService: Service<PaisModel.Entity> = {
   getAll: async () => {
     const response = await publicInstance.get(collection())
 
@@ -24,7 +24,7 @@ export const PaisService: Service<PaisModel.Entity, PaisModel.CreateData> = {
     return PaisAdapter.getOne.output(response.data)
   },
 
-  create: async data => {
+  create: async (data: PaisModel.CreateData) => {
     const adaptedInput = PaisAdapter.create.input(data)
 
     await publicInstance.post(collection(), adaptedInput)

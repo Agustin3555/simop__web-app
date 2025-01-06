@@ -1,9 +1,6 @@
 import { View } from '../../components'
-import { Add, Query } from './components'
-import { ViewKey } from '../../constants'
+import { InspectorModel } from '../../models'
 
-const Inspector = () => (
-  <View viewKey={ViewKey.INSPECTOR} add={<Add />} query={<Query />} />
-)
+const Inspector = () => <View scheme={InspectorModel.scheme} />
 
 export default Inspector

@@ -1,31 +1,27 @@
-import { publicInstance } from '@/services/config'
+import { publicInstance, Service } from '@/services/config'
 import { RepresentanteEmpresaModel } from '../models'
 import { RepresentanteEmpresaAdapter } from '../adapters'
+import { buildPath } from '@/helpers'
 
-const collection = '/representantes-empresas'
+const collection = buildPath('representantes-empresas')
 
-export const getAll = async () => {
-  const response = await publicInstance.get(collection)
+export const RepresentanteEmpresaService: Service<RepresentanteEmpresaModel.Entity> =
+  {
+    getAll: async () => {
+      const response = await publicInstance.get(collection())
 
-  return RepresentanteEmpresaAdapter.getAll.output(response.data)
-}
+      return RepresentanteEmpresaAdapter.getAll.output(response.data)
+    },
 
-export const getForConnect = async () => {
-  const response = await publicInstance.get(`${collection}/for-connect`)
+    getOne: async id => {
+      const response = await publicInstance.get(collection(id))
 
-  return RepresentanteEmpresaAdapter.getForConnect.output(response.data)
-}
+      return RepresentanteEmpresaAdapter.getOne.output(response.data)
+    },
 
-export const getOne = async (id: number) => {
-  const response = await publicInstance.get(`${collection}/${id}`)
+    create: async (data: RepresentanteEmpresaModel.CreateData) => {
+      const adaptedInput = RepresentanteEmpresaAdapter.create.input(data)
 
-  return RepresentanteEmpresaAdapter.getOne.output(response.data)
-}
-
-export const create = async (data: RepresentanteEmpresaModel.CreateData) => {
-  const adaptedInput = RepresentanteEmpresaAdapter.create.input(data)
-
-  const response = await publicInstance.post(collection, adaptedInput)
-
-  return true
-}
+      await publicInstance.post(collection(), adaptedInput)
+    },
+  }

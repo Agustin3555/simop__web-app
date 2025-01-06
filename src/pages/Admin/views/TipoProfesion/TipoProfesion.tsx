@@ -1,9 +1,6 @@
 import { View } from '../../components'
-import { Add, Query } from './components'
-import { ViewKey } from '../../constants'
+import { TipoProfesionModel } from '../../models'
 
-const TipoProfesion = () => (
-  <View viewKey={ViewKey.TIPO_PROFESION} add={<Add />} query={<Query />} />
-)
+const TipoProfesion = () => <View scheme={TipoProfesionModel.scheme} />
 
 export default TipoProfesion

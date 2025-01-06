@@ -1,5 +1,24 @@
 import { Scheme } from '../services/config'
-import { EmpresaModel, PaisModel } from '../models'
+import // DepartamentoModel,
+// DireccionModel,
+// EmpresaModel,
+// InspectorModel,
+// LocalidadModel,
+// PaisModel,
+// ProvinciaModel,
+// RepresentanteEmpresaModel,
+// RepresentanteModel,
+// RepresentanteObraModel,
+// SubSecretariaModel,
+// TipoContratacionObraModel,
+// TipoEstadoObraModel,
+// TipoFinanciamientoObraModel,
+// TipoInspectorModel,
+// TipoProfesionModel,
+// TipoProgramaObraModel,
+// TipoRepresentanteModel,
+// TipoTematicaObraModel,
+'../models'
 
 export interface SectionNode {
   title?: string
@@ -11,60 +30,67 @@ export const TREE: SectionNode[] = [
   {
     title: 'Administración',
     sections: [
-      // {
-      //   title: 'Organigrama',
-      //   sections: [
-      //     { scheme: ViewKey.SUB_SECRETARIA },
-      //     { scheme: ViewKey.DIRECCION },
-      //     { scheme: ViewKey.DEPARTAMENTO },
-      //   ],
-      // },
       {
-        title: 'Ubicación Geográfica',
+        title: 'Organigrama',
         sections: [
-          { scheme: PaisModel.scheme },
-          // { scheme: ViewKey.PROVINCIA },
-          // { scheme: ViewKey.LOCALIDAD },
+          // { scheme: SubSecretariaModel.scheme },
+          // { scheme: DireccionModel.scheme },
+          // { scheme: DepartamentoModel.scheme },
         ],
       },
       // {
-      //   title: 'Tipos',
+      //   title: 'Ubicación Geográfica',
       //   sections: [
-      //     { scheme: ViewKey.TIPO_CONTRATACION_OBRA },
-      //     { scheme: ViewKey.TIPO_ESTADO_OBRA },
-      //     { scheme: ViewKey.TIPO_FINANCIAMIENTO_OBRA },
-      //     { scheme: ViewKey.MODIFICACION_OBRA },
-      //     { scheme: ViewKey.PARALIZACION_OBRA },
-      //     { scheme: ViewKey.TIPO_PROGRAMA_OBRA },
-      //     { scheme: ViewKey.TIPO_TEMATICA_OBRA },
-      //     { scheme: ViewKey.TIPO_REPRESENTANTE_EMPRESA },
-      //     { scheme: ViewKey.TRAMITE },
-      //     { scheme: ViewKey.TIPO_PROFESION },
+      //     { scheme: PaisModel.scheme },
+      //     { scheme: ProvinciaModel.scheme },
+      //     { scheme: LocalidadModel.scheme },
       //   ],
       // },
       // {
-      //   title: 'Inspectores',
-      //   sections: [
-      //     { scheme: ViewKey.INSPECTOR },
-      //     { scheme: ViewKey.TIPO_INSPECTOR },
-      //   ],
+      //   title: 'Tipos comunes',
+      //   sections: [{ scheme: TipoProfesionModel.scheme }],
       // },
     ],
   },
-  {
-    title: 'Empresas',
-    sections: [
-      { scheme: EmpresaModel.scheme },
-      // { scheme: ViewKey.REPRESENTANTE_EMPRESA },
-    ],
-  },
+  // {
+  //   title: 'Inspectores',
+  //   sections: [
+  //     { scheme: InspectorModel.scheme },
+  //     { scheme: TipoInspectorModel.scheme },
+  //   ],
+  // },
+  // {
+  //   title: 'Representantes',
+  //   sections: [
+  //     { scheme: RepresentanteModel.scheme },
+  //     { scheme: TipoRepresentanteModel.scheme },
+  //   ],
+  // },
+  // {
+  //   title: 'Empresas',
+  //   sections: [
+  //     { scheme: EmpresaModel.scheme },
+  //     { scheme: RepresentanteEmpresaModel.scheme },
+  //   ],
+  // },
   // {
   //   title: 'Obras',
   //   sections: [
-  //     { scheme: ViewKey.OBRA },
-  //     { scheme: ViewKey.FOJA_MEDICION },
-  //     { scheme: ViewKey.CERTIFICACION },
-  //     { scheme: ViewKey.PAGO_CERTIFICACION },
+  //     { scheme: RepresentanteObraModel.scheme },
+  //     { scheme: TipoContratacionObraModel.scheme },
+  //     { scheme: TipoFinanciamientoObraModel.scheme },
+  //     { scheme: TipoProgramaObraModel.scheme },
+  //     { scheme: TipoTematicaObraModel.scheme },
+  //     { scheme: TipoEstadoObraModel.scheme },
   //   ],
   // },
 ]
+
+// { scheme: ViewKey.MODIFICACION_OBRA },
+// { scheme: ViewKey.PARALIZACION_OBRA },
+// { scheme: ViewKey.TRAMITE },
+
+// { scheme: ViewKey.OBRA },
+// { scheme: ViewKey.FOJA_MEDICION },
+// { scheme: ViewKey.CERTIFICACION },
+// { scheme: ViewKey.PAGO_CERTIFICACION },

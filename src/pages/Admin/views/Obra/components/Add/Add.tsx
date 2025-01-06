@@ -15,8 +15,8 @@ import {
   ProgramaObraService,
   FinanciamientoService,
   TipoContratacionObraService,
-  RepresentanteEmpresaService,
-  TipoRepresentanteEmpresaService,
+  RepresentanteService,
+  TipoRepresentanteService,
   TipoProfesionService,
   InspectorService,
 } from '@/pages/Admin/services'
@@ -306,13 +306,13 @@ const Add = () => (
           //       <Combobox
           //         title="Representante"
           //         getForConnectProvider={
-          //           RepresentanteEmpresaService.getForConnect
+          //           RepresentanteService.getForConnect
           //         }
           //       />
           //       <Combobox
           //         title="Tipo de Representante"
           //         getForConnectProvider={
-          //           TipoRepresentanteEmpresaService.getForConnect
+          //           TipoRepresentanteService.getForConnect
           //         }
           //       />
           //     </FieldGenerator>

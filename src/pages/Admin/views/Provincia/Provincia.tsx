@@ -1,9 +1,6 @@
 import { View } from '../../components'
-import { Add, Query } from './components'
-import { ViewKey } from '../../constants'
+import { ProvinciaModel } from '../../models'
 
-const Provincia = () => {
-  return <View viewKey={ViewKey.PROVINCIA} add={<Add />} query={<Query />} />
-}
+const Provincia = () => <View scheme={ProvinciaModel.scheme} />
 
 export default Provincia

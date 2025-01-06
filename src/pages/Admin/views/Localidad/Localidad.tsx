@@ -1,9 +1,6 @@
 import { View } from '../../components'
-import { Add, Query } from './components'
-import { ViewKey } from '../../constants'
+import { LocalidadModel } from '../../models'
 
-const Localidad = () => {
-  return <View viewKey={ViewKey.LOCALIDAD} add={<Add />} query={<Query />} />
-}
+const Localidad = () => <View scheme={LocalidadModel.scheme} />
 
 export default Localidad

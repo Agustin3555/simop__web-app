@@ -102,25 +102,15 @@ export const scheme: Scheme<Entity> = {
             required: true,
           },
         }),
-        pais: new RefProp('pais', 'País', {
+        pais: new RefProp('pais', {
           getScheme: () => PaisModel.scheme,
         }),
-        // provincia: {
-        //   accessorKey: 'provincia',
-        //   title: 'Provincia',
-        //   type: 'ref',
-        //   refConfig: {
-        //     getScheme: () => ProvinciaModel.scheme,
-        //   },
-        // },
-        // localidad: {
-        //   accessorKey: 'localidad',
-        //   title: 'Localidad',
-        //   type: 'ref',
-        //   refConfig: {
-        //     getScheme: () => LocalidadModel.scheme,
-        //   },
-        // },
+        provincia: new RefProp('provincia', {
+          getScheme: () => ProvinciaModel.scheme,
+        }),
+        localidad: new RefProp('localidad', {
+          getScheme: () => LocalidadModel.scheme,
+        }),
       },
     },
   ],

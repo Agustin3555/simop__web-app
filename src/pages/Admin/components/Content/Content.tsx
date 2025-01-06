@@ -1,26 +1,30 @@
 import './Content.css'
 import {
-  // SubSecretarias,
-  // Direcciones,
-  // Departamentos,
+  SubSecretaria,
+  Direccion,
+  Departamento,
   Pais,
-  // Provincia,
-  // Localidad,
-  // EstadoObra,
-  // Financiamiento,
+  Provincia,
+  Localidad,
+  TipoProfesion,
+  Inspector,
+  TipoInspector,
+  Representante,
+  TipoRepresentante,
+  Empresa,
+  RepresentanteEmpresa,
+  RepresentanteObra,
+  TipoContratacionObra,
+  TipoFinanciamientoObra,
+  TipoProgramaObra,
+  TipoTematicaObra,
+  TipoEstadoObra,
+
   // ModificacionObra,
   // ParalizacionObra,
-  // ProgramaObra,
-  // TipoTematicaObra,
-  // RepresentanteEmpresa,
   // Tramite,
-  // TipoProfesion,
-  // TipoInspector,
-  // Inspector,
-  // TipoRepresentanteEmpresa,
-  Empresa,
+
   // Obra,
-  // TipoContratacionObra,
   // FojaMedicion,
   // Certificacion,
   // PagoCertificacion,
@@ -28,26 +32,30 @@ import {
 
 const Content = () => (
   <div className="cmp-content">
-    {/* <SubSecretarias /> */}
-    {/* <Direcciones /> */}
-    {/* <Departamentos /> */}
+    <SubSecretaria />
+    <Direccion />
+    <Departamento />
     <Pais />
-    {/* <Provincia /> */}
-    {/* <Localidad /> */}
-    {/* <TipoContratacionObra /> */}
-    {/* <EstadoObra /> */}
-    {/* <Financiamiento /> */}
+    <Provincia />
+    <Localidad />
+    <TipoProfesion />
+    <Inspector />
+    <TipoInspector />
+    <Representante />
+    <TipoRepresentante />
+    <Empresa />
+    <RepresentanteEmpresa />
+    <RepresentanteObra />
+    <TipoContratacionObra />
+    <TipoFinanciamientoObra />
+    <TipoProgramaObra />
+    <TipoTematicaObra />
+    <TipoEstadoObra />
+
     {/* <ModificacionObra /> */}
     {/* <ParalizacionObra /> */}
-    {/* <ProgramaObra /> */}
-    {/* <TipoTematicaObra /> */}
-    {/* <RepresentanteEmpresa /> */}
     {/* <Tramite /> */}
-    {/* <TipoProfesion /> */}
-    {/* <TipoInspector /> */}
-    {/* <TipoRepresentanteEmpresa /> */}
-    {/* <Inspector /> */}
-    <Empresa />
+
     {/* <Obra /> */}
     {/* <FojaMedicion /> */}
     {/* <Certificacion /> */}

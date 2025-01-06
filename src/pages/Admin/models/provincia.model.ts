@@ -1,10 +1,15 @@
-import { PaisModel } from '.'
 import { Ref } from '@/types'
+import { PaisModel } from '.'
+import { RefProp, Scheme, TextProp } from '../services/config'
+import { ProvinciaService } from '../services'
+import { COMMON_PROPS } from '../constants'
 
 export interface RawEntity {
   id: number
   nombre: string
+
   pais?: PaisModel.RawRef
+
   creado: string
   modificado: string
 }
@@ -12,7 +17,9 @@ export interface RawEntity {
 export interface Entity {
   id: number
   nombre: string
+
   pais?: Ref
+
   creado: string
   modificado: string
 }
@@ -24,10 +31,37 @@ export interface RawRef {
 
 export interface CreateData {
   nombre: string
+
   paisId: number
 }
 
 export interface CreateBody {
   nombre: string
+
   paisId: number
+}
+
+export const scheme: Scheme<Entity> = {
+  key: 'provincia',
+  service: ProvinciaService,
+  title: {
+    singular: 'Provincia',
+    plural: 'Provincias',
+  },
+
+  groups: [
+    {
+      props: {
+        ...COMMON_PROPS,
+        nombre: new TextProp('nombre', 'Nombre', {
+          field: {
+            required: true,
+          },
+        }),
+        pais: new RefProp('pais', {
+          getScheme: () => PaisModel.scheme,
+        }),
+      },
+    },
+  ],
 }

@@ -1,9 +1,6 @@
 import { View } from '../../components'
-import { Add, Query } from './components'
-import { ViewKey } from '../../constants'
+import { ObraModel } from '../../models'
 
-const Obra = () => {
-  return <View viewKey={ViewKey.OBRA} add={<Add />} query={<Query />} />
-}
+const Obra = () => <View scheme={ObraModel.scheme} />
 
 export default Obra

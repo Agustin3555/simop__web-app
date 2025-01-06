@@ -2,7 +2,7 @@ import { publicInstance } from '@/services/config'
 import { ModificacionObraModel } from '../models'
 import { ModificacionObraAdapter } from '../adapters'
 
-const collection = '/tipo-modificaciones-obra'
+const collection = '/tipos-modificaciones-obra'
 
 export const getAll = async () => {
   const response = await publicInstance.get(collection)
@@ -22,8 +22,8 @@ export const getOne = async (id: number) => {
   return ModificacionObraAdapter.getOne.output(response.data)
 }
 
-export const create = async (data:ModificacionObraModel.CreateData) => {
-  const adaptedInput =ModificacionObraAdapter.create.input(data)
+export const create = async (data: ModificacionObraModel.CreateData) => {
+  const adaptedInput = ModificacionObraAdapter.create.input(data)
 
   const response = await publicInstance.post(collection, adaptedInput)
 

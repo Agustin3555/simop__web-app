@@ -1,3 +1,7 @@
+import { Scheme } from '../services/config'
+import { TipoContratacionObraService } from '../services'
+import { TIPO_PROPS } from '../constants'
+
 export interface RawEntity {
   id: number
   nombre: string
@@ -25,4 +29,21 @@ export interface CreateData {
 
 export interface CreateBody {
   nombre: string
+}
+
+export const scheme: Scheme<Entity> = {
+  key: 'tipoContratacionObra',
+  service: TipoContratacionObraService,
+  title: {
+    singular: 'Tipo de Contratación de Obra',
+    plural: 'Tipos de Contrataciones de Obra',
+  },
+
+  groups: [
+    {
+      props: {
+        ...TIPO_PROPS,
+      },
+    },
+  ],
 }

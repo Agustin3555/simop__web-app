@@ -1,31 +1,32 @@
-import { publicInstance } from '@/services/config'
+import { publicInstance, Service } from '@/services/config'
 import { DireccionModel } from '../models'
 import { DireccionAdapter } from '../adapters'
+import { buildPath } from '@/helpers'
 
-const collection = '/direcciones'
+const collection = buildPath('direcciones')
 
-export const getAll = async () => {
-  const response = await publicInstance.get(collection)
+export const DireccionService: Service<DireccionModel.Entity> = {
+  getAll: async () => {
+    const response = await publicInstance.get(collection())
 
-  return DireccionAdapter.getAll.output(response.data)
-}
+    return DireccionAdapter.getAll.output(response.data)
+  },
 
-export const getOne = async (id: number) => {
-  const response = await publicInstance.get(`${collection}/${id}`)
+  getOne: async id => {
+    const response = await publicInstance.get(collection(id))
 
-  return DireccionAdapter.getOne.output(response.data)
-}
+    return DireccionAdapter.getOne.output(response.data)
+  },
 
-export const getForConnect = async () => {
-  const response = await publicInstance.get(`${collection}/for-connect`)
+  getForConnect: async () => {
+    const response = await publicInstance.get(collection('for-connect'))
 
-  return DireccionAdapter.getForConnect.output(response.data)
-}
+    return DireccionAdapter.getForConnect.output(response.data)
+  },
 
-export const create = async (data: DireccionModel.CreateData) => {
-  const adaptedInput = DireccionAdapter.create.input(data)
+  create: async (data: DireccionModel.CreateData) => {
+    const adaptedInput = DireccionAdapter.create.input(data)
 
-  const response = await publicInstance.post(collection, adaptedInput)
-
-  return true
+    await publicInstance.post(collection(), adaptedInput)
+  },
 }

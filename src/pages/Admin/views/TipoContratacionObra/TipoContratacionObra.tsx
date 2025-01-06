@@ -1,13 +1,8 @@
 import { View } from '../../components'
-import { Add, Query } from './components'
-import { ViewKey } from '../../constants'
+import { TipoContratacionObraModel } from '../../models'
 
 const TipoContratacionObra = () => (
-  <View
-    viewKey={ViewKey.TIPO_CONTRATACION_OBRA}
-    add={<Add />}
-    query={<Query />}
-  />
+  <View scheme={TipoContratacionObraModel.scheme} />
 )
 
 export default TipoContratacionObra

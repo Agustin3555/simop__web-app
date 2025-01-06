@@ -2,7 +2,7 @@ import { publicInstance } from '@/services/config'
 import { ParalizacionObraModel } from '../models'
 import { ParalizacionObraAdapter } from '../adapters'
 
-const collection = '/tipo-paralizaciones-obras'
+const collection = '/tipos-paralizaciones-obra'
 
 export const getAll = async () => {
   const response = await publicInstance.get(collection)
@@ -22,8 +22,8 @@ export const getOne = async (id: number) => {
   return ParalizacionObraAdapter.getOne.output(response.data)
 }
 
-export const create = async (data:ParalizacionObraModel.CreateData) => {
-  const adaptedInput =ParalizacionObraAdapter.create.input(data)
+export const create = async (data: ParalizacionObraModel.CreateData) => {
+  const adaptedInput = ParalizacionObraAdapter.create.input(data)
 
   const response = await publicInstance.post(collection, adaptedInput)
 

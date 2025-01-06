@@ -1,6 +1,11 @@
+import { Scheme } from '../services/config'
+import { TipoTematicaObraService } from '../services'
+import { TIPO_PROPS } from '../constants'
+
 export interface RawEntity {
   id: number
   nombre: string
+
   creado: string
   modificado: string
 }
@@ -8,6 +13,7 @@ export interface RawEntity {
 export interface Entity {
   id: number
   nombre: string
+
   creado: string
   modificado: string
 }
@@ -23,4 +29,21 @@ export interface CreateData {
 
 export interface CreateBody {
   nombre: string
+}
+
+export const scheme: Scheme<Entity> = {
+  key: 'tipoTematicaObra',
+  service: TipoTematicaObraService,
+  title: {
+    singular: 'Tipo de Temática de Obra',
+    plural: 'Tipos de Temáticas de Obra',
+  },
+
+  groups: [
+    {
+      props: {
+        ...TIPO_PROPS,
+      },
+    },
+  ],
 }

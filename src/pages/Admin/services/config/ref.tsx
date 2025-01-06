@@ -8,9 +8,8 @@ import { AccessorFn, Row } from '@tanstack/react-table'
 export class RefProp<T extends EntityKey> implements PropScheme {
   constructor(
     public key: T,
-    public title: string,
 
-    public config?: GetScheme & {
+    public config: GetScheme & {
       // column?: ForView,
       field?: ForView
     },
@@ -19,15 +18,26 @@ export class RefProp<T extends EntityKey> implements PropScheme {
   }
 
   getFieldComponent = () => {
-    const { key, title, config } = this
-    const { getScheme, field } = config ?? {}
+    const { key, config } = this
+    const { getScheme, field } = config
     const { hidden } = field ?? {}
 
     if (hidden === true) return
 
-    const { getForConnect } = getScheme!().service
+    const scheme = getScheme()
+    if (!scheme) return
 
-    return <Combobox key={key} name={key} {...{ title, getForConnect }} />
+    const { service, title } = scheme
+    const { getForConnect } = service
+
+    return (
+      <Combobox
+        key={key}
+        name={key}
+        title={title.singular}
+        {...{ getForConnect }}
+      />
+    )
   }
 
   getFieldValue = (formValues: FormValues) => {
