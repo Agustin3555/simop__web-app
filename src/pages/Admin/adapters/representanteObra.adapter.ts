@@ -14,7 +14,7 @@ export const getAll: {
 
         obra: item.obra && {
           id: item.obra.id,
-          title: item.obra.nombre,
+          title: String(item.obra.numero),
         },
         representante: item.representante && {
           id: item.representante.id,
@@ -46,7 +46,7 @@ export const getOne: {
 
       obra: response.obra && {
         id: response.obra.id,
-        title: response.obra.nombre,
+        title: String(response.obra.numero),
       },
       representante: response.representante && {
         id: response.representante.id,

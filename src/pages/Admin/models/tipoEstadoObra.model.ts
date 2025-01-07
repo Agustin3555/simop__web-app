@@ -1,4 +1,4 @@
-import { TIPO_PROPS } from '../constants'
+import { TIPO_PROPS } from '../constants/commonProps.const'
 import { TipoEstadoObraService } from '../services'
 import { Scheme } from '../services/config'
 

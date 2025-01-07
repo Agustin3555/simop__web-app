@@ -1,6 +1,6 @@
 import { Scheme, TextProp } from '../services/config'
 import { SubSecretariaService } from '../services'
-import { COMMON_PROPS } from '../constants'
+import { COMMON_PROPS } from '../constants/commonProps.const'
 
 export interface RawEntity {
   id: number

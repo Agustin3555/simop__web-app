@@ -24,10 +24,7 @@ export class RefProp<T extends EntityKey> implements PropScheme {
 
     if (hidden === true) return
 
-    const scheme = getScheme()
-    if (!scheme) return
-
-    const { service, title } = scheme
+    const { service, title } = getScheme()
     const { getForConnect } = service
 
     return (

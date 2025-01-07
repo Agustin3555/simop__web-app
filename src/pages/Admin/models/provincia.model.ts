@@ -2,7 +2,7 @@ import { Ref } from '@/types'
 import { PaisModel } from '.'
 import { RefProp, Scheme, TextProp } from '../services/config'
 import { ProvinciaService } from '../services'
-import { COMMON_PROPS } from '../constants'
+import { COMMON_PROPS } from '../constants/commonProps.const'
 
 export interface RawEntity {
   id: number

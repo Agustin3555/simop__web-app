@@ -2,7 +2,7 @@ import { EmpresaModel, RepresentanteModel, TipoRepresentanteModel } from '.'
 import { Ref } from '@/types'
 import { RefProp, Scheme } from '../services/config'
 import { RepresentanteEmpresaService } from '../services'
-import { COMMON_PROPS } from '../constants'
+import { COMMON_PROPS } from '../constants/commonProps.const'
 
 export interface RawEntity {
   id: number

@@ -2,7 +2,7 @@ import { LocalidadModel, PaisModel, ProvinciaModel } from '.'
 import { Ref } from '@/types'
 import { NumberProp, RefProp, Scheme, TextProp } from '../services/config'
 import { EmpresaService } from '../services'
-import { COMMON_PROPS } from '../constants'
+import { COMMON_PROPS } from '../constants/commonProps.const'
 
 export interface RawEntity {
   id: number

@@ -2,7 +2,7 @@ import './Nav.css'
 import { useCallback, useState } from 'react'
 import { Button, ExternalLink } from '@/components'
 import { Section } from './components'
-import { TREE } from '../../constants'
+import { TREE } from '../../constants/navTree.const'
 import { classList } from '@/helpers'
 
 const Nav = () => {

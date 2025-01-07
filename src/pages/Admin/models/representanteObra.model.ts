@@ -1,18 +1,13 @@
-import {
-  EmpresaModel,
-  ObraModel,
-  RepresentanteModel,
-  TipoRepresentanteModel,
-} from '.'
+import { ObraModel, RepresentanteModel, TipoRepresentanteModel } from '.'
 import { Ref } from '@/types'
 import { RefProp, Scheme } from '../services/config'
 import { RepresentanteObraService } from '../services'
-import { COMMON_PROPS } from '../constants'
+import { COMMON_PROPS } from '../constants/commonProps.const'
 
 export interface RawEntity {
   id: number
 
-  obra: EmpresaModel.RawRef
+  obra: ObraModel.RawRef
   representante: RepresentanteModel.RawRef
   tipoRepresentante: TipoRepresentanteModel.RawRef
 

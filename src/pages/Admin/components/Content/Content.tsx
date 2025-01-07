@@ -13,7 +13,9 @@ import {
   TipoRepresentante,
   Empresa,
   RepresentanteEmpresa,
+  Obra,
   RepresentanteObra,
+  InspectorObra,
   TipoContratacionObra,
   TipoFinanciamientoObra,
   TipoProgramaObra,
@@ -24,7 +26,6 @@ import {
   // ParalizacionObra,
   // Tramite,
 
-  // Obra,
   // FojaMedicion,
   // Certificacion,
   // PagoCertificacion,
@@ -45,7 +46,9 @@ const Content = () => (
     <TipoRepresentante />
     <Empresa />
     <RepresentanteEmpresa />
+    <Obra />
     <RepresentanteObra />
+    <InspectorObra />
     <TipoContratacionObra />
     <TipoFinanciamientoObra />
     <TipoProgramaObra />
@@ -56,7 +59,6 @@ const Content = () => (
     {/* <ParalizacionObra /> */}
     {/* <Tramite /> */}
 
-    {/* <Obra /> */}
     {/* <FojaMedicion /> */}
     {/* <Certificacion /> */}
     {/* <PagoCertificacion /> */}

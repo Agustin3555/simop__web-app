@@ -1,6 +1,6 @@
 import { Scheme } from '../services/config'
 import { TipoProgramaObraService } from '../services'
-import { TIPO_PROPS } from '../constants'
+import { TIPO_PROPS } from '../constants/commonProps.const'
 
 export interface RawEntity {
   id: number
