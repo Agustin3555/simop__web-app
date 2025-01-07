@@ -11,6 +11,7 @@ export const getAll: {
     const convertedResource = response.map<RepresentanteEmpresaModel.Entity>(
       item => ({
         id: item.id,
+        vigencia: item.vigencia,
 
         empresa: item.empresa && {
           id: item.empresa.id,
@@ -43,6 +44,7 @@ export const getOne: {
   output: response => {
     const convertedResource = {
       id: response.id,
+      vigencia: response.vigencia,
 
       empresa: response.empresa && {
         id: response.empresa.id,
@@ -73,6 +75,8 @@ export const create: {
 } = {
   input: data => {
     const convertedResource: RepresentanteEmpresaModel.CreateBody = {
+      vigencia: data.vigencia,
+
       empresaId: data.empresaId,
       representanteId: data.representanteId,
       tipoRepresentanteId: data.tipoRepresentanteId,

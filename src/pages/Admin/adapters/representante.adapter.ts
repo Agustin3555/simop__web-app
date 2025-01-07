@@ -16,7 +16,6 @@ export const getAll: {
       nombre: item.nombre,
       direccion: item.direccion,
       numeroMatricula: item.numeroMatricula,
-      vigencia: item.vigencia,
 
       pais: item.pais && {
         id: item.pais.id,
@@ -45,7 +44,7 @@ export const getForConnect: {
   output: response => {
     const convertedResource = response.map<Ref>(item => ({
       id: item.id,
-      title: item.nombre,
+      title: item.apellido,
     }))
 
     return convertedResource
@@ -63,7 +62,6 @@ export const getOne: {
       nombre: response.nombre,
       direccion: response.direccion,
       numeroMatricula: response.numeroMatricula,
-      vigencia: response.vigencia,
 
       pais: response.pais && {
         id: response.pais.id,
@@ -99,7 +97,6 @@ export const create: {
       nombre: data.nombre,
       direccion: data.direccion,
       numeroMatricula: data.numeroMatricula,
-      vigencia: data.vigencia,
 
       paisId: data.paisId,
       provinciaId: data.provinciaId,

@@ -1,12 +1,6 @@
 import { PaisModel, ProvinciaModel, LocalidadModel } from '.'
 import { Ref } from '@/types'
-import {
-  BooleanProp,
-  NumberProp,
-  RefProp,
-  Scheme,
-  TextProp,
-} from '../services/config'
+import { NumberProp, RefProp, Scheme, TextProp } from '../services/config'
 import { RepresentanteService } from '../services'
 import { COMMON_PROPS } from '../constants/commonProps.const'
 
@@ -17,7 +11,6 @@ export interface RawEntity {
   nombre: string
   direccion: string
   numeroMatricula: string
-  vigencia: boolean
 
   pais?: PaisModel.RawRef
   provincia?: ProvinciaModel.RawRef
@@ -34,7 +27,6 @@ export interface Entity {
   nombre: string
   direccion: string
   numeroMatricula: string
-  vigencia: boolean
 
   pais?: Ref
   provincia?: Ref
@@ -55,7 +47,6 @@ export interface CreateData {
   nombre: string
   direccion: string
   numeroMatricula: string
-  vigencia: boolean
 
   paisId: number
   provinciaId: number
@@ -68,7 +59,6 @@ export interface CreateBody {
   nombre: string
   direccion: string
   numeroMatricula: string
-  vigencia: boolean
 
   paisId: number
   provinciaId: number
@@ -116,10 +106,6 @@ export const scheme: Scheme<Entity> = {
             },
           },
         ),
-        vigencia: new BooleanProp('vigencia', 'Vigencia', {
-          falseText: 'No Vigente',
-          trueText: 'Vigente',
-        }),
         pais: new RefProp('pais', {
           getScheme: () => PaisModel.scheme,
         }),

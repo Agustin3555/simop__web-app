@@ -1,11 +1,12 @@
 import { EmpresaModel, RepresentanteModel, TipoRepresentanteModel } from '.'
 import { Ref } from '@/types'
-import { RefProp, Scheme } from '../services/config'
+import { BooleanProp, RefProp, Scheme } from '../services/config'
 import { RepresentanteEmpresaService } from '../services'
 import { COMMON_PROPS } from '../constants/commonProps.const'
 
 export interface RawEntity {
   id: number
+  vigencia: boolean
 
   empresa: EmpresaModel.RawRef
   representante: RepresentanteModel.RawRef
@@ -17,6 +18,7 @@ export interface RawEntity {
 
 export interface Entity {
   id: number
+  vigencia: boolean
 
   empresa: Ref
   representante: Ref
@@ -27,12 +29,16 @@ export interface Entity {
 }
 
 export interface CreateData {
+  vigencia: boolean
+
   empresaId: number
   representanteId: number
   tipoRepresentanteId: number
 }
 
 export interface CreateBody {
+  vigencia: boolean
+
   empresaId: number
   representanteId: number
   tipoRepresentanteId: number
@@ -58,6 +64,10 @@ export const scheme: Scheme<Entity> = {
         }),
         tipoRepresentante: new RefProp('tipoRepresentante', {
           getScheme: () => TipoRepresentanteModel.scheme,
+        }),
+        vigencia: new BooleanProp('vigencia', 'Vigencia', {
+          falseText: 'No Vigente',
+          trueText: 'Vigente',
         }),
       },
     },
