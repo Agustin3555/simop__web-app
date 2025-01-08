@@ -8,8 +8,9 @@ import { classList } from '@/helpers'
 const Nav = () => {
   const [open, setOpen] = useState(false)
 
+  const closeNav = useCallback(() => setOpen(false), [])
   const toggleHandleClick = useCallback(() => setOpen(prev => !prev), [])
-  const backdropHandleClick = useCallback(() => setOpen(false), [])
+  const backdropHandleClick = useCallback(() => closeNav(), [])
 
   return (
     <div className={classList('cmp-nav', { open })}>
@@ -31,6 +32,7 @@ const Nav = () => {
             <Section
               key={section.title || section.scheme?.title.plural}
               {...section}
+              {...{ closeNav }}
             />
           ))}
         </div>
