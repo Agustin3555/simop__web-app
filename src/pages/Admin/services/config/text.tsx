@@ -1,6 +1,5 @@
 import { Entity, EntityKey } from '@/services/config'
 import { ForView, PropScheme, Required } from './utils'
-import { FormValues } from '@/hooks'
 import { Input } from '@/components'
 import { Column, Row } from '@tanstack/react-table'
 import { TextFilter } from '../../components'
@@ -26,14 +25,18 @@ export class TextProp<T extends EntityKey> implements PropScheme {
     return <Input key={key} name={key} {...{ title, required }} />
   }
 
-  getFieldValue = (formValues: FormValues) => {
+  getFieldValue = (formData: FormData) => {
     const { key, config } = this
     const { field } = config ?? {}
     const { hidden } = field ?? {}
 
     if (hidden === true) return
 
-    return formValues.get.string(key)
+    const value = formData.get(key)
+
+    if (value === '') return
+
+    return value as string
   }
 
   getHeader = (column: Column<Entity>) => {

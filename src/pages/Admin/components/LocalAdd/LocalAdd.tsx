@@ -20,17 +20,19 @@ const LocalAdd = () => {
   )
 
   const { handleSubmit, actionState } = useSubmitAction(
-    async ({ formValues, setError, setSuccess }) => {
+    async ({ form, formData, setError, setSuccess }) => {
       try {
         const createData = groups.reduce((acc, { props }) => {
           Object.values(props).forEach(({ key, getFieldValue }) => {
-            const value = getFieldValue(formValues)
+            const value = getFieldValue(formData, form)
 
             if (value !== undefined) acc[key as keyof typeof acc] = value
           })
 
           return acc
         }, {} as Record<string, unknown>)
+
+        // console.log(createData)
 
         await service.create!(createData)
 

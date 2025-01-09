@@ -1,8 +1,7 @@
 import { Entity, EntityKey } from '@/services/config'
 import { Color, ForView, PropScheme } from './utils'
-import { FormValues } from '@/hooks'
 import { Checkbox } from '../../components'
-import { Row } from '@tanstack/react-table'
+import { Column, Row } from '@tanstack/react-table'
 import { classList } from '@/helpers'
 
 export class BooleanProp<T extends EntityKey> implements PropScheme {
@@ -32,14 +31,30 @@ export class BooleanProp<T extends EntityKey> implements PropScheme {
     return <Checkbox key={key} name={key} {...{ title, falseText, trueText }} />
   }
 
-  getFieldValue = (formValues: FormValues) => {
+  getFieldValue = (formData: FormData, form: HTMLFormElement) => {
     const { key, config } = this
     const { field } = config ?? {}
     const { hidden } = field ?? {}
 
     if (hidden === true) return
 
-    return formValues.get.boolean(key)
+    // const checkbox = form.querySelector<HTMLInputElement>(
+    //   `input[type="checkbox"][name="${key}"]`,
+    // )
+    // if (!checkbox) return
+
+    // const useValue = checkbox.dataset.useValue === 'true'
+    // if (!useValue) return
+
+    return formData.get(key) === 'on'
+  }
+
+  getHeader = (column: Column<Entity>) => {
+    const { title } = this
+
+    const filter = undefined
+
+    return { title, filter }
   }
 
   getCellComponent = (row: Row<Entity>) => {

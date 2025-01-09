@@ -11,6 +11,7 @@ import { Ref } from '@/types'
 import {
   BooleanProp,
   DateProp,
+  DateTimeProp,
   NumberProp,
   RefProp,
   Scheme,
@@ -50,7 +51,7 @@ export interface RawEntity {
   observacionesObraRefaccionada?: string
 
   empresa?: EmpresaModel.RawRef
-  tipoContratacionObra?: TipoTematicaObraModel.RawRef
+  tipoContratacionObra?: TipoContratacionObraModel.RawRef
   tipoFinanciamientoObra?: TipoFinanciamientoObraModel.RawRef
   tipoProgramaObra?: TipoProgramaObraModel.RawRef
   tipoTematicaObra?: TipoTematicaObraModel.RawRef
@@ -203,115 +204,70 @@ export const scheme: Scheme<Entity> = {
             required: true,
           },
         }),
-        empresa: new RefProp('empresa', {
-          getScheme: () => EmpresaModel.scheme,
-        }),
+        // empresa: new RefProp('empresa', {
+        //   getScheme: () => EmpresaModel.scheme,
+        // }),
         numeroExpediente: new TextProp(
           'numeroExpediente',
           'Número de Expediente',
-          {
-            field: {
-              required: true,
-            },
-          },
         ),
         numeroResolucion: new TextProp(
           'numeroResolucion',
           'Número de Resolución',
-          {
-            field: {
-              required: true,
-            },
-          },
         ),
-        anioResolucion: new NumberProp('anioResolucion', 'Año de Resolución', {
-          field: {
-            required: true,
-          },
-        }),
+        // anioResolucion: new NumberProp('anioResolucion', 'Año de Resolución', {
+        //   field: {
+        //     required: true,
+        //   },
+        // }),
         numeroContratacion: new TextProp(
           'numeroContratacion',
           'Número de Contratación',
-          {
-            field: {
-              required: true,
-            },
-          },
         ),
-        anioContratacion: new NumberProp(
-          'anioContratacion',
-          'Año de Contratación',
-          {
-            field: {
-              required: true,
-            },
-          },
-        ),
+        // anioContratacion: new NumberProp(
+        //   'anioContratacion',
+        //   'Año de Contratación',
+        //   {
+        //     field: {
+        //       required: true,
+        //     },
+        //   },
+        // ),
         montoContratacion: new NumberProp(
           'montoContratacion',
           'Año de Contratación',
           {
-            field: {
-              required: true,
-            },
+            decimal: true,
+            pre: '$',
           },
         ),
-        tipoContratacionObra: new RefProp('tipoContratacionObra', {
-          getScheme: () => TipoContratacionObraModel.scheme,
-        }),
-        tipoFinanciamientoObra: new RefProp('tipoFinanciamientoObra', {
-          getScheme: () => TipoFinanciamientoObraModel.scheme,
-        }),
-        tipoProgramaObra: new RefProp('tipoProgramaObra', {
-          getScheme: () => TipoProgramaObraModel.scheme,
-        }),
-        tipoTematicaObra: new RefProp('tipoTematicaObra', {
-          getScheme: () => TipoTematicaObraModel.scheme,
-        }),
-        tipoEstadoObra: new RefProp('tipoEstadoObra', {
-          getScheme: () => TipoEstadoObraModel.scheme,
-        }),
-        fechaInicio: new DateProp('fechaInicio', 'Fecha de Inicio', {
-          field: {
-            required: true,
-          },
-        }),
-        fechaFin: new DateProp('fechaFin', 'Fecha de Fin', {
-          field: {
-            required: true,
-          },
-        }),
-        plazoMeses: new NumberProp('plazoMeses', 'Plazo en Meses', {
-          field: {
-            required: true,
-          },
-        }),
-        plazoDias: new NumberProp('plazoDias', 'Plazo en Días', {
-          field: {
-            required: true,
-          },
-        }),
-        localidad: new RefProp('localidad', {
-          getScheme: () => LocalidadModel.scheme,
-        }),
-        direccion: new TextProp('direccion', 'Dirección', {
-          field: {
-            required: true,
-          },
-        }),
-        lugar: new TextProp('lugar', 'Lugar', {
-          field: {
-            required: true,
-          },
-        }),
+        // tipoContratacionObra: new RefProp('tipoContratacionObra', {
+        //   getScheme: () => TipoContratacionObraModel.scheme,
+        // }),
+        // tipoFinanciamientoObra: new RefProp('tipoFinanciamientoObra', {
+        //   getScheme: () => TipoFinanciamientoObraModel.scheme,
+        // }),
+        // tipoProgramaObra: new RefProp('tipoProgramaObra', {
+        //   getScheme: () => TipoProgramaObraModel.scheme,
+        // }),
+        // tipoTematicaObra: new RefProp('tipoTematicaObra', {
+        //   getScheme: () => TipoTematicaObraModel.scheme,
+        // }),
+        // tipoEstadoObra: new RefProp('tipoEstadoObra', {
+        //   getScheme: () => TipoEstadoObraModel.scheme,
+        // }),
+        fechaInicio: new DateProp('fechaInicio', 'Fecha de Inicio'),
+        fechaFin: new DateProp('fechaFin', 'Fecha de Fin'),
+        plazoMeses: new NumberProp('plazoMeses', 'Plazo en Meses'),
+        plazoDias: new NumberProp('plazoDias', 'Plazo en Días'),
+        // localidad: new RefProp('localidad', {
+        //   getScheme: () => LocalidadModel.scheme,
+        // }),
+        direccion: new TextProp('direccion', 'Dirección'),
+        lugar: new TextProp('lugar', 'Lugar'),
         nomenclaturaCatastral: new TextProp(
           'nomenclaturaCatastral',
           'Nomenclatura Catastral',
-          {
-            field: {
-              required: true,
-            },
-          },
         ),
         observaciones: new TextLongProp(
           'observaciones',
@@ -326,19 +282,32 @@ export const scheme: Scheme<Entity> = {
         porcentajeObraNueva: new NumberProp(
           'porcentajeObraNueva',
           'Porcentaje de obra nueva',
+          {
+            decimal: true,
+            pre: '%',
+          },
         ),
         metrosCuadradosObraNueva: new NumberProp(
           'metrosCuadradosObraNueva',
           'm² (metros cuadrados) de obra nueva',
+          {
+            decimal: true,
+            sub: 'm²',
+          },
         ),
         metrosLinealesObraNueva: new NumberProp(
           'metrosLinealesObraNueva',
           'm (metros lineales) de obra nueva',
+          {
+            decimal: true,
+            sub: 'm',
+          },
         ),
         observacionesObraNueva: new TextLongProp(
           'observacionesObraNueva',
           'Observaciones de obra nueva',
         ),
+
         obraRefaccionada: new BooleanProp(
           'obraRefaccionada',
           'Obra refaccionada',
@@ -346,14 +315,26 @@ export const scheme: Scheme<Entity> = {
         porcentajeObraRefaccionada: new NumberProp(
           'porcentajeObraRefaccionada',
           'Porcentaje de obra refaccionada',
+          {
+            decimal: true,
+            pre: '%',
+          },
         ),
         metrosCuadradosObraRefaccionada: new NumberProp(
           'metrosCuadradosObraRefaccionada',
           'm² (metros cuadrados) de obra refaccionada',
+          {
+            decimal: true,
+            sub: 'm²',
+          },
         ),
         metrosLinealesObraRefaccionada: new NumberProp(
           'metrosLinealesObraRefaccionada',
           'm (metros lineales) de obra refaccionada',
+          {
+            decimal: true,
+            sub: 'm',
+          },
         ),
         observacionesObraRefaccionada: new TextLongProp(
           'observacionesObraRefaccionada',

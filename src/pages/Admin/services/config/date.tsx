@@ -1,6 +1,5 @@
 import { Entity, EntityKey } from '@/services/config'
 import { ForView, PropScheme, Required } from './utils'
-import { FormValues } from '@/hooks'
 import { Input } from '@/components'
 import { Column, FilterFn, Row } from '@tanstack/react-table'
 import { format } from '@formkit/tempo'
@@ -27,14 +26,18 @@ export class DateProp<T extends EntityKey> implements PropScheme {
     return <Input key={key} name={key} type="date" {...{ title, required }} />
   }
 
-  getFieldValue = (formValues: FormValues) => {
+  getFieldValue = (formData: FormData) => {
     const { key, config } = this
     const { field } = config ?? {}
     const { hidden } = field ?? {}
 
     if (hidden === true) return
 
-    return formValues.get.string(key)
+    const value = formData.get(key)
+
+    if (value === '') return
+
+    return `${value}T00:00:00Z`
   }
 
   filterFn: FilterFn<Entity> = (row, columnId, filterValue) => {
@@ -52,9 +55,8 @@ export class DateProp<T extends EntityKey> implements PropScheme {
     const { getFilterValue, setFilterValue } = column
     const filterValue = getFilterValue() || { min: '', max: '' }
 
-    const filter = (
-      <DateTimeFilter {...{ filterValue, setFilterValue }} notTime />
-    )
+    // const filter = <DateTimeFilter {...{ filterValue, setFilterValue }} />
+    const filter = undefined
 
     return { title, filter }
   }

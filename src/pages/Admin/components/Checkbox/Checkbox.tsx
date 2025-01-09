@@ -1,5 +1,5 @@
 import './Checkbox.css'
-import { InputHTMLAttributes } from 'react'
+import { InputHTMLAttributes, useEffect, useState } from 'react'
 import { useLabel } from '@/hooks'
 import { Icon } from '@/components'
 import { Control } from '@/types'
@@ -21,6 +21,9 @@ const Checkbox = ({
   ...rest
 }: CheckboxProps) => {
   const { content, controlTitle } = useLabel({ title })
+  const [firstChange, setFirstChange] = useState(false)
+
+  const handleChange = () => setFirstChange(true)
 
   return (
     <div className={classList('cmp-checkbox', 'control', long)}>
@@ -30,7 +33,14 @@ const Checkbox = ({
         </label>
       )}
       <div className="box">
-        <input title={controlTitle} type="checkbox" {...{ name }} {...rest} />
+        <input
+          title={controlTitle}
+          type="checkbox"
+          {...{ name }}
+          onChange={handleChange}
+          data-use-value={firstChange}
+          {...rest}
+        />
         <div className="check-container">
           <Icon faIcon="fa-solid fa-check" />
         </div>

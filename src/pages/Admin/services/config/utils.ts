@@ -1,7 +1,12 @@
-import { FormValues } from '@/hooks'
 import { ReactNode } from 'react'
 import { Scheme } from './scheme'
-import { AccessorFn, Column, FilterFn, Row } from '@tanstack/react-table'
+import {
+  AccessorFn,
+  BuiltInFilterFn,
+  Column,
+  FilterFn,
+  Row,
+} from '@tanstack/react-table'
 import { Entity, EntityKey } from '@/services/config'
 
 export type Color = 'blue' | 'green' | 'yellow' | 'red' | 'grey'
@@ -29,10 +34,13 @@ export interface PropScheme<T = EntityKey, E = Entity> {
   config?: unknown
 
   getFieldComponent: () => ReactNode
-  getFieldValue: (formValues: FormValues) => undefined | unknown
+  getFieldValue: (
+    formData: FormData,
+    form: HTMLFormElement,
+  ) => undefined | unknown
 
   accessorFn?: AccessorFn<E>
-  filterFn?: FilterFn<E>
+  filterFn?: FilterFn<E> | BuiltInFilterFn
   getHeader?: (column: Column<E>) => {
     title: string
     subtitle?: string

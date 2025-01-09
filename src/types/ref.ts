@@ -1,4 +1,4 @@
 export interface Ref {
   id: number
-  title: string
+  title: number | string
 }

@@ -7,7 +7,8 @@ export const getAll: {
 } = {
   output: response => {
     const convertedResource = response.map<ObraModel.Entity>(item => ({
-      id: item.numero,
+      id: item.id,
+      numero: item.numero,
       nombre: item.nombre,
       numeroExpediente: item.numeroExpediente,
       numeroResolucion: item.numeroResolucion,
@@ -76,8 +77,8 @@ export const getForConnect: {
 } = {
   output: response => {
     const convertedResource = response.map<Ref>(item => ({
-      id: item.numero,
-      title: item.nombre,
+      id: item.id,
+      title: item.numero,
     }))
 
     return convertedResource
@@ -89,7 +90,8 @@ export const getOne: {
 } = {
   output: response => {
     const convertedResource = {
-      id: response.numero,
+      id: response.id,
+      numero: response.numero,
       nombre: response.nombre,
       numeroExpediente: response.numeroExpediente,
       numeroResolucion: response.numeroResolucion,
@@ -166,8 +168,8 @@ export const create: {
       numeroContratacion: data.numeroContratacion,
       anioContratacion: data.anioContratacion,
       montoContratacion: data.montoContratacion,
-      fechaInicio: new Date(data.fechaInicio).toISOString(),
-      fechaFin: new Date(data.fechaFin).toISOString(),
+      fechaInicio: data.fechaInicio,
+      fechaFin: data.fechaFin,
       plazoMeses: data.plazoMeses,
       plazoDias: data.plazoDias,
       direccion: data.direccion,

@@ -19,6 +19,7 @@ export interface SubmitActionResult {
 
 export const useSubmitAction = (
   submitCallback: ActionCallback<{
+    form: HTMLFormElement
     formData: FormData
     formValues: FormValues
   }>,
@@ -28,6 +29,7 @@ export const useSubmitAction = (
   const handleSubmit: FormEventHandler<HTMLFormElement> = async event => {
     event.preventDefault()
 
+    const form = event.currentTarget
     const formData = new FormData(event.currentTarget)
 
     const formValues: FormValues = {
@@ -42,7 +44,7 @@ export const useSubmitAction = (
     }
 
     await setLoading()
-    await submitCallback({ formData, formValues, setError, setSuccess })
+    await submitCallback({ form, formData, formValues, setError, setSuccess })
   }
 
   return { handleSubmit, actionState }

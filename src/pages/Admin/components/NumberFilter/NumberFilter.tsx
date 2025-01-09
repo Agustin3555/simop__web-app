@@ -1,46 +1,64 @@
-import { Updater } from '@tanstack/react-table'
+import { useCallback } from 'react'
 import { DebouncedInput } from '..'
 import { DebouncedInputProps } from '../DebouncedInput/DebouncedInput'
+import { ColumnFiltersColumn, FacetedColumn } from '@tanstack/react-table'
+import { Entity } from '@/services/config'
 
-interface Props {
-  filterValue: unknown
-  getFacetedMinMaxValues: () => undefined | [number, number]
-  setFilterValue: (updater: Updater<any>) => void
+type FilterValuePair = [string, string] | undefined
+
+interface Props
+  extends Pick<
+      ColumnFiltersColumn<Entity>,
+      'getFilterValue' | 'setFilterValue'
+    >,
+    Pick<FacetedColumn<Entity>, 'getFacetedMinMaxValues'> {
+  decimal: boolean
 }
 
 const NumberFilter = ({
-  filterValue,
-  getFacetedMinMaxValues,
+  decimal,
+  getFilterValue,
   setFilterValue,
+  getFacetedMinMaxValues,
 }: Props) => {
-  const inputs: DebouncedInputProps[] = [
-    {
-      value: (filterValue as [number, number])?.[0] ?? '',
-      min: Number(getFacetedMinMaxValues()?.[0] ?? ''),
-      max: Number(getFacetedMinMaxValues()?.[1] ?? ''),
-      placeholder: `Min ${
-        getFacetedMinMaxValues()?.[0] !== undefined
-          ? `(${getFacetedMinMaxValues()?.[0]})`
-          : ''
-      }`,
-      onChange: value =>
-        setFilterValue((prev: [number, number]) => [value, prev?.[1]]),
-    },
-    {
-      value: (filterValue as [number, number])?.[1] ?? '',
-      min: Number(getFacetedMinMaxValues()?.[0] ?? ''),
-      max: Number(getFacetedMinMaxValues()?.[1] ?? ''),
-      placeholder: `Max ${
-        getFacetedMinMaxValues()?.[1]
-          ? `(${getFacetedMinMaxValues()?.[1]})`
-          : ''
-      }`,
-      onChange: value =>
-        setFilterValue((prev: [number, number]) => [prev?.[0], value]),
-    },
-  ]
+  const [minValue = '', maxValue = ''] =
+    (getFilterValue() as FilterValuePair) ?? []
 
-  return inputs.map((input, index) => <DebouncedInput key={index} {...input} />)
+  const [minFaceted, maxFaceted] = getFacetedMinMaxValues() ?? []
+
+  const commonProps: Partial<DebouncedInputProps> = {
+    type: 'number',
+    min: minFaceted,
+    max: maxFaceted,
+    step: decimal ? '0.01' : '',
+  }
+
+  const handleMinChange = useCallback<DebouncedInputProps['onChange']>(
+    value => setFilterValue((prev: FilterValuePair) => [value, prev?.[1]]),
+    [],
+  )
+
+  const handleMaxChange = useCallback<DebouncedInputProps['onChange']>(
+    value => setFilterValue((prev: FilterValuePair) => [prev?.[0], value]),
+    [],
+  )
+
+  return (
+    <>
+      <DebouncedInput
+        value={minValue}
+        onChange={handleMinChange}
+        placeholder={minFaceted ? `Min (${minFaceted})` : ''}
+        {...commonProps}
+      />
+      <DebouncedInput
+        value={maxValue}
+        onChange={handleMaxChange}
+        placeholder={maxFaceted ? `Max (${maxFaceted})` : ''}
+        {...commonProps}
+      />
+    </>
+  )
 }
 
 export default NumberFilter

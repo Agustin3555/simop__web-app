@@ -1,8 +1,13 @@
 import { Entity, EntityKey } from '@/services/config'
 import { ForView, PropScheme, Required } from './utils'
-import { FormValues } from '@/hooks'
 import { Input } from '@/components'
-import { Column, FilterFn, Row } from '@tanstack/react-table'
+import {
+  BuiltInFilterFn,
+  Column,
+  FilterFn,
+  Row,
+  filterFns,
+} from '@tanstack/react-table'
 import { NumberFilter } from '../../components'
 
 export class NumberProp<T extends EntityKey> implements PropScheme {
@@ -11,6 +16,7 @@ export class NumberProp<T extends EntityKey> implements PropScheme {
     public title: string,
 
     public config?: {
+      decimal?: boolean
       pre?: string
       sub?: string
 
@@ -25,33 +31,46 @@ export class NumberProp<T extends EntityKey> implements PropScheme {
 
   getFieldComponent = () => {
     const { key, title, config } = this
-    const { field } = config ?? {}
+    const { field, decimal = false } = config ?? {}
     const { hidden, required } = field ?? {}
 
     if (hidden === true) return
 
-    return <Input key={key} name={key} type="number" {...{ title, required }} />
+    return (
+      <Input
+        key={key}
+        name={key}
+        type="number"
+        {...{ title, required }}
+        step={decimal ? '0.01' : undefined}
+      />
+    )
   }
 
-  getFieldValue = (formValues: FormValues) => {
+  getFieldValue = (formData: FormData) => {
     const { key, config } = this
     const { field } = config ?? {}
     const { hidden } = field ?? {}
 
     if (hidden === true) return
 
-    return formValues.get.number(key)
+    const value = formData.get(key)
+
+    if (value === '') return
+
+    return Number(value)
   }
 
-  getHeader = (column: Column<Entity>) => {
-    const { title } = this
+  filterFn: BuiltInFilterFn = 'inNumberRange'
 
-    const { getFacetedMinMaxValues, getFilterValue, setFilterValue } = column
-    const filterValue = getFilterValue()
+  getHeader = (column: Column<Entity>) => {
+    const { title, config } = this
+    const { decimal = false } = config ?? {}
+    const { getFilterValue, setFilterValue, getFacetedMinMaxValues } = column
 
     const filter = (
       <NumberFilter
-        {...{ filterValue, getFacetedMinMaxValues, setFilterValue }}
+        {...{ decimal, getFilterValue, setFilterValue, getFacetedMinMaxValues }}
       />
     )
 
@@ -65,11 +84,13 @@ export class NumberProp<T extends EntityKey> implements PropScheme {
     const value = row.original[key] as number
 
     return (
-      <p>
-        {pre && <small>{pre}</small>}
-        {value}
-        {sub && <small>{sub}</small>}
-      </p>
+      value && (
+        <p>
+          {pre && <small>{pre}</small>}
+          {value}
+          {sub && <small>{sub}</small>}
+        </p>
+      )
     )
   }
 }
