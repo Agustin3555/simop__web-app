@@ -38,6 +38,7 @@ export const scheme: Scheme<Entity> = {
     singular: 'País',
     plural: 'Países',
   },
+  refAnchorField: 'Nombre',
 
   groups: [
     {

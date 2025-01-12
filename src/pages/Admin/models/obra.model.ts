@@ -11,7 +11,6 @@ import { Ref } from '@/types'
 import {
   BooleanProp,
   DateProp,
-  DateTimeProp,
   NumberProp,
   RefProp,
   Scheme,
@@ -344,5 +343,3 @@ export const scheme: Scheme<Entity> = {
     },
   ],
 }
-
-// TODO module InspectorObra

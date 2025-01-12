@@ -48,6 +48,7 @@ export const scheme: Scheme<Entity> = {
     singular: 'Localidad',
     plural: 'Localidades',
   },
+  refAnchorField: 'Nombre',
 
   groups: [
     {
@@ -60,6 +61,9 @@ export const scheme: Scheme<Entity> = {
         }),
         provincia: new RefProp('provincia', {
           getScheme: () => ProvinciaModel.scheme,
+          field: {
+            required: true,
+          },
         }),
       },
     },

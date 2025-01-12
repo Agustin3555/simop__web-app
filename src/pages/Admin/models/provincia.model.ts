@@ -48,6 +48,7 @@ export const scheme: Scheme<Entity> = {
     singular: 'Provincia',
     plural: 'Provincias',
   },
+  refAnchorField: 'Nombre',
 
   groups: [
     {
@@ -60,6 +61,9 @@ export const scheme: Scheme<Entity> = {
         }),
         pais: new RefProp('pais', {
           getScheme: () => PaisModel.scheme,
+          field: {
+            required: true,
+          },
         }),
       },
     },

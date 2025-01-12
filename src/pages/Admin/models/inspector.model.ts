@@ -56,21 +56,14 @@ export const scheme: Scheme<Entity> = {
     singular: 'Inspector',
     plural: 'Inspectores',
   },
+  refAnchorField: 'Apellido',
 
   groups: [
     {
       props: {
         ...COMMON_PROPS,
-        cuil: new NumberProp('cuil', 'CUIL', {
-          field: {
-            required: true,
-          },
-        }),
-        nombre: new TextProp('nombre', 'Nombre', {
-          field: {
-            required: true,
-          },
-        }),
+        cuil: new NumberProp('cuil', 'CUIL'),
+        nombre: new TextProp('nombre', 'Nombre'),
         apellido: new TextProp('apellido', 'Apellido', {
           field: {
             required: true,

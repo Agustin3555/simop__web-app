@@ -38,6 +38,7 @@ export const scheme: Scheme<Entity> = {
     singular: 'Tipo de Financiamiento de Obra',
     plural: 'Tipos de Financiamientos de Obra',
   },
+  refAnchorField: 'Nombre',
 
   groups: [
     {

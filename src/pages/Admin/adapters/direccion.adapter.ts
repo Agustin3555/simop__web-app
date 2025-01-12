@@ -9,10 +9,12 @@ export const getAll: {
     const convertedResource = response.map<DireccionModel.Entity>(item => ({
       id: item.id,
       nombre: item.nombre,
+
       subSecretaria: item.subSecretaria && {
         id: item.subSecretaria.id,
         title: item.subSecretaria.nombre,
       },
+
       creado: item.creado,
       modificado: item.modificado,
     }))
@@ -41,10 +43,12 @@ export const getOne: {
     const convertedResource = {
       id: response.id,
       nombre: response.nombre,
+
       subSecretaria: response.subSecretaria && {
         id: response.subSecretaria.id,
         title: response.subSecretaria.nombre,
       },
+
       creado: response.creado,
       modificado: response.modificado,
     }
@@ -59,6 +63,7 @@ export const create: {
   input: data => {
     const convertedResource: DireccionModel.CreateBody = {
       nombre: data.nombre,
+
       subSecretariaId: data.subSecretariaId,
     }
 

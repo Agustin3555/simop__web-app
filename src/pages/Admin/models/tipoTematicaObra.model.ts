@@ -38,6 +38,7 @@ export const scheme: Scheme<Entity> = {
     singular: 'Tipo de Temática de Obra',
     plural: 'Tipos de Temáticas de Obra',
   },
+  refAnchorField: 'Nombre',
 
   groups: [
     {

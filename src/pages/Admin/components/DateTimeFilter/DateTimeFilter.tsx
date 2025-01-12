@@ -1,39 +1,52 @@
 import { useCallback } from 'react'
 import { DebouncedInput } from '..'
-import { Updater } from '@tanstack/react-table'
+import { ColumnFiltersColumn } from '@tanstack/react-table'
+import { DebouncedInputProps } from '../DebouncedInput/DebouncedInput'
+import { Entity } from '@/services/config'
 
-interface Props {
+type FilterValuePair = { min: string; max: string } | undefined
+
+interface Props
+  extends Pick<
+    ColumnFiltersColumn<Entity>,
+    'getFilterValue' | 'setFilterValue'
+  > {
   notTime?: boolean
-  filterValue: { min?: string; max?: string }
-  setFilterValue: (updater: Updater<any>) => void
 }
 
 const DateTimeFilter = ({
   notTime = false,
-  filterValue,
+  getFilterValue,
   setFilterValue,
 }: Props) => {
-  const inputs = [
-    { title: 'Desde', key: 'min', value: filterValue.min },
-    { title: 'Hasta', key: 'max', value: filterValue.max },
-  ]
+  const { min = '', max = '' } = (getFilterValue() as FilterValuePair) ?? {}
 
-  const handleChange = useCallback(
-    (key: string) => (newValue: string) =>
-      setFilterValue(prev => ({ ...prev, [key]: newValue })),
-    [setFilterValue],
+  const commonProps: Partial<DebouncedInputProps> = {
+    type: notTime ? 'date' : 'datetime-local',
+  }
+
+  const handleChange = useCallback<
+    (key: string) => DebouncedInputProps['onChange']
+  >(
+    key => value =>
+      setFilterValue((prev: FilterValuePair) => ({ ...prev, [key]: value })),
+    [],
   )
 
   return (
     <>
-      {inputs.map(({ title, key, value }) => (
-        <DebouncedInput
-          key={key}
-          {...{ title, value }}
-          type={notTime ? 'date' : 'datetime-local'}
-          onChange={handleChange(key)}
-        />
-      ))}
+      <DebouncedInput
+        title="Desde"
+        value={min}
+        onChange={handleChange('min')}
+        {...commonProps}
+      />
+      <DebouncedInput
+        title="Hasta"
+        value={max}
+        onChange={handleChange('max')}
+        {...commonProps}
+      />
     </>
   )
 }

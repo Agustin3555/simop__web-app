@@ -29,6 +29,7 @@ const Header = ({ flatProps, header, sorting, setSorting }: Props) => {
 
   if (!getHeader) return
 
+  // TODO: contener en un useMemo
   const { title, subtitle, filter } = getHeader(column) ?? {}
 
   const sortValue = getIsSorted() || null

@@ -88,6 +88,7 @@
     box-shadow: var(--pal-shadow-1);
     translate: 0 var(--pal-size-xs);
     opacity: 0;
+    overflow: hidden;
 
     transition: display var(--pal-time-s) ease allow-discrete,
       translate var(--pal-time-s) ease, opacity var(--pal-time-s) ease;

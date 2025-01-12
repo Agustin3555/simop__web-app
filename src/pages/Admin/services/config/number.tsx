@@ -1,13 +1,7 @@
 import { Entity, EntityKey } from '@/services/config'
 import { ForView, PropScheme, Required } from './utils'
 import { Input } from '@/components'
-import {
-  BuiltInFilterFn,
-  Column,
-  FilterFn,
-  Row,
-  filterFns,
-} from '@tanstack/react-table'
+import { BuiltInFilterFn, Column, Row } from '@tanstack/react-table'
 import { NumberFilter } from '../../components'
 
 export class NumberProp<T extends EntityKey> implements PropScheme {
@@ -86,9 +80,9 @@ export class NumberProp<T extends EntityKey> implements PropScheme {
     return (
       value && (
         <p>
-          {pre && <small>{pre}</small>}
+          {pre && <small className="pre">{pre}</small>}
           {value}
-          {sub && <small>{sub}</small>}
+          {sub && <small className="sub">{sub}</small>}
         </p>
       )
     )

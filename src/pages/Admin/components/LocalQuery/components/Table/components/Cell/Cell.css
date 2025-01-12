@@ -9,4 +9,18 @@
     padding-block: var(--pal-size-s);
     max-width: 30rem;
   }
+
+  > p > small {
+    --gap: var(--pal-size-xs);
+
+    color: var(--pal-color-a);
+
+    &.pre {
+      margin-right: var(--gap);
+    }
+
+    &.sub {
+      margin-left: var(--gap);
+    }
+  }
 }

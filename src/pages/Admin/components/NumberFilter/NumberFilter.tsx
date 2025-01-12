@@ -4,6 +4,7 @@ import { DebouncedInputProps } from '../DebouncedInput/DebouncedInput'
 import { ColumnFiltersColumn, FacetedColumn } from '@tanstack/react-table'
 import { Entity } from '@/services/config'
 
+// TODO: optimizar tratando el filtro como objeto al igual que DateTimeFilter
 type FilterValuePair = [string, string] | undefined
 
 interface Props
@@ -47,14 +48,14 @@ const NumberFilter = ({
     <>
       <DebouncedInput
         value={minValue}
-        onChange={handleMinChange}
         placeholder={minFaceted ? `Min (${minFaceted})` : ''}
+        onChange={handleMinChange}
         {...commonProps}
       />
       <DebouncedInput
         value={maxValue}
-        onChange={handleMaxChange}
         placeholder={maxFaceted ? `Max (${maxFaceted})` : ''}
+        onChange={handleMaxChange}
         {...commonProps}
       />
     </>

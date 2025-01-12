@@ -48,6 +48,7 @@ export const scheme: Scheme<Entity> = {
     singular: 'Dirección',
     plural: 'Direcciones',
   },
+  refAnchorField: 'Nombre',
 
   groups: [
     {
@@ -60,6 +61,9 @@ export const scheme: Scheme<Entity> = {
         }),
         subSecretaria: new RefProp('subSecretaria', {
           getScheme: () => SubSecretariaModel.scheme,
+          field: {
+            required: true,
+          },
         }),
       },
     },

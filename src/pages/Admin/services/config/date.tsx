@@ -41,22 +41,25 @@ export class DateProp<T extends EntityKey> implements PropScheme {
   }
 
   filterFn: FilterFn<Entity> = (row, columnId, filterValue) => {
-    if (!Array.isArray(filterValue) || filterValue.length !== 2) return true
+    if (!filterValue) return true // No hay filtro, muestra todo
 
+    const { min, max } = filterValue
     const rowDate = new Date(row.getValue(columnId))
-    const [minDate, maxDate] = filterValue.map(date => new Date(date))
 
-    return rowDate >= minDate && rowDate <= maxDate
+    const isAfterMin = min ? rowDate >= new Date(min) : true
+    const isBeforeMax = max ? rowDate <= new Date(max) : true
+
+    return isAfterMin && isBeforeMax
   }
 
   getHeader = (column: Column<Entity>) => {
     const { title } = this
 
     const { getFilterValue, setFilterValue } = column
-    const filterValue = getFilterValue() || { min: '', max: '' }
 
-    // const filter = <DateTimeFilter {...{ filterValue, setFilterValue }} />
-    const filter = undefined
+    const filter = (
+      <DateTimeFilter {...{ getFilterValue, setFilterValue }} notTime />
+    )
 
     return { title, filter }
   }

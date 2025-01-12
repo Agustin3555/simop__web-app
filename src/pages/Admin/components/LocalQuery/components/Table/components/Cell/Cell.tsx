@@ -2,6 +2,7 @@ import './Cell.css'
 import { useScheme } from '@/pages/Admin/hooks'
 import { Cell as TanstackCell } from '@tanstack/react-table'
 import { Entity } from '@/services/config'
+import { useMemo } from 'react'
 
 /*
   No se usa 'getValue' porque se necesita tener el valor original. 'getValue'
@@ -15,7 +16,10 @@ interface Props {
 }
 
 const Cell = ({ flatProps, cell }: Props) => {
-  const component = flatProps[cell.column.id].getCellComponent(cell.row)
+  const component = useMemo(
+    () => flatProps[cell.column.id].getCellComponent(cell.row),
+    [],
+  )
 
   return <td className="cmp-cell">{component}</td>
 }

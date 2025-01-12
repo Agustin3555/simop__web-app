@@ -63,10 +63,8 @@ export class DateTimeProp<T extends EntityKey> implements PropScheme {
     const { title } = this
 
     const { getFilterValue, setFilterValue } = column
-    const filterValue = getFilterValue() || { min: '', max: '' }
 
-    // const filter = <DateTimeFilter {...{ filterValue, setFilterValue }} />
-    const filter = undefined
+    const filter = <DateTimeFilter {...{ getFilterValue, setFilterValue }} />
 
     return { title, filter }
   }

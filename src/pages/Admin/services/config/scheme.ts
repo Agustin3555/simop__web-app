@@ -13,11 +13,12 @@ import { PropScheme } from './utils'
 
 export interface Scheme<T = Entity> {
   key: string
+  service: Service
   title: {
     singular: string
     plural: string
   }
-  service: Service
+  refAnchorField?: string
 
   groups: {
     title?: string
