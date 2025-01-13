@@ -1,58 +1,78 @@
 import { Entity, EntityKey } from '@/services/config'
-import { ForView, GetScheme, PropScheme } from './utils'
-import { FormValues } from '@/hooks'
-import { FetchRef } from '../../components'
+import { ForView, GetScheme, PropScheme, Required } from './utils'
+import { Combobox, FetchRef } from '../../components'
 import { Ref } from '@/types'
-import { Row } from '@tanstack/react-table'
+import { Column, Row } from '@tanstack/react-table'
 
 /*
-  TODO: Solamente para visualizar los vínculos de uno a muchos que no tengan
-  atributos de vinculo y que no sean relaciones ternarias, si lo es, se debe
-  convertir en un modulo aparte.
+  Solamente para controlar los vínculos de uno a muchos que no tengan atributos
+  de vinculo y que no sean relaciones ternarias, si lo es, se debe convertir en
+  un modulo aparte.
 */
-
 export class RefListProp<T extends EntityKey> implements PropScheme {
   constructor(
     public key: T,
-    public title: string,
 
-    public config?: GetScheme & {
+    public config: GetScheme & {
       // column?: ForView,
-      field?: ForView
+      field?: ForView & Required
     },
   ) {}
 
   getFieldComponent = () => {
-    const { key, title, config } = this
-    const { getScheme, field } = config ?? {}
-    const { hidden } = field ?? {}
+    const { key, config } = this
+    const { getScheme, field } = config
+    const { hidden, required } = field ?? {}
 
     if (hidden === true) return
 
-    const { getForConnect } = getScheme!().service
+    const { service, title } = getScheme()
+    const { getForConnect } = service
 
-    return undefined
+    return (
+      <Combobox
+        key={key}
+        name={key}
+        title={title.plural}
+        multiple
+        {...{ getForConnect, required }}
+      />
+    )
   }
 
-  getFieldValue = (formValues: FormValues) => {
+  getFieldValue = (formData: FormData) => {
     const { key, config } = this
     const { field } = config ?? {}
     const { hidden } = field ?? {}
 
     if (hidden === true) return
 
-    return undefined
+    const value = formData.getAll(key)
+
+    if (value.length === 0) return
+
+    return value.map(Number)
+  }
+
+  getHeader = (column: Column<Entity>) => {
+    const { config } = this
+    const { getScheme } = config
+    const { title, refAnchorField } = getScheme()
+
+    const filter = undefined
+
+    return { title: title.plural, subtitle: refAnchorField, filter }
   }
 
   getCellComponent = (row: Row<Entity>) => {
     const { key, config } = this
     const { getScheme } = config ?? {}
 
-    const { getOne } = getScheme!().service
+    const { getOne } = getScheme().service
     const value = row.original[key] as Ref[]
 
     return (
-      <div>
+      <div className="items">
         {value.map(item => (
           <FetchRef {...item} {...{ getOne }} />
         ))}

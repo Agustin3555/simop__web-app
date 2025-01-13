@@ -56,9 +56,9 @@ export class RefProp<T extends EntityKey> implements PropScheme {
   accessorFn: AccessorFn<Entity> = row => {
     const { baseKey } = this
 
-    const { title } = (row[baseKey] as Ref) ?? {}
+    const { title = '' } = (row[baseKey] as Ref) ?? {}
 
-    return title ?? ''
+    return title
   }
 
   getHeader = (column: Column<Entity>) => {
@@ -82,7 +82,7 @@ export class RefProp<T extends EntityKey> implements PropScheme {
     const { baseKey, config } = this
     const { getScheme } = config ?? {}
 
-    const { getOne } = getScheme!().service
+    const { getOne } = getScheme().service
     const value = row.original[baseKey] as Ref
 
     return <FetchRef {...value} {...{ getOne }} />

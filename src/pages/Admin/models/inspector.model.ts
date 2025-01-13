@@ -1,6 +1,6 @@
 import { TipoProfesionModel } from '.'
 import { Ref } from '@/types'
-import { NumberProp, Scheme, TextProp } from '../services/config'
+import { NumberProp, RefListProp, Scheme, TextProp } from '../services/config'
 import { InspectorService } from '../services'
 import { COMMON_PROPS } from '../constants/commonProps.const'
 
@@ -63,11 +63,14 @@ export const scheme: Scheme<Entity> = {
       props: {
         ...COMMON_PROPS,
         cuil: new NumberProp('cuil', 'CUIL'),
-        nombre: new TextProp('nombre', 'Nombre'),
         apellido: new TextProp('apellido', 'Apellido', {
           field: {
             required: true,
           },
+        }),
+        nombre: new TextProp('nombre', 'Nombre'),
+        tiposProfesiones: new RefListProp('tiposProfesiones', {
+          getScheme: () => TipoProfesionModel.scheme,
         }),
       },
     },
