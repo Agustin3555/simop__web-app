@@ -83,8 +83,8 @@ export class RefProp<T extends EntityKey> implements PropScheme {
     const { getScheme } = config ?? {}
 
     const { getOne } = getScheme().service
-    const value = row.original[baseKey] as Ref
+    const value = row.original[baseKey] as Ref | undefined
 
-    return <FetchRef {...value} {...{ getOne }} />
+    return value && <FetchRef {...value} {...{ getOne }} />
   }
 }

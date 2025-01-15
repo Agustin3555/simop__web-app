@@ -67,10 +67,10 @@ export const TREE: SectionNode[] = [
           },
         ],
       },
+      { scheme: InspectorModel.scheme },
+      { scheme: RepresentanteModel.scheme },
     ],
   },
-  { scheme: InspectorModel.scheme },
-  { scheme: RepresentanteModel.scheme },
   {
     title: 'Empresas',
     sections: [

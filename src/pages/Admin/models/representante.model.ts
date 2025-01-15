@@ -92,12 +92,12 @@ export const scheme: Scheme<Entity> = {
             required: true,
           },
         }),
-        direccion: new TextProp('direccion', 'Apellido', {
+        direccion: new TextProp('direccion', 'Dirección', {
           field: {
             required: true,
           },
         }),
-        numeroMatricula: new NumberProp(
+        numeroMatricula: new TextProp(
           'numeroMatricula',
           'Número de Matricula',
           {
