@@ -76,7 +76,6 @@ export const scheme: Scheme<Entity> = {
   groups: [
     {
       props: {
-        ...COMMON_PROPS,
         cuit: new NumberProp('cuit', 'CUIT', {
           field: {
             required: true,
@@ -111,6 +110,7 @@ export const scheme: Scheme<Entity> = {
         localidad: new RefProp('localidad', {
           getScheme: () => LocalidadModel.scheme,
         }),
+        ...COMMON_PROPS,
       },
     },
   ],

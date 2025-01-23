@@ -58,7 +58,6 @@ export const scheme: Scheme<Entity> = {
   groups: [
     {
       props: {
-        ...COMMON_PROPS,
         obra: new RefProp('obra', {
           getScheme: () => ObraModel.scheme,
         }),
@@ -71,6 +70,7 @@ export const scheme: Scheme<Entity> = {
         tipoProfesion: new RefProp('tipoProfesion', {
           getScheme: () => TipoProfesionModel.scheme,
         }),
+        ...COMMON_PROPS,
       },
     },
   ],

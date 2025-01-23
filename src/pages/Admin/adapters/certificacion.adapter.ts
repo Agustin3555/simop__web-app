@@ -11,13 +11,14 @@ export const getAll: {
   output: response => {
     const convertedResource = response.map<CertificacionModel.Entity>(item => ({
       id: item.id,
-      numeroExpediente: item.numeroExpediente,
+      ordenPago: item.ordenPago,
       fecha: item.fecha,
+      monto: item.monto,
       observaciones: item.observaciones,
-      fojaMedicionId: item.fojaMedicionId && {
+      /*fojaMedicionId: item.fojaMedicionId && {
         id: item.fojaMedicionId.id,
-        title: item.fojaMedicionId.numeroExpediente,
-      },
+        title: item.fojaMedicionId.ordenPago,
+      },*/
       creado: item.creado,
       modificado: item.modificado,
     }))
@@ -32,7 +33,7 @@ export const getForConnect: {
   output: response => {
     const convertedResource = response.map<Ref>(item => ({
       id: item.id,
-      title: item.numeroExpediente,
+      title: item.ordenPago,
     }))
 
     return convertedResource
@@ -45,13 +46,14 @@ export const getOne: {
   output: response => {
     const convertedResource = {
       id: response.id,
-      numeroExpediente: response.numeroExpediente,
+      ordenPago: response.ordenPago,
       fecha: response.fecha,
-      observaciones: response.observaciones,
+      monto: response.monto,
+      observaciones: response.observaciones /* 
       fojaMedicionId: response.fojaMedicionId && {
         id: response.fojaMedicionId.id,
-        title: response.fojaMedicionId.numeroExpediente,
-      },
+        title: response.fojaMedicionId.ordenPago,
+      },*/,
       creado: response.creado,
       modificado: response.modificado,
     }
@@ -69,10 +71,11 @@ export const create: {
   input: data => {
     const convertedResource: CertificacionModel.CreateBody = {
       id: data.id,
-      numeroExpediente: data.numeroExpediente,
+      ordenPago: data.ordenPago,
       fecha: data.fecha,
+      monto: data.monto,
       observaciones: data.observaciones,
-      fojaMedicionId: data.fojaMedicionId,
+      //fojaMedicionId: data.fojaMedicionId,
     }
     return convertedResource
   },

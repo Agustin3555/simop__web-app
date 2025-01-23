@@ -55,7 +55,6 @@ export const scheme: Scheme<Entity> = {
   groups: [
     {
       props: {
-        ...COMMON_PROPS,
         obra: new RefProp('obra', {
           getScheme: () => ObraModel.scheme,
         }),
@@ -69,6 +68,7 @@ export const scheme: Scheme<Entity> = {
           falseText: 'No Vigente',
           trueText: 'Vigente',
         }),
+        ...COMMON_PROPS,
       },
     },
   ],

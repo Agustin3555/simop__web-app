@@ -1,9 +1,6 @@
 import { View } from '../../components'
-import { Add, Query } from './components'
-import { ViewKey } from '../../constants'
+import { CertificacionModel } from '../../models'
 
-const Certificacion = () => (
-  <View viewKey={ViewKey.CERTIFICACION} add={<Add />} query={<Query />} />
-)
+const Certificacion = () => <View scheme={CertificacionModel.scheme} />
 
 export default Certificacion

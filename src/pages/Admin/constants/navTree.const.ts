@@ -1,5 +1,6 @@
 import { Scheme } from '../services/config'
 import {
+  CertificacionModel,
   DepartamentoModel,
   DireccionModel,
   EmpresaModel,
@@ -7,6 +8,7 @@ import {
   InspectorObraModel,
   LocalidadModel,
   ObraModel,
+  PagoCertificacionModel,
   PaisModel,
   ProvinciaModel,
   RepresentanteEmpresaModel,
@@ -21,8 +23,8 @@ import {
   TipoProgramaObraModel,
   TipoRepresentanteModel,
   TipoTematicaObraModel,
+  FojaMedicionModel,
 } from '../models'
-
 export interface SectionNode {
   title?: string
   sections?: SectionNode[]
@@ -84,6 +86,9 @@ export const TREE: SectionNode[] = [
       { scheme: ObraModel.scheme },
       { scheme: RepresentanteObraModel.scheme },
       { scheme: InspectorObraModel.scheme },
+      { scheme: CertificacionModel.scheme },
+      { scheme: PagoCertificacionModel.scheme },
+      { scheme: FojaMedicionModel.scheme },
     ],
   },
 ]
@@ -91,7 +96,3 @@ export const TREE: SectionNode[] = [
 // { scheme: ViewKey.MODIFICACION_OBRA },
 // { scheme: ViewKey.PARALIZACION_OBRA },
 // { scheme: ViewKey.TRAMITE },
-
-// { scheme: ViewKey.FOJA_MEDICION },
-// { scheme: ViewKey.CERTIFICACION },
-// { scheme: ViewKey.PAGO_CERTIFICACION },

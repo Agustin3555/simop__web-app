@@ -1,31 +1,32 @@
-import { publicInstance } from '@/services/config'
+import { publicInstance, Service } from '@/services/config'
 import { ParalizacionObraModel } from '../models'
 import { ParalizacionObraAdapter } from '../adapters'
+import { buildPath } from '@/helpers'
 
-const collection = '/tipos-paralizaciones-obra'
+const collection = buildPath('tipo-paralizaciones-obras')
 
-export const getAll = async () => {
-  const response = await publicInstance.get(collection)
+export const ParalizacionObraService: Service<ParalizacionObraModel.Entity> = {
+  getAll: async () => {
+    const response = await publicInstance.get(collection())
 
-  return ParalizacionObraAdapter.getAll.output(response.data)
-}
+    return ParalizacionObraAdapter.getAll.output(response.data)
+  },
 
-export const getForConnect = async () => {
-  const response = await publicInstance.get(`${collection}/for-connect`)
+  getForConnect: async () => {
+    const response = await publicInstance.get(collection('for-connect'))
 
-  return ParalizacionObraAdapter.getForConnect.output(response.data)
-}
+    return ParalizacionObraAdapter.getForConnect.output(response.data)
+  },
 
-export const getOne = async (id: number) => {
-  const response = await publicInstance.get(`${collection}/${id}`)
+  getOne: async id => {
+    const response = await publicInstance.get(collection(id))
 
-  return ParalizacionObraAdapter.getOne.output(response.data)
-}
+    return ParalizacionObraAdapter.getOne.output(response.data)
+  },
 
-export const create = async (data: ParalizacionObraModel.CreateData) => {
-  const adaptedInput = ParalizacionObraAdapter.create.input(data)
+  create: async (data: ParalizacionObraModel.CreateData) => {
+    const adaptedInput = ParalizacionObraAdapter.create.input(data)
 
-  const response = await publicInstance.post(collection, adaptedInput)
-
-  return true
+    await publicInstance.post(collection(), adaptedInput)
+  },
 }
