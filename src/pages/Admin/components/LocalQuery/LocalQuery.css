@@ -7,9 +7,9 @@
 
   > header {
     display: flex;
+    flex-wrap: wrap;
     align-items: center;
     justify-content: space-between;
-    flex-wrap: wrap;
     gap: var(--pal-size-m);
 
     > .left {
@@ -41,9 +41,22 @@
       }
     }
 
-    > .cmp-button {
-      border-color: var(--pal-color-b);
-      color: var(--pal-color-b-d1);
+    > .actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--pal-size-m);
+
+      > .cmp-secure-hold-button {
+        border-color: var(--pal-color-a-l1);
+        width: 8rem;
+
+        color: var(--pal-color-a);
+      }
+
+      > .cmp-button {
+        border-color: var(--pal-color-b);
+        color: var(--pal-color-b-d1);
+      }
     }
   }
 }

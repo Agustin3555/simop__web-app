@@ -56,7 +56,8 @@ const LocalAdd = () => {
         </div>
         <div className="actions">
           <Button
-            title="Limpiar"
+            text="Limpiar"
+            title="Limpiar formulario"
             faIcon="fa-solid fa-eraser"
             type="reset"
             _type="secondary"

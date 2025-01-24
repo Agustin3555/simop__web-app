@@ -14,6 +14,7 @@ export interface Service<T = unknown> {
   getForConnect?: () => Promise<Ref[]>
   getOne: (id: number) => Promise<T>
   create?: (data: any) => Promise<void>
+  deleteMany: (ids: number[]) => Promise<void>
 }
 
 export type GetAllProvider = Pick<Service, 'getAll'>

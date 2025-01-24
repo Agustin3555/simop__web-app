@@ -9,7 +9,7 @@ export interface UseLabelProps {
 
 export const useLabel = ({ title, required = false }: UseLabelProps) => {
   const controlTitle = useMemo(
-    () => (required ? `${title} (Requerido)` : title),
+    () => (required ? `${title} (requerido)` : title),
     [required, title],
   )
 

@@ -8,7 +8,7 @@ interface FetchRefProps extends GetOneProvider, Ref {}
 const FetchRef = ({ id, title, getOne }: FetchRefProps) => {
   return (
     <div className="cmp-fetch-ref">
-      <Button {...{ title }} faIcon="fa-solid fa-eye" _type="secondary" />
+      <Button text={String(title)} faIcon="fa-solid fa-eye" _type="secondary" />
       {/* <dialog>
       {data ? <Loader /> : }
       </dialog> */}

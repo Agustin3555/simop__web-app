@@ -23,7 +23,7 @@ const SecureHoldButton = ({
   type,
   action,
 }: Props) => {
-  const timerRef = useRef<NodeJS.Timeout | null>(null)
+  const timerRef = useRef<number | null>(null)
 
   const handleMouseDown = () => {
     if (actionState === 'ready') timerRef.current = setTimeout(action, 3000)
@@ -42,9 +42,9 @@ const SecureHoldButton = ({
         'cmp-secure-hold-button',
         'button-look',
         'state',
-        type
+        type,
       )}
-      title={`${title} (Mantener)`}
+      title={`${title} (mantener)`}
       disabled={actionState !== 'ready'}
       onMouseDown={handleMouseDown}
       onMouseUp={handleMouseUp}

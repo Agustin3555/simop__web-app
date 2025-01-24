@@ -6,6 +6,7 @@ import { Button, Icon, StateButton } from '@/components'
 import { Table } from './components'
 import { Entity } from '@/services/config'
 import { utils, writeFile } from 'xlsx'
+import { SecureHoldButton } from '..'
 
 const LocalQuery = () => {
   const { scheme } = useScheme()
@@ -19,6 +20,18 @@ const LocalQuery = () => {
       try {
         const response = await service.getAll()
         setData(response)
+
+        await setSuccess()
+      } catch (error) {
+        await setError()
+      }
+    },
+  )
+
+  const { actionState, handleAction } = useHandleAction(
+    async ({ setSuccess, setError }) => {
+      try {
+        await service.deleteMany(selectedRowIds)
 
         await setSuccess()
       } catch (error) {
@@ -64,14 +77,29 @@ const LocalQuery = () => {
             </div>
           )}
         </div>
-        {data && (
-          <Button
-            title="Descargar Excel"
-            faIcon="fa-solid fa-file-excel"
-            _type="secondary"
-            onClick={handleExportClick}
-          />
-        )}
+        <div className="actions">
+          {selectedRowIds.length !== 0 && (
+            <SecureHoldButton
+              text="Eliminar"
+              title="Eliminar seleccionados"
+              faIcon="fa-solid fa-trash"
+              type="secondary"
+              action={handleAction}
+              {...{ actionState }}
+            />
+          )}
+          {data && (
+            <Button
+              text="Descargar Excel"
+              title={`Descargar Excel (${
+                selectedRowIds.length === 0 ? 'todo' : 'seleccionados'
+              })`}
+              faIcon="fa-solid fa-file-excel"
+              _type="secondary"
+              onClick={handleExportClick}
+            />
+          )}
+        </div>
       </header>
       {data && <Table {...{ data, selectedRowIds, setSelectedRowIds }} />}
     </div>

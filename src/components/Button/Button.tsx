@@ -4,12 +4,15 @@ import { ButtonHTMLAttributes } from 'react'
 import { classList } from '@/helpers'
 
 interface Props extends ButtonHTMLAttributes<HTMLButtonElement> {
+  text?: string
+  title?: string
   faIcon?: string
   hideText?: boolean
   _type?: 'secondary'
 }
 
 const Button = ({
+  text,
   title,
   faIcon,
   hideText,
@@ -19,10 +22,10 @@ const Button = ({
 }: Props) => (
   <button
     className={classList('cmp-button', 'button-look', _type)}
-    title={title}
+    title={title || text}
     {...rest}
   >
-    {!hideText && title}
+    {!hideText && (text || title)}
     {faIcon && <Icon faIcon={faIcon} />}
     {children}
   </button>
