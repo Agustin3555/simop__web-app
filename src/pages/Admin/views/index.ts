@@ -20,7 +20,7 @@ export { default as TipoRepresentante } from './TipoRepresentante/TipoRepresenta
 export { default as Empresa } from './Empresa/Empresa'
 export { default as Obra } from './Obra/Obra'
 export { default as Inspector } from './Inspector/Inspector'
-// export { default as FojaMedicion } from './FojaMedicion/FojaMedicion'
+export { default as FojaMedicion } from './FojaMedicion/FojaMedicion'
 export { default as Certificacion } from './Certificacion/Certificacion'
 export { default as PagoCertificacion } from './PagoCertificacion/PagoCertificacion'
 export { default as TipoContratacionObra } from './TipoContratacionObra/TipoContratacionObra'

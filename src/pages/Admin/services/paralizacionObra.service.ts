@@ -1,6 +1,7 @@
 import { publicInstance, Service } from '@/services/config'
 import { ParalizacionObraModel } from '../models'
 import { ParalizacionObraAdapter } from '../adapters'
+import { deleteManyHandler } from '@/services/handlers'
 import { buildPath } from '@/helpers'
 
 const collection = buildPath('tipo-paralizaciones-obras')
@@ -29,4 +30,5 @@ export const ParalizacionObraService: Service<ParalizacionObraModel.Entity> = {
 
     await publicInstance.post(collection(), adaptedInput)
   },
+  deleteMany: async ids => await deleteManyHandler(collection, ids),
 }

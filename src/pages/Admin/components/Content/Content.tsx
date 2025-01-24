@@ -21,7 +21,7 @@ import {
   TipoProgramaObra,
   TipoTematicaObra,
   TipoEstadoObra,
-  //FojaMedicion,
+  FojaMedicion,
 
   // ModificacionObra,
   // ParalizacionObra,
@@ -58,7 +58,7 @@ const Content = () => (
     {/* <ParalizacionObra /> */}
     {/* <Tramite /> */}
 
-    {/*<FojaMedicion />*/}
+    <FojaMedicion />
     <Certificacion />
     <PagoCertificacion />
   </div>

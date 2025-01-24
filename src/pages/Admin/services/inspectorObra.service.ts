@@ -1,6 +1,7 @@
 import { publicInstance, Service } from '@/services/config'
 import { InspectorObraModel } from '../models'
 import { InspectorObraAdapter } from '../adapters'
+import { deleteManyHandler } from '@/services/handlers'
 import { buildPath } from '@/helpers'
 
 const collection = buildPath('inspectores-obras')
@@ -23,4 +24,5 @@ export const InspectorObraService: Service<InspectorObraModel.Entity> = {
 
     await publicInstance.post(collection(), adaptedInput)
   },
+  deleteMany: async ids => await deleteManyHandler(collection, ids),
 }

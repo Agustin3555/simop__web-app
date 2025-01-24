@@ -1,6 +1,7 @@
 import { publicInstance, Service } from '@/services/config'
 import { ProvinciaModel } from '../models'
 import { ProvinciaAdapter } from '../adapters'
+import { deleteManyHandler } from '@/services/handlers'
 import { buildPath } from '@/helpers'
 
 const collection = buildPath('provincias')
@@ -29,4 +30,5 @@ export const ProvinciaService: Service<ProvinciaModel.Entity> = {
 
     await publicInstance.post(collection(), adaptedInput)
   },
+  deleteMany: async ids => await deleteManyHandler(collection, ids),
 }

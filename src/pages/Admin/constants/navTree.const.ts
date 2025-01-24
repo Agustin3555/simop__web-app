@@ -86,9 +86,9 @@ export const TREE: SectionNode[] = [
       { scheme: ObraModel.scheme },
       { scheme: RepresentanteObraModel.scheme },
       { scheme: InspectorObraModel.scheme },
+      { scheme: FojaMedicionModel.scheme },
       { scheme: CertificacionModel.scheme },
       { scheme: PagoCertificacionModel.scheme },
-      { scheme: FojaMedicionModel.scheme },
     ],
   },
 ]

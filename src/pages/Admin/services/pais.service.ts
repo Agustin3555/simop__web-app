@@ -1,6 +1,7 @@
 import { publicInstance, Service } from '@/services/config'
 import { PaisModel } from '../models'
 import { PaisAdapter } from '../adapters'
+import { deleteManyHandler } from '@/services/handlers'
 import { buildPath } from '@/helpers'
 
 const collection = buildPath('pais')
@@ -29,4 +30,5 @@ export const PaisService: Service<PaisModel.Entity> = {
 
     await publicInstance.post(collection(), adaptedInput)
   },
+  deleteMany: async ids => await deleteManyHandler(collection, ids),
 }

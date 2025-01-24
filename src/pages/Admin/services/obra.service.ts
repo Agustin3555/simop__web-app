@@ -1,6 +1,7 @@
 import { publicInstance, Service } from '@/services/config'
 import { ObraModel } from '../models'
 import { ObraAdapter } from '../adapters'
+import { deleteManyHandler } from '@/services/handlers'
 import { buildPath } from '@/helpers'
 
 const collection = buildPath('obras')
@@ -29,4 +30,5 @@ export const ObraService: Service<ObraModel.Entity> = {
 
     await publicInstance.post(collection(), adaptedInput)
   },
+  deleteMany: async ids => await deleteManyHandler(collection, ids),
 }

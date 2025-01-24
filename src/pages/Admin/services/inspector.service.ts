@@ -1,6 +1,7 @@
 import { publicInstance, Service } from '@/services/config'
 import { InspectorModel } from '../models'
 import { InspectorAdapter } from '../adapters'
+import { deleteManyHandler } from '@/services/handlers'
 import { buildPath } from '@/helpers'
 
 const collection = buildPath('inspectores')
@@ -29,4 +30,5 @@ export const InspectorService: Service<InspectorModel.Entity> = {
 
     await publicInstance.post(collection(), adaptedInput)
   },
+  deleteMany: async ids => await deleteManyHandler(collection, ids),
 }

@@ -1,6 +1,7 @@
 import { publicInstance, Service } from '@/services/config'
 import { SubSecretariaModel } from '../models'
 import { SubSecretariaAdapter } from '../adapters'
+import { deleteManyHandler } from '@/services/handlers'
 import { buildPath } from '@/helpers'
 
 const collection = buildPath('sub-secretarias')
@@ -29,4 +30,5 @@ export const SubSecretariaService: Service<SubSecretariaModel.Entity> = {
 
     await publicInstance.post(collection(), adaptedInput)
   },
+  deleteMany: async ids => await deleteManyHandler(collection, ids),
 }

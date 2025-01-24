@@ -1,9 +1,10 @@
 import { publicInstance, Service } from '@/services/config'
 import { FojaMedicionModel } from '../models'
 import { FojaMedicionAdapter } from '../adapters'
+import { deleteManyHandler } from '@/services/handlers'
 import { buildPath } from '@/helpers'
 
-const collection = buildPath('fojas')
+const collection = buildPath('fojas-mediciones')
 
 export const FojaMedicionService: Service<FojaMedicionModel.Entity> = {
   getAll: async () => {
@@ -29,4 +30,5 @@ export const FojaMedicionService: Service<FojaMedicionModel.Entity> = {
 
     await publicInstance.post(collection(), adaptedInput)
   },
+  deleteMany: async ids => await deleteManyHandler(collection, ids),
 }

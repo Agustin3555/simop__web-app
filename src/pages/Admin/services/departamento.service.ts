@@ -1,6 +1,7 @@
 import { publicInstance, Service } from '@/services/config'
 import { DepartamentoModel } from '../models'
 import { DepartamentoAdapter } from '../adapters'
+import { deleteManyHandler } from '@/services/handlers'
 import { buildPath } from '@/helpers'
 
 const collection = buildPath('departamentos')
@@ -29,4 +30,5 @@ export const DepartamentoService: Service<DepartamentoModel.Entity> = {
 
     await publicInstance.post(collection(), adaptedInput)
   },
+  deleteMany: async ids => await deleteManyHandler(collection, ids),
 }

@@ -1,6 +1,7 @@
 import { publicInstance, Service } from '@/services/config'
 import { PagoCertificacionModel } from '../models'
 import { PagoCertificacionAdapter } from '../adapters'
+import { deleteManyHandler } from '@/services/handlers'
 import { buildPath } from '@/helpers'
 
 const collection = buildPath('pagos-certificaciones')
@@ -30,4 +31,5 @@ export const PagoCertificacionService: Service<PagoCertificacionModel.Entity> =
 
       await publicInstance.post(collection(), adaptedInput)
     },
+    deleteMany: async ids => await deleteManyHandler(collection, ids),
   }
