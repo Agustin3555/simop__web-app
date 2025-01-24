@@ -53,7 +53,6 @@ export const scheme: Scheme<Entity> = {
   groups: [
     {
       props: {
-        ...COMMON_PROPS,
         nombre: new TextProp('nombre', 'Nombre', {
           field: {
             required: true,
@@ -65,6 +64,7 @@ export const scheme: Scheme<Entity> = {
             required: true,
           },
         }),
+        ...COMMON_PROPS,
       },
     },
   ],

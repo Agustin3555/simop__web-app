@@ -21,14 +21,13 @@ import {
   TipoProgramaObra,
   TipoTematicaObra,
   TipoEstadoObra,
+  //FojaMedicion,
 
   // ModificacionObra,
   // ParalizacionObra,
   // Tramite,
-
-  // FojaMedicion,
-  // Certificacion,
-  // PagoCertificacion,
+  Certificacion,
+  PagoCertificacion,
 } from '../../views'
 
 const Content = () => (
@@ -59,9 +58,9 @@ const Content = () => (
     {/* <ParalizacionObra /> */}
     {/* <Tramite /> */}
 
-    {/* <FojaMedicion /> */}
-    {/* <Certificacion /> */}
-    {/* <PagoCertificacion /> */}
+    {/*<FojaMedicion />*/}
+    <Certificacion />
+    <PagoCertificacion />
   </div>
 )
 

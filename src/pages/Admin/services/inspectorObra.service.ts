@@ -3,7 +3,7 @@ import { InspectorObraModel } from '../models'
 import { InspectorObraAdapter } from '../adapters'
 import { buildPath } from '@/helpers'
 
-const collection = buildPath('representantes-obras')
+const collection = buildPath('inspectores-obras')
 
 export const InspectorObraService: Service<InspectorObraModel.Entity> = {
   getAll: async () => {

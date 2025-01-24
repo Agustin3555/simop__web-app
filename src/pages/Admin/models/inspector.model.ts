@@ -61,7 +61,6 @@ export const scheme: Scheme<Entity> = {
   groups: [
     {
       props: {
-        ...COMMON_PROPS,
         cuil: new NumberProp('cuil', 'CUIL'),
         apellido: new TextProp('apellido', 'Apellido', {
           field: {
@@ -72,6 +71,7 @@ export const scheme: Scheme<Entity> = {
         tiposProfesiones: new RefListProp('tiposProfesiones', {
           getScheme: () => TipoProfesionModel.scheme,
         }),
+        ...COMMON_PROPS,
       },
     },
   ],

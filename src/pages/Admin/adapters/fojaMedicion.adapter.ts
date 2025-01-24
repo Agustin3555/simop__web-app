@@ -16,9 +16,9 @@ export const getAll: {
       avance: item.avance,
       fecha: item.fecha,
       observaciones: item.observaciones,
-      obraNumero: item.obraNumero && {
-        id: item.obraNumero.id,
-        title: item.obraNumero.nombre,
+      obraId: item.obraId && {
+        id: item.obraId.id,
+        title: item.obraId.numero,
       },
       inspectorId: item.inspectorId && {
         id: item.inspectorId.id,
@@ -56,9 +56,9 @@ export const getOne: {
       avance: response.avance,
       fecha: response.fecha,
       observaciones: response.observaciones,
-      obraNumero: response.obraNumero && {
-        id: response.obraNumero.id,
-        title: response.obraNumero.nombre,
+      obraId: response.obraId && {
+        id: response.obraId.id,
+        title: response.obraId.numero,
       },
       inspectorId: response.inspectorId && {
         id: response.inspectorId.id,
@@ -85,7 +85,7 @@ export const create: {
       avance: data.avance,
       fecha: data.fecha,
       observaciones: data.observaciones,
-      obraNumero: data.obraNumero,
+      obraId: data.obraId,
       inspectorId: data.inspectorId,
 
       creado: data.creado,

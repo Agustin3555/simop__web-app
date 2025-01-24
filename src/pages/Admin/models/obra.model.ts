@@ -192,7 +192,6 @@ export const scheme: Scheme<Entity> = {
   groups: [
     {
       props: {
-        ...COMMON_PROPS,
         numero: new NumberProp('numero', 'Número', {
           field: {
             required: true,
@@ -203,9 +202,9 @@ export const scheme: Scheme<Entity> = {
             required: true,
           },
         }),
-        // empresa: new RefProp('empresa', {
-        //   getScheme: () => EmpresaModel.scheme,
-        // }),
+        empresa: new RefProp('empresa', {
+          getScheme: () => EmpresaModel.scheme,
+        }),
         numeroExpediente: new TextProp(
           'numeroExpediente',
           'Número de Expediente',
@@ -214,24 +213,24 @@ export const scheme: Scheme<Entity> = {
           'numeroResolucion',
           'Número de Resolución',
         ),
-        // anioResolucion: new NumberProp('anioResolucion', 'Año de Resolución', {
-        //   field: {
-        //     required: true,
-        //   },
-        // }),
+        anioResolucion: new NumberProp('anioResolucion', 'Año de Resolución', {
+          field: {
+            required: true,
+          },
+        }),
         numeroContratacion: new TextProp(
           'numeroContratacion',
           'Número de Contratación',
         ),
-        // anioContratacion: new NumberProp(
-        //   'anioContratacion',
-        //   'Año de Contratación',
-        //   {
-        //     field: {
-        //       required: true,
-        //     },
-        //   },
-        // ),
+        anioContratacion: new NumberProp(
+          'anioContratacion',
+          'Año de Contratación',
+          {
+            field: {
+              required: true,
+            },
+          },
+        ),
         montoContratacion: new NumberProp(
           'montoContratacion',
           'Año de Contratación',
@@ -240,30 +239,30 @@ export const scheme: Scheme<Entity> = {
             pre: '$',
           },
         ),
-        // tipoContratacionObra: new RefProp('tipoContratacionObra', {
-        //   getScheme: () => TipoContratacionObraModel.scheme,
-        // }),
-        // tipoFinanciamientoObra: new RefProp('tipoFinanciamientoObra', {
-        //   getScheme: () => TipoFinanciamientoObraModel.scheme,
-        // }),
-        // tipoProgramaObra: new RefProp('tipoProgramaObra', {
-        //   getScheme: () => TipoProgramaObraModel.scheme,
-        // }),
-        // tipoTematicaObra: new RefProp('tipoTematicaObra', {
-        //   getScheme: () => TipoTematicaObraModel.scheme,
-        // }),
-        // tipoEstadoObra: new RefProp('tipoEstadoObra', {
-        //   getScheme: () => TipoEstadoObraModel.scheme,
-        // }),
+        tipoContratacionObra: new RefProp('tipoContratacionObra', {
+          getScheme: () => TipoContratacionObraModel.scheme,
+        }),
+        tipoFinanciamientoObra: new RefProp('tipoFinanciamientoObra', {
+          getScheme: () => TipoFinanciamientoObraModel.scheme,
+        }),
+        tipoProgramaObra: new RefProp('tipoProgramaObra', {
+          getScheme: () => TipoProgramaObraModel.scheme,
+        }),
+        tipoTematicaObra: new RefProp('tipoTematicaObra', {
+          getScheme: () => TipoTematicaObraModel.scheme,
+        }),
+        tipoEstadoObra: new RefProp('tipoEstadoObra', {
+          getScheme: () => TipoEstadoObraModel.scheme,
+        }),
         fechaInicio: new DateProp('fechaInicio', 'Fecha de Inicio'),
         fechaFin: new DateProp('fechaFin', 'Fecha de Fin'),
         plazoMeses: new NumberProp('plazoMeses', 'Plazo en Meses'),
         plazoDias: new NumberProp('plazoDias', 'Plazo en Días'),
-        // localidad: new RefProp('localidad', {
-        //   getScheme: () => LocalidadModel.scheme,
-        // }),
+        localidad: new RefProp('localidad', {
+          getScheme: () => LocalidadModel.scheme,
+        }),
         direccion: new TextProp('direccion', 'Dirección'),
-        lugar: new TextProp('lugar', 'Lugar'),
+        lugar: new TextLongProp('lugar', 'Lugar'),
         nomenclaturaCatastral: new TextProp(
           'nomenclaturaCatastral',
           'Nomenclatura Catastral',
@@ -339,6 +338,7 @@ export const scheme: Scheme<Entity> = {
           'observacionesObraRefaccionada',
           'Observaciones de obra refaccionada',
         ),
+        ...COMMON_PROPS,
       },
     },
   ],
