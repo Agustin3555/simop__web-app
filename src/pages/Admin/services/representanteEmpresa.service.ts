@@ -25,5 +25,6 @@ export const RepresentanteEmpresaService: Service<RepresentanteEmpresaModel.Enti
 
       await publicInstance.post(collection(), adaptedInput)
     },
+
     deleteMany: async ids => await deleteManyHandler(collection, ids),
   }

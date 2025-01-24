@@ -30,5 +30,6 @@ export const CertificacionService: Service<CertificacionModel.Entity> = {
 
     await publicInstance.post(collection(), adaptedInput)
   },
+
   deleteMany: async ids => await deleteManyHandler(collection, ids),
 }

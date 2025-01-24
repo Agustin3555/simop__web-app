@@ -31,5 +31,6 @@ export const TipoFinanciamientoObraService: Service<TipoFinanciamientoObraModel.
 
       await publicInstance.post(collection(), adaptedInput)
     },
+
     deleteMany: async ids => await deleteManyHandler(collection, ids),
   }

@@ -33,6 +33,9 @@ const LocalQuery = () => {
       try {
         await service.deleteMany(selectedRowIds)
 
+        const response = await service.getAll()
+        setData(response)
+
         await setSuccess()
       } catch (error) {
         await setError()

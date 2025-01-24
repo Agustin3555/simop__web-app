@@ -4,7 +4,7 @@ import { ModificacionObraAdapter } from '../adapters'
 import { deleteManyHandler } from '@/services/handlers'
 import { buildPath } from '@/helpers'
 
-const collection = buildPath('tipo-modificaciones-obra')
+const collection = buildPath('tipos-modificaciones-obra')
 
 export const ModificacionObraService: Service<ModificacionObraModel.Entity> = {
   getAll: async () => {
@@ -30,5 +30,6 @@ export const ModificacionObraService: Service<ModificacionObraModel.Entity> = {
 
     await publicInstance.post(collection(), adaptedInput)
   },
+
   deleteMany: async ids => await deleteManyHandler(collection, ids),
 }

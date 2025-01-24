@@ -31,5 +31,6 @@ export const TipoRepresentanteService: Service<TipoRepresentanteModel.Entity> =
 
       await publicInstance.post(collection(), adaptedInput)
     },
+
     deleteMany: async ids => await deleteManyHandler(collection, ids),
   }

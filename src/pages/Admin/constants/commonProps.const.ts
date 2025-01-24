@@ -36,10 +36,10 @@ interface TipoFields extends CommonFields {
 }
 
 export const TIPO_PROPS: ScalarProps<TipoFields> = {
-  ...COMMON_PROPS,
   nombre: new TextProp('nombre', 'Nombre', {
     field: {
       required: true,
     },
   }),
+  ...COMMON_PROPS,
 }
