@@ -25,6 +25,7 @@ import {
   TipoTematicaObraModel,
   FojaMedicionModel,
 } from '../models'
+
 export interface SectionNode {
   title?: string
   sections?: SectionNode[]
@@ -92,7 +93,3 @@ export const TREE: SectionNode[] = [
     ],
   },
 ]
-
-// { scheme: ViewKey.MODIFICACION_OBRA },
-// { scheme: ViewKey.PARALIZACION_OBRA },
-// { scheme: ViewKey.TRAMITE },

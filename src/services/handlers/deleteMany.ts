@@ -28,5 +28,5 @@ export const deleteManyHandler = async (
 ) => {
   const adaptedInput = adapter.input({ ids })
 
-  await publicInstance.post(collection(), adaptedInput)
+  await publicInstance.post(collection('delete-many'), adaptedInput)
 }

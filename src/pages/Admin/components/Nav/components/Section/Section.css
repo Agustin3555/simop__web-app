@@ -1,12 +1,18 @@
 .cmp-section {
   --button-height: var(--pal-size-xl);
 
+  flex-shrink: 0;
+
   display: flex;
   flex-direction: column;
   gap: var(--items-gap);
   height: var(--button-height);
 
   overflow: hidden;
+
+  &:hover > .items > .bar {
+    opacity: initial;
+  }
 
   > button {
     --cmp-icon-size: var(--pal-size-s);
@@ -19,6 +25,7 @@
     padding-inline: var(--pal-size-s);
     height: var(--button-height);
 
+    white-space: nowrap;
     border-radius: var(--pal-size-2xs);
 
     transition: background-color var(--pal-time-xs) ease-out;
@@ -32,13 +39,34 @@
 
       background-color: var(--pal-color-a);
     }
+
+    > .cmp-icon {
+      transition: rotate var(--pal-time-s) ease;
+    }
   }
 
-  > .sections {
+  > .items {
     display: flex;
-    flex-direction: column;
-    gap: var(--items-gap);
-    margin-left: var(--pal-size-xl);
+    gap: var(--pal-size-s);
+    padding-left: 1.125rem;
+
+    > .bar {
+      width: 0.0625rem;
+
+      border-radius: var(--pal-size-3xl);
+      background-color: rgba(var(--pal-color-base-white), 0.875);
+      opacity: 0;
+
+      transition: opacity var(--pal-time-xs) ease-out;
+    }
+
+    > .sections {
+      flex-grow: 1;
+
+      display: flex;
+      flex-direction: column;
+      gap: var(--items-gap);
+    }
   }
 
   &.open {

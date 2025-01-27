@@ -30,14 +30,17 @@ const Section = ({ title, sections, scheme, closeNav }: Props) => {
         {hasView ? scheme.title.plural : title}
       </button>
       {sections && (
-        <div className="sections">
-          {sections.map(section => (
-            <Section
-              key={section.title || section.scheme?.title.plural}
-              {...section}
-              {...{ closeNav }}
-            />
-          ))}
+        <div className="items">
+          <span className="bar" />
+          <div className="sections">
+            {sections.map(section => (
+              <Section
+                key={section.title || section.scheme?.title.plural}
+                {...section}
+                {...{ closeNav }}
+              />
+            ))}
+          </div>
         </div>
       )}
     </div>

@@ -1,5 +1,5 @@
 import './Table.css'
-import { Dispatch, SetStateAction, useEffect, useMemo, useState } from 'react'
+import { Dispatch, SetStateAction, useMemo, useState } from 'react'
 import { useScheme } from '@/pages/Admin/hooks'
 import {
   ColumnDef,
@@ -18,27 +18,24 @@ import { Entity } from '@/services/config'
 
 interface TableProps {
   data: Entity[]
+  rowSelection: RowSelectionState
+  setRowSelection: Dispatch<SetStateAction<RowSelectionState>>
   selectedRowIds: number[]
-  setSelectedRowIds: Dispatch<SetStateAction<number[]>>
 }
 
 const SELECT_COLUMN = 'select'
 
-const Table = ({ data, selectedRowIds, setSelectedRowIds }: TableProps) => {
+const Table = ({
+  data,
+  rowSelection,
+  setRowSelection,
+  selectedRowIds,
+}: TableProps) => {
   const { scheme, flatProps } = useScheme()
   const { groups } = scheme
 
   const [sorting, setSorting] = useState<SortingState>([])
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([])
-  const [rowSelection, setRowSelection] = useState<RowSelectionState>({})
-
-  useEffect(() => {
-    setSelectedRowIds(
-      Object.keys(rowSelection)
-        .filter(id => rowSelection[id])
-        .map(Number),
-    )
-  }, [rowSelection])
 
   const columns = useMemo(
     () => [

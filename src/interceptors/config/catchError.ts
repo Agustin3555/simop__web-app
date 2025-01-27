@@ -1,12 +1,15 @@
 import { AppError } from '@/services/config'
+import { useAppStore } from '@/store/config'
 import { AxiosError } from 'axios'
 
 interface ApiErrorData {
   code?: string
 }
 
+const { toasting } = useAppStore.getState()
+
 export const catchError = (error: AxiosError) => {
-  let code: string | undefined = undefined
+  let code: string | undefined
 
   if (error.response) {
     /*
@@ -32,5 +35,8 @@ export const catchError = (error: AxiosError) => {
     En todos los casos, convertimos el error en una instancia de AppError para
     manejarlo de manera consistente.
   */
-  return Promise.reject(new AppError(code))
+  const appError = new AppError(code)
+  toasting('error', appError.message)
+
+  return Promise.reject(appError)
 }

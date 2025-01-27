@@ -1,9 +1,6 @@
 import { View } from '../../components'
-import { Add, Query } from './components'
-import { ViewKey } from '../../constants'
+import { FojaMedicionModel } from '../../models'
 
-const FojaMedicion = () => (
-  <View viewKey={ViewKey.FOJA_MEDICION} add={<Add />} query={<Query />} />
-)
+const FojaMedicion = () => <View scheme={FojaMedicionModel.scheme} />
 
 export default FojaMedicion

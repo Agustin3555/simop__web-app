@@ -1,5 +1,5 @@
 import './LocalQuery.css'
-import { useCallback, useState } from 'react'
+import { useCallback, useMemo, useState } from 'react'
 import { useHandleAction } from '@/hooks'
 import { useScheme } from '../../hooks'
 import { Button, Icon, StateButton } from '@/components'
@@ -7,13 +7,24 @@ import { Table } from './components'
 import { Entity } from '@/services/config'
 import { utils, writeFile } from 'xlsx'
 import { SecureHoldButton } from '..'
+import { RowSelectionState } from '@tanstack/react-table'
+import { useAppStore } from '@/store/config'
 
 const LocalQuery = () => {
   const { scheme } = useScheme()
   const { title, service } = scheme
 
+  const toasting = useAppStore(store => store.toasting)
   const [data, setData] = useState<Entity[]>()
-  const [selectedRowIds, setSelectedRowIds] = useState<number[]>([])
+  const [rowSelection, setRowSelection] = useState<RowSelectionState>({})
+
+  const selectedRowIds = useMemo(
+    () =>
+      Object.keys(rowSelection)
+        .filter(id => rowSelection[id])
+        .map(Number),
+    [rowSelection],
+  )
 
   const handleActionResult = useHandleAction(
     async ({ setError, setSuccess }) => {
@@ -32,9 +43,12 @@ const LocalQuery = () => {
     async ({ setSuccess, setError }) => {
       try {
         await service.deleteMany(selectedRowIds)
+        setRowSelection({})
 
         const response = await service.getAll()
         setData(response)
+
+        toasting('success', 'Eliminado con éxito')
 
         await setSuccess()
       } catch (error) {
@@ -104,7 +118,9 @@ const LocalQuery = () => {
           )}
         </div>
       </header>
-      {data && <Table {...{ data, selectedRowIds, setSelectedRowIds }} />}
+      {data && (
+        <Table {...{ data, rowSelection, setRowSelection, selectedRowIds }} />
+      )}
     </div>
   )
 }

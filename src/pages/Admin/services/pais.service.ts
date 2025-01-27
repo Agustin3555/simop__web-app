@@ -4,7 +4,7 @@ import { PaisAdapter } from '../adapters'
 import { deleteManyHandler } from '@/services/handlers'
 import { buildPath } from '@/helpers'
 
-const collection = buildPath('pais')
+const collection = buildPath('paises')
 
 export const PaisService: Service<PaisModel.Entity> = {
   getAll: async () => {

@@ -37,21 +37,22 @@
   > nav {
     --items-gap: var(--pal-size-2xs);
 
-    position: absolute;
+    position: fixed;
 
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    padding: var(--pal-size-m);
     gap: var(--pal-size-m);
+    padding: var(--pal-size-m);
     width: fit-content;
+    max-width: calc(100% - var(--pal-size-2xl));
     height: 100dvh;
 
     background-color: var(--pal-color-a-l2);
-    box-shadow: var(--pal-shadow-1);
     translate: -100%;
 
-    transition: translate var(--pal-time-m) ease;
+    transition: box-shadow var(--pal-time-m) ease,
+      translate var(--pal-time-m) ease;
 
     > .tree {
       display: flex;
@@ -59,6 +60,7 @@
       gap: var(--items-gap);
 
       overflow: auto;
+      scrollbar-color: var(--pal-color-a-l1) transparent;
     }
 
     > .cmp-external-link {
@@ -80,6 +82,7 @@
     }
 
     > nav {
+      box-shadow: var(--pal-shadow-1);
       translate: initial;
     }
   }

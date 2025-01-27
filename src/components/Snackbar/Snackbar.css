@@ -1,0 +1,85 @@
+@keyframes show {
+  to {
+    translate: initial;
+    opacity: initial;
+  }
+}
+
+@keyframes disappear {
+  to {
+    translate: 0 var(--pal-size-2xl);
+    opacity: 0;
+  }
+}
+
+@keyframes to-ring {
+  0%,
+  100% {
+    transform: rotate(0deg);
+  }
+  20%,
+  60% {
+    transform: rotate(8deg);
+  }
+  40%,
+  80% {
+    transform: rotate(-8deg);
+  }
+  50%,
+  70% {
+    transform: rotate(5deg);
+  }
+}
+
+.cmp-snackbar {
+  display: flex;
+  justify-content: center;
+
+  color: var(--pal-color-white);
+
+  > .toast {
+    position: fixed;
+    z-index: 1;
+    bottom: 0;
+
+    display: flex;
+    align-items: center;
+    gap: var(--pal-size-l);
+    margin: var(--pal-size-m);
+    padding: var(--pal-size-m);
+    padding-right: var(--pal-size-l);
+
+    border-radius: var(--pal-size-2xs);
+    box-shadow: var(--pal-shadow-1);
+    translate: 0 var(--pal-size-2xl);
+    opacity: 0;
+
+    animation: show var(--pal-time-m) var(--pal-timing-func-a) forwards,
+      disappear var(--exit-time) var(--screen-time) var(--pal-timing-func-a)
+        forwards;
+
+    &.info {
+      color: var(--pal-color-a-d2);
+
+      background-color: var(--pal-color-white);
+    }
+
+    &.warning {
+      background-color: var(--pal-color-a);
+    }
+
+    &.error {
+      background-color: var(--pal-color-c);
+    }
+
+    &.success {
+      background-color: var(--pal-color-b);
+    }
+
+    > .cmp-icon {
+      --cmp-icon-size: var(--pal-size-font-l);
+
+      animation: to-ring ease-in-out 1.5s infinite alternate;
+    }
+  }
+}

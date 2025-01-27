@@ -3,10 +3,13 @@ import { useMemo } from 'react'
 import { useSubmitAction } from '@/hooks'
 import { useScheme } from '../../hooks'
 import { Button, StateButton } from '@/components'
+import { useAppStore } from '@/store/config'
 
 const LocalAdd = () => {
   const { scheme } = useScheme()
   const { service, groups } = scheme
+
+  const toasting = useAppStore(store => store.toasting)
 
   const fieldGroups = useMemo(
     () =>
@@ -35,6 +38,7 @@ const LocalAdd = () => {
         // console.log(createData)
 
         await service.create!(createData)
+        toasting('success', 'Agregado con éxito')
 
         await setSuccess()
       } catch (error) {
