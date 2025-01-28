@@ -1,5 +1,5 @@
 import './Section.css'
-import { useCallback, useState } from 'react'
+import { useCallback, useMemo, useState } from 'react'
 import { useViewActive, useViewNavigation } from '@/pages/Admin/hooks'
 import { SectionNode } from '@/pages/Admin/constants/navTree.const'
 import { classList } from '@/helpers'
@@ -10,15 +10,14 @@ interface Props extends SectionNode {
 }
 
 const Section = ({ title, sections, scheme, closeNav }: Props) => {
-  const hasView = scheme !== undefined
-
+  const hasView = useMemo(() => scheme !== undefined, [])
   const [isOpen, setOpen] = useState(false)
   const viewNavigate = useViewNavigation()
   const isActive = useViewActive(scheme?.key ?? '')
 
   const handleClick = useCallback(() => {
     if (hasView) {
-      viewNavigate(scheme.key)
+      viewNavigate(scheme!.key)
       closeNav()
     } else setOpen(prev => !prev)
   }, [])
@@ -27,7 +26,7 @@ const Section = ({ title, sections, scheme, closeNav }: Props) => {
     <div className={classList('cmp-section', { open: isOpen })}>
       <button className={classList({ active: isActive })} onClick={handleClick}>
         {sections && <Icon faIcon="fa-solid fa-angle-right" />}
-        {hasView ? scheme.title.plural : title}
+        {hasView ? scheme!.title.plural : title}
       </button>
       {sections && (
         <div className="items">

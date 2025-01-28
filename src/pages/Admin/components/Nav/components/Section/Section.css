@@ -41,6 +41,8 @@
     }
 
     > .cmp-icon {
+      color: var(--pal-color-a);
+
       transition: rotate var(--pal-time-s) ease;
     }
   }

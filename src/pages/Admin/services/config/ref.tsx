@@ -48,7 +48,7 @@ export class RefProp<T extends EntityKey> implements PropScheme {
 
     const value = formData.get(key)
 
-    if (value === '') return
+    if (value === null) return
 
     return Number(value)
   }

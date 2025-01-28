@@ -10,7 +10,7 @@ export interface RawEntity {
   apellido: string
   nombre: string
 
-  tiposProfesiones: TipoProfesionModel.RawRef[]
+  profesiones: TipoProfesionModel.RawRef[]
 
   creado: string
   modificado: string
@@ -22,7 +22,7 @@ export interface Entity {
   apellido: string
   nombre: string
 
-  tiposProfesiones: Ref[]
+  profesiones: Ref[]
 
   creado: string
   modificado: string
@@ -38,7 +38,7 @@ export interface CreateData {
   apellido: string
   nombre: string
 
-  tiposProfesiones?: number[]
+  profesiones?: number[]
 }
 
 export interface CreateBody {
@@ -46,7 +46,7 @@ export interface CreateBody {
   apellido: string
   nombre: string
 
-  tiposProfesiones?: number[]
+  profesiones?: number[]
 }
 
 export const scheme: Scheme<Entity> = {
@@ -68,7 +68,7 @@ export const scheme: Scheme<Entity> = {
           },
         }),
         nombre: new TextProp('nombre', 'Nombre'),
-        tiposProfesiones: new RefListProp('tiposProfesiones', {
+        profesiones: new RefListProp('profesiones', {
           getScheme: () => TipoProfesionModel.scheme,
         }),
         ...COMMON_PROPS,

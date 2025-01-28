@@ -11,7 +11,7 @@ export const getAll: {
       cuil: item.cuil,
       apellido: item.apellido,
       nombre: item.nombre,
-      tiposProfesiones: item.tiposProfesiones.map<Ref>(item => ({
+      profesiones: item.profesiones.map<Ref>(item => ({
         id: item.id,
         title: item.nombre,
       })),
@@ -45,7 +45,7 @@ export const getOne: {
       cuil: response.cuil,
       apellido: response.apellido,
       nombre: response.nombre,
-      tiposProfesiones: response.tiposProfesiones.map<Ref>(item => ({
+      profesiones: response.profesiones.map<Ref>(item => ({
         id: item.id,
         title: item.nombre,
       })),
@@ -65,7 +65,7 @@ export const create: {
       cuil: data.cuil,
       apellido: data.apellido,
       nombre: data.nombre,
-      tiposProfesiones: data?.tiposProfesiones,
+      profesiones: data?.profesiones,
     }
 
     return convertedResource
