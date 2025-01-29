@@ -16,9 +16,9 @@ export const getAll: {
         monto: item.monto,
         fecha: item.fecha,
         observaciones: item.observaciones,
-        certificacionId: item.certificacionId && {
-          id: item.certificacionId.id,
-          title: item.certificacionId.id,
+        certificacion: item.certificacion && {
+          id: item.certificacion.id,
+          title: item.certificacion.id,
         },
         creado: item.creado,
         modificado: item.modificado,
@@ -55,9 +55,9 @@ export const getOne: {
       monto: response.monto,
       fecha: response.fecha,
       observaciones: response.observaciones,
-      certificacionId: response.certificacionId && {
-        id: response.certificacionId.id,
-        title: response.certificacionId.id,
+      certificacionId: response.certificacion && {
+        id: response.certificacion.id,
+        title: response.certificacion.id,
       },
       creado: response.creado,
       modificado: response.modificado,

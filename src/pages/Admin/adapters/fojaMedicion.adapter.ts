@@ -16,13 +16,13 @@ export const getAll: {
       avance: item.avance,
       fecha: item.fecha,
       observaciones: item.observaciones,
-      obraId: item.obraId && {
-        id: item.obraId.id,
-        title: item.obraId.numero,
+      obra: item.obra && {
+        id: item.obra.id,
+        title: item.obra.numero,
       },
-      inspectorId: item.inspectorId && {
-        id: item.inspectorId.id,
-        title: item.inspectorId.apellido,
+      inspector: item.inspector && {
+        id: item.inspector.id,
+        title: item.inspector.apellido,
       },
       creado: item.creado,
       modificado: item.modificado,
@@ -56,13 +56,13 @@ export const getOne: {
       avance: response.avance,
       fecha: response.fecha,
       observaciones: response.observaciones,
-      obraId: response.obraId && {
-        id: response.obraId.id,
-        title: response.obraId.numero,
+      obraId: response.obra && {
+        id: response.obra.id,
+        title: response.obra.numero,
       },
-      inspectorId: response.inspectorId && {
-        id: response.inspectorId.id,
-        title: response.inspectorId.apellido,
+      inspectorId: response.inspector && {
+        id: response.inspector.id,
+        title: response.inspector.apellido,
       },
       creado: response.creado,
       modificado: response.modificado,

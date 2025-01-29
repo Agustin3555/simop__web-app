@@ -17,7 +17,7 @@ export interface RawEntity {
   fecha: string
   observaciones: string
 
-  certificacionId?: CertificacionModel.RawRef
+  certificacion?: CertificacionModel.RawRef
 
   creado: string
   modificado: string
@@ -30,7 +30,7 @@ export interface Entity {
   fecha: string
   observaciones: string
 
-  certificacionId?: Ref
+  certificacion?: Ref
 
   creado: string
   modificado: string
@@ -71,7 +71,7 @@ export const scheme: Scheme<Entity> = {
   groups: [
     {
       props: {
-        numero: new NumberProp('numero', 'Número', {
+        numero: new NumberProp('numero', 'Número de pago', {
           field: {
             required: true,
           },
@@ -81,18 +81,18 @@ export const scheme: Scheme<Entity> = {
             required: true,
           },
         }),
-        observaciones: new TextLongProp('observaciones', 'Observaciones', {
-          field: {
-            required: true,
-          },
-        }),
         monto: new NumberProp('monto', 'Monto', {
           decimal: true,
           pre: '$',
         }),
 
-        certificacionId: new RefProp('certificacionId', {
+        certificacion: new RefProp('certificacion', {
           getScheme: () => CertificacionModel.scheme,
+          field: {
+            required: true,
+          },
+        }),
+        observaciones: new TextLongProp('observaciones', 'Observaciones', {
           field: {
             required: true,
           },

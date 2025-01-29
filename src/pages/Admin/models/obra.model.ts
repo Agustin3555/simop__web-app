@@ -233,7 +233,7 @@ export const scheme: Scheme<Entity> = {
         ),
         montoContratacion: new NumberProp(
           'montoContratacion',
-          'Año de Contratación',
+          'Monto de Contratación',
           {
             decimal: true,
             pre: '$',

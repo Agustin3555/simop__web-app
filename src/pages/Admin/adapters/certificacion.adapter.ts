@@ -49,11 +49,13 @@ export const getOne: {
       ordenPago: response.ordenPago,
       fecha: response.fecha,
       monto: response.monto,
-      observaciones: response.observaciones /* 
-      fojaMedicionId: response.fojaMedicionId && {
-        id: response.fojaMedicionId.id,
-        title: response.fojaMedicionId.ordenPago,
-      },*/,
+      observaciones: response.observaciones,
+
+      fojaMedicion: response.fojaMedicion && {
+        id: response.fojaMedicion.id,
+        title: response.fojaMedicion.numeroExpediente,
+      },
+
       creado: response.creado,
       modificado: response.modificado,
     }
@@ -75,7 +77,7 @@ export const create: {
       fecha: data.fecha,
       monto: data.monto,
       observaciones: data.observaciones,
-      //fojaMedicionId: data.fojaMedicionId,
+      fojaMedicionId: data.fojaMedicionId,
     }
     return convertedResource
   },

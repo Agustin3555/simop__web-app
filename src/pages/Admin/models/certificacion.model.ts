@@ -17,7 +17,7 @@ export interface RawEntity {
   monto: number
   observaciones: string
 
-  fojaMedicionId?: FojaMedicionModel.RawRef
+  fojaMedicion?: FojaMedicionModel.RawRef
 
   creado: string
   modificado: string
@@ -30,7 +30,7 @@ export interface Entity {
   monto: number
   observaciones: string
 
-  fojaMedicionId?: Ref
+  fojaMedicion?: Ref
 
   creado: string
   modificado: string
@@ -73,7 +73,7 @@ export const scheme: Scheme<Entity> = {
   groups: [
     {
       props: {
-        ordenPago: new NumberProp('ordenPago', 'Orden de Pago', {
+        ordenPago: new NumberProp('ordenPago', 'Número de Expediente', {
           field: {
             required: true,
           },
@@ -83,22 +83,18 @@ export const scheme: Scheme<Entity> = {
             required: true,
           },
         }),
-        observaciones: new TextLongProp('observaciones', 'Observaciones', {
-          field: {
-            required: true,
-          },
-        }),
         monto: new NumberProp('monto', 'Monto', {
           decimal: true,
           pre: '$',
         }),
 
-        fojaMedicionId: new RefProp('fojaMedicionId', {
+        fojaMedicion: new RefProp('fojaMedicion', {
           getScheme: () => FojaMedicionModel.scheme,
           field: {
             required: true,
           },
         }),
+        observaciones: new TextLongProp('observaciones', 'Observaciones'),
         ...COMMON_PROPS,
       },
     },
