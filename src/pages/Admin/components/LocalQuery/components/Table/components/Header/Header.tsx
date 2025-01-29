@@ -19,25 +19,41 @@ interface Props {
   header: TanstackHeader<Entity, unknown>
   sorting: SortingState
   setSorting: Dispatch<SetStateAction<SortingState>>
+  draggable?: boolean
+  onDragStart?: (e: React.DragEvent) => void
+  onDragOver?: (e: React.DragEvent) => void
+  onDrop?: (e: React.DragEvent) => void
+  onDragEnd?: (e: React.DragEvent) => void // Agregado el evento onDragEnd
 }
 
-const Header = ({ flatProps, header, sorting, setSorting }: Props) => {
+const Header = ({
+  flatProps,
+  header,
+  sorting,
+  setSorting,
+  draggable = false,
+  onDragStart,
+  onDragOver,
+  onDrop,
+  onDragEnd,
+}: Props) => {
   const { column } = header
   const { getIsSorted, getSortIndex } = column
 
   const { getHeader } = flatProps[column.id]
 
-  if (!getHeader) return
+  if (!getHeader) return null
 
   // TODO: contener en un useMemo
   const { title, subtitle, filter } = getHeader(column) ?? {}
 
   const sortValue = getIsSorted() || null
 
-  const sortIcon = useMemo(
-    () => sortIconMatcher[sortValue] ?? null,
-    [sortValue],
-  )
+  const sortIcon = useMemo(() => {
+    //si isSorted cambios, los deja,sino, default
+    if (sortValue === null) return null //chequeamos que no sea null
+    return sortIconMatcher[sortValue]
+  }, [sortValue])
 
   const handleSortingClick = () => {
     const isAlreadySorted = sorting.find(sort => sort.id === column.id)
@@ -61,7 +77,14 @@ const Header = ({ flatProps, header, sorting, setSorting }: Props) => {
   }
 
   return (
-    <th className="cmp-header">
+    <th
+      className="cmp-header"
+      draggable={draggable}
+      onDragStart={onDragStart}
+      onDragOver={onDragOver}
+      onDrop={onDrop}
+      onDragEnd={onDragEnd} //  manejo de onDragEnd
+    >
       <div className="content">
         <button onClick={handleSortingClick}>
           <div className="title">
