@@ -73,3 +73,10 @@
     }
   }
 }
+
+.cmp-table th[draggable] {
+  cursor: move;
+  &:active {
+    background-color: blueviolet;
+  }
+}
