@@ -21,15 +21,20 @@ import {
   TipoProgramaObra,
   TipoTematicaObra,
   TipoEstadoObra,
+  TipoRescision,
+  TipoRedeterminacion,
+  TipoRecepcion,
+  TipoModificacion,
   FojaMedicion,
-
+  Redeterminacion,
+  Ampliacion,
+  Modificacion,
   // ModificacionObra,
   // ParalizacionObra,
   // Tramite,
   Certificacion,
   PagoCertificacion,
 } from '../../views'
-
 const Content = () => (
   <div className="cmp-content">
     <SubSecretaria />
@@ -53,6 +58,13 @@ const Content = () => (
     <TipoProgramaObra />
     <TipoTematicaObra />
     <TipoEstadoObra />
+    <TipoRescision />
+    <TipoRedeterminacion />
+    <TipoRecepcion />
+    <TipoModificacion />
+    <Redeterminacion />
+    <Ampliacion />
+    <Modificacion />
 
     {/* <ModificacionObra /> */}
     {/* <ParalizacionObra /> */}

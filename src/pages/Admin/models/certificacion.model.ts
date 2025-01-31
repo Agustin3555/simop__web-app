@@ -65,7 +65,7 @@ export const scheme: Scheme<Entity> = {
   key: 'certificacion',
   service: CertificacionService,
   title: {
-    singular: 'Certificacion',
+    singular: 'Certificación',
     plural: 'Certificaciones',
   },
   refAnchorField: 'Nombre',
