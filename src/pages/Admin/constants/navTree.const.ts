@@ -23,7 +23,14 @@ import {
   TipoProgramaObraModel,
   TipoRepresentanteModel,
   TipoTematicaObraModel,
+  TipoModificacionModel,
+  TipoRecepcionModel,
+  TipoRedeterminacionModel,
+  TipoRescisionModel,
   FojaMedicionModel,
+  AmpliacionModel,
+  RedeterminacionModel,
+  ModificacionModel,
 } from '../models'
 
 export interface SectionNode {
@@ -66,6 +73,10 @@ export const TREE: SectionNode[] = [
               { scheme: TipoProgramaObraModel.scheme },
               { scheme: TipoTematicaObraModel.scheme },
               { scheme: TipoEstadoObraModel.scheme },
+              { scheme: TipoRescisionModel.scheme },
+              { scheme: TipoRedeterminacionModel.scheme },
+              { scheme: TipoRecepcionModel.scheme },
+              { scheme: TipoModificacionModel.scheme },
             ],
           },
         ],
@@ -90,6 +101,9 @@ export const TREE: SectionNode[] = [
       { scheme: FojaMedicionModel.scheme },
       { scheme: CertificacionModel.scheme },
       { scheme: PagoCertificacionModel.scheme },
+      { scheme: RedeterminacionModel.scheme },
+      { scheme: AmpliacionModel.scheme },
+      { scheme: ModificacionModel.scheme },
     ],
   },
 ]
