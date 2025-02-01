@@ -34,10 +34,13 @@ const Table = ({
 }: TableProps) => {
   const { scheme, flatProps } = useScheme()
   const { groups } = scheme
+
   const [sorting, setSorting] = useState<SortingState>([])
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([])
+
   const [columnOrder, setColumnOrder] = useState<ColumnOrderState>(
-    [SELECT_COLUMN, ...groups.flatMap(({ props }) => Object.keys(props))], // Inicializar con el orden de columnas
+    // Inicializar el orden de columnas
+    [SELECT_COLUMN, ...groups.flatMap(({ props }) => Object.keys(props))],
   )
 
   const columns = useMemo(
@@ -64,7 +67,7 @@ const Table = ({
     onSortingChange: setSorting,
     onColumnFiltersChange: setColumnFilters,
     onRowSelectionChange: setRowSelection,
-    onColumnOrderChange: setColumnOrder, // actualizar el orden
+    onColumnOrderChange: setColumnOrder,
     getCoreRowModel: getCoreRowModel(),
     getFilteredRowModel: getFilteredRowModel(),
     getFacetedMinMaxValues: getFacetedMinMaxValues(),
@@ -74,39 +77,6 @@ const Table = ({
     enableMultiSort: true,
     enableSortingRemoval: false,
   })
-
-  // manejo del evento DragStart
-  const handleDragStart = (e: React.DragEvent, columnId: string) => {
-    e.dataTransfer.setData('columnId', columnId)
-  }
-
-  //manejo de drop para reordenar columnas
-  const handleDrop = (e: React.DragEvent, targetColumnId: string) => {
-    const draggedColumnId = e.dataTransfer.getData('columnId')
-
-    if (draggedColumnId && draggedColumnId !== targetColumnId) {
-      const newColumnOrder = [...columnOrder]
-      const draggedIndex = newColumnOrder.indexOf(draggedColumnId)
-      const targetIndex = newColumnOrder.indexOf(targetColumnId)
-
-      if (draggedIndex > -1 && targetIndex > -1) {
-        newColumnOrder.splice(draggedIndex, 1)
-        newColumnOrder.splice(targetIndex, 0, draggedColumnId)
-        setColumnOrder(newColumnOrder) // actualizar el orden de las columnas
-      }
-    }
-  }
-
-  // manejo del evento DragOver
-  const handleDragOver = (e: React.DragEvent) => {
-    e.preventDefault() // permitir el arrastre sobre la columna
-  }
-
-  // manejo del evento DragEnd
-  const handleDragEnd = () => {
-    // forzamos la actualización del orden de las columnas
-    setColumnOrder([...columnOrder])
-  }
 
   return (
     <div className="cmp-table">
@@ -127,12 +97,14 @@ const Table = ({
                 ) : (
                   <Header
                     key={header.id}
-                    {...{ flatProps, header, sorting, setSorting }}
-                    draggable
-                    onDragStart={e => handleDragStart(e, header.id)}
-                    onDragOver={handleDragOver} // el arrastre sobre la columna
-                    onDrop={e => handleDrop(e, header.id)} // soltar la columna
-                    onDragEnd={handleDragEnd} // finalizar el arrastre
+                    {...{
+                      flatProps,
+                      header,
+                      sorting,
+                      setSorting,
+                      columnOrder,
+                      setColumnOrder,
+                    }}
                   />
                 ),
               )}

@@ -1,13 +1,22 @@
 import './Header.css'
-import { Dispatch, SetStateAction, useMemo } from 'react'
+import {
+  Dispatch,
+  DragEventHandler,
+  SetStateAction,
+  useCallback,
+  useMemo,
+  useState,
+} from 'react'
 import { useScheme } from '@/pages/Admin/hooks'
 import { Icon } from '@/components'
 import {
+  ColumnOrderState,
   SortDirection,
   SortingState,
   Header as TanstackHeader,
 } from '@tanstack/react-table'
 import { Entity } from '@/services/config'
+import { classList } from '@/helpers'
 
 const sortIconMatcher: Record<SortDirection, string> = {
   asc: 'fa-solid fa-arrow-up-wide-short',
@@ -19,11 +28,8 @@ interface Props {
   header: TanstackHeader<Entity, unknown>
   sorting: SortingState
   setSorting: Dispatch<SetStateAction<SortingState>>
-  draggable?: boolean
-  onDragStart?: (e: React.DragEvent) => void
-  onDragOver?: (e: React.DragEvent) => void
-  onDrop?: (e: React.DragEvent) => void
-  onDragEnd?: (e: React.DragEvent) => void // Agregado el evento onDragEnd
+  columnOrder: ColumnOrderState
+  setColumnOrder: Dispatch<SetStateAction<ColumnOrderState>>
 }
 
 const Header = ({
@@ -31,16 +37,14 @@ const Header = ({
   header,
   sorting,
   setSorting,
-  draggable = false,
-  onDragStart,
-  onDragOver,
-  onDrop,
-  onDragEnd,
+  columnOrder,
+  setColumnOrder,
 }: Props) => {
   const { column } = header
   const { getIsSorted, getSortIndex } = column
-
   const { getHeader } = flatProps[column.id]
+
+  const [dragging, setDragging] = useState(false)
 
   if (!getHeader) return null
 
@@ -50,7 +54,6 @@ const Header = ({
   const sortValue = getIsSorted() || null
 
   const sortIcon = useMemo(() => {
-    //si isSorted cambios, los deja,sino, default
     if (sortValue === null) return null //chequeamos que no sea null
     return sortIconMatcher[sortValue]
   }, [sortValue])
@@ -76,14 +79,48 @@ const Header = ({
     })
   }
 
+  const handleDragStart = useCallback<DragEventHandler<HTMLTableCellElement>>(
+    e => {
+      setDragging(true)
+      e.dataTransfer.setData('columnId', column.id)
+    },
+    [],
+  )
+
+  const handleDragOver = useCallback<DragEventHandler<HTMLTableCellElement>>(
+    e => e.preventDefault(),
+    [],
+  )
+
+  const handleDragEnd = useCallback(() => setDragging(false), [])
+
+  const handleDrop = useCallback<DragEventHandler<HTMLTableCellElement>>(
+    e => {
+      const draggedColumnId = e.dataTransfer.getData('columnId')
+
+      if (draggedColumnId && draggedColumnId !== column.id) {
+        const newColumnOrder = [...columnOrder]
+        const draggedIndex = newColumnOrder.indexOf(draggedColumnId)
+        const targetIndex = newColumnOrder.indexOf(column.id)
+
+        if (draggedIndex > -1 && targetIndex > -1) {
+          newColumnOrder.splice(draggedIndex, 1)
+          newColumnOrder.splice(targetIndex, 0, draggedColumnId)
+          setColumnOrder(newColumnOrder)
+        }
+      }
+    },
+    [columnOrder],
+  )
+
   return (
     <th
-      className="cmp-header"
-      draggable={draggable}
-      onDragStart={onDragStart}
-      onDragOver={onDragOver}
-      onDrop={onDrop}
-      onDragEnd={onDragEnd} //  manejo de onDragEnd
+      className={classList('cmp-header', { dragging })}
+      draggable
+      onDragStart={handleDragStart}
+      onDragOver={handleDragOver}
+      onDragEnd={handleDragEnd}
+      onDrop={handleDrop}
     >
       <div className="content">
         <button onClick={handleSortingClick}>

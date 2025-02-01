@@ -10,6 +10,10 @@
     border: none;
   }
 
+  &.dragging {
+    background-color: var(--pal-color-b-l1);
+  }
+
   > .content {
     display: flex;
     flex-direction: column;
@@ -71,12 +75,5 @@
         background-color: var(--pal-color-a-l3);
       }
     }
-  }
-}
-
-.cmp-table th[draggable] {
-  cursor: move;
-  &:active {
-    background-color: blueviolet;
   }
 }
