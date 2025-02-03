@@ -236,6 +236,7 @@ export const scheme: Scheme<Entity> = {
           'Monto de Contratación',
           {
             decimal: true,
+            big: true,
             pre: '$',
           },
         ),

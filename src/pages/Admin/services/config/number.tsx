@@ -11,6 +11,7 @@ export class NumberProp<T extends EntityKey> implements PropScheme {
 
     public config?: {
       decimal?: boolean
+      big?: boolean
       pre?: string
       sub?: string
 
@@ -43,7 +44,7 @@ export class NumberProp<T extends EntityKey> implements PropScheme {
 
   getFieldValue = (formData: FormData) => {
     const { key, config } = this
-    const { field } = config ?? {}
+    const { field, big = false } = config ?? {}
     const { hidden } = field ?? {}
 
     if (hidden === true) return
@@ -52,7 +53,7 @@ export class NumberProp<T extends EntityKey> implements PropScheme {
 
     if (value === '') return
 
-    return Number(value)
+    return big ? value : Number(value)
   }
 
   filterFn: BuiltInFilterFn = 'inNumberRange'
@@ -75,7 +76,7 @@ export class NumberProp<T extends EntityKey> implements PropScheme {
     const { key, config } = this
     const { pre, sub } = config ?? {}
 
-    const value = row.original[key] as number
+    const value = row.original[key] as number | string
 
     return (
       value && (
