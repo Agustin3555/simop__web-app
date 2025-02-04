@@ -131,12 +131,14 @@ export const scheme: Scheme<Entity> = {
 
         monto: new NumberProp('monto', 'Monto', {
           decimal: true,
+          big: true,
           pre: '$',
           field: { required: true },
         }),
 
         nuevoMontoObra: new NumberProp('nuevoMontoObra', 'Nuevo Monto', {
           decimal: true,
+          big: true,
           pre: '$',
           field: { required: true },
         }),

@@ -83,6 +83,7 @@ export const scheme: Scheme<Entity> = {
         }),
         monto: new NumberProp('monto', 'Monto', {
           decimal: true,
+          big: true,
           pre: '$',
         }),
 
