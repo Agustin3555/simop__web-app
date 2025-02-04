@@ -1,15 +1,17 @@
 import './LocalAdd.css'
-import { useMemo } from 'react'
-import { useSubmitAction } from '@/hooks'
-import { useScheme } from '../../hooks'
-import { Button, StateButton } from '@/components'
+import { useCallback, useMemo } from 'react'
 import { useAppStore } from '@/store/config'
+import { useSubmitAction } from '@/hooks'
+import { useReset, useScheme } from '../../hooks'
+import { FieldResetFnsContext } from '../../contexts'
+import { Button, StateButton } from '@/components'
 
-const LocalAdd = () => {
+const HydratedLocalAdd = () => {
   const { scheme } = useScheme()
   const { service, groups } = scheme
 
   const toasting = useAppStore(store => store.toasting)
+  const reset = useReset()
 
   const fieldGroups = useMemo(
     () =>
@@ -47,6 +49,8 @@ const LocalAdd = () => {
     },
   )
 
+  const handleResetClick = useCallback(() => reset(), [])
+
   return (
     <div className="cmp-local-add">
       <form onSubmit={handleSubmit}>
@@ -65,6 +69,7 @@ const LocalAdd = () => {
             faIcon="fa-solid fa-eraser"
             type="reset"
             _type="secondary"
+            onClick={handleResetClick}
           />
           <StateButton
             text="Confirmar"
@@ -76,5 +81,11 @@ const LocalAdd = () => {
     </div>
   )
 }
+
+const LocalAdd = () => (
+  <FieldResetFnsContext.Provider value={[]}>
+    <HydratedLocalAdd />
+  </FieldResetFnsContext.Provider>
+)
 
 export default LocalAdd

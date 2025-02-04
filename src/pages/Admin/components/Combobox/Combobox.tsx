@@ -1,5 +1,10 @@
 import { MouseEventHandler, useCallback, useState } from 'react'
-import { ComboboxProps, useCombobox, useInputHandler } from '../../hooks'
+import {
+  ComboboxProps,
+  useAddFieldReset,
+  useCombobox,
+  useInputHandler,
+} from '../../hooks'
 import { Button } from '@/components'
 import { ComboboxLayout } from '..'
 import { Ref } from '@/types'
@@ -21,6 +26,8 @@ const Combobox = ({
     getForConnect,
     long,
   })
+
+  useAddFieldReset(() => setSelected([]))
 
   const handleOptionChange = useInputHandler(id => {
     const newSelected = options.find(option => String(option.id) === id)
@@ -80,7 +87,7 @@ const Combobox = ({
                 value={id}
                 name={name}
                 checked={selected.some(item => item.id === id)}
-                {...{ required }}
+                // BUG: si se usa {...{ required }} y es true, dará un error al no ser focusable
                 onChange={handleOptionChange}
               />
             </label>
