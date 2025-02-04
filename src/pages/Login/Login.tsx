@@ -26,7 +26,7 @@ const Login = () => {
   return (
     <article className="cmp-login">
       <div className="content">
-        <img src="/isologotipo-gobierno-del-chaco.webp" />
+        <img src="/isologotipo-gobierno-ministerio.webp" />
         <form onSubmit={handleSubmit}>
           <Input name="pass" title="Contraseña" type="password" required />
           <StateButton

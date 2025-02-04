@@ -1,13 +1,30 @@
+@keyframes show {
+  to {
+    translate: initial;
+    opacity: initial;
+  }
+}
+
 .cmp-login {
   align-content: center;
+  padding-inline: var(--pal-size-m);
   height: 100dvh;
 
   > .content {
     display: flex;
     flex-direction: column;
-    gap: var(--pal-size-2xl);
+    gap: var(--pal-size-3xl);
     margin-inline: auto;
-    max-width: 20rem;
+    padding: var(--pal-size-2xl);
+    max-width: 28rem;
+
+    border-radius: var(--pal-size-xs);
+    background-color: var(--pal-color-white);
+    box-shadow: var(--pal-shadow-1);
+    translate: 0 var(--pal-size-2xl);
+    opacity: 0;
+
+    animation: show var(--pal-time-l) ease forwards;
 
     > form {
       display: flex;

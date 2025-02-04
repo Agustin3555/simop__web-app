@@ -1,5 +1,5 @@
-export type InputAdapter<DataType, BodyType> = (data: DataType) => BodyType
+export type InputAdapter<Data, Body> = (data: Data) => Body
 
-export type OutputAdapter<RawResponseType, ResponseType> = (
-  response: RawResponseType
-) => ResponseType
+export type OutputAdapter<RawResponse, Response> = (
+  response: RawResponse,
+) => Response
