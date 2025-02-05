@@ -61,7 +61,9 @@ export const scheme: Scheme<Entity> = {
   groups: [
     {
       props: {
-        cuil: new NumberProp('cuil', 'CUIL'),
+        cuil: new NumberProp('cuil', 'CUIL', {
+          big: true,
+        }),
         apellido: new TextProp('apellido', 'Apellido', {
           field: {
             required: true,

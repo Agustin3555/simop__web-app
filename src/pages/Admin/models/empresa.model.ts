@@ -77,6 +77,7 @@ export const scheme: Scheme<Entity> = {
     {
       props: {
         cuit: new NumberProp('cuit', 'CUIT', {
+          big: true,
           field: {
             required: true,
           },
@@ -92,6 +93,7 @@ export const scheme: Scheme<Entity> = {
           },
         }),
         numeroContacto: new NumberProp('numeroContacto', 'Número de contacto', {
+          big: true,
           field: {
             required: true,
           },

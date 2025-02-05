@@ -193,6 +193,7 @@ export const scheme: Scheme<Entity> = {
     {
       props: {
         numero: new NumberProp('numero', 'Número', {
+          big: true,
           field: {
             required: true,
           },
