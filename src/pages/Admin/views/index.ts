@@ -31,4 +31,7 @@ export { default as TipoContratacionObra } from './TipoContratacionObra/TipoCont
 export { default as Redeterminacion } from './Redeterminacion/Redeterminacion'
 export { default as Ampliacion } from './Ampliacion/Ampliacion'
 export { default as Modificacion } from './Modificacion/Modificacion'
+export { default as Paralizacion } from './Paralizacion/Paralizacion'
+export { default as Rescision } from './Rescision/Rescision'
+export { default as Recepcion } from './Recepcion/Recepcion'
 export { default as InspectorObra } from './InspectorObra/InspectorObra'

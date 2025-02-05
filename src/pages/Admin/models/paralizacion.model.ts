@@ -1,5 +1,5 @@
 import { Ref } from '@/types'
-import { ObraModel, TipoModificacionModel } from '.'
+import { TipoParalizacionModel, ObraModel } from '.'
 import {
   DateProp,
   NumberProp,
@@ -8,20 +8,20 @@ import {
   Scheme,
   TextProp,
 } from '../services/config'
-import { ModificacionService } from '../services'
+import { ParalizacionService } from '../services'
 import { COMMON_PROPS } from '../constants/commonProps.const'
 
 export interface RawEntity {
   id: number
+  numero: number
   numeroExpediente: string
-  numeroResolucion: string
-  monto: number
-  nuevoMontoObra: number
+  fechaReinicio: string
+  nuevaFechaFinObra: string
   fecha: string
   observaciones: string
 
   obra?: ObraModel.RawRef
-  tipoModificacion?: TipoModificacionModel.RawRef
+  tipoParalizacion?: TipoParalizacionModel.RawRef
 
   creado: string
   modificado: string
@@ -29,15 +29,15 @@ export interface RawEntity {
 
 export interface Entity {
   id: number
+  numero: number
   numeroExpediente: string
-  numeroResolucion: string
-  monto: number
-  nuevoMontoObra: number
+  fechaReinicio: string
+  nuevaFechaFinObra: string
   fecha: string
   observaciones: string
 
   obra?: Ref
-  tipoModificacion?: Ref
+  tipoParalizacion?: Ref
 
   creado: string
   modificado: string
@@ -45,45 +45,50 @@ export interface Entity {
 
 export interface RawRef {
   id: number
-  numeroExpediente: string
+  numero: number
 }
 
 export interface CreateData {
+  numero: number
   numeroExpediente: string
-  numeroResolucion: string
-  monto: number
-  nuevoMontoObra: number
+  fechaReinicio: string
+  nuevaFechaFinObra: string
   fecha: string
   observaciones: string
 
   obraId: number
-  tipoModificacionId: number
+  tipoParalizacionId: number
 }
 
 export interface CreateBody {
+  numero: number
   numeroExpediente: string
-  numeroResolucion: string
-  monto: number
-  nuevoMontoObra: number
+  fechaReinicio: string
+  nuevaFechaFinObra: string
   fecha: string
   observaciones: string
 
   obraId: number
-  tipoModificacionId: number
+  tipoParalizacionId: number
 }
 
 export const scheme: Scheme<Entity> = {
-  key: 'modificacion',
-  service: ModificacionService,
+  key: 'paralizacion',
+  service: ParalizacionService,
   title: {
-    singular: 'Modificación',
-    plural: 'Modificaciones',
+    singular: 'Paralización',
+    plural: 'Paralizaciones',
   },
   refAnchorField: 'Nombre',
 
   groups: [
     {
       props: {
+        numero: new NumberProp('numero', 'Número', {
+          field: {
+            required: true,
+          },
+        }),
         numeroExpediente: new TextProp(
           'numeroExpediente',
           'Número De Expediente',
@@ -93,29 +98,14 @@ export const scheme: Scheme<Entity> = {
             },
           },
         ),
-        numeroResolucion: new TextProp(
-          'numeroResolucion',
-          'Número De Resolución',
-          {
-            field: {
-              required: true,
-            },
-          },
+        fechaReinicio: new DateProp('fechaReinicio', 'Fecha Reinicio', {
+          field: { required: true },
+        }),
+        nuevaFechaFinObra: new DateProp(
+          'nuevaFechaFinObra',
+          'Nueva Fecha Fin de Obra',
+          { field: { required: true } },
         ),
-        monto: new NumberProp('monto', 'Monto', {
-          decimal: true,
-          big: true,
-          pre: '$',
-          field: { required: true },
-        }),
-
-        nuevoMontoObra: new NumberProp('nuevoMontoObra', 'Nuevo Monto', {
-          decimal: true,
-          big: true,
-          pre: '$',
-          field: { required: true },
-        }),
-
         fecha: new DateProp('fecha', 'Fecha', { field: { required: true } }),
 
         observaciones: new TextLongProp('observaciones', 'Observaciones'),
@@ -124,8 +114,8 @@ export const scheme: Scheme<Entity> = {
           getScheme: () => ObraModel.scheme,
         }),
 
-        tipoModificacion: new RefProp('tipoModificacion', {
-          getScheme: () => TipoModificacionModel.scheme,
+        tipoParalizacion: new RefProp('tipoParalizacion', {
+          getScheme: () => TipoParalizacionModel.scheme,
         }),
 
         ...COMMON_PROPS,

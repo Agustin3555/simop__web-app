@@ -1,27 +1,24 @@
 import { Ref } from '@/types'
-import { ObraModel, TipoModificacionModel } from '.'
+import { ObraModel, TipoRescisionModel } from '.'
 import {
   DateProp,
-  NumberProp,
   TextLongProp,
   RefProp,
   Scheme,
   TextProp,
 } from '../services/config'
-import { ModificacionService } from '../services'
+import { RescisionService } from '../services'
 import { COMMON_PROPS } from '../constants/commonProps.const'
 
 export interface RawEntity {
   id: number
   numeroExpediente: string
   numeroResolucion: string
-  monto: number
-  nuevoMontoObra: number
   fecha: string
   observaciones: string
 
   obra?: ObraModel.RawRef
-  tipoModificacion?: TipoModificacionModel.RawRef
+  tipoRescision?: TipoRescisionModel.RawRef
 
   creado: string
   modificado: string
@@ -31,13 +28,11 @@ export interface Entity {
   id: number
   numeroExpediente: string
   numeroResolucion: string
-  monto: number
-  nuevoMontoObra: number
   fecha: string
   observaciones: string
 
   obra?: Ref
-  tipoModificacion?: Ref
+  tipoRescision?: Ref
 
   creado: string
   modificado: string
@@ -51,33 +46,29 @@ export interface RawRef {
 export interface CreateData {
   numeroExpediente: string
   numeroResolucion: string
-  monto: number
-  nuevoMontoObra: number
   fecha: string
   observaciones: string
 
   obraId: number
-  tipoModificacionId: number
+  tipoRescisionId: number
 }
 
 export interface CreateBody {
   numeroExpediente: string
   numeroResolucion: string
-  monto: number
-  nuevoMontoObra: number
   fecha: string
   observaciones: string
 
   obraId: number
-  tipoModificacionId: number
+  tipoRescisionId: number
 }
 
 export const scheme: Scheme<Entity> = {
-  key: 'modificacion',
-  service: ModificacionService,
+  key: 'rescision',
+  service: RescisionService,
   title: {
-    singular: 'Modificación',
-    plural: 'Modificaciones',
+    singular: 'Rescision',
+    plural: 'Rescisiones',
   },
   refAnchorField: 'Nombre',
 
@@ -102,20 +93,6 @@ export const scheme: Scheme<Entity> = {
             },
           },
         ),
-        monto: new NumberProp('monto', 'Monto', {
-          decimal: true,
-          big: true,
-          pre: '$',
-          field: { required: true },
-        }),
-
-        nuevoMontoObra: new NumberProp('nuevoMontoObra', 'Nuevo Monto', {
-          decimal: true,
-          big: true,
-          pre: '$',
-          field: { required: true },
-        }),
-
         fecha: new DateProp('fecha', 'Fecha', { field: { required: true } }),
 
         observaciones: new TextLongProp('observaciones', 'Observaciones'),
@@ -124,8 +101,8 @@ export const scheme: Scheme<Entity> = {
           getScheme: () => ObraModel.scheme,
         }),
 
-        tipoModificacion: new RefProp('tipoModificacion', {
-          getScheme: () => TipoModificacionModel.scheme,
+        tipoRescision: new RefProp('tipoRescision', {
+          getScheme: () => TipoRescisionModel.scheme,
         }),
 
         ...COMMON_PROPS,

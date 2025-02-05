@@ -32,6 +32,9 @@ import {
   // ModificacionObra,
   // ParalizacionObra,
   // Tramite,
+  Paralizacion,
+  Recepcion,
+  Rescision,
   Certificacion,
   PagoCertificacion,
 } from '../../views'
@@ -65,6 +68,9 @@ const Content = () => (
     <Redeterminacion />
     <Ampliacion />
     <Modificacion />
+    <Paralizacion />
+    <Rescision />
+    <Recepcion />
 
     {/* <ModificacionObra /> */}
     {/* <ParalizacionObra /> */}
