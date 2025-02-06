@@ -77,6 +77,7 @@ export const scheme: Scheme<Entity> = {
     {
       props: {
         cuil: new NumberProp('cuil', 'CUIL', {
+          big: true,
           field: {
             required: true,
           },
