@@ -11,9 +11,12 @@ import { PropScheme } from './utils'
 //     Field,
 //     GetScheme {}
 
+export type RefreshRate = 'high' | 'medium' | 'low'
+
 export interface Scheme<T = Entity> {
   key: string
   service: Service
+  refreshRate?: RefreshRate
   title: {
     singular: string
     plural: string

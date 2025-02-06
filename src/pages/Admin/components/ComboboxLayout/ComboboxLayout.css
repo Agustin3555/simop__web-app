@@ -93,22 +93,35 @@
     transition: display var(--pal-time-s) ease allow-discrete,
       translate var(--pal-time-s) ease, opacity var(--pal-time-s) ease;
 
-    > .input {
-      border-width: 0;
-      border-bottom-width: var(--line-thickness);
-      padding-inline: var(--control-padding-inline);
+    > header {
+      --button-gap: var(--pal-size-2xs);
+      --button-size: calc(var(--control-height) - var(--button-gap) * 2);
 
-      border-radius: 0;
-    }
+      position: relative;
 
-    > .loader-container {
-      align-content: center;
-      height: var(--control-height);
+      > .input {
+        border-width: 0;
+        border-bottom-width: var(--line-thickness);
+        padding-right: calc(
+          var(--control-padding-inline) + var(--button-size) + var(--button-gap)
+        );
+        padding-left: var(--control-padding-inline);
 
-      color: var(--pal-color-a-l1);
+        border-radius: 0;
+      }
 
-      > * {
-        margin-inline: auto;
+      > .cmp-state-button {
+        position: absolute;
+        top: 0;
+        right: 0;
+
+        border-color: var(--pal-color-a-l2);
+        padding: 0;
+        aspect-ratio: 1;
+
+        color: var(--pal-color-a-l1);
+
+        border-radius: 0;
       }
     }
 

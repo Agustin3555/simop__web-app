@@ -9,21 +9,18 @@ import { Button } from '@/components'
 import { ComboboxLayout } from '..'
 import { Ref } from '@/types'
 
-// TODO: agregar un botón para actualizar las opciones
-
 const Combobox = ({
   name,
-  title,
+  scheme,
   multiple = false,
   required = false,
-  getForConnect,
   long,
 }: ComboboxProps) => {
   const [selected, setSelected] = useState<Ref[]>([])
+
   const { basicProps, options, sortedOptions } = useCombobox({
-    title,
+    scheme,
     required,
-    getForConnect,
     long,
   })
 

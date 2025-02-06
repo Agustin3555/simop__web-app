@@ -1,8 +1,9 @@
 import './ComboboxLayout.css'
 import { ReactNode } from 'react'
 import { BasicProps } from '../../hooks'
-import { Icon, Loader } from '@/components'
+import { Icon, StateButton } from '@/components'
 import { classList } from '@/helpers'
+import { useHandleAction } from '@/hooks'
 
 interface ComboboxLayoutProps extends BasicProps {
   selection: ReactNode
@@ -15,6 +16,7 @@ const ComboboxLayout = ({
   fieldset,
 }: ComboboxLayoutProps) => {
   const {
+    refetch,
     comboboxLayoutRef,
     long = 'm',
     open,
@@ -24,10 +26,21 @@ const ComboboxLayout = ({
     handleToggleClick,
     search,
     handleSearchChange,
-    loading,
   } = basicProps
 
   // TODO: long debería ser 'l' si es multiple
+
+  const handleActionResult = useHandleAction(
+    async ({ setError, setSuccess }) => {
+      try {
+        await refetch()
+
+        await setSuccess()
+      } catch (error) {
+        await setError()
+      }
+    },
+  )
 
   return (
     <div
@@ -43,19 +56,21 @@ const ComboboxLayout = ({
         </div>
       </header>
       <div className="drop-down">
-        <input
-          className="box input"
-          value={search}
-          placeholder="Buscar ..."
-          onChange={handleSearchChange}
-        />
-        {loading ? (
-          <div className="loader-container">
-            <Loader />
-          </div>
-        ) : (
-          fieldset
-        )}
+        <header>
+          <input
+            className="box input"
+            value={search}
+            placeholder="Buscar ..."
+            onChange={handleSearchChange}
+          />
+          <StateButton
+            text="Actualizar opciones"
+            hiddenText
+            faIcon="fa-solid fa-rotate"
+            {...handleActionResult}
+          />
+        </header>
+        {fieldset}
       </div>
     </div>
   )

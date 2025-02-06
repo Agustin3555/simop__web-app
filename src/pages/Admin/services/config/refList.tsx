@@ -26,18 +26,9 @@ export class RefListProp<T extends EntityKey> implements PropScheme {
 
     if (hidden === true) return
 
-    const { service, title } = getScheme()
-    const { getForConnect } = service
+    const scheme = getScheme()
 
-    return (
-      <Combobox
-        key={key}
-        name={key}
-        title={title.plural}
-        multiple
-        {...{ getForConnect, required }}
-      />
-    )
+    return <Combobox key={key} name={key} multiple {...{ scheme, required }} />
   }
 
   getFieldValue = (formData: FormData) => {

@@ -2,9 +2,17 @@ import { lastVisitedViewEntity } from '@/services/localStorage'
 import { Content, Nav, ViewActiveProvider } from './components'
 import { SubSecretariaModel } from './models'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 
 const lastVisitedView = lastVisitedViewEntity.get()
-const client = new QueryClient()
+
+const client = new QueryClient({
+  defaultOptions: {
+    queries: {
+      refetchOnWindowFocus: false,
+    },
+  },
+})
 
 const Admin = () => (
   <ViewActiveProvider
@@ -13,6 +21,7 @@ const Admin = () => (
     <QueryClientProvider {...{ client }}>
       <Nav />
       <Content />
+      <ReactQueryDevtools />
     </QueryClientProvider>
   </ViewActiveProvider>
 )

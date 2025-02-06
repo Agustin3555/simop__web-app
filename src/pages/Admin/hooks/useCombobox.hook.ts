@@ -2,49 +2,40 @@ import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { useLabel, UseLabelProps } from '@/hooks'
 import { useInputHandler } from '.'
 import { Control, Long, Ref } from '@/types'
-import { GetForConnectProvider } from '@/services/config'
+import { useQuery } from '@tanstack/react-query'
+import { Scheme } from '../services/config'
+import { REFETCH_INTERVALS } from '../constants/refetchIntervals.const'
 
-export interface ComboboxProps
-  extends UseLabelProps,
-    Control,
-    GetForConnectProvider {
+interface Aux {
+  required: UseLabelProps['required']
+  scheme: Scheme
+}
+
+export interface ComboboxProps extends Aux, Control {
   multiple?: boolean
 }
 
-interface UseComboboxProps extends UseLabelProps, GetForConnectProvider, Long {}
+interface UseComboboxProps extends Aux, Long {}
 
-export const useCombobox = ({
-  title,
-  required,
-  getForConnect,
-  long,
-}: UseComboboxProps) => {
-  const { content, controlTitle } = useLabel({ title, required })
-  const [options, setOptions] = useState<Ref[]>()
+export const useCombobox = ({ scheme, required, long }: UseComboboxProps) => {
+  const { key, title, service, refreshRate } = scheme
+
+  const { content, controlTitle } = useLabel({
+    title: title.singular,
+    required,
+  })
+
   const [open, setOpen] = useState(false)
   const [search, setSearch] = useState('')
-  const [firstLoad, setFirstLoad] = useState(false)
+  const [enabled, setEnabled] = useState(false)
   const comboboxLayoutRef = useRef<HTMLDivElement>(null)
 
-  const loading = useMemo(() => options === undefined, [options])
-
-  const handleEnter = useCallback(() => setFirstLoad(true), [])
-
-  const fetchAsync = useCallback(async () => {
-    try {
-      const response = await getForConnect()
-
-      setOptions(response)
-    } catch (error) {}
-  }, [getForConnect])
-
-  useEffect(() => {
-    if (firstLoad) fetchAsync()
-  }, [fetchAsync, firstLoad])
-
-  const handleSearchChange = useInputHandler(newValue => setSearch(newValue))
-
-  const handleToggleClick = useCallback(() => setOpen(prev => !prev), [])
+  const { data: options, refetch } = useQuery<Ref[]>({
+    queryKey: [key, 'refs'],
+    queryFn: service.getForConnect,
+    refetchInterval: refreshRate ? REFETCH_INTERVALS[refreshRate] : Infinity,
+    enabled,
+  })
 
   const sortedOptions = useMemo(() => {
     if (!options) return
@@ -75,6 +66,12 @@ export const useCombobox = ({
     })
   }, [options, search])
 
+  const handleEnter = useCallback(() => setEnabled(true), [])
+
+  const handleSearchChange = useInputHandler(newValue => setSearch(newValue))
+
+  const handleToggleClick = useCallback(() => setOpen(prev => !prev), [])
+
   const handleClickOutside = useCallback((event: MouseEvent) => {
     // Cierra el componente si el click es fuera del propio elemento
     if (
@@ -93,7 +90,7 @@ export const useCombobox = ({
   return {
     basicProps: {
       open,
-      loading,
+      refetch,
       controlTitle,
       search,
       content,
