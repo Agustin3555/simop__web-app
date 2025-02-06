@@ -31,6 +31,9 @@ import {
   AmpliacionModel,
   RedeterminacionModel,
   ModificacionModel,
+  ParalizacionModel,
+  RescisionModel,
+  RecepcionModel,
 } from '../models'
 
 export interface SectionNode {
@@ -104,6 +107,9 @@ export const TREE: SectionNode[] = [
       { scheme: RedeterminacionModel.scheme },
       { scheme: AmpliacionModel.scheme },
       { scheme: ModificacionModel.scheme },
+      { scheme: ParalizacionModel.scheme },
+      { scheme: RescisionModel.scheme },
+      { scheme: RecepcionModel.scheme },
     ],
   },
 ]

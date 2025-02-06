@@ -32,5 +32,8 @@ export * from './tramite.service'
 export * from './ampliacion.service'
 export * from './redeterminacion.service'
 export * from './modificacion.service'
+export * from './paralizacion.service'
+export * from './rescision.service'
+export * from './recepcion.service'
 
 export * from './inspectorObra.service'
