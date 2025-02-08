@@ -34,6 +34,7 @@ export const useCombobox = ({ scheme, required, long }: UseComboboxProps) => {
     queryKey: [key, 'refs'],
     queryFn: service.getForConnect,
     refetchInterval: refreshRate ? REFETCH_INTERVALS[refreshRate] : Infinity,
+    retry: false,
     enabled,
   })
 
@@ -99,12 +100,9 @@ export const useCombobox = ({ scheme, required, long }: UseComboboxProps) => {
       handleToggleClick,
       handleSearchChange,
       long,
+      isVoid: !(options && options.length),
     },
     options,
     sortedOptions,
   }
-}
-
-export interface BasicProps {
-  basicProps: ReturnType<typeof useCombobox>['basicProps']
 }
