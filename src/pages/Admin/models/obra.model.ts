@@ -184,6 +184,7 @@ export interface CreateBody {
 export const scheme: Scheme<Entity> = {
   key: 'obra',
   service: ObraService,
+  refreshRate: 'medium',
   title: {
     singular: 'Obra',
     plural: 'Obras',

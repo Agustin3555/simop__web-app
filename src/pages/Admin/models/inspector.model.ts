@@ -52,6 +52,7 @@ export interface CreateBody {
 export const scheme: Scheme<Entity> = {
   key: 'inspector',
   service: InspectorService,
+  refreshRate: 'medium',
   title: {
     singular: 'Inspector',
     plural: 'Inspectores',

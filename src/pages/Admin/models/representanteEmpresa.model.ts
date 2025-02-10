@@ -47,6 +47,7 @@ export interface CreateBody {
 export const scheme: Scheme<Entity> = {
   key: 'representanteEmpresa',
   service: RepresentanteEmpresaService,
+  refreshRate: 'low',
   title: {
     singular: 'Representante de Empresa',
     plural: 'Representantes de Empresa',

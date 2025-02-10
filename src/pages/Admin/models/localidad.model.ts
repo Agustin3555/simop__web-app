@@ -44,6 +44,7 @@ export interface CreateBody {
 export const scheme: Scheme<Entity> = {
   key: 'localidad',
   service: LocalidadService,
+  refreshRate: 'low',
   title: {
     singular: 'Localidad',
     plural: 'Localidades',

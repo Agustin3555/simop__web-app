@@ -64,6 +64,7 @@ export interface CreateBody {
 export const scheme: Scheme<Entity> = {
   key: 'certificacion',
   service: CertificacionService,
+  refreshRate: 'medium',
   title: {
     singular: 'Certificación',
     plural: 'Certificaciones',

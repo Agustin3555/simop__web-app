@@ -83,6 +83,7 @@ export interface CreateBody {
 export const scheme: Scheme<Entity> = {
   key: 'redeterminacion',
   service: RedeterminacionService,
+  refreshRate: 'medium',
   title: {
     singular: 'Redeterminación',
     plural: 'Redeterminaciones',

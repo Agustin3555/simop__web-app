@@ -77,6 +77,7 @@ export interface CreateBody {
 export const scheme: Scheme<Entity> = {
   key: 'fojaMedicion',
   service: FojaMedicionService,
+  refreshRate: 'medium',
   title: {
     singular: 'Foja de Medición',
     plural: 'Fojas de Mediciones',
