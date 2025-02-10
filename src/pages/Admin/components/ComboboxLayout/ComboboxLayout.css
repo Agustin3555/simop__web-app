@@ -34,6 +34,12 @@
           flex-grow: 1;
 
           padding-inline: var(--pal-size-s);
+          max-width: 20rem;
+
+          white-space: nowrap;
+          text-overflow: ellipsis;
+
+          overflow: hidden;
         }
 
         > .cmp-button {
@@ -142,6 +148,8 @@
         padding-inline: var(--control-padding-inline);
         height: var(--control-height);
 
+        white-space: nowrap;
+
         cursor: pointer;
 
         transition: color var(--pal-time-xs) ease-out,
@@ -160,6 +168,19 @@
 
           background-color: var(--pal-color-a-l1);
         }
+      }
+    }
+
+    > .void {
+      --cmp-icon-size: var(--pal-size-l);
+
+      align-content: center;
+      height: calc(var(--control-height) * 2);
+
+      color: var(--pal-color-a-l3);
+
+      > * {
+        margin-inline: auto;
       }
     }
   }

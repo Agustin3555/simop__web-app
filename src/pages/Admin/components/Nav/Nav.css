@@ -64,6 +64,8 @@
     }
 
     > .cmp-external-link {
+      flex-shrink: 0;
+
       color: var(--pal-color-a-d2);
 
       background-color: var(--pal-color-a-l3);

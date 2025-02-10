@@ -1,11 +1,12 @@
 import './ComboboxLayout.css'
 import { ReactNode } from 'react'
-import { BasicProps } from '../../hooks'
+import { useCombobox } from '../../hooks'
 import { Icon, StateButton } from '@/components'
 import { classList } from '@/helpers'
 import { useHandleAction } from '@/hooks'
 
-interface ComboboxLayoutProps extends BasicProps {
+interface ComboboxLayoutProps
+  extends Pick<ReturnType<typeof useCombobox>, 'basicProps'> {
   selection: ReactNode
   fieldset: ReactNode
 }
@@ -26,6 +27,7 @@ const ComboboxLayout = ({
     handleToggleClick,
     search,
     handleSearchChange,
+    isVoid,
   } = basicProps
 
   // TODO: long debería ser 'l' si es multiple
@@ -70,7 +72,13 @@ const ComboboxLayout = ({
             {...handleActionResult}
           />
         </header>
-        {fieldset}
+        {isVoid ? (
+          <div className="void">
+            <Icon faIcon="fa-solid fa-frog" />
+          </div>
+        ) : (
+          fieldset
+        )}
       </div>
     </div>
   )
