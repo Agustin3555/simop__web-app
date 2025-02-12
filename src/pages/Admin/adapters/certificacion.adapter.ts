@@ -11,14 +11,15 @@ export const getAll: {
   output: response => {
     const convertedResource = response.map<CertificacionModel.Entity>(item => ({
       id: item.id,
-      ordenPago: item.ordenPago,
+      numeroExpediente: item.numeroExpediente,
       fecha: item.fecha,
       monto: item.monto,
       observaciones: item.observaciones,
-      /*fojaMedicionId: item.fojaMedicionId && {
-        id: item.fojaMedicionId.id,
-        title: item.fojaMedicionId.ordenPago,
-      },*/
+
+      fojaMedicionId: item.fojaMedicion && {
+        id: item.fojaMedicion.id,
+        title: item.fojaMedicion.numeroExpediente,
+      },
       creado: item.creado,
       modificado: item.modificado,
     }))
@@ -33,7 +34,7 @@ export const getForConnect: {
   output: response => {
     const convertedResource = response.map<Ref>(item => ({
       id: item.id,
-      title: item.ordenPago,
+      title: item.numeroExpediente,
     }))
 
     return convertedResource
@@ -46,7 +47,7 @@ export const getOne: {
   output: response => {
     const convertedResource = {
       id: response.id,
-      ordenPago: response.ordenPago,
+      numeroExpediente: response.numeroExpediente,
       fecha: response.fecha,
       monto: response.monto,
       observaciones: response.observaciones,
@@ -73,7 +74,7 @@ export const create: {
   input: data => {
     const convertedResource: CertificacionModel.CreateBody = {
       id: data.id,
-      ordenPago: data.ordenPago,
+      numeroExpediente: data.numeroExpediente,
       fecha: data.fecha,
       monto: data.monto,
       observaciones: data.observaciones,

@@ -1,11 +1,11 @@
 import { TipoProfesionModel } from '.'
-import { Ref } from '@/types'
 import { NumberProp, RefListProp, Scheme, TextProp } from '../services/config'
 import { InspectorService } from '../services'
 import { COMMON_PROPS } from '../constants/commonProps.const'
 
 export interface RawEntity {
   id: number
+
   cuil: number
   apellido: string
   nombre: string
@@ -18,11 +18,12 @@ export interface RawEntity {
 
 export interface Entity {
   id: number
+
   cuil: number
   apellido: string
   nombre: string
 
-  profesiones: Ref[]
+  profesiones: TipoProfesionModel.Ref[]
 
   creado: string
   modificado: string
@@ -30,6 +31,15 @@ export interface Entity {
 
 export interface RawRef {
   id: number
+
+  cuil: number
+  apellido: string
+}
+
+export interface Ref {
+  id: number
+
+  cuil: number
   apellido: string
 }
 

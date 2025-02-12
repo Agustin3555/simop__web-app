@@ -23,7 +23,7 @@ export const getAll: {
 
         certificacion: item.certificacion && {
           id: item.certificacion.id,
-          title: item.certificacion.ordenPago,
+          title: item.certificacion.numeroExpediente,
         },
         tipoRedeterminacion: item.tipoRedeterminacion && {
           id: item.tipoRedeterminacion.id,
@@ -71,7 +71,7 @@ export const getOne: {
 
       certificacion: response.certificacion && {
         id: response.certificacion.id,
-        title: response.certificacion.ordenPago,
+        title: response.certificacion.numeroExpediente,
       },
       tipoRedeterminacion: response.tipoRedeterminacion && {
         id: response.tipoRedeterminacion.id,

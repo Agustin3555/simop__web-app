@@ -1,6 +1,10 @@
-import { InputAdapter, OutputAdapter } from '@/adapters/config'
+import {
+  convert,
+  convertList,
+  InputAdapter,
+  OutputAdapter,
+} from '@/adapters/config'
 import { TipoProfesionModel } from '../models'
-import { Ref } from '@/types'
 
 export const getAll: {
   output: OutputAdapter<
@@ -9,27 +13,19 @@ export const getAll: {
   >
 } = {
   output: response => {
-    const convertedResource = response.map<TipoProfesionModel.Entity>(item => ({
-      id: item.id,
-      nombre: item.nombre,
-      creado: item.creado,
-      modificado: item.modificado,
-    }))
+    const conversion = convertList(response)
 
-    return convertedResource
+    return conversion
   },
 }
 
 export const getForConnect: {
-  output: OutputAdapter<TipoProfesionModel.RawRef[], Ref[]>
+  output: OutputAdapter<TipoProfesionModel.RawRef[], TipoProfesionModel.Ref[]>
 } = {
   output: response => {
-    const convertedResource = response.map<Ref>(item => ({
-      id: item.id,
-      title: item.nombre,
-    }))
+    const conversion = convertList(response)
 
-    return convertedResource
+    return conversion
   },
 }
 
@@ -37,14 +33,9 @@ export const getOne: {
   output: OutputAdapter<TipoProfesionModel.RawEntity, TipoProfesionModel.Entity>
 } = {
   output: response => {
-    const convertedResource = {
-      id: response.id,
-      nombre: response.nombre,
-      creado: response.creado,
-      modificado: response.modificado,
-    }
+    const conversion = convert(response)
 
-    return convertedResource
+    return conversion
   },
 }
 
@@ -55,10 +46,8 @@ export const create: {
   >
 } = {
   input: data => {
-    const convertedResource: TipoProfesionModel.CreateBody = {
-      nombre: data.nombre,
-    }
+    const conversion = convert(data)
 
-    return convertedResource
+    return conversion
   },
 }

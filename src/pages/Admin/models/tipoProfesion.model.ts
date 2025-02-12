@@ -4,6 +4,7 @@ import { TIPO_PROPS } from '../constants/commonProps.const'
 
 export interface RawEntity {
   id: number
+
   nombre: string
 
   creado: string
@@ -12,6 +13,7 @@ export interface RawEntity {
 
 export interface Entity {
   id: number
+
   nombre: string
 
   creado: string
@@ -20,6 +22,13 @@ export interface Entity {
 
 export interface RawRef {
   id: number
+
+  nombre: string
+}
+
+export interface Ref {
+  id: number
+
   nombre: string
 }
 

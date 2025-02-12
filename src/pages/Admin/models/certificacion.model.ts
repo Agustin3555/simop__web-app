@@ -7,12 +7,13 @@ import {
   Scheme,
   DateProp,
   TextLongProp,
+  TextProp,
 } from '../services/config'
 import { COMMON_PROPS } from '../constants/commonProps.const'
 
 export interface RawEntity {
   id: number
-  ordenPago: number
+  numeroExpediente: number
   fecha: string
   monto: number
   observaciones: string
@@ -25,7 +26,7 @@ export interface RawEntity {
 
 export interface Entity {
   id: number
-  ordenPago: number
+  numeroExpediente: number
   fecha: string
   monto: number
   observaciones: string
@@ -38,12 +39,12 @@ export interface Entity {
 
 export interface RawRef {
   id: number
-  ordenPago: string
+  numeroExpediente: string
 }
 
 export interface CreateData {
   id: number
-  ordenPago: number
+  numeroExpediente: number
   fecha: string
   monto: number
   observaciones: string
@@ -53,7 +54,7 @@ export interface CreateData {
 
 export interface CreateBody {
   id: number
-  ordenPago: number
+  numeroExpediente: number
   fecha: string
   monto: number
   observaciones: string
@@ -74,11 +75,15 @@ export const scheme: Scheme<Entity> = {
   groups: [
     {
       props: {
-        ordenPago: new NumberProp('ordenPago', 'Número de Expediente', {
-          field: {
-            required: true,
+        numeroExpediente: new TextProp(
+          'numeroExpediente',
+          'Número de Expediente',
+          {
+            field: {
+              required: true,
+            },
           },
-        }),
+        ),
         fecha: new DateProp('fecha', 'Fecha', {
           field: {
             required: true,

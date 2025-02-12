@@ -3,11 +3,13 @@ import { Ref } from '@/types'
 export type EntityKey = string
 export type EntityValue = undefined | string | number | boolean | Ref | Ref[]
 
-export type Entity = Record<EntityKey, EntityValue> & {
+interface BaseEntity {
   id: number
   creado: string
   modificado: string
 }
+
+export type Entity = Record<EntityKey, EntityValue> & BaseEntity
 
 export interface Service<T = unknown> {
   getAll: () => Promise<T[]>

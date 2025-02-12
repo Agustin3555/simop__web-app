@@ -1,38 +1,31 @@
-import { InputAdapter, OutputAdapter } from '@/adapters/config'
+import {
+  convert,
+  convertList,
+  InputAdapter,
+  OutputAdapter,
+} from '@/adapters/config'
 import { InspectorModel } from '../models'
-import { Ref } from '@/types'
+import { TipoProfesionAdapter } from '.'
 
 export const getAll: {
   output: OutputAdapter<InspectorModel.RawEntity[], InspectorModel.Entity[]>
 } = {
   output: response => {
-    const convertedResource = response.map<InspectorModel.Entity>(item => ({
-      id: item.id,
-      cuil: item.cuil,
-      apellido: item.apellido,
-      nombre: item.nombre,
-      profesiones: item.profesiones.map<Ref>(item => ({
-        id: item.id,
-        title: item.nombre,
-      })),
-      creado: item.creado,
-      modificado: item.modificado,
+    const conversion = convertList(response, acc => ({
+      profesiones: TipoProfesionAdapter.getForConnect.output(acc.profesiones),
     }))
 
-    return convertedResource
+    return conversion
   },
 }
 
 export const getForConnect: {
-  output: OutputAdapter<InspectorModel.RawRef[], Ref[]>
+  output: OutputAdapter<InspectorModel.RawRef[], InspectorModel.Ref[]>
 } = {
   output: response => {
-    const convertedResource = response.map<Ref>(item => ({
-      id: item.id,
-      title: item.apellido,
-    }))
+    const conversion = convertList(response)
 
-    return convertedResource
+    return conversion
   },
 }
 
@@ -40,20 +33,11 @@ export const getOne: {
   output: OutputAdapter<InspectorModel.RawEntity, InspectorModel.Entity>
 } = {
   output: response => {
-    const convertedResource = {
-      id: response.id,
-      cuil: response.cuil,
-      apellido: response.apellido,
-      nombre: response.nombre,
-      profesiones: response.profesiones.map<Ref>(item => ({
-        id: item.id,
-        title: item.nombre,
-      })),
-      creado: response.creado,
-      modificado: response.modificado,
-    }
+    const conversion = convert(response, acc => ({
+      profesiones: TipoProfesionAdapter.getForConnect.output(acc.profesiones),
+    }))
 
-    return convertedResource
+    return conversion
   },
 }
 
@@ -61,13 +45,8 @@ export const create: {
   input: InputAdapter<InspectorModel.CreateData, InspectorModel.CreateBody>
 } = {
   input: data => {
-    const convertedResource: InspectorModel.CreateBody = {
-      cuil: data.cuil,
-      apellido: data.apellido,
-      nombre: data.nombre,
-      profesiones: data?.profesiones,
-    }
+    const conversion = convert(data)
 
-    return convertedResource
+    return conversion
   },
 }
