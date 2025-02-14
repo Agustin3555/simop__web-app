@@ -1,9 +1,4 @@
-import {
-  convert,
-  convertList,
-  InputAdapter,
-  OutputAdapter,
-} from '@/adapters/config'
+import { InputAdapter, OutputAdapter } from '@/adapters/config'
 import { TipoProfesionModel } from '../models'
 
 export const getAll: {
@@ -12,31 +7,19 @@ export const getAll: {
     TipoProfesionModel.Entity[]
   >
 } = {
-  output: response => {
-    const conversion = convertList(response)
-
-    return conversion
-  },
+  output: response => response,
 }
 
 export const getForConnect: {
   output: OutputAdapter<TipoProfesionModel.RawRef[], TipoProfesionModel.Ref[]>
 } = {
-  output: response => {
-    const conversion = convertList(response)
-
-    return conversion
-  },
+  output: response => response,
 }
 
 export const getOne: {
   output: OutputAdapter<TipoProfesionModel.RawEntity, TipoProfesionModel.Entity>
 } = {
-  output: response => {
-    const conversion = convert(response)
-
-    return conversion
-  },
+  output: response => response,
 }
 
 export const create: {
@@ -45,9 +28,5 @@ export const create: {
     TipoProfesionModel.CreateBody
   >
 } = {
-  input: data => {
-    const conversion = convert(data)
-
-    return conversion
-  },
+  input: data => data,
 }

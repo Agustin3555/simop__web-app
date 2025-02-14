@@ -1,21 +1,21 @@
-export const convert = <T extends Record<string, any>, R>(
-  input: T,
-  transform?: (acc: T) => Partial<R>,
+export const convert = <T, K extends keyof T, R>(
+  obj: T,
+  keys: K[],
+  transform: (acc: T) => R,
 ) => {
-  const transformed = transform ? transform(input) : {}
-  const transformedKeys = new Set(Object.keys(transformed))
+  const newObj = { ...obj }
 
-  return Object.keys(input).reduce(
-    (acc, key) => {
-      if (!transformedKeys.has(key)) acc[key as keyof R] = input[key]
+  for (const key of keys) delete newObj[key]
 
-      return acc
-    },
-    { ...transformed } as T & R,
-  )
+  return { ...newObj, ...(transform ? transform(obj) : {}) } as unknown as Omit<
+    T,
+    K
+  > &
+    R
 }
 
-export const convertList = <T extends Record<string, any>, R>(
-  input: T[],
-  transform?: (acc: T) => Partial<R>,
-) => input.map(item => convert(item, transform))
+export const convertList = <T, K extends keyof T, R>(
+  arr: T[],
+  keys: K[],
+  transform: (acc: T) => R,
+) => arr.map(item => convert(item, keys, transform))

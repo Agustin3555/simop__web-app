@@ -285,7 +285,7 @@ export const scheme: Scheme<Entity> = {
           'Porcentaje de obra nueva',
           {
             decimal: true,
-            pre: '%',
+            sub: '%',
           },
         ),
         metrosCuadradosObraNueva: new NumberProp(
@@ -318,7 +318,7 @@ export const scheme: Scheme<Entity> = {
           'Porcentaje de obra refaccionada',
           {
             decimal: true,
-            pre: '%',
+            sub: '%',
           },
         ),
         metrosCuadradosObraRefaccionada: new NumberProp(

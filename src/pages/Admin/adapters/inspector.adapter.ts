@@ -10,43 +10,29 @@ import { TipoProfesionAdapter } from '.'
 export const getAll: {
   output: OutputAdapter<InspectorModel.RawEntity[], InspectorModel.Entity[]>
 } = {
-  output: response => {
-    const conversion = convertList(response, acc => ({
+  output: response =>
+    convertList(response, ['profesiones'], acc => ({
       profesiones: TipoProfesionAdapter.getForConnect.output(acc.profesiones),
-    }))
-
-    return conversion
-  },
+    })),
 }
 
 export const getForConnect: {
   output: OutputAdapter<InspectorModel.RawRef[], InspectorModel.Ref[]>
 } = {
-  output: response => {
-    const conversion = convertList(response)
-
-    return conversion
-  },
+  output: response => response,
 }
 
 export const getOne: {
   output: OutputAdapter<InspectorModel.RawEntity, InspectorModel.Entity>
 } = {
-  output: response => {
-    const conversion = convert(response, acc => ({
+  output: response =>
+    convert(response, ['profesiones'], acc => ({
       profesiones: TipoProfesionAdapter.getForConnect.output(acc.profesiones),
-    }))
-
-    return conversion
-  },
+    })),
 }
 
 export const create: {
   input: InputAdapter<InspectorModel.CreateData, InspectorModel.CreateBody>
 } = {
-  input: data => {
-    const conversion = convert(data)
-
-    return conversion
-  },
+  input: data => data,
 }

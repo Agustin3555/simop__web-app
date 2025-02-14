@@ -94,11 +94,7 @@ export const scheme: Scheme<Entity> = {
             required: true,
           },
         }),
-        observaciones: new TextLongProp('observaciones', 'Observaciones', {
-          field: {
-            required: true,
-          },
-        }),
+        observaciones: new TextLongProp('observaciones', 'Observaciones'),
         ...COMMON_PROPS,
       },
     },

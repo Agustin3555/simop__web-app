@@ -109,7 +109,7 @@ export const scheme: Scheme<Entity> = {
         }),
         avance: new NumberProp('avance', 'Porcentaje de avance', {
           decimal: true,
-          pre: '%',
+          sub: '%',
         }),
         fecha: new DateProp('fecha', 'Fecha', {
           field: {
