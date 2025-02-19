@@ -1,5 +1,4 @@
 import { FojaMedicionModel } from '.'
-import { Ref } from '@/types'
 import { CertificacionService } from '../services'
 import {
   NumberProp,
@@ -31,13 +30,18 @@ export interface Entity {
   monto: number
   observaciones: string
 
-  fojaMedicion?: Ref
+  fojaMedicion?: FojaMedicionModel.Ref
 
   creado: string
   modificado: string
 }
 
 export interface RawRef {
+  id: number
+  numeroExpediente: string
+}
+
+export interface Ref {
   id: number
   numeroExpediente: string
 }

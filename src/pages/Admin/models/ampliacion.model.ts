@@ -1,4 +1,3 @@
-import { Ref } from '@/types'
 import { ObraModel } from '.'
 import {
   DateProp,
@@ -39,13 +38,18 @@ export interface Entity {
   fecha: string
   observaciones: string
 
-  obra?: Ref
+  obra?: ObraModel.Ref
 
   creado: string
   modificado: string
 }
 
 export interface RawRef {
+  id: number
+  numero: number
+}
+
+export interface Ref {
   id: number
   numero: number
 }

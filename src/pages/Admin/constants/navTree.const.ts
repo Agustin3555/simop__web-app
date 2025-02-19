@@ -19,6 +19,7 @@ import {
   TipoEstadoObraModel,
   TipoFinanciamientoObraModel,
   TipoInspectorModel,
+  TipoParalizacionModel,
   TipoProfesionModel,
   TipoProgramaObraModel,
   TipoRepresentanteModel,
@@ -73,6 +74,7 @@ export const TREE: SectionNode[] = [
             sections: [
               { scheme: TipoContratacionObraModel.scheme },
               { scheme: TipoFinanciamientoObraModel.scheme },
+              { scheme: TipoParalizacionModel.scheme },
               { scheme: TipoProgramaObraModel.scheme },
               { scheme: TipoTematicaObraModel.scheme },
               { scheme: TipoEstadoObraModel.scheme },

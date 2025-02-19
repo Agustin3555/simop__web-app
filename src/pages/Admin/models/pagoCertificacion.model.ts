@@ -1,5 +1,4 @@
 import { CertificacionModel } from '.'
-import { Ref } from '@/types'
 import { COMMON_PROPS } from '../constants/commonProps.const'
 import {
   Scheme,
@@ -30,13 +29,18 @@ export interface Entity {
   fecha: string
   observaciones: string
 
-  certificacion?: Ref
+  certificacion?: CertificacionModel.Ref
 
   creado: string
   modificado: string
 }
 
 export interface RawRef {
+  id: number
+  numero: number
+}
+
+export interface Ref {
   id: number
   numero: number
 }

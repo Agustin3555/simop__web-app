@@ -1,4 +1,3 @@
-import { Ref } from '@/types'
 import { SubSecretariaModel } from '.'
 import { RefProp, Scheme, TextProp } from '../services/config'
 import { DireccionService } from '../services'
@@ -18,7 +17,7 @@ export interface Entity {
   id: number
   nombre: string
 
-  subSecretaria?: Ref
+  subSecretaria?: SubSecretariaModel.Ref
 
   creado: string
   modificado: string
@@ -26,6 +25,11 @@ export interface Entity {
 
 export interface RawRef {
   id: number
+  nombre: string
+}
+export interface Ref {
+  id: number
+
   nombre: string
 }
 

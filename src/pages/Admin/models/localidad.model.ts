@@ -1,4 +1,3 @@
-import { Ref } from '@/types'
 import { ProvinciaModel } from '.'
 import { RefProp, Scheme, TextProp } from '../services/config'
 import { LocalidadService } from '../services'
@@ -25,6 +24,11 @@ export interface Entity {
 }
 
 export interface RawRef {
+  id: number
+  nombre: string
+}
+
+export interface Ref {
   id: number
   nombre: string
 }

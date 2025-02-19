@@ -1,4 +1,3 @@
-import { Ref } from '@/types'
 import { DireccionModel } from '.'
 import { RefProp, Scheme, TextProp } from '../services/config'
 import { DepartamentoService } from '../services'
@@ -18,13 +17,18 @@ export interface Entity {
   id: number
   nombre: string
 
-  direccion?: Ref
+  direccion?: DireccionModel.Ref
 
   creado: string
   modificado: string
 }
 
 export interface RawRef {
+  id: number
+  nombre: string
+}
+
+export interface Ref {
   id: number
   nombre: string
 }

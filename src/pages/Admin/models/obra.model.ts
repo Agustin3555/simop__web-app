@@ -7,7 +7,6 @@ import {
   TipoProgramaObraModel,
   TipoEstadoObraModel,
 } from '.'
-import { Ref } from '@/types'
 import {
   BooleanProp,
   DateProp,
@@ -90,19 +89,24 @@ export interface Entity {
   metrosLinealesObraRefaccionada?: number
   observacionesObraRefaccionada?: string
 
-  empresa?: Ref
-  tipoContratacionObra?: Ref
-  tipoFinanciamientoObra?: Ref
-  tipoProgramaObra?: Ref
-  tipoTematicaObra?: Ref
-  tipoEstadoObra?: Ref
-  localidad?: Ref
+  empresa?: EmpresaModel.Ref
+  tipoContratacionObra?: TipoContratacionObraModel.Ref
+  tipoFinanciamientoObra?: TipoFinanciamientoObraModel.Ref
+  tipoProgramaObra?: TipoProgramaObraModel.Ref
+  tipoTematicaObra?: TipoTematicaObraModel.Ref
+  tipoEstadoObra?: TipoEstadoObraModel.Ref
+  localidad?: LocalidadModel.Ref
 
   creado: string
   modificado: string
 }
 
 export interface RawRef {
+  id: number
+  numero: number
+}
+
+export interface Ref {
   id: number
   numero: number
 }

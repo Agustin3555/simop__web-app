@@ -4,7 +4,6 @@ import {
   TipoInspectorModel,
   TipoProfesionModel,
 } from '.'
-import { Ref } from '@/types'
 import { RefProp, Scheme } from '../services/config'
 import { InspectorObraService } from '../services'
 import { COMMON_PROPS } from '../constants/commonProps.const'
@@ -24,13 +23,21 @@ export interface RawEntity {
 export interface Entity {
   id: number
 
-  obra: Ref
-  inspector: Ref
-  tipoInspector: Ref
-  tipoProfesion: Ref
+  obra: ObraModel.Ref
+  inspector: InspectorModel.Ref
+  tipoInspector: TipoInspectorModel.Ref
+  tipoProfesion: TipoProfesionModel.Ref
 
   creado: string
   modificado: string
+}
+
+export interface RawRef {
+  id: number
+}
+
+export interface Ref {
+  id: number
 }
 
 export interface CreateData {

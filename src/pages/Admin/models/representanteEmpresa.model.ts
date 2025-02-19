@@ -1,5 +1,4 @@
 import { EmpresaModel, RepresentanteModel, TipoRepresentanteModel } from '.'
-import { Ref } from '@/types'
 import { BooleanProp, RefProp, Scheme } from '../services/config'
 import { RepresentanteEmpresaService } from '../services'
 import { COMMON_PROPS } from '../constants/commonProps.const'
@@ -26,6 +25,14 @@ export interface Entity {
 
   creado: string
   modificado: string
+}
+
+export interface RawRef {
+  id: number
+}
+
+export interface Ref {
+  id: number
 }
 
 export interface CreateData {

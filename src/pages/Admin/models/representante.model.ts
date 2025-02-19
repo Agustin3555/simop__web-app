@@ -1,5 +1,4 @@
 import { PaisModel, ProvinciaModel, LocalidadModel } from '.'
-import { Ref } from '@/types'
 import { NumberProp, RefProp, Scheme, TextProp } from '../services/config'
 import { RepresentanteService } from '../services'
 import { COMMON_PROPS } from '../constants/commonProps.const'
@@ -28,15 +27,20 @@ export interface Entity {
   direccion: string
   numeroMatricula: string
 
-  pais?: Ref
-  provincia?: Ref
-  localidad?: Ref
+  pais?: PaisModel.Ref
+  provincia?: ProvinciaModel.Ref
+  localidad?: LocalidadModel.Ref
 
   creado: string
   modificado: string
 }
 
 export interface RawRef {
+  id: number
+  apellido: string
+}
+
+export interface Ref {
   id: number
   apellido: string
 }
