@@ -197,103 +197,75 @@ export const scheme: Scheme<Entity> = {
   groups: [
     {
       props: {
-        numero: new NumberProp('numero', 'Número', {
+        numero: new NumberProp('Número', {
           big: true,
           field: {
             required: true,
           },
         }),
-        nombre: new TextProp('nombre', 'Nombre', {
+        nombre: new TextProp('Nombre', {
           field: {
             required: true,
           },
         }),
-        empresa: new RefProp('empresa', {
+        empresa: new RefProp({
           getScheme: () => EmpresaModel.scheme,
         }),
-        numeroExpediente: new TextProp(
-          'numeroExpediente',
-          'Número de Expediente',
-        ),
-        numeroResolucion: new TextProp(
-          'numeroResolucion',
-          'Número de Resolución',
-        ),
-        anioResolucion: new NumberProp('anioResolucion', 'Año de Resolución', {
+        numeroExpediente: new TextProp('Número de Expediente'),
+        numeroResolucion: new TextProp('Número de Resolución'),
+        anioResolucion: new NumberProp('Año de Resolución', {
           field: {
             required: true,
           },
         }),
-        numeroContratacion: new TextProp(
-          'numeroContratacion',
-          'Número de Contratación',
-        ),
-        anioContratacion: new NumberProp(
-          'anioContratacion',
-          'Año de Contratación',
-          {
-            field: {
-              required: true,
-            },
+        numeroContratacion: new TextProp('Número de Contratación'),
+        anioContratacion: new NumberProp('Año de Contratación', {
+          field: {
+            required: true,
           },
-        ),
-        montoContratacion: new NumberProp(
-          'montoContratacion',
-          'Monto de Contratación',
-          {
-            decimal: true,
-            big: true,
-            pre: '$',
-          },
-        ),
-        tipoContratacionObra: new RefProp('tipoContratacionObra', {
+        }),
+        montoContratacion: new NumberProp('Monto de Contratación', {
+          decimal: true,
+          big: true,
+          pre: '$',
+        }),
+        tipoContratacionObra: new RefProp({
           getScheme: () => TipoContratacionObraModel.scheme,
         }),
-        tipoFinanciamientoObra: new RefProp('tipoFinanciamientoObra', {
+        tipoFinanciamientoObra: new RefProp({
           getScheme: () => TipoFinanciamientoObraModel.scheme,
         }),
-        tipoProgramaObra: new RefProp('tipoProgramaObra', {
+        tipoProgramaObra: new RefProp({
           getScheme: () => TipoProgramaObraModel.scheme,
         }),
-        tipoTematicaObra: new RefProp('tipoTematicaObra', {
+        tipoTematicaObra: new RefProp({
           getScheme: () => TipoTematicaObraModel.scheme,
         }),
-        tipoEstadoObra: new RefProp('tipoEstadoObra', {
+        tipoEstadoObra: new RefProp({
           getScheme: () => TipoEstadoObraModel.scheme,
         }),
-        fechaInicio: new DateProp('fechaInicio', 'Fecha de Inicio'),
-        fechaFin: new DateProp('fechaFin', 'Fecha de Fin'),
-        plazoMeses: new NumberProp('plazoMeses', 'Plazo en Meses'),
-        plazoDias: new NumberProp('plazoDias', 'Plazo en Días'),
-        localidad: new RefProp('localidad', {
+        fechaInicio: new DateProp('Fecha de Inicio'),
+        fechaFin: new DateProp('Fecha de Fin'),
+        plazoMeses: new NumberProp('Plazo en Meses'),
+        plazoDias: new NumberProp('Plazo en Días'),
+        localidad: new RefProp({
           getScheme: () => LocalidadModel.scheme,
         }),
-        direccion: new TextProp('direccion', 'Dirección'),
-        lugar: new TextLongProp('lugar', 'Lugar'),
-        nomenclaturaCatastral: new TextProp(
-          'nomenclaturaCatastral',
-          'Nomenclatura Catastral',
-        ),
-        observaciones: new TextLongProp(
-          'observaciones',
-          'Observaciones generales',
-        ),
+        direccion: new TextProp('Dirección'),
+        lugar: new TextLongProp('Lugar'),
+        nomenclaturaCatastral: new TextProp('Nomenclatura Catastral'),
+        observaciones: new TextLongProp('Observaciones generales'),
       },
     },
     {
       title: 'Modalidad',
       props: {
-        obraNueva: new BooleanProp('obraNueva', 'Obra nueva'),
-        porcentajeObraNueva: new NumberProp(
-          'porcentajeObraNueva',
-          'Porcentaje de obra nueva',
-          {
-            decimal: true,
-            sub: '%',
-          },
-        ),
+        obraNueva: new BooleanProp('Obra nueva'),
+        porcentajeObraNueva: new NumberProp('Porcentaje de obra nueva', {
+          decimal: true,
+          sub: '%',
+        }),
         metrosCuadradosObraNueva: new NumberProp(
-          'metrosCuadradosObraNueva',
           'm² (metros cuadrados) de obra nueva',
           {
             decimal: true,
@@ -301,24 +273,16 @@ export const scheme: Scheme<Entity> = {
           },
         ),
         metrosLinealesObraNueva: new NumberProp(
-          'metrosLinealesObraNueva',
           'm (metros lineales) de obra nueva',
           {
             decimal: true,
             sub: 'm',
           },
         ),
-        observacionesObraNueva: new TextLongProp(
-          'observacionesObraNueva',
-          'Observaciones de obra nueva',
-        ),
+        observacionesObraNueva: new TextLongProp('Observaciones de obra nueva'),
 
-        obraRefaccionada: new BooleanProp(
-          'obraRefaccionada',
-          'Obra refaccionada',
-        ),
+        obraRefaccionada: new BooleanProp('Obra refaccionada'),
         porcentajeObraRefaccionada: new NumberProp(
-          'porcentajeObraRefaccionada',
           'Porcentaje de obra refaccionada',
           {
             decimal: true,
@@ -326,7 +290,6 @@ export const scheme: Scheme<Entity> = {
           },
         ),
         metrosCuadradosObraRefaccionada: new NumberProp(
-          'metrosCuadradosObraRefaccionada',
           'm² (metros cuadrados) de obra refaccionada',
           {
             decimal: true,
@@ -334,7 +297,6 @@ export const scheme: Scheme<Entity> = {
           },
         ),
         metrosLinealesObraRefaccionada: new NumberProp(
-          'metrosLinealesObraRefaccionada',
           'm (metros lineales) de obra refaccionada',
           {
             decimal: true,
@@ -342,7 +304,6 @@ export const scheme: Scheme<Entity> = {
           },
         ),
         observacionesObraRefaccionada: new TextLongProp(
-          'observacionesObraRefaccionada',
           'Observaciones de obra refaccionada',
         ),
         ...COMMON_PROPS,

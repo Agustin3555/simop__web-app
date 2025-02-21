@@ -80,33 +80,25 @@ export const scheme: Scheme<Entity> = {
   groups: [
     {
       props: {
-        numeroExpediente: new TextProp(
-          'numeroExpediente',
-          'Número De Expediente',
-          {
-            field: {
-              required: true,
-            },
+        numeroExpediente: new TextProp('Número De Expediente', {
+          field: {
+            required: true,
           },
-        ),
-        numeroResolucion: new TextProp(
-          'numeroResolucion',
-          'Número De Resolución',
-          {
-            field: {
-              required: true,
-            },
+        }),
+        numeroResolucion: new TextProp('Número De Resolución', {
+          field: {
+            required: true,
           },
-        ),
-        fecha: new DateProp('fecha', 'Fecha', { field: { required: true } }),
+        }),
+        fecha: new DateProp('Fecha', { field: { required: true } }),
 
-        observaciones: new TextLongProp('observaciones', 'Observaciones'),
+        observaciones: new TextLongProp('Observaciones'),
 
-        obra: new RefProp('obra', {
+        obra: new RefProp({
           getScheme: () => ObraModel.scheme,
         }),
 
-        tipoRescision: new RefProp('tipoRescision', {
+        tipoRescision: new RefProp({
           getScheme: () => TipoRescisionModel.scheme,
         }),
 

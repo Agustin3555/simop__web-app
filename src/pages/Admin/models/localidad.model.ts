@@ -58,12 +58,12 @@ export const scheme: Scheme<Entity> = {
   groups: [
     {
       props: {
-        nombre: new TextProp('nombre', 'Nombre', {
+        nombre: new TextProp('Nombre', {
           field: {
             required: true,
           },
         }),
-        provincia: new RefProp('provincia', {
+        provincia: new RefProp({
           getScheme: () => ProvinciaModel.scheme,
           field: {
             required: true,

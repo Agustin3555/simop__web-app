@@ -76,29 +76,29 @@ export const scheme: Scheme<Entity> = {
   groups: [
     {
       props: {
-        numero: new NumberProp('numero', 'Número de pago', {
+        numero: new NumberProp('Número de pago', {
           field: {
             required: true,
           },
         }),
-        fecha: new DateProp('fecha', 'Fecha', {
+        fecha: new DateProp('Fecha', {
           field: {
             required: true,
           },
         }),
-        monto: new NumberProp('monto', 'Monto', {
+        monto: new NumberProp('Monto', {
           decimal: true,
           big: true,
           pre: '$',
         }),
 
-        certificacion: new RefProp('certificacion', {
+        certificacion: new RefProp({
           getScheme: () => CertificacionModel.scheme,
           field: {
             required: true,
           },
         }),
-        observaciones: new TextLongProp('observaciones', 'Observaciones'),
+        observaciones: new TextLongProp('Observaciones'),
         ...COMMON_PROPS,
       },
     },

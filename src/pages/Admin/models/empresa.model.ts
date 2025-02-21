@@ -81,40 +81,40 @@ export const scheme: Scheme<Entity> = {
   groups: [
     {
       props: {
-        cuit: new NumberProp('cuit', 'CUIT', {
+        cuit: new NumberProp('CUIT', {
           big: true,
           field: {
             required: true,
           },
         }),
-        nombre: new TextProp('nombre', 'Nombre', {
+        nombre: new TextProp('Nombre', {
           field: {
             required: true,
           },
         }),
-        direccion: new TextProp('direccion', 'Dirección declarada', {
+        direccion: new TextProp('Dirección declarada', {
           field: {
             required: true,
           },
         }),
-        numeroContacto: new NumberProp('numeroContacto', 'Número de contacto', {
+        numeroContacto: new NumberProp('Número de contacto', {
           big: true,
           field: {
             required: true,
           },
         }),
-        email: new TextProp('email', 'Email', {
+        email: new TextProp('Email', {
           field: {
             required: true,
           },
         }),
-        pais: new RefProp('pais', {
+        pais: new RefProp({
           getScheme: () => PaisModel.scheme,
         }),
-        provincia: new RefProp('provincia', {
+        provincia: new RefProp({
           getScheme: () => ProvinciaModel.scheme,
         }),
-        localidad: new RefProp('localidad', {
+        localidad: new RefProp({
           getScheme: () => LocalidadModel.scheme,
         }),
         ...COMMON_PROPS,

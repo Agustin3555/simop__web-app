@@ -79,32 +79,28 @@ export const scheme: Scheme<Entity> = {
   groups: [
     {
       props: {
-        numeroExpediente: new TextProp(
-          'numeroExpediente',
-          'Número de Expediente',
-          {
-            field: {
-              required: true,
-            },
-          },
-        ),
-        fecha: new DateProp('fecha', 'Fecha', {
+        numeroExpediente: new TextProp('Número de Expediente', {
           field: {
             required: true,
           },
         }),
-        monto: new NumberProp('monto', 'Monto', {
+        fecha: new DateProp('Fecha', {
+          field: {
+            required: true,
+          },
+        }),
+        monto: new NumberProp('Monto', {
           decimal: true,
           pre: '$',
         }),
 
-        fojaMedicion: new RefProp('fojaMedicion', {
+        fojaMedicion: new RefProp({
           getScheme: () => FojaMedicionModel.scheme,
           field: {
             required: true,
           },
         }),
-        observaciones: new TextLongProp('observaciones', 'Observaciones'),
+        observaciones: new TextLongProp('Observaciones'),
         ...COMMON_PROPS,
       },
     },

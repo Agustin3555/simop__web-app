@@ -59,12 +59,12 @@ export const scheme: Scheme<Entity> = {
   groups: [
     {
       props: {
-        nombre: new TextProp('nombre', 'Nombre', {
+        nombre: new TextProp('Nombre', {
           field: {
             required: true,
           },
         }),
-        pais: new RefProp('pais', {
+        pais: new RefProp({
           getScheme: () => PaisModel.scheme,
           field: {
             required: true,

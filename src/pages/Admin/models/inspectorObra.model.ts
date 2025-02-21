@@ -66,16 +66,16 @@ export const scheme: Scheme<Entity> = {
   groups: [
     {
       props: {
-        obra: new RefProp('obra', {
+        obra: new RefProp({
           getScheme: () => ObraModel.scheme,
         }),
-        inspector: new RefProp('inspector', {
+        inspector: new RefProp({
           getScheme: () => InspectorModel.scheme,
         }),
-        tipoInspector: new RefProp('tipoInspector', {
+        tipoInspector: new RefProp({
           getScheme: () => TipoInspectorModel.scheme,
         }),
-        tipoProfesion: new RefProp('tipoProfesion', {
+        tipoProfesion: new RefProp({
           getScheme: () => TipoProfesionModel.scheme,
         }),
         ...COMMON_PROPS,

@@ -90,43 +90,39 @@ export const scheme: Scheme<Entity> = {
   groups: [
     {
       props: {
-        obra: new RefProp('obra', {
+        obra: new RefProp({
           getScheme: () => ObraModel.scheme,
           field: {
             required: true,
           },
         }),
-        numeroExpediente: new TextProp(
-          'numeroExpediente',
-          'Numero de Expediente de la foja',
-          {
-            field: {
-              required: true,
-            },
-          },
-        ),
-        numero: new NumberProp('numero', 'Número de foja', {
+        numeroExpediente: new TextProp('Numero de Expediente de la foja', {
           field: {
             required: true,
           },
         }),
-        avance: new NumberProp('avance', 'Porcentaje de avance', {
+        numero: new NumberProp('Número de foja', {
+          field: {
+            required: true,
+          },
+        }),
+        avance: new NumberProp('Porcentaje de avance', {
           decimal: true,
           sub: '%',
         }),
-        fecha: new DateProp('fecha', 'Fecha', {
+        fecha: new DateProp('Fecha', {
           field: {
             required: true,
           },
         }),
 
-        inspector: new RefProp('inspector', {
+        inspector: new RefProp({
           getScheme: () => InspectorModel.scheme,
           field: {
             required: true,
           },
         }),
-        observaciones: new TextLongProp('observaciones', 'Observaciones'),
+        observaciones: new TextLongProp('Observaciones'),
         ...COMMON_PROPS,
       },
     },
