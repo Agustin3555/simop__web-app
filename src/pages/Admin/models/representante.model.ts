@@ -1,5 +1,4 @@
 import { PaisModel, ProvinciaModel, LocalidadModel } from '.'
-import { Ref } from '@/types'
 import { NumberProp, RefProp, Scheme, TextProp } from '../services/config'
 import { RepresentanteService } from '../services'
 import { COMMON_PROPS } from '../constants/commonProps.const'
@@ -28,15 +27,20 @@ export interface Entity {
   direccion: string
   numeroMatricula: string
 
-  pais?: Ref
-  provincia?: Ref
-  localidad?: Ref
+  pais?: PaisModel.Ref
+  provincia?: ProvinciaModel.Ref
+  localidad?: LocalidadModel.Ref
 
   creado: string
   modificado: string
 }
 
 export interface RawRef {
+  id: number
+  apellido: string
+}
+
+export interface Ref {
   id: number
   apellido: string
 }
@@ -77,43 +81,39 @@ export const scheme: Scheme<Entity> = {
   groups: [
     {
       props: {
-        cuil: new NumberProp('cuil', 'CUIL', {
+        cuil: new NumberProp('CUIL', {
           big: true,
           field: {
             required: true,
           },
         }),
-        apellido: new TextProp('apellido', 'Apellido', {
+        apellido: new TextProp('Apellido', {
           field: {
             required: true,
           },
         }),
-        nombre: new TextProp('nombre', 'Nombre', {
+        nombre: new TextProp('Nombre', {
           field: {
             required: true,
           },
         }),
-        direccion: new TextProp('direccion', 'Dirección', {
+        direccion: new TextProp('Dirección', {
           field: {
             required: true,
           },
         }),
-        numeroMatricula: new TextProp(
-          'numeroMatricula',
-          'Número de Matricula',
-          {
-            field: {
-              required: true,
-            },
+        numeroMatricula: new TextProp('Número de Matricula', {
+          field: {
+            required: true,
           },
-        ),
-        pais: new RefProp('pais', {
+        }),
+        pais: new RefProp({
           getScheme: () => PaisModel.scheme,
         }),
-        provincia: new RefProp('provincia', {
+        provincia: new RefProp({
           getScheme: () => ProvinciaModel.scheme,
         }),
-        localidad: new RefProp('localidad', {
+        localidad: new RefProp({
           getScheme: () => LocalidadModel.scheme,
         }),
         ...COMMON_PROPS,

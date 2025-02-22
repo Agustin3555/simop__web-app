@@ -18,6 +18,7 @@ import {
   InspectorObra,
   TipoContratacionObra,
   TipoFinanciamientoObra,
+  TipoParalizacion,
   TipoProgramaObra,
   TipoTematicaObra,
   TipoEstadoObra,
@@ -59,6 +60,7 @@ const Content = () => (
     <TipoContratacionObra />
     <TipoFinanciamientoObra />
     <TipoProgramaObra />
+    <TipoParalizacion />
     <TipoTematicaObra />
     <TipoEstadoObra />
     <TipoRescision />

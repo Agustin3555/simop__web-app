@@ -1,5 +1,4 @@
 import { CertificacionModel } from '.'
-import { Ref } from '@/types'
 import { COMMON_PROPS } from '../constants/commonProps.const'
 import {
   Scheme,
@@ -30,13 +29,18 @@ export interface Entity {
   fecha: string
   observaciones: string
 
-  certificacion?: Ref
+  certificacion?: CertificacionModel.Ref
 
   creado: string
   modificado: string
 }
 
 export interface RawRef {
+  id: number
+  numero: number
+}
+
+export interface Ref {
   id: number
   numero: number
 }
@@ -72,29 +76,29 @@ export const scheme: Scheme<Entity> = {
   groups: [
     {
       props: {
-        numero: new NumberProp('numero', 'Número de pago', {
+        numero: new NumberProp('Número de pago', {
           field: {
             required: true,
           },
         }),
-        fecha: new DateProp('fecha', 'Fecha', {
+        fecha: new DateProp('Fecha', {
           field: {
             required: true,
           },
         }),
-        monto: new NumberProp('monto', 'Monto', {
+        monto: new NumberProp('Monto', {
           decimal: true,
           big: true,
           pre: '$',
         }),
 
-        certificacion: new RefProp('certificacion', {
+        certificacion: new RefProp({
           getScheme: () => CertificacionModel.scheme,
           field: {
             required: true,
           },
         }),
-        observaciones: new TextLongProp('observaciones', 'Observaciones'),
+        observaciones: new TextLongProp('Observaciones'),
         ...COMMON_PROPS,
       },
     },

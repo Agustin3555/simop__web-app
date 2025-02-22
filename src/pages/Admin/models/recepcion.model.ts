@@ -1,4 +1,3 @@
-import { Ref } from '@/types'
 import { ObraModel, TipoRecepcionModel } from '.'
 import {
   DateProp,
@@ -29,14 +28,18 @@ export interface Entity {
   fecha: string
   observaciones: string
 
-  obra?: Ref
-  tipoRecepcion?: Ref
-
+  obra?: ObraModel.Ref
+  tipoRecepcion?: TipoRecepcionModel.Ref
   creado: string
   modificado: string
 }
 
 export interface RawRef {
+  id: number
+  numeroActa: number
+}
+
+export interface Ref {
   id: number
   numeroActa: number
 }
@@ -72,20 +75,20 @@ export const scheme: Scheme<Entity> = {
   groups: [
     {
       props: {
-        numeroActa: new NumberProp('numeroActa', 'Número De Acta', {
+        numeroActa: new NumberProp('Número De Acta', {
           field: {
             required: true,
           },
         }),
-        fecha: new DateProp('fecha', 'Fecha', { field: { required: true } }),
+        fecha: new DateProp('Fecha', { field: { required: true } }),
 
-        observaciones: new TextLongProp('observaciones', 'Observaciones'),
+        observaciones: new TextLongProp('Observaciones'),
 
-        obra: new RefProp('obra', {
+        obra: new RefProp({
           getScheme: () => ObraModel.scheme,
         }),
 
-        tipoRecepcion: new RefProp('tipoRecepcion', {
+        tipoRecepcion: new RefProp({
           getScheme: () => TipoRecepcionModel.scheme,
         }),
 

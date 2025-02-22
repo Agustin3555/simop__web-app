@@ -1,4 +1,3 @@
-import { Ref } from '@/types'
 import { ProvinciaModel } from '.'
 import { RefProp, Scheme, TextProp } from '../services/config'
 import { LocalidadService } from '../services'
@@ -29,6 +28,11 @@ export interface RawRef {
   nombre: string
 }
 
+export interface Ref {
+  id: number
+  nombre: string
+}
+
 export interface CreateData {
   nombre: string
 
@@ -54,12 +58,12 @@ export const scheme: Scheme<Entity> = {
   groups: [
     {
       props: {
-        nombre: new TextProp('nombre', 'Nombre', {
+        nombre: new TextProp('Nombre', {
           field: {
             required: true,
           },
         }),
-        provincia: new RefProp('provincia', {
+        provincia: new RefProp({
           getScheme: () => ProvinciaModel.scheme,
           field: {
             required: true,

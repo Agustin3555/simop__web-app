@@ -1,6 +1,5 @@
 import { InputAdapter, OutputAdapter } from '@/adapters/config'
 import { DepartamentoModel } from '../models'
-import { Ref } from '@/types'
 
 export const getAll: {
   output: OutputAdapter<
@@ -8,52 +7,19 @@ export const getAll: {
     DepartamentoModel.Entity[]
   >
 } = {
-  output: response => {
-    const convertedResource = response.map<DepartamentoModel.Entity>(item => ({
-      id: item.id,
-      nombre: item.nombre,
-      direccion: item.direccion && {
-        id: item.direccion.id,
-        title: item.direccion.nombre,
-      },
-      creado: item.creado,
-      modificado: item.modificado,
-    }))
-
-    return convertedResource
-  },
+  output: response => response,
 }
 
 export const getForConnect: {
-  output: OutputAdapter<DepartamentoModel.RawRef[], Ref[]>
+  output: OutputAdapter<DepartamentoModel.RawRef[], DepartamentoModel.Ref[]>
 } = {
-  output: response => {
-    const convertedResource = response.map<Ref>(item => ({
-      id: item.id,
-      title: item.nombre,
-    }))
-
-    return convertedResource
-  },
+  output: response => response,
 }
 
 export const getOne: {
   output: OutputAdapter<DepartamentoModel.RawEntity, DepartamentoModel.Entity>
 } = {
-  output: response => {
-    const convertedResource = {
-      id: response.id,
-      nombre: response.nombre,
-      direccion: response.direccion && {
-        id: response.direccion.id,
-        title: response.direccion.nombre,
-      },
-      creado: response.creado,
-      modificado: response.modificado,
-    }
-
-    return convertedResource
-  },
+  output: response => response,
 }
 
 export const create: {
@@ -62,12 +28,5 @@ export const create: {
     DepartamentoModel.CreateBody
   >
 } = {
-  input: data => {
-    const convertedResource: DepartamentoModel.CreateBody = {
-      nombre: data.nombre,
-      direccionId: data.direccionId,
-    }
-
-    return convertedResource
-  },
+  input: data => data,
 }

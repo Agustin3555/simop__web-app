@@ -1,5 +1,4 @@
 import { ObraModel, RepresentanteModel, TipoRepresentanteModel } from '.'
-import { Ref } from '@/types'
 import { BooleanProp, RefProp, Scheme } from '../services/config'
 import { RepresentanteObraService } from '../services'
 import { COMMON_PROPS } from '../constants/commonProps.const'
@@ -20,12 +19,19 @@ export interface Entity {
   id: number
   vigencia: boolean
 
-  obra: Ref
-  representante: Ref
-  tipoRepresentante: Ref
+  obra: ObraModel.Ref
+  representante: RepresentanteModel.Ref
+  tipoRepresentante: TipoRepresentanteModel.Ref
 
   creado: string
   modificado: string
+}
+export interface RawRef {
+  id: number
+}
+
+export interface Ref {
+  id: number
 }
 
 export interface CreateData {
@@ -56,16 +62,16 @@ export const scheme: Scheme<Entity> = {
   groups: [
     {
       props: {
-        obra: new RefProp('obra', {
+        obra: new RefProp({
           getScheme: () => ObraModel.scheme,
         }),
-        representante: new RefProp('representante', {
+        representante: new RefProp({
           getScheme: () => RepresentanteModel.scheme,
         }),
-        tipoRepresentante: new RefProp('tipoRepresentante', {
+        tipoRepresentante: new RefProp({
           getScheme: () => TipoRepresentanteModel.scheme,
         }),
-        vigencia: new BooleanProp('vigencia', 'Vigencia', {
+        vigencia: new BooleanProp('Vigencia', {
           falseText: 'No Vigente',
           trueText: 'Vigente',
         }),

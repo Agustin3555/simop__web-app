@@ -1,4 +1,3 @@
-import { Ref } from '@/types'
 import { ObraModel } from '.'
 import {
   DateProp,
@@ -39,13 +38,18 @@ export interface Entity {
   fecha: string
   observaciones: string
 
-  obra?: Ref
+  obra?: ObraModel.Ref
 
   creado: string
   modificado: string
 }
 
 export interface RawRef {
+  id: number
+  numero: number
+}
+
+export interface Ref {
   id: number
   numero: number
 }
@@ -89,13 +93,12 @@ export const scheme: Scheme<Entity> = {
   groups: [
     {
       props: {
-        numero: new NumberProp('numero', 'Número', {
+        numero: new NumberProp('Número' {
           field: {
             required: true,
           },
         }),
         numeroResolucion: new TextProp(
-          'numeroResolucion',
           'Número De Resolución',
           {
             field: {
@@ -104,7 +107,6 @@ export const scheme: Scheme<Entity> = {
           },
         ),
         numeroExpedienteSolicitud: new TextProp(
-          'numeroExpedienteSolicitud',
           'Número De Expediente Solicitud',
           {
             field: {
@@ -114,7 +116,6 @@ export const scheme: Scheme<Entity> = {
         ),
 
         plazoMesesSolicitado: new NumberProp(
-          'plazoMesesSolicitado',
           'Plazo de Meses Solicitado ',
           {
             field: {
@@ -124,7 +125,7 @@ export const scheme: Scheme<Entity> = {
         ),
 
         plazoMesesOtorgado: new NumberProp(
-          'plazoMesesOtorgado',
+
           'Plazo de Meses Otorgado',
           {
             field: {
@@ -133,8 +134,7 @@ export const scheme: Scheme<Entity> = {
           },
         ),
         nuevaFechaFinObra: new DateProp(
-          'nuevaFechaFinObra',
-          'nuevaFechaFinObra',
+          'Nueva Fecha Fin De Obra',
           {
             field: {
               required: true,
@@ -142,9 +142,9 @@ export const scheme: Scheme<Entity> = {
           },
         ),
 
-        fecha: new DateProp('fecha', 'Fecha', { field: { required: true } }),
+        fecha: new DateProp('Fecha', { field: { required: true } }),
 
-        observaciones: new TextLongProp('observaciones', 'Observaciones'),
+        observaciones: new TextLongProp('Observaciones'),
 
         obra: new RefProp('obra', {
           getScheme: () => ObraModel.scheme,

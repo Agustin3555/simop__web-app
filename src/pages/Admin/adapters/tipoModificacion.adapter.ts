@@ -1,6 +1,5 @@
 import { InputAdapter, OutputAdapter } from '@/adapters/config'
 import { TipoModificacionModel } from '../models'
-import { Ref } from '@/types'
 
 export const getAll: {
   output: OutputAdapter<
@@ -8,32 +7,16 @@ export const getAll: {
     TipoModificacionModel.Entity[]
   >
 } = {
-  output: response => {
-    const convertedResource = response.map<TipoModificacionModel.Entity>(
-      item => ({
-        id: item.id,
-        nombre: item.nombre,
-
-        creado: item.creado,
-        modificado: item.modificado,
-      }),
-    )
-
-    return convertedResource
-  },
+  output: response => response,
 }
 
 export const getForConnect: {
-  output: OutputAdapter<TipoModificacionModel.RawRef[], Ref[]>
+  output: OutputAdapter<
+    TipoModificacionModel.RawRef[],
+    TipoModificacionModel.Ref[]
+  >
 } = {
-  output: response => {
-    const convertedResource = response.map<Ref>(item => ({
-      id: item.id,
-      title: item.nombre,
-    }))
-
-    return convertedResource
-  },
+  output: response => response,
 }
 
 export const getOne: {
@@ -42,17 +25,7 @@ export const getOne: {
     TipoModificacionModel.Entity
   >
 } = {
-  output: response => {
-    const convertedResource = {
-      id: response.id,
-      nombre: response.nombre,
-
-      creado: response.creado,
-      modificado: response.modificado,
-    }
-
-    return convertedResource
-  },
+  output: response => response,
 }
 
 export const create: {
@@ -61,11 +34,5 @@ export const create: {
     TipoModificacionModel.CreateBody
   >
 } = {
-  input: data => {
-    const convertedResource: TipoModificacionModel.CreateBody = {
-      nombre: data.nombre,
-    }
-
-    return convertedResource
-  },
+  input: data => data,
 }

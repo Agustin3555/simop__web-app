@@ -72,16 +72,16 @@ export const scheme: Scheme<Entity> = {
   groups: [
     {
       props: {
-        cuil: new NumberProp('cuil', 'CUIL', {
+        cuil: new NumberProp('CUIL', {
           big: true,
         }),
-        apellido: new TextProp('apellido', 'Apellido', {
+        apellido: new TextProp('Apellido', {
           field: {
             required: true,
           },
         }),
-        nombre: new TextProp('nombre', 'Nombre'),
-        profesiones: new RefListProp('profesiones', {
+        nombre: new TextProp('Nombre'),
+        profesiones: new RefListProp({
           getScheme: () => TipoProfesionModel.scheme,
         }),
         ...COMMON_PROPS,

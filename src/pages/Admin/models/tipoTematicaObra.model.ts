@@ -22,6 +22,10 @@ export interface RawRef {
   id: number
   nombre: string
 }
+export interface Ref {
+  id: number
+  nombre: string
+}
 
 export interface CreateData {
   nombre: string

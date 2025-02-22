@@ -1,4 +1,3 @@
-import { Ref } from '@/types'
 import { TipoParalizacionModel, ObraModel } from '.'
 import {
   DateProp,
@@ -36,14 +35,19 @@ export interface Entity {
   fecha: string
   observaciones: string
 
-  obra?: Ref
-  tipoParalizacion?: Ref
+  obra?: ObraModel.Ref
+  tipoParalizacion?: TipoParalizacionModel.Ref
 
   creado: string
   modificado: string
 }
 
 export interface RawRef {
+  id: number
+  numero: number
+}
+
+export interface Ref {
   id: number
   numero: number
 }
@@ -85,37 +89,31 @@ export const scheme: Scheme<Entity> = {
   groups: [
     {
       props: {
-        numero: new NumberProp('numero', 'Número', {
+        numero: new NumberProp('Número', {
           field: {
             required: true,
           },
         }),
-        numeroExpediente: new TextProp(
-          'numeroExpediente',
-          'Número De Expediente',
-          {
-            field: {
-              required: true,
-            },
+        numeroExpediente: new TextProp('Número De Expediente', {
+          field: {
+            required: true,
           },
-        ),
-        fechaReinicio: new DateProp('fechaReinicio', 'Fecha Reinicio', {
+        }),
+        fechaReinicio: new DateProp('Fecha Reinicio', {
           field: { required: true },
         }),
-        nuevaFechaFinObra: new DateProp(
-          'nuevaFechaFinObra',
-          'Nueva Fecha Fin de Obra',
-          { field: { required: true } },
-        ),
-        fecha: new DateProp('fecha', 'Fecha', { field: { required: true } }),
+        nuevaFechaFinObra: new DateProp('Nueva Fecha Fin de Obra', {
+          field: { required: true },
+        }),
+        fecha: new DateProp('Fecha', { field: { required: true } }),
 
-        observaciones: new TextLongProp('observaciones', 'Observaciones'),
+        observaciones: new TextLongProp('Observaciones'),
 
-        obra: new RefProp('obra', {
+        obra: new RefProp({
           getScheme: () => ObraModel.scheme,
         }),
 
-        tipoParalizacion: new RefProp('tipoParalizacion', {
+        tipoParalizacion: new RefProp({
           getScheme: () => TipoParalizacionModel.scheme,
         }),
 
