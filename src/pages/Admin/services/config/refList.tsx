@@ -1,18 +1,17 @@
-import { Entity, EntityKey } from '@/services/config'
+import { Entity, Ref } from '@/services/config'
 import { ForView, GetScheme, PropScheme, Required } from './utils'
 import { Combobox, FetchRef } from '../../components'
-import { Ref } from '@/types'
 import { Column, Row } from '@tanstack/react-table'
 
 /*
   Solamente para controlar los vínculos de uno a muchos que no tengan atributos
-  de vinculo y que no sean relaciones ternarias, si lo es, se debe convertir en
-  un modulo aparte.
+  de vinculo y que no sean relaciones ternarias, de lo contrario, se debe convertir
+  en un modulo específico.
 */
-export class RefListProp<T extends EntityKey> implements PropScheme {
-  constructor(
-    public key: T,
+export class RefListProp implements PropScheme {
+  key = ''
 
+  constructor(
     public config: GetScheme & {
       // column?: ForView,
       field?: ForView & Required

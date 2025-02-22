@@ -1,20 +1,18 @@
 import { useContext, useMemo } from 'react'
 import { SchemeContext } from '../contexts'
-import { EntityKey } from '@/services/config'
-import { PropScheme } from '../services/config'
+import { getFlatProps } from '../services/config'
 
 export const useScheme = () => {
   const { scheme } = useContext(SchemeContext)!
 
-  const flatProps = useMemo(
-    () =>
-      scheme.groups.reduce((acc, { props }) => {
-        Object.values(props).forEach(prop => (acc[prop.key] = prop))
+  const flatProps = useMemo(() => {
+    const props = getFlatProps(scheme)
 
-        return acc
-      }, {} as Record<EntityKey, PropScheme>),
-    [],
-  )
+    // Inicializa la clave de las propiedades
+    Object.entries(props).forEach(([key, prop]) => (prop.key = key))
+
+    return props
+  }, [])
 
   return { scheme, flatProps }
 }

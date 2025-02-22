@@ -1,12 +1,13 @@
-import { Entity, EntityKey } from '@/services/config'
+import { Entity } from '@/services/config'
 import { ForView, PropScheme, Required } from './utils'
 import { Input } from '@/components'
 import { Column, Row } from '@tanstack/react-table'
 import { TextFilter } from '../../components'
 
-export class TextProp<T extends EntityKey> implements PropScheme {
+export class TextProp implements PropScheme {
+  key = ''
+
   constructor(
-    public key: T,
     public title: string,
 
     public config?: {

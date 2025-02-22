@@ -1,13 +1,14 @@
-import { Entity, EntityKey } from '@/services/config'
+import { Entity } from '@/services/config'
 import { ForView, PropScheme, Required } from './utils'
 import { Input } from '@/components'
 import { Column, FilterFn, Row } from '@tanstack/react-table'
 import { format } from '@formkit/tempo'
 import { DateTimeFilter } from '../../components'
 
-export class DateTimeProp<T extends EntityKey> implements PropScheme {
+export class DateTimeProp implements PropScheme {
+  key = ''
+
   constructor(
-    public key: T,
     public title: string,
 
     public config?: {

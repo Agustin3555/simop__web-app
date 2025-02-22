@@ -4,7 +4,7 @@ import { ModificacionAdapter } from '../adapters'
 import { deleteManyHandler } from '@/services/handlers'
 import { buildPath } from '@/helpers'
 
-const collection = buildPath('modifiaciones')
+const collection = buildPath('modificaciones')
 
 export const ModificacionService: Service<ModificacionModel.Entity> = {
   getAll: async () => {

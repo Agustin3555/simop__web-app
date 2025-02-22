@@ -44,6 +44,10 @@ small {
   font-size: var(--pal-size-font-xs);
 }
 
+strong {
+  font-weight: 600;
+}
+
 ul,
 ol {
   display: flex;

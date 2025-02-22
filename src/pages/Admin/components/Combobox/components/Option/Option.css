@@ -1,0 +1,47 @@
+.cmp-option {
+  flex-shrink: 0;
+
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: var(--control-padding-inline);
+  padding: var(--control-padding-inline);
+
+  white-space: nowrap;
+  color: var(--pal-color-a-d2);
+
+  cursor: pointer;
+
+  transition: color var(--pal-time-xs) ease-out,
+    background-color var(--pal-time-xs) ease-out;
+
+  > ul {
+    display: flex;
+    gap: var(--pal-size-s);
+
+    > li {
+      display: flex;
+      gap: var(--pal-size-xs);
+
+      font-size: var(--pal-size-font-2xs);
+
+      > strong {
+        color: var(--pal-color-a);
+      }
+    }
+  }
+
+  > input {
+    display: none;
+  }
+
+  &:hover {
+    background-color: rgba(var(--pal-color-base-a), 0.125);
+  }
+
+  &:has(input:checked) {
+    color: var(--pal-color-a-d3);
+
+    background-color: var(--pal-color-a-l2);
+  }
+}

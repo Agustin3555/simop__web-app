@@ -1,4 +1,4 @@
-.cmp-combobox-layout {
+.cmp-combobox {
   position: relative;
 
   > header {
@@ -14,7 +14,6 @@
 
     > .selected-items {
       --padding: 0.3125rem;
-      --border-radius: var(--pal-size-3xs);
 
       display: flex;
       flex-wrap: wrap;
@@ -24,10 +23,16 @@
       cursor: default;
 
       > .item {
+        --border-color: var(--pal-color-a-l3);
+        --border-width: var(--pal-color-a-l3);
+
         display: flex;
         align-items: center;
+        border-width: var(--line-thickness);
+        border-style: solid;
+        border-color: var(--border-color);
 
-        border-radius: var(--border-radius);
+        border-radius: var(--pal-size-3xs);
         background-color: var(--pal-color-white);
 
         > p {
@@ -36,6 +41,7 @@
           padding-inline: var(--pal-size-s);
           max-width: 20rem;
 
+          line-height: initial;
           white-space: nowrap;
           text-overflow: ellipsis;
 
@@ -43,16 +49,19 @@
         }
 
         > .cmp-button {
+          border-width: 0;
+          border-color: var(--border-color);
+          border-left-width: var(--line-thickness);
           padding: 0;
           aspect-ratio: 1;
           height: calc(
-            var(--control-height) - (var(--padding) + var(--line-thickness)) * 2
+            var(--control-height) - (var(--padding) + var(--line-thickness) * 2) *
+              2
           );
 
-          color: var(--pal-color-white);
+          color: var(--pal-color-a-l1);
 
-          border-radius: var(--border-radius);
-          background-color: var(--pal-color-a-l2);
+          border-radius: 0;
         }
       }
     }
@@ -100,34 +109,78 @@
       translate var(--pal-time-s) ease, opacity var(--pal-time-s) ease;
 
     > header {
-      --button-gap: var(--pal-size-2xs);
-      --button-size: calc(var(--control-height) - var(--button-gap) * 2);
+      display: flex;
+      flex-direction: column;
 
-      position: relative;
+      > fieldset {
+        display: flex;
+        align-items: center;
+        gap: var(--pal-size-xs);
+        border: none;
+        padding-inline: var(--control-padding-inline);
+        padding-top: var(--pal-size-xs);
+        padding-bottom: var(--pal-size-2xs);
 
-      > .input {
-        border-width: 0;
-        border-bottom-width: var(--line-thickness);
-        padding-right: calc(
-          var(--control-padding-inline) + var(--button-size) + var(--button-gap)
-        );
-        padding-left: var(--control-padding-inline);
+        > label {
+          border-width: 0.0625rem;
+          border-style: solid;
+          border-color: var(--pal-color-a-l2);
+          padding-block: var(--pal-size-2xs);
+          padding-inline: var(--pal-size-xs);
 
-        border-radius: 0;
+          font-size: var(--pal-size-font-xs);
+          white-space: nowrap;
+          color: var(--pal-color-a-l1);
+
+          border-radius: var(--pal-size-3xl);
+          cursor: pointer;
+
+          transition: color var(--pal-time-xs) ease-out,
+            background-color var(--pal-time-xs) ease-out;
+
+          > input {
+            display: none;
+          }
+
+          &:has(input:checked) {
+            color: var(--pal-color-white);
+
+            background-color: var(--pal-color-a-l2);
+          }
+        }
       }
 
-      > .cmp-state-button {
-        position: absolute;
-        top: 0;
-        right: 0;
+      > .search {
+        --button-gap: var(--pal-size-2xs);
+        --button-size: calc(var(--control-height) - var(--button-gap) * 2);
 
-        border-color: var(--pal-color-a-l2);
-        padding: 0;
-        aspect-ratio: 1;
+        position: relative;
 
-        color: var(--pal-color-a-l1);
+        > .input {
+          border-width: 0;
+          border-bottom-width: var(--line-thickness);
+          padding-right: calc(
+            var(--control-padding-inline) + var(--button-size) +
+              var(--button-gap)
+          );
+          padding-left: var(--control-padding-inline);
 
-        border-radius: 0;
+          border-radius: 0;
+        }
+
+        > .cmp-state-button {
+          position: absolute;
+          top: 0;
+          right: 0;
+
+          border-color: var(--pal-color-a-l2);
+          padding: 0;
+          aspect-ratio: 1;
+
+          color: var(--pal-color-a-l1);
+
+          border-radius: 0;
+        }
       }
     }
 
@@ -139,36 +192,6 @@
       max-height: calc(var(--control-height) * 7.5);
 
       overflow-y: auto;
-
-      > .option {
-        flex-shrink: 0;
-
-        display: flex;
-        align-items: center;
-        padding-inline: var(--control-padding-inline);
-        height: var(--control-height);
-
-        white-space: nowrap;
-
-        cursor: pointer;
-
-        transition: color var(--pal-time-xs) ease-out,
-          background-color var(--pal-time-xs) ease-out;
-
-        > input {
-          display: none;
-        }
-
-        &:hover {
-          background-color: rgba(var(--pal-color-base-a), 0.125);
-        }
-
-        &:has(input:checked) {
-          color: var(--pal-color-white);
-
-          background-color: var(--pal-color-a-l1);
-        }
-      }
     }
 
     > .void {

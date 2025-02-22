@@ -1,33 +1,124 @@
-import { MouseEventHandler, useCallback, useState } from 'react'
+import './Combobox.css'
 import {
-  ComboboxProps,
-  useAddFieldReset,
-  useCombobox,
-  useInputHandler,
-} from '../../hooks'
-import { Button } from '@/components'
-import { ComboboxLayout } from '..'
-import { Ref } from '@/types'
+  MouseEventHandler,
+  useCallback,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from 'react'
+import { useHandleAction, useLabel } from '@/hooks'
+import { useAddFieldReset, useInputHandler } from '../../hooks'
+import { useQuery } from '@tanstack/react-query'
+import { Button, Icon, StateButton } from '@/components'
+import { Option } from './components'
+import { Control } from '@/types'
+import { Entity } from '@/services/config'
+import { getFlatProps, Scheme } from '../../services/config'
+import { REFETCH_INTERVALS } from '../../constants/refetchIntervals.const'
+import { classList } from '@/helpers'
+import { sort } from './helpers'
+
+export type SearchMode = keyof Entity
+
+export interface ComboboxProps extends Control {
+  multiple?: boolean
+  scheme: Scheme
+}
 
 const Combobox = ({
   name,
-  scheme,
-  multiple = false,
+  title,
   required = false,
   long,
+  multiple = false,
+  scheme,
 }: ComboboxProps) => {
-  const [selected, setSelected] = useState<Ref[]>([])
+  const { key, title: schemeTitle, service, refreshRate } = scheme
 
-  const { basicProps, options, sortedOptions } = useCombobox({
-    scheme,
+  const { labelContent, inputTitle } = useLabel({
+    title: title || schemeTitle.singular,
     required,
-    long,
+  })
+
+  const [enabled, setEnabled] = useState(false)
+  const [open, setOpen] = useState(false)
+  const [search, setSearch] = useState('')
+  const [searchModes, setSearchModes] = useState<SearchMode[]>([])
+  const [selectedSearchMode, setSelectedSearchMode] = useState<SearchMode>('id')
+  const [selected, setSelected] = useState<Partial<Entity>[]>([])
+  const comboboxLayoutRef = useRef<HTMLDivElement>(null)
+
+  const { data: options, refetch } = useQuery({
+    queryKey: [key, 'refs'],
+
+    queryFn: async () => {
+      const options = await service.getForConnect!()
+
+      setSearchModes(Object.keys(options[0]))
+
+      return options
+    },
+
+    refetchInterval: refreshRate ? REFETCH_INTERVALS[refreshRate] : Infinity,
+    retry: false,
+    enabled,
   })
 
   useAddFieldReset(() => setSelected([]))
 
+  const isVoid = useMemo(() => !(options && options.length), [options])
+
+  const flatProps = useMemo(() => getFlatProps(scheme), [])
+
+  const searchModeTitles = useMemo(
+    () => searchModes.map(mode => ({ mode, title: flatProps[mode].title })),
+    [searchModes, flatProps],
+  )
+
+  const sortedOptions = useMemo(() => {
+    if (!options) return
+
+    const sorted = sort(
+      search.trim().toLowerCase(),
+      options,
+      option => option[selectedSearchMode],
+    )
+
+    return sorted.map(props => {
+      const record: Record<
+        SearchMode,
+        { title: string; value: number | string }
+      > = {}
+
+      searchModes.forEach(mode => {
+        record[mode] = {
+          title: flatProps[mode].title as string,
+          value: props[mode],
+        }
+      })
+
+      return record
+    })
+  }, [options, search, selectedSearchMode, searchModes])
+
+  const handleEnter = useCallback(() => setEnabled(true), [])
+
+  const handleSearchChange = useInputHandler(newValue => setSearch(newValue))
+
+  const handleToggleClick = useCallback(() => setOpen(prev => !prev), [])
+
+  const handleSearchModeChange = useCallback(
+    (mode: SearchMode) => () => setSelectedSearchMode(mode),
+    [],
+  )
+
   const handleOptionChange = useInputHandler(id => {
+    if (!options) return
+
     const newSelected = options.find(option => String(option.id) === id)
+
+    if (!newSelected) return
 
     setSelected(
       multiple
@@ -40,6 +131,8 @@ const Combobox = ({
           }
         : [newSelected],
     )
+
+    if (!multiple) setOpen(false)
   })
 
   const handleDeleteClick = useCallback<MouseEventHandler<HTMLButtonElement>>(
@@ -54,44 +147,117 @@ const Combobox = ({
     [],
   )
 
+  const handleActionResult = useHandleAction(
+    async ({ setError, setSuccess }) => {
+      try {
+        await refetch()
+
+        await setSuccess()
+      } catch (error) {
+        await setError()
+      }
+    },
+  )
+
+  const handleClickOutside = useCallback((event: MouseEvent) => {
+    // Cierra el componente si el click es fuera del propio elemento
+    if (
+      comboboxLayoutRef.current &&
+      !comboboxLayoutRef.current.contains(event.target as Node)
+    )
+      setOpen(false)
+  }, [])
+
+  useEffect(() => {
+    document.addEventListener('mousedown', handleClickOutside)
+
+    return () => document.removeEventListener('mousedown', handleClickOutside)
+  }, [handleClickOutside])
+
   return (
-    <ComboboxLayout
-      {...{ basicProps }}
-      selection={
+    <div
+      ref={comboboxLayoutRef}
+      className={classList(
+        'cmp-combobox',
+        'control',
+        long || (multiple ? 'l' : 'm'),
+        { open },
+      )}
+      onMouseEnter={handleEnter}
+    >
+      <small className="label">{labelContent}</small>
+      <header className="box" title={inputTitle} onClick={handleToggleClick}>
         <div className="selected-items">
-          {selected.map(({ id, title }) => (
-            <div key={id} className="item">
-              <p>{title}</p>
+          {selected.map(item => (
+            <div key={item.id} className="item">
+              <p>{item[selectedSearchMode]}</p>
               <Button
                 title="Eliminar"
                 faIcon="fa-solid fa-xmark"
-                name={String(id)}
+                name={String(item.id)}
                 type="button"
                 hideText
+                _type="secondary"
                 onClick={handleDeleteClick}
               />
             </div>
           ))}
         </div>
-      }
-      fieldset={
-        <fieldset className="drop-down">
-          {sortedOptions?.map(({ id, title }) => (
-            <label key={id} className="option">
-              {title}
-              <input
-                type={multiple ? 'checkbox' : 'radio'}
-                value={id}
-                name={name}
-                checked={selected.some(item => item.id === id)}
-                // BUG: si se usa {...{ required }} y es true, dará un error al no ser focusable
-                onChange={handleOptionChange}
+        <div className="arrow">
+          <Icon faIcon="fa-solid fa-angle-down" />
+        </div>
+      </header>
+      <div className="drop-down">
+        <header>
+          {searchModeTitles.length !== 0 && (
+            <fieldset>
+              {searchModeTitles.map(({ mode, title }) => (
+                <label key={mode}>
+                  {title}
+                  <input
+                    type="radio"
+                    name={`searchMode-${name}`}
+                    checked={selectedSearchMode === mode}
+                    onChange={handleSearchModeChange(mode)}
+                  />
+                </label>
+              ))}
+            </fieldset>
+          )}
+          <div className="search">
+            <input
+              className="box input"
+              value={search}
+              placeholder="Buscar ..."
+              onChange={handleSearchChange}
+            />
+            <StateButton
+              text="Actualizar opciones"
+              hiddenText
+              faIcon="fa-solid fa-rotate"
+              {...handleActionResult}
+            />
+          </div>
+        </header>
+        {isVoid ? (
+          <div className="void">
+            <Icon faIcon="fa-solid fa-frog" />
+          </div>
+        ) : (
+          <fieldset className="drop-down">
+            {sortedOptions?.map(option => (
+              <Option
+                key={option.id!.value}
+                checked={selected.some(item => item.id === option.id!.value)}
+                fields={option}
+                handleChange={handleOptionChange}
+                {...{ name, required, multiple, selectedSearchMode }}
               />
-            </label>
-          ))}
-        </fieldset>
-      }
-    />
+            ))}
+          </fieldset>
+        )}
+      </div>
+    </div>
   )
 }
 

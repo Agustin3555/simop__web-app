@@ -1,7 +1,6 @@
 import './FetchRef.css'
 import { Button } from '@/components'
-import { GetOneProvider } from '@/services/config'
-import { Ref } from '@/types'
+import { GetOneProvider, Ref } from '@/services/config'
 
 interface FetchRefProps extends GetOneProvider, Ref {}
 

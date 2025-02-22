@@ -1,12 +1,13 @@
-import { Entity, EntityKey } from '@/services/config'
+import { Entity } from '@/services/config'
 import { Color, ForView, PropScheme } from './utils'
 import { Checkbox } from '../../components'
 import { Column, Row } from '@tanstack/react-table'
 import { classList } from '@/helpers'
 
-export class BooleanProp<T extends EntityKey> implements PropScheme {
+export class BooleanProp implements PropScheme {
+  key = ''
+
   constructor(
-    public key: T,
     public title: string,
 
     public config?: {

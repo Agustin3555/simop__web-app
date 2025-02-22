@@ -5,7 +5,7 @@ import {
   TextProp,
 } from '../services/config'
 
-type ScalarProps<T> = Record<keyof T, PropScheme<keyof T>>
+type ScalarProps<T> = Record<keyof T, PropScheme>
 
 interface CommonFields {
   id: unknown
@@ -14,17 +14,17 @@ interface CommonFields {
 }
 
 export const COMMON_PROPS: ScalarProps<CommonFields> = {
-  id: new NumberProp('id', 'ID', {
+  id: new NumberProp('ID', {
     field: {
       hidden: true,
     },
   }),
-  creado: new DateTimeProp('creado', 'Creación del recurso', {
+  creado: new DateTimeProp('Creación del recurso', {
     field: {
       hidden: true,
     },
   }),
-  modificado: new DateTimeProp('modificado', 'Modificación del recurso', {
+  modificado: new DateTimeProp('Modificación del recurso', {
     field: {
       hidden: true,
     },
@@ -36,7 +36,7 @@ interface TipoFields extends CommonFields {
 }
 
 export const TIPO_PROPS: ScalarProps<TipoFields> = {
-  nombre: new TextProp('nombre', 'Nombre', {
+  nombre: new TextProp('Nombre', {
     field: {
       required: true,
     },

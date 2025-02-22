@@ -1,4 +1,4 @@
-import { Entity, Service } from '@/services/config'
+import { Entity, EntityKey, Service } from '@/services/config'
 import { PropScheme } from './utils'
 
 // interface RefConfig
@@ -13,7 +13,7 @@ import { PropScheme } from './utils'
 
 export type RefreshRate = 'high' | 'medium' | 'low'
 
-export interface Scheme<T = Entity> {
+export interface Scheme<E = Entity> {
   key: string
   service: Service
   refreshRate?: RefreshRate
@@ -25,6 +25,12 @@ export interface Scheme<T = Entity> {
 
   groups: {
     title?: string
-    props: Record<keyof T, PropScheme<keyof T>>
+    props: Record<keyof E, PropScheme>
   }[]
 }
+
+export const getFlatProps = (scheme: Scheme) =>
+  scheme.groups.reduce(
+    (acc, { props }) => ({ ...acc, ...props }),
+    {} as Record<EntityKey, PropScheme>,
+  )

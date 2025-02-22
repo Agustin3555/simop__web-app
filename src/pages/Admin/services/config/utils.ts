@@ -7,7 +7,7 @@ import {
   FilterFn,
   Row,
 } from '@tanstack/react-table'
-import { Entity, EntityKey } from '@/services/config'
+import { Entity } from '@/services/config'
 
 export type Color = 'blue' | 'green' | 'yellow' | 'red' | 'grey'
 
@@ -21,15 +21,15 @@ export interface Required {
 }
 
 /*
-  El scheme se debe obtener desde un método para evitar el problema de
-  referencias circulares.
+  El scheme se debe obtener desde un método para evitar el problema de referencias
+  circulares.
 */
 export interface GetScheme {
   getScheme: () => Scheme
 }
 
-export interface PropScheme<T = EntityKey, E = Entity> {
-  key: T
+export interface PropScheme<E = Entity> {
+  key: string
   title?: string
   config?: unknown
 

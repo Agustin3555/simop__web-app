@@ -4,9 +4,7 @@ import { useLabel } from '@/hooks'
 import { Control } from '@/types'
 import { classList } from '@/helpers'
 
-interface Props extends InputHTMLAttributes<HTMLInputElement>, Control {
-  hideLabel?: boolean
-}
+interface Props extends InputHTMLAttributes<HTMLInputElement>, Control {}
 
 const Input = ({
   name,
@@ -16,14 +14,14 @@ const Input = ({
   long = 'm',
   ...rest
 }: Props) => {
-  const { content, controlTitle } = useLabel({ title, required })
+  const { labelContent, inputTitle } = useLabel({ title, required })
 
   return (
     <div className={classList('cmp-input', 'control', long)}>
-      {!hideLabel && <label className="label">{content}</label>}
+      {!hideLabel && <label className="label">{labelContent}</label>}
       <input
         className="input box"
-        title={controlTitle}
+        title={inputTitle}
         {...{ name, required }}
         {...rest}
       />

@@ -16,14 +16,14 @@ const InputArea = ({
   long = 'l',
   ...rest
 }: Props) => {
-  const { content, controlTitle } = useLabel({ title, required })
+  const { labelContent, inputTitle } = useLabel({ title, required })
 
   return (
     <div className={classList('cmp-text-area', 'control', long)}>
-      {!hideLabel && <label className="label">{content}</label>}
+      {!hideLabel && <label className="label">{labelContent}</label>}
       <textarea
         className="text box input"
-        title={controlTitle}
+        title={inputTitle}
         {...{ name, required }}
         {...rest}
       />

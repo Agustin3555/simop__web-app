@@ -1,12 +1,11 @@
 import './Checkbox.css'
-import { InputHTMLAttributes, useEffect, useState } from 'react'
+import { InputHTMLAttributes, useState } from 'react'
 import { useLabel } from '@/hooks'
 import { Icon } from '@/components'
 import { Control } from '@/types'
 import { classList } from '@/helpers'
 
 interface CheckboxProps extends InputHTMLAttributes<HTMLInputElement>, Control {
-  hideLabel?: boolean
   falseText?: string
   trueText?: string
 }
@@ -14,13 +13,13 @@ interface CheckboxProps extends InputHTMLAttributes<HTMLInputElement>, Control {
 const Checkbox = ({
   name,
   title,
-  falseText = 'No',
-  trueText = 'Si',
   hideLabel = false,
   long = 's',
+  falseText = 'No',
+  trueText = 'Si',
   ...rest
 }: CheckboxProps) => {
-  const { content, controlTitle } = useLabel({ title })
+  const { labelContent, inputTitle } = useLabel({ title })
   const [firstChange, setFirstChange] = useState(false)
 
   const handleChange = () => setFirstChange(true)
@@ -29,12 +28,12 @@ const Checkbox = ({
     <div className={classList('cmp-checkbox', 'control', long)}>
       {!hideLabel && (
         <label htmlFor={name} className="label">
-          {content}
+          {labelContent}
         </label>
       )}
       <div className="box">
         <input
-          title={controlTitle}
+          title={inputTitle}
           type="checkbox"
           {...{ name }}
           onChange={handleChange}

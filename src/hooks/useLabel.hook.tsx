@@ -1,25 +1,22 @@
 import { useMemo } from 'react'
+import { Control } from '@/types'
 
-export interface UseLabelProps {
-  title: string
-  required?: boolean
-}
-
-// TODO: debería ser un componente
-
-export const useLabel = ({ title, required = false }: UseLabelProps) => {
-  const controlTitle = useMemo(
+export const useLabel = ({
+  title,
+  required,
+}: Pick<Control, 'title' | 'required'>) => {
+  const inputTitle = useMemo(
     () => (required ? `${title} (requerido)` : title),
     [required, title],
   )
 
   return {
-    content: (
+    labelContent: (
       <>
         {title}
         {required && <span>*</span>}
       </>
     ),
-    controlTitle,
+    inputTitle,
   }
 }

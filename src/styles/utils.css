@@ -61,7 +61,6 @@
   text-wrap: pretty;
 
   strong {
-    font-weight: 700;
     color: var(--pal-color-b-d2);
   }
 }

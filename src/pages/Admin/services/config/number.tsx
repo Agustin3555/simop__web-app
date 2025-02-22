@@ -1,12 +1,13 @@
-import { Entity, EntityKey } from '@/services/config'
+import { Entity } from '@/services/config'
 import { ForView, PropScheme, Required } from './utils'
 import { Input } from '@/components'
 import { BuiltInFilterFn, Column, Row } from '@tanstack/react-table'
 import { NumberFilter } from '../../components'
 
-export class NumberProp<T extends EntityKey> implements PropScheme {
+export class NumberProp implements PropScheme {
+  key = ''
+
   constructor(
-    public key: T,
     public title: string,
 
     public config?: {

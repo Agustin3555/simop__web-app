@@ -1,26 +1,30 @@
-import { Entity, EntityKey } from '@/services/config'
+import { Entity, Ref } from '@/services/config'
 import { ForView, GetScheme, PropScheme, Required } from './utils'
 import { Combobox, FetchRef, TextFilter } from '../../components'
-import { Ref } from '@/types'
 import { AccessorFn, Column, Row } from '@tanstack/react-table'
 
-export class RefProp<T extends EntityKey> implements PropScheme {
-  baseKey: T
+export class RefProp implements PropScheme {
+  private _key = ''
+  private _keyId = ''
 
   constructor(
-    public key: T,
-
     public config: GetScheme & {
       // column?: ForView,
       field?: ForView & Required
     },
-  ) {
-    this.key = `${key}Id` as T
-    this.baseKey = key
+  ) {}
+
+  get key() {
+    return this._key
+  }
+
+  set key(value) {
+    this._key = value
+    this._keyId = `${value}Id`
   }
 
   getFieldComponent = () => {
-    const { key, config } = this
+    const { _keyId, config } = this
     const { getScheme, field } = config
     const { hidden, required } = field ?? {}
 
@@ -28,17 +32,17 @@ export class RefProp<T extends EntityKey> implements PropScheme {
 
     const scheme = getScheme()
 
-    return <Combobox key={key} name={key} {...{ scheme, required }} />
+    return <Combobox key={_keyId} name={_keyId} {...{ scheme, required }} />
   }
 
   getFieldValue = (formData: FormData) => {
-    const { key, config } = this
+    const { _keyId, config } = this
     const { field } = config ?? {}
     const { hidden } = field ?? {}
 
     if (hidden === true) return
 
-    const value = formData.get(key)
+    const value = formData.get(_keyId)
 
     if (value === null) return
 
@@ -46,9 +50,9 @@ export class RefProp<T extends EntityKey> implements PropScheme {
   }
 
   accessorFn: AccessorFn<Entity> = row => {
-    const { baseKey } = this
+    const { key } = this
 
-    const { title = '' } = (row[baseKey] as Ref) ?? {}
+    const { title = '' } = (row[key] as Ref) ?? {}
 
     return title
   }
@@ -71,11 +75,11 @@ export class RefProp<T extends EntityKey> implements PropScheme {
   }
 
   getCellComponent = (row: Row<Entity>) => {
-    const { baseKey, config } = this
+    const { key, config } = this
     const { getScheme } = config ?? {}
 
     const { getOne } = getScheme().service
-    const value = row.original[baseKey] as Ref | undefined
+    const value = row.original[key] as Ref | undefined
 
     return value && <FetchRef {...value} {...{ getOne }} />
   }

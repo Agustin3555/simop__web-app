@@ -56,7 +56,7 @@ const HydratedLocalAdd = () => {
       <form onSubmit={handleSubmit}>
         <div className="field-groups">
           {fieldGroups.map(({ title, fields }, index) => (
-            <div key={title || index} className="group">
+            <div key={index} className="group">
               {title && <small>{title}</small>}
               <div className="fields">{fields.map(item => item)}</div>
             </div>
