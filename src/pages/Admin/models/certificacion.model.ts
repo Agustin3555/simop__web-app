@@ -12,7 +12,7 @@ import { COMMON_PROPS } from '../constants/commonProps.const'
 
 export interface RawEntity {
   id: number
-  numeroExpediente: number
+  numeroExpediente: string
   fecha: string
   monto: number
   observaciones: string
@@ -25,7 +25,7 @@ export interface RawEntity {
 
 export interface Entity {
   id: number
-  numeroExpediente: number
+  numeroExpediente: string
   fecha: string
   monto: number
   observaciones: string
@@ -48,7 +48,7 @@ export interface Ref {
 
 export interface CreateData {
   id: number
-  numeroExpediente: number
+  numeroExpediente: string
   fecha: string
   monto: number
   observaciones: string
@@ -58,7 +58,7 @@ export interface CreateData {
 
 export interface CreateBody {
   id: number
-  numeroExpediente: number
+  numeroExpediente: string
   fecha: string
   monto: number
   observaciones: string

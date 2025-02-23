@@ -55,7 +55,7 @@ const Combobox = ({
     queryFn: async () => {
       const options = await service.getForConnect!()
 
-      setSearchModes(Object.keys(options[0]))
+      if (options.length !== 0) setSearchModes(Object.keys(options[0]))
 
       return options
     },
@@ -77,7 +77,7 @@ const Combobox = ({
   )
 
   const sortedOptions = useMemo(() => {
-    if (!options) return
+    if (!options || searchModes.length === 0) return
 
     const sorted = sort(
       search.trim().toLowerCase(),
@@ -247,8 +247,8 @@ const Combobox = ({
           <fieldset className="drop-down">
             {sortedOptions?.map(option => (
               <Option
-                key={option.id!.value}
-                checked={selected.some(item => item.id === option.id!.value)}
+                key={option.id.value}
+                checked={selected.some(item => item.id === option.id.value)}
                 fields={option}
                 handleChange={handleOptionChange}
                 {...{ name, required, multiple, selectedSearchMode }}

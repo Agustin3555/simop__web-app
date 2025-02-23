@@ -1,26 +1,32 @@
 import { InputAdapter, OutputAdapter } from '@/adapters/config'
-import { AmpliacionModel } from '../models'
+import { CertificacionModel } from '../models'
 
 export const getAll: {
-  output: OutputAdapter<AmpliacionModel.RawEntity[], AmpliacionModel.Entity[]>
+  output: OutputAdapter<
+    CertificacionModel.RawEntity[],
+    CertificacionModel.Entity[]
+  >
 } = {
   output: response => response,
 }
 
 export const getForConnect: {
-  output: OutputAdapter<AmpliacionModel.RawRef[], AmpliacionModel.Ref[]>
+  output: OutputAdapter<CertificacionModel.RawRef[], CertificacionModel.Ref[]>
 } = {
   output: response => response,
 }
 
 export const getOne: {
-  output: OutputAdapter<AmpliacionModel.RawEntity, AmpliacionModel.Entity>
+  output: OutputAdapter<CertificacionModel.RawEntity, CertificacionModel.Entity>
 } = {
   output: response => response,
 }
 
 export const create: {
-  input: InputAdapter<AmpliacionModel.CreateData, AmpliacionModel.CreateBody>
+  input: InputAdapter<
+    CertificacionModel.CreateData,
+    CertificacionModel.CreateBody
+  >
 } = {
   input: data => data,
 }

@@ -63,16 +63,16 @@ export const scheme: Scheme<Entity> = {
   groups: [
     {
       props: {
-        empresa: new RefProp( {
+        empresa: new RefProp({
           getScheme: () => EmpresaModel.scheme,
         }),
-        representante: new RefProp( {
+        representante: new RefProp({
           getScheme: () => RepresentanteModel.scheme,
         }),
-        tipoRepresentante: new RefProp(, {
+        tipoRepresentante: new RefProp({
           getScheme: () => TipoRepresentanteModel.scheme,
         }),
-        vigencia: new BooleanProp( 'Vigencia', {
+        vigencia: new BooleanProp('Vigencia', {
           falseText: 'No Vigente',
           trueText: 'Vigente',
         }),

@@ -30,15 +30,13 @@ import {
   Redeterminacion,
   Ampliacion,
   Modificacion,
-  // ModificacionObra,
-  // ParalizacionObra,
-  // Tramite,
   Paralizacion,
   Recepcion,
   Rescision,
   Certificacion,
   PagoCertificacion,
 } from '../../views'
+
 const Content = () => (
   <div className="cmp-content">
     <SubSecretaria />
@@ -48,39 +46,34 @@ const Content = () => (
     <Provincia />
     <Localidad />
     <TipoProfesion />
-    <Inspector />
     <TipoInspector />
-    <Representante />
     <TipoRepresentante />
+    <TipoContratacionObra />
+    <TipoFinanciamientoObra />
+    <TipoProgramaObra />
+    <TipoTematicaObra />
+    <TipoEstadoObra />
+    <TipoRedeterminacion />
+    <TipoModificacion />
+    <TipoParalizacion />
+    <TipoRescision />
+    <TipoRecepcion />
+    <Inspector />
+    <Representante />
     <Empresa />
     <RepresentanteEmpresa />
     <Obra />
     <RepresentanteObra />
     <InspectorObra />
-    <TipoContratacionObra />
-    <TipoFinanciamientoObra />
-    <TipoProgramaObra />
-    <TipoParalizacion />
-    <TipoTematicaObra />
-    <TipoEstadoObra />
-    <TipoRescision />
-    <TipoRedeterminacion />
-    <TipoRecepcion />
-    <TipoModificacion />
+    <FojaMedicion />
+    <Certificacion />
+    <PagoCertificacion />
     <Redeterminacion />
     <Ampliacion />
     <Modificacion />
     <Paralizacion />
     <Rescision />
     <Recepcion />
-
-    {/* <ModificacionObra /> */}
-    {/* <ParalizacionObra /> */}
-    {/* <Tramite /> */}
-
-    <FojaMedicion />
-    <Certificacion />
-    <PagoCertificacion />
   </div>
 )
 

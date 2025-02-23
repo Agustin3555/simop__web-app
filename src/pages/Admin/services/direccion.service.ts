@@ -13,16 +13,16 @@ export const DireccionService: Service<DireccionModel.Entity> = {
     return DireccionAdapter.getAll.output(response.data)
   },
 
-  getOne: async id => {
-    const response = await publicInstance.get(collection(id))
-
-    return DireccionAdapter.getOne.output(response.data)
-  },
-
   getForConnect: async () => {
     const response = await publicInstance.get(collection('for-connect'))
 
     return DireccionAdapter.getForConnect.output(response.data)
+  },
+
+  getOne: async id => {
+    const response = await publicInstance.get(collection(id))
+
+    return DireccionAdapter.getOne.output(response.data)
   },
 
   create: async (data: DireccionModel.CreateData) => {
