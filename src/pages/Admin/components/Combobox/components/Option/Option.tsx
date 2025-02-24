@@ -39,7 +39,6 @@ const Option = ({
         ))}
       </ul>
       <input
-        id={String(fields.id.value)}
         type={multiple ? 'checkbox' : 'radio'}
         value={fields.id.value}
         onChange={handleChange}

@@ -43,7 +43,7 @@ export const scheme: Scheme<Entity> = {
     singular: 'Tipo de Modificación',
     plural: 'Tipos de Modificaciones',
   },
-  refAnchorField: 'Nombre',
+  anchorField: 'nombre',
 
   groups: [
     {

@@ -43,7 +43,7 @@ export const scheme: Scheme<Entity> = {
     singular: 'Tipo de Estado de Obra',
     plural: 'Tipos de Estados de Obra',
   },
-  refAnchorField: 'Nombre',
+  anchorField: 'nombre',
 
   groups: [
     {

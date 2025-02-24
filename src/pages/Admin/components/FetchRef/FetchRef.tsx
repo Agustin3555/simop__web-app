@@ -2,7 +2,9 @@ import './FetchRef.css'
 import { Button } from '@/components'
 import { GetOneProvider, Ref } from '@/services/config'
 
-interface FetchRefProps extends GetOneProvider, Ref {}
+interface FetchRefProps extends GetOneProvider, Ref {
+  title: string
+}
 
 const FetchRef = ({ id, title, getOne }: FetchRefProps) => {
   return (

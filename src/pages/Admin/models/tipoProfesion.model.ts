@@ -47,7 +47,7 @@ export const scheme: Scheme<Entity> = {
     singular: 'Tipo de Profesión',
     plural: 'Tipos de Profesiones',
   },
-  refAnchorField: 'Nombre',
+  anchorField: 'nombre',
 
   groups: [
     {

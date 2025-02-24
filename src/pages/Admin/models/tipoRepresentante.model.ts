@@ -41,7 +41,7 @@ export const scheme: Scheme<Entity> = {
     singular: 'Tipo de Representante',
     plural: 'Tipos de Representantes',
   },
-  refAnchorField: 'Nombre',
+  anchorField: 'nombre',
 
   groups: [
     {

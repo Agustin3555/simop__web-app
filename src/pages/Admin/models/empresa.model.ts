@@ -77,6 +77,7 @@ export const scheme: Scheme<Entity> = {
     singular: 'Empresa',
     plural: 'Empresas',
   },
+  anchorField: 'nombre',
 
   groups: [
     {

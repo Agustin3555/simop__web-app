@@ -193,6 +193,7 @@ export const scheme: Scheme<Entity> = {
     singular: 'Obra',
     plural: 'Obras',
   },
+  anchorField: 'nombre',
 
   groups: [
     {

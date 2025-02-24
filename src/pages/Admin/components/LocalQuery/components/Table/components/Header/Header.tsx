@@ -42,7 +42,7 @@ const Header = ({
 }: Props) => {
   const { column } = header
   const { getIsSorted, getSortIndex } = column
-  const { getHeader } = flatProps[column.id]
+  const { getHeader } = flatProps[column.id] ?? {}
 
   const [dragging, setDragging] = useState(false)
 

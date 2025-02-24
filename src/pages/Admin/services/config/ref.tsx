@@ -1,11 +1,12 @@
-import { Entity, Ref } from '@/services/config'
+import { Entity } from '@/services/config'
 import { ForView, GetScheme, PropScheme, Required } from './utils'
 import { Combobox, FetchRef, TextFilter } from '../../components'
 import { AccessorFn, Column, Row } from '@tanstack/react-table'
+import { getFlatProps } from './scheme'
 
 export class RefProp implements PropScheme {
-  private _key = ''
-  private _keyId = ''
+  _key = ''
+  verboseKey = ''
 
   constructor(
     public config: GetScheme & {
@@ -14,17 +15,17 @@ export class RefProp implements PropScheme {
     },
   ) {}
 
-  get key() {
+  public get key() {
     return this._key
   }
 
-  set key(value) {
+  public set key(value: string) {
     this._key = value
-    this._keyId = `${value}Id`
+    this.verboseKey = `${value}Id`
   }
 
   getFieldComponent = () => {
-    const { _keyId, config } = this
+    const { verboseKey, config } = this
     const { getScheme, field } = config
     const { hidden, required } = field ?? {}
 
@@ -32,17 +33,19 @@ export class RefProp implements PropScheme {
 
     const scheme = getScheme()
 
-    return <Combobox key={_keyId} name={_keyId} {...{ scheme, required }} />
+    return (
+      <Combobox key={verboseKey} name={verboseKey} {...{ scheme, required }} />
+    )
   }
 
   getFieldValue = (formData: FormData) => {
-    const { _keyId, config } = this
+    const { verboseKey, config } = this
     const { field } = config ?? {}
     const { hidden } = field ?? {}
 
     if (hidden === true) return
 
-    const value = formData.get(_keyId)
+    const value = formData.get(verboseKey)
 
     if (value === null) return
 
@@ -50,17 +53,22 @@ export class RefProp implements PropScheme {
   }
 
   accessorFn: AccessorFn<Entity> = row => {
-    const { key } = this
+    const { key, config } = this
+    const { getScheme } = config
 
-    const { title = '' } = (row[key] as Ref) ?? {}
+    const scheme = getScheme()
+    const { anchorField } = scheme
 
-    return title
+    return row[key]?.[anchorField]
   }
 
   getHeader = (column: Column<Entity>) => {
     const { config } = this
     const { getScheme } = config
-    const { title, refAnchorField } = getScheme()
+
+    const scheme = getScheme()
+    const { title, anchorField } = scheme
+    const flatProps = getFlatProps(scheme)
 
     const { getFacetedUniqueValues, getFilterValue, setFilterValue } = column
     const filterValue = getFilterValue()
@@ -71,16 +79,26 @@ export class RefProp implements PropScheme {
       />
     )
 
-    return { title: title.singular, subtitle: refAnchorField, filter }
+    return {
+      title: title.singular,
+      subtitle: flatProps[anchorField].title,
+      filter,
+    }
   }
 
   getCellComponent = (row: Row<Entity>) => {
     const { key, config } = this
     const { getScheme } = config ?? {}
 
-    const { getOne } = getScheme().service
-    const value = row.original[key] as Ref | undefined
+    const { service, anchorField } = getScheme()
+    const { getOne } = service
 
-    return value && <FetchRef {...value} {...{ getOne }} />
+    const value = row.original[key] as any | undefined
+
+    return (
+      value && (
+        <FetchRef id={value.id} title={value[anchorField]} {...{ getOne }} />
+      )
+    )
   }
 }

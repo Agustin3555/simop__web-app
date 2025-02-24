@@ -59,6 +59,7 @@ export const scheme: Scheme<Entity> = {
     singular: 'Representante de Empresa',
     plural: 'Representantes de Empresa',
   },
+  anchorField: 'id',
 
   groups: [
     {

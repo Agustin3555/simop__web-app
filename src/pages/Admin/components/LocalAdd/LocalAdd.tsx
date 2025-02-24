@@ -28,10 +28,10 @@ const HydratedLocalAdd = () => {
     async ({ form, formData, setError, setSuccess }) => {
       try {
         const createData = groups.reduce((acc, { props }) => {
-          Object.values(props).forEach(({ key, getFieldValue }) => {
+          Object.values(props).forEach(({ key, verboseKey, getFieldValue }) => {
             const value = getFieldValue(formData, form)
 
-            if (value !== undefined) acc[key as keyof typeof acc] = value
+            if (value !== undefined) acc[verboseKey || key] = value
           })
 
           return acc

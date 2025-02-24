@@ -30,6 +30,7 @@ export interface GetScheme {
 
 export interface PropScheme<E = Entity> {
   key: string
+  verboseKey?: string
   title?: string
   config?: unknown
 

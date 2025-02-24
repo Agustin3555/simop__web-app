@@ -34,7 +34,7 @@ const Combobox = ({
   multiple = false,
   scheme,
 }: ComboboxProps) => {
-  const { key, title: schemeTitle, service, refreshRate } = scheme
+  const { key, service, refreshRate, title: schemeTitle, anchorField } = scheme
 
   const { labelContent, inputTitle } = useLabel({
     title: title || schemeTitle.singular,
@@ -45,7 +45,7 @@ const Combobox = ({
   const [open, setOpen] = useState(false)
   const [search, setSearch] = useState('')
   const [searchModes, setSearchModes] = useState<SearchMode[]>([])
-  const [selectedSearchMode, setSelectedSearchMode] = useState<SearchMode>('id')
+  const [selectedSearchMode, setSelectedSearchMode] = useState(anchorField)
   const [selected, setSelected] = useState<Partial<Entity>[]>([])
   const comboboxLayoutRef = useRef<HTMLDivElement>(null)
 
@@ -104,7 +104,7 @@ const Combobox = ({
 
   const handleEnter = useCallback(() => setEnabled(true), [])
 
-  const handleSearchChange = useInputHandler(newValue => setSearch(newValue))
+  const handleSearchChange = useInputHandler(value => setSearch(value))
 
   const handleToggleClick = useCallback(() => setOpen(prev => !prev), [])
 
@@ -113,20 +113,20 @@ const Combobox = ({
     [],
   )
 
-  const handleOptionChange = useInputHandler(id => {
+  const handleOptionChange = useInputHandler(value => {
     if (!options) return
 
-    const newSelected = options.find(option => String(option.id) === id)
+    const newSelected = options.find(option => String(option.id) === value)
 
     if (!newSelected) return
 
     setSelected(
       multiple
         ? prev => {
-            const exists = prev.some(item => item.id === Number(id))
+            const exists = prev.some(item => item.id === Number(value))
 
             return exists
-              ? prev.filter(item => item.id !== Number(id))
+              ? prev.filter(item => item.id !== Number(value))
               : [...prev, newSelected]
           }
         : [newSelected],

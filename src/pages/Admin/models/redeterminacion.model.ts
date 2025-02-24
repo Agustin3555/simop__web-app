@@ -94,7 +94,7 @@ export const scheme: Scheme<Entity> = {
     singular: 'Redeterminación',
     plural: 'Redeterminaciones',
   },
-  refAnchorField: 'Nombre',
+  anchorField: 'numeroExpediente',
 
   groups: [
     {

@@ -88,7 +88,7 @@ export const scheme: Scheme<Entity> = {
     singular: 'Ampliación',
     plural: 'Ampliaciones',
   },
-  refAnchorField: 'Nombre',
+  anchorField: 'numeroExpedienteSolicitud',
 
   groups: [
     {

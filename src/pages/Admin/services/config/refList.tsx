@@ -1,7 +1,8 @@
-import { Entity, Ref } from '@/services/config'
+import { Entity } from '@/services/config'
 import { ForView, GetScheme, PropScheme, Required } from './utils'
 import { Combobox, FetchRef } from '../../components'
 import { Column, Row } from '@tanstack/react-table'
+import { getFlatProps } from './scheme'
 
 /*
   Solamente para controlar los vínculos de uno a muchos que no tengan atributos
@@ -47,26 +48,37 @@ export class RefListProp implements PropScheme {
   getHeader = (column: Column<Entity>) => {
     const { config } = this
     const { getScheme } = config
-    const { title, refAnchorField } = getScheme()
+
+    const scheme = getScheme()
+    const { title, anchorField } = scheme
+    const flatProps = getFlatProps(scheme)
 
     const filter = undefined
 
-    return { title: title.plural, subtitle: refAnchorField, filter }
+    return {
+      title: title.plural,
+      subtitle: flatProps[anchorField].title,
+      filter,
+    }
   }
 
   getCellComponent = (row: Row<Entity>) => {
     const { key, config } = this
     const { getScheme } = config ?? {}
 
-    const { getOne } = getScheme().service
-    const value = row.original[key] as Ref[]
+    const { service, anchorField } = getScheme()
+    const { getOne } = service
+
+    const value = row.original[key] as any[] | undefined
 
     return (
-      <div className="items">
-        {value.map(item => (
-          <FetchRef {...item} {...{ getOne }} />
-        ))}
-      </div>
+      value && (
+        <div className="items">
+          {value.map(item => (
+            <FetchRef id={item.id} title={item[anchorField]} {...{ getOne }} />
+          ))}
+        </div>
+      )
     )
   }
 }

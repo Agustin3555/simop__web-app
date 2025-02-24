@@ -21,7 +21,7 @@ export interface Scheme<E = Entity> {
     singular: string
     plural: string
   }
-  refAnchorField?: string
+  anchorField: keyof E
 
   groups: {
     title?: string

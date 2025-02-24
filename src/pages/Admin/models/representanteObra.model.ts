@@ -58,6 +58,7 @@ export const scheme: Scheme<Entity> = {
     singular: 'Representante de Obra',
     plural: 'Representantes de Obra',
   },
+  anchorField: 'id',
 
   groups: [
     {
