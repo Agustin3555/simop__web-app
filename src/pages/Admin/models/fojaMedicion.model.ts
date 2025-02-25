@@ -92,9 +92,6 @@ export const scheme: Scheme<Entity> = {
       props: {
         obra: new RefProp({
           getScheme: () => ObraModel.scheme,
-          field: {
-            required: true,
-          },
         }),
         numeroExpediente: new TextProp('Numero de Expediente de la foja', {
           field: {
@@ -110,17 +107,10 @@ export const scheme: Scheme<Entity> = {
           decimal: true,
           sub: '%',
         }),
-        fecha: new DateProp('Fecha', {
-          field: {
-            required: true,
-          },
-        }),
+        fecha: new DateProp('Fecha', {}),
 
         inspector: new RefProp({
           getScheme: () => InspectorModel.scheme,
-          field: {
-            required: true,
-          },
         }),
         observaciones: new TextLongProp('Observaciones'),
         ...COMMON_PROPS,

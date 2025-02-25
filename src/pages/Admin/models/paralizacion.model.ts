@@ -89,7 +89,7 @@ export const scheme: Scheme<Entity> = {
   groups: [
     {
       props: {
-        numero: new NumberProp('Número', {
+        numero: new NumberProp('Número de Paralización', {
           field: {
             required: true,
           },
@@ -99,13 +99,9 @@ export const scheme: Scheme<Entity> = {
             required: true,
           },
         }),
-        fechaReinicio: new DateProp('Fecha Reinicio', {
-          field: { required: true },
-        }),
-        nuevaFechaFinObra: new DateProp('Nueva Fecha Fin de Obra', {
-          field: { required: true },
-        }),
-        fecha: new DateProp('Fecha', { field: { required: true } }),
+        fechaReinicio: new DateProp('Fecha Reinicio', {}),
+        nuevaFechaFinObra: new DateProp('Nueva Fecha Fin de Obra', {}),
+        fecha: new DateProp('Fecha'),
 
         observaciones: new TextLongProp('Observaciones'),
 

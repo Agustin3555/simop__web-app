@@ -93,7 +93,11 @@ export const scheme: Scheme<Entity> = {
   groups: [
     {
       props: {
-        numero: new NumberProp('Número', {
+        obra: new RefProp({
+          getScheme: () => ObraModel.scheme,
+        }),
+
+        numero: new NumberProp('Número De Ampliación', {
           field: {
             required: true,
           },
@@ -105,37 +109,16 @@ export const scheme: Scheme<Entity> = {
         }),
         numeroExpedienteSolicitud: new TextProp(
           'Número De Expediente Solicitud',
-          {
-            field: {
-              required: true,
-            },
-          },
         ),
 
-        plazoMesesSolicitado: new NumberProp('Plazo de Meses Solicitado ', {
-          field: {
-            required: true,
-          },
-        }),
+        plazoMesesSolicitado: new NumberProp('Plazo de Meses Solicitado '),
 
-        plazoMesesOtorgado: new NumberProp('Plazo de Meses Otorgado', {
-          field: {
-            required: true,
-          },
-        }),
-        nuevaFechaFinObra: new DateProp('Nueva Fecha Fin De Obra', {
-          field: {
-            required: true,
-          },
-        }),
+        plazoMesesOtorgado: new NumberProp('Plazo de Meses Otorgado'),
+        nuevaFechaFinObra: new DateProp('Nueva Fecha Fin De Obra'),
 
-        fecha: new DateProp('Fecha', { field: { required: true } }),
+        fecha: new DateProp('Fecha'),
 
         observaciones: new TextLongProp('Observaciones'),
-
-        obra: new RefProp({
-          getScheme: () => ObraModel.scheme,
-        }),
 
         ...COMMON_PROPS,
       },

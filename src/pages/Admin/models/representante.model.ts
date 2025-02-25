@@ -103,11 +103,7 @@ export const scheme: Scheme<Entity> = {
             required: true,
           },
         }),
-        numeroMatricula: new TextProp('Número de Matricula', {
-          field: {
-            required: true,
-          },
-        }),
+        numeroMatricula: new TextProp('Número de Matricula', {}),
         pais: new RefProp({
           getScheme: () => PaisModel.scheme,
         }),

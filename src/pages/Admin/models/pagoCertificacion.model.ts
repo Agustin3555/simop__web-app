@@ -81,11 +81,7 @@ export const scheme: Scheme<Entity> = {
             required: true,
           },
         }),
-        fecha: new DateProp('Fecha', {
-          field: {
-            required: true,
-          },
-        }),
+        fecha: new DateProp('Fecha'),
         monto: new NumberProp('Monto', {
           decimal: true,
           big: true,
@@ -94,9 +90,6 @@ export const scheme: Scheme<Entity> = {
 
         certificacion: new RefProp({
           getScheme: () => CertificacionModel.scheme,
-          field: {
-            required: true,
-          },
         }),
         observaciones: new TextLongProp('Observaciones'),
         ...COMMON_PROPS,

@@ -84,11 +84,7 @@ export const scheme: Scheme<Entity> = {
             required: true,
           },
         }),
-        fecha: new DateProp('Fecha', {
-          field: {
-            required: true,
-          },
-        }),
+        fecha: new DateProp('Fecha'),
         monto: new NumberProp('Monto', {
           decimal: true,
           pre: '$',
@@ -96,9 +92,6 @@ export const scheme: Scheme<Entity> = {
 
         fojaMedicion: new RefProp({
           getScheme: () => FojaMedicionModel.scheme,
-          field: {
-            required: true,
-          },
         }),
         observaciones: new TextLongProp('Observaciones'),
         ...COMMON_PROPS,

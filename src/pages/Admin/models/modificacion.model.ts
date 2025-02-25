@@ -89,37 +89,30 @@ export const scheme: Scheme<Entity> = {
   groups: [
     {
       props: {
+        obra: new RefProp({
+          getScheme: () => ObraModel.scheme,
+        }),
         numeroExpediente: new TextProp('Número De Expediente', {
           field: {
             required: true,
           },
         }),
-        numeroResolucion: new TextProp('Número De Resolución', {
-          field: {
-            required: true,
-          },
-        }),
+        numeroResolucion: new TextProp('Número De Resolución'),
         monto: new NumberProp('Monto', {
           decimal: true,
           big: true,
           pre: '$',
-          field: { required: true },
         }),
 
         nuevoMontoObra: new NumberProp('Nuevo Monto', {
           decimal: true,
           big: true,
           pre: '$',
-          field: { required: true },
         }),
 
-        fecha: new DateProp('Fecha', { field: { required: true } }),
+        fecha: new DateProp('Fecha'),
 
         observaciones: new TextLongProp('Observaciones'),
-
-        obra: new RefProp({
-          getScheme: () => ObraModel.scheme,
-        }),
 
         tipoModificacion: new RefProp({
           getScheme: () => TipoModificacionModel.scheme,

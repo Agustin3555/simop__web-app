@@ -104,43 +104,27 @@ export const scheme: Scheme<Entity> = {
             required: true,
           },
         }),
-        numeroResolucion: new TextProp('Número De Resolución', {
-          field: {
-            required: true,
-          },
-        }),
+        numeroResolucion: new TextProp('Número De Resolución'),
         numeroExpedienteCertificado: new TextProp(
           'Número De Expediente Certificado',
-          {
-            field: {
-              required: true,
-            },
-          },
         ),
         numeroExpedienteSolicitud: new TextProp(
           'Número De Expediente Solicitud',
-          {
-            field: {
-              required: true,
-            },
-          },
         ),
 
         monto: new NumberProp('Monto', {
           decimal: true,
           big: true,
           pre: '$',
-          field: { required: true },
         }),
 
         nuevoMontoObra: new NumberProp('Nuevo Monto', {
           decimal: true,
           big: true,
           pre: '$',
-          field: { required: true },
         }),
 
-        fecha: new DateProp('Fecha', { field: { required: true } }),
+        fecha: new DateProp('Fecha'),
 
         observaciones: new TextLongProp('Observaciones'),
 

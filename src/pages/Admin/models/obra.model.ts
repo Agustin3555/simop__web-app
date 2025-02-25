@@ -198,7 +198,7 @@ export const scheme: Scheme<Entity> = {
   groups: [
     {
       props: {
-        numero: new NumberProp('Número', {
+        numero: new NumberProp('Número De', {
           big: true,
           field: {
             required: true,
@@ -214,17 +214,9 @@ export const scheme: Scheme<Entity> = {
         }),
         numeroExpediente: new TextProp('Número de Expediente'),
         numeroResolucion: new TextProp('Número de Resolución'),
-        anioResolucion: new NumberProp('Año de Resolución', {
-          field: {
-            required: true,
-          },
-        }),
+        anioResolucion: new NumberProp('Año de Resolución'),
         numeroContratacion: new TextProp('Número de Contratación'),
-        anioContratacion: new NumberProp('Año de Contratación', {
-          field: {
-            required: true,
-          },
-        }),
+        anioContratacion: new NumberProp('Año de Contratación'),
         montoContratacion: new NumberProp('Monto de Contratación', {
           decimal: true,
           big: true,
