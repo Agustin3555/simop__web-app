@@ -29,7 +29,7 @@ const Option = ({
 
   return (
     <label className="cmp-option">
-      <strong>{fields[selectedSearchMode].value}</strong>
+      <strong className="text">{fields[selectedSearchMode].value}</strong>
       <ul>
         {remainingData.map(({ title, value }) => (
           <li key={title}>

@@ -2,12 +2,13 @@
   flex-shrink: 0;
 
   display: flex;
-  align-items: flex-end;
+  flex-wrap: wrap;
+  align-items: center;
   justify-content: space-between;
   gap: var(--control-padding-inline);
-  padding: var(--control-padding-inline);
+  padding-block: var(--pal-size-s);
+  padding-inline: var(--control-padding-inline);
 
-  white-space: nowrap;
   color: var(--pal-color-a-d2);
 
   cursor: pointer;
@@ -21,11 +22,14 @@
 
   > ul {
     display: flex;
+    flex-wrap: wrap;
     gap: var(--pal-size-s);
+
+    white-space: nowrap;
 
     > li {
       display: flex;
-      gap: var(--pal-size-xs);
+      gap: var(--pal-size-2xs);
 
       font-size: var(--pal-size-font-2xs);
 

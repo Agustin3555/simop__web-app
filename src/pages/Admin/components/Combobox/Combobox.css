@@ -114,8 +114,9 @@
 
       > fieldset {
         display: flex;
+        flex-wrap: wrap;
         align-items: center;
-        gap: var(--pal-size-xs);
+        gap: var(--pal-size-2xs);
         border: none;
         padding-inline: var(--control-padding-inline);
         padding-top: var(--pal-size-xs);
