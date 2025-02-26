@@ -103,11 +103,15 @@ export interface Entity {
 
 export interface RawRef {
   id: number
+
+  nombre: string
   numero: number
 }
 
 export interface Ref {
   id: number
+
+  nombre: string
   numero: number
 }
 
@@ -198,7 +202,7 @@ export const scheme: Scheme<Entity> = {
   groups: [
     {
       props: {
-        numero: new NumberProp('Número De', {
+        numero: new NumberProp('Número De Obra', {
           big: true,
           field: {
             required: true,

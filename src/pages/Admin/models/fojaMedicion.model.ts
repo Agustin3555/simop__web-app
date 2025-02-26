@@ -42,10 +42,14 @@ export interface Entity {
 
 export interface RawRef {
   id: number
+
+  numero: number
   numeroExpediente: string
 }
 export interface Ref {
   id: number
+
+  numero: number
   numeroExpediente: string
 }
 

@@ -44,11 +44,15 @@ export interface Entity {
 
 export interface RawRef {
   id: number
+
+  numeroExpediente: string
   numero: number
 }
 
 export interface Ref {
   id: number
+
+  numeroExpediente: string
   numero: number
 }
 

@@ -37,11 +37,15 @@ export interface Entity {
 
 export interface RawRef {
   id: number
+
+  cuit: number
   nombre: string
 }
 
 export interface Ref {
   id: number
+
+  cuit: number
   nombre: string
 }
 
