@@ -96,6 +96,9 @@ export const scheme: Scheme<Entity> = {
       props: {
         obra: new RefProp({
           getScheme: () => ObraModel.scheme,
+          field: {
+            required: true,
+          },
         }),
         numeroExpediente: new TextProp('Numero de Expediente de la foja', {
           field: {

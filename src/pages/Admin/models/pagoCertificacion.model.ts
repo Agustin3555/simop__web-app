@@ -6,12 +6,14 @@ import {
   RefProp,
   DateProp,
   TextLongProp,
+  TextProp,
 } from '../services/config'
 import { PagoCertificacionService } from '../services'
 
 export interface RawEntity {
   id: number
   numero: number
+  ordenPago?: string
   monto: number
   fecha: string
   observaciones: string
@@ -25,6 +27,7 @@ export interface RawEntity {
 export interface Entity {
   id: number
   numero: number
+  ordenPago?: string
   monto: number
   fecha: string
   observaciones: string
@@ -47,6 +50,7 @@ export interface Ref {
 
 export interface CreateData {
   numero: number
+  ordenPago?: string
   fecha: string
   observaciones: string
   monto: number
@@ -56,6 +60,7 @@ export interface CreateData {
 
 export interface CreateBody {
   numero: number
+  ordenPago?: string
   fecha: string
   observaciones: string
   monto: number
@@ -81,13 +86,13 @@ export const scheme: Scheme<Entity> = {
             required: true,
           },
         }),
+        ordenPago: new TextProp('Orden de pago'),
         fecha: new DateProp('Fecha'),
         monto: new NumberProp('Monto', {
           decimal: true,
           big: true,
           pre: '$',
         }),
-
         certificacion: new RefProp({
           getScheme: () => CertificacionModel.scheme,
         }),

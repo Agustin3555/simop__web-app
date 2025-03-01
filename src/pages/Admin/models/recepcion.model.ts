@@ -77,6 +77,9 @@ export const scheme: Scheme<Entity> = {
       props: {
         obra: new RefProp({
           getScheme: () => ObraModel.scheme,
+          field: {
+            required: true,
+          },
         }),
         numeroActa: new NumberProp('Número De Acta', {
           field: {
@@ -84,13 +87,10 @@ export const scheme: Scheme<Entity> = {
           },
         }),
         fecha: new DateProp('Fecha'),
-
-        observaciones: new TextLongProp('Observaciones'),
-
         tipoRecepcion: new RefProp({
           getScheme: () => TipoRecepcionModel.scheme,
         }),
-
+        observaciones: new TextLongProp('Observaciones'),
         ...COMMON_PROPS,
       },
     },

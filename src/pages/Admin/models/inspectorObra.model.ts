@@ -69,9 +69,15 @@ export const scheme: Scheme<Entity> = {
       props: {
         obra: new RefProp({
           getScheme: () => ObraModel.scheme,
+          field: {
+            required: true,
+          },
         }),
         inspector: new RefProp({
           getScheme: () => InspectorModel.scheme,
+          field: {
+            required: true,
+          },
         }),
         tipoInspector: new RefProp({
           getScheme: () => TipoInspectorModel.scheme,

@@ -27,7 +27,7 @@ export interface RawEntity {
   numeroResolucion?: number
   anioResolucion?: string
   numeroContratacion?: number
-  anioContratacion?: number
+  fechaContratacion?: string
   montoContratacion?: number
   fechaInicio?: string
   fechaFin?: string
@@ -68,7 +68,7 @@ export interface Entity {
   numeroResolucion?: number
   anioResolucion?: string
   numeroContratacion?: number
-  anioContratacion?: number
+  fechaContratacion?: string
   montoContratacion?: number
   fechaInicio?: string
   fechaFin?: string
@@ -122,7 +122,7 @@ export interface CreateData {
   numeroResolucion?: number
   anioResolucion?: string
   numeroContratacion?: number
-  anioContratacion?: number
+  fechaContratacion?: string
   montoContratacion?: number
   fechaInicio?: string
   fechaFin?: string
@@ -159,7 +159,7 @@ export interface CreateBody {
   numeroResolucion?: number
   anioResolucion?: string
   numeroContratacion?: number
-  anioContratacion?: number
+  fechaContratacion?: string
   montoContratacion?: number
   fechaInicio?: string
   fechaFin?: string
@@ -220,7 +220,7 @@ export const scheme: Scheme<Entity> = {
         numeroResolucion: new TextProp('Número de Resolución'),
         anioResolucion: new NumberProp('Año de Resolución'),
         numeroContratacion: new TextProp('Número de Contratación'),
-        anioContratacion: new NumberProp('Año de Contratación'),
+        fechaContratacion: new DateProp('Fecha de Contratación'),
         montoContratacion: new NumberProp('Monto de Contratación', {
           decimal: true,
           big: true,

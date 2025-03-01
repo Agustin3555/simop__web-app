@@ -95,31 +95,24 @@ export const scheme: Scheme<Entity> = {
       props: {
         obra: new RefProp({
           getScheme: () => ObraModel.scheme,
+          field: {
+            required: true,
+          },
         }),
-
         numero: new NumberProp('Número De Ampliación', {
           field: {
             required: true,
           },
         }),
-        numeroResolucion: new TextProp('Número De Resolución', {
-          field: {
-            required: true,
-          },
-        }),
+        numeroResolucion: new TextProp('Número De Resolución'),
         numeroExpedienteSolicitud: new TextProp(
           'Número De Expediente Solicitud',
         ),
-
         plazoMesesSolicitado: new NumberProp('Plazo de Meses Solicitado '),
-
         plazoMesesOtorgado: new NumberProp('Plazo de Meses Otorgado'),
         nuevaFechaFinObra: new DateProp('Nueva Fecha Fin De Obra'),
-
         fecha: new DateProp('Fecha'),
-
         observaciones: new TextLongProp('Observaciones'),
-
         ...COMMON_PROPS,
       },
     },

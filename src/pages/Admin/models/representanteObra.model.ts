@@ -65,6 +65,9 @@ export const scheme: Scheme<Entity> = {
       props: {
         obra: new RefProp({
           getScheme: () => ObraModel.scheme,
+          field: {
+            required: true,
+          },
         }),
         representante: new RefProp({
           getScheme: () => RepresentanteModel.scheme,

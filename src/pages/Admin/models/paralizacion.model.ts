@@ -93,6 +93,12 @@ export const scheme: Scheme<Entity> = {
   groups: [
     {
       props: {
+        obra: new RefProp({
+          getScheme: () => ObraModel.scheme,
+          field: {
+            required: true,
+          },
+        }),
         numero: new NumberProp('Número de Paralización', {
           field: {
             required: true,
@@ -106,17 +112,10 @@ export const scheme: Scheme<Entity> = {
         fechaReinicio: new DateProp('Fecha Reinicio', {}),
         nuevaFechaFinObra: new DateProp('Nueva Fecha Fin de Obra', {}),
         fecha: new DateProp('Fecha'),
-
-        observaciones: new TextLongProp('Observaciones'),
-
-        obra: new RefProp({
-          getScheme: () => ObraModel.scheme,
-        }),
-
         tipoParalizacion: new RefProp({
           getScheme: () => TipoParalizacionModel.scheme,
         }),
-
+        observaciones: new TextLongProp('Observaciones'),
         ...COMMON_PROPS,
       },
     },

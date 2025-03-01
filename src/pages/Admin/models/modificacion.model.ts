@@ -91,6 +91,9 @@ export const scheme: Scheme<Entity> = {
       props: {
         obra: new RefProp({
           getScheme: () => ObraModel.scheme,
+          field: {
+            required: true,
+          },
         }),
         numeroExpediente: new TextProp('Número De Expediente', {
           field: {
@@ -103,21 +106,16 @@ export const scheme: Scheme<Entity> = {
           big: true,
           pre: '$',
         }),
-
         nuevoMontoObra: new NumberProp('Nuevo Monto', {
           decimal: true,
           big: true,
           pre: '$',
         }),
-
         fecha: new DateProp('Fecha'),
-
-        observaciones: new TextLongProp('Observaciones'),
-
         tipoModificacion: new RefProp({
           getScheme: () => TipoModificacionModel.scheme,
         }),
-
+        observaciones: new TextLongProp('Observaciones'),
         ...COMMON_PROPS,
       },
     },

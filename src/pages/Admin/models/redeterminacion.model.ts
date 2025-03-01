@@ -1,4 +1,4 @@
-import { CertificacionModel, TipoRedeterminacionModel } from '.'
+import { ObraModel, TipoRedeterminacionModel } from '.'
 import {
   DateProp,
   NumberProp,
@@ -14,14 +14,13 @@ export interface RawEntity {
   id: number
   numeroExpediente: string
   numeroResolucion: string
-  numeroExpedienteCertificado: string
   numeroExpedienteSolicitud: string
   monto: number
   nuevoMontoObra: number
   fecha: string
   observaciones: string
 
-  certificacion?: CertificacionModel.RawRef
+  obra?: ObraModel.RawRef
   tipoRedeterminacion?: TipoRedeterminacionModel.RawRef
 
   creado: string
@@ -32,14 +31,13 @@ export interface Entity {
   id: number
   numeroExpediente: string
   numeroResolucion: string
-  numeroExpedienteCertificado: string
   numeroExpedienteSolicitud: string
   monto: number
   nuevoMontoObra: number
   fecha: string
   observaciones: string
 
-  certificacion?: CertificacionModel.Ref
+  obra?: ObraModel.Ref
   tipoRedeterminacion?: TipoRedeterminacionModel.Ref
 
   creado: string
@@ -61,28 +59,26 @@ export interface Ref {
 export interface CreateData {
   numeroExpediente: string
   numeroResolucion: string
-  numeroExpedienteCertificado: string
   numeroExpedienteSolicitud: string
   monto: number
   nuevoMontoObra: number
   fecha: string
   observaciones: string
 
-  certificacionId: number
+  obraId: number
   tipoRedeterminacionId: number
 }
 
 export interface CreateBody {
   numeroExpediente: string
   numeroResolucion: string
-  numeroExpedienteCertificado: string
   numeroExpedienteSolicitud: string
   monto: number
   nuevoMontoObra: number
   fecha: string
   observaciones: string
 
-  certificacionId: number
+  obraId: number
   tipoRedeterminacionId: number
 }
 
@@ -99,43 +95,36 @@ export const scheme: Scheme<Entity> = {
   groups: [
     {
       props: {
+        obra: new RefProp({
+          getScheme: () => ObraModel.scheme,
+          field: {
+            required: true,
+          },
+        }),
         numeroExpediente: new TextProp('Número De Expediente', {
           field: {
             required: true,
           },
         }),
         numeroResolucion: new TextProp('Número De Resolución'),
-        numeroExpedienteCertificado: new TextProp(
-          'Número De Expediente Certificado',
-        ),
         numeroExpedienteSolicitud: new TextProp(
-          'Número De Expediente Solicitud',
+          'Número De Expediente de la Solicitud',
         ),
-
         monto: new NumberProp('Monto', {
           decimal: true,
           big: true,
           pre: '$',
         }),
-
         nuevoMontoObra: new NumberProp('Nuevo Monto', {
           decimal: true,
           big: true,
           pre: '$',
         }),
-
         fecha: new DateProp('Fecha'),
-
-        observaciones: new TextLongProp('Observaciones'),
-
-        certificacion: new RefProp({
-          getScheme: () => CertificacionModel.scheme,
-        }),
-
         tipoRedeterminacion: new RefProp({
           getScheme: () => TipoRedeterminacionModel.scheme,
         }),
-
+        observaciones: new TextLongProp('Observaciones'),
         ...COMMON_PROPS,
       },
     },
