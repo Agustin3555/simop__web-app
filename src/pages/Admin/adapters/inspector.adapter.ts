@@ -24,3 +24,9 @@ export const create: {
 } = {
   input: data => data,
 }
+
+export const updateOne: {
+  input: InputAdapter<InspectorModel.UpdateData, InspectorModel.UpdateBody>
+} = {
+  input: data => data,
+}

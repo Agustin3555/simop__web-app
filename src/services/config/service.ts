@@ -16,9 +16,8 @@ export interface Service<T = Entity> {
   getForConnect?: () => Promise<Partial<T>[]>
   getOne: (id: number) => Promise<T>
   create?: (data: any) => Promise<void>
+  updateOne?: (id: number, data: any) => Promise<void>
   deleteMany: (ids: number[]) => Promise<void>
 }
 
-export type GetAllProvider = Pick<Service, 'getAll'>
-export type GetForConnectProvider = Pick<Service, 'getForConnect'>
 export type GetOneProvider = Pick<Service, 'getOne'>

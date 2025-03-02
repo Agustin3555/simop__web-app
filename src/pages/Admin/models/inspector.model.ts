@@ -59,6 +59,22 @@ export interface CreateBody {
   profesiones?: number[]
 }
 
+export interface UpdateData {
+  cuil?: number
+  apellido?: string
+  nombre?: string
+
+  profesiones?: number[]
+}
+
+export interface UpdateBody {
+  cuil?: number
+  apellido?: string
+  nombre?: string
+
+  profesiones?: number[]
+}
+
 export const scheme: Scheme<Entity> = {
   key: 'inspector',
   service: InspectorService,
@@ -74,6 +90,9 @@ export const scheme: Scheme<Entity> = {
       props: {
         cuil: new NumberProp('CUIL', {
           big: true,
+          field: {
+            required: true,
+          },
         }),
         apellido: new TextProp('Apellido', {
           field: {
