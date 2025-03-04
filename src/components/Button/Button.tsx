@@ -9,6 +9,8 @@ interface Props extends ButtonHTMLAttributes<HTMLButtonElement> {
   faIcon?: string
   hideText?: boolean
   _type?: 'secondary'
+  size?: 's'
+  inverted?: boolean
 }
 
 const Button = ({
@@ -17,11 +19,15 @@ const Button = ({
   faIcon,
   hideText,
   _type,
+  size,
+  inverted = false,
   children,
   ...rest
 }: Props) => (
   <button
-    className={classList('cmp-button', 'button-look', _type)}
+    className={classList('cmp-button', 'button-look', size, _type, {
+      inverted,
+    })}
     title={title || text}
     {...rest}
   >

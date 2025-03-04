@@ -1,6 +1,6 @@
 import './Table.css'
-import { Dispatch, SetStateAction, useMemo, useState } from 'react'
-import { useScheme } from '@/pages/Admin/hooks'
+import { useMemo, useState } from 'react'
+import { useRowSelection, useScheme } from '@/pages/Admin/hooks'
 import {
   ColumnDef,
   ColumnFiltersState,
@@ -9,7 +9,6 @@ import {
   getFacetedUniqueValues,
   getFilteredRowModel,
   getSortedRowModel,
-  RowSelectionState,
   SortingState,
   useReactTable,
   ColumnOrderState,
@@ -19,22 +18,15 @@ import { Entity } from '@/services/config'
 
 interface TableProps {
   data: Entity[]
-  rowSelection: RowSelectionState
-  setRowSelection: Dispatch<SetStateAction<RowSelectionState>>
-  selectedRowIds: number[]
 }
 
 const SELECT_COLUMN = 'select'
 
-const Table = ({
-  data,
-  rowSelection,
-  setRowSelection,
-  selectedRowIds,
-}: TableProps) => {
+const Table = ({ data }: TableProps) => {
   const { scheme, flatProps } = useScheme()
   const { groups } = scheme
 
+  const { rowSelection, setRowSelection, selectedRowIds } = useRowSelection()
   const [sorting, setSorting] = useState<SortingState>([])
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([])
 

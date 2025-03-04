@@ -24,6 +24,16 @@
     border-style: solid;
   }
 
+  &.s {
+    --cmp-icon-size: var(--pal-size-font-xs);
+
+    padding-inline: var(--pal-size-s);
+    height: var(--pal-size-xl);
+
+    font-size: var(--pal-size-font-s);
+    font-weight: initial;
+  }
+
   &.state {
     position: relative;
 
@@ -59,10 +69,6 @@
 .text {
   line-height: 1.4;
   text-wrap: pretty;
-
-  strong {
-    color: var(--pal-color-b-d2);
-  }
 }
 
 .paragraphs {
