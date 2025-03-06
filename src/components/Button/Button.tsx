@@ -9,7 +9,7 @@ interface Props extends ButtonHTMLAttributes<HTMLButtonElement> {
   faIcon?: string
   hideText?: boolean
   _type?: 'secondary'
-  size?: 's'
+  size?: 'xs' | 's'
   inverted?: boolean
 }
 

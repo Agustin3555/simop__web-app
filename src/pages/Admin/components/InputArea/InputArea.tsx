@@ -1,31 +1,37 @@
 import './InputArea.css'
 import { TextareaHTMLAttributes } from 'react'
-import { useLabel } from '@/hooks'
+import { useControl } from '@/hooks'
 import { classList } from '@/helpers'
 import { Control } from '@/types'
+import { ControlLabel } from '@/components'
 
-interface Props extends TextareaHTMLAttributes<HTMLTextAreaElement>, Control {
-  hideLabel?: boolean
+interface InputAreaProps extends Control {
+  textareaHTMLAttrs?: TextareaHTMLAttributes<HTMLTextAreaElement>
 }
 
 const InputArea = ({
-  name,
+  keyName,
   title,
   hideLabel = false,
-  required,
+  required = false,
+  editMode = false,
   long = 'l',
-  ...rest
-}: Props) => {
-  const { labelContent, inputTitle } = useLabel({ title, required })
+  textareaHTMLAttrs,
+}: InputAreaProps) => {
+  const { inputTitle, disabledState } = useControl({ title, required })
+  const { disabled } = disabledState
 
   return (
     <div className={classList('cmp-text-area', 'control', long)}>
-      {!hideLabel && <label className="label">{labelContent}</label>}
+      <ControlLabel
+        {...{ title, hideLabel, required, editMode, ...disabledState }}
+      />
       <textarea
-        className="text box input"
+        className="input box text"
         title={inputTitle}
-        {...{ name, required }}
-        {...rest}
+        name={keyName}
+        {...(editMode && { disabled })}
+        {...{ required, ...textareaHTMLAttrs }}
       />
     </div>
   )

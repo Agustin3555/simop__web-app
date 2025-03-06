@@ -26,10 +26,9 @@ export class DateTimeProp implements PropScheme {
 
     return (
       <Input
-        key={key}
-        name={key}
-        type="datetime-local"
+        keyName={key}
         {...{ title, required }}
+        inputHTMLAttrs={{ type: 'datetime-local' }}
       />
     )
   }

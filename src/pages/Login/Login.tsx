@@ -28,7 +28,12 @@ const Login = () => {
       <div className="content">
         <img src="/isologotipo-gobierno-ministerio.webp" />
         <form onSubmit={handleSubmit}>
-          <Input name="pass" title="Contraseña" type="password" required />
+          <Input
+            keyName="pass"
+            title="Contraseña"
+            required
+            inputHTMLAttrs={{ type: 'password' }}
+          />
           <StateButton
             text="Acceder"
             faIcon="fa-solid fa-arrow-right"

@@ -23,7 +23,7 @@ export class TextProp implements PropScheme {
 
     if (hidden === true) return
 
-    return <Input key={key} name={key} {...{ title, required }} />
+    return <Input keyName={key} {...{ title, required }} />
   }
 
   getFieldValue = (formData: FormData) => {

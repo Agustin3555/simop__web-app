@@ -14,6 +14,8 @@ interface Props
   notTime?: boolean
 }
 
+// BUG
+
 const DateTimeFilter = ({
   notTime = false,
   getFilterValue,
@@ -21,12 +23,12 @@ const DateTimeFilter = ({
 }: Props) => {
   const { min = '', max = '' } = (getFilterValue() as FilterValuePair) ?? {}
 
-  const commonProps: Partial<DebouncedInputProps> = {
+  const commonInputHTMLAttrs: Partial<DebouncedInputProps['inputHTMLAttrs']> = {
     type: notTime ? 'date' : 'datetime-local',
   }
 
   const handleChange = useCallback<
-    (key: string) => DebouncedInputProps['onChange']
+    (key: string) => DebouncedInputProps['handleChange']
   >(
     key => value =>
       setFilterValue((prev: FilterValuePair) => ({ ...prev, [key]: value })),
@@ -38,14 +40,16 @@ const DateTimeFilter = ({
       <DebouncedInput
         title="Desde"
         value={min}
-        onChange={handleChange('min')}
-        {...commonProps}
+        hideLabel
+        inputHTMLAttrs={commonInputHTMLAttrs}
+        handleChange={handleChange('min')}
       />
       <DebouncedInput
         title="Hasta"
         value={max}
-        onChange={handleChange('max')}
-        {...commonProps}
+        hideLabel
+        inputHTMLAttrs={commonInputHTMLAttrs}
+        handleChange={handleChange('max')}
       />
     </>
   )

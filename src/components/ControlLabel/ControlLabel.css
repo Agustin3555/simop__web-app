@@ -1,0 +1,33 @@
+.cmp-control-label {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  > .title {
+    display: flex;
+    gap: var(--pal-size-xs);
+
+    font-size: var(--pal-size-font-xs);
+    font-weight: 600;
+    white-space: nowrap;
+
+    color: var(--pal-color-a-d1);
+
+    > span {
+      color: var(--pal-color-a);
+    }
+  }
+
+  > .editing-actions {
+    display: flex;
+    align-items: center;
+    gap: var(--pal-size-2xs);
+
+    > .cmp-button {
+      border-color: var(--pal-color-a-l2);
+      aspect-ratio: 1;
+
+      color: var(--pal-color-a);
+    }
+  }
+}

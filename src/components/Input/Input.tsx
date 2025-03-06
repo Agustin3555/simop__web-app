@@ -1,29 +1,37 @@
 import './Input.css'
 import { InputHTMLAttributes } from 'react'
-import { useLabel } from '@/hooks'
+import { useControl } from '@/hooks'
 import { Control } from '@/types'
 import { classList } from '@/helpers'
+import { ControlLabel } from '..'
 
-interface Props extends InputHTMLAttributes<HTMLInputElement>, Control {}
+export interface InputProps extends Control {
+  inputHTMLAttrs?: InputHTMLAttributes<HTMLInputElement>
+}
 
 const Input = ({
-  name,
+  keyName,
   title,
   hideLabel = false,
-  required,
+  required = false,
+  editMode = false,
   long = 'm',
-  ...rest
-}: Props) => {
-  const { labelContent, inputTitle } = useLabel({ title, required })
+  inputHTMLAttrs,
+}: InputProps) => {
+  const { inputTitle, disabledState } = useControl({ title, required })
+  const { disabled } = disabledState
 
   return (
     <div className={classList('cmp-input', 'control', long)}>
-      {!hideLabel && <label className="label">{labelContent}</label>}
+      <ControlLabel
+        {...{ title, hideLabel, required, editMode, ...disabledState }}
+      />
       <input
         className="input box"
         title={inputTitle}
-        {...{ name, required }}
-        {...rest}
+        name={keyName}
+        {...(editMode && { disabled })}
+        {...{ required, ...inputHTMLAttrs }}
       />
     </div>
   )
