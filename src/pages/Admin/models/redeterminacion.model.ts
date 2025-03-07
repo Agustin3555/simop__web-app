@@ -81,6 +81,7 @@ export interface CreateBody {
   obraId: number
   tipoRedeterminacionId: number
 }
+
 export interface UpdateData {
   numeroExpediente?: string
   numeroResolucion?: string

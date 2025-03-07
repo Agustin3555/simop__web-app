@@ -79,6 +79,7 @@ export interface CreateBody {
   obraId: number
   tipoParalizacionId: number
 }
+
 export interface UpdateData {
   numero?: number
   numeroExpediente?: string

@@ -39,6 +39,7 @@ export interface CreateData {
 export interface CreateBody {
   nombre: string
 }
+
 export interface UpdateData {
   nombre?: string
 }

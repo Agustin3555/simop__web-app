@@ -1,11 +1,12 @@
 import { ObraModel, RepresentanteModel, TipoRepresentanteModel } from '.'
-import { BooleanProp, RefProp, Scheme } from '../services/config'
+import { BooleanProp, RefProp, Scheme, DateProp } from '../services/config'
 import { RepresentanteObraService } from '../services'
 import { COMMON_PROPS } from '../constants/commonProps.const'
 
 export interface RawEntity {
   id: number
   vigencia: boolean
+  fecha?: string
 
   obra: ObraModel.RawRef
   representante: RepresentanteModel.RawRef
@@ -18,6 +19,7 @@ export interface RawEntity {
 export interface Entity {
   id: number
   vigencia: boolean
+  fecha?: string
 
   obra: ObraModel.Ref
   representante: RepresentanteModel.Ref
@@ -26,6 +28,7 @@ export interface Entity {
   creado: string
   modificado: string
 }
+
 export interface RawRef {
   id: number
 }
@@ -36,6 +39,7 @@ export interface Ref {
 
 export interface CreateData {
   vigencia: boolean
+  fecha?: string
 
   obraId: number
   representanteId: number
@@ -44,13 +48,16 @@ export interface CreateData {
 
 export interface CreateBody {
   vigencia: boolean
+  fecha?: string
 
   obraId: number
   representanteId: number
   tipoRepresentanteId: number
 }
+
 export interface UpdateData {
   vigencia?: boolean
+  fecha?: string
 
   obraId?: number
   representanteId?: number
@@ -59,6 +66,7 @@ export interface UpdateData {
 
 export interface UpdateBody {
   vigencia?: boolean
+  fecha?: string
 
   obraId?: number
   representanteId?: number
@@ -94,6 +102,8 @@ export const scheme: Scheme<Entity> = {
           falseText: 'No Vigente',
           trueText: 'Vigente',
         }),
+
+        fecha: new DateProp('Fecha'),
         ...COMMON_PROPS,
       },
     },

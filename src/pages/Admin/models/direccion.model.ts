@@ -44,6 +44,7 @@ export interface CreateBody {
 
   subSecretariaId: number
 }
+
 export interface UpdateData {
   nombre?: string
 

@@ -67,6 +67,7 @@ export interface CreateBody {
 
   certificacionId?: number
 }
+
 export interface UpdateData {
   numero?: number
   ordenPago?: string

@@ -11,7 +11,7 @@ import { COMMON_PROPS } from '../constants/commonProps.const'
 export interface RawEntity {
   id: number
   vigencia: boolean
-  fecha: string
+  fecha?: string
 
   obra: ObraModel.RawRef
   inspector: InspectorModel.RawRef
@@ -25,7 +25,7 @@ export interface RawEntity {
 export interface Entity {
   id: number
   vigencia: boolean
-  fecha: string
+  fecha?: string
 
   obra: ObraModel.Ref
   inspector: InspectorModel.Ref
@@ -45,7 +45,7 @@ export interface Ref {
 }
 
 export interface CreateData {
-  fecha: string
+  fecha?: string
   vigencia: boolean
 
   obraId: number
@@ -55,7 +55,7 @@ export interface CreateData {
 }
 
 export interface CreateBody {
-  fecha: string
+  fecha?: string
   vigencia: boolean
 
   obraId: number

@@ -24,6 +24,7 @@ export const create: {
 } = {
   input: data => data,
 }
+
 export const updateOne: {
   input: InputAdapter<LocalidadModel.UpdateData, LocalidadModel.UpdateBody>
 } = {

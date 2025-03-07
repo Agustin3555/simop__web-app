@@ -61,6 +61,7 @@ export interface CreateBody {
   obraId: number
   tipoRecepcionId: number
 }
+
 export interface UpdateData {
   numeroActa?: number
   fecha?: string

@@ -72,6 +72,7 @@ export interface CreateBody {
   provinciaId: number
   localidadId: number
 }
+
 export interface UpdateData {
   cuil?: number
   apellido?: string

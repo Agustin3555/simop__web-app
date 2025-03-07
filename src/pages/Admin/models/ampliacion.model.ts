@@ -79,6 +79,7 @@ export interface CreateBody {
 
   obraId: number
 }
+
 export interface UpdateData {
   numero?: number
   numeroResolucion?: string

@@ -188,6 +188,7 @@ export interface CreateBody {
   tipoEstadoObraId?: number
   localidadId?: number
 }
+
 export interface UpdateData {
   numero?: number
   nombre?: string

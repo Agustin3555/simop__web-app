@@ -45,6 +45,7 @@ export interface CreateBody {
 
   paisId: number
 }
+
 export interface UpdateData {
   nombre?: string
 

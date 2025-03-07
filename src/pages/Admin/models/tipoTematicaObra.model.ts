@@ -22,6 +22,7 @@ export interface RawRef {
   id: number
   nombre: string
 }
+
 export interface Ref {
   id: number
   nombre: string
@@ -34,6 +35,7 @@ export interface CreateData {
 export interface CreateBody {
   nombre: string
 }
+
 export interface UpdateData {
   nombre?: string
 }

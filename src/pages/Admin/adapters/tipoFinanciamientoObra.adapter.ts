@@ -36,6 +36,7 @@ export const create: {
 } = {
   input: data => data,
 }
+
 export const updateOne: {
   input: InputAdapter<
     TipoFinanciamientoObraModel.UpdateData,

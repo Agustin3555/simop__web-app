@@ -54,6 +54,7 @@ export interface CreateBody {
   representanteId: number
   tipoRepresentanteId: number
 }
+
 export interface UpdateData {
   vigencia?: boolean
   fecha?: string

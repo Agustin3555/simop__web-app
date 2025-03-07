@@ -46,6 +46,7 @@ export interface RawRef {
   numero: number
   numeroExpediente: string
 }
+
 export interface Ref {
   id: number
 
@@ -74,6 +75,7 @@ export interface CreateBody {
   obraId?: number
   inspectorId?: number
 }
+
 export interface UpdateData {
   numero?: number
   numeroExpediente?: string
