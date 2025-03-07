@@ -30,6 +30,11 @@ export const LocalidadService: Service<LocalidadModel.Entity> = {
 
     await publicInstance.post(collection(), adaptedInput)
   },
+  updateOne: async (id, data: LocalidadModel.UpdateData) => {
+    const adaptedInput = LocalidadAdapter.updateOne.input(data)
+
+    await publicInstance.put(collection(id), adaptedInput)
+  },
 
   deleteMany: async ids => await deleteManyHandler(collection, ids),
 }

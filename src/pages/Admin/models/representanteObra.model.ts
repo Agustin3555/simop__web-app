@@ -49,6 +49,21 @@ export interface CreateBody {
   representanteId: number
   tipoRepresentanteId: number
 }
+export interface UpdateData {
+  vigencia?: boolean
+
+  obraId?: number
+  representanteId?: number
+  tipoRepresentanteId?: number
+}
+
+export interface UpdateBody {
+  vigencia?: boolean
+
+  obraId?: number
+  representanteId?: number
+  tipoRepresentanteId?: number
+}
 
 export const scheme: Scheme<Entity> = {
   key: 'representanteObra',

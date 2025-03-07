@@ -35,6 +35,13 @@ export interface CreateData {
 export interface CreateBody {
   nombre: string
 }
+export interface UpdateData {
+  nombre?: string
+}
+
+export interface UpdateBody {
+  nombre?: string
+}
 
 export const scheme: Scheme<Entity> = {
   key: 'tipoRedeterminacion',

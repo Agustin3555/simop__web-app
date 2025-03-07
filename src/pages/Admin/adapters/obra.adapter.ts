@@ -24,3 +24,8 @@ export const create: {
 } = {
   input: data => data,
 }
+export const updateOne: {
+  input: InputAdapter<ObraModel.UpdateData, ObraModel.UpdateBody>
+} = {
+  input: data => data,
+}

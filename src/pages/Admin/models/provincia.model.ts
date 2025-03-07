@@ -45,6 +45,17 @@ export interface CreateBody {
 
   paisId: number
 }
+export interface UpdateData {
+  nombre?: string
+
+  paisId?: number
+}
+
+export interface UpdateBody {
+  nombre?: string
+
+  paisId?: number
+}
 
 export const scheme: Scheme<Entity> = {
   key: 'provincia',

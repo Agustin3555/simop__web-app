@@ -81,6 +81,31 @@ export interface CreateBody {
   obraId: number
   tipoRedeterminacionId: number
 }
+export interface UpdateData {
+  numeroExpediente?: string
+  numeroResolucion?: string
+  numeroExpedienteSolicitud?: string
+  monto?: number
+  nuevoMontoObra?: number
+  fecha?: string
+  observaciones?: string
+
+  obraId?: number
+  tipoRedeterminacionId?: number
+}
+
+export interface UpdateBody {
+  numeroExpediente?: string
+  numeroResolucion?: string
+  numeroExpedienteSolicitud?: string
+  monto?: number
+  nuevoMontoObra?: number
+  fecha?: string
+  observaciones?: string
+
+  obraId?: number
+  tipoRedeterminacionId?: number
+}
 
 export const scheme: Scheme<Entity> = {
   key: 'redeterminacion',

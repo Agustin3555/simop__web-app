@@ -31,6 +31,11 @@ export const TipoFinanciamientoObraService: Service<TipoFinanciamientoObraModel.
 
       await publicInstance.post(collection(), adaptedInput)
     },
+    updateOne: async (id, data: TipoFinanciamientoObraModel.UpdateData) => {
+      const adaptedInput = TipoFinanciamientoObraAdapter.updateOne.input(data)
+
+      await publicInstance.put(collection(id), adaptedInput)
+    },
 
     deleteMany: async ids => await deleteManyHandler(collection, ids),
   }

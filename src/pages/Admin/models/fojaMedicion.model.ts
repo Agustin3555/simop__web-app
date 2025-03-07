@@ -62,9 +62,6 @@ export interface CreateData {
 
   obraId?: number
   inspectorId?: number
-
-  creado: string
-  modificado: string
 }
 
 export interface CreateBody {
@@ -76,9 +73,27 @@ export interface CreateBody {
 
   obraId?: number
   inspectorId?: number
+}
+export interface UpdateData {
+  numero?: number
+  numeroExpediente?: string
+  avance?: number
+  fecha?: string
+  observaciones?: string
 
-  creado: string
-  modificado: string
+  obraId?: number
+  inspectorId?: number
+}
+
+export interface UpdateBody {
+  numero?: number
+  numeroExpediente?: string
+  avance?: number
+  fecha?: string
+  observaciones?: string
+
+  obraId?: number
+  inspectorId?: number
 }
 
 export const scheme: Scheme<Entity> = {

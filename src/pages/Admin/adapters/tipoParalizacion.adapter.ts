@@ -36,3 +36,11 @@ export const create: {
 } = {
   input: data => data,
 }
+export const updateOne: {
+  input: InputAdapter<
+    TipoParalizacionModel.UpdateData,
+    TipoParalizacionModel.UpdateBody
+  >
+} = {
+  input: data => data,
+}

@@ -24,3 +24,8 @@ export const create: {
 } = {
   input: data => data,
 }
+export const updateOne: {
+  input: InputAdapter<EmpresaModel.UpdateData, EmpresaModel.UpdateBody>
+} = {
+  input: data => data,
+}

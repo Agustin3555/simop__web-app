@@ -30,6 +30,11 @@ export const TipoProgramaObraService: Service<TipoProgramaObraModel.Entity> = {
 
     await publicInstance.post(collection(), adaptedInput)
   },
+  updateOne: async (id, data: TipoProgramaObraModel.UpdateData) => {
+    const adaptedInput = TipoProgramaObraAdapter.updateOne.input(data)
+
+    await publicInstance.put(collection(id), adaptedInput)
+  },
 
   deleteMany: async ids => await deleteManyHandler(collection, ids),
 }

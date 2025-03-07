@@ -30,6 +30,10 @@ export const SubSecretariaService: Service<SubSecretariaModel.Entity> = {
 
     await publicInstance.post(collection(), adaptedInput)
   },
+  updateOne: async (id, data: SubSecretariaModel.UpdateData) => {
+    const adaptedInput = SubSecretariaAdapter.updateOne.input(data)
 
+    await publicInstance.put(collection(id), adaptedInput)
+  },
   deleteMany: async ids => await deleteManyHandler(collection, ids),
 }

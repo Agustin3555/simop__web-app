@@ -44,6 +44,17 @@ export interface CreateBody {
 
   subSecretariaId: number
 }
+export interface UpdateData {
+  nombre?: string
+
+  subSecretariaId?: number
+}
+
+export interface UpdateBody {
+  nombre?: string
+
+  subSecretariaId?: number
+}
 
 export const scheme: Scheme<Entity> = {
   key: 'direccion',

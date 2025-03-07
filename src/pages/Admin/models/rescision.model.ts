@@ -66,7 +66,25 @@ export interface CreateBody {
   obraId: number
   tipoRescisionId: number
 }
+export interface UpdateData {
+  numeroExpediente?: string
+  numeroResolucion?: string
+  fecha?: string
+  observaciones?: string
 
+  obraId?: number
+  tipoRescisionId?: number
+}
+
+export interface UpdateBody {
+  numeroExpediente?: string
+  numeroResolucion?: string
+  fecha?: string
+  observaciones?: string
+
+  obraId?: number
+  tipoRescisionId?: number
+}
 export const scheme: Scheme<Entity> = {
   key: 'rescision',
   service: RescisionService,

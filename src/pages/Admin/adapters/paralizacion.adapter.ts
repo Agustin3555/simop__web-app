@@ -30,3 +30,11 @@ export const create: {
 } = {
   input: data => data,
 }
+export const updateOne: {
+  input: InputAdapter<
+    ParalizacionModel.UpdateData,
+    ParalizacionModel.UpdateBody
+  >
+} = {
+  input: data => data,
+}

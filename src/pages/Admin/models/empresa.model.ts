@@ -73,6 +73,30 @@ export interface CreateBody {
   localidadId?: number
 }
 
+export interface UpdateData {
+  cuit?: number
+  nombre?: string
+  direccion?: string
+  numeroContacto?: number
+  email?: string
+
+  paisId?: number
+  provinciaId?: number
+  localidadId?: number
+}
+
+export interface UpdateBody {
+  cuit?: number
+  nombre?: string
+  direccion?: string
+  numeroContacto?: number
+  email?: string
+
+  paisId?: number
+  provinciaId?: number
+  localidadId?: number
+}
+
 export const scheme: Scheme<Entity> = {
   key: 'empresa',
   service: EmpresaService,

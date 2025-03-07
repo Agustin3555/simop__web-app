@@ -188,6 +188,79 @@ export interface CreateBody {
   tipoEstadoObraId?: number
   localidadId?: number
 }
+export interface UpdateData {
+  numero?: number
+  nombre?: string
+  numeroExpediente?: number
+  numeroResolucion?: number
+  anioResolucion?: string
+  numeroContratacion?: number
+  fechaContratacion?: string
+  montoContratacion?: number
+  fechaInicio?: string
+  fechaFin?: string
+  plazoMeses?: number
+  plazoDias?: number
+  direccion?: string
+  lugar?: string
+  nomenclaturaCatastral?: string
+  observaciones?: string
+  obraNueva?: boolean
+  porcentajeObraNueva?: number
+  metrosCuadradosObraNueva?: number
+  metrosLinealesObraNueva?: number
+  observacionesObraNueva?: string
+  obraRefaccionada?: boolean
+  porcentajeObraRefaccionada?: number
+  metrosCuadradosObraRefaccionada?: number
+  metrosLinealesObraRefaccionada?: number
+  observacionesObraRefaccionada?: string
+
+  empresaId?: number
+  tipoContratacionObraId?: number
+  tipoFinanciamientoObraId?: number
+  tipoProgramaObraId?: number
+  tipoTematicaObraId?: number
+  tipoEstadoObraId?: number
+  localidadId?: number
+}
+
+export interface UpdateBody {
+  numero?: number
+  nombre?: string
+  numeroExpediente?: number
+  numeroResolucion?: number
+  anioResolucion?: string
+  numeroContratacion?: number
+  fechaContratacion?: string
+  montoContratacion?: number
+  fechaInicio?: string
+  fechaFin?: string
+  plazoMeses?: number
+  plazoDias?: number
+  direccion?: string
+  lugar?: string
+  nomenclaturaCatastral?: string
+  observaciones?: string
+  obraNueva?: boolean
+  porcentajeObraNueva?: number
+  metrosCuadradosObraNueva?: number
+  metrosLinealesObraNueva?: number
+  observacionesObraNueva?: string
+  obraRefaccionada?: boolean
+  porcentajeObraRefaccionada?: number
+  metrosCuadradosObraRefaccionada?: number
+  metrosLinealesObraRefaccionada?: number
+  observacionesObraRefaccionada?: string
+
+  empresaId?: number
+  tipoContratacionObraId?: number
+  tipoFinanciamientoObraId?: number
+  tipoProgramaObraId?: number
+  tipoTematicaObraId?: number
+  tipoEstadoObraId?: number
+  localidadId?: number
+}
 
 export const scheme: Scheme<Entity> = {
   key: 'obra',

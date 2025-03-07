@@ -30,6 +30,10 @@ export const FojaMedicionService: Service<FojaMedicionModel.Entity> = {
 
     await publicInstance.post(collection(), adaptedInput)
   },
+  updateOne: async (id, data: FojaMedicionModel.UpdateData) => {
+    const adaptedInput = FojaMedicionAdapter.updateOne.input(data)
 
+    await publicInstance.put(collection(id), adaptedInput)
+  },
   deleteMany: async ids => await deleteManyHandler(collection, ids),
 }

@@ -30,6 +30,11 @@ export const EmpresaService: Service<EmpresaModel.Entity> = {
 
     await publicInstance.post(collection(), adaptedInput)
   },
+  updateOne: async (id, data: EmpresaModel.UpdateData) => {
+    const adaptedInput = EmpresaAdapter.updateOne.input(data)
+
+    await publicInstance.put(collection(id), adaptedInput)
+  },
 
   deleteMany: async ids => await deleteManyHandler(collection, ids),
 }

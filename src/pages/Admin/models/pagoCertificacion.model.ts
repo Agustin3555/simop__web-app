@@ -67,6 +67,25 @@ export interface CreateBody {
 
   certificacionId?: number
 }
+export interface UpdateData {
+  numero?: number
+  ordenPago?: string
+  fecha?: string
+  observaciones?: string
+  monto?: number
+
+  certificacionId?: number
+}
+
+export interface UpdateBody {
+  numero?: number
+  ordenPago?: string
+  fecha?: string
+  observaciones?: string
+  monto?: number
+
+  certificacionId?: number
+}
 
 export const scheme: Scheme<Entity> = {
   key: 'pagoCertificacion',

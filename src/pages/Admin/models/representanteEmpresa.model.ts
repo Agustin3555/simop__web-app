@@ -1,11 +1,12 @@
 import { EmpresaModel, RepresentanteModel, TipoRepresentanteModel } from '.'
-import { BooleanProp, RefProp, Scheme } from '../services/config'
+import { BooleanProp, RefProp, Scheme, DateProp } from '../services/config'
 import { RepresentanteEmpresaService } from '../services'
 import { COMMON_PROPS } from '../constants/commonProps.const'
 
 export interface RawEntity {
   id: number
   vigencia: boolean
+  fecha: string
 
   empresa: EmpresaModel.RawRef
   representante: RepresentanteModel.RawRef
@@ -18,6 +19,7 @@ export interface RawEntity {
 export interface Entity {
   id: number
   vigencia: boolean
+  fecha: string
 
   empresa: Ref
   representante: Ref
@@ -37,6 +39,7 @@ export interface Ref {
 
 export interface CreateData {
   vigencia: boolean
+  fecha: string
 
   empresaId: number
   representanteId: number
@@ -45,10 +48,27 @@ export interface CreateData {
 
 export interface CreateBody {
   vigencia: boolean
+  fecha: string
 
   empresaId: number
   representanteId: number
   tipoRepresentanteId: number
+}
+export interface UpdateData {
+  vigencia?: boolean
+  fecha?: string
+  empresaId?: number
+  representanteId?: number
+  tipoRepresentanteId?: number
+}
+
+export interface UpdateBody {
+  vigencia?: boolean
+  fecha?: string
+
+  empresaId?: number
+  representanteId?: number
+  tipoRepresentanteId?: number
 }
 
 export const scheme: Scheme<Entity> = {
@@ -77,6 +97,7 @@ export const scheme: Scheme<Entity> = {
           falseText: 'No Vigente',
           trueText: 'Vigente',
         }),
+        fecha: new DateProp('Fecha'),
         ...COMMON_PROPS,
       },
     },

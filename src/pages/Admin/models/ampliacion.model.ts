@@ -79,6 +79,31 @@ export interface CreateBody {
 
   obraId: number
 }
+export interface UpdateData {
+  numero?: number
+  numeroResolucion?: string
+  numeroExpedienteSolicitud?: string
+  plazoMesesSolicitado?: number
+  plazoMesesOtorgado?: number
+  nuevaFechaFinObra?: string
+  fecha?: string
+  observaciones?: string
+
+  obraId?: number
+}
+
+export interface UpdateBody {
+  numero?: number
+  numeroResolucion?: string
+  numeroExpedienteSolicitud?: string
+  plazoMesesSolicitado?: number
+  plazoMesesOtorgado?: number
+  nuevaFechaFinObra?: string
+  fecha?: string
+  observaciones?: string
+
+  obraId?: number
+}
 
 export const scheme: Scheme<Entity> = {
   key: 'ampliacion',

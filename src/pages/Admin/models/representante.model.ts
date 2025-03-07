@@ -72,6 +72,29 @@ export interface CreateBody {
   provinciaId: number
   localidadId: number
 }
+export interface UpdateData {
+  cuil?: number
+  apellido?: string
+  nombre?: string
+  direccion?: string
+  numeroMatricula?: string
+
+  paisId?: number
+  provinciaId?: number
+  localidadId?: number
+}
+
+export interface UpdateBody {
+  cuil?: number
+  apellido?: string
+  nombre?: string
+  direccion?: string
+  numeroMatricula?: string
+
+  paisId?: number
+  provinciaId?: number
+  localidadId?: number
+}
 
 export const scheme: Scheme<Entity> = {
   key: 'representante',

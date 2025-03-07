@@ -30,3 +30,11 @@ export const create: {
 } = {
   input: data => data,
 }
+export const updateOne: {
+  input: InputAdapter<
+    RepresentanteModel.UpdateData,
+    RepresentanteModel.UpdateBody
+  >
+} = {
+  input: data => data,
+}

@@ -30,3 +30,11 @@ export const create: {
 } = {
   input: data => data,
 }
+export const updateOne: {
+  input: InputAdapter<
+    InspectorObraModel.UpdateData,
+    InspectorObraModel.UpdateBody
+  >
+} = {
+  input: data => data,
+}

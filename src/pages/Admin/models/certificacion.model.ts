@@ -47,7 +47,6 @@ export interface Ref {
 }
 
 export interface CreateData {
-  id: number
   numeroExpediente: string
   fecha: string
   monto: number
@@ -57,13 +56,30 @@ export interface CreateData {
 }
 
 export interface CreateBody {
-  id: number
   numeroExpediente: string
   fecha: string
   monto: number
   observaciones: string
 
   fojaMedicionId: number
+}
+
+export interface UpdateData {
+  numeroExpediente?: string
+  fecha?: string
+  monto?: number
+  observaciones?: string
+
+  fojaMedicionId?: number
+}
+
+export interface UpdateBody {
+  numeroExpediente?: string
+  fecha?: string
+  monto?: number
+  observaciones?: string
+
+  fojaMedicionId?: number
 }
 
 export const scheme: Scheme<Entity> = {

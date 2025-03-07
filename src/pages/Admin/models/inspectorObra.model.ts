@@ -4,12 +4,14 @@ import {
   TipoInspectorModel,
   TipoProfesionModel,
 } from '.'
-import { RefProp, Scheme } from '../services/config'
+import { RefProp, Scheme, BooleanProp, DateProp } from '../services/config'
 import { InspectorObraService } from '../services'
 import { COMMON_PROPS } from '../constants/commonProps.const'
 
 export interface RawEntity {
   id: number
+  vigencia: boolean
+  fecha: string
 
   obra: ObraModel.RawRef
   inspector: InspectorModel.RawRef
@@ -22,6 +24,8 @@ export interface RawEntity {
 
 export interface Entity {
   id: number
+  vigencia: boolean
+  fecha: string
 
   obra: ObraModel.Ref
   inspector: InspectorModel.Ref
@@ -41,6 +45,9 @@ export interface Ref {
 }
 
 export interface CreateData {
+  fecha: string
+  vigencia: boolean
+
   obraId: number
   inspectorId: number
   tipoInspectorId: number
@@ -48,10 +55,33 @@ export interface CreateData {
 }
 
 export interface CreateBody {
+  fecha: string
+  vigencia: boolean
+
   obraId: number
   inspectorId: number
   tipoInspectorId: number
   tipoProfesionId: number
+}
+
+export interface UpdateData {
+  fecha?: string
+  vigencia?: boolean
+
+  obraId?: number
+  inspectorId?: number
+  tipoInspectorId?: number
+  tipoProfesionId?: number
+}
+
+export interface UpdateBody {
+  fecha?: string
+  vigencia?: boolean
+
+  obraId?: number
+  inspectorId?: number
+  tipoInspectorId?: number
+  tipoProfesionId?: number
 }
 
 export const scheme: Scheme<Entity> = {
@@ -85,6 +115,11 @@ export const scheme: Scheme<Entity> = {
         tipoProfesion: new RefProp({
           getScheme: () => TipoProfesionModel.scheme,
         }),
+        vigencia: new BooleanProp('Vigencia', {
+          falseText: 'No Vigente',
+          trueText: 'Vigente',
+        }),
+        fecha: new DateProp('Fecha'),
         ...COMMON_PROPS,
       },
     },

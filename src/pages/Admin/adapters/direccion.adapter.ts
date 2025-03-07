@@ -24,3 +24,8 @@ export const create: {
 } = {
   input: data => data,
 }
+export const updateOne: {
+  input: InputAdapter<DireccionModel.UpdateData, DireccionModel.UpdateBody>
+} = {
+  input: data => data,
+}

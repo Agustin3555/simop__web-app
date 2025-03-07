@@ -79,6 +79,29 @@ export interface CreateBody {
   obraId: number
   tipoParalizacionId: number
 }
+export interface UpdateData {
+  numero?: number
+  numeroExpediente?: string
+  fechaReinicio?: string
+  nuevaFechaFinObra?: string
+  fecha?: string
+  observaciones?: string
+
+  obraId?: number
+  tipoParalizacionId?: number
+}
+
+export interface UpdateBody {
+  numero?: number
+  numeroExpediente?: string
+  fechaReinicio?: string
+  nuevaFechaFinObra?: string
+  fecha?: string
+  observaciones?: string
+
+  obraId?: number
+  tipoParalizacionId?: number
+}
 
 export const scheme: Scheme<Entity> = {
   key: 'paralizacion',
