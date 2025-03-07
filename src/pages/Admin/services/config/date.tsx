@@ -24,7 +24,13 @@ export class DateProp implements PropScheme {
 
     if (hidden === true) return
 
-    return <Input key={key} name={key} type="date" {...{ title, required }} />
+    return (
+      <Input
+        keyName={key}
+        {...{ title, required }}
+        inputHTMLAttrs={{ type: 'date' }}
+      />
+    )
   }
 
   getFieldValue = (formData: FormData) => {

@@ -27,8 +27,16 @@ export class RefListProp implements PropScheme {
     if (hidden === true) return
 
     const scheme = getScheme()
+    const { title } = scheme
 
-    return <Combobox key={key} name={key} multiple {...{ scheme, required }} />
+    return (
+      <Combobox
+        keyName={key}
+        title={title.singular}
+        multiple
+        {...{ scheme, required }}
+      />
+    )
   }
 
   getFieldValue = (formData: FormData) => {

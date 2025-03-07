@@ -3,8 +3,9 @@ export interface Long {
 }
 
 export interface Control extends Long {
-  name?: string
-  title?: string
+  keyName: string
+  title: string
   hideLabel?: boolean
   required?: boolean
+  editMode?: boolean
 }

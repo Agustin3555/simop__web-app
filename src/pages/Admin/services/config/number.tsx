@@ -34,11 +34,9 @@ export class NumberProp implements PropScheme {
 
     return (
       <Input
-        key={key}
-        name={key}
-        type="number"
+        keyName={key}
         {...{ title, required }}
-        step={decimal ? '0.01' : undefined}
+        inputHTMLAttrs={{ type: 'number', step: decimal ? '0.01' : undefined }}
       />
     )
   }

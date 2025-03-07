@@ -7,16 +7,20 @@ interface Props {
   setFilterValue: (updater: Updater<any>) => void
 }
 
+// BUG
+
 const TextFilter = ({
   filterValue,
   getFacetedUniqueValues,
   setFilterValue,
 }: Props) => (
   <DebouncedInput
-    type="text"
     value={(filterValue ?? '') as string}
-    placeholder={`Buscar... (${getFacetedUniqueValues().size})`}
-    onChange={value => setFilterValue(value)}
+    hideLabel
+    handleChange={value => setFilterValue(value)}
+    inputHTMLAttrs={{
+      placeholder: `Buscar... (${getFacetedUniqueValues().size})`,
+    }}
   />
 )
 

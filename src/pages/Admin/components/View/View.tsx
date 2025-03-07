@@ -2,24 +2,29 @@ import './View.css'
 import { ReactNode, useMemo, useState } from 'react'
 import { useChangeHandler, useScheme, useViewActive } from '../../hooks'
 import { Icon, Separator } from '@/components'
-import { SchemeContext } from '../../contexts'
+import { RowSelectionContext, SchemeContext } from '../../contexts'
 import { Scheme } from '../../services/config'
-import { LocalAdd, LocalQuery } from '..'
+import { LocalAdd, LocalEdit, LocalQuery } from '..'
 import { addIf, classList } from '@/helpers'
+import { RowSelectionState } from '@tanstack/react-table'
 
-type LocalViewKey = 'query' | 'add'
+type LocalViewKey = 'query' | 'add' | 'edit'
 
 // TODO: admitir vistas locales custom
 
 interface Props {
   notQuery?: boolean
   notAdd?: boolean
-  notUpdate?: boolean
+  notEdit?: boolean
 }
 
-const HydratedView = ({ notQuery = false, notAdd = false }: Props) => {
+const HydratedView = ({
+  notQuery = false,
+  notAdd = false,
+  notEdit = false,
+}: Props) => {
   const { scheme } = useScheme()
-  const { key: accessorKey, title } = scheme
+  const { key, title } = scheme
 
   const localViews = useMemo(
     () =>
@@ -41,19 +46,34 @@ const HydratedView = ({ notQuery = false, notAdd = false }: Props) => {
           localViewKey: 'add',
           component: <LocalAdd />,
         },
+        !notEdit && {
+          title: 'Editar',
+          faIcon: 'fa-solid fa-pen',
+          localViewKey: 'edit',
+          component: <LocalEdit />,
+        },
       ]),
     [],
   )
 
-  const isActive = useViewActive(accessorKey)
+  const isActive = useViewActive(key)
   const [localView, setLocalView] = useState(localViews[0].localViewKey)
+  const [rowSelection, setRowSelection] = useState<RowSelectionState>({})
+
+  const selectedRowIds = useMemo(
+    () =>
+      Object.keys(rowSelection)
+        .filter(id => rowSelection[id])
+        .map(Number),
+    [rowSelection],
+  )
 
   const handleChange = useChangeHandler(newLocalView =>
     setLocalView(newLocalView as LocalViewKey),
   )
 
   return (
-    <div className={classList('cmp-view', accessorKey, { active: isActive })}>
+    <div className={classList('cmp-view', key, { active: isActive })}>
       <header>
         <fieldset>
           {localViews.map(({ title, faIcon, localViewKey }) => (
@@ -63,7 +83,7 @@ const HydratedView = ({ notQuery = false, notAdd = false }: Props) => {
               <input
                 type="radio"
                 id={localViewKey}
-                name={['tabbed', accessorKey].join('-')}
+                name={['tabbed', key].join('-')}
                 checked={localViewKey === localView}
                 onChange={handleChange}
               />
@@ -74,14 +94,18 @@ const HydratedView = ({ notQuery = false, notAdd = false }: Props) => {
       </header>
       <Separator />
       <div className="local-views">
-        {localViews.map(({ localViewKey, component }) => (
-          <div
-            key={localViewKey}
-            className={classList({ active: localViewKey === localView })}
-          >
-            {component}
-          </div>
-        ))}
+        <RowSelectionContext.Provider
+          value={{ rowSelection, setRowSelection, selectedRowIds }}
+        >
+          {localViews.map(({ localViewKey, component }) => (
+            <div
+              key={localViewKey}
+              className={classList({ active: localViewKey === localView })}
+            >
+              {component}
+            </div>
+          ))}
+        </RowSelectionContext.Provider>
       </div>
     </div>
   )

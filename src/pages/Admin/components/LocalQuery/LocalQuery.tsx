@@ -1,13 +1,12 @@
 import './LocalQuery.css'
-import { useCallback, useMemo, useState } from 'react'
+import { useCallback, useState } from 'react'
 import { useHandleAction } from '@/hooks'
-import { useScheme } from '../../hooks'
+import { useRowSelection, useScheme } from '../../hooks'
 import { Button, Icon, StateButton } from '@/components'
 import { Table } from './components'
 import { Entity } from '@/services/config'
 import { utils, writeFile } from 'xlsx'
 import { SecureHoldButton } from '..'
-import { RowSelectionState } from '@tanstack/react-table'
 import { useAppStore } from '@/store/config'
 
 const LocalQuery = () => {
@@ -16,15 +15,7 @@ const LocalQuery = () => {
 
   const toasting = useAppStore(store => store.toasting)
   const [data, setData] = useState<Entity[]>()
-  const [rowSelection, setRowSelection] = useState<RowSelectionState>({})
-
-  const selectedRowIds = useMemo(
-    () =>
-      Object.keys(rowSelection)
-        .filter(id => rowSelection[id])
-        .map(Number),
-    [rowSelection],
-  )
+  const { setRowSelection, selectedRowIds } = useRowSelection()
 
   const handleActionResult = useHandleAction(
     async ({ setError, setSuccess }) => {
@@ -118,9 +109,7 @@ const LocalQuery = () => {
           )}
         </div>
       </header>
-      {data && (
-        <Table {...{ data, rowSelection, setRowSelection, selectedRowIds }} />
-      )}
+      {data && <Table {...{ data }} />}
     </div>
   )
 }

@@ -12,6 +12,10 @@
 
     transition: border-color var(--pal-time-xs) ease-out;
 
+    &[disabled] {
+      pointer-events: none;
+    }
+
     > .selected-items {
       --padding: 0.3125rem;
 

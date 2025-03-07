@@ -1,44 +1,45 @@
 import './Checkbox.css'
-import { InputHTMLAttributes, useState } from 'react'
-import { useLabel } from '@/hooks'
-import { Icon } from '@/components'
+import { useState } from 'react'
+import { useControl } from '@/hooks'
+import { ControlLabel, Icon } from '@/components'
 import { Control } from '@/types'
 import { classList } from '@/helpers'
 
-interface CheckboxProps extends InputHTMLAttributes<HTMLInputElement>, Control {
+interface CheckboxProps extends Control {
   falseText?: string
   trueText?: string
 }
 
 const Checkbox = ({
-  name,
+  keyName,
   title,
   hideLabel = false,
+  required = false,
+  editMode = false,
   long = 's',
   falseText = 'No',
   trueText = 'Si',
-  ...rest
 }: CheckboxProps) => {
-  const { labelContent, inputTitle } = useLabel({ title })
+  const { inputTitle, disabledState } = useControl({ title, required })
+  const { disabled } = disabledState
+
   const [firstChange, setFirstChange] = useState(false)
 
   const handleChange = () => setFirstChange(true)
 
   return (
     <div className={classList('cmp-checkbox', 'control', long)}>
-      {!hideLabel && (
-        <label htmlFor={name} className="label">
-          {labelContent}
-        </label>
-      )}
+      <ControlLabel
+        {...{ title, hideLabel, required, editMode, ...disabledState }}
+      />
       <div className="box">
         <input
           title={inputTitle}
+          name={keyName}
           type="checkbox"
-          {...{ name }}
-          onChange={handleChange}
           data-use-value={firstChange}
-          {...rest}
+          onChange={handleChange}
+          {...(editMode && { disabled })}
         />
         <div className="check-container">
           <Icon faIcon="fa-solid fa-check" />

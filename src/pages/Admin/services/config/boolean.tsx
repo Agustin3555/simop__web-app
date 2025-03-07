@@ -29,7 +29,7 @@ export class BooleanProp implements PropScheme {
 
     if (hidden === true) return
 
-    return <Checkbox key={key} name={key} {...{ title, falseText, trueText }} />
+    return <Checkbox keyName={key} {...{ title, falseText, trueText }} />
   }
 
   getFieldValue = (formData: FormData, form: HTMLFormElement) => {

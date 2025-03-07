@@ -7,10 +7,10 @@ import {
   useRef,
   useState,
 } from 'react'
-import { useHandleAction, useLabel } from '@/hooks'
+import { useHandleAction, useControl } from '@/hooks'
 import { useAddFieldReset, useInputHandler } from '../../hooks'
 import { useQuery } from '@tanstack/react-query'
-import { Button, Icon, StateButton } from '@/components'
+import { Button, ControlLabel, Icon, StateButton } from '@/components'
 import { Option } from './components'
 import { Control } from '@/types'
 import { Entity } from '@/services/config'
@@ -27,19 +27,19 @@ export interface ComboboxProps extends Control {
 }
 
 const Combobox = ({
-  name,
+  keyName,
   title,
+  hideLabel = false,
   required = false,
+  editMode = false,
   long,
   multiple = false,
   scheme,
 }: ComboboxProps) => {
-  const { key, service, refreshRate, title: schemeTitle, anchorField } = scheme
+  const { key, service, refreshRate, anchorField } = scheme
 
-  const { labelContent, inputTitle } = useLabel({
-    title: title || schemeTitle.singular,
-    required,
-  })
+  const { inputTitle, disabledState } = useControl({ title, required })
+  const { disabled } = disabledState
 
   const [enabled, setEnabled] = useState(false)
   const [open, setOpen] = useState(false)
@@ -185,8 +185,16 @@ const Combobox = ({
       )}
       onMouseEnter={handleEnter}
     >
-      <small className="label">{labelContent}</small>
-      <header className="box" title={inputTitle} onClick={handleToggleClick}>
+      <ControlLabel
+        discreetLabel
+        {...{ title, hideLabel, required, editMode, ...disabledState }}
+      />
+      <header
+        className="box"
+        title={inputTitle}
+        {...(editMode && { disabled })}
+        onClick={handleToggleClick}
+      >
         <div className="selected-items">
           {selected.map(item => (
             <div key={item.id} className="item">
@@ -216,7 +224,7 @@ const Combobox = ({
                   {title}
                   <input
                     type="radio"
-                    name={`searchMode-${name}`}
+                    name={`searchMode-${keyName}`}
                     checked={selectedSearchMode === mode}
                     onChange={handleSearchModeChange(mode)}
                   />
@@ -244,14 +252,14 @@ const Combobox = ({
             <Icon faIcon="fa-solid fa-frog" />
           </div>
         ) : (
-          <fieldset className="drop-down">
+          <fieldset className="drop-down" {...(editMode && { disabled })}>
             {sortedOptions?.map(option => (
               <Option
                 key={option.id.value}
                 checked={selected.some(item => item.id === option.id.value)}
                 fields={option}
                 handleChange={handleOptionChange}
-                {...{ name, required, multiple, selectedSearchMode }}
+                {...{ keyName, required, multiple, selectedSearchMode }}
               />
             ))}
           </fieldset>

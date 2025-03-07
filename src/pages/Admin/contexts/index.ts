@@ -1,3 +1,4 @@
 export * from './fieldResetFns.context'
+export * from './rowSelection.context'
 export * from './scheme.context'
 export * from './views.context'

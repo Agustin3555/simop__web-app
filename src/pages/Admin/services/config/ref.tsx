@@ -32,9 +32,14 @@ export class RefProp implements PropScheme {
     if (hidden === true) return
 
     const scheme = getScheme()
+    const { title } = scheme
 
     return (
-      <Combobox key={verboseKey} name={verboseKey} {...{ scheme, required }} />
+      <Combobox
+        keyName={verboseKey}
+        title={title.singular}
+        {...{ scheme, required }}
+      />
     )
   }
 

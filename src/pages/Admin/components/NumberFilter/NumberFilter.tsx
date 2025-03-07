@@ -16,6 +16,8 @@ interface Props
   decimal: boolean
 }
 
+// BUG
+
 const NumberFilter = ({
   decimal,
   getFilterValue,
@@ -27,19 +29,19 @@ const NumberFilter = ({
 
   const [minFaceted, maxFaceted] = getFacetedMinMaxValues() ?? []
 
-  const commonProps: Partial<DebouncedInputProps> = {
+  const commonInputHTMLAttrs: Partial<DebouncedInputProps['inputHTMLAttrs']> = {
     type: 'number',
     min: minFaceted,
     max: maxFaceted,
     step: decimal ? '0.01' : '',
   }
 
-  const handleMinChange = useCallback<DebouncedInputProps['onChange']>(
+  const handleMinChange = useCallback<DebouncedInputProps['handleChange']>(
     value => setFilterValue((prev: FilterValuePair) => [value, prev?.[1]]),
     [],
   )
 
-  const handleMaxChange = useCallback<DebouncedInputProps['onChange']>(
+  const handleMaxChange = useCallback<DebouncedInputProps['handleChange']>(
     value => setFilterValue((prev: FilterValuePair) => [prev?.[0], value]),
     [],
   )
@@ -48,15 +50,21 @@ const NumberFilter = ({
     <>
       <DebouncedInput
         value={minValue}
-        placeholder={minFaceted ? `Min (${minFaceted})` : ''}
-        onChange={handleMinChange}
-        {...commonProps}
+        hideLabel
+        inputHTMLAttrs={{
+          placeholder: minFaceted ? `Min (${minFaceted})` : '',
+          ...commonInputHTMLAttrs,
+        }}
+        handleChange={handleMinChange}
       />
       <DebouncedInput
         value={maxValue}
-        placeholder={maxFaceted ? `Max (${maxFaceted})` : ''}
-        onChange={handleMaxChange}
-        {...commonProps}
+        hideLabel
+        inputHTMLAttrs={{
+          placeholder: maxFaceted ? `Max (${maxFaceted})` : '',
+          ...commonInputHTMLAttrs,
+        }}
+        handleChange={handleMaxChange}
       />
     </>
   )

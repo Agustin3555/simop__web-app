@@ -3,7 +3,7 @@ import { ChangeEventHandler, useMemo } from 'react'
 import { ComboboxProps, SearchMode } from '../../Combobox'
 
 interface OptionProps
-  extends Pick<ComboboxProps, 'name' | 'required' | 'multiple'> {
+  extends Pick<ComboboxProps, 'keyName' | 'required' | 'multiple'> {
   checked: boolean
   fields: Record<SearchMode, { title: string; value: number | string }>
   selectedSearchMode: SearchMode
@@ -11,7 +11,7 @@ interface OptionProps
 }
 
 const Option = ({
-  name,
+  keyName,
   required,
   multiple,
   checked,
@@ -42,7 +42,8 @@ const Option = ({
         type={multiple ? 'checkbox' : 'radio'}
         value={fields.id.value}
         onChange={handleChange}
-        {...{ name, checked }}
+        name={keyName}
+        {...{ checked }}
         // BUG: si se usa 'required' y es true, dará un error al no ser focusable
       />
     </label>

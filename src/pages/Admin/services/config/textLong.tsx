@@ -22,7 +22,7 @@ export class TextLongProp implements PropScheme {
 
     if (hidden === true) return
 
-    return <InputArea key={key} name={key} {...{ title, required }} />
+    return <InputArea keyName={key} {...{ title, required }} />
   }
 
   getFieldValue = (formData: FormData) => {
