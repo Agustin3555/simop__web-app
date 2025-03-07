@@ -17,7 +17,7 @@ export interface Entity {
   id: number
   nombre: string
 
-  provincia?: Ref
+  provincia?: ProvinciaModel.Ref
 
   creado: string
   modificado: string

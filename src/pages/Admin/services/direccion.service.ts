@@ -30,10 +30,12 @@ export const DireccionService: Service<DireccionModel.Entity> = {
 
     await publicInstance.post(collection(), adaptedInput)
   },
+
   updateOne: async (id, data: DireccionModel.UpdateData) => {
     const adaptedInput = DireccionAdapter.updateOne.input(data)
 
     await publicInstance.put(collection(id), adaptedInput)
   },
+
   deleteMany: async ids => await deleteManyHandler(collection, ids),
 }

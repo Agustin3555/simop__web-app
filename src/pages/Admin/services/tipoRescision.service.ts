@@ -30,6 +30,7 @@ export const TipoRescisionService: Service<TipoRescisionModel.Entity> = {
 
     await publicInstance.post(collection(), adaptedInput)
   },
+
   updateOne: async (id, data: TipoRescisionModel.UpdateData) => {
     const adaptedInput = TipoRescisionAdapter.updateOne.input(data)
 

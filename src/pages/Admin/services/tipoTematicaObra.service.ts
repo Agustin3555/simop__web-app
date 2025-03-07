@@ -30,6 +30,7 @@ export const TipoTematicaObraService: Service<TipoTematicaObraModel.Entity> = {
 
     await publicInstance.post(collection(), adaptedInput)
   },
+
   updateOne: async (id, data: TipoTematicaObraModel.UpdateData) => {
     const adaptedInput = TipoTematicaObraAdapter.updateOne.input(data)
 

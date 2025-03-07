@@ -31,6 +31,7 @@ export const TipoFinanciamientoObraService: Service<TipoFinanciamientoObraModel.
 
       await publicInstance.post(collection(), adaptedInput)
     },
+
     updateOne: async (id, data: TipoFinanciamientoObraModel.UpdateData) => {
       const adaptedInput = TipoFinanciamientoObraAdapter.updateOne.input(data)
 

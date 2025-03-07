@@ -30,6 +30,7 @@ export const TipoParalizacionService: Service<TipoParalizacionModel.Entity> = {
 
     await publicInstance.post(collection(), adaptedInput)
   },
+
   updateOne: async (id, data: TipoParalizacionModel.UpdateData) => {
     const adaptedInput = TipoParalizacionAdapter.updateOne.input(data)
 

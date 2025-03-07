@@ -30,6 +30,7 @@ export const LocalidadService: Service<LocalidadModel.Entity> = {
 
     await publicInstance.post(collection(), adaptedInput)
   },
+
   updateOne: async (id, data: LocalidadModel.UpdateData) => {
     const adaptedInput = LocalidadAdapter.updateOne.input(data)
 

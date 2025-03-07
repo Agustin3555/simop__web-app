@@ -30,10 +30,12 @@ export const TipoInspectorService: Service<TipoInspectorModel.Entity> = {
 
     await publicInstance.post(collection(), adaptedInput)
   },
+
   updateOne: async (id, data: TipoInspectorModel.UpdateData) => {
     const adaptedInput = TipoInspectorAdapter.updateOne.input(data)
 
     await publicInstance.put(collection(id), adaptedInput)
   },
+
   deleteMany: async ids => await deleteManyHandler(collection, ids),
 }

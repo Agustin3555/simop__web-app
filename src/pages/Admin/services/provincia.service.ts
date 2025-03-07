@@ -30,10 +30,12 @@ export const ProvinciaService: Service<ProvinciaModel.Entity> = {
 
     await publicInstance.post(collection(), adaptedInput)
   },
+
   updateOne: async (id, data: ProvinciaModel.UpdateData) => {
     const adaptedInput = ProvinciaAdapter.updateOne.input(data)
 
     await publicInstance.put(collection(id), adaptedInput)
   },
+
   deleteMany: async ids => await deleteManyHandler(collection, ids),
 }

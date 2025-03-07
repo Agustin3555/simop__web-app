@@ -30,6 +30,7 @@ export const DepartamentoService: Service<DepartamentoModel.Entity> = {
 
     await publicInstance.post(collection(), adaptedInput)
   },
+
   updateOne: async (id, data: DepartamentoModel.UpdateData) => {
     const adaptedInput = DepartamentoAdapter.updateOne.input(data)
 

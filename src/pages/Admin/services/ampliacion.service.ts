@@ -36,5 +36,6 @@ export const AmpliacionService: Service<AmpliacionModel.Entity> = {
 
     await publicInstance.put(collection(id), adaptedInput)
   },
+
   deleteMany: async ids => await deleteManyHandler(collection, ids),
 }

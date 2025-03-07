@@ -30,6 +30,7 @@ export const EmpresaService: Service<EmpresaModel.Entity> = {
 
     await publicInstance.post(collection(), adaptedInput)
   },
+
   updateOne: async (id, data: EmpresaModel.UpdateData) => {
     const adaptedInput = EmpresaAdapter.updateOne.input(data)
 

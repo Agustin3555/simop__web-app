@@ -25,10 +25,12 @@ export const RepresentanteObraService: Service<RepresentanteObraModel.Entity> =
 
       await publicInstance.post(collection(), adaptedInput)
     },
+
     updateOne: async (id, data: RepresentanteObraModel.UpdateData) => {
       const adaptedInput = RepresentanteObraAdapter.updateOne.input(data)
 
       await publicInstance.put(collection(id), adaptedInput)
     },
+
     deleteMany: async ids => await deleteManyHandler(collection, ids),
   }

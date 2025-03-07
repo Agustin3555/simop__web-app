@@ -30,6 +30,7 @@ export const TipoModificacionService: Service<TipoModificacionModel.Entity> = {
 
     await publicInstance.post(collection(), adaptedInput)
   },
+
   updateOne: async (id, data: TipoModificacionModel.UpdateData) => {
     const adaptedInput = TipoModificacionAdapter.updateOne.input(data)
 

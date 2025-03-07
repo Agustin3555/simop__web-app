@@ -30,10 +30,12 @@ export const ObraService: Service<ObraModel.Entity> = {
 
     await publicInstance.post(collection(), adaptedInput)
   },
+
   updateOne: async (id, data: ObraModel.UpdateData) => {
     const adaptedInput = ObraAdapter.updateOne.input(data)
 
     await publicInstance.put(collection(id), adaptedInput)
   },
+
   deleteMany: async ids => await deleteManyHandler(collection, ids),
 }

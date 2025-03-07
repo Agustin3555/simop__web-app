@@ -31,6 +31,7 @@ export const TipoRedeterminacionService: Service<TipoRedeterminacionModel.Entity
 
       await publicInstance.post(collection(), adaptedInput)
     },
+
     updateOne: async (id, data: TipoRedeterminacionModel.UpdateData) => {
       const adaptedInput = TipoRedeterminacionAdapter.updateOne.input(data)
 

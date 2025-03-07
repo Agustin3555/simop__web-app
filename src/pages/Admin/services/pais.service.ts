@@ -30,10 +30,12 @@ export const PaisService: Service<PaisModel.Entity> = {
 
     await publicInstance.post(collection(), adaptedInput)
   },
+
   updateOne: async (id, data: PaisModel.UpdateData) => {
     const adaptedInput = PaisAdapter.updateOne.input(data)
 
     await publicInstance.put(collection(id), adaptedInput)
   },
+
   deleteMany: async ids => await deleteManyHandler(collection, ids),
 }

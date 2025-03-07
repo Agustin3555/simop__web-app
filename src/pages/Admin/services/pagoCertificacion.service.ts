@@ -31,6 +31,7 @@ export const PagoCertificacionService: Service<PagoCertificacionModel.Entity> =
 
       await publicInstance.post(collection(), adaptedInput)
     },
+
     updateOne: async (id, data: PagoCertificacionModel.UpdateData) => {
       const adaptedInput = PagoCertificacionAdapter.updateOne.input(data)
 

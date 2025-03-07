@@ -31,6 +31,7 @@ export const TipoContratacionObraService: Service<TipoContratacionObraModel.Enti
 
       await publicInstance.post(collection(), adaptedInput)
     },
+
     updateOne: async (id, data: TipoContratacionObraModel.UpdateData) => {
       const adaptedInput = TipoContratacionObraAdapter.updateOne.input(data)
 

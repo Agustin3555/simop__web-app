@@ -21,9 +21,9 @@ export interface Entity {
   vigencia: boolean
   fecha: string
 
-  empresa: Ref
-  representante: Ref
-  tipoRepresentante: Ref
+  empresa: EmpresaModel.Ref
+  representante: RepresentanteModel.Ref
+  tipoRepresentante: TipoRepresentanteModel.Ref
 
   creado: string
   modificado: string
