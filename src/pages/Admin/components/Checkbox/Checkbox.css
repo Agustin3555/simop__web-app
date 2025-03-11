@@ -6,6 +6,14 @@
   gap: var(--pal-size-m);
   padding-inline: var(--pal-size-xs);
 
+  &.disabled {
+    opacity: 0.5;
+
+    > input {
+      cursor: default;
+    }
+  }
+
   &:has(input:checked) {
     > .check-container {
       border: none;

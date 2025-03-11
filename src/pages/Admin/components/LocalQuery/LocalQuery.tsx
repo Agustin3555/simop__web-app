@@ -1,54 +1,29 @@
 import './LocalQuery.css'
-import { useCallback, useState } from 'react'
-import { useHandleAction } from '@/hooks'
-import { useRowSelection, useScheme } from '../../hooks'
+import { useCallback } from 'react'
+import { useQueryActionState } from '@/hooks'
+import { useEntities, useRowSelection, useScheme } from '../../hooks'
 import { Button, Icon, StateButton } from '@/components'
-import { Table } from './components'
-import { Entity } from '@/services/config'
+import { DeleteButton, Table } from './components'
 import { utils, writeFile } from 'xlsx'
-import { SecureHoldButton } from '..'
-import { useAppStore } from '@/store/config'
 
 const LocalQuery = () => {
   const { scheme } = useScheme()
-  const { title, service } = scheme
+  const { title } = scheme
 
-  const toasting = useAppStore(store => store.toasting)
-  const [data, setData] = useState<Entity[]>()
-  const { setRowSelection, selectedRowIds } = useRowSelection()
+  const { selectedRowIds } = useRowSelection()
 
-  const handleActionResult = useHandleAction(
-    async ({ setError, setSuccess }) => {
-      try {
-        const response = await service.getAll()
-        setData(response)
+  const { query, enableQuery } = useEntities(scheme)
+  const { data, status, isFetching, refetch } = query
 
-        await setSuccess()
-      } catch (error) {
-        await setError()
-      }
-    },
-  )
+  const queryActionState = useQueryActionState({ status, isFetching })
 
-  const { actionState, handleAction } = useHandleAction(
-    async ({ setSuccess, setError }) => {
-      try {
-        await service.deleteMany(selectedRowIds)
-        setRowSelection({})
+  const queryHandleClick = useCallback(async () => {
+    enableQuery()
 
-        const response = await service.getAll()
-        setData(response)
+    if (data || status === 'error') await refetch()
+  }, [data, status])
 
-        toasting('success', 'Eliminado con éxito')
-
-        await setSuccess()
-      } catch (error) {
-        await setError()
-      }
-    },
-  )
-
-  const handleExportClick = useCallback(() => {
+  const exportHandleClick = useCallback(() => {
     if (!data) return
 
     const selectedData =
@@ -76,7 +51,8 @@ const LocalQuery = () => {
             text="Consultar datos"
             hiddenText
             faIcon="fa-solid fa-cloud-arrow-down"
-            {...handleActionResult}
+            actionState={queryActionState}
+            handleAction={queryHandleClick}
           />
           {data && (
             <div className="total-items">
@@ -86,16 +62,7 @@ const LocalQuery = () => {
           )}
         </div>
         <div className="actions">
-          {selectedRowIds.length !== 0 && (
-            <SecureHoldButton
-              text="Eliminar"
-              title="Eliminar seleccionados"
-              faIcon="fa-solid fa-trash"
-              type="secondary"
-              action={handleAction}
-              {...{ actionState }}
-            />
-          )}
+          {selectedRowIds.length !== 0 && <DeleteButton />}
           {data && (
             <Button
               text="Descargar Excel"
@@ -104,7 +71,7 @@ const LocalQuery = () => {
               })`}
               faIcon="fa-solid fa-file-excel"
               _type="secondary"
-              onClick={handleExportClick}
+              onClick={exportHandleClick}
             />
           )}
         </div>

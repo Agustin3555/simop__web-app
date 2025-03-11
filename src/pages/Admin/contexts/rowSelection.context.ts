@@ -5,6 +5,7 @@ interface RowSelectionContextProps {
   rowSelection: RowSelectionState
   setRowSelection: Dispatch<SetStateAction<RowSelectionState>>
   selectedRowIds: number[]
+  deselectRows: () => void
 }
 
 export const RowSelectionContext = createContext<

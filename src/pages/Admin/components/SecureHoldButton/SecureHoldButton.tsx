@@ -10,7 +10,7 @@ interface Props {
   faIcon?: string
   actionState: ActionState
   type?: 'secondary'
-  action: () => Promise<void>
+  handleAction: () => void | Promise<void>
 }
 
 // TODO: que sea posible utilizarlo como botón en un formulario
@@ -21,12 +21,13 @@ const SecureHoldButton = ({
   faIcon,
   actionState,
   type,
-  action,
+  handleAction,
 }: Props) => {
   const timerRef = useRef<number | null>(null)
 
   const handleMouseDown = () => {
-    if (actionState === 'ready') timerRef.current = setTimeout(action, 3000)
+    if (actionState === 'ready')
+      timerRef.current = setTimeout(handleAction, 3000)
   }
 
   const handleMouseUp = () => {

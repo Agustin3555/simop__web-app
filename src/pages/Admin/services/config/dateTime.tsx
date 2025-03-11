@@ -17,17 +17,21 @@ export class DateTimeProp implements PropScheme {
     },
   ) {}
 
-  getFieldComponent = () => {
+  getFieldComponent = (value?: string, editMode = false) => {
     const { key, title, config } = this
     const { field } = config ?? {}
     const { hidden, required } = field ?? {}
 
     if (hidden === true) return
 
+    // Convierte a un formato compatible con datetime-local
+    if (value) value = new Date(value).toISOString().slice(0, 16)
+
     return (
       <Input
         keyName={key}
-        {...{ title, required }}
+        {...(!editMode && { required })}
+        {...{ title, value, editMode }}
         inputHTMLAttrs={{ type: 'datetime-local' }}
       />
     )
@@ -72,8 +76,8 @@ export class DateTimeProp implements PropScheme {
   getCellComponent = (row: Row<Entity>) => {
     const { key } = this
 
-    const value = row.original[key] as string
+    const value = row.original[key] as undefined | string
 
-    return <p>{format(value, { date: 'medium', time: 'short' })}</p>
+    return value && <p>{format(value, { date: 'medium', time: 'short' })}</p>
   }
 }

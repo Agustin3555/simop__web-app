@@ -24,7 +24,7 @@ export class RefProp implements PropScheme {
     this.verboseKey = `${value}Id`
   }
 
-  getFieldComponent = () => {
+  getFieldComponent = (value?: Partial<Entity>, editMode = false) => {
     const { verboseKey, config } = this
     const { getScheme, field } = config
     const { hidden, required } = field ?? {}
@@ -38,7 +38,9 @@ export class RefProp implements PropScheme {
       <Combobox
         keyName={verboseKey}
         title={title.singular}
-        {...{ scheme, required }}
+        value={value && [value]}
+        {...(!editMode && { required })}
+        {...{ editMode, scheme }}
       />
     )
   }
@@ -98,7 +100,7 @@ export class RefProp implements PropScheme {
     const { service, anchorField } = getScheme()
     const { getOne } = service
 
-    const value = row.original[key] as any | undefined
+    const value = row.original[key] as undefined | any
 
     return (
       value && (

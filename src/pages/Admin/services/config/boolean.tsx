@@ -22,30 +22,27 @@ export class BooleanProp implements PropScheme {
     },
   ) {}
 
-  getFieldComponent = () => {
+  getFieldComponent = (value?: boolean, editMode = false) => {
     const { key, title, config } = this
     const { falseText, trueText, field } = config ?? {}
     const { hidden } = field ?? {}
 
     if (hidden === true) return
 
-    return <Checkbox keyName={key} {...{ title, falseText, trueText }} />
+    return (
+      <Checkbox
+        keyName={key}
+        {...{ title, value, editMode, falseText, trueText }}
+      />
+    )
   }
 
-  getFieldValue = (formData: FormData, form: HTMLFormElement) => {
+  getFieldValue = (formData: FormData) => {
     const { key, config } = this
     const { field } = config ?? {}
     const { hidden } = field ?? {}
 
     if (hidden === true) return
-
-    // const checkbox = form.querySelector<HTMLInputElement>(
-    //   `input[type="checkbox"][name="${key}"]`,
-    // )
-    // if (!checkbox) return
-
-    // const useValue = checkbox.dataset.useValue === 'true'
-    // if (!useValue) return
 
     return formData.get(key) === 'on'
   }
@@ -63,12 +60,14 @@ export class BooleanProp implements PropScheme {
     const { falseText = 'No', trueText = 'Si', column } = config ?? {}
     const { falseColor = 'grey', trueColor = 'green' } = column ?? {}
 
-    const value = row.original[key] as boolean
+    const value = row.original[key] as undefined | boolean
 
     return (
-      <p className={classList('highlighted', value ? trueColor : falseColor)}>
-        {value ? trueText : falseText}
-      </p>
+      value !== undefined && (
+        <p className={classList('highlighted', value ? trueColor : falseColor)}>
+          {value ? trueText : falseText}
+        </p>
+      )
     )
   }
 }

@@ -1,5 +1,5 @@
 import './View.css'
-import { ReactNode, useMemo, useState } from 'react'
+import { ReactNode, useCallback, useMemo, useState } from 'react'
 import { useChangeHandler, useScheme, useViewActive } from '../../hooks'
 import { Icon, Separator } from '@/components'
 import { RowSelectionContext, SchemeContext } from '../../contexts'
@@ -68,6 +68,8 @@ const HydratedView = ({
     [rowSelection],
   )
 
+  const deselectRows = useCallback(() => setRowSelection({}), [])
+
   const handleChange = useChangeHandler(newLocalView =>
     setLocalView(newLocalView as LocalViewKey),
   )
@@ -95,7 +97,12 @@ const HydratedView = ({
       <Separator />
       <div className="local-views">
         <RowSelectionContext.Provider
-          value={{ rowSelection, setRowSelection, selectedRowIds }}
+          value={{
+            rowSelection,
+            setRowSelection,
+            selectedRowIds,
+            deselectRows,
+          }}
         >
           {localViews.map(({ localViewKey, component }) => (
             <div

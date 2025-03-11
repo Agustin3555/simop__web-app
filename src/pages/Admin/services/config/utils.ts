@@ -34,7 +34,7 @@ export interface PropScheme<E = Entity> {
   title?: string
   config?: unknown
 
-  getFieldComponent: () => ReactNode
+  getFieldComponent: (value?: any, editMode?: boolean) => ReactNode
   getFieldValue: (
     formData: FormData,
     form: HTMLFormElement,

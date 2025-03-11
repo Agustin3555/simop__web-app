@@ -17,17 +17,21 @@ export class DateProp implements PropScheme {
     },
   ) {}
 
-  getFieldComponent = () => {
+  getFieldComponent = (value?: string, editMode = false) => {
     const { key, title, config } = this
     const { field } = config ?? {}
     const { hidden, required } = field ?? {}
 
     if (hidden === true) return
 
+    // Obtiene solo la fecha
+    if (value) value = value.split('T')[0]
+
     return (
       <Input
         keyName={key}
-        {...{ title, required }}
+        {...(!editMode && { required })}
+        {...{ title, value, editMode }}
         inputHTMLAttrs={{ type: 'date' }}
       />
     )
@@ -74,8 +78,8 @@ export class DateProp implements PropScheme {
   getCellComponent = (row: Row<Entity>) => {
     const { key } = this
 
-    const value = row.original[key] as string
+    const value = row.original[key] as undefined | string
 
-    return <p>{format(value, { date: 'medium' })}</p>
+    return value && <p>{format(value, { date: 'medium' })}</p>
   }
 }

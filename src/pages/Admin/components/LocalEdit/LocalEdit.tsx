@@ -1,58 +1,109 @@
 import './LocalEdit.css'
-import { useCallback, useMemo } from 'react'
+import { FormEventHandler, useCallback, useMemo } from 'react'
 import { useAppStore } from '@/store/config'
-import { useSubmitAction } from '@/hooks'
+import { useMutationActionState } from '@/hooks'
 import { useEntities, useRowSelection, useScheme } from '../../hooks'
-import { Button, Icon, StateButton } from '@/components'
+import { Button, StateButton } from '@/components'
+import { useMutation } from '@tanstack/react-query'
 
 const LocalEdit = () => {
   const { scheme } = useScheme()
-  const { service, title, groups } = scheme
+  const { service, title, anchorField, groups } = scheme
 
   const toasting = useAppStore(store => store.toasting)
-  // const { data } = useEntities(scheme)
-  const { selectedRowIds } = useRowSelection()
+  const { selectedRowIds, deselectRows } = useRowSelection()
 
-  const fieldGroups = useMemo(
-    () =>
-      groups.map(({ title, props }) => ({
-        title,
-        fields: Object.values(props).map(({ getFieldComponent }) =>
-          getFieldComponent(),
-        ),
-      })),
-    [],
+  const { query } = useEntities(scheme)
+  const { data, refetch } = query
+
+  const isEditing = useMemo(
+    () => selectedRowIds.length === 1,
+    [selectedRowIds.length],
   )
 
-  // const { handleSubmit, actionState } = useSubmitAction(
-  //   async ({ form, formData, setError, setSuccess }) => {
-  //     try {
-  //       const createData = groups.reduce((acc, { props }) => {
-  //         Object.values(props).forEach(({ key, verboseKey, getFieldValue }) => {
-  //           const value = getFieldValue(formData, form)
+  const selectedEntity = useMemo(
+    () => data?.find(entity => entity.id === selectedRowIds[0]),
+    [data, selectedRowIds],
+  )
 
-  //           if (value !== undefined) acc[verboseKey || key] = value
-  //         })
+  const fieldGroups = useMemo(() => {
+    if (!isEditing) return
 
-  //         return acc
-  //       }, {} as Record<string, unknown>)
+    return groups.map(({ title, props }) => ({
+      title,
+      fields: Object.entries(props).map(([key, { getFieldComponent }]) =>
+        getFieldComponent(selectedEntity![key], true),
+      ),
+    }))
+  }, [isEditing, selectedEntity])
 
-  //       // console.log(createData)
+  const mutationFn = useCallback(
+    async (form: HTMLFormElement) => {
+      const id = selectedRowIds[0]
+      const formData = new FormData(form)
 
-  //       await service.create!(createData)
-  //       toasting('success', 'Cambios aplicados con éxito')
+      const updateData = groups.reduce((acc, { props }) => {
+        Object.values(props).forEach(({ key, verboseKey, getFieldValue }) => {
+          if (!formData.has(verboseKey || key)) return
 
-  //       await setSuccess()
-  //     } catch (error) {
-  //       await setError()
-  //     }
-  //   },
-  // )
+          const value = getFieldValue(formData, form)
+
+          if (value !== undefined) acc[verboseKey || key] = value
+        })
+
+        return acc
+      }, {} as Record<string, unknown>)
+
+      await service.updateOne!(id, updateData)
+      await refetch()
+    },
+    [selectedRowIds],
+  )
+
+  const { status, isPending, mutate } = useMutation({
+    mutationFn,
+    onSuccess: () => {
+      toasting('success', 'Cambios aplicados con éxito')
+      deselectRows()
+    },
+  })
+
+  const actionState = useMutationActionState({ status, isPending })
+
+  const handleSubmit: FormEventHandler<HTMLFormElement> = event => {
+    event.preventDefault()
+
+    mutate(event.currentTarget)
+  }
 
   return (
     <div className="cmp-local-edit">
-      {selectedRowIds.length === 1 ? (
-        selectedRowIds
+      {isEditing ? (
+        <>
+          <h2>
+            Editando:
+            <strong className="button-look s">
+              {selectedEntity![anchorField]}
+            </strong>
+          </h2>
+          <form onSubmit={handleSubmit}>
+            <div className="field-groups">
+              {fieldGroups?.map(({ title, fields }, index) => (
+                <div key={index} className="group">
+                  {title && <small>{title}</small>}
+                  <div className="fields">{fields.map(item => item)}</div>
+                </div>
+              ))}
+            </div>
+            <div className="actions">
+              <StateButton
+                text="Confirmar"
+                faIcon="fa-solid fa-check"
+                {...{ actionState }}
+              />
+            </div>
+          </form>
+        </>
       ) : (
         <div className="banner-container">
           <div className="banner">
@@ -74,21 +125,3 @@ const LocalEdit = () => {
 }
 
 export default LocalEdit
-
-// <form onSubmit={handleSubmit}>
-//   <div className="field-groups">
-//     {fieldGroups.map(({ title, fields }, index) => (
-//       <div key={index} className="group">
-//         {title && <small>{title}</small>}
-//         <div className="fields">{fields.map(item => item)}</div>
-//       </div>
-//     ))}
-//   </div>
-//   <div className="actions">
-//     <StateButton
-//       text="Confirmar"
-//       faIcon="fa-solid fa-check"
-//       {...{ actionState }}
-//     />
-//   </div>
-// </form>

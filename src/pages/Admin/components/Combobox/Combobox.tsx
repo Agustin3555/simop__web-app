@@ -22,6 +22,7 @@ import { sort } from './helpers'
 export type SearchMode = keyof Entity
 
 export interface ComboboxProps extends Control {
+  value?: Partial<Entity>[]
   multiple?: boolean
   scheme: Scheme
 }
@@ -29,6 +30,7 @@ export interface ComboboxProps extends Control {
 const Combobox = ({
   keyName,
   title,
+  value: initialData,
   hideLabel = false,
   required = false,
   editMode = false,
@@ -46,20 +48,21 @@ const Combobox = ({
   const [search, setSearch] = useState('')
   const [searchModes, setSearchModes] = useState<SearchMode[]>([])
   const [selectedSearchMode, setSelectedSearchMode] = useState(anchorField)
-  const [selected, setSelected] = useState<Partial<Entity>[]>([])
+  const [selected, setSelected] = useState<Partial<Entity>[]>(initialData ?? [])
   const comboboxLayoutRef = useRef<HTMLDivElement>(null)
+
+  const queryFn = useCallback(async () => {
+    const options = await service.getForConnect!()
+
+    if (options.length !== 0) setSearchModes(Object.keys(options[0]))
+
+    return options
+  }, [])
 
   const { data: options, refetch } = useQuery({
     queryKey: [key, 'refs'],
-
-    queryFn: async () => {
-      const options = await service.getForConnect!()
-
-      if (options.length !== 0) setSearchModes(Object.keys(options[0]))
-
-      return options
-    },
-
+    queryFn,
+    initialData,
     refetchInterval: refreshRate ? REFETCH_INTERVALS[refreshRate] : Infinity,
     retry: false,
     enabled,
@@ -174,6 +177,8 @@ const Combobox = ({
     return () => document.removeEventListener('mousedown', handleClickOutside)
   }, [handleClickOutside])
 
+  const resetHandleClick = useCallback(() => setSelected(initialData ?? []), [])
+
   return (
     <div
       ref={comboboxLayoutRef}
@@ -187,7 +192,14 @@ const Combobox = ({
     >
       <ControlLabel
         discreetLabel
-        {...{ title, hideLabel, required, editMode, ...disabledState }}
+        {...{
+          title,
+          hideLabel,
+          required,
+          editMode,
+          ...disabledState,
+          resetHandleClick,
+        }}
       />
       <header
         className="box"

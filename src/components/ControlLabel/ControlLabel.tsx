@@ -1,5 +1,5 @@
 import './ControlLabel.css'
-import { useMemo } from 'react'
+import { MouseEventHandler, useMemo } from 'react'
 import { Control } from '@/types'
 import { Button, Toggle } from '..'
 import { ToggleProps } from '../Toggle/Toggle'
@@ -10,6 +10,7 @@ interface ControlLabelProps
   discreetLabel?: boolean
   disabled: ToggleProps['value']
   setDisabled: ToggleProps['setValue']
+  resetHandleClick?: MouseEventHandler<HTMLButtonElement>
 }
 
 const ControlLabel = ({
@@ -20,6 +21,7 @@ const ControlLabel = ({
   discreetLabel = false,
   disabled,
   setDisabled,
+  resetHandleClick,
 }: ControlLabelProps) => {
   const labelContent = useMemo(
     () => (
@@ -41,13 +43,17 @@ const ControlLabel = ({
         )}
         {editMode && (
           <div className="editing-actions">
-            <Button
-              title="Reiniciar valor"
-              faIcon="fa-solid fa-arrow-rotate-left"
-              hideText
-              size="xs"
-              _type="secondary"
-            />
+            {resetHandleClick && (
+              <Button
+                title="Reiniciar valor"
+                faIcon="fa-solid fa-arrow-rotate-left"
+                hideText
+                type="button"
+                onClick={resetHandleClick}
+                _type="secondary"
+                size="xs"
+              />
+            )}
             <Toggle
               title="Alternar edición"
               faIcon="fa-solid fa-pen"

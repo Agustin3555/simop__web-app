@@ -18,7 +18,7 @@ interface Props {
 const Cell = ({ flatProps, cell }: Props) => {
   const component = useMemo(
     () => flatProps[cell.column.id].getCellComponent(cell.row),
-    [],
+    [cell.column.id, cell.row],
   )
 
   return <td className="cmp-cell">{component}</td>

@@ -25,7 +25,7 @@ export class NumberProp implements PropScheme {
     },
   ) {}
 
-  getFieldComponent = () => {
+  getFieldComponent = (value?: number | string, editMode = false) => {
     const { key, title, config } = this
     const { field, decimal = false } = config ?? {}
     const { hidden, required } = field ?? {}
@@ -35,7 +35,8 @@ export class NumberProp implements PropScheme {
     return (
       <Input
         keyName={key}
-        {...{ title, required }}
+        {...(!editMode && { required })}
+        {...{ title, value, editMode }}
         inputHTMLAttrs={{ type: 'number', step: decimal ? '0.01' : undefined }}
       />
     )
@@ -75,10 +76,10 @@ export class NumberProp implements PropScheme {
     const { key, config } = this
     const { pre, sub } = config ?? {}
 
-    const value = row.original[key] as number | string
+    const value = row.original[key] as undefined | number | string
 
     return (
-      value && (
+      value !== undefined && (
         <p>
           {pre && <small className="pre">{pre}</small>}
           {value}

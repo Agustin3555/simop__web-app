@@ -16,14 +16,20 @@ export class TextProp implements PropScheme {
     },
   ) {}
 
-  getFieldComponent = () => {
+  getFieldComponent = (value?: string, editMode = false) => {
     const { key, title, config } = this
     const { field } = config ?? {}
     const { hidden, required } = field ?? {}
 
     if (hidden === true) return
 
-    return <Input keyName={key} {...{ title, required }} />
+    return (
+      <Input
+        keyName={key}
+        {...(!editMode && { required })}
+        {...{ title, value, editMode }}
+      />
+    )
   }
 
   getFieldValue = (formData: FormData) => {
@@ -37,7 +43,7 @@ export class TextProp implements PropScheme {
 
     if (value === '') return
 
-    return value as string
+    return (value as string).trim()
   }
 
   getHeader = (column: Column<Entity>) => {
@@ -58,8 +64,8 @@ export class TextProp implements PropScheme {
   getCellComponent = (row: Row<Entity>) => {
     const { key } = this
 
-    const value = row.original[key] as string
+    const value = row.original[key] as undefined | string
 
-    return <p>{value}</p>
+    return value && <p>{value}</p>
   }
 }
