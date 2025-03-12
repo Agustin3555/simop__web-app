@@ -47,6 +47,7 @@ export interface RawEntity {
   metrosCuadradosObraRefaccionada?: number
   metrosLinealesObraRefaccionada?: number
   observacionesObraRefaccionada?: string
+  avanceTotal?: number
 
   empresa?: EmpresaModel.RawRef
   tipoContratacionObra?: TipoContratacionObraModel.RawRef
@@ -88,6 +89,7 @@ export interface Entity {
   metrosCuadradosObraRefaccionada?: number
   metrosLinealesObraRefaccionada?: number
   observacionesObraRefaccionada?: string
+  avanceTotal?: number
 
   empresa?: EmpresaModel.Ref
   tipoContratacionObra?: TipoContratacionObraModel.Ref
@@ -142,6 +144,7 @@ export interface CreateData {
   metrosCuadradosObraRefaccionada?: number
   metrosLinealesObraRefaccionada?: number
   observacionesObraRefaccionada?: string
+  avanceTotal?: number
 
   empresaId?: number
   tipoContratacionObraId?: number
@@ -179,6 +182,7 @@ export interface CreateBody {
   metrosCuadradosObraRefaccionada?: number
   metrosLinealesObraRefaccionada?: number
   observacionesObraRefaccionada?: string
+  avanceTotal?: number
 
   empresaId?: number
   tipoContratacionObraId?: number
@@ -216,6 +220,7 @@ export interface UpdateData {
   metrosCuadradosObraRefaccionada?: number
   metrosLinealesObraRefaccionada?: number
   observacionesObraRefaccionada?: string
+  avanceTotal?: number
 
   empresaId?: number
   tipoContratacionObraId?: number
@@ -253,6 +258,7 @@ export interface UpdateBody {
   metrosCuadradosObraRefaccionada?: number
   metrosLinealesObraRefaccionada?: number
   observacionesObraRefaccionada?: string
+  avanceTotal?: number
 
   empresaId?: number
   tipoContratacionObraId?: number
@@ -319,12 +325,16 @@ export const scheme: Scheme<Entity> = {
         fechaFin: new DateProp('Fecha de Fin'),
         plazoMeses: new NumberProp('Plazo en Meses'),
         plazoDias: new NumberProp('Plazo en Días'),
+        avanceTotal: new NumberProp('Porcentaje de Avance Total', {
+          decimal: true,
+          sub: '%',
+        }),
+        nomenclaturaCatastral: new TextProp('Nomenclatura Catastral'),
         localidad: new RefProp({
           getScheme: () => LocalidadModel.scheme,
         }),
         direccion: new TextProp('Dirección'),
         lugar: new TextLongProp('Lugar'),
-        nomenclaturaCatastral: new TextProp('Nomenclatura Catastral'),
         observaciones: new TextLongProp('Observaciones generales'),
       },
     },
