@@ -74,7 +74,7 @@ export class NumberProp implements PropScheme {
 
   getCellComponent = (row: Row<Entity>) => {
     const { key, config } = this
-    const { pre, sub } = config ?? {}
+    const { decimal = false, pre, sub } = config ?? {}
 
     const value = row.original[key] as undefined | number | string
 
@@ -82,7 +82,11 @@ export class NumberProp implements PropScheme {
       value !== undefined && (
         <p>
           {pre && <small className="pre">{pre}</small>}
-          {value}
+          {decimal
+            ? Number(value).toLocaleString('es-ES', {
+                minimumFractionDigits: 2,
+              })
+            : value}
           {sub && <small className="sub">{sub}</small>}
         </p>
       )
