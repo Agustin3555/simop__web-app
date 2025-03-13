@@ -4,7 +4,7 @@ import { Combobox, FetchRef, TextFilter } from '../../components'
 import { AccessorFn, Column, Row } from '@tanstack/react-table'
 import { getFlatProps } from './scheme'
 
-export const fn = (form: HTMLFormElement, key: string) => {
+export const isFieldEnabled = (form: HTMLFormElement, key: string) => {
   const inputOption = form.querySelector<HTMLInputElement>(`[name="${key}"]`)
 
   // Verifica si 'inputOption' está dentro de un 'fieldset' habilitado
@@ -62,7 +62,7 @@ export class RefProp implements PropScheme {
     const value = formData.get(verboseKey)
 
     if (value === null) {
-      if (editMode && fn(form, verboseKey)) return null
+      if (editMode && isFieldEnabled(form, verboseKey)) return null
       return
     }
 

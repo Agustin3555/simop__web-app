@@ -3,7 +3,7 @@ import { ForView, GetScheme, PropScheme, Required } from './utils'
 import { Combobox, FetchRef } from '../../components'
 import { Column, Row } from '@tanstack/react-table'
 import { getFlatProps } from './scheme'
-import { fn } from '.'
+import { isFieldEnabled } from '.'
 
 /*
   Solamente para controlar los vínculos de uno a muchos que no tengan atributos
@@ -51,7 +51,7 @@ export class RefListProp implements PropScheme {
     const value = formData.getAll(key)
 
     if (value.length === 0) {
-      if (editMode && fn(form, key)) return null
+      if (editMode && isFieldEnabled(form, key)) return null
       return
     }
 
