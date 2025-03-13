@@ -3,6 +3,7 @@ import { ForView, GetScheme, PropScheme, Required } from './utils'
 import { Combobox, FetchRef } from '../../components'
 import { Column, Row } from '@tanstack/react-table'
 import { getFlatProps } from './scheme'
+import { fn } from '.'
 
 /*
   Solamente para controlar los vínculos de uno a muchos que no tengan atributos
@@ -40,16 +41,19 @@ export class RefListProp implements PropScheme {
     )
   }
 
-  getFieldValue = (formData: FormData) => {
-    const { key, config } = this
-    const { field } = config ?? {}
-    const { hidden } = field ?? {}
-
-    if (hidden === true) return
+  getFieldValue = (
+    formData: FormData,
+    form: HTMLFormElement,
+    editMode = false,
+  ) => {
+    const { key } = this
 
     const value = formData.getAll(key)
 
-    if (value.length === 0) return
+    if (value.length === 0) {
+      if (editMode && fn(form, key)) return null
+      return
+    }
 
     return value.map(Number)
   }

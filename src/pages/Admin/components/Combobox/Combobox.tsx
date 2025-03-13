@@ -268,7 +268,7 @@ const Combobox = ({
             {sortedOptions?.map(option => (
               <Option
                 key={option.id.value}
-                checked={selected.some(item => item.id === option.id.value)}
+                checked={selected.some(({ id }) => id === option.id.value)}
                 fields={option}
                 handleChange={handleOptionChange}
                 {...{ keyName, required, multiple, selectedSearchMode }}

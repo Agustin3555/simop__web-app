@@ -31,16 +31,17 @@ export class TextLongProp implements PropScheme {
     )
   }
 
-  getFieldValue = (formData: FormData) => {
-    const { key, config } = this
-    const { field } = config ?? {}
-    const { hidden } = field ?? {}
-
-    if (hidden === true) return
+  getFieldValue = (
+    formData: FormData,
+    form: HTMLFormElement,
+    editMode = false,
+  ) => {
+    const { key } = this
 
     const value = formData.get(key)
 
-    if (value === '') return
+    if (value === null) return
+    if (value === '') return editMode ? null : undefined
 
     return value as string
   }

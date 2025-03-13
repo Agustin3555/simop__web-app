@@ -4,6 +4,13 @@ import { Combobox, FetchRef, TextFilter } from '../../components'
 import { AccessorFn, Column, Row } from '@tanstack/react-table'
 import { getFlatProps } from './scheme'
 
+export const fn = (form: HTMLFormElement, key: string) => {
+  const inputOption = form.querySelector<HTMLInputElement>(`[name="${key}"]`)
+
+  // Verifica si 'inputOption' está dentro de un 'fieldset' habilitado
+  return inputOption && !inputOption.closest('fieldset')?.disabled
+}
+
 export class RefProp implements PropScheme {
   _key = ''
   verboseKey = ''
@@ -45,16 +52,19 @@ export class RefProp implements PropScheme {
     )
   }
 
-  getFieldValue = (formData: FormData) => {
-    const { verboseKey, config } = this
-    const { field } = config ?? {}
-    const { hidden } = field ?? {}
-
-    if (hidden === true) return
+  getFieldValue = (
+    formData: FormData,
+    form: HTMLFormElement,
+    editMode = false,
+  ) => {
+    const { verboseKey } = this
 
     const value = formData.get(verboseKey)
 
-    if (value === null) return
+    if (value === null) {
+      if (editMode && fn(form, verboseKey)) return null
+      return
+    }
 
     return Number(value)
   }

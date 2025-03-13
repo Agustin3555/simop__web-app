@@ -44,9 +44,7 @@ const LocalEdit = () => {
 
       const updateData = groups.reduce((acc, { props }) => {
         Object.values(props).forEach(({ key, verboseKey, getFieldValue }) => {
-          if (!formData.has(verboseKey || key)) return
-
-          const value = getFieldValue(formData, form)
+          const value = getFieldValue(formData, form, true)
 
           if (value !== undefined) acc[verboseKey || key] = value
         })

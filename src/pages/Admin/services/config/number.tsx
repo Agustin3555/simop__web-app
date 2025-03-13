@@ -42,16 +42,18 @@ export class NumberProp implements PropScheme {
     )
   }
 
-  getFieldValue = (formData: FormData) => {
+  getFieldValue = (
+    formData: FormData,
+    form: HTMLFormElement,
+    editMode = false,
+  ) => {
     const { key, config } = this
-    const { field, big = false } = config ?? {}
-    const { hidden } = field ?? {}
-
-    if (hidden === true) return
+    const { big = false } = config ?? {}
 
     const value = formData.get(key)
 
-    if (value === '') return
+    if (value === null) return
+    if (value === '') return editMode ? null : undefined
 
     return big ? value : Number(value)
   }

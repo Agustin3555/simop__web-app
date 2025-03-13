@@ -37,14 +37,18 @@ export class BooleanProp implements PropScheme {
     )
   }
 
-  getFieldValue = (formData: FormData) => {
-    const { key, config } = this
-    const { field } = config ?? {}
-    const { hidden } = field ?? {}
+  getFieldValue = (
+    formData: FormData,
+    form: HTMLFormElement,
+    editMode = false,
+  ) => {
+    const { key } = this
 
-    if (hidden === true) return
+    if (editMode && !formData.has(key)) return
 
-    return formData.get(key) === 'on'
+    const value = formData.get(key)
+
+    return value === 'on'
   }
 
   getHeader = (column: Column<Entity>) => {

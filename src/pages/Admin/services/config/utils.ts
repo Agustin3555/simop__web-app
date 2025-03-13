@@ -38,6 +38,7 @@ export interface PropScheme<E = Entity> {
   getFieldValue: (
     formData: FormData,
     form: HTMLFormElement,
+    editMode?: boolean,
   ) => undefined | unknown
 
   accessorFn?: AccessorFn<E>
