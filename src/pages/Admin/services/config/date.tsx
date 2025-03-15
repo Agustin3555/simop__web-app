@@ -81,6 +81,6 @@ export class DateProp implements PropScheme {
 
     const value = row.original[key] as undefined | string
 
-    return value && <p>{format(value, { date: 'medium' })}</p>
+    return value && <p>{format(value, { date: 'short' })}</p>
   }
 }

@@ -1,9 +1,9 @@
 import './LocalQuery.css'
-import { useCallback } from 'react'
+import { useCallback, useRef } from 'react'
 import { useQueryActionState } from '@/hooks'
 import { useEntities, useRowSelection, useScheme } from '../../hooks'
 import { Button, Icon, StateButton } from '@/components'
-import { DeleteButton, Table } from './components'
+import { DeleteButton, DownloadReportButton, Table } from './components'
 import { utils, writeFile } from 'xlsx'
 
 const LocalQuery = () => {
@@ -11,6 +11,7 @@ const LocalQuery = () => {
   const { title } = scheme
 
   const { selectedRowIds } = useRowSelection()
+  const localQueryRef = useRef<HTMLDivElement | null>(null)
 
   const { query, enableQuery } = useEntities(scheme)
   const { data, status, isFetching, refetch } = query
@@ -44,7 +45,7 @@ const LocalQuery = () => {
   }, [data, selectedRowIds])
 
   return (
-    <div className="cmp-local-query">
+    <div className="cmp-local-query" ref={localQueryRef}>
       <header>
         <div className="left">
           <StateButton
@@ -64,15 +65,18 @@ const LocalQuery = () => {
         <div className="actions">
           {selectedRowIds.length !== 0 && <DeleteButton />}
           {data && (
-            <Button
-              text="Descargar Excel"
-              title={`Descargar Excel (${
-                selectedRowIds.length === 0 ? 'todo' : 'seleccionados'
-              })`}
-              faIcon="fa-solid fa-file-excel"
-              _type="secondary"
-              onClick={exportHandleClick}
-            />
+            <>
+              <DownloadReportButton {...{ localQueryRef }} />
+              <Button
+                text="Descargar Excel"
+                title={`Descargar Excel (${
+                  selectedRowIds.length === 0 ? 'todo' : 'seleccionados'
+                })`}
+                faIcon="fa-solid fa-file-excel"
+                _type="secondary"
+                onClick={exportHandleClick}
+              />
+            </>
           )}
         </div>
       </header>

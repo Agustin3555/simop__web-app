@@ -1,5 +1,5 @@
-import './styles/index.css'
 import '@fontsource-variable/inter'
+import './styles/index.css'
 
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
@@ -12,5 +12,5 @@ PrivateInterceptor()
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <App />
-  </StrictMode>
+  </StrictMode>,
 )
