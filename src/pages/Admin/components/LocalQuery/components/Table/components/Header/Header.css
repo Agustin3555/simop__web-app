@@ -1,6 +1,7 @@
 .cmp-header {
-  vertical-align: bottom;
+  position: relative;
 
+  vertical-align: bottom;
   border-inline-style: solid;
   border-inline-width: var(--line-thickness);
   border-inline-color: var(--pal-color-white);
@@ -25,14 +26,18 @@
       gap: var(--cell-padding-inline);
       padding: var(--cell-padding-inline);
 
-      > .title {
+      > .title-group {
         display: flex;
         flex-direction: column;
         align-items: flex-start;
         gap: var(--pal-size-xs);
 
         font-weight: 650;
-        color: var(--pal-color-a-d2);
+
+        > .title {
+          text-align: start;
+          color: var(--pal-color-a-d2);
+        }
 
         > small {
           font-size: var(--pal-size-font-2xs);
@@ -74,6 +79,28 @@
 
         background-color: var(--pal-color-a-l3);
       }
+    }
+  }
+
+  > .resizer {
+    position: absolute;
+    top: 0;
+    right: 0;
+
+    width: var(--pal-size-s);
+    height: 100%;
+
+    opacity: 0;
+    cursor: col-resize;
+    user-select: none;
+
+    transition: opacity var(--pal-time-xs) ease-out;
+    background: linear-gradient(to right, transparent, var(--pal-color-a-l1));
+    touch-action: none;
+
+    &.resizing,
+    &:hover {
+      opacity: initial;
     }
   }
 }

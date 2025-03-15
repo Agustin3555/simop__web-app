@@ -66,6 +66,6 @@ export class TextLongProp implements PropScheme {
 
     const value = row.original[key] as undefined | string
 
-    return value && <p>{value}</p>
+    return value && <p className="text m">{value}</p>
   }
 }

@@ -40,8 +40,8 @@ const Header = ({
   columnOrder,
   setColumnOrder,
 }: Props) => {
-  const { column } = header
-  const { getIsSorted, getSortIndex } = column
+  const { column, getResizeHandler, getSize } = header
+  const { getIsSorted, getSortIndex, resetSize, getIsResizing } = column
   const { getHeader } = flatProps[column.id] ?? {}
 
   const [dragging, setDragging] = useState(false)
@@ -116,16 +116,18 @@ const Header = ({
   return (
     <th
       className={classList('cmp-header', { dragging })}
-      draggable
-      onDragStart={handleDragStart}
-      onDragOver={handleDragOver}
-      onDragEnd={handleDragEnd}
-      onDrop={handleDrop}
+      style={{ minWidth: getSize() }}
+      // style={{ width: Math.round(getSize() / 32) * 32 }}
+      // draggable
+      // onDragStart={handleDragStart}
+      // onDragOver={handleDragOver}
+      // onDragEnd={handleDragEnd}
+      // onDrop={handleDrop}
     >
       <div className="content">
         <button onClick={handleSortingClick}>
-          <div className="title">
-            {title}
+          <div className="title-group">
+            <p className="title text">{title}</p>
             {subtitle && <small>{subtitle}</small>}
           </div>
           {sortIcon && (
@@ -137,6 +139,12 @@ const Header = ({
         </button>
         {filter && <div className="filters">{filter}</div>}
       </div>
+      <div
+        className={classList('resizer', { resizing: getIsResizing() })}
+        onDoubleClick={() => resetSize()}
+        onMouseDown={getResizeHandler()}
+        onTouchStart={getResizeHandler()}
+      />
     </th>
   )
 }

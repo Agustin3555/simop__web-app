@@ -3,7 +3,7 @@ import { useCallback, useRef } from 'react'
 import { useQueryActionState } from '@/hooks'
 import { useEntities, useRowSelection, useScheme } from '../../hooks'
 import { Button, Icon, StateButton } from '@/components'
-import { DeleteButton, DownloadReportButton, Table } from './components'
+import { DeleteButton, ReportButton, Table } from './components'
 import { utils, writeFile } from 'xlsx'
 
 const LocalQuery = () => {
@@ -66,7 +66,7 @@ const LocalQuery = () => {
           {selectedRowIds.length !== 0 && <DeleteButton />}
           {data && (
             <>
-              <DownloadReportButton {...{ localQueryRef }} />
+              <ReportButton {...{ localQueryRef }} />
               <Button
                 text="Descargar Excel"
                 title={`Descargar Excel (${

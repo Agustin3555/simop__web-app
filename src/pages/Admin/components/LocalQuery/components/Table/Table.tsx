@@ -68,6 +68,7 @@ const Table = ({ data }: TableProps) => {
     enableRowSelection: true,
     enableMultiSort: true,
     enableSortingRemoval: false,
+    columnResizeMode: 'onChange',
   })
 
   return (

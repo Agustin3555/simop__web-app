@@ -1,5 +1,7 @@
 .cmp-fetch-ref {
   > .cmp-button {
+    /* TODO: hacer que el texto pueda romper la línea */
+
     justify-content: flex-start;
     border-color: var(--pal-color-a-l3);
     width: 100%;

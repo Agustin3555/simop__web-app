@@ -13,8 +13,6 @@
     border-style: solid;
     border-collapse: collapse;
 
-    white-space: nowrap;
-
     border-radius: var(--table-border-radius);
     background-color: var(--pal-color-white);
     overflow: hidden;

@@ -1,13 +1,13 @@
 .cmp-cell {
+  padding-block: var(--pal-size-s);
   padding-inline: var(--cell-padding-inline);
-  height: 4rem;
 
-  > .items {
-    display: flex;
-    flex-wrap: wrap;
-    gap: var(--pal-size-2xs);
-    padding-block: var(--pal-size-s);
-    max-width: 30rem;
+  .text {
+    min-width: 16rem;
+
+    &.m {
+      min-width: 24rem;
+    }
   }
 
   > p > small {
@@ -22,5 +22,13 @@
     &.sub {
       margin-left: var(--gap);
     }
+  }
+
+  > .items {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--pal-size-2xs);
+    padding-block: var(--pal-size-s);
+    max-width: 30rem;
   }
 }

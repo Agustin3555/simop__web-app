@@ -16,12 +16,18 @@ interface Props {
 }
 
 const Cell = ({ flatProps, cell }: Props) => {
+  const { column, row } = cell
+
   const component = useMemo(
-    () => flatProps[cell.column.id].getCellComponent(cell.row),
-    [cell.column.id, cell.row],
+    () => flatProps[column.id].getCellComponent(row),
+    [column.id, row],
   )
 
-  return <td className="cmp-cell">{component}</td>
+  return (
+    <td className="cmp-cell" style={{ width: column.getSize() }}>
+      {component}
+    </td>
+  )
 }
 
 export default Cell
