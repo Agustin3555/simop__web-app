@@ -7,16 +7,18 @@ import { Entity } from '@/services/config'
 import { getFlatProps, Scheme } from '../../services/config'
 import { REFETCH_INTERVALS } from '../../constants/refetchIntervals.const'
 import { BaseCombobox } from '..'
-import { BaseComboboxProps } from '../BaseCombobox/BaseCombobox'
+import { BaseComboboxProps, Fields } from '../BaseCombobox/BaseCombobox'
 import { baseSorter } from '../../helpers'
 
-export type SearchModeKey = keyof Entity
+type E = Partial<Entity>
 
-const adapter = <T extends { id?: number }>(array?: T[]) =>
-  array?.map(({ id, ...rest }) => ({ id: String(id), ...rest }))
+const adapter = (array?: E[]) =>
+  array?.map(({ id, ...rest }) => ({ id: String(id), ...rest })) as (E & {
+    id: string
+  })[]
 
 export interface AutoComboboxProps extends Control {
-  initSelected?: Partial<Entity>[]
+  initSelected?: E[]
   scheme: Scheme
   multiple?: boolean
 }
@@ -25,7 +27,7 @@ const AutoCombobox = ({ initSelected, scheme, ...rest }: AutoComboboxProps) => {
   const { key, service, refreshRate, anchorField } = scheme
 
   const [enabled, setEnabled] = useState(false)
-  const [searchModeKeys, setSearchModeKeys] = useState<SearchModeKey[]>()
+  const [searchModeKeys, setSearchModeKeys] = useState<string[]>()
   const [selectedSearchMode, setSelectedSearchMode] = useState(anchorField)
 
   const initSelectedAdapted = useMemo(() => adapter(initSelected), [])
@@ -75,33 +77,32 @@ const AutoCombobox = ({ initSelected, scheme, ...rest }: AutoComboboxProps) => {
     [searchModeKeys],
   )
 
-  const sorter = useCallback<BaseComboboxProps['sorter']>(
+  const sorter = useCallback<BaseComboboxProps<E>['sorter']>(
     (search, options) =>
       baseSorter(search, options, option => option[selectedSearchMode]),
     [selectedSearchMode],
   )
 
-  const renderingOptions = useCallback<BaseComboboxProps['renderingOptions']>(
+  const renderingOptions = useCallback<
+    NonNullable<BaseComboboxProps<E>['searchModePack']>['renderingOptions']
+  >(
     options =>
       options.map(props => {
-        const record: Record<
-          SearchModeKey,
-          { title: string; value: number | string }
-        > = {}
+        const fields: Fields = {}
 
         searchModeKeys?.forEach(mode => {
-          record[mode] = {
+          fields[mode] = {
             title: flatProps[mode].title as string,
             value: props[mode],
           }
         })
 
-        return record
+        return fields
       }),
     [searchModeKeys],
   )
 
-  const deselectItem = useCallback<BaseComboboxProps['deselectItem']>(
+  const deselectItem = useCallback<BaseComboboxProps<E>['deselectItem']>(
     id => setSelected(prev => prev.filter(item => item.id !== id)),
     [],
   )
@@ -118,7 +119,7 @@ const AutoCombobox = ({ initSelected, scheme, ...rest }: AutoComboboxProps) => {
   const handleAction = useCallback(async () => await refetch(), [])
 
   const searchModeItemHandleChange = useInputHandler(value =>
-    setSelectedSearchMode(value as SearchModeKey),
+    setSelectedSearchMode(value),
   )
 
   return (
@@ -130,7 +131,6 @@ const AutoCombobox = ({ initSelected, scheme, ...rest }: AutoComboboxProps) => {
         setSelected,
         selectedItems,
         sorter,
-        renderingOptions,
         deselectItem,
         handleEnter,
         resetHandleClick,
@@ -142,6 +142,7 @@ const AutoCombobox = ({ initSelected, scheme, ...rest }: AutoComboboxProps) => {
       searchModePack={{
         searchModes,
         selectedSearchMode,
+        renderingOptions,
         searchModeItemHandleChange,
       }}
     />

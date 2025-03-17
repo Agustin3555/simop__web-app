@@ -19,9 +19,15 @@ import { Control } from '@/types'
 import { classList } from '@/helpers'
 import { ControlLabelProps } from '@/components/ControlLabel/ControlLabel'
 
-export interface BaseComboboxProps<
-  T = Record<string, string | number> & { id: string },
-> extends Control,
+export interface BasicOption {
+  id: string
+  title: string
+}
+
+export type Fields = Record<string, { title: string; value: string }>
+
+export interface BaseComboboxProps<E = unknown, T = E & BasicOption>
+  extends Control,
     Pick<ControlLabelProps, 'resetHandleClick'> {
   multiple?: boolean
   options?: T[]
@@ -29,7 +35,6 @@ export interface BaseComboboxProps<
   setSelected: Dispatch<SetStateAction<T[]>>
   selectedItems?: { id: string; title: string }[]
   sorter: (search: string, options: T[]) => T[]
-  renderingOptions: (options: T[]) => any
   deselectItem: (id: string) => void
   handleEnter?: () => void
 
@@ -37,6 +42,7 @@ export interface BaseComboboxProps<
   searchModePack?: {
     searchModes?: { mode: string; title: string }[]
     selectedSearchMode: string
+    renderingOptions: (options: T[]) => Fields[]
     searchModeItemHandleChange: ChangeEventHandler<HTMLInputElement>
   }
 }
@@ -55,7 +61,6 @@ const BaseCombobox = ({
   setSelected,
   selectedItems,
   sorter,
-  renderingOptions,
   deselectItem,
   handleEnter,
   resetHandleClick,
@@ -63,8 +68,12 @@ const BaseCombobox = ({
   refetchPack,
   searchModePack,
 }: BaseComboboxProps) => {
-  const { searchModes, selectedSearchMode, searchModeItemHandleChange } =
-    searchModePack ?? {}
+  const {
+    searchModes,
+    selectedSearchMode,
+    renderingOptions,
+    searchModeItemHandleChange,
+  } = searchModePack ?? {}
 
   const { inputTitle, disabledState } = useControl({ title, required })
   const { disabled } = disabledState
@@ -78,13 +87,21 @@ const BaseCombobox = ({
   const finalRenderingOptions = useMemo(() => {
     if (!options) return
 
-    const sorted = sorter(search, options)
-    return renderingOptions(sorted)
+    const sorted = sorter(search.trim().toLowerCase(), options)
+
+    if (renderingOptions) return renderingOptions(sorted)
+
+    return sorted.map(({ title }) => {
+      const fields: Fields = {}
+      fields['title'] = { title: 'title', value: title }
+
+      return fields
+    })
   }, [options, search, sorter, renderingOptions])
 
   const searchHandleChange = useInputHandler(value => setSearch(value))
 
-  const handleOptionChange = useInputHandler(value => {
+  const optionHandleChange = useInputHandler(value => {
     if (!options) return
 
     const newSelected = options.find(option => String(option.id) === value)
@@ -220,17 +237,25 @@ const BaseCombobox = ({
             <Icon faIcon="fa-solid fa-frog" />
           </div>
         ) : (
-          <fieldset className="drop-down" {...(editMode && { disabled })}>
-            {finalRenderingOptions?.map(option => (
-              <Option
-                key={option.id.value}
-                checked={selected.some(({ id }) => id === option.id.value)}
-                fields={option}
-                handleChange={handleOptionChange}
-                {...{ keyName, required, multiple, selectedSearchMode }}
-              />
-            ))}
-          </fieldset>
+          finalRenderingOptions && (
+            <fieldset className="drop-down" {...(editMode && { disabled })}>
+              {finalRenderingOptions.map(
+                option =>
+                  option.id && (
+                    <Option
+                      key={option.id.value}
+                      checked={selected.some(
+                        ({ id }) => id === option.id.value,
+                      )}
+                      fields={option}
+                      selectedSearchMode={selectedSearchMode ?? 'title'}
+                      handleChange={optionHandleChange}
+                      {...{ keyName, required, multiple }}
+                    />
+                  ),
+              )}
+            </fieldset>
+          )
         )}
       </div>
     </div>

@@ -1,17 +1,12 @@
 import { useCallback, useMemo, useState } from 'react'
 import { Control } from '@/types'
-import { BaseComboboxProps } from '../BaseCombobox/BaseCombobox'
+import { BaseComboboxProps, BasicOption } from '../BaseCombobox/BaseCombobox'
 import { BaseCombobox } from '..'
 import { baseSorter } from '../../helpers'
 
-interface Option {
-  id: string
-  title: string
-}
-
 export interface ComboboxProps extends Control {
-  options: Option[]
-  selectedIds?: Option['id'][]
+  options: BasicOption[]
+  selectedIds?: BasicOption['id'][]
   multiple?: boolean
 }
 
@@ -24,32 +19,12 @@ const Combobox = ({ options, selectedIds, ...rest }: ComboboxProps) => {
 
   const [selected, setSelected] = useState(initSelected ?? [])
 
-  const sorter = useCallback<BaseComboboxProps<Option>['sorter']>(
+  const sorter = useCallback<BaseComboboxProps['sorter']>(
     (search, options) => baseSorter(search, options, option => option.title),
     [],
   )
 
-  const renderingOptions = useCallback<
-    BaseComboboxProps<Option>['renderingOptions']
-  >(
-    options =>
-      options.map(props => {
-        // const record: Record<
-        //   SearchMode,
-        //   { title: string; value: number | string }
-        // > = {}
-        // searchModes.forEach(mode => {
-        //   record[mode] = {
-        //     title: flatProps[mode].title as string,
-        //     value: props[mode],
-        //   }
-        // })
-        // return record
-      }),
-    [],
-  )
-
-  const deselectItem = useCallback<BaseComboboxProps<Option>['deselectItem']>(
+  const deselectItem = useCallback<BaseComboboxProps['deselectItem']>(
     id => setSelected(prev => prev.filter(item => item.id !== id)),
     [],
   )
@@ -63,7 +38,6 @@ const Combobox = ({ options, selectedIds, ...rest }: ComboboxProps) => {
         setSelected,
         selectedItems: selected,
         sorter,
-        renderingOptions,
         deselectItem,
       }}
     />
