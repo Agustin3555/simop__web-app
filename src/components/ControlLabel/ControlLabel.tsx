@@ -4,7 +4,7 @@ import { Control } from '@/types'
 import { Button, Toggle } from '..'
 import { ToggleProps } from '../Toggle/Toggle'
 
-interface ControlLabelProps
+export interface ControlLabelProps
   extends Pick<Control, 'title'>,
     Required<Pick<Control, 'hideLabel' | 'required' | 'editMode'>> {
   discreetLabel?: boolean

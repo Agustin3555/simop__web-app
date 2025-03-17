@@ -1,6 +1,6 @@
 import { Entity } from '@/services/config'
 import { ForView, GetScheme, PropScheme, Required } from './utils'
-import { Combobox, FetchRef, TextFilter } from '../../components'
+import { AutoCombobox, FetchRef, TextFilter } from '../../components'
 import { AccessorFn, Column, Row } from '@tanstack/react-table'
 import { getFlatProps } from './scheme'
 
@@ -42,10 +42,10 @@ export class RefProp implements PropScheme {
     const { title } = scheme
 
     return (
-      <Combobox
+      <AutoCombobox
         keyName={verboseKey}
         title={title.singular}
-        value={value && [value]}
+        initSelected={value && [value]}
         {...(!editMode && { required })}
         {...{ editMode, scheme }}
       />

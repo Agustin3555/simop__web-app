@@ -4,7 +4,7 @@ import { ActionState } from '@/hooks'
 import { classList } from '@/helpers'
 import { MouseEventHandler } from 'react'
 
-interface Props {
+export interface StateButtonProps {
   text: number | string
   hiddenText?: boolean
   title?: number | string
@@ -24,14 +24,14 @@ const StateButton = ({
   type,
   handlingClass,
   handleAction,
-}: Props) => (
+}: StateButtonProps) => (
   <button
     className={classList(
       'cmp-state-button',
       'button-look',
       'state',
       type,
-      handlingClass
+      handlingClass,
     )}
     title={String(title || text)}
     disabled={actionState !== 'ready'}

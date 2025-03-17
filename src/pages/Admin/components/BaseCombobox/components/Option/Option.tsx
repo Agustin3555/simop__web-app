@@ -1,9 +1,9 @@
 import './Option.css'
 import { ChangeEventHandler, useMemo } from 'react'
-import { ComboboxProps, SearchMode } from '../../Combobox'
+import { BaseComboboxProps } from '../../BaseCombobox'
 
 interface OptionProps
-  extends Pick<ComboboxProps, 'keyName' | 'required' | 'multiple'> {
+  extends Pick<BaseComboboxProps, 'keyName' | 'required' | 'multiple'> {
   checked: boolean
   fields: Record<SearchMode, { title: string; value: number | string }>
   selectedSearchMode: SearchMode

@@ -1,6 +1,6 @@
 import { Entity } from '@/services/config'
 import { ForView, GetScheme, PropScheme, Required } from './utils'
-import { Combobox, FetchRef } from '../../components'
+import { AutoCombobox, FetchRef } from '../../components'
 import { Column, Row } from '@tanstack/react-table'
 import { getFlatProps } from './scheme'
 import { isFieldEnabled } from '.'
@@ -31,12 +31,12 @@ export class RefListProp implements PropScheme {
     const { title } = scheme
 
     return (
-      <Combobox
+      <AutoCombobox
         keyName={key}
         title={title.singular}
         multiple
         {...(!editMode && { required })}
-        {...{ value, editMode, scheme }}
+        {...{ initSelected: value, editMode, scheme }}
       />
     )
   }

@@ -1,4 +1,4 @@
-export const sort = <T>(
+export const baseSorter = <T>(
   search: string,
   options: T[],
   accessorFn: (option: T) => number | string,
