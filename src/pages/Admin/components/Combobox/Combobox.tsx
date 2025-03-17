@@ -4,7 +4,9 @@ import { BaseComboboxProps, BasicOption } from '../BaseCombobox/BaseCombobox'
 import { BaseCombobox } from '..'
 import { baseSorter } from '../../helpers'
 
-export interface ComboboxProps extends Control {
+export interface ComboboxProps
+  extends Control,
+    Pick<BaseComboboxProps, 'reportOption'> {
   options: BasicOption[]
   selectedIds?: BasicOption['id'][]
   multiple?: boolean

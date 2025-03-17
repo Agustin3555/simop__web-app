@@ -1,5 +1,5 @@
 import './Table.css'
-import { useMemo, useState } from 'react'
+import { Dispatch, SetStateAction, useEffect, useMemo, useState } from 'react'
 import { useRowSelection, useScheme } from '@/pages/Admin/hooks'
 import {
   ColumnDef,
@@ -12,17 +12,20 @@ import {
   SortingState,
   useReactTable,
   ColumnOrderState,
+  VisibilityState,
 } from '@tanstack/react-table'
 import { Cell, Header, RowSelectorCell } from './components'
 import { Entity } from '@/services/config'
 
 interface TableProps {
   data: Entity[]
+  columnVisibility: VisibilityState
+  setColumnVisibility: Dispatch<SetStateAction<VisibilityState>>
 }
 
 const SELECT_COLUMN = 'select'
 
-const Table = ({ data }: TableProps) => {
+const Table = ({ data, columnVisibility, setColumnVisibility }: TableProps) => {
   const { scheme, flatProps } = useScheme()
   const { groups } = scheme
 
@@ -54,17 +57,27 @@ const Table = ({ data }: TableProps) => {
   const table = useReactTable({
     data,
     columns,
-    state: { rowSelection, columnFilters, sorting, columnOrder },
+    state: {
+      rowSelection,
+      columnFilters,
+      sorting,
+      columnOrder,
+      columnVisibility,
+    },
     getRowId: row => String(row.id),
+
     onSortingChange: setSorting,
     onColumnFiltersChange: setColumnFilters,
     onRowSelectionChange: setRowSelection,
     onColumnOrderChange: setColumnOrder,
+    onColumnVisibilityChange: setColumnVisibility,
+
     getCoreRowModel: getCoreRowModel(),
     getFilteredRowModel: getFilteredRowModel(),
     getFacetedMinMaxValues: getFacetedMinMaxValues(),
     getFacetedUniqueValues: getFacetedUniqueValues(),
     getSortedRowModel: getSortedRowModel(),
+
     enableRowSelection: true,
     enableMultiSort: true,
     enableSortingRemoval: false,

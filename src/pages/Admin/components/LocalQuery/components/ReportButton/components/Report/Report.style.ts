@@ -4,6 +4,7 @@ export const styles = StyleSheet.create({
   page: {
     display: 'flex',
     flexDirection: 'column',
+    alignItems: 'flex-start',
     gap: 20,
     padding: 20,
   },
@@ -13,6 +14,7 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'space-between',
     padding: 16,
+    width: '100%',
 
     color: '#5059bc',
 

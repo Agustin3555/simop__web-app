@@ -1,14 +1,25 @@
 import './LocalQuery.css'
-import { useCallback, useRef } from 'react'
+import { useCallback, useMemo, useRef, useState } from 'react'
 import { useQueryActionState } from '@/hooks'
 import { useEntities, useRowSelection, useScheme } from '../../hooks'
 import { Button, Icon, StateButton } from '@/components'
+import { Combobox } from '..'
 import { DeleteButton, ReportButton, Table } from './components'
+import { VisibilityState } from '@tanstack/react-table'
 import { utils, writeFile } from 'xlsx'
+import { ComboboxProps } from '../Combobox/Combobox'
 
 const LocalQuery = () => {
-  const { scheme } = useScheme()
-  const { title } = scheme
+  const { scheme, flatProps } = useScheme()
+  const { key, title } = scheme
+
+  const initColumnVisibility = useMemo(
+    () => Object.fromEntries(Object.keys(flatProps).map(id => [id, true])),
+    [],
+  )
+
+  const [columnVisibility, setColumnVisibility] =
+    useState<VisibilityState>(initColumnVisibility)
 
   const { selectedRowIds } = useRowSelection()
   const localQueryRef = useRef<HTMLDivElement | null>(null)
@@ -23,6 +34,15 @@ const LocalQuery = () => {
 
     if (data || status === 'error') await refetch()
   }, [data, status])
+
+  const columnOptions = useMemo(() => {
+    if (!data) return
+
+    return Object.keys(columnVisibility).map(id => ({
+      id,
+      title: flatProps[id].title as string,
+    }))
+  }, [data, columnVisibility])
 
   const exportHandleClick = useCallback(() => {
     if (!data) return
@@ -44,6 +64,21 @@ const LocalQuery = () => {
     writeFile(workbook, fileName)
   }, [data, selectedRowIds])
 
+  const optionHandleChange = useCallback<
+    NonNullable<ComboboxProps['reportOption']>
+  >(
+    id =>
+      setColumnVisibility(prev => {
+        const newState = { ...prev }
+
+        const checked = newState[id]
+        newState[id] = !checked
+
+        return newState
+      }),
+    [],
+  )
+
   return (
     <div className="cmp-local-query" ref={localQueryRef}>
       <header>
@@ -60,6 +95,17 @@ const LocalQuery = () => {
               <Icon faIcon="fa-solid fa-cubes-stacked" />
               <p>{data.length}</p>
             </div>
+          )}
+          {columnOptions && (
+            <Combobox
+              keyName={`visibility-${key}`}
+              title="Columnas"
+              hideLabel
+              multiple
+              options={columnOptions}
+              selectedIds={columnOptions.map(({ id }) => id)}
+              reportOption={optionHandleChange}
+            />
           )}
         </div>
         <div className="actions">
@@ -80,7 +126,7 @@ const LocalQuery = () => {
           )}
         </div>
       </header>
-      {data && <Table {...{ data }} />}
+      {data && <Table {...{ data, columnVisibility, setColumnVisibility }} />}
     </div>
   )
 }

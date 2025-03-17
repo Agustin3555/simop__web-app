@@ -36,6 +36,7 @@ export interface BaseComboboxProps<E = unknown, T = E & BasicOption>
   selectedItems?: { id: string; title: string }[]
   sorter: (search: string, options: T[]) => T[]
   deselectItem: (id: string) => void
+  reportOption?: (value: string) => void
   handleEnter?: () => void
 
   refetchPack?: Required<Pick<StateButtonProps, 'actionState' | 'handleAction'>>
@@ -62,6 +63,7 @@ const BaseCombobox = ({
   selectedItems,
   sorter,
   deselectItem,
+  reportOption,
   handleEnter,
   resetHandleClick,
 
@@ -91,9 +93,11 @@ const BaseCombobox = ({
 
     if (renderingOptions) return renderingOptions(sorted)
 
-    return sorted.map(({ title }) => {
+    return sorted.map(({ id, title }) => {
       const fields: Fields = {}
-      fields['title'] = { title: 'title', value: title }
+
+      fields['id'] = { title: 'Clave', value: id }
+      fields['title'] = { title: 'Título', value: title }
 
       return fields
     })
@@ -104,9 +108,11 @@ const BaseCombobox = ({
   const optionHandleChange = useInputHandler(value => {
     if (!options) return
 
-    const newSelected = options.find(option => String(option.id) === value)
+    const newSelected = options.find(option => option.id === value)
 
     if (!newSelected) return
+
+    reportOption && reportOption(value)
 
     setSelected(
       multiple
@@ -129,7 +135,10 @@ const BaseCombobox = ({
     // Evita que se dispare el evento de click del elemento padre (header)
     event.stopPropagation()
 
-    deselectItem(event.currentTarget.name)
+    const id = event.currentTarget.name
+
+    deselectItem(id)
+    reportOption && reportOption(id)
   }, [])
 
   const toggleHandleClick = useCallback(() => setOpen(prev => !prev), [])
@@ -153,13 +162,14 @@ const BaseCombobox = ({
     <div
       ref={comboboxLayoutRef}
       className={classList(
-        'cmp-combobox',
+        'cmp-base-combobox',
         'control',
         long || (multiple ? 'l' : 'm'),
         { open },
       )}
       onMouseEnter={handleEnter}
     >
+      {/* <pre>{JSON.stringify(finalRenderingOptions, undefined, ' ')}</pre> */}
       <ControlLabel
         discreetLabel
         {...{
