@@ -114,4 +114,8 @@ export const TREE: SectionNode[] = [
       { scheme: RecepcionModel.scheme },
     ],
   },
+  {
+    title: 'Tablero de Control',
+    sections: [{ scheme: ObraModel.scheme }],
+  },
 ]
