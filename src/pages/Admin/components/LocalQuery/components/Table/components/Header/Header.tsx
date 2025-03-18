@@ -116,13 +116,13 @@ const Header = ({
   return (
     <th
       className={classList('cmp-header', { dragging })}
-      style={{ minWidth: getSize() }}
+      // style={{ minWidth: getSize() }}
       // style={{ width: Math.round(getSize() / 32) * 32 }}
-      // draggable
-      // onDragStart={handleDragStart}
-      // onDragOver={handleDragOver}
-      // onDragEnd={handleDragEnd}
-      // onDrop={handleDrop}
+      draggable
+      onDragStart={handleDragStart}
+      onDragOver={handleDragOver}
+      onDragEnd={handleDragEnd}
+      onDrop={handleDrop}
     >
       <div className="content">
         <button onClick={handleSortingClick}>
