@@ -40,7 +40,7 @@ const LocalQuery = () => {
 
     return Object.keys(columnVisibility).map(id => ({
       id,
-      title: flatProps[id].title as string,
+      title: flatProps[id].title,
     }))
   }, [data, columnVisibility])
 
@@ -102,6 +102,7 @@ const LocalQuery = () => {
               title="Columnas"
               hideLabel
               multiple
+              reduceHeader
               options={columnOptions}
               selectedIds={columnOptions.map(({ id }) => id)}
               reportOption={optionHandleChange}

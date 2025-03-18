@@ -30,6 +30,7 @@ export interface BaseComboboxProps<E = unknown, T = E & BasicOption>
   extends Control,
     Pick<ControlLabelProps, 'resetHandleClick'> {
   multiple?: boolean
+  reduceHeader?: boolean
   options?: T[]
   selected: T[]
   setSelected: Dispatch<SetStateAction<T[]>>
@@ -57,6 +58,7 @@ const BaseCombobox = ({
   long,
 
   multiple = false,
+  reduceHeader = false,
   options,
   selected,
   setSelected,
@@ -187,7 +189,7 @@ const BaseCombobox = ({
         {...(editMode && { disabled })}
         onClick={toggleHandleClick}
       >
-        <div className="selected-items">
+        <div className={classList('selected-items', { reduce: reduceHeader })}>
           {selectedItems?.map(({ id, title }) => (
             <div key={id} className="item">
               <p>{title}</p>

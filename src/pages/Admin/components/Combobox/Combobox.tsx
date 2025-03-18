@@ -10,6 +10,7 @@ export interface ComboboxProps
   options: BasicOption[]
   selectedIds?: BasicOption['id'][]
   multiple?: boolean
+  reduceHeader?: boolean
 }
 
 const Combobox = ({ options, selectedIds, ...rest }: ComboboxProps) => {

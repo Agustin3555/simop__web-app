@@ -44,12 +44,15 @@ export class DateTimeProp implements PropScheme {
   ) => {
     const { key } = this
 
-    const value = formData.get(key)
+    let value = formData.get(key) as null | string
 
     if (value === null) return
     if (value === '') return editMode ? null : undefined
 
-    return `${value}:00Z`
+    // Año '0024' --> '2024'
+    if (value.startsWith('00')) value = '20' + value.slice(2)
+
+    return value + ':00Z'
   }
 
   filterFn: FilterFn<Entity> = (row, columnId, filterValue) => {

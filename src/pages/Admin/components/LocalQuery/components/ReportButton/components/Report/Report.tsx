@@ -12,7 +12,16 @@ const Report = ({ title, tableImgUrl }: ReportProps) => (
     <Page style={styles.page} size="A4" orientation="landscape">
       <View style={styles.header}>
         <Text style={styles.h1}>{title}</Text>
-        <Image style={styles.logo} src="/isologotipo-gobierno-ministerio.png" />
+        <View style={styles.by}>
+          <Image
+            style={styles.logo}
+            src="/isologotipo-gobierno-ministerio.png"
+          />
+          <View style={styles.separator} />
+          <Text style={styles.subsecretaria}>
+            Subsecretaría de Obras Públicas
+          </Text>
+        </View>
         <Text style={styles.date}>
           {format('', { date: 'short', time: 'short' })}
         </Text>

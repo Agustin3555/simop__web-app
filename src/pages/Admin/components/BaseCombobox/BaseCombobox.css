@@ -26,6 +26,12 @@
 
       cursor: default;
 
+      &.reduce > .item > p {
+        padding-inline: var(--pal-size-xs);
+
+        font-size: var(--pal-size-font-xs);
+      }
+
       > .item {
         --border-color: var(--pal-color-a-l3);
         --border-width: var(--pal-color-a-l3);

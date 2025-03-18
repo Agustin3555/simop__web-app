@@ -30,7 +30,7 @@ const DownloadReportButton = ({ localQueryRef }: ReportButtonProps) => {
     setTableImgUrl(tableImgUrl)
 
     const blob = await pdf(
-      <Report title={title.plural} {...{ tableImgUrl }} />,
+      <Report title={`Lista de ${title.plural}`} {...{ tableImgUrl }} />,
     ).toBlob()
     const pdfUrl = URL.createObjectURL(blob)
 
@@ -55,7 +55,7 @@ const DownloadReportButton = ({ localQueryRef }: ReportButtonProps) => {
   return (
     <>
       <Button
-        text="Descargar PDF"
+        text="Informe"
         faIcon="fa-solid fa-file-pdf"
         _type="secondary"
         onClick={handleClick}

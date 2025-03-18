@@ -39,7 +39,7 @@ const AutoCombobox = ({ initSelected, scheme, ...rest }: AutoComboboxProps) => {
     () =>
       selected.map(item => ({
         id: String(item.id),
-        title: item[selectedSearchMode] as string,
+        title: item[selectedSearchMode],
       })),
     [selected, selectedSearchMode],
   )
@@ -72,7 +72,7 @@ const AutoCombobox = ({ initSelected, scheme, ...rest }: AutoComboboxProps) => {
     () =>
       searchModeKeys?.map(mode => ({
         mode,
-        title: flatProps[mode].title as string,
+        title: flatProps[mode].title,
       })),
     [searchModeKeys],
   )
@@ -92,7 +92,7 @@ const AutoCombobox = ({ initSelected, scheme, ...rest }: AutoComboboxProps) => {
 
         searchModeKeys?.forEach(mode => {
           fields[mode] = {
-            title: flatProps[mode].title as string,
+            title: flatProps[mode].title,
             value: props[mode],
           }
         })

@@ -26,8 +26,26 @@ export const styles = StyleSheet.create({
     fontFamily: 'Helvetica',
     fontWeight: 600,
   },
+  by: {
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 8,
+  },
   logo: {
     height: 16,
+  },
+  separator: {
+    width: 0.5,
+    height: 16,
+
+    backgroundColor: '#5059bc',
+  },
+  subsecretaria: {
+    width: 80,
+
+    fontSize: 8,
+    lineHeight: 1.2,
   },
   date: {
     fontSize: 11,
