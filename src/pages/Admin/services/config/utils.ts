@@ -31,7 +31,7 @@ export interface GetScheme {
 export interface PropScheme<E = Entity> {
   key: string
   verboseKey?: string
-  title?: string
+  title: string
   config?: unknown
 
   getFieldComponent: (value?: any, editMode?: boolean) => ReactNode

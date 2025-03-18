@@ -20,6 +20,12 @@ export class RefListProp implements PropScheme {
     },
   ) {}
 
+  public get title() {
+    const scheme = this.config.getScheme()
+
+    return scheme.title.plural
+  }
+
   getFieldComponent = (value?: Partial<Entity>[], editMode = false) => {
     const { key, config } = this
     const { getScheme, field } = config
@@ -59,17 +65,17 @@ export class RefListProp implements PropScheme {
   }
 
   getHeader = (column: Column<Entity>) => {
-    const { config } = this
+    const { title, config } = this
     const { getScheme } = config
 
     const scheme = getScheme()
-    const { title, anchorField } = scheme
+    const { anchorField } = scheme
     const flatProps = getFlatProps(scheme)
 
     const filter = undefined
 
     return {
-      title: title.plural,
+      title,
       subtitle: flatProps[anchorField].title,
       filter,
     }

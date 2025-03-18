@@ -31,23 +31,27 @@ export class RefProp implements PropScheme {
     this.verboseKey = `${value}Id`
   }
 
+  public get title() {
+    const scheme = this.config.getScheme()
+
+    return scheme.title.singular
+  }
+
   getFieldComponent = (value?: Partial<Entity>, editMode = false) => {
-    const { verboseKey, config } = this
+    const { verboseKey, title, config } = this
     const { getScheme, field } = config
     const { hidden, required } = field ?? {}
 
     if (hidden === true) return
 
     const scheme = getScheme()
-    const { title } = scheme
 
     return (
       <AutoCombobox
         keyName={verboseKey}
-        title={title.singular}
         initSelected={value && [value]}
         {...(!editMode && { required })}
-        {...{ editMode, scheme }}
+        {...{ title, editMode, scheme }}
       />
     )
   }
@@ -80,11 +84,11 @@ export class RefProp implements PropScheme {
   }
 
   getHeader = (column: Column<Entity>) => {
-    const { config } = this
+    const { title, config } = this
     const { getScheme } = config
 
     const scheme = getScheme()
-    const { title, anchorField } = scheme
+    const { anchorField } = scheme
     const flatProps = getFlatProps(scheme)
 
     const { getFacetedUniqueValues, getFilterValue, setFilterValue } = column
@@ -96,11 +100,7 @@ export class RefProp implements PropScheme {
       />
     )
 
-    return {
-      title: title.singular,
-      subtitle: flatProps[anchorField].title,
-      filter,
-    }
+    return { title, subtitle: flatProps[anchorField].title, filter }
   }
 
   getCellComponent = (row: Row<Entity>) => {
