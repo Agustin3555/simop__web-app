@@ -184,12 +184,12 @@ const BaseCombobox = ({
         }}
       />
       <header
-        className="box"
+        className={classList('box', { reduce: reduceHeader })}
         title={inputTitle}
         {...(editMode && { disabled })}
         onClick={toggleHandleClick}
       >
-        <div className={classList('selected-items', { reduce: reduceHeader })}>
+        <div className="selected-items">
           {selectedItems?.map(({ id, title }) => (
             <div key={id} className="item">
               <p>{title}</p>
