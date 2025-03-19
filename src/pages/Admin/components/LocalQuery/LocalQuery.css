@@ -12,6 +12,10 @@
     justify-content: space-between;
     gap: var(--pal-size-m);
 
+    > .cmp-base-combobox {
+      width: 100%;
+    }
+
     > .left {
       flex-grow: 1;
 
@@ -42,10 +46,6 @@
 
         border-radius: var(--pal-size-3xl);
         background-color: var(--pal-color-a-l3);
-      }
-
-      > .cmp-base-combobox {
-        flex-grow: 1;
       }
     }
 

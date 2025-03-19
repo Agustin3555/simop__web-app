@@ -35,14 +35,14 @@ const LocalQuery = () => {
     if (data || status === 'error') await refetch()
   }, [data, status])
 
-  const columnOptions = useMemo(() => {
-    if (!data) return
-
-    return Object.keys(columnVisibility).map(id => ({
-      id,
-      title: flatProps[id].title,
-    }))
-  }, [data, columnVisibility])
+  const columnOptions = useMemo(
+    () =>
+      Object.keys(columnVisibility).map(id => ({
+        id,
+        title: flatProps[id].title,
+      })),
+    [data, columnVisibility],
+  )
 
   const exportHandleClick = useCallback(() => {
     if (!data) return
@@ -82,6 +82,16 @@ const LocalQuery = () => {
   return (
     <div className="cmp-local-query" ref={localQueryRef}>
       <header>
+        <Combobox
+          keyName={`visibility-${key}`}
+          title="Columnas"
+          hideLabel
+          multiple
+          reduceHeader
+          options={columnOptions}
+          selectedIds={columnOptions.map(({ id }) => id)}
+          reportOption={optionHandleChange}
+        />
         <div className="left">
           <StateButton
             text="Consultar datos"
@@ -95,18 +105,6 @@ const LocalQuery = () => {
               <Icon faIcon="fa-solid fa-cubes-stacked" />
               <p>{data.length}</p>
             </div>
-          )}
-          {columnOptions && (
-            <Combobox
-              keyName={`visibility-${key}`}
-              title="Columnas"
-              hideLabel
-              multiple
-              reduceHeader
-              options={columnOptions}
-              selectedIds={columnOptions.map(({ id }) => id)}
-              reportOption={optionHandleChange}
-            />
           )}
         </div>
         <div className="actions">
