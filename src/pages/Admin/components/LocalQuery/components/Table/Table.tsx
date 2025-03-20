@@ -1,5 +1,5 @@
 import './Table.css'
-import { Dispatch, SetStateAction, useEffect, useMemo, useState } from 'react'
+import { Dispatch, SetStateAction, useMemo, useState } from 'react'
 import { useRowSelection, useScheme } from '@/pages/Admin/hooks'
 import {
   ColumnDef,
@@ -42,12 +42,13 @@ const Table = ({ data, columnVisibility, setColumnVisibility }: TableProps) => {
     () => [
       { id: SELECT_COLUMN },
       ...groups.flatMap<ColumnDef<Entity>>(({ props }) =>
-        Object.values(props).map(({ key, accessorFn, filterFn }) => ({
+        Object.values(props).map(({ key, accessorFn, filterFn, footer }) => ({
           header: key,
           accessorKey: key,
           id: key,
           ...(accessorFn && { accessorFn }),
           ...(filterFn && { filterFn }),
+          ...(footer && { footer }),
         })),
       ),
     ],
@@ -138,6 +139,21 @@ const Table = ({ data, columnVisibility, setColumnVisibility }: TableProps) => {
             </tr>
           ))}
         </tbody>
+        <tfoot>
+          {table.getFooterGroups().map(footerGroup => (
+            <tr key={footerGroup.id}>
+              {footerGroup.headers.map(header => (
+                <td key={header.id}>
+                  {header.column.columnDef.footer
+                    ? typeof header.column.columnDef.footer === 'function'
+                      ? header.column.columnDef.footer(header.getContext())
+                      : header.column.columnDef.footer
+                    : null}
+                </td>
+              ))}
+            </tr>
+          ))}
+        </tfoot>
       </table>
     </div>
   )

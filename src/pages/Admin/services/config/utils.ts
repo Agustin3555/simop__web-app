@@ -5,6 +5,7 @@ import {
   BuiltInFilterFn,
   Column,
   FilterFn,
+  HeaderContext,
   Row,
 } from '@tanstack/react-table'
 import { Entity } from '@/services/config'
@@ -43,6 +44,7 @@ export interface PropScheme<E = Entity> {
 
   accessorFn?: AccessorFn<E>
   filterFn?: FilterFn<E> | BuiltInFilterFn
+  footer?: (info: HeaderContext<E, unknown>) => ReactNode
   getHeader?: (column: Column<E>) => {
     title: string
     subtitle?: string

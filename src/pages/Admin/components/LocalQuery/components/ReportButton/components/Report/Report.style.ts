@@ -7,6 +7,8 @@ export const styles = StyleSheet.create({
     alignItems: 'flex-start',
     gap: 20,
     padding: 20,
+
+    fontFamily: 'Manrope Variable',
   },
   header: {
     display: 'flex',
@@ -23,8 +25,7 @@ export const styles = StyleSheet.create({
   },
   h1: {
     fontSize: 16,
-    fontFamily: 'Helvetica',
-    fontWeight: 600,
+    fontWeight: 700,
   },
   by: {
     display: 'flex',
@@ -33,11 +34,13 @@ export const styles = StyleSheet.create({
     gap: 8,
   },
   logo: {
-    height: 16,
+    height: 17,
   },
   separator: {
+    top: 1,
+
     width: 0.5,
-    height: 16,
+    height: 17,
 
     backgroundColor: '#5059bc',
   },
@@ -46,6 +49,7 @@ export const styles = StyleSheet.create({
 
     fontSize: 8,
     lineHeight: 1.2,
+    fontWeight: 600,
   },
   date: {
     fontSize: 11,

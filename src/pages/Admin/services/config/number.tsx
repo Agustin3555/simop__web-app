@@ -1,7 +1,12 @@
 import { Entity } from '@/services/config'
 import { ForView, PropScheme, Required } from './utils'
 import { Input } from '@/components'
-import { BuiltInFilterFn, Column, Row } from '@tanstack/react-table'
+import {
+  BuiltInFilterFn,
+  Column,
+  HeaderContext,
+  Row,
+} from '@tanstack/react-table'
 import { NumberFilter } from '../../components'
 
 export class NumberProp implements PropScheme {
@@ -59,6 +64,28 @@ export class NumberProp implements PropScheme {
   }
 
   filterFn: BuiltInFilterFn = 'inNumberRange'
+
+  footer = (info: HeaderContext<Entity, unknown>) => {
+    const { key } = this
+
+    const total = info.table.getRowModel().rows.reduce((acc, row) => {
+      const value = row.original[key] as undefined | number | string
+
+      if (value === undefined) return acc
+
+      const number = typeof value === 'string' ? Number(value) : value
+
+      return acc + number
+    }, 0)
+
+    return (
+      <p>
+        {total.toLocaleString('es-ES', {
+          minimumFractionDigits: 2,
+        })}
+      </p>
+    )
+  }
 
   getHeader = (column: Column<Entity>) => {
     const { title, config } = this
