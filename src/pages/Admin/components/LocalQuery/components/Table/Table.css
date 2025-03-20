@@ -17,44 +17,53 @@
     background-color: var(--pal-color-white);
     overflow: hidden;
 
-    thead {
+    tr {
+      position: relative;
+
+      border-width: 0;
+      border-style: solid;
+      border-color: var(--pal-color-gs-50);
+      border-block-width: var(--line-thickness);
+
+      /* "Sobrescribe" el border actual y del elemento anterior */
+      &::after {
+        --position: calc(var(--line-thickness) * -1.5);
+
+        position: absolute;
+        inset: 0;
+        top: var(--position);
+        bottom: var(--position);
+
+        pointer-events: none;
+
+        border-block-style: solid;
+        border-block-width: 0;
+        border-block-color: var(--pal-color-white);
+
+        content: '';
+      }
+
+      &:hover {
+        background-color: var(--pal-color-a-l3);
+
+        &::after {
+          border-block-width: var(--line-thickness);
+        }
+      }
+    }
+
+    > thead {
       background-color: var(--pal-color-a-l2);
     }
 
-    tbody {
-      tr {
-        position: relative;
+    > tfoot {
+      background-color: var(--pal-color-a-l2);
 
-        border-width: 0;
-        border-style: solid;
-        border-color: var(--pal-color-gs-50);
-        border-block-width: var(--line-thickness);
-
-        /* "Sobrescribe" el border actual y del elemento anterior */
-        &::after {
-          --position: calc(var(--line-thickness) * -1.5);
-
-          position: absolute;
-          inset: 0;
-          top: var(--position);
-          bottom: var(--position);
-
-          pointer-events: none;
-
-          border-block-style: solid;
-          border-block-width: 0;
-          border-block-color: var(--pal-color-white);
-
-          content: '';
-        }
-
-        &:hover {
-          background-color: var(--pal-color-a-l3);
-
-          &::after {
-            border-block-width: var(--line-thickness);
-          }
-        }
+      > tr > td {
+        padding: var(--cell-padding-inline);
+        border-top: var(--line-thickness) solid var(--pal-color-gs-50);
+        font-weight: bold;
+        text-align: right;
       }
     }
   }
