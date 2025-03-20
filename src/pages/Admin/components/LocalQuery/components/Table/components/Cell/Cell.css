@@ -10,20 +10,6 @@
     }
   }
 
-  > p > small {
-    --gap: var(--pal-size-xs);
-
-    color: var(--pal-color-a);
-
-    &.pre {
-      margin-right: var(--gap);
-    }
-
-    &.sub {
-      margin-left: var(--gap);
-    }
-  }
-
   > .items {
     display: flex;
     flex-wrap: wrap;

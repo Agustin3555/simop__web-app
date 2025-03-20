@@ -303,7 +303,9 @@ export const scheme: Scheme<Entity> = {
         fechaContratacion: new DateProp('Fecha de Contratación'),
         montoContratacion: new NumberProp('Monto de Contratación', {
           decimal: true,
+          isMoney: true,
           big: true,
+          sum: true,
           pre: '$',
         }),
         tipoContratacionObra: new RefProp({

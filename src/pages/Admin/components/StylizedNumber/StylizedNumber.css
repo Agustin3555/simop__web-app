@@ -1,0 +1,13 @@
+.cmp-stylized-number > small {
+  --gap: var(--pal-size-xs);
+
+  color: var(--pal-color-a);
+
+  &.pre {
+    margin-right: var(--gap);
+  }
+
+  &.sub {
+    margin-left: var(--gap);
+  }
+}

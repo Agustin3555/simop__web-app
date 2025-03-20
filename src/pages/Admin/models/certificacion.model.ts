@@ -103,6 +103,8 @@ export const scheme: Scheme<Entity> = {
         fecha: new DateProp('Fecha'),
         monto: new NumberProp('Monto', {
           decimal: true,
+          isMoney: true,
+          sum: true,
           pre: '$',
         }),
 

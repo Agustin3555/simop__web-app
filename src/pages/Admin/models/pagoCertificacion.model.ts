@@ -110,7 +110,9 @@ export const scheme: Scheme<Entity> = {
         fecha: new DateProp('Fecha'),
         monto: new NumberProp('Monto', {
           decimal: true,
+          isMoney: true,
           big: true,
+          sum: true,
           pre: '$',
         }),
         certificacion: new RefProp({

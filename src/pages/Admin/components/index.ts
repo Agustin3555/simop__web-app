@@ -17,3 +17,4 @@ export { default as SecureHoldButton } from './SecureHoldButton/SecureHoldButton
 export { default as TextFilter } from './TextFilter/TextFilter'
 export { default as View } from './View/View'
 export { default as ViewActiveProvider } from './ViewActiveProvider/ViewActiveProvider'
+export { default as StylizedNumber } from './StylizedNumber/StylizedNumber'

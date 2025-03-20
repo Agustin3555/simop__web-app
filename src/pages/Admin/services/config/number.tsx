@@ -7,7 +7,7 @@ import {
   HeaderContext,
   Row,
 } from '@tanstack/react-table'
-import { NumberFilter } from '../../components'
+import { NumberFilter, StylizedNumber } from '../../components'
 
 export class NumberProp implements PropScheme {
   key = ''
@@ -17,7 +17,9 @@ export class NumberProp implements PropScheme {
 
     public config?: {
       decimal?: boolean
+      isMoney?: boolean
       big?: boolean
+      sum?: boolean
       pre?: string
       sub?: string
 
@@ -66,7 +68,10 @@ export class NumberProp implements PropScheme {
   filterFn: BuiltInFilterFn = 'inNumberRange'
 
   footer = (info: HeaderContext<Entity, unknown>) => {
-    const { key } = this
+    const { key, config } = this
+    const { isMoney = false, sum = false, pre, sub } = config ?? {}
+
+    if (!sum) return
 
     const total = info.table.getRowModel().rows.reduce((acc, row) => {
       const value = row.original[key] as undefined | number | string
@@ -78,13 +83,7 @@ export class NumberProp implements PropScheme {
       return acc + number
     }, 0)
 
-    return (
-      <p>
-        {total.toLocaleString('es-ES', {
-          minimumFractionDigits: 2,
-        })}
-      </p>
-    )
+    return <StylizedNumber value={total} {...{ isMoney, pre, sub }} />
   }
 
   getHeader = (column: Column<Entity>) => {
@@ -103,21 +102,15 @@ export class NumberProp implements PropScheme {
 
   getCellComponent = (row: Row<Entity>) => {
     const { key, config } = this
-    const { decimal = false, pre, sub } = config ?? {}
+    const { isMoney = false, pre, sub } = config ?? {}
 
-    const value = row.original[key] as undefined | number | string
+    let value = row.original[key] as undefined | number | string
+
+    if (typeof value === 'string') value = Number(value)
 
     return (
       value !== undefined && (
-        <p>
-          {pre && <small className="pre">{pre}</small>}
-          {decimal
-            ? Number(value).toLocaleString('es-ES', {
-                minimumFractionDigits: 2,
-              })
-            : value}
-          {sub && <small className="sub">{sub}</small>}
-        </p>
+        <StylizedNumber {...{ value, isMoney, pre, sub }} />
       )
     )
   }

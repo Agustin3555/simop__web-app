@@ -127,12 +127,16 @@ export const scheme: Scheme<Entity> = {
         numeroResolucion: new TextProp('Número De Resolución'),
         monto: new NumberProp('Monto', {
           decimal: true,
+          isMoney: true,
           big: true,
+          sum: true,
           pre: '$',
         }),
         nuevoMontoObra: new NumberProp('Nuevo Monto', {
           decimal: true,
+          isMoney: true,
           big: true,
+          sum: true,
           pre: '$',
         }),
         fecha: new DateProp('Fecha'),
