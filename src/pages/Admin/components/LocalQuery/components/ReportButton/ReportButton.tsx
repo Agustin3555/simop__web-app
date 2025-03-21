@@ -1,7 +1,7 @@
 import { MutableRefObject, useCallback, useEffect, useState } from 'react'
 import { useScheme } from '@/pages/Admin/hooks'
 import { Button } from '@/components'
-import { Report } from './components'
+import { ReportInTable } from './components'
 import domtoimage from 'dom-to-image'
 import { pdf, PDFViewer } from '@react-pdf/renderer'
 
@@ -30,7 +30,7 @@ const DownloadReportButton = ({ localQueryRef }: ReportButtonProps) => {
     setTableImgUrl(tableImgUrl)
 
     const blob = await pdf(
-      <Report title={`Lista de ${title.plural}`} {...{ tableImgUrl }} />,
+      <ReportInTable title={`Lista de ${title.plural}`} {...{ tableImgUrl }} />,
     ).toBlob()
     const pdfUrl = URL.createObjectURL(blob)
 

@@ -1,6 +1,7 @@
 import { styles } from './Report.style'
 import { Font, Image, Page, Text, View, Document } from '@react-pdf/renderer'
 import { format } from '@formkit/tempo'
+import { ReactNode } from 'react'
 
 const fontFiles = import.meta.glob('@/assets/fonts/manrope_5.2.5/ttf/*.ttf', {
   eager: true,
@@ -11,16 +12,17 @@ const fonts = Object.entries(fontFiles)
     const weight = path.match(/manrope-latin-(\d+)-normal\.ttf$/)?.[1]
     return weight ? { src: module.default, fontWeight: Number(weight) } : null
   })
-  .filter((f): f is { src: string; fontWeight: number } => f !== null) // 👈 Esto elimina el error de TypeScript
+  .filter((f): f is { src: string; fontWeight: number } => f !== null)
 
 Font.register({ family: 'Manrope Variable', fonts })
 
 interface ReportProps {
   title: string
   tableImgUrl: string
+  children: ReactNode
 }
 
-const Report = ({ title, tableImgUrl }: ReportProps) => (
+const Report = ({ title, tableImgUrl, children }: ReportProps) => (
   <Document>
     <Page style={styles.page} size="A4" orientation="landscape">
       <View style={styles.header}>
@@ -39,6 +41,7 @@ const Report = ({ title, tableImgUrl }: ReportProps) => (
           {format('', { date: 'short', time: 'short' })}
         </Text>
       </View>
+      {children}
       <Image style={styles.tableImg} src={tableImgUrl} />
     </Page>
   </Document>
