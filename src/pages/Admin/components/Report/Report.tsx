@@ -18,11 +18,10 @@ Font.register({ family: 'Manrope Variable', fonts })
 
 interface ReportProps {
   title: string
-  tableImgUrl: string
   children: ReactNode
 }
 
-const Report = ({ title, tableImgUrl, children }: ReportProps) => (
+const Report = ({ title, children }: ReportProps) => (
   <Document>
     <Page style={styles.page} size="A4" orientation="landscape">
       <View style={styles.header}>
@@ -42,7 +41,6 @@ const Report = ({ title, tableImgUrl, children }: ReportProps) => (
         </Text>
       </View>
       {children}
-      <Image style={styles.tableImg} src={tableImgUrl} />
     </Page>
   </Document>
 )

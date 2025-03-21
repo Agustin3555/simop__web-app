@@ -5,6 +5,49 @@ import { ReportInTable } from './components'
 import domtoimage from 'dom-to-image'
 import { pdf, PDFViewer } from '@react-pdf/renderer'
 
+const generarImagenes = (element: HTMLElement) => {
+  const children = Array.from(element.children)
+  const chunkSize = 10
+
+  const groups = Array.from(
+    { length: Math.ceil(children.length / chunkSize) },
+    (_, i) => children.slice(i * chunkSize, i * chunkSize + chunkSize),
+  )
+
+  const promises = groups.map(async grupo => {
+    const wrapper = document.createElement('div')
+    grupo.forEach(child => wrapper.appendChild(child.cloneNode(true)))
+
+    Object.assign(wrapper.style, {
+      display: 'flex',
+      flexDirection: 'column',
+    })
+
+    const container = document.createElement('div')
+
+    Object.assign(container.style, {
+      position: 'absolute',
+      top: '-9999px',
+      overflow: 'scroll',
+    })
+
+    container.appendChild(wrapper)
+
+    // Añadimos el contenedor al DOM temporalmente
+    document.body.appendChild(container)
+
+    const imgDataUrl = await domtoimage.toPng(wrapper)
+
+    // Añadimos el contenedor al DOM temporalmente
+    document.body.removeChild(container)
+
+    return imgDataUrl
+  })
+
+  // Generar cada imagen en paralelo
+  return Promise.all(promises)
+}
+
 interface ReportButtonProps {
   localQueryRef: MutableRefObject<HTMLDivElement | null>
 }
@@ -19,19 +62,25 @@ const DownloadReportButton = ({ localQueryRef }: ReportButtonProps) => {
   const [key, setKey] = useState(0)
 
   const handleClick = useCallback(async () => {
-    if (!localQueryRef.current) return
-
-    const tableElement = localQueryRef.current.querySelector('table')
-    if (!tableElement) return
-
     setLoading(true)
 
-    const tableImgUrl = await domtoimage.toPng(tableElement)
-    setTableImgUrl(tableImgUrl)
+    if (!localQueryRef.current) return
+
+    const tbodyElement =
+      localQueryRef.current.querySelector<HTMLTableSectionElement>(
+        'table > tbody',
+      )
+    if (!tbodyElement) return
+
+    const imageUrls = await generarImagenes(tbodyElement)
+
+    // const tableImgUrl = await domtoimage.toPng(tbodyElement)
+    // setTableImgUrl(tableImgUrl)
 
     const blob = await pdf(
-      <ReportInTable title={`Lista de ${title.plural}`} {...{ tableImgUrl }} />,
+      <ReportInTable title={`Lista de ${title.plural}`} {...{ imageUrls }} />,
     ).toBlob()
+
     const pdfUrl = URL.createObjectURL(blob)
 
     window.open(pdfUrl, '_blank')
