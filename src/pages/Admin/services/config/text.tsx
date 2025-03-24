@@ -69,4 +69,12 @@ export class TextProp implements PropScheme {
 
     return value && <p className="text">{value}</p>
   }
+
+  getExcelValue = (item: Entity) => {
+    const { key } = this
+
+    const value = item[key] as string
+
+    return value
+  }
 }

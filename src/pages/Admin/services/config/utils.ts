@@ -51,4 +51,6 @@ export interface PropScheme<E = Entity> {
     filter: ReactNode
   }
   getCellComponent: (row: Row<E>) => ReactNode
+
+  getExcelValue: (item: E) => unknown
 }
