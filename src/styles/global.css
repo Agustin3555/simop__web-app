@@ -25,6 +25,10 @@ html {
   background-color: var(--document-background-color);
 }
 
+body {
+  font-family: var(--pal-font-a);
+}
+
 ::selection {
   color: var(--pal-color-white);
   background-color: var(--pal-color-a-d1);

@@ -61,9 +61,14 @@
         color: var(--pal-color-a);
       }
 
-      > .cmp-button {
+      > .cmp-button,
+      .cmp-state-button {
         border-color: var(--pal-color-b);
         color: var(--pal-color-b-d1);
+      }
+
+      > .cmp-state-button {
+        width: 8rem;
       }
     }
   }

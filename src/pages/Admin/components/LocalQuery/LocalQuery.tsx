@@ -84,7 +84,7 @@ const LocalQuery = () => {
       <header>
         <Combobox
           keyName={`visibility-${key}`}
-          title="Columnas"
+          title="Columnas activas"
           hideLabel
           multiple
           reduceHeader

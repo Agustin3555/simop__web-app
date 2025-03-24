@@ -51,8 +51,34 @@ export const styles = StyleSheet.create({
     lineHeight: 1.2,
     fontWeight: 600,
   },
-  date: {
-    fontSize: 11,
+  right: {
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'flex-end',
+    justifyContent: 'space-between',
+    height: 32,
+
+    fontSize: 8,
   },
-  tableImg: {},
+  pagination: {
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 6,
+    paddingVertical: 2,
+    paddingHorizontal: 6,
+
+    borderRadius: 2,
+    backgroundColor: '#ffffff',
+  },
+  pageNumber: {
+    fontWeight: 700,
+  },
+  paginationSeparator: {
+    width: 0.5,
+    height: 7,
+
+    backgroundColor: '#e5e6f5',
+  },
+  date: {},
 })

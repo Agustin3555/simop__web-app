@@ -87,8 +87,8 @@ const Table = ({ data, columnVisibility, setColumnVisibility }: TableProps) => {
 
   return (
     <div className="cmp-table">
-      <table>
-        <thead>
+      <table className="table">
+        <thead className="thead">
           {table.getHeaderGroups().map(headerGroup => (
             <tr key={headerGroup.id}>
               {headerGroup.headers.map(header =>
@@ -118,7 +118,7 @@ const Table = ({ data, columnVisibility, setColumnVisibility }: TableProps) => {
             </tr>
           ))}
         </thead>
-        <tbody>
+        <tbody className="tbody">
           {table.getRowModel().rows.map(row => (
             <tr key={row.id}>
               {row
@@ -139,7 +139,7 @@ const Table = ({ data, columnVisibility, setColumnVisibility }: TableProps) => {
             </tr>
           ))}
         </tbody>
-        <tfoot>
+        <tfoot className="tfoot">
           {table.getFooterGroups().map(footerGroup => (
             <tr key={footerGroup.id}>
               {footerGroup.headers.map(header => (

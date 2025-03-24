@@ -1,18 +1,15 @@
-import { useLocation } from 'wouter'
 import { useEffect, useState } from 'react'
+import { useLocation } from 'wouter'
 
-export default function NotFoundPage() {
+const REDIRECT_IN_SECONDS = 3
+
+const NotFound = () => {
   const [, navigate] = useLocation()
-  const [countdown, setCountdown] = useState(3)
+  const [countdown, setCountdown] = useState(REDIRECT_IN_SECONDS)
 
   useEffect(() => {
-    const interval = setInterval(() => {
-      setCountdown(prev => prev - 1)
-    }, 1000)
-
-    const timeout = setTimeout(() => {
-      navigate('/') // Redirigir al home
-    }, 3000)
+    const interval = setInterval(() => setCountdown(prev => prev - 1), 1000)
+    const timeout = setTimeout(() => navigate('/'), REDIRECT_IN_SECONDS * 1000)
 
     return () => {
       clearInterval(interval)
@@ -28,3 +25,5 @@ export default function NotFoundPage() {
     </div>
   )
 }
+
+export default NotFound

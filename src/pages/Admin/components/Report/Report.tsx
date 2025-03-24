@@ -24,7 +24,7 @@ interface ReportProps {
 const Report = ({ title, children }: ReportProps) => (
   <Document>
     <Page style={styles.page} size="A4" orientation="landscape">
-      <View style={styles.header}>
+      <View style={styles.header} fixed>
         <Text style={styles.h1}>{title}</Text>
         <View style={styles.by}>
           <Image
@@ -36,9 +36,19 @@ const Report = ({ title, children }: ReportProps) => (
             Subsecretaría de Obras Públicas
           </Text>
         </View>
-        <Text style={styles.date}>
-          {format('', { date: 'short', time: 'short' })}
-        </Text>
+        <View style={styles.right}>
+          <Text style={styles.date}>
+            {format('', { date: 'short', time: 'short' })}
+          </Text>
+          <View style={styles.pagination}>
+            <Text
+              style={styles.pageNumber}
+              render={({ pageNumber }) => pageNumber}
+            />
+            <View style={styles.paginationSeparator} />
+            <Text render={({ totalPages }) => totalPages} />
+          </View>
+        </View>
       </View>
       {children}
     </Page>
