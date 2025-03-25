@@ -281,16 +281,17 @@ export const scheme: Scheme<Entity> = {
   columnVisibility: [
     'numero',
     'nombre',
-    'localidad',
-    'tipoEstadoObra',
-    'fechaInicio',
-    'fechaFin',
     'empresa',
+    'numeroExpediente',
     'fechaContratacion',
     'montoContratacion',
     'tipoFinanciamientoObra',
+    'tipoEstadoObra',
+    'fechaInicio',
     'avanceTotal',
+    'localidad',
   ],
+  quickFilters: ['empresa', 'tipoEstadoObra', 'fechaInicio', 'localidad'],
 
   groups: [
     {

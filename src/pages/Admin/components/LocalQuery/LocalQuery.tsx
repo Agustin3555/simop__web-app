@@ -8,6 +8,7 @@ import { DeleteButton, ReportButton, Table } from './components'
 import { VisibilityState } from '@tanstack/react-table'
 import { utils, writeFile } from 'xlsx'
 import { ComboboxProps } from '../Combobox/Combobox'
+import { GetHeaderResult } from './components/Table/Table'
 
 const LocalQuery = () => {
   const { scheme, flatProps } = useScheme()
@@ -30,6 +31,8 @@ const LocalQuery = () => {
   const [columnVisibility, setColumnVisibility] = useState<VisibilityState>(
     initColumnVisibility || allVisibleColumns,
   )
+
+  const [quickFilters, setQuickFilters] = useState<GetHeaderResult[]>()
 
   const { selectedRowIds } = useRowSelection()
   const localQueryRef = useRef<HTMLDivElement | null>(null)
@@ -102,6 +105,16 @@ const LocalQuery = () => {
           selectedIds={schemeColumnVisibility || Object.keys(allVisibleColumns)}
           reportOption={optionHandleChange}
         />
+        {quickFilters && (
+          <div className="filters">
+            {quickFilters.map(({ title, filter }) => (
+              <div className="item">
+                <small>{title}</small>
+                {filter}
+              </div>
+            ))}
+          </div>
+        )}
         <div className="left">
           <StateButton
             text="Consultar datos"
@@ -135,7 +148,11 @@ const LocalQuery = () => {
           )}
         </div>
       </header>
-      {data && <Table {...{ data, columnVisibility, setColumnVisibility }} />}
+      {data && (
+        <Table
+          {...{ data, columnVisibility, setColumnVisibility, setQuickFilters }}
+        />
+      )}
     </div>
   )
 }
