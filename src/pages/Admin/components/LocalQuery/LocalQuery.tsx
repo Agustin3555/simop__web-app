@@ -11,15 +11,25 @@ import { ComboboxProps } from '../Combobox/Combobox'
 
 const LocalQuery = () => {
   const { scheme, flatProps } = useScheme()
-  const { key, title } = scheme
+  const { key, title, columnVisibility: schemeColumnVisibility } = scheme
 
-  const initColumnVisibility = useMemo(
+  const allVisibleColumns = useMemo(
     () => Object.fromEntries(Object.keys(flatProps).map(id => [id, true])),
     [],
   )
 
-  const [columnVisibility, setColumnVisibility] =
-    useState<VisibilityState>(initColumnVisibility)
+  const initColumnVisibility = useMemo(
+    () =>
+      schemeColumnVisibility && {
+        ...Object.fromEntries(Object.keys(flatProps).map(id => [id, false])),
+        ...Object.fromEntries(schemeColumnVisibility.map(id => [id, true])),
+      },
+    [],
+  )
+
+  const [columnVisibility, setColumnVisibility] = useState<VisibilityState>(
+    initColumnVisibility || allVisibleColumns,
+  )
 
   const { selectedRowIds } = useRowSelection()
   const localQueryRef = useRef<HTMLDivElement | null>(null)
@@ -37,11 +47,11 @@ const LocalQuery = () => {
 
   const columnOptions = useMemo(
     () =>
-      Object.keys(columnVisibility).map(id => ({
+      Object.keys(allVisibleColumns).map(id => ({
         id,
         title: flatProps[id].title,
       })),
-    [data, columnVisibility],
+    [],
   )
 
   const exportHandleClick = useCallback(() => {
@@ -89,7 +99,7 @@ const LocalQuery = () => {
           multiple
           reduceHeader
           options={columnOptions}
-          selectedIds={columnOptions.map(({ id }) => id)}
+          selectedIds={schemeColumnVisibility || Object.keys(allVisibleColumns)}
           reportOption={optionHandleChange}
         />
         <div className="left">

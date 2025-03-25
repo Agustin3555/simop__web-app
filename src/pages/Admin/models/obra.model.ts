@@ -278,6 +278,19 @@ export const scheme: Scheme<Entity> = {
     plural: 'Obras',
   },
   anchorField: 'nombre',
+  columnVisibility: [
+    'numero',
+    'nombre',
+    'localidad',
+    'tipoEstadoObra',
+    'fechaInicio',
+    'fechaFin',
+    'empresa',
+    'fechaContratacion',
+    'montoContratacion',
+    'tipoFinanciamientoObra',
+    'avanceTotal',
+  ],
 
   groups: [
     {

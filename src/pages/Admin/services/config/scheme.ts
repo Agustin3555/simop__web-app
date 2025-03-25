@@ -22,6 +22,7 @@ export interface Scheme<E = Entity> {
     plural: string
   }
   anchorField: keyof E
+  columnVisibility?: (keyof E)[]
 
   groups: {
     title?: string
