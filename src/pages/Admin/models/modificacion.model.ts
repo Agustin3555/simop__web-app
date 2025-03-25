@@ -13,11 +13,11 @@ import { COMMON_PROPS } from '../constants/commonProps.const'
 export interface RawEntity {
   id: number
   numeroExpediente: string
-  numeroResolucion: string
-  monto: number
-  nuevoMontoObra: number
-  fecha: string
-  observaciones: string
+  numeroResolucion?: string
+  monto?: number
+  nuevoMontoObra?: number
+  fecha?: string
+  observaciones?: string
 
   obra?: ObraModel.RawRef
   tipoModificacion?: TipoModificacionModel.RawRef
@@ -29,11 +29,11 @@ export interface RawEntity {
 export interface Entity {
   id: number
   numeroExpediente: string
-  numeroResolucion: string
-  monto: number
-  nuevoMontoObra: number
-  fecha: string
-  observaciones: string
+  numeroResolucion?: string
+  monto?: number
+  nuevoMontoObra?: number
+  fecha?: string
+  observaciones?: string
 
   obra?: ObraModel.Ref
   tipoModificacion?: TipoModificacionModel.Ref

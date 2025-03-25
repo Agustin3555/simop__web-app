@@ -12,8 +12,8 @@ import { COMMON_PROPS } from '../constants/commonProps.const'
 export interface RawEntity {
   id: number
   numeroActa: number
-  fecha: string
-  observaciones: string
+  fecha?: string
+  observaciones?: string
 
   obra?: ObraModel.RawRef
   tipoRecepcion?: TipoRecepcionModel.RawRef
@@ -25,8 +25,8 @@ export interface RawEntity {
 export interface Entity {
   id: number
   numeroActa: number
-  fecha: string
-  observaciones: string
+  fecha?: string
+  observaciones?: string
 
   obra?: ObraModel.Ref
   tipoRecepcion?: TipoRecepcionModel.Ref

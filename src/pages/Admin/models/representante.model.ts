@@ -7,9 +7,9 @@ export interface RawEntity {
   id: number
   cuil: number
   apellido: string
-  nombre: string
-  direccion: string
-  numeroMatricula: string
+  nombre?: string
+  direccion?: string
+  numeroMatricula?: string
 
   pais?: PaisModel.RawRef
   provincia?: ProvinciaModel.RawRef
@@ -23,9 +23,9 @@ export interface Entity {
   id: number
   cuil: number
   apellido: string
-  nombre: string
-  direccion: string
-  numeroMatricula: string
+  nombre?: string
+  direccion?: string
+  numeroMatricula?: string
 
   pais?: PaisModel.Ref
   provincia?: ProvinciaModel.Ref
@@ -121,17 +121,9 @@ export const scheme: Scheme<Entity> = {
             required: true,
           },
         }),
-        nombre: new TextProp('Nombre', {
-          field: {
-            required: true,
-          },
-        }),
-        direccion: new TextProp('Dirección', {
-          field: {
-            required: true,
-          },
-        }),
-        numeroMatricula: new TextProp('Número de Matricula', {}),
+        nombre: new TextProp('Nombre'),
+        direccion: new TextProp('Dirección'),
+        numeroMatricula: new TextProp('Número de Matricula'),
         pais: new RefProp({
           getScheme: () => PaisModel.scheme,
         }),

@@ -8,7 +8,7 @@ export interface RawEntity {
 
   cuil: number
   apellido: string
-  nombre: string
+  nombre?: string
 
   profesiones: TipoProfesionModel.RawRef[]
 
@@ -46,7 +46,7 @@ export interface Ref {
 export interface CreateData {
   cuil: number
   apellido: string
-  nombre: string
+  nombre?: string
 
   profesiones?: number[]
 }
@@ -54,7 +54,7 @@ export interface CreateData {
 export interface CreateBody {
   cuil: number
   apellido: string
-  nombre: string
+  nombre?: string
 
   profesiones?: number[]
 }
