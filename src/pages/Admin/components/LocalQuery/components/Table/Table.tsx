@@ -1,5 +1,12 @@
 import './Table.css'
-import { Dispatch, SetStateAction, useMemo, useState } from 'react'
+import {
+  Dispatch,
+  ReactNode,
+  SetStateAction,
+  useEffect,
+  useMemo,
+  useState,
+} from 'react'
 import { useRowSelection, useScheme } from '@/pages/Admin/hooks'
 import {
   ColumnDef,
@@ -16,18 +23,27 @@ import {
 } from '@tanstack/react-table'
 import { Cell, Header, RowSelectorCell } from './components'
 import { Entity } from '@/services/config'
+import { PropScheme } from '@/pages/Admin/services/config'
+
+export type GetHeaderResult = ReturnType<NonNullable<PropScheme['getHeader']>>
 
 interface TableProps {
   data: Entity[]
   columnVisibility: VisibilityState
   setColumnVisibility: Dispatch<SetStateAction<VisibilityState>>
+  setQuickFilters: Dispatch<SetStateAction<GetHeaderResult[] | undefined>>
 }
 
 const SELECT_COLUMN = 'select'
 
-const Table = ({ data, columnVisibility, setColumnVisibility }: TableProps) => {
+const Table = ({
+  data,
+  columnVisibility,
+  setColumnVisibility,
+  setQuickFilters,
+}: TableProps) => {
   const { scheme, flatProps } = useScheme()
-  const { groups } = scheme
+  const { quickFilters, groups } = scheme
 
   const { rowSelection, setRowSelection, selectedRowIds } = useRowSelection()
   const [sorting, setSorting] = useState<SortingState>([])
@@ -84,6 +100,27 @@ const Table = ({ data, columnVisibility, setColumnVisibility }: TableProps) => {
     enableSortingRemoval: false,
     columnResizeMode: 'onChange',
   })
+
+  useEffect(() => {
+    if (!quickFilters) return
+
+    let results: GetHeaderResult[] = []
+
+    quickFilters.forEach(key => {
+      const { getHeader } = flatProps[key]
+
+      if (!getHeader) return
+
+      const { column } =
+        table.getHeaderGroups()[0].headers.find(({ id }) => id === key) ?? {}
+
+      if (!column) return
+
+      results = [...results, getHeader(column)]
+    })
+
+    setQuickFilters(results)
+  }, [table])
 
   return (
     <div className="cmp-table">
