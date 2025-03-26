@@ -77,4 +77,5 @@ export class TextProp implements PropScheme {
 
     return value
   }
+  
 }

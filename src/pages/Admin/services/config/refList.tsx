@@ -100,4 +100,17 @@ export class RefListProp implements PropScheme {
       )
     )
   }
+
+  getExcelValue = (item: Entity) => {
+    const { key, config } = this
+    const { getScheme } = config
+
+    const { anchorField } = getScheme()
+
+    const values = item[key] as undefined | Partial<Entity>[]
+
+    if (!values || values.length === 0) return
+
+    return values.map(value => value[anchorField]).join(', ')
+  }
 }

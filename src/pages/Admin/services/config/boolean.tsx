@@ -74,4 +74,15 @@ export class BooleanProp implements PropScheme {
       )
     )
   }
+
+  getExcelValue = (item: Entity) => {
+    const { key, config } = this
+    const { falseText = 'No', trueText = 'Sí' } = config ?? {}
+
+    const value = item[key] as boolean | undefined
+
+    if (value === undefined) return
+
+    return value ? trueText : falseText
+  }
 }

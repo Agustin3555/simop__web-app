@@ -118,4 +118,17 @@ export class RefProp implements PropScheme {
       )
     )
   }
+
+  getExcelValue = (item: Entity) => {
+    const { key, config } = this
+    const { getScheme } = config
+
+    const { anchorField } = getScheme()
+
+    const value = item[key] as undefined | Partial<Entity>
+
+    if (value === undefined) return
+
+    return value[anchorField]
+  }
 }
