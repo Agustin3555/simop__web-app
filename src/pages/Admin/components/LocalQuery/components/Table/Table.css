@@ -6,68 +6,62 @@
   overflow: auto;
 }
 
-table {
+.table {
   --cell-padding-inline: var(--pal-size-m);
   --table-border-radius: var(--pal-size-xs);
 
   border-width: var(--line-thickness);
   border-style: solid;
-  border-color: var(--pal-color-a-l3);
-  border-collapse: collapse;
+  border-color: var(--pal-color-white);
 
-  border-radius: var(--table-border-radius);
   background-color: var(--pal-color-white);
-  overflow: hidden;
 
-  thead {
-    background-color: var(--pal-color-a-l2);
+  .row {
+    display: flex;
   }
 
-  tbody > tr {
-    /* "Sobrescribe" el border actual y del elemento anterior */
-    &::after {
-      --position: calc(var(--line-thickness) * -1.5);
+  > .head {
+    background-color: var(--pal-color-a-l2);
 
-      position: absolute;
-      inset: 0;
-      top: var(--position);
-      bottom: var(--position);
+    > .row > * {
+      border-right-width: var(--line-thickness);
+      border-right-style: solid;
+      border-right-color: var(--pal-color-white);
 
-      pointer-events: none;
-
-      border-block-style: solid;
-      border-block-width: 0;
-      border-block-color: var(--pal-color-white);
-
-      content: '';
-    }
-
-    &:hover {
-      background-color: var(--pal-color-a-l3);
-
-      &::after {
-        border-block-width: var(--line-thickness);
+      &:last-child {
+        border: none;
       }
     }
   }
 
-  tr {
-    position: relative;
+  > .body {
+    display: flex;
+    flex-direction: column;
 
-    border-width: 0;
-    border-style: solid;
-    border-color: var(--pal-color-gs-50);
     border-block-width: var(--line-thickness);
+    border-block-style: solid;
+    border-block-color: var(--pal-color-white);
+
+    > .row {
+      border-bottom-width: var(--line-thickness);
+      border-bottom-style: solid;
+      border-bottom-color: var(--pal-color-a-l3);
+
+      &:last-of-type {
+        border: none;
+      }
+
+      &:hover {
+        background-color: var(--pal-color-a-l3);
+      }
+    }
   }
 
-  > tfoot {
+  > .foot {
     background-color: var(--pal-color-a-l3);
+  }
 
-    /* > tr > td {
-      padding: var(--cell-padding-inline);
-      border-top: var(--line-thickness) solid var(--pal-color-gs-50);
-      font-weight: bold;
-      text-align: right;
-    } */
+  > :is(.body, .foot) > .row {
+    padding-block: var(--pal-size-s);
   }
 }

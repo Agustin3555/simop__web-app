@@ -310,7 +310,7 @@ export const scheme: Scheme<Entity> = {
         empresa: new RefProp({
           getScheme: () => EmpresaModel.scheme,
         }),
-        numeroExpediente: new TextProp('Número de Expediente'),
+        numeroExpediente: new TextProp('Número de Expediente de Contrato'),
         numeroResolucion: new TextProp('Número de Resolución'),
         anioResolucion: new NumberProp('Año de Resolución'),
         numeroContratacion: new TextProp('Número de Contratación'),

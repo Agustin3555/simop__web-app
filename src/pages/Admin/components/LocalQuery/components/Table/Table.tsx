@@ -1,12 +1,5 @@
 import './Table.css'
-import {
-  Dispatch,
-  ReactNode,
-  SetStateAction,
-  useEffect,
-  useMemo,
-  useState,
-} from 'react'
+import { Dispatch, SetStateAction, useEffect, useMemo, useState } from 'react'
 import { useRowSelection, useScheme } from '@/pages/Admin/hooks'
 import {
   ColumnDef,
@@ -59,9 +52,11 @@ const Table = ({
       { id: SELECT_COLUMN },
       ...groups.flatMap<ColumnDef<Entity>>(({ props }) =>
         Object.values(props).map(({ key, accessorFn, filterFn, footer }) => ({
-          header: key,
-          accessorKey: key,
           id: key,
+          accessorKey: key,
+          header: key,
+          // minSize, en rem
+          // size: minSize,
           ...(accessorFn && { accessorFn }),
           ...(filterFn && { filterFn }),
           ...(footer && { footer }),
@@ -120,14 +115,14 @@ const Table = ({
     })
 
     setQuickFilters(results)
-  }, [table])
+  }, [])
 
   return (
     <div className="cmp-table">
-      <table className="table">
-        <thead className="thead">
+      <div className="table">
+        <div className="head">
           {table.getHeaderGroups().map(headerGroup => (
-            <tr key={headerGroup.id}>
+            <div className="row" key={headerGroup.id}>
               {headerGroup.headers.map(header =>
                 header.id === SELECT_COLUMN ? (
                   <RowSelectorCell
@@ -152,12 +147,12 @@ const Table = ({
                   />
                 ),
               )}
-            </tr>
+            </div>
           ))}
-        </thead>
-        <tbody className="tbody">
+        </div>
+        <div className="body">
           {table.getRowModel().rows.map(row => (
-            <tr key={row.id}>
+            <div className="row" key={row.id}>
               {row
                 .getVisibleCells()
                 .map(cell =>
@@ -173,12 +168,12 @@ const Table = ({
                     <Cell key={cell.id} {...{ flatProps, cell }} />
                   ),
                 )}
-            </tr>
+            </div>
           ))}
-        </tbody>
-        <tfoot className="tfoot">
+        </div>
+        <div className="foot">
           {table.getFooterGroups().map(footerGroup => (
-            <tr key={footerGroup.id}>
+            <div className="row" key={footerGroup.id}>
               {footerGroup.headers.map(header => (
                 <td key={header.id}>
                   {header.column.columnDef.footer
@@ -188,10 +183,10 @@ const Table = ({
                     : null}
                 </td>
               ))}
-            </tr>
+            </div>
           ))}
-        </tfoot>
-      </table>
+        </div>
+      </div>
     </div>
   )
 }
