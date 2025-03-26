@@ -8,9 +8,9 @@ export interface RawEntity {
   vigencia: boolean
   fecha?: string
 
-  obra: ObraModel.RawRef
-  representante: RepresentanteModel.RawRef
-  tipoRepresentante: TipoRepresentanteModel.RawRef
+  obra?: ObraModel.RawRef
+  representante?: RepresentanteModel.RawRef
+  tipoRepresentante?: TipoRepresentanteModel.RawRef
 
   creado: string
   modificado: string
@@ -21,9 +21,9 @@ export interface Entity {
   vigencia: boolean
   fecha?: string
 
-  obra: ObraModel.Ref
-  representante: RepresentanteModel.Ref
-  tipoRepresentante: TipoRepresentanteModel.Ref
+  obra?: ObraModel.Ref
+  representante?: RepresentanteModel.Ref
+  tipoRepresentante?: TipoRepresentanteModel.Ref
 
   creado: string
   modificado: string

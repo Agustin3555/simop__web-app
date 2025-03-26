@@ -2,7 +2,12 @@ import './LocalEdit.css'
 import { FormEventHandler, useCallback, useMemo } from 'react'
 import { useAppStore } from '@/store/config'
 import { useMutationActionState } from '@/hooks'
-import { useEntities, useRowSelection, useScheme } from '../../hooks'
+import {
+  useEntities,
+  useRowSelection,
+  useScheme,
+  useLocalView,
+} from '../../hooks'
 import { Button, StateButton } from '@/components'
 import { useMutation } from '@tanstack/react-query'
 
@@ -11,6 +16,7 @@ const LocalEdit = () => {
   const { service, title, anchorField, groups } = scheme
 
   const toasting = useAppStore(store => store.toasting)
+  const { setLocalView } = useLocalView()
   const { selectedRowIds, deselectRows } = useRowSelection()
 
   const { query } = useEntities(scheme)
@@ -74,6 +80,8 @@ const LocalEdit = () => {
     mutate(event.currentTarget)
   }
 
+  const handleClick = useCallback(() => setLocalView('query'), [])
+
   return (
     <div className="cmp-local-edit">
       {isEditing ? (
@@ -114,6 +122,7 @@ const LocalEdit = () => {
               _type="secondary"
               size="s"
               inverted
+              onClick={handleClick}
             />
           </div>
         </div>

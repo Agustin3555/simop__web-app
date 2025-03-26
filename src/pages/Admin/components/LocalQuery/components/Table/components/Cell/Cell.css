@@ -1,7 +1,7 @@
 .cmp-cell {
-  padding-block: var(--pal-size-s);
   padding-inline: var(--cell-padding-inline);
 
+  /*
   .text {
     min-width: 16rem;
 
@@ -9,12 +9,12 @@
       min-width: 24rem;
     }
   }
+  */
 
   > .items {
     display: flex;
     flex-wrap: wrap;
     gap: var(--pal-size-2xs);
     padding-block: var(--pal-size-s);
-    max-width: 30rem;
   }
 }

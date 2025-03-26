@@ -1,69 +1,89 @@
 .cmp-header {
   position: relative;
 
-  vertical-align: bottom;
-  border-inline-style: solid;
-  border-inline-width: var(--line-thickness);
-  border-inline-color: var(--pal-color-white);
-
-  /* Corrige el border excedente */
-  &:last-of-type {
-    border: none;
-  }
+  flex-shrink: 0;
 
   &.dragging {
     background-color: var(--pal-color-b-l1);
   }
 
   > .content {
+    --gap: var(--pal-size-3xs);
+
     display: flex;
     flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
 
-    > button {
+    > .management {
       display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: var(--cell-padding-inline);
-      padding: var(--cell-padding-inline);
+      flex-direction: column;
 
-      > .title-group {
-        display: flex;
-        flex-direction: column;
-        align-items: flex-start;
-        gap: var(--pal-size-xs);
+      > .grip-area {
+        padding: var(--gap);
+        padding-bottom: 0;
 
-        font-weight: 650;
+        cursor: grab;
 
-        > .title {
-          text-align: start;
-          color: var(--pal-color-a-d2);
-        }
+        > span {
+          width: 100%;
+          height: var(--pal-size-m);
 
-        > small {
-          font-size: var(--pal-size-font-2xs);
-          color: var(--pal-color-a);
+          border-radius: calc(var(--table-border-radius) - var(--gap));
+          background-image: radial-gradient(
+            circle at 0.125rem 0.125rem,
+            var(--pal-color-a-l1) 0.0625rem,
+            transparent 0
+          );
+          background-size: 0.25rem 0.25rem;
         }
       }
 
-      > .sort {
-        --cmp-icon-size: var(--pal-size-s);
-
+      > button {
         display: flex;
-        align-items: center;
-        gap: var(--pal-size-xs);
-        padding: var(--pal-size-xs);
+        flex-wrap: wrap;
+        align-items: flex-start;
+        justify-content: space-between;
+        gap: var(--cell-padding-inline);
+        padding: var(--cell-padding-inline);
 
-        font-weight: 500;
-        color: var(--pal-color-a-l3);
+        > .title-group {
+          display: flex;
+          flex-direction: column;
+          align-items: flex-start;
+          gap: var(--pal-size-2xs);
 
-        border-radius: var(--pal-size-2xs);
-        background-color: var(--pal-color-a);
+          font-weight: 650;
+
+          > .title {
+            text-align: start;
+            color: var(--pal-color-a-d2);
+          }
+
+          > small {
+            font-size: var(--pal-size-font-2xs);
+            color: var(--pal-color-a);
+          }
+        }
+
+        > .sort {
+          --cmp-icon-size: var(--pal-size-s);
+
+          display: flex;
+          align-items: center;
+          gap: var(--pal-size-xs);
+          padding: var(--pal-size-xs);
+
+          font-weight: 500;
+          color: var(--pal-color-a-l3);
+
+          border-radius: var(--pal-size-2xs);
+          background-color: var(--pal-color-a);
+        }
       }
     }
 
     > .filters {
-      --gap: var(--pal-size-3xs);
-
       display: flex;
       flex-direction: column;
       gap: var(--gap);
@@ -73,7 +93,6 @@
       .input {
         padding-inline: calc(var(--control-padding-inline) - var(--gap));
         padding-right: var(--pal-size-xs);
-        min-width: 8rem;
 
         border-radius: calc(var(--table-border-radius) - var(--gap));
 
@@ -83,24 +102,43 @@
   }
 
   > .resizer {
-    position: absolute;
-    top: 0;
-    right: 0;
+    --width: var(--pal-size-s);
 
-    width: var(--pal-size-s);
+    position: absolute;
+    z-index: 1;
+    top: 0;
+    right: calc(var(--width) / -2);
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: var(--width);
     height: 100%;
 
+    background-color: var(--pal-color-a-l3);
+    box-shadow: var(--pal-shadow-0);
     opacity: 0;
     cursor: col-resize;
     user-select: none;
 
     transition: opacity var(--pal-time-xs) ease-out;
-    background: linear-gradient(to right, transparent, var(--pal-color-a-l1));
     touch-action: none;
 
     &.resizing,
     &:hover {
       opacity: initial;
+    }
+
+    &::before {
+      position: absolute;
+
+      width: var(--pal-size-2xs);
+      height: var(--pal-size-2xl);
+
+      border-radius: var(--pal-size-3xl);
+      background-color: var(--pal-color-a-l2);
+
+      content: '';
     }
   }
 }

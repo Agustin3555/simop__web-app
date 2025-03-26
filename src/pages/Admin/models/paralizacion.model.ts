@@ -14,10 +14,10 @@ export interface RawEntity {
   id: number
   numero: number
   numeroExpediente: string
-  fechaReinicio: string
-  nuevaFechaFinObra: string
-  fecha: string
-  observaciones: string
+  fechaReinicio?: string
+  nuevaFechaFinObra?: string
+  fecha?: string
+  observaciones?: string
 
   obra?: ObraModel.RawRef
   tipoParalizacion?: TipoParalizacionModel.RawRef
@@ -30,10 +30,10 @@ export interface Entity {
   id: number
   numero: number
   numeroExpediente: string
-  fechaReinicio: string
-  nuevaFechaFinObra: string
-  fecha: string
-  observaciones: string
+  fechaReinicio?: string
+  nuevaFechaFinObra?: string
+  fecha?: string
+  observaciones?: string
 
   obra?: ObraModel.Ref
   tipoParalizacion?: TipoParalizacionModel.Ref

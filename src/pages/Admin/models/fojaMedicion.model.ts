@@ -14,9 +14,9 @@ export interface RawEntity {
   id: number
   numero: number
   numeroExpediente: string
-  avance: number
-  fecha: string
-  observaciones: string
+  avance?: number
+  fecha?: string
+  observaciones?: string
 
   obra?: ObraModel.RawRef
   inspector?: InspectorModel.RawRef
@@ -29,9 +29,9 @@ export interface Entity {
   id: number
   numero: number
   numeroExpediente: string
-  avance: number
-  fecha: string
-  observaciones: string
+  avance?: number
+  fecha?: string
+  observaciones?: string
 
   obra?: ObraModel.Ref
   inspector?: InspectorModel.Ref

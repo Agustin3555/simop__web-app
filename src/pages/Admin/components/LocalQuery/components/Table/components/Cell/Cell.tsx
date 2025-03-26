@@ -24,7 +24,7 @@ const Cell = ({ flatProps, cell }: Props) => {
   )
 
   return (
-    <td className="cmp-cell" style={{ minWidth: column.getSize() }}>
+    <td className="cmp-cell" style={{ width: column.getSize() }}>
       {component}
     </td>
   )

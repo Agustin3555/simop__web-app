@@ -13,13 +13,13 @@ import { COMMON_PROPS } from '../constants/commonProps.const'
 export interface RawEntity {
   id: number
   numero: number
-  numeroResolucion: string
-  numeroExpedienteSolicitud: string
-  plazoMesesSolicitado: number
-  plazoMesesOtorgado: number
-  nuevaFechaFinObra: string
-  fecha: string
-  observaciones: string
+  numeroResolucion?: string
+  numeroExpedienteSolicitud?: string
+  plazoMesesSolicitado?: number
+  plazoMesesOtorgado?: number
+  nuevaFechaFinObra?: string
+  fecha?: string
+  observaciones?: string
 
   obra?: ObraModel.RawRef
 
@@ -30,13 +30,13 @@ export interface RawEntity {
 export interface Entity {
   id: number
   numero: number
-  numeroResolucion: string
-  numeroExpedienteSolicitud: string
-  plazoMesesSolicitado: number
-  plazoMesesOtorgado: number
-  nuevaFechaFinObra: string
-  fecha: string
-  observaciones: string
+  numeroResolucion?: string
+  numeroExpedienteSolicitud?: string
+  plazoMesesSolicitado?: number
+  plazoMesesOtorgado?: number
+  nuevaFechaFinObra?: string
+  fecha?: string
+  observaciones?: string
 
   obra?: ObraModel.Ref
 

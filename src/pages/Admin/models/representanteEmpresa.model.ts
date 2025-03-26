@@ -6,11 +6,11 @@ import { COMMON_PROPS } from '../constants/commonProps.const'
 export interface RawEntity {
   id: number
   vigencia: boolean
-  fecha: string
+  fecha?: string
 
-  empresa: EmpresaModel.RawRef
-  representante: RepresentanteModel.RawRef
-  tipoRepresentante: TipoRepresentanteModel.RawRef
+  empresa?: EmpresaModel.RawRef
+  representante?: RepresentanteModel.RawRef
+  tipoRepresentante?: TipoRepresentanteModel.RawRef
 
   creado: string
   modificado: string
@@ -19,11 +19,11 @@ export interface RawEntity {
 export interface Entity {
   id: number
   vigencia: boolean
-  fecha: string
+  fecha?: string
 
-  empresa: EmpresaModel.Ref
-  representante: RepresentanteModel.Ref
-  tipoRepresentante: TipoRepresentanteModel.Ref
+  empresa?: EmpresaModel.Ref
+  representante?: RepresentanteModel.Ref
+  tipoRepresentante?: TipoRepresentanteModel.Ref
 
   creado: string
   modificado: string

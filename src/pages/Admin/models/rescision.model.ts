@@ -12,9 +12,9 @@ import { COMMON_PROPS } from '../constants/commonProps.const'
 export interface RawEntity {
   id: number
   numeroExpediente: string
-  numeroResolucion: string
-  fecha: string
-  observaciones: string
+  numeroResolucion?: string
+  fecha?: string
+  observaciones?: string
 
   obra?: ObraModel.RawRef
   tipoRescision?: TipoRescisionModel.RawRef
@@ -26,9 +26,9 @@ export interface RawEntity {
 export interface Entity {
   id: number
   numeroExpediente: string
-  numeroResolucion: string
-  fecha: string
-  observaciones: string
+  numeroResolucion?: string
+  fecha?: string
+  observaciones?: string
 
   obra?: ObraModel.Ref
   tipoRescision?: TipoRescisionModel.Ref

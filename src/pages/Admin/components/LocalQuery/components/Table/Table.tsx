@@ -1,5 +1,5 @@
 import './Table.css'
-import { Dispatch, SetStateAction, useMemo, useState } from 'react'
+import { Dispatch, SetStateAction, useEffect, useMemo, useState } from 'react'
 import { useRowSelection, useScheme } from '@/pages/Admin/hooks'
 import {
   ColumnDef,
@@ -16,18 +16,27 @@ import {
 } from '@tanstack/react-table'
 import { Cell, Header, RowSelectorCell } from './components'
 import { Entity } from '@/services/config'
+import { PropScheme } from '@/pages/Admin/services/config'
+
+export type GetHeaderResult = ReturnType<NonNullable<PropScheme['getHeader']>>
 
 interface TableProps {
   data: Entity[]
   columnVisibility: VisibilityState
   setColumnVisibility: Dispatch<SetStateAction<VisibilityState>>
+  setQuickFilters: Dispatch<SetStateAction<GetHeaderResult[] | undefined>>
 }
 
 const SELECT_COLUMN = 'select'
 
-const Table = ({ data, columnVisibility, setColumnVisibility }: TableProps) => {
+const Table = ({
+  data,
+  columnVisibility,
+  setColumnVisibility,
+  setQuickFilters,
+}: TableProps) => {
   const { scheme, flatProps } = useScheme()
-  const { groups } = scheme
+  const { quickFilters, groups } = scheme
 
   const { rowSelection, setRowSelection, selectedRowIds } = useRowSelection()
   const [sorting, setSorting] = useState<SortingState>([])
@@ -43,9 +52,11 @@ const Table = ({ data, columnVisibility, setColumnVisibility }: TableProps) => {
       { id: SELECT_COLUMN },
       ...groups.flatMap<ColumnDef<Entity>>(({ props }) =>
         Object.values(props).map(({ key, accessorFn, filterFn, footer }) => ({
-          header: key,
-          accessorKey: key,
           id: key,
+          accessorKey: key,
+          header: key,
+          // minSize, en rem
+          // size: minSize,
           ...(accessorFn && { accessorFn }),
           ...(filterFn && { filterFn }),
           ...(footer && { footer }),
@@ -85,12 +96,33 @@ const Table = ({ data, columnVisibility, setColumnVisibility }: TableProps) => {
     columnResizeMode: 'onChange',
   })
 
+  useEffect(() => {
+    if (!quickFilters) return
+
+    let results: GetHeaderResult[] = []
+
+    quickFilters.forEach(key => {
+      const { getHeader } = flatProps[key]
+
+      if (!getHeader) return
+
+      const { column } =
+        table.getHeaderGroups()[0].headers.find(({ id }) => id === key) ?? {}
+
+      if (!column) return
+
+      results = [...results, getHeader(column)]
+    })
+
+    setQuickFilters(results)
+  }, [])
+
   return (
     <div className="cmp-table">
-      <table className="table">
-        <thead className="thead">
+      <div className="table">
+        <div className="head">
           {table.getHeaderGroups().map(headerGroup => (
-            <tr key={headerGroup.id}>
+            <div className="row" key={headerGroup.id}>
               {headerGroup.headers.map(header =>
                 header.id === SELECT_COLUMN ? (
                   <RowSelectorCell
@@ -115,12 +147,12 @@ const Table = ({ data, columnVisibility, setColumnVisibility }: TableProps) => {
                   />
                 ),
               )}
-            </tr>
+            </div>
           ))}
-        </thead>
-        <tbody className="tbody">
+        </div>
+        <div className="body">
           {table.getRowModel().rows.map(row => (
-            <tr key={row.id}>
+            <div className="row" key={row.id}>
               {row
                 .getVisibleCells()
                 .map(cell =>
@@ -136,12 +168,12 @@ const Table = ({ data, columnVisibility, setColumnVisibility }: TableProps) => {
                     <Cell key={cell.id} {...{ flatProps, cell }} />
                   ),
                 )}
-            </tr>
+            </div>
           ))}
-        </tbody>
-        <tfoot className="tfoot">
+        </div>
+        <div className="foot">
           {table.getFooterGroups().map(footerGroup => (
-            <tr key={footerGroup.id}>
+            <div className="row" key={footerGroup.id}>
               {footerGroup.headers.map(header => (
                 <td key={header.id}>
                   {header.column.columnDef.footer
@@ -151,10 +183,10 @@ const Table = ({ data, columnVisibility, setColumnVisibility }: TableProps) => {
                     : null}
                 </td>
               ))}
-            </tr>
+            </div>
           ))}
-        </tfoot>
-      </table>
+        </div>
+      </div>
     </div>
   )
 }

@@ -79,12 +79,18 @@ const Header = ({
     })
   }
 
-  const handleDragStart = useCallback<DragEventHandler<HTMLTableCellElement>>(
+  const handleDragStart = useCallback<DragEventHandler<HTMLDivElement>>(
     e => {
       setDragging(true)
-      e.dataTransfer.setData('columnId', column.id)
+
+      e.dataTransfer.setData('text/plain', column.id)
+      e.dataTransfer.effectAllowed = 'move'
+
+      const headerElement = e.currentTarget.closest('.cmp-header')
+
+      if (headerElement) e.dataTransfer.setDragImage(headerElement, 0, 0)
     },
-    [],
+    [column.id],
   )
 
   const handleDragOver = useCallback<DragEventHandler<HTMLTableCellElement>>(
@@ -96,7 +102,7 @@ const Header = ({
 
   const handleDrop = useCallback<DragEventHandler<HTMLTableCellElement>>(
     e => {
-      const draggedColumnId = e.dataTransfer.getData('columnId')
+      const draggedColumnId = e.dataTransfer.getData('text/plain')
 
       if (draggedColumnId && draggedColumnId !== column.id) {
         const newColumnOrder = [...columnOrder]
@@ -114,29 +120,35 @@ const Header = ({
   )
 
   return (
-    <th
+    <div
       className={classList('cmp-header', { dragging })}
-      // style={{ minWidth: getSize() }}
-      // style={{ width: Math.round(getSize() / 32) * 32 }}
-      draggable
-      onDragStart={handleDragStart}
-      onDragOver={handleDragOver}
-      onDragEnd={handleDragEnd}
-      onDrop={handleDrop}
+      style={{ width: getSize() }}
     >
       <div className="content">
-        <button onClick={handleSortingClick}>
-          <div className="title-group">
-            <p className="title text">{title}</p>
-            {subtitle && <small>{subtitle}</small>}
+        <div className="management">
+          <div
+            className="grip-area"
+            draggable
+            onDragStart={handleDragStart}
+            onDragOver={handleDragOver}
+            onDragEnd={handleDragEnd}
+            onDrop={handleDrop}
+          >
+            <span />
           </div>
-          {sortIcon && (
-            <div className="sort">
-              <Icon faIcon={sortIcon} />
-              <small>{getSortIndex() + 1}</small>
+          <button onClick={handleSortingClick}>
+            <div className="title-group">
+              <p className="title text">{title}</p>
+              {subtitle && <small>{subtitle}</small>}
             </div>
-          )}
-        </button>
+            {sortIcon && (
+              <div className="sort">
+                <Icon faIcon={sortIcon} />
+                <small>{getSortIndex() + 1}</small>
+              </div>
+            )}
+          </button>
+        </div>
         {filter && <div className="filters">{filter}</div>}
       </div>
       <div
@@ -145,7 +157,7 @@ const Header = ({
         onMouseDown={getResizeHandler()}
         onTouchStart={getResizeHandler()}
       />
-    </th>
+    </div>
   )
 }
 

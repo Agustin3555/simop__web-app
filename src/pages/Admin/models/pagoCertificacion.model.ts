@@ -14,9 +14,9 @@ export interface RawEntity {
   id: number
   numero: number
   ordenPago?: string
-  monto: number
-  fecha: string
-  observaciones: string
+  monto?: number
+  fecha?: string
+  observaciones?: string
 
   certificacion?: CertificacionModel.RawRef
 
@@ -28,9 +28,9 @@ export interface Entity {
   id: number
   numero: number
   ordenPago?: string
-  monto: number
-  fecha: string
-  observaciones: string
+  monto?: number
+  fecha?: string
+  observaciones?: string
 
   certificacion?: CertificacionModel.Ref
 

@@ -239,6 +239,7 @@ const BaseCombobox = ({
                 text="Actualizar opciones"
                 hiddenText
                 faIcon="fa-solid fa-rotate"
+                // BUG: se debe declarar como button porque si no se interpreta como submit al estar dentro del form
                 {...refetchPack}
               />
             )}
