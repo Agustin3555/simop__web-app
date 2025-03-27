@@ -88,4 +88,14 @@ export class DateProp implements PropScheme {
 
     return value && <p>{format(value, { date: 'short' })}</p>
   }
+
+  getExcelValue = (item: Entity) => {
+    const { key } = this
+
+    const value = item[key] as string | undefined
+
+    if (value === undefined) return
+
+    return format(value, { date: 'short' })
+  }
 }

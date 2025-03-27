@@ -116,4 +116,22 @@ export class NumberProp implements PropScheme {
       )
     )
   }
+  getExcelValue = (item: Entity) => {
+    const { key, config } = this
+    const { isMoney = false, pre = '', sub = '' } = config ?? {}
+
+    let value = item[key] as undefined | number | string
+
+    if (value === undefined) return
+
+    if (typeof value === 'string') value = Number(value)
+
+    return (
+      pre +
+      (isMoney
+        ? value.toLocaleString('es-ES', { minimumFractionDigits: 2 })
+        : value) +
+      sub
+    )
+  }
 }
