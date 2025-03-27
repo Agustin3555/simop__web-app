@@ -1,5 +1,5 @@
 import { Entity } from '@/services/config'
-import { ForView, GetScheme, PropScheme, Required } from './utils'
+import { ForView, GetScheme, MinSize, PropScheme, Required } from './utils'
 import { AutoCombobox, FetchRef } from '../../components'
 import { Column, Row } from '@tanstack/react-table'
 import { getFlatProps } from './scheme'
@@ -18,6 +18,8 @@ export class RefListProp implements PropScheme {
       // column?: ForView,
       field?: ForView & Required
     },
+
+    public minSize: MinSize = 'm',
   ) {}
 
   public get title() {

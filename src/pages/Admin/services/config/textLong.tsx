@@ -1,5 +1,5 @@
 import { Entity } from '@/services/config'
-import { ForView, PropScheme, Required } from './utils'
+import { ForView, MinSize, PropScheme, Required } from './utils'
 import { Column, Row } from '@tanstack/react-table'
 import { InputArea, TextFilter } from '../../components'
 
@@ -13,6 +13,8 @@ export class TextLongProp implements PropScheme {
       // column?: ForView,
       field?: ForView & Required
     },
+
+    public minSize: MinSize = 'l',
   ) {}
 
   getFieldComponent = (value?: string, editMode = false) => {

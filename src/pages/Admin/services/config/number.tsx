@@ -1,5 +1,5 @@
 import { Entity } from '@/services/config'
-import { ForView, PropScheme, Required } from './utils'
+import { ForView, MinSize, PropScheme, Required } from './utils'
 import { Input } from '@/components'
 import {
   BuiltInFilterFn,
@@ -30,6 +30,8 @@ export class NumberProp implements PropScheme {
           max?: number
         }
     },
+
+    public minSize: MinSize = 's',
   ) {}
 
   getFieldComponent = (value?: number | string, editMode = false) => {
