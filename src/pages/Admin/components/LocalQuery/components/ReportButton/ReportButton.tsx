@@ -25,7 +25,7 @@ const ReportButton = ({ localQueryRef }: ReportButtonProps) => {
         const localQueryElement = localQueryRef.current
 
         const tableElement =
-          localQueryElement.querySelector<HTMLTableElement>('table')
+          localQueryElement.querySelector<HTMLElement>('.table')
 
         if (!tableElement) return
 

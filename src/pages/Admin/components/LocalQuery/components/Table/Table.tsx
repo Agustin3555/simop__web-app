@@ -29,6 +29,8 @@ interface TableProps {
 
 const SELECT_COLUMN = 'select'
 
+const minSize = 256
+
 const Table = ({
   data,
   columnVisibility,
@@ -55,8 +57,8 @@ const Table = ({
           id: key,
           accessorKey: key,
           header: key,
-          // minSize, en rem
-          // size: minSize,
+          minSize,
+          size: minSize,
           ...(accessorFn && { accessorFn }),
           ...(filterFn && { filterFn }),
           ...(footer && { footer }),

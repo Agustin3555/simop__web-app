@@ -1,20 +1,10 @@
 .cmp-cell {
+  flex-shrink: 0;
+
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--pal-size-2xs);
   padding-inline: var(--cell-padding-inline);
 
-  /*
-  .text {
-    min-width: 16rem;
-
-    &.m {
-      min-width: 24rem;
-    }
-  }
-  */
-
-  > .items {
-    display: flex;
-    flex-wrap: wrap;
-    gap: var(--pal-size-2xs);
-    padding-block: var(--pal-size-s);
-  }
+  transition: width var(--pal-time-s) ease;
 }

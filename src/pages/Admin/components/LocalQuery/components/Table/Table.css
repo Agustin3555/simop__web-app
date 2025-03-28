@@ -13,8 +13,11 @@
   border-width: var(--line-thickness);
   border-style: solid;
   border-color: var(--pal-color-white);
+  width: max-content;
 
+  border-radius: var(--table-border-radius);
   background-color: var(--pal-color-white);
+  overflow: auto;
 
   .row {
     display: flex;
@@ -62,6 +65,7 @@
   }
 
   > :is(.body, .foot) > .row {
+    align-items: center;
     padding-block: var(--pal-size-s);
   }
 }

@@ -3,6 +3,7 @@ import { useScheme } from '@/pages/Admin/hooks'
 import { Cell as TanstackCell } from '@tanstack/react-table'
 import { Entity } from '@/services/config'
 import { useMemo } from 'react'
+import { steppedSizes } from '../../helpers'
 
 /*
   No se usa 'getValue' porque se necesita tener el valor original. 'getValue'
@@ -23,10 +24,12 @@ const Cell = ({ flatProps, cell }: Props) => {
     [column.id, row],
   )
 
+  const width = steppedSizes(column.columnDef.minSize!, column.getSize())
+
   return (
-    <td className="cmp-cell" style={{ width: column.getSize() }}>
+    <div className="cmp-cell" style={{ width }}>
       {component}
-    </td>
+    </div>
   )
 }
 

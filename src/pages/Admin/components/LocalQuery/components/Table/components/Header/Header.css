@@ -3,9 +3,7 @@
 
   flex-shrink: 0;
 
-  &.dragging {
-    background-color: var(--pal-color-b-l1);
-  }
+  transition: width var(--pal-time-s) ease;
 
   > .content {
     --gap: var(--pal-size-3xs);
@@ -140,5 +138,13 @@
 
       content: '';
     }
+  }
+
+  &:last-child > .resizer {
+    right: 0;
+  }
+
+  &.dragging {
+    background-color: var(--pal-color-b-l1);
   }
 }

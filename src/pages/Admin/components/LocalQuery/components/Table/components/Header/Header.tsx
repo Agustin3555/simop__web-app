@@ -17,6 +17,7 @@ import {
 } from '@tanstack/react-table'
 import { Entity } from '@/services/config'
 import { classList } from '@/helpers'
+import { steppedSizes } from '../../helpers'
 
 const sortIconMatcher: Record<SortDirection, string> = {
   asc: 'fa-solid fa-arrow-up-wide-short',
@@ -119,11 +120,10 @@ const Header = ({
     [columnOrder],
   )
 
+  const width = steppedSizes(column.columnDef.minSize!, getSize())
+
   return (
-    <div
-      className={classList('cmp-header', { dragging })}
-      style={{ width: getSize() }}
-    >
+    <div className={classList('cmp-header', { dragging })} style={{ width }}>
       <div className="content">
         <div className="management">
           <div

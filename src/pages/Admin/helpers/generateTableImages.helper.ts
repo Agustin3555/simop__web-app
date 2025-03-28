@@ -1,55 +1,54 @@
 import domtoimage from 'dom-to-image'
 
-type TSection = HTMLTableSectionElement
-
 const CHUNK_SIZE = 10
 
-export const generateTableImages = (tableElement: HTMLTableElement) => {
-  const theadElement = tableElement.querySelector<TSection>('thead')
-  const tbodyElement = tableElement.querySelector<TSection>('tbody')
-  const tfootElement = tableElement.querySelector<TSection>('tfoot')
+export const generateTableImages = (tableElement: HTMLElement) => {
+  const headElement = tableElement.querySelector<HTMLElement>('.head')
+  const bodyElement = tableElement.querySelector<HTMLElement>('.body')
+  const footElement = tableElement.querySelector<HTMLElement>('.foot')
 
-  if (!(theadElement && tbodyElement && tfootElement)) return
+  if (!(headElement && bodyElement && footElement)) return
 
-  const trElements = Array.from(tbodyElement.children) as HTMLTableRowElement[]
+  const rowElements = Array.from(bodyElement.children) as HTMLElement[]
 
   const trGroups = Array.from(
-    { length: Math.ceil(trElements.length / CHUNK_SIZE) },
-    (_, i) => trElements.slice(i * CHUNK_SIZE, i * CHUNK_SIZE + CHUNK_SIZE),
+    { length: Math.ceil(rowElements.length / CHUNK_SIZE) },
+    (_, i) => rowElements.slice(i * CHUNK_SIZE, i * CHUNK_SIZE + CHUNK_SIZE),
   )
 
-  const generators = trGroups.map(async (trElements, i) => {
-    const auxTableElement = document.createElement('table')
+  const generators = trGroups.map(async (rowElements, i) => {
+    const auxTableElement = document.createElement('div')
+    auxTableElement.classList.add('table')
 
-    Object.assign(auxTableElement.style, {
-      display: 'flex',
-      flexDirection: 'column',
-    })
+    if (i === 0) auxTableElement.appendChild(headElement.cloneNode(true))
 
-    if (i === 0) auxTableElement.appendChild(theadElement.cloneNode(true))
+    const auxBodyElement = document.createElement('div')
+    auxBodyElement.classList.add('body')
 
-    trElements.forEach(item =>
-      auxTableElement.appendChild(item.cloneNode(true)),
+    rowElements.forEach(item =>
+      auxBodyElement.appendChild(item.cloneNode(true)),
     )
 
+    auxTableElement.appendChild(auxBodyElement)
+
     if (i === trGroups.length - 1)
-      auxTableElement.appendChild(tfootElement.cloneNode(true))
+      auxTableElement.appendChild(footElement.cloneNode(true))
 
-    const container = document.createElement('div')
+    const containerToHideElement = document.createElement('div')
 
-    Object.assign(container.style, {
-      position: 'absolute',
-      top: '500rem',
-      overflow: 'scroll',
+    Object.assign(containerToHideElement.style, {
+      position: 'fixed',
+      width: 0,
+      overflow: 'auto',
     })
 
-    container.appendChild(auxTableElement)
+    containerToHideElement.appendChild(auxTableElement)
 
-    document.body.appendChild(container)
+    document.body.appendChild(containerToHideElement)
 
     const imageUrl = await domtoimage.toPng(auxTableElement)
 
-    document.body.removeChild(container)
+    document.body.removeChild(containerToHideElement)
 
     return imageUrl
   })

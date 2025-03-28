@@ -1,5 +1,5 @@
 .cmp-row-selector-cell {
-  padding: var(--cell-padding-inline);
+  padding-inline: var(--cell-padding-inline);
 
   > .content {
     display: flex;
@@ -53,7 +53,13 @@
     }
   }
 
-  &.header .content label {
-    border-color: var(--pal-color-a-l1);
+  &.header {
+    align-content: flex-end;
+
+    padding-bottom: calc(var(--cell-padding-inline) + 0.0625rem);
+
+    > .content > label {
+      border-color: var(--pal-color-a-l1);
+    }
   }
 }

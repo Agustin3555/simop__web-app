@@ -27,15 +27,15 @@ const RowSelectorCell = ({
   // TODO: diferenciar el estado indeterminate (en CSS -> :indeterminate)
 
   return (
-    <td className={classList('cmp-row-selector-cell', { header: asHeader })}>
+    <div className={classList('cmp-row-selector-cell', { header: asHeader })}>
       <div className="content">
+        {asHeader && <small>{selectionCounter}</small>}
         <label title="Alternar selección">
           <input type="checkbox" ref={inputRef} {...rest} />
           <Icon faIcon="fa-solid fa-check" />
         </label>
-        {asHeader && <small>{selectionCounter}</small>}
       </div>
-    </td>
+    </div>
   )
 }
 

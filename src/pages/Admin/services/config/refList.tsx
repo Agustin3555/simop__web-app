@@ -91,13 +91,10 @@ export class RefListProp implements PropScheme {
     const value = row.original[key] as undefined | any[]
 
     return (
-      value && (
-        <div className="items">
-          {value.map(item => (
-            <FetchRef id={item.id} title={item[anchorField]} {...{ getOne }} />
-          ))}
-        </div>
-      )
+      value &&
+      value.map(item => (
+        <FetchRef id={item.id} title={item[anchorField]} {...{ getOne }} />
+      ))
     )
   }
 }
