@@ -1,5 +1,5 @@
 import { Entity } from '@/services/config'
-import { ForView, PropScheme, Required } from './utils'
+import { ForView, MinSize, PropScheme, Required } from './utils'
 import { Input } from '@/components'
 import {
   BuiltInFilterFn,
@@ -30,6 +30,8 @@ export class NumberProp implements PropScheme {
           max?: number
         }
     },
+
+    public minSize: MinSize = 's',
   ) {}
 
   getFieldComponent = (value?: number | string, editMode = false) => {
@@ -112,6 +114,24 @@ export class NumberProp implements PropScheme {
       value !== undefined && (
         <StylizedNumber {...{ value, isMoney, pre, sub }} />
       )
+    )
+  }
+  getExcelValue = (item: Entity) => {
+    const { key, config } = this
+    const { isMoney = false, pre = '', sub = '' } = config ?? {}
+
+    let value = item[key] as undefined | number | string
+
+    if (value === undefined) return
+
+    if (typeof value === 'string') value = Number(value)
+
+    return (
+      pre +
+      (isMoney
+        ? value.toLocaleString('es-ES', { minimumFractionDigits: 2 })
+        : value) +
+      sub
     )
   }
 }

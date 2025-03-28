@@ -11,6 +11,7 @@ import {
 import { Entity } from '@/services/config'
 
 export type Color = 'blue' | 'green' | 'yellow' | 'red' | 'grey'
+export type MinSize = 's' | 'm' | 'l'
 
 export interface ForView {
   hidden?: boolean
@@ -33,6 +34,7 @@ export interface PropScheme<E = Entity> {
   key: string
   verboseKey?: string
   title: string
+  minSize: MinSize
   config?: unknown
 
   getFieldComponent: (value?: any, editMode?: boolean) => ReactNode

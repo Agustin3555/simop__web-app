@@ -1,5 +1,5 @@
 import { Entity } from '@/services/config'
-import { ForView, PropScheme, Required } from './utils'
+import { ForView, MinSize, PropScheme, Required } from './utils'
 import { Column, Row } from '@tanstack/react-table'
 import { InputArea, TextFilter } from '../../components'
 
@@ -13,6 +13,8 @@ export class TextLongProp implements PropScheme {
       // column?: ForView,
       field?: ForView & Required
     },
+
+    public minSize: MinSize = 'l',
   ) {}
 
   getFieldComponent = (value?: string, editMode = false) => {
@@ -67,5 +69,15 @@ export class TextLongProp implements PropScheme {
     const value = row.original[key] as undefined | string
 
     return value && <p className="text">{value}</p>
+  }
+
+  getExcelValue = (item: Entity) => {
+    const { key } = this
+
+    const value = item[key] as string | undefined
+
+    if (value === undefined) return
+
+    return value
   }
 }

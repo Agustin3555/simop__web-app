@@ -1,5 +1,5 @@
 import { Entity } from '@/services/config'
-import { ForView, PropScheme, Required } from './utils'
+import { ForView, MinSize, PropScheme, Required } from './utils'
 import { Input } from '@/components'
 import { Column, FilterFn, Row } from '@tanstack/react-table'
 import { format } from '@formkit/tempo'
@@ -15,6 +15,8 @@ export class DateTimeProp implements PropScheme {
       // column?: ForView,
       field?: ForView & Required
     },
+
+    public minSize: MinSize = 'm',
   ) {}
 
   getFieldComponent = (value?: string, editMode = false) => {
@@ -83,5 +85,15 @@ export class DateTimeProp implements PropScheme {
     const value = row.original[key] as undefined | string
 
     return value && <p>{format(value, { date: 'short', time: 'short' })}</p>
+  }
+
+  getExcelValue = (item: Entity) => {
+    const { key } = this
+
+    const value = item[key] as string | undefined
+
+    if (value === undefined) return
+
+    return format(value, { date: 'short', time: 'short' })
   }
 }

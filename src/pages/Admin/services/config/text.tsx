@@ -1,5 +1,5 @@
 import { Entity } from '@/services/config'
-import { ForView, PropScheme, Required } from './utils'
+import { ForView, MinSize, PropScheme, Required } from './utils'
 import { Input } from '@/components'
 import { Column, Row } from '@tanstack/react-table'
 import { TextFilter } from '../../components'
@@ -14,6 +14,8 @@ export class TextProp implements PropScheme {
       // column?: ForView,
       field?: ForView & Required
     },
+
+    public minSize: MinSize = 'm',
   ) {}
 
   getFieldComponent = (value?: string, editMode = false) => {
@@ -77,4 +79,5 @@ export class TextProp implements PropScheme {
 
     return value
   }
+  
 }

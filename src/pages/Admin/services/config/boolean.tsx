@@ -1,5 +1,5 @@
 import { Entity } from '@/services/config'
-import { Color, ForView, PropScheme } from './utils'
+import { Color, ForView, MinSize, PropScheme } from './utils'
 import { Checkbox } from '../../components'
 import { Column, Row } from '@tanstack/react-table'
 import { classList } from '@/helpers'
@@ -20,6 +20,8 @@ export class BooleanProp implements PropScheme {
       }
       field?: ForView
     },
+
+    public minSize: MinSize = 's',
   ) {}
 
   getFieldComponent = (value?: boolean, editMode = false) => {
@@ -73,5 +75,16 @@ export class BooleanProp implements PropScheme {
         </p>
       )
     )
+  }
+
+  getExcelValue = (item: Entity) => {
+    const { key, config } = this
+    const { falseText = 'No', trueText = 'Sí' } = config ?? {}
+
+    const value = item[key] as boolean | undefined
+
+    if (value === undefined) return
+
+    return value ? trueText : falseText
   }
 }

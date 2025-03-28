@@ -1,5 +1,5 @@
 import { Entity } from '@/services/config'
-import { ForView, GetScheme, PropScheme, Required } from './utils'
+import { ForView, GetScheme, MinSize, PropScheme, Required } from './utils'
 import { AutoCombobox, FetchRef, TextFilter } from '../../components'
 import { AccessorFn, Column, Row } from '@tanstack/react-table'
 import { getFlatProps } from './scheme'
@@ -20,6 +20,8 @@ export class RefProp implements PropScheme {
       // column?: ForView,
       field?: ForView & Required
     },
+
+    public minSize: MinSize = 'm',
   ) {}
 
   public get key() {
@@ -117,5 +119,18 @@ export class RefProp implements PropScheme {
         <FetchRef id={value.id} title={value[anchorField]} {...{ getOne }} />
       )
     )
+  }
+
+  getExcelValue = (item: Entity) => {
+    const { key, config } = this
+    const { getScheme } = config
+
+    const { anchorField } = getScheme()
+
+    const value = item[key] as undefined | Partial<Entity>
+
+    if (value === undefined) return
+
+    return value[anchorField]
   }
 }
