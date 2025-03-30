@@ -11,7 +11,14 @@ import {
 import { Entity } from '@/services/config'
 
 export type Color = 'blue' | 'green' | 'yellow' | 'red' | 'grey'
-export type MinSize = 's' | 'm' | 'l'
+
+export enum MinSize {
+  xs = 5,
+  s = 8,
+  m = 10,
+  l = 12,
+  xl = 16,
+}
 
 export interface ForView {
   hidden?: boolean

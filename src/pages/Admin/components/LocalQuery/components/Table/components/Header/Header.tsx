@@ -41,7 +41,7 @@ const Header = ({
   columnOrder,
   setColumnOrder,
 }: Props) => {
-  const { column, getResizeHandler, getSize } = header
+  const { column, getContext, getResizeHandler, getSize } = header
   const { getIsSorted, getSortIndex, resetSize, getIsResizing } = column
   const { getHeader } = flatProps[column.id] ?? {}
 
@@ -122,6 +122,14 @@ const Header = ({
 
   const width = steppedSizes(column.columnDef.minSize!, getSize())
 
+  const calculateTranslate = useCallback(() => {
+    if (!getIsResizing()) return
+
+    const { deltaOffset = 0 } = getContext().table.getState().columnSizingInfo
+
+    return steppedSizes(column.columnDef.minSize!, deltaOffset ?? 0) + 'px'
+  }, [])
+
   return (
     <div className={classList('cmp-header', { dragging })} style={{ width }}>
       <div className="content">
@@ -153,10 +161,12 @@ const Header = ({
       </div>
       <div
         className={classList('resizer', { resizing: getIsResizing() })}
+        style={{ translate: calculateTranslate() }}
         onDoubleClick={() => resetSize()}
         onMouseDown={getResizeHandler()}
         onTouchStart={getResizeHandler()}
       />
+      <div className="ruler" />
     </div>
   )
 }

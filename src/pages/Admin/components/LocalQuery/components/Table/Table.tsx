@@ -16,7 +16,7 @@ import {
 } from '@tanstack/react-table'
 import { Cell, Header, RowSelectorCell } from './components'
 import { Entity } from '@/services/config'
-import { PropScheme } from '@/pages/Admin/services/config'
+import { MinSize, PropScheme } from '@/pages/Admin/services/config'
 
 export type GetHeaderResult = ReturnType<NonNullable<PropScheme['getHeader']>>
 
@@ -28,8 +28,7 @@ interface TableProps {
 }
 
 const SELECT_COLUMN = 'select'
-
-const minSize = 256
+const STEP_WIDTH = 32
 
 const Table = ({
   data,
@@ -53,16 +52,18 @@ const Table = ({
     () => [
       { id: SELECT_COLUMN },
       ...groups.flatMap<ColumnDef<Entity>>(({ props }) =>
-        Object.values(props).map(({ key, accessorFn, filterFn, footer }) => ({
-          id: key,
-          accessorKey: key,
-          header: key,
-          minSize,
-          size: minSize,
-          ...(accessorFn && { accessorFn }),
-          ...(filterFn && { filterFn }),
-          ...(footer && { footer }),
-        })),
+        Object.values(props).map(
+          ({ key, minSize, accessorFn, filterFn, footer }) => ({
+            id: key,
+            accessorKey: key,
+            header: key,
+            minSize: MinSize.xs * STEP_WIDTH,
+            size: minSize * STEP_WIDTH,
+            ...(accessorFn && { accessorFn }),
+            ...(filterFn && { filterFn }),
+            ...(footer && { footer }),
+          }),
+        ),
       ),
     ],
     [],
@@ -95,7 +96,7 @@ const Table = ({
     enableRowSelection: true,
     enableMultiSort: true,
     enableSortingRemoval: false,
-    columnResizeMode: 'onChange',
+    columnResizeMode: 'onEnd',
   })
 
   useEffect(() => {

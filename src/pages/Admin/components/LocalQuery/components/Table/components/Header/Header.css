@@ -118,11 +118,14 @@
     opacity: 0;
     cursor: col-resize;
     user-select: none;
+    pointer-events: none;
 
-    transition: opacity var(--pal-time-xs) ease-out;
+    transition: opacity var(--pal-time-xs) ease-out,
+      translate var(--pal-time-s) ease;
     touch-action: none;
 
     &.resizing,
+    &.resizing ~ .ruler,
     &:hover {
       opacity: initial;
     }
@@ -138,6 +141,38 @@
 
       content: '';
     }
+  }
+
+  > .ruler {
+    --step-width: 2rem;
+    --step-color: var(--pal-color-a);
+    --width: calc(var(--step-width) * 16);
+    --height: var(--pal-size-2xl);
+
+    position: absolute;
+    z-index: 1;
+    top: calc(50% - var(--height) / 2);
+    right: calc(var(--width) / -2);
+
+    width: var(--width);
+    height: var(--height);
+
+    background-image: repeating-linear-gradient(
+      to right,
+      var(--step-color) 0,
+      var(--step-color) 0.0625rem,
+      transparent 0.0625rem,
+      transparent var(--step-width)
+    );
+    opacity: 0;
+    mask-image: radial-gradient(#fff, transparent 87.5%);
+    pointer-events: none;
+
+    transition: opacity var(--pal-time-xs) ease-out;
+  }
+
+  &:hover > .resizer {
+    pointer-events: initial;
   }
 
   &:last-child > .resizer {

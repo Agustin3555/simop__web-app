@@ -23,6 +23,10 @@
     display: flex;
   }
 
+  > * {
+    overflow: hidden;
+  }
+
   > .head {
     background-color: var(--pal-color-a-l2);
 

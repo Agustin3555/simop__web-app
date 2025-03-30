@@ -31,7 +31,7 @@ export class NumberProp implements PropScheme {
         }
     },
 
-    public minSize: MinSize = 's',
+    public minSize = MinSize.xs,
   ) {}
 
   getFieldComponent = (value?: number | string, editMode = false) => {

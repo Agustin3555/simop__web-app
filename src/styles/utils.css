@@ -8,7 +8,9 @@
   padding-inline: var(--pal-size-m);
   height: var(--pal-size-2xl);
 
+  line-height: 1.4;
   font-weight: 500;
+  text-align: start;
   white-space: nowrap;
   letter-spacing: 0.0125rem;
 

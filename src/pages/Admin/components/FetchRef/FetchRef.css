@@ -1,19 +1,18 @@
 .cmp-fetch-ref {
   > .cmp-button {
-    /* TODO: hacer que el texto pueda romper la línea */
-
     justify-content: flex-start;
     border-color: var(--pal-color-a-l3);
-    width: 100%;
+    padding-block: var(--pal-size-xs);
+    height: auto;
 
+    line-height: 1.375rem;
+    white-space: initial;
     color: var(--pal-color-a-d1);
 
     background-color: var(--pal-color-white);
 
     > .cmp-icon {
       --cmp-icon-size: var(--pal-size-s);
-
-      order: -1;
 
       color: var(--pal-color-a-l2);
     }
