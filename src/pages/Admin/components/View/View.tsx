@@ -6,63 +6,64 @@ import {
   RowSelectionContext,
   SchemeContext,
   LocalViewContext,
-  LocalViewKey,
 } from '../../contexts'
 import { Scheme } from '../../services/config'
 import { LocalAdd, LocalEdit, LocalQuery } from '..'
 import { addIf, classList } from '@/helpers'
 import { RowSelectionState } from '@tanstack/react-table'
 
-// TODO: admitir vistas locales custom
+interface CustomLocalView {
+  title: string
+  faIcon: string
+  localViewKey: string
+  component: ReactNode
+}
 
 interface Props {
-  notQuery?: boolean
-  notAdd?: boolean
-  notEdit?: boolean
+  query?: boolean
+  add?: boolean
+  edit?: boolean
+  custom?: CustomLocalView[]
 }
 
 const HydratedView = ({
-  notQuery = false,
-  notAdd = false,
-  notEdit = false,
+  query = true,
+  add = true,
+  edit = true,
+  custom = [],
 }: Props) => {
   const { scheme } = useScheme()
   const { key, title } = scheme
 
-  const localViews = useMemo(
-    () =>
-      addIf<{
-        title: string
-        faIcon: string
-        localViewKey: LocalViewKey
-        component: ReactNode
-      }>([
-        !notQuery && {
+  const localViews = useMemo(() => {
+    return [
+      ...addIf<CustomLocalView>([
+        query && {
           title: 'Consultar',
           faIcon: 'fa-solid fa-search',
           localViewKey: 'query',
           component: <LocalQuery />,
         },
-        !notAdd && {
+        add && {
           title: 'Agregar',
           faIcon: 'fa-solid fa-plus',
           localViewKey: 'add',
           component: <LocalAdd />,
         },
-        !notEdit && {
+        edit && {
           title: 'Editar',
           faIcon: 'fa-solid fa-pen',
           localViewKey: 'edit',
           component: <LocalEdit />,
         },
       ]),
-    [],
-  )
+      ...custom,
+    ]
+  }, [])
 
   const isActive = useViewActive(key)
-  const [localView, setLocalView] = useState<LocalViewKey>(
-    localViews[0].localViewKey,
-  )
+
+  const [localView, setLocalView] = useState<string>(localViews[0].localViewKey)
   const [rowSelection, setRowSelection] = useState<RowSelectionState>({})
 
   const selectedRowIds = useMemo(
@@ -76,7 +77,7 @@ const HydratedView = ({
   const deselectRows = useCallback(() => setRowSelection({}), [])
 
   const handleChange = useChangeHandler(newLocalView =>
-    setLocalView(newLocalView as LocalViewKey),
+    setLocalView(newLocalView as string),
   )
 
   return (
@@ -85,7 +86,7 @@ const HydratedView = ({
         <header>
           <fieldset>
             {localViews.map(({ title, faIcon, localViewKey }) => (
-              <label key={title}>
+              <label key={localViewKey}>
                 {faIcon && <Icon {...{ faIcon }} />}
                 <div className="text">{title}</div>
                 <input

@@ -1,9 +1,7 @@
 import { createContext } from 'react'
 
-export type LocalViewKey = 'query' | 'add' | 'edit'
-
 interface LocalViewContextProps {
-  setLocalView: (view: LocalViewKey) => void
+  setLocalView: (view: string) => void
 }
 
 /*
