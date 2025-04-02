@@ -1,4 +1,5 @@
 export { default as Button } from './Button/Button'
+export { default as CardPage } from './CardPage/CardPage'
 export { default as ControlLabel } from './ControlLabel/ControlLabel'
 export { default as ExternalLink } from './ExternalLink/ExternalLink'
 export { default as Icon } from './Icon/Icon'

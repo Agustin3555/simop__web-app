@@ -1,0 +1,29 @@
+@keyframes show {
+  to {
+    translate: initial;
+    opacity: initial;
+  }
+}
+
+.cmp-card-page {
+  align-content: center;
+  padding-inline: var(--pal-size-m);
+  height: 100dvh;
+
+  > * {
+    display: flex;
+    flex-direction: column;
+    gap: var(--pal-size-3xl);
+    margin-inline: auto;
+    padding: var(--pal-size-2xl);
+    max-width: 28rem;
+
+    border-radius: var(--pal-size-xs);
+    background-color: var(--pal-color-white);
+    box-shadow: var(--pal-shadow-1);
+    translate: 0 var(--pal-size-2xl);
+    opacity: 0;
+
+    animation: show var(--pal-time-l) ease forwards;
+  }
+}

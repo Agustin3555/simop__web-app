@@ -1,8 +1,8 @@
 import './Login.css'
 import { useSubmitAction } from '@/hooks'
-import { Input, StateButton } from '@/components'
-import { useLocation } from 'wouter'
 import { useAppStore } from '@/store/config'
+import { useLocation } from 'wouter'
+import { CardPage, Input, StateButton } from '@/components'
 
 const Login = () => {
   const [, navigate] = useLocation()
@@ -24,8 +24,8 @@ const Login = () => {
   )
 
   return (
-    <article className="cmp-login">
-      <div className="content">
+    <CardPage>
+      <article className="cmp-login">
         <img src="/isologotipo-gobierno-ministerio.webp" />
         <form onSubmit={handleSubmit}>
           <Input
@@ -40,8 +40,8 @@ const Login = () => {
             {...{ actionState }}
           />
         </form>
-      </div>
-    </article>
+      </article>
+    </CardPage>
   )
 }
 

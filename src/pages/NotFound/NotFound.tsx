@@ -1,7 +1,9 @@
+import './NotFound.css'
 import { useEffect, useState } from 'react'
 import { useLocation } from 'wouter'
+import { CardPage } from '@/components'
 
-const REDIRECT_IN_SECONDS = 3
+const REDIRECT_IN_SECONDS = 4
 
 const NotFound = () => {
   const [, navigate] = useLocation()
@@ -18,11 +20,14 @@ const NotFound = () => {
   }, [navigate])
 
   return (
-    <div>
-      <h1>Página no encontrada</h1>
-      <p>Error 404</p>
-      <p>Redirigiendo en {countdown}...</p>
-    </div>
+    <CardPage>
+      <article className="cmp-not-found">
+        <h1>
+          Página no encontrada <small>Error 404</small>
+        </h1>
+        <p>Redirigiendo al Inicio en {countdown}...</p>
+      </article>
+    </CardPage>
   )
 }
 

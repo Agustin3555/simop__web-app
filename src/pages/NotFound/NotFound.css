@@ -1,0 +1,14 @@
+.cmp-not-found > h1 {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  gap: var(--pal-size-s);
+
+  color: var(--pal-color-a-l1);
+
+  > small {
+    font-size: var(--pal-size-font-s);
+    font-weight: initial;
+    color: var(--pal-color-a-l2);
+  }
+}

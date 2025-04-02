@@ -116,6 +116,7 @@ export class NumberProp implements PropScheme {
       )
     )
   }
+
   getExcelValue = (item: Entity) => {
     const { key, config } = this
     const { isMoney = false, pre = '', sub = '' } = config ?? {}
