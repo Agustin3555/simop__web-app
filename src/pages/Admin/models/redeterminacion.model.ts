@@ -13,6 +13,7 @@ import {
   Scheme,
   TextProp,
   BooleanProp,
+  RefListProp,
 } from '../services/config'
 import { RedeterminacionService } from '../services'
 import { COMMON_PROPS } from '../constants/commonProps.const'
@@ -29,7 +30,7 @@ export interface RawEntity {
   fechaCertificacion?: string
   tieneHijas: boolean
 
-  redeterminacion: RawRef
+  redeterminacionesHijas: RawRef[]
   direccion?: DireccionModel.RawRef
   departamento?: DepartamentoModel.RawRef
   obra?: ObraModel.RawRef
@@ -51,7 +52,7 @@ export interface Entity {
   fechaCertificacion?: string
   tieneHijas: boolean
 
-  redeterminacion: Ref
+  redeterminacionesHijas: Ref[]
   direccion?: DireccionModel.Ref
   departamento?: DepartamentoModel.Ref
   obra?: ObraModel.Ref
@@ -173,7 +174,7 @@ export const scheme: Scheme<Entity> = {
         numeroResolucion: new TextProp('Número De Resolución'),
 
         numeroExpedienteSolicitud: new TextProp(
-          'Número De Expediente de la Solicitud',
+          'Número de Expediente de Solicitud',
           {
             field: {
               required: true,
@@ -206,7 +207,7 @@ export const scheme: Scheme<Entity> = {
         departamento: new RefProp({
           getScheme: () => DepartamentoModel.scheme,
         }),
-        redeterminacion: new RefProp({
+        redeterminacionesHijas: new RefListProp({
           getScheme: () => RedeterminacionModel.scheme,
         }),
         observaciones: new TextLongProp('Observaciones'),
