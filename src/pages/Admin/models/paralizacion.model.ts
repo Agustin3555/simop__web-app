@@ -1,4 +1,9 @@
-import { TipoParalizacionModel, ObraModel } from '.'
+import {
+  TipoParalizacionModel,
+  ObraModel,
+  DireccionModel,
+  DepartamentoModel,
+} from '.'
 import {
   DateProp,
   NumberProp,
@@ -19,6 +24,8 @@ export interface RawEntity {
   fecha?: string
   observaciones?: string
 
+  direccion?: DireccionModel.RawRef
+  departamento?: DepartamentoModel.RawRef
   obra?: ObraModel.RawRef
   tipoParalizacion?: TipoParalizacionModel.RawRef
 
@@ -35,6 +42,8 @@ export interface Entity {
   fecha?: string
   observaciones?: string
 
+  direccion?: DireccionModel.Ref
+  departamento?: DepartamentoModel.Ref
   obra?: ObraModel.Ref
   tipoParalizacion?: TipoParalizacionModel.Ref
 
@@ -76,6 +85,8 @@ export interface CreateBody {
   fecha: string
   observaciones: string
 
+  direccionId?: number
+  departamentoId?: number
   obraId: number
   tipoParalizacionId: number
 }
@@ -88,6 +99,8 @@ export interface UpdateData {
   fecha?: string
   observaciones?: string
 
+  direccionId?: number
+  departamentoId?: number
   obraId?: number
   tipoParalizacionId?: number
 }
@@ -100,6 +113,8 @@ export interface UpdateBody {
   fecha?: string
   observaciones?: string
 
+  direccionId?: number
+  departamentoId?: number
   obraId?: number
   tipoParalizacionId?: number
 }
@@ -138,6 +153,13 @@ export const scheme: Scheme<Entity> = {
         fecha: new DateProp('Fecha'),
         tipoParalizacion: new RefProp({
           getScheme: () => TipoParalizacionModel.scheme,
+        }),
+
+        direccion: new RefProp({
+          getScheme: () => DireccionModel.scheme,
+        }),
+        departamento: new RefProp({
+          getScheme: () => DepartamentoModel.scheme,
         }),
         observaciones: new TextLongProp('Observaciones'),
         ...COMMON_PROPS,

@@ -1,4 +1,3 @@
-export * from './certificacion.service'
 export * from './departamento.service'
 export * from './direccion.service'
 export * from './empresa.service'

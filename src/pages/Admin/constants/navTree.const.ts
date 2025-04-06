@@ -1,6 +1,5 @@
 import { Scheme } from '../services/config'
 import {
-  CertificacionModel,
   DepartamentoModel,
   DireccionModel,
   EmpresaModel,
@@ -104,7 +103,6 @@ export const TREE: SectionNode[] = [
       { scheme: RepresentanteObraModel.scheme },
       { scheme: InspectorObraModel.scheme },
       { scheme: FojaMedicionModel.scheme },
-      { scheme: CertificacionModel.scheme },
       { scheme: PagoCertificacionModel.scheme },
       { scheme: RedeterminacionModel.scheme },
       { scheme: AmpliacionModel.scheme },
