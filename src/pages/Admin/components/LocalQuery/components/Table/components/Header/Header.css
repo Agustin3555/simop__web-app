@@ -146,7 +146,7 @@
   > .ruler {
     --step-width: 2rem;
     --step-color: var(--pal-color-a);
-    --width: calc(var(--step-width) * 16);
+    --width: calc(var(--step-width) * 10);
     --height: var(--pal-size-2xl);
 
     position: absolute;
@@ -175,8 +175,12 @@
     pointer-events: initial;
   }
 
-  &:last-child > .resizer {
-    right: 0;
+  &:last-child {
+    overflow: hidden;
+
+    > .resizer {
+      right: 0;
+    }
   }
 
   &.dragging {

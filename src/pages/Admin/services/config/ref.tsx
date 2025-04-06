@@ -1,7 +1,7 @@
 import { Entity } from '@/services/config'
 import { ForView, GetScheme, MinSize, PropScheme, Required } from './utils'
 import { AutoCombobox, FetchRef, TextFilter } from '../../components'
-import { AccessorFn, Column, Row } from '@tanstack/react-table'
+import { AccessorFn, Column, FilterFn, Row } from '@tanstack/react-table'
 import { getFlatProps } from './scheme'
 
 export const isFieldEnabled = (form: HTMLFormElement, key: string) => {
@@ -85,8 +85,18 @@ export class RefProp implements PropScheme {
     return row[key]?.[anchorField]
   }
 
+  // filterFn: FilterFn<Entity> = (row, filterValue) => {
+  //   if (!filterValue) return true
+
+  //   const { key } = this
+
+  //   const value = row.original[key] as undefined | Partial<Entity>
+
+  //   return String(value?.id) === filterValue
+  // }
+
   getHeader = (column: Column<Entity>) => {
-    const { title, config } = this
+    const { verboseKey, title, config } = this
     const { getScheme } = config
 
     const scheme = getScheme()
@@ -95,6 +105,16 @@ export class RefProp implements PropScheme {
 
     const { getFacetedUniqueValues, getFilterValue, setFilterValue } = column
     const filterValue = getFilterValue()
+
+    // const reportOption = (id?: string) => setFilterValue(id)
+
+    // const filter = (
+    //   <AutoCombobox
+    //     keyName={verboseKey}
+    //     hideLabel
+    //     {...{ title, scheme, reportOption }}
+    //   />
+    // )
 
     const filter = (
       <TextFilter

@@ -1,5 +1,4 @@
 import './Checkbox.css'
-import { useState } from 'react'
 import { useControl, useResetByRender } from '@/hooks'
 import { ControlLabel, Icon } from '@/components'
 import { Control } from '@/types'
