@@ -1,4 +1,9 @@
-import { CertificacionModel } from '.'
+import {
+  FojaMedicionModel,
+  RedeterminacionModel,
+  DireccionModel,
+  DepartamentoModel,
+} from '.'
 import { COMMON_PROPS } from '../constants/commonProps.const'
 import {
   Scheme,
@@ -18,7 +23,10 @@ export interface RawEntity {
   fecha?: string
   observaciones?: string
 
-  certificacion?: CertificacionModel.RawRef
+  direccion?: DireccionModel.RawRef
+  departamento?: DepartamentoModel.RawRef
+  redeterminacion?: RedeterminacionModel.RawRef
+  fojaMedicion?: FojaMedicionModel.RawRef
 
   creado: string
   modificado: string
@@ -32,7 +40,10 @@ export interface Entity {
   fecha?: string
   observaciones?: string
 
-  certificacion?: CertificacionModel.Ref
+  direccion?: DireccionModel.Ref
+  departamento?: DepartamentoModel.Ref
+  redeterminacion?: RedeterminacionModel.Ref
+  fojaMedicion?: FojaMedicionModel.Ref
 
   creado: string
   modificado: string
@@ -51,21 +62,25 @@ export interface Ref {
 export interface CreateData {
   numero: number
   ordenPago?: string
-  fecha: string
-  observaciones: string
-  monto: number
+  fecha?: string
+  observaciones?: string
+  monto?: number
 
-  certificacionId?: number
+  direccionId?: number
+  departamentoId?: number
+  redeterminacionId?: number
+  fojaMedicionId?: number
 }
 
 export interface CreateBody {
   numero: number
   ordenPago?: string
-  fecha: string
-  observaciones: string
-  monto: number
+  fecha?: string
+  observaciones?: string
+  monto?: number
 
-  certificacionId?: number
+  redeterminacionId?: number
+  fojaMedicionId?: number
 }
 
 export interface UpdateData {
@@ -75,7 +90,10 @@ export interface UpdateData {
   observaciones?: string
   monto?: number
 
-  certificacionId?: number
+  direccionId?: number
+  departamentoId?: number
+  redeterminacion?: number
+  fojaMedicionId?: number
 }
 
 export interface UpdateBody {
@@ -85,11 +103,14 @@ export interface UpdateBody {
   observaciones?: string
   monto?: number
 
-  certificacionId?: number
+  direccionId?: number
+  departamentoId?: number
+  redeterminacion?: number
+  fojaMedicionId?: number
 }
 
 export const scheme: Scheme<Entity> = {
-  key: 'pagoCertificacion',
+  key: 'PagoCertificacion',
   service: PagoCertificacionService,
   refreshRate: 'medium',
   title: {
@@ -115,8 +136,17 @@ export const scheme: Scheme<Entity> = {
           sum: true,
           pre: '$',
         }),
-        certificacion: new RefProp({
-          getScheme: () => CertificacionModel.scheme,
+        fojaMedicion: new RefProp({
+          getScheme: () => FojaMedicionModel.scheme,
+        }),
+        redeterminacion: new RefProp({
+          getScheme: () => RedeterminacionModel.scheme,
+        }),
+        direccion: new RefProp({
+          getScheme: () => DireccionModel.scheme,
+        }),
+        departamento: new RefProp({
+          getScheme: () => DepartamentoModel.scheme,
         }),
         observaciones: new TextLongProp('Observaciones'),
         ...COMMON_PROPS,

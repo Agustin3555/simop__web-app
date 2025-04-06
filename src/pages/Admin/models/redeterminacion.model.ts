@@ -1,4 +1,10 @@
-import { ObraModel, TipoRedeterminacionModel } from '.'
+import {
+  ObraModel,
+  TipoRedeterminacionModel,
+  DireccionModel,
+  DepartamentoModel,
+  RedeterminacionModel,
+} from '.'
 import {
   DateProp,
   NumberProp,
@@ -6,20 +12,26 @@ import {
   RefProp,
   Scheme,
   TextProp,
+  BooleanProp,
 } from '../services/config'
 import { RedeterminacionService } from '../services'
 import { COMMON_PROPS } from '../constants/commonProps.const'
 
 export interface RawEntity {
   id: number
-  numeroExpediente: string
+  numeroExpedienteSolicitud: string
+  numeroExpediente?: string
   numeroResolucion?: string
-  numeroExpedienteSolicitud?: string
-  monto?: number
+  montoTotal?: number
   nuevoMontoObra?: number
-  fecha?: string
+  fechaRedeterminacion?: string
   observaciones?: string
+  fechaCertificacion?: string
+  tieneHijas: boolean
 
+  redeterminacion: RawRef
+  direccion?: DireccionModel.RawRef
+  departamento?: DepartamentoModel.RawRef
   obra?: ObraModel.RawRef
   tipoRedeterminacion?: TipoRedeterminacionModel.RawRef
 
@@ -29,14 +41,19 @@ export interface RawEntity {
 
 export interface Entity {
   id: number
-  numeroExpediente: string
+  numeroExpedienteSolicitud: string
+  numeroExpediente?: string
   numeroResolucion?: string
-  numeroExpedienteSolicitud?: string
-  monto?: number
+  montoTotal?: number
   nuevoMontoObra?: number
-  fecha?: string
+  fechaRedeterminacion?: string
   observaciones?: string
+  fechaCertificacion?: string
+  tieneHijas: boolean
 
+  redeterminacion: Ref
+  direccion?: DireccionModel.Ref
+  departamento?: DepartamentoModel.Ref
   obra?: ObraModel.Ref
   tipoRedeterminacion?: TipoRedeterminacionModel.Ref
 
@@ -47,63 +64,83 @@ export interface Entity {
 export interface RawRef {
   id: number
 
-  numeroExpediente: string
+  numeroExpedienteSolicitud: string
 }
 
 export interface Ref {
   id: number
 
-  numeroExpediente: string
+  numeroExpedienteSolicitud: string
 }
 
 export interface CreateData {
   numeroExpediente: string
   numeroResolucion: string
   numeroExpedienteSolicitud: string
-  monto: number
+  montoTotal: number
   nuevoMontoObra: number
-  fecha: string
+  fechaRedeterminacion: string
   observaciones: string
+  fechaCertificacion: string
+  tieneHijas: boolean
 
+  redeterminacionId?: number
+  direccionId?: number
+  departamentoId?: number
   obraId: number
   tipoRedeterminacionId: number
 }
 
 export interface CreateBody {
+  numeroExpedienteSolicitud: string
   numeroExpediente: string
   numeroResolucion: string
-  numeroExpedienteSolicitud: string
-  monto: number
+  montoTotal: number
   nuevoMontoObra: number
-  fecha: string
+  fechaRedeterminacion: string
   observaciones: string
+  fechaCertificacion: string
+  tieneHijas: boolean
 
+  redeterminacionId?: number
+  direccionId?: number
+  departamentoId?: number
   obraId: number
   tipoRedeterminacionId: number
 }
 
 export interface UpdateData {
+  numeroExpedienteSolicitud?: string
   numeroExpediente?: string
   numeroResolucion?: string
-  numeroExpedienteSolicitud?: string
-  monto?: number
+  montoTotal?: number
   nuevoMontoObra?: number
-  fecha?: string
+  fechaRedeterminacion?: string
   observaciones?: string
+  fechaCertificacion?: string
+  tieneHijas?: boolean
 
+  redeterminacionId?: number
+  direccionId?: number
+  departamentoId?: number
   obraId?: number
   tipoRedeterminacionId?: number
 }
 
 export interface UpdateBody {
+  numeroExpedienteSolicitud?: string
   numeroExpediente?: string
   numeroResolucion?: string
-  numeroExpedienteSolicitud?: string
-  monto?: number
+  montoTotal?: number
   nuevoMontoObra?: number
-  fecha?: string
+  fechaRedeterminacion?: string
   observaciones?: string
+  fechaCertificacion?: string
+  tieneHijas?: boolean
 
+  redeterminacionId?: number
+  direccionId?: number
+  departamentoId?: number
   obraId?: number
   tipoRedeterminacionId?: number
 }
@@ -116,7 +153,7 @@ export const scheme: Scheme<Entity> = {
     singular: 'Redeterminación',
     plural: 'Redeterminaciones',
   },
-  anchorField: 'numeroExpediente',
+  anchorField: 'numeroExpedienteSolicitud',
 
   groups: [
     {
@@ -132,11 +169,18 @@ export const scheme: Scheme<Entity> = {
             required: true,
           },
         }),
+
         numeroResolucion: new TextProp('Número De Resolución'),
+
         numeroExpedienteSolicitud: new TextProp(
           'Número De Expediente de la Solicitud',
+          {
+            field: {
+              required: true,
+            },
+          },
         ),
-        monto: new NumberProp('Monto', {
+        montoTotal: new NumberProp('Monto Total', {
           decimal: true,
           isMoney: true,
           big: true,
@@ -150,9 +194,20 @@ export const scheme: Scheme<Entity> = {
           sum: true,
           pre: '$',
         }),
-        fecha: new DateProp('Fecha'),
+        fechaRedeterminacion: new DateProp('Fecha'),
+        fechaCertificacion: new DateProp('Fecha Certificación'),
+        tieneHijas: new BooleanProp('Tiene Hijas'),
         tipoRedeterminacion: new RefProp({
           getScheme: () => TipoRedeterminacionModel.scheme,
+        }),
+        direccion: new RefProp({
+          getScheme: () => DireccionModel.scheme,
+        }),
+        departamento: new RefProp({
+          getScheme: () => DepartamentoModel.scheme,
+        }),
+        redeterminacion: new RefProp({
+          getScheme: () => RedeterminacionModel.scheme,
         }),
         observaciones: new TextLongProp('Observaciones'),
         ...COMMON_PROPS,

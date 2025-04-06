@@ -1,4 +1,4 @@
-import { ObraModel, InspectorModel } from '.'
+import { ObraModel, InspectorModel, DireccionModel, DepartamentoModel } from '.'
 import {
   NumberProp,
   RefProp,
@@ -15,9 +15,13 @@ export interface RawEntity {
   numero: number
   numeroExpediente: string
   avance?: number
-  fecha?: string
+  fechaFoja?: string
   observaciones?: string
+  fechaCertificacion?: string
+  montoTotal?: number
 
+  direccion?: DireccionModel.RawRef
+  departamento?: DepartamentoModel.RawRef
   obra?: ObraModel.RawRef
   inspector?: InspectorModel.RawRef
 
@@ -30,9 +34,13 @@ export interface Entity {
   numero: number
   numeroExpediente: string
   avance?: number
-  fecha?: string
+  fechaFoja?: string
   observaciones?: string
+  fechaCertificacion?: string
+  montoTotal?: number
 
+  direccion?: DireccionModel.Ref
+  departamento?: DepartamentoModel.Ref
   obra?: ObraModel.Ref
   inspector?: InspectorModel.Ref
 
@@ -58,9 +66,12 @@ export interface CreateData {
   numero: number
   numeroExpediente: string
   avance: number
-  fecha: string
+  fechaFoja: string
   observaciones: string
-
+  fechaCertificacion: string
+  montoTotal: number
+  direccionId?: number
+  departamentoId?: number
   obraId?: number
   inspectorId?: number
 }
@@ -69,9 +80,12 @@ export interface CreateBody {
   numero: number
   numeroExpediente: string
   avance: number
-  fecha: string
+  fechaFoja: string
   observaciones: string
-
+  fechaCertificacion: string
+  montoTotal: number
+  direccionId?: number
+  departamentoId?: number
   obraId?: number
   inspectorId?: number
 }
@@ -80,9 +94,13 @@ export interface UpdateData {
   numero?: number
   numeroExpediente?: string
   avance?: number
-  fecha?: string
+  fechaFoja?: string
   observaciones?: string
+  fechaCertificacion?: string
+  montoTotal?: number
 
+  direccionId?: number
+  departamentoId?: number
   obraId?: number
   inspectorId?: number
 }
@@ -91,9 +109,13 @@ export interface UpdateBody {
   numero?: number
   numeroExpediente?: string
   avance?: number
-  fecha?: string
+  fechaFoja?: string
   observaciones?: string
+  fechaCertificacion?: string
+  montoTotal?: number
 
+  direccionId?: number
+  departamentoId?: number
   obraId?: number
   inspectorId?: number
 }
@@ -131,10 +153,26 @@ export const scheme: Scheme<Entity> = {
           decimal: true,
           sub: '%',
         }),
-        fecha: new DateProp('Fecha', {}),
+        fechaFoja: new DateProp('Fecha Foja'),
+
+        fechaCertificacion: new DateProp('Fecha Certificación'),
+
+        montoTotal: new NumberProp('Monto Total', {
+          decimal: true,
+          isMoney: true,
+          big: true,
+          sum: true,
+          pre: '$',
+        }),
 
         inspector: new RefProp({
           getScheme: () => InspectorModel.scheme,
+        }),
+        direccion: new RefProp({
+          getScheme: () => DireccionModel.scheme,
+        }),
+        departamento: new RefProp({
+          getScheme: () => DepartamentoModel.scheme,
         }),
         observaciones: new TextLongProp('Observaciones'),
         ...COMMON_PROPS,

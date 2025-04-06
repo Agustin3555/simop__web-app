@@ -33,7 +33,6 @@ import {
   Paralizacion,
   Recepcion,
   Rescision,
-  Certificacion,
   PagoCertificacion,
 } from '../../views'
 
@@ -66,7 +65,6 @@ const Content = () => (
     <RepresentanteObra />
     <InspectorObra />
     <FojaMedicion />
-    <Certificacion />
     <PagoCertificacion />
     <Redeterminacion />
     <Ampliacion />
