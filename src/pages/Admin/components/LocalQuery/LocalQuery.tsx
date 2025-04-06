@@ -6,9 +6,10 @@ import { Button, Icon, StateButton } from '@/components'
 import { Combobox } from '..'
 import { DeleteButton, ReportButton, Table } from './components'
 import { VisibilityState } from '@tanstack/react-table'
-import { utils, writeFile } from 'xlsx'
 import { ComboboxProps } from '../Combobox/Combobox'
 import { GetHeaderResult } from './components/Table/Table'
+import { format } from '@formkit/tempo'
+import { utils, writeFile } from 'xlsx'
 
 const LocalQuery = () => {
   const { scheme, flatProps } = useScheme()
@@ -71,7 +72,7 @@ const LocalQuery = () => {
     const workbook = utils.book_new()
     utils.book_append_sheet(workbook, worksheet, 'Datos')
 
-    const date = new Date().toISOString().slice(0, 10)
+    const date = format('', { date: 'short' }).replaceAll('/', '-')
     const fileName = `${title.plural} (${date}).xlsx`
 
     writeFile(workbook, fileName)
