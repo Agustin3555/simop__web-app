@@ -34,6 +34,7 @@ import {
   Recepcion,
   Rescision,
   PagoCertificacion,
+  ObraGeneral,
 } from '../../views'
 
 const Content = () => (
@@ -72,6 +73,7 @@ const Content = () => (
     <Paralizacion />
     <Rescision />
     <Recepcion />
+    <ObraGeneral />
   </div>
 )
 

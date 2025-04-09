@@ -139,7 +139,7 @@ export const scheme: Scheme<Entity> = {
             required: true,
           },
         }),
-        numeroExpediente: new TextProp('Numero de Expediente de la foja', {
+        numeroExpediente: new TextProp('Numero de Expediente de Foja', {
           field: {
             required: true,
           },
@@ -153,7 +153,7 @@ export const scheme: Scheme<Entity> = {
           decimal: true,
           sub: '%',
         }),
-        fechaFoja: new DateProp('Fecha Foja'),
+        fechaFoja: new DateProp('Fecha de Solicitud'),
 
         fechaCertificacion: new DateProp('Fecha Certificación'),
 

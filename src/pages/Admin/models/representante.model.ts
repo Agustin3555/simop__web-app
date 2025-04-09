@@ -39,6 +39,7 @@ export interface RawRef {
   id: number
 
   cuil: number
+  nombre: string
   apellido: string
 }
 
@@ -46,6 +47,7 @@ export interface Ref {
   id: number
 
   cuil: number
+  nombre: string
   apellido: string
 }
 

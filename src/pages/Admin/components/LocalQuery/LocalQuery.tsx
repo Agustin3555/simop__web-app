@@ -36,7 +36,7 @@ const LocalQuery = () => {
   const [quickFilters, setQuickFilters] = useState<GetHeaderResult[]>()
 
   const { selectedRowIds } = useRowSelection()
-  const localQueryRef = useRef<HTMLDivElement | null>(null)
+  const componentRef = useRef<HTMLDivElement | null>(null)
 
   const { query, enableQuery } = useEntities(scheme)
   const { data, status, isFetching, refetch } = query
@@ -94,7 +94,7 @@ const LocalQuery = () => {
   )
 
   return (
-    <div className="cmp-local-query" ref={localQueryRef}>
+    <div className="cmp-local-query" ref={componentRef}>
       <header>
         <Combobox
           keyName={`visibility-${key}`}
@@ -135,7 +135,7 @@ const LocalQuery = () => {
           {selectedRowIds.length !== 0 && <DeleteButton />}
           {data && (
             <>
-              <ReportButton {...{ localQueryRef }} />
+              <ReportButton {...{ localQueryRef: componentRef }} />
               <Button
                 text="Descargar Excel"
                 title={`Descargar Excel (${

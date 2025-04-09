@@ -165,11 +165,14 @@ export const scheme: Scheme<Entity> = {
             required: true,
           },
         }),
-        numeroExpediente: new TextProp('Número De Expediente', {
-          field: {
-            required: true,
+        numeroExpediente: new TextProp(
+          'Número De Expediente de Redeterminación',
+          {
+            field: {
+              required: true,
+            },
           },
-        }),
+        ),
 
         numeroResolucion: new TextProp('Número De Resolución'),
 
@@ -195,9 +198,9 @@ export const scheme: Scheme<Entity> = {
           sum: true,
           pre: '$',
         }),
-        fechaRedeterminacion: new DateProp('Fecha'),
+        fechaRedeterminacion: new DateProp('Fecha de Solicitud'),
         fechaCertificacion: new DateProp('Fecha Certificación'),
-        tieneHijas: new BooleanProp('Tiene Hijas'),
+        tieneHijas: new BooleanProp('AE Acum.'),
         tipoRedeterminacion: new RefProp({
           getScheme: () => TipoRedeterminacionModel.scheme,
         }),
