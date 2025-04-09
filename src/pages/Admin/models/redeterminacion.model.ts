@@ -65,13 +65,13 @@ export interface Entity {
 export interface RawRef {
   id: number
 
-  numeroExpedienteSolicitud: string
+  numeroExpediente: string
 }
 
 export interface Ref {
   id: number
 
-  numeroExpedienteSolicitud: string
+  numeroExpediente: string
 }
 
 export interface CreateData {
