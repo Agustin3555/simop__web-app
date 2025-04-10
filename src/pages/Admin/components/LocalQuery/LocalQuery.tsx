@@ -100,13 +100,31 @@ const LocalQuery = () => {
         : data.filter(({ id }) => selectedRowIds.includes(id))
 
     const convertedData = selectedData.map(row =>
-      Object.keys(flatProps).reduce((acc, key) => {
-        acc[key] = flatProps[key].getExcelValue(row)
-        return acc
-      }, {} as Record<string, any>),
+      Object.fromEntries(
+        Object.keys(flatProps).map(key => [
+          flatProps[key].title,
+          flatProps[key].getExcelValue(row),
+        ]),
+      ),
     )
 
     const worksheet = utils.json_to_sheet(convertedData)
+
+    // Calcular el ancho óptimo por columna
+    const colWidths = Object.keys(flatProps).map(key => {
+      const header = flatProps[key].title
+
+      const maxLength = Math.max(
+        header.length,
+        ...convertedData.map(
+          row => String(row[flatProps[key].title] ?? '').length,
+        ),
+      )
+
+      return { wch: maxLength + 1 }
+    })
+
+    worksheet['!cols'] = colWidths
 
     // Crea el libro de trabajo y agrega una hoja
     const workbook = utils.book_new()
