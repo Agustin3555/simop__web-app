@@ -99,7 +99,14 @@ const LocalQuery = () => {
         ? data
         : data.filter(({ id }) => selectedRowIds.includes(id))
 
-    const worksheet = utils.json_to_sheet(selectedData)
+    const convertedData = selectedData.map(row =>
+      Object.keys(flatProps).reduce((acc, key) => {
+        acc[key] = flatProps[key].getExcelValue(row)
+        return acc
+      }, {} as Record<string, any>),
+    )
+
+    const worksheet = utils.json_to_sheet(convertedData)
 
     // Crea el libro de trabajo y agrega una hoja
     const workbook = utils.book_new()
