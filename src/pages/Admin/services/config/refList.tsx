@@ -28,7 +28,7 @@ export class RefListProp implements PropScheme {
     return scheme.title.plural
   }
 
-  getFieldComponent = (value?: Partial<Entity>[], editMode = false) => {
+  getFieldComponent = (value?: Entity[], editMode = false) => {
     const { key, config } = this
     const { getScheme, field } = config
     const { hidden, required } = field ?? {}
@@ -43,8 +43,8 @@ export class RefListProp implements PropScheme {
         keyName={key}
         title={title.singular}
         multiple
-        {...(!editMode && { required })}
-        {...{ initSelected: value, editMode, scheme }}
+        initOptions={value}
+        {...{ required, editMode, scheme }}
       />
     )
   }
@@ -90,12 +90,17 @@ export class RefListProp implements PropScheme {
     const { service, anchorField } = getScheme()
     const { getOne } = service
 
-    const value = row.original[key] as undefined | any[]
+    const value = row.original[key] as undefined | Entity[]
 
     return (
       value &&
       value.map(item => (
-        <FetchRef id={item.id} title={item[anchorField]} {...{ getOne }} />
+        <FetchRef
+          key={item.id}
+          id={item.id}
+          title={item[anchorField]}
+          {...{ getOne }}
+        />
       ))
     )
   }
@@ -106,7 +111,7 @@ export class RefListProp implements PropScheme {
 
     const { anchorField } = getScheme()
 
-    const values = item[key] as undefined | Partial<Entity>[]
+    const values = item[key] as undefined | Entity[]
 
     if (!values || values.length === 0) return
 

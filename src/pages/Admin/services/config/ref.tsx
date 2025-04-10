@@ -39,7 +39,7 @@ export class RefProp implements PropScheme {
     return scheme.title.singular
   }
 
-  getFieldComponent = (value?: Partial<Entity>, editMode = false) => {
+  getFieldComponent = (value?: Entity, editMode = false) => {
     const { verboseKey, title, config } = this
     const { getScheme, field } = config
     const { hidden, required } = field ?? {}
@@ -51,9 +51,8 @@ export class RefProp implements PropScheme {
     return (
       <AutoCombobox
         keyName={verboseKey}
-        initSelected={value && [value]}
-        {...(!editMode && { required })}
-        {...{ title, editMode, scheme }}
+        initOptions={value && [value]}
+        {...{ title, required, editMode, scheme }}
       />
     )
   }

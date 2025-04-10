@@ -3,6 +3,7 @@ import {
   ChangeEventHandler,
   Dispatch,
   MouseEventHandler,
+  ReactNode,
   SetStateAction,
   useCallback,
   useEffect,
@@ -12,41 +13,29 @@ import {
 } from 'react'
 import { useControl } from '@/hooks'
 import { useInputHandler } from '../../hooks'
-import { Button, ControlLabel, Icon, StateButton } from '@/components'
-import { StateButtonProps } from '@/components/StateButton/StateButton'
-import { Option } from './components'
 import { Control } from '@/types'
+import { Button, ControlLabel, Icon } from '@/components'
+import { Option } from './components'
+import { OptionProps } from './components/Option/Option'
 import { classList } from '@/helpers'
-import { ControlLabelProps } from '@/components/ControlLabel/ControlLabel'
 
-export interface BasicOption {
-  id: string
-  title: string
-}
-
-export type Fields = Record<string, { title: string; value: string }>
-
-export interface BaseComboboxProps<E = unknown, T = E & BasicOption>
-  extends Control,
-    Pick<ControlLabelProps, 'resetHandleClick'> {
+export interface BaseComboboxProps extends Control {
   multiple?: boolean
   reduceHeader?: boolean
-  options?: T[]
-  selected: T[]
-  setSelected: Dispatch<SetStateAction<T[]>>
-  selectedItems?: { id: string; title: string }[]
-  sorter: (search: string, options: T[]) => T[]
-  deselectItem: (id: string) => void
-  reportOption?: (value?: string) => void
+
+  search: string
+  setSearch: Dispatch<SetStateAction<string>>
+  selected: string[]
+  setSelected: Dispatch<SetStateAction<string[]>>
+
+  fullSelection?: string[]
+  sortedOptions: Pick<OptionProps, 'id' | 'fields'>[]
+  getItemTitle: (id: string) => string
+  handleReset?: () => void
   handleEnter?: () => void
 
-  refetchPack?: Required<Pick<StateButtonProps, 'actionState' | 'handleAction'>>
-  searchModePack?: {
-    searchModes?: { mode: string; title: string }[]
-    selectedSearchMode: string
-    renderingOptions: (options: T[]) => Fields[]
-    searchModeItemHandleChange: ChangeEventHandler<HTMLInputElement>
-  }
+  modeSlot?: ReactNode
+  searchSlot?: ReactNode
 }
 
 const BaseCombobox = ({
@@ -56,103 +45,78 @@ const BaseCombobox = ({
   required = false,
   editMode = false,
   long,
-
   multiple = false,
   reduceHeader = false,
-  options,
+
+  search,
+  setSearch,
   selected,
   setSelected,
-  selectedItems,
-  sorter,
-  deselectItem,
-  reportOption,
+
+  fullSelection,
+  sortedOptions,
+  getItemTitle,
   handleEnter,
-  resetHandleClick,
+  handleReset,
 
-  refetchPack,
-  searchModePack,
+  modeSlot,
+  searchSlot,
 }: BaseComboboxProps) => {
-  const {
-    searchModes,
-    selectedSearchMode,
-    renderingOptions,
-    searchModeItemHandleChange,
-  } = searchModePack ?? {}
-
   const { inputTitle, disabledState } = useControl({ title, required })
   const { disabled } = disabledState
 
   const [open, setOpen] = useState(false)
-  const [search, setSearch] = useState('')
-  const comboboxLayoutRef = useRef<HTMLDivElement | null>(null)
+  const componentRef = useRef<HTMLDivElement | null>(null)
 
-  const isVoid = useMemo(() => !(options && options.length), [options])
+  const isVoid = useMemo(() => !fullSelection?.length, [fullSelection])
 
-  const finalRenderingOptions = useMemo(() => {
-    if (!options) return
+  const toggleItem = useCallback(
+    (id: string) => {
+      setSelected(prev => {
+        const exists = prev.includes(id)
 
-    const sorted = sorter(search.trim().toLowerCase(), options)
+        if (multiple)
+          return exists
+            ? prev.filter(selectedId => selectedId !== id)
+            : [...prev, id]
 
-    if (renderingOptions) return renderingOptions(sorted)
+        return exists ? [] : [id]
+      })
 
-    return sorted.map(({ id, title }) => {
-      const fields: Fields = {}
+      if (!multiple) setOpen(false)
+    },
+    [multiple],
+  )
 
-      fields['id'] = { title: 'Clave', value: id }
-      fields['title'] = { title: 'Título', value: title }
+  const handleHeaderClick = useCallback(() => setOpen(prev => !prev), [])
 
-      return fields
-    })
-  }, [options, search, sorter, renderingOptions])
+  const handleSearchChange = useInputHandler(value => setSearch(value))
 
-  const searchHandleChange = useInputHandler(value => setSearch(value))
+  const handleOptionChange = useInputHandler(value => toggleItem(value))
 
-  const optionHandleChange = useInputHandler(value => {
-    if (!options) return
-
-    const newSelected = options.find(option => option.id === value)
-
-    if (!newSelected) return
-
-    reportOption && reportOption(value)
-
-    setSelected(
-      multiple
-        ? prev => {
-            const exists = prev.some(item => item.id === value)
-
-            return exists
-              ? prev.filter(item => item.id !== value)
-              : [...prev, newSelected]
-          }
-        : [newSelected],
-    )
-
-    if (!multiple) setOpen(false)
-  })
-
-  const deleteSelectedItemHandleClick = useCallback<
+  const handleDeselectItemClick = useCallback<
     MouseEventHandler<HTMLButtonElement>
   >(event => {
     // Evita que se dispare el evento de click del elemento padre (header)
     event.stopPropagation()
 
-    const id = event.currentTarget.name
-
-    deselectItem(id)
-    reportOption && reportOption(id)
+    toggleItem(event.currentTarget.name)
   }, [])
 
-  const toggleHandleClick = useCallback(() => setOpen(prev => !prev), [])
+  const handleCheckAllChange = useCallback<
+    ChangeEventHandler<HTMLInputElement>
+  >(event => setSelected(event.target.checked ? [] : fullSelection!), [])
+
+  const handleResetClick = useCallback(() => {
+    editMode && handleReset ? handleReset() : setSelected([])
+  }, [])
 
   useEffect(() => {
-    const handleClick = (event: MouseEvent) => {
-      // Cierra el componente si el click es fuera del propio elemento
-      const close =
-        comboboxLayoutRef.current &&
-        !comboboxLayoutRef.current.contains(event.target as Node)
+    const component = componentRef.current
 
-      if (close) setOpen(false)
+    const handleClick = (event: MouseEvent) => {
+      // Cierra el componente si se produce un click fuera del propio elemento
+      if (component && !component.contains(event.target as Node)) setOpen(false)
     }
 
     document.addEventListener('mousedown', handleClick)
@@ -162,7 +126,7 @@ const BaseCombobox = ({
 
   return (
     <div
-      ref={comboboxLayoutRef}
+      ref={componentRef}
       className={classList(
         'cmp-base-combobox',
         'control',
@@ -171,28 +135,28 @@ const BaseCombobox = ({
       )}
       onMouseEnter={handleEnter}
     >
-      {/* <pre>{JSON.stringify(finalRenderingOptions, undefined, ' ')}</pre> */}
       <ControlLabel
         discreetLabel
+        resetHandleClick={handleResetClick}
         {...{
           title,
           hideLabel,
           required,
           editMode,
           ...disabledState,
-          resetHandleClick,
         }}
       />
       <header
         className={classList('box', { reduce: reduceHeader })}
         title={inputTitle}
         {...(editMode && { disabled })}
-        onClick={toggleHandleClick}
+        onClick={handleHeaderClick}
       >
+        {/* TODO: seleccionador global, renderizar solo si existe fullSelection */}
         <div className="selected-items">
-          {selectedItems?.map(({ id, title }) => (
+          {selected.map(id => (
             <div key={id} className="item">
-              <p>{title}</p>
+              <p>{getItemTitle(id)}</p>
               <Button
                 title="Eliminar"
                 faIcon="fa-solid fa-xmark"
@@ -200,7 +164,7 @@ const BaseCombobox = ({
                 type="button"
                 hideText
                 _type="secondary"
-                onClick={deleteSelectedItemHandleClick}
+                onClick={handleDeselectItemClick}
               />
             </div>
           ))}
@@ -211,38 +175,15 @@ const BaseCombobox = ({
       </header>
       <div className="drop-down">
         <header>
-          {searchModes && (
-            <fieldset>
-              {searchModes.map(({ mode, title }) => (
-                <label key={mode}>
-                  {title}
-                  <input
-                    type="radio"
-                    name={`searchMode-${keyName}`}
-                    value={mode}
-                    checked={selectedSearchMode === mode}
-                    onChange={searchModeItemHandleChange}
-                  />
-                </label>
-              ))}
-            </fieldset>
-          )}
+          {modeSlot}
           <div className="search">
             <input
               className="box input"
               value={search}
-              placeholder="Buscar ..."
-              onChange={searchHandleChange}
+              placeholder="Buscar..."
+              onChange={handleSearchChange}
             />
-            {refetchPack && (
-              <StateButton
-                text="Actualizar opciones"
-                hiddenText
-                faIcon="fa-solid fa-rotate"
-                // BUG: se debe declarar como button porque si no se interpreta como submit al estar dentro del form
-                {...refetchPack}
-              />
-            )}
+            {searchSlot}
           </div>
         </header>
         {isVoid ? (
@@ -250,25 +191,17 @@ const BaseCombobox = ({
             <Icon faIcon="fa-solid fa-frog" />
           </div>
         ) : (
-          finalRenderingOptions && (
-            <fieldset className="drop-down" {...(editMode && { disabled })}>
-              {finalRenderingOptions.map(
-                option =>
-                  option.id && (
-                    <Option
-                      key={option.id.value}
-                      checked={selected.some(
-                        ({ id }) => id === option.id.value,
-                      )}
-                      fields={option}
-                      selectedSearchMode={selectedSearchMode ?? 'title'}
-                      handleChange={optionHandleChange}
-                      {...{ keyName, required, multiple }}
-                    />
-                  ),
-              )}
-            </fieldset>
-          )
+          <fieldset {...(editMode && { disabled })}>
+            {sortedOptions.map(({ id, fields }) => (
+              <Option
+                key={id}
+                title={getItemTitle(id)}
+                checked={selected.some(selectedId => selectedId === id)}
+                handleChange={handleOptionChange}
+                {...{ id, fields, keyName, required, multiple }}
+              />
+            ))}
+          </fieldset>
         )}
       </div>
     </div>

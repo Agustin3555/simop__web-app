@@ -23,13 +23,14 @@
   > ul {
     display: flex;
     flex-wrap: wrap;
-    gap: var(--pal-size-s);
-
-    white-space: nowrap;
+    row-gap: var(--pal-size-xs);
+    column-gap: var(--pal-size-m);
 
     > li {
       display: flex;
-      gap: var(--pal-size-2xs);
+      flex-wrap: wrap;
+      align-items: baseline;
+      gap: var(--pal-size-xs);
 
       font-size: var(--pal-size-font-2xs);
 
@@ -43,8 +44,14 @@
     display: none;
   }
 
+  &:not(:last-child) {
+    border-bottom-color: var(--pal-color-a-l3);
+    border-bottom-style: solid;
+    border-bottom-width: var(--line-thickness);
+  }
+
   &:hover {
-    background-color: rgba(var(--pal-color-base-a), 0.125);
+    background-color: var(--pal-color-a-l3);
   }
 
   &:has(input:checked) {

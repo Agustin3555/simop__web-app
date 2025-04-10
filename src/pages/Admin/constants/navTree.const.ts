@@ -113,7 +113,7 @@ export const TREE: SectionNode[] = [
     ],
   },
   {
-    title: 'Tablero de Control',
+    title: 'Tablero de Gestión',
     sections: [
       {
         scheme: {

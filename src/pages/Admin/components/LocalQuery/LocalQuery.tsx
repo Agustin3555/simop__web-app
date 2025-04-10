@@ -1,12 +1,18 @@
 import './LocalQuery.css'
 import { useCallback, useMemo, useRef, useState } from 'react'
 import { useQueryActionState } from '@/hooks'
-import { useEntities, useRowSelection, useScheme } from '../../hooks'
+import {
+  StateToDerived,
+  DerivedToState,
+  useDerivedState,
+  useEntities,
+  useRowSelection,
+  useScheme,
+} from '../../hooks'
+import { VisibilityState } from '@tanstack/react-table'
 import { Button, Icon, StateButton } from '@/components'
 import { Combobox } from '..'
 import { DeleteButton, ReportButton, Table } from './components'
-import { VisibilityState } from '@tanstack/react-table'
-import { ComboboxProps } from '../Combobox/Combobox'
 import { GetHeaderResult } from './components/Table/Table'
 import { format } from '@formkit/tempo'
 import { utils, writeFile } from 'xlsx'
@@ -15,7 +21,7 @@ const LocalQuery = () => {
   const { scheme, flatProps } = useScheme()
   const { key, title, columnVisibility: schemeColumnVisibility } = scheme
 
-  const allVisibleColumns = useMemo(
+  const allColumnsVisible = useMemo(
     () => Object.fromEntries(Object.keys(flatProps).map(id => [id, true])),
     [],
   )
@@ -30,7 +36,34 @@ const LocalQuery = () => {
   )
 
   const [columnVisibility, setColumnVisibility] = useState<VisibilityState>(
-    initColumnVisibility || allVisibleColumns,
+    initColumnVisibility ?? allColumnsVisible,
+  )
+
+  const fromVisibilityToKeys = useCallback<
+    StateToDerived<VisibilityState, string[]>
+  >(
+    visibility =>
+      Object.entries(visibility)
+        .filter(([, value]) => value)
+        .map(([key]) => key),
+    [],
+  )
+
+  const fromKeysToVisibility = useCallback<
+    DerivedToState<VisibilityState, string[]>
+  >((keys, prev) => {
+    const newVisibility: VisibilityState = {}
+
+    for (const key of Object.keys(prev)) newVisibility[key] = keys.includes(key)
+
+    return newVisibility
+  }, [])
+
+  const [visibleKeys, setVisibleKeys] = useDerivedState(
+    columnVisibility,
+    setColumnVisibility,
+    fromVisibilityToKeys,
+    fromKeysToVisibility,
   )
 
   const [quickFilters, setQuickFilters] = useState<GetHeaderResult[]>()
@@ -51,7 +84,7 @@ const LocalQuery = () => {
 
   const columnOptions = useMemo(
     () =>
-      Object.keys(allVisibleColumns).map(id => ({
+      Object.keys(allColumnsVisible).map(id => ({
         id,
         title: flatProps[id].title,
       })),
@@ -78,21 +111,6 @@ const LocalQuery = () => {
     writeFile(workbook, fileName)
   }, [data, selectedRowIds])
 
-  const optionHandleChange = useCallback<
-    NonNullable<ComboboxProps['reportOption']>
-  >(
-    id =>
-      setColumnVisibility(prev => {
-        const newState = { ...prev }
-
-        const checked = newState[id]
-        newState[id] = !checked
-
-        return newState
-      }),
-    [],
-  )
-
   return (
     <div className="cmp-local-query" ref={componentRef}>
       <header>
@@ -102,14 +120,14 @@ const LocalQuery = () => {
           hideLabel
           multiple
           reduceHeader
+          selected={visibleKeys}
+          setSelected={setVisibleKeys}
           options={columnOptions}
-          selectedIds={schemeColumnVisibility || Object.keys(allVisibleColumns)}
-          reportOption={optionHandleChange}
         />
         {quickFilters && (
           <div className="filters">
             {quickFilters.map(({ title, filter }) => (
-              <div className="item">
+              <div key={title} className="item">
                 <small>{title}</small>
                 {filter}
               </div>

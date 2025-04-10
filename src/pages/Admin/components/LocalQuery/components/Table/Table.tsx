@@ -178,13 +178,13 @@ const Table = ({
           {table.getFooterGroups().map(footerGroup => (
             <div className="row" key={footerGroup.id}>
               {footerGroup.headers.map(header => (
-                <td key={header.id}>
+                <div key={header.id}>
                   {header.column.columnDef.footer
                     ? typeof header.column.columnDef.footer === 'function'
                       ? header.column.columnDef.footer(header.getContext())
                       : header.column.columnDef.footer
                     : null}
-                </td>
+                </div>
               ))}
             </div>
           ))}

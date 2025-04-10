@@ -1,34 +1,40 @@
 import { useCallback, useMemo, useState } from 'react'
 import { Control } from '@/types'
-import { BaseComboboxProps, BasicOption } from '../BaseCombobox/BaseCombobox'
-import { BaseCombobox } from '..'
 import { baseSorter } from '../../helpers'
+import BaseCombobox, { BaseComboboxProps } from '../BaseCombobox/BaseCombobox'
 
 export interface ComboboxProps
   extends Control,
-    Pick<BaseComboboxProps, 'reportOption'> {
-  options: BasicOption[]
-  selectedIds?: BasicOption['id'][]
-  multiple?: boolean
-  reduceHeader?: boolean
+    Pick<
+      BaseComboboxProps,
+      'multiple' | 'reduceHeader' | 'selected' | 'setSelected'
+    > {
+  options: { id: string; title: string }[]
+  initSelected?: string[]
 }
 
-const Combobox = ({ options, selectedIds, ...rest }: ComboboxProps) => {
-  const initSelected = useMemo(() => {
-    if (!selectedIds || selectedIds.length === 0) return
+const Combobox = ({
+  options,
+  initSelected,
+  setSelected,
+  ...rest
+}: ComboboxProps) => {
+  const [search, setSearch] = useState('')
 
-    return options.filter(({ id }) => selectedIds.includes(id))
-  }, [])
+  const fullSelection = useMemo(() => options.map(({ id }) => id), [options])
 
-  const [selected, setSelected] = useState(initSelected ?? [])
-
-  const sorter = useCallback<BaseComboboxProps['sorter']>(
-    (search, options) => baseSorter(search, options, option => option.title),
-    [],
+  const sortedOptions = useMemo<BaseComboboxProps['sortedOptions']>(
+    () => baseSorter(search, options, option => option.title),
+    [options, search],
   )
 
-  const deselectItem = useCallback<BaseComboboxProps['deselectItem']>(
-    id => setSelected(prev => prev.filter(item => item.id !== id)),
+  const getItemTitle = useCallback<BaseComboboxProps['getItemTitle']>(
+    id => options.find(option => option.id === id)!.title,
+    [options],
+  )
+
+  const handleReset = useCallback(
+    () => initSelected && setSelected(initSelected),
     [],
   )
 
@@ -36,12 +42,15 @@ const Combobox = ({ options, selectedIds, ...rest }: ComboboxProps) => {
     <BaseCombobox
       {...{
         ...rest,
-        options,
-        selected,
+
+        search,
+        setSearch,
         setSelected,
-        selectedItems: selected,
-        sorter,
-        deselectItem,
+
+        fullSelection,
+        sortedOptions,
+        getItemTitle,
+        handleReset,
       }}
     />
   )

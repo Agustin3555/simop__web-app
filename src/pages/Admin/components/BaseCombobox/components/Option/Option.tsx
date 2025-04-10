@@ -1,56 +1,47 @@
 import './Option.css'
-import { ChangeEventHandler, useMemo } from 'react'
-import { BaseComboboxProps, Fields } from '../../BaseCombobox'
+import { ChangeEventHandler } from 'react'
+import { BaseComboboxProps } from '../../BaseCombobox'
 
-interface OptionProps
-  extends Pick<BaseComboboxProps, 'keyName' | 'required' | 'multiple'>,
-    Pick<
-      NonNullable<BaseComboboxProps['searchModePack']>,
-      'selectedSearchMode'
-    > {
+export interface OptionProps
+  extends Pick<BaseComboboxProps, 'keyName' | 'required' | 'multiple'> {
+  id: string
+  title: string
   checked: boolean
-  fields: Fields
+  fields?: { title: string; value: string }[]
   handleChange: ChangeEventHandler<HTMLInputElement>
 }
 
 const Option = ({
+  id,
+  title,
+  checked,
+  fields,
   keyName,
   required,
   multiple,
-  checked,
-  fields,
-  selectedSearchMode,
   handleChange,
-}: OptionProps) => {
-  const remainingData = useMemo(
-    () =>
-      Object.entries(fields)
-        .filter(([key]) => key !== selectedSearchMode)
-        .map(([, value]) => value),
-    [fields, selectedSearchMode],
-  )
-
-  return (
-    <label className="cmp-option">
-      <strong className="text">{fields[selectedSearchMode].value}</strong>
+}: OptionProps) => (
+  <label className="cmp-option">
+    <strong className="text">{title}</strong>
+    {fields && (
       <ul>
-        {remainingData.map(({ title, value }) => (
-          <li key={title}>
+        {fields.map(({ title, value }) => (
+          <li className="text" key={title}>
             <strong>{`${title}:`}</strong>
             {value}
           </li>
         ))}
       </ul>
-      <input
-        type={multiple ? 'checkbox' : 'radio'}
-        value={fields.id.value}
-        onChange={handleChange}
-        name={keyName}
-        {...{ checked }}
-        // BUG: si se usa 'required' y es true, dará un error al no ser focusable
-      />
-    </label>
-  )
-}
+    )}
+    <input
+      type={multiple ? 'checkbox' : 'radio'}
+      value={id}
+      onChange={handleChange}
+      name={keyName}
+      {...{ checked }}
+      // BUG: si se usa 'required' y es true, dará un error al no ser focusable
+    />
+  </label>
+)
 
 export default Option

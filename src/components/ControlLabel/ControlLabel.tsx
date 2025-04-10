@@ -1,5 +1,5 @@
 import './ControlLabel.css'
-import { MouseEventHandler, useMemo } from 'react'
+import { useMemo } from 'react'
 import { Control } from '@/types'
 import { Button, Toggle } from '..'
 import { ToggleProps } from '../Toggle/Toggle'
@@ -10,7 +10,7 @@ export interface ControlLabelProps
   discreetLabel?: boolean
   disabled: ToggleProps['value']
   setDisabled: ToggleProps['setValue']
-  resetHandleClick?: MouseEventHandler<HTMLButtonElement>
+  resetHandleClick?: () => void
 }
 
 const ControlLabel = ({
