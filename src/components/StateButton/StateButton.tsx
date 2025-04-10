@@ -26,6 +26,7 @@ const StateButton = ({
   handleAction,
 }: StateButtonProps) => (
   <button
+    type="button"
     className={classList(
       'cmp-state-button',
       'button-look',

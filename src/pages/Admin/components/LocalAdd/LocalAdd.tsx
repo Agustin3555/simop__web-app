@@ -51,9 +51,15 @@ const HydratedLocalAdd = () => {
 
   const handleResetClick = useCallback(() => reset(), [])
 
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLFormElement>) => {
+    if (e.key === 'Enter') {
+      e.preventDefault()
+    }
+  }
+
   return (
     <div className="cmp-local-add">
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} onKeyDown={handleKeyDown}>
         <div className="field-groups">
           {fieldGroups.map(({ title, fields }, index) => (
             <div key={index} className="group">
