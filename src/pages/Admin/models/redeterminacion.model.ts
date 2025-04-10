@@ -13,6 +13,7 @@ import {
   Scheme,
   TextProp,
   BooleanProp,
+  RefListProp,
 } from '../services/config'
 import { RedeterminacionService } from '../services'
 import { COMMON_PROPS } from '../constants/commonProps.const'
@@ -29,7 +30,7 @@ export interface RawEntity {
   fechaCertificacion?: string
   tieneHijas: boolean
 
-  redeterminacion: RawRef
+  redeterminacionesHijas: RawRef[]
   direccion?: DireccionModel.RawRef
   departamento?: DepartamentoModel.RawRef
   obra?: ObraModel.RawRef
@@ -51,7 +52,7 @@ export interface Entity {
   fechaCertificacion?: string
   tieneHijas: boolean
 
-  redeterminacion: Ref
+  redeterminacionesHijas: Ref[]
   direccion?: DireccionModel.Ref
   departamento?: DepartamentoModel.Ref
   obra?: ObraModel.Ref
@@ -64,13 +65,13 @@ export interface Entity {
 export interface RawRef {
   id: number
 
-  numeroExpedienteSolicitud: string
+  numeroExpediente: string
 }
 
 export interface Ref {
   id: number
 
-  numeroExpedienteSolicitud: string
+  numeroExpediente: string
 }
 
 export interface CreateData {
@@ -164,16 +165,19 @@ export const scheme: Scheme<Entity> = {
             required: true,
           },
         }),
-        numeroExpediente: new TextProp('Número De Expediente', {
-          field: {
-            required: true,
+        numeroExpediente: new TextProp(
+          'Número De Expediente de Redeterminación',
+          {
+            field: {
+              required: true,
+            },
           },
-        }),
+        ),
 
         numeroResolucion: new TextProp('Número De Resolución'),
 
         numeroExpedienteSolicitud: new TextProp(
-          'Número De Expediente de la Solicitud',
+          'Número de Expediente de Solicitud',
           {
             field: {
               required: true,
@@ -194,9 +198,9 @@ export const scheme: Scheme<Entity> = {
           sum: true,
           pre: '$',
         }),
-        fechaRedeterminacion: new DateProp('Fecha'),
+        fechaRedeterminacion: new DateProp('Fecha de Solicitud'),
         fechaCertificacion: new DateProp('Fecha Certificación'),
-        tieneHijas: new BooleanProp('Tiene Hijas'),
+        tieneHijas: new BooleanProp('AE Acum.'),
         tipoRedeterminacion: new RefProp({
           getScheme: () => TipoRedeterminacionModel.scheme,
         }),
@@ -206,7 +210,7 @@ export const scheme: Scheme<Entity> = {
         departamento: new RefProp({
           getScheme: () => DepartamentoModel.scheme,
         }),
-        redeterminacion: new RefProp({
+        redeterminacionesHijas: new RefListProp({
           getScheme: () => RedeterminacionModel.scheme,
         }),
         observaciones: new TextLongProp('Observaciones'),

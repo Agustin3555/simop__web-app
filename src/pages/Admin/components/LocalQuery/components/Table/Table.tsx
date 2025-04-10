@@ -122,7 +122,7 @@ const Table = ({
 
   return (
     <div className="cmp-table">
-      <div className="table">
+      <div className="table stick-head">
         <div className="head">
           {table.getHeaderGroups().map(headerGroup => (
             <div className="row" key={headerGroup.id}>

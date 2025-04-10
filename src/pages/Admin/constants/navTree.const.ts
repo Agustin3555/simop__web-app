@@ -114,6 +114,15 @@ export const TREE: SectionNode[] = [
   },
   {
     title: 'Tablero de Control',
-    sections: [{ scheme: ObraModel.scheme }],
+    sections: [
+      {
+        scheme: {
+          key: 'obraGeneral',
+          title: {
+            plural: 'Obra Básica General',
+          },
+        },
+      },
+    ],
   },
 ]

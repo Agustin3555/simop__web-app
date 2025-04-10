@@ -37,7 +37,7 @@ export interface BaseComboboxProps<E = unknown, T = E & BasicOption>
   selectedItems?: { id: string; title: string }[]
   sorter: (search: string, options: T[]) => T[]
   deselectItem: (id: string) => void
-  reportOption?: (value: string) => void
+  reportOption?: (value?: string) => void
   handleEnter?: () => void
 
   refetchPack?: Required<Pick<StateButtonProps, 'actionState' | 'handleAction'>>

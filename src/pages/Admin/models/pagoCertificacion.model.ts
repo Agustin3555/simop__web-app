@@ -122,13 +122,13 @@ export const scheme: Scheme<Entity> = {
   groups: [
     {
       props: {
-        numero: new NumberProp('Número de pago', {
+        numero: new NumberProp('Número de Pago', {
           field: {
             required: true,
           },
         }),
         ordenPago: new TextProp('Orden de pago'),
-        fecha: new DateProp('Fecha'),
+        fecha: new DateProp('Fecha de Pago'),
         monto: new NumberProp('Monto', {
           decimal: true,
           isMoney: true,

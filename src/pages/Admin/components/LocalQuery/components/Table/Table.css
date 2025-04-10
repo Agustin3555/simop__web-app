@@ -1,7 +1,10 @@
 .cmp-table {
+  position: relative;
+
   flex-grow: 1;
 
   max-width: max-content;
+  max-height: max-content;
 
   overflow: auto;
 }
@@ -21,10 +24,6 @@
 
   .row {
     display: flex;
-  }
-
-  > * {
-    overflow: hidden;
   }
 
   > .head {
@@ -71,5 +70,14 @@
   > :is(.body, .foot) > .row {
     align-items: center;
     padding-block: var(--pal-size-s);
+  }
+
+  &.stick-head {
+    height: 100%;
+
+    > .head {
+      position: sticky;
+      top: 0;
+    }
   }
 }

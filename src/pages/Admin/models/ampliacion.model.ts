@@ -144,7 +144,7 @@ export const scheme: Scheme<Entity> = {
         }),
         numeroResolucion: new TextProp('Número De Resolución'),
         numeroExpedienteSolicitud: new TextProp(
-          'Número De Expediente Solicitud',
+          'Número de Expediente de Solicitud',
         ),
         plazoMesesSolicitado: new NumberProp('Plazo de Meses Solicitado '),
         plazoMesesOtorgado: new NumberProp('Plazo de Meses Otorgado'),

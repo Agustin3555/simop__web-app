@@ -17,7 +17,9 @@ const adapter = (array?: E[]) =>
     id: string
   })[]
 
-export interface AutoComboboxProps extends Control {
+export interface AutoComboboxProps
+  extends Control,
+    Pick<BaseComboboxProps, 'reportOption'> {
   initSelected?: E[]
   scheme: Scheme
   multiple?: boolean
