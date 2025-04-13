@@ -1,6 +1,6 @@
-import { View } from '../../components'
+import { SchemeView } from '../../components'
 import { LocalidadModel } from '../../models'
 
-const Localidad = () => <View scheme={LocalidadModel.scheme} />
+const Localidad = () => <SchemeView scheme={LocalidadModel.scheme} />
 
 export default Localidad

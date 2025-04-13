@@ -1,6 +1,6 @@
-import { View } from '../../components'
+import { SchemeView } from '../../components'
 import { TipoRescisionModel } from '../../models'
 
-const TipoRescision = () => <View scheme={TipoRescisionModel.scheme} />
+const TipoRescision = () => <SchemeView scheme={TipoRescisionModel.scheme} />
 
 export default TipoRescision

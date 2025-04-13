@@ -98,7 +98,7 @@ export interface UpdateBody {
 }
 
 export const scheme: Scheme<Entity> = {
-  key: 'Recepcion',
+  key: 'recepcion',
   service: RecepcionService,
   refreshRate: 'medium',
   title: {

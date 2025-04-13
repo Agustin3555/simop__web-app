@@ -13,7 +13,7 @@ import {
   ColumnOrderState,
   SortDirection,
   SortingState,
-  Header as TanstackHeader,
+  Header as TsHeader,
 } from '@tanstack/react-table'
 import { Entity } from '@/services/config'
 import { classList } from '@/helpers'
@@ -26,7 +26,7 @@ const sortIconMatcher: Record<SortDirection, string> = {
 
 interface Props {
   flatProps: ReturnType<typeof useScheme>['flatProps']
-  header: TanstackHeader<Entity, unknown>
+  header: TsHeader<Entity, unknown>
   sorting: SortingState
   setSorting: Dispatch<SetStateAction<SortingState>>
   columnOrder: ColumnOrderState

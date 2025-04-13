@@ -110,7 +110,7 @@ export interface UpdateBody {
 }
 
 export const scheme: Scheme<Entity> = {
-  key: 'PagoCertificacion',
+  key: 'pagoCertificacion',
   service: PagoCertificacionService,
   refreshRate: 'medium',
   title: {

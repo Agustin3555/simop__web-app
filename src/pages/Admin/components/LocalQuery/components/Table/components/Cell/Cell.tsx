@@ -1,6 +1,6 @@
 import './Cell.css'
 import { useScheme } from '@/pages/Admin/hooks'
-import { Cell as TanstackCell } from '@tanstack/react-table'
+import { Cell as TsCell } from '@tanstack/react-table'
 import { Entity } from '@/services/config'
 import { useMemo } from 'react'
 import { steppedSizes } from '../../helpers'
@@ -13,7 +13,7 @@ import { steppedSizes } from '../../helpers'
 
 interface Props {
   flatProps: ReturnType<typeof useScheme>['flatProps']
-  cell: TanstackCell<Entity, unknown>
+  cell: TsCell<Entity, unknown>
 }
 
 const Cell = ({ flatProps, cell }: Props) => {

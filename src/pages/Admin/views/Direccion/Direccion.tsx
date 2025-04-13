@@ -1,6 +1,6 @@
-import { View } from '../../components'
+import { SchemeView } from '../../components'
 import { DireccionModel } from '../../models'
 
-const Direccion = () => <View scheme={DireccionModel.scheme} />
+const Direccion = () => <SchemeView scheme={DireccionModel.scheme} />
 
 export default Direccion

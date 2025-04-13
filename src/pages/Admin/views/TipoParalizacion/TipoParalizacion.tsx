@@ -1,6 +1,8 @@
-import { View } from '../../components'
+import { SchemeView } from '../../components'
 import { TipoParalizacionModel } from '../../models'
 
-const TipoParalizacion = () => <View scheme={TipoParalizacionModel.scheme} />
+const TipoParalizacion = () => (
+  <SchemeView scheme={TipoParalizacionModel.scheme} />
+)
 
 export default TipoParalizacion

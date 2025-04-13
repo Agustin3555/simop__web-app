@@ -1,6 +1,8 @@
-import { View } from '../../components'
+import { SchemeView } from '../../components'
 import { TipoRepresentanteModel } from '../../models'
 
-const TipoRepresentante = () => <View scheme={TipoRepresentanteModel.scheme} />
+const TipoRepresentante = () => (
+  <SchemeView scheme={TipoRepresentanteModel.scheme} />
+)
 
 export default TipoRepresentante

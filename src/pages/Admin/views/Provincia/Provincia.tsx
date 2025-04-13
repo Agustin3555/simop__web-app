@@ -1,6 +1,6 @@
-import { View } from '../../components'
+import { SchemeView } from '../../components'
 import { ProvinciaModel } from '../../models'
 
-const Provincia = () => <View scheme={ProvinciaModel.scheme} />
+const Provincia = () => <SchemeView scheme={ProvinciaModel.scheme} />
 
 export default Provincia
