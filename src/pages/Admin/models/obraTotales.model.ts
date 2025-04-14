@@ -1,21 +1,7 @@
-import {
-  LocalidadModel,
-  EmpresaModel,
-  TipoTematicaObraModel,
-  TipoContratacionObraModel,
-  TipoFinanciamientoObraModel,
-  TipoProgramaObraModel,
-  TipoEstadoObraModel,
-} from '.'
-import {
-  DateProp,
-  NumberProp,
-  RefProp,
-  Scheme,
-  TextLongProp,
-  TextProp,
-} from '../services/config'
+import { EmpresaModel, LocalidadModel } from '.'
+import { NumberProp, RefProp, Scheme, TextProp } from '../services/config'
 import { ObraService } from '../services'
+import { COMMON_PROPS } from '../constants/commonProps.const'
 
 export interface RawEntity {
   id: number
@@ -23,8 +9,19 @@ export interface RawEntity {
   numero: number
   nombre: string
   montoContratacion?: number
+  nuevoMonto?: number
   avanceTotal?: number
+  totalMontoCertificado?: number
+  totalOrdenPago?: number
+  totalPagado?: number
+  montoPendientePago?: number
+  totalMontoRedeterminacion?: number
+  totalPagadoRedeterminacion?: number
+  montoPendientePagoRedeterminacion?: number
+  porcentajePendienteCertificar?: number
+  montoPendienteCertificar?: number
 
+  empresa?: EmpresaModel.RawRef
   localidad?: LocalidadModel.RawRef
 }
 
@@ -34,8 +31,19 @@ export interface Entity {
   numero: number
   nombre: string
   montoContratacion?: number
+  nuevoMonto?: number
   avanceTotal?: number
+  totalMontoCertificado?: number
+  totalOrdenPago?: number
+  totalPagado?: number
+  montoPendientePago?: number
+  totalMontoRedeterminacion?: number
+  totalPagadoRedeterminacion?: number
+  montoPendientePagoRedeterminacion?: number
+  porcentajePendienteCertificar?: number
+  montoPendienteCertificar?: number
 
+  empresa?: EmpresaModel.Ref
   localidad?: LocalidadModel.Ref
 }
 
@@ -54,23 +62,14 @@ export const scheme: Scheme<Entity> = {
       props: {
         numero: new NumberProp('Número De Obra', {
           big: true,
-          field: {
-            required: true,
-          },
         }),
-        nombre: new TextProp('Nombre', {
-          field: {
-            required: true,
-          },
-        }),
+        nombre: new TextProp('Nombre', {}),
         empresa: new RefProp({
           getScheme: () => EmpresaModel.scheme,
         }),
-        numeroExpediente: new TextProp('Número de Expediente de Contrato'),
-        numeroResolucion: new TextProp('Número de Resolución'),
-        anioResolucion: new NumberProp('Año de Resolución'),
-        numeroContratacion: new TextProp('Número de Contratación'),
-        fechaContratacion: new DateProp('Fecha de Contratación'),
+        localidad: new RefProp({
+          getScheme: () => LocalidadModel.scheme,
+        }),
         montoContratacion: new NumberProp('Monto de Contratación', {
           decimal: true,
           isMoney: true,
@@ -78,36 +77,11 @@ export const scheme: Scheme<Entity> = {
           sum: true,
           pre: '$',
         }),
-        tipoContratacionObra: new RefProp({
-          getScheme: () => TipoContratacionObraModel.scheme,
-        }),
-        tipoFinanciamientoObra: new RefProp({
-          getScheme: () => TipoFinanciamientoObraModel.scheme,
-        }),
-        tipoProgramaObra: new RefProp({
-          getScheme: () => TipoProgramaObraModel.scheme,
-        }),
-        tipoTematicaObra: new RefProp({
-          getScheme: () => TipoTematicaObraModel.scheme,
-        }),
-        tipoEstadoObra: new RefProp({
-          getScheme: () => TipoEstadoObraModel.scheme,
-        }),
-        fechaInicio: new DateProp('Fecha de Inicio'),
-        fechaFin: new DateProp('Fecha de Fin'),
-        plazoMeses: new NumberProp('Plazo en Meses'),
-        plazoDias: new NumberProp('Plazo en Días'),
         avanceTotal: new NumberProp('Porcentaje de Avance Total', {
           decimal: true,
           sub: '%',
         }),
-        nomenclaturaCatastral: new TextProp('Nomenclatura Catastral'),
-        localidad: new RefProp({
-          getScheme: () => LocalidadModel.scheme,
-        }),
-        direccion: new TextProp('Dirección'),
-        lugar: new TextLongProp('Lugar'),
-        observaciones: new TextLongProp('Observaciones generales'),
+        id: COMMON_PROPS.id,
       },
     },
   ],

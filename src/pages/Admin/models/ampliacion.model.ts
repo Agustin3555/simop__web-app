@@ -50,11 +50,13 @@ export interface Entity {
 
 export interface RawRef {
   id: number
+
   numero: number
 }
 
 export interface Ref {
   id: number
+
   numero: number
 }
 
@@ -88,35 +90,9 @@ export interface CreateBody {
   obraId: number
 }
 
-export interface UpdateData {
-  numero?: number
-  numeroResolucion?: string
-  numeroExpedienteSolicitud?: string
-  plazoMesesSolicitado?: number
-  plazoMesesOtorgado?: number
-  nuevaFechaFinObra?: string
-  fecha?: string
-  observaciones?: string
+export type UpdateData = Partial<CreateData>
 
-  direccionId?: number
-  departamentoId?: number
-  obraId?: number
-}
-
-export interface UpdateBody {
-  numero?: number
-  numeroResolucion?: string
-  numeroExpedienteSolicitud?: string
-  plazoMesesSolicitado?: number
-  plazoMesesOtorgado?: number
-  nuevaFechaFinObra?: string
-  fecha?: string
-  observaciones?: string
-
-  direccionId?: number
-  departamentoId?: number
-  obraId?: number
-}
+export type UpdateBody = Partial<CreateBody>
 
 export const scheme: Scheme<Entity> = {
   key: 'ampliacion',
