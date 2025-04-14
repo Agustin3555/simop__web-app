@@ -37,6 +37,7 @@ const Login = () => {
           <StateButton
             text="Acceder"
             faIcon="fa-solid fa-arrow-right"
+            type="submit"
             {...{ actionState }}
           />
         </form>

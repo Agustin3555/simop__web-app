@@ -2,15 +2,16 @@ import './StateButton.css'
 import { Icon, Loader } from '..'
 import { ActionState } from '@/hooks'
 import { classList } from '@/helpers'
-import { MouseEventHandler } from 'react'
+import { ButtonHTMLAttributes, MouseEventHandler } from 'react'
 
-export interface StateButtonProps {
+export interface StateButtonProps
+  extends Pick<ButtonHTMLAttributes<HTMLButtonElement>, 'type'> {
   text: number | string
   hiddenText?: boolean
   title?: number | string
   faIcon?: string
   actionState: ActionState
-  type?: 'secondary'
+  _type?: 'secondary'
   handlingClass?: string
   handleAction?: MouseEventHandler<HTMLButtonElement>
 }
@@ -22,16 +23,17 @@ const StateButton = ({
   faIcon = 'fa-solid fa-arrow-right',
   actionState,
   type,
+  _type,
   handlingClass,
   handleAction,
 }: StateButtonProps) => (
   <button
-    type="button"
+    type={type ?? 'button'}
     className={classList(
       'cmp-state-button',
       'button-look',
       'state',
-      type,
+      _type,
       handlingClass,
     )}
     title={String(title || text)}

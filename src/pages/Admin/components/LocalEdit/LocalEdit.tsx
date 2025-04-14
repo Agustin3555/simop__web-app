@@ -105,6 +105,7 @@ const LocalEdit = () => {
               <StateButton
                 text="Confirmar"
                 faIcon="fa-solid fa-check"
+                type="submit"
                 {...{ actionState }}
               />
             </div>
