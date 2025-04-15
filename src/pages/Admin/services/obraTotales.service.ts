@@ -1,14 +1,14 @@
 import { publicInstance, Service } from '@/services/config'
-import { ObraModel } from '../models'
-import { ObraAdapter } from '../adapters'
+import { ObraTotalesModel } from '../models'
+import { ObraTotalesAdapter } from '../adapters'
 import { buildPath } from '@/helpers'
 
 const collection = buildPath('obras')
 
-export const ObraTotalesService: Service<ObraModel.Entity> = {
+export const ObraTotalesService: Service<ObraTotalesModel.Entity> = {
   getAll: async () => {
     const response = await publicInstance.get(collection('totales'))
 
-    return ObraAdapter.getAll.output(response.data)
+    return ObraTotalesAdapter.getAll.output(response.data)
   },
 }
