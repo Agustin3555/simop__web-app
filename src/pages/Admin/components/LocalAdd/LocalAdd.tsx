@@ -1,5 +1,5 @@
 import './LocalAdd.css'
-import { useCallback, useMemo } from 'react'
+import { KeyboardEventHandler, useCallback, useMemo } from 'react'
 import { useAppStore } from '@/store/config'
 import { useSubmitAction } from '@/hooks'
 import { useReset, useScheme } from '../../hooks'
@@ -51,11 +51,10 @@ const HydratedLocalAdd = () => {
 
   const handleResetClick = useCallback(() => reset(), [])
 
-  const handleKeyDown = (e: React.KeyboardEvent<HTMLFormElement>) => {
-    if (e.key === 'Enter') {
-      e.preventDefault()
-    }
-  }
+  const handleKeyDown = useCallback<KeyboardEventHandler<HTMLFormElement>>(
+    e => e.key === 'Enter' && e.preventDefault(),
+    [],
+  )
 
   return (
     <div className="cmp-local-add">
