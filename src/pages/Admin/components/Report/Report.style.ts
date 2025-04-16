@@ -1,3 +1,4 @@
+import { FontSize, palColorGS, palSize, Size } from '@/styles/palette'
 import { StyleSheet } from '@react-pdf/renderer'
 
 export const styles = StyleSheet.create({
@@ -15,23 +16,23 @@ export const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    padding: 16,
+    padding: palSize(Size.M),
     width: '100%',
 
     color: '#5059bc',
 
-    borderRadius: 4,
+    borderRadius: palSize(Size.XS2),
     backgroundColor: '#e5e6f5',
   },
   h1: {
-    fontSize: 16,
+    fontSize: palSize(FontSize.S),
     fontWeight: 700,
   },
   by: {
     display: 'flex',
     flexDirection: 'row',
     alignItems: 'center',
-    gap: 8,
+    gap: palSize(Size.XS),
   },
   logo: {
     height: 17,
@@ -65,11 +66,11 @@ export const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     gap: 6,
-    paddingVertical: 2,
+    paddingVertical: palSize(Size.XS3),
     paddingHorizontal: 6,
 
-    borderRadius: 2,
-    backgroundColor: '#ffffff',
+    borderRadius: palSize(Size.XS3),
+    backgroundColor: palColorGS('white'),
   },
   pageNumber: {
     fontWeight: 700,
