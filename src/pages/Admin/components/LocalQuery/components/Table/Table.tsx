@@ -14,7 +14,7 @@ import {
   ColumnOrderState,
   VisibilityState,
 } from '@tanstack/react-table'
-import { Cell, Header, RowSelectorCell } from './components'
+import { Cell, Footer, Header, RowSelectorCell } from './components'
 import { Entity } from '@/services/config'
 import { MinSize, PropScheme } from '@/pages/Admin/services/config'
 
@@ -177,15 +177,24 @@ const Table = ({
         <div className="foot">
           {table.getFooterGroups().map(footerGroup => (
             <div className="row" key={footerGroup.id}>
-              {footerGroup.headers.map(header => (
-                <div key={header.id}>
-                  {header.column.columnDef.footer
-                    ? typeof header.column.columnDef.footer === 'function'
-                      ? header.column.columnDef.footer(header.getContext())
-                      : header.column.columnDef.footer
-                    : null}
-                </div>
-              ))}
+              {footerGroup.headers.map(header =>
+                header.id === SELECT_COLUMN ? (
+                  <RowSelectorCell
+                    key={header.id}
+                    checked={table.getIsAllRowsSelected()}
+                    indeterminate={table.getIsSomeRowsSelected()}
+                    onChange={table.getToggleAllRowsSelectedHandler()}
+                    asHeader
+                    selectionCounter={selectedRowIds.length}
+                  />
+                ) : (
+                  <Footer
+                    key={header.id}
+                    column={header.column}
+                    getContext={header.getContext}
+                  />
+                ),
+              )}
             </div>
           ))}
         </div>
