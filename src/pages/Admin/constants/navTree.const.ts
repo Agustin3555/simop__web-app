@@ -34,6 +34,7 @@ import {
   ParalizacionModel,
   RescisionModel,
   RecepcionModel,
+  ObraTotalesModel,
 } from '../models'
 
 export interface SectionNode {
@@ -123,6 +124,7 @@ export const TREE: SectionNode[] = [
           },
         },
       },
+      { scheme: ObraTotalesModel.scheme },
     ],
   },
 ]

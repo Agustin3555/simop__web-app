@@ -1,76 +1,99 @@
-import {
-  LocalidadModel,
-  EmpresaModel,
-  TipoTematicaObraModel,
-  TipoContratacionObraModel,
-  TipoFinanciamientoObraModel,
-  TipoProgramaObraModel,
-  TipoEstadoObraModel,
-} from '.'
+import { EmpresaModel, LocalidadModel } from '.'
 import {
   DateProp,
   NumberProp,
   RefProp,
   Scheme,
-  TextLongProp,
   TextProp,
 } from '../services/config'
-import { ObraService } from '../services'
+import { ObraTotalesService } from '../services'
+import { COMMON_PROPS } from '../constants/commonProps.const'
 
 export interface RawEntity {
   id: number
 
-  numero: number
+  numero: string
   nombre: string
-  montoContratacion?: number
+  montoContratacion?: string
+  fechaInicio?: string
   avanceTotal?: number
 
+  nuevoMonto?: string
+
+  totalCertificadoFojaMedicion?: string
+  totalOrdenPagoFojaMedicion?: string
+  totalPagadoFojaMedicion?: string
+  totalPendientePagoFojaMedicion?: string
+
+  totalCertificadoRedeterminacion?: string
+  totalOrdenPagoRedeterminacion?: string
+  totalPagadoRedeterminacion?: string
+  totalPendientePagoRedeterminacion?: string
+
+  porcentajePendienteCertificar?: number
+  montoPendienteCertificar?: string
+
+  empresa?: EmpresaModel.RawRef
   localidad?: LocalidadModel.RawRef
 }
 
 export interface Entity {
   id: number
 
-  numero: number
+  numero: string
   nombre: string
-  montoContratacion?: number
+  montoContratacion?: string
+  fechaInicio?: string
   avanceTotal?: number
 
+  nuevoMonto?: string
+
+  totalCertificadoFojaMedicion?: string
+  totalOrdenPagoFojaMedicion?: string
+  totalPagadoFojaMedicion?: string
+  totalPendientePagoFojaMedicion?: string
+
+  totalCertificadoRedeterminacion?: string
+  totalOrdenPagoRedeterminacion?: string
+  totalPagadoRedeterminacion?: string
+  totalPendientePagoRedeterminacion?: string
+
+  porcentajePendienteCertificar?: number
+  montoPendienteCertificar?: string
+
+  empresa?: EmpresaModel.Ref
   localidad?: LocalidadModel.Ref
 }
 
 export const scheme: Scheme<Entity> = {
-  key: 'obra',
-  service: ObraService,
+  key: 'obraTotales',
+  service: ObraTotalesService,
   refreshRate: 'medium',
   title: {
     singular: 'Obra',
-    plural: 'Obras',
+    plural: 'Totales de Obra',
   },
   anchorField: 'nombre',
+  quickFilters: ['empresa', 'fechaInicio', 'localidad'],
 
   groups: [
     {
       props: {
         numero: new NumberProp('Número De Obra', {
           big: true,
-          field: {
-            required: true,
-          },
         }),
-        nombre: new TextProp('Nombre', {
-          field: {
-            required: true,
-          },
-        }),
+        nombre: new TextProp('Nombre'),
         empresa: new RefProp({
           getScheme: () => EmpresaModel.scheme,
         }),
-        numeroExpediente: new TextProp('Número de Expediente de Contrato'),
-        numeroResolucion: new TextProp('Número de Resolución'),
-        anioResolucion: new NumberProp('Año de Resolución'),
-        numeroContratacion: new TextProp('Número de Contratación'),
-        fechaContratacion: new DateProp('Fecha de Contratación'),
+        localidad: new RefProp({
+          getScheme: () => LocalidadModel.scheme,
+        }),
+        fechaInicio: new DateProp('Fecha de Inicio'),
+        avanceTotal: new NumberProp('Porcentaje de Avance Total', {
+          decimal: true,
+          sub: '%',
+        }),
         montoContratacion: new NumberProp('Monto de Contratación', {
           decimal: true,
           isMoney: true,
@@ -78,36 +101,108 @@ export const scheme: Scheme<Entity> = {
           sum: true,
           pre: '$',
         }),
-        tipoContratacionObra: new RefProp({
-          getScheme: () => TipoContratacionObraModel.scheme,
-        }),
-        tipoFinanciamientoObra: new RefProp({
-          getScheme: () => TipoFinanciamientoObraModel.scheme,
-        }),
-        tipoProgramaObra: new RefProp({
-          getScheme: () => TipoProgramaObraModel.scheme,
-        }),
-        tipoTematicaObra: new RefProp({
-          getScheme: () => TipoTematicaObraModel.scheme,
-        }),
-        tipoEstadoObra: new RefProp({
-          getScheme: () => TipoEstadoObraModel.scheme,
-        }),
-        fechaInicio: new DateProp('Fecha de Inicio'),
-        fechaFin: new DateProp('Fecha de Fin'),
-        plazoMeses: new NumberProp('Plazo en Meses'),
-        plazoDias: new NumberProp('Plazo en Días'),
-        avanceTotal: new NumberProp('Porcentaje de Avance Total', {
+        nuevoMonto: new NumberProp('Nuevo Monto', {
           decimal: true,
-          sub: '%',
+          isMoney: true,
+          big: true,
+          sum: true,
+          pre: '$',
         }),
-        nomenclaturaCatastral: new TextProp('Nomenclatura Catastral'),
-        localidad: new RefProp({
-          getScheme: () => LocalidadModel.scheme,
+        totalCertificadoFojaMedicion: new NumberProp(
+          'Total Certificado de Fojas',
+          {
+            decimal: true,
+            isMoney: true,
+            big: true,
+            sum: true,
+            pre: '$',
+          },
+        ),
+        totalOrdenPagoFojaMedicion: new NumberProp(
+          'Total Orden de Pago de Fojas',
+          {
+            decimal: true,
+            isMoney: true,
+            big: true,
+            sum: true,
+            pre: '$',
+          },
+        ),
+        totalPagadoFojaMedicion: new NumberProp('Total Pagado de Fojas', {
+          decimal: true,
+          isMoney: true,
+          big: true,
+          sum: true,
+          pre: '$',
         }),
-        direccion: new TextProp('Dirección'),
-        lugar: new TextLongProp('Lugar'),
-        observaciones: new TextLongProp('Observaciones generales'),
+        totalPendientePagoFojaMedicion: new NumberProp(
+          'Total Pendiente de Pago de Fojas',
+          {
+            decimal: true,
+            isMoney: true,
+            big: true,
+            sum: true,
+            pre: '$',
+          },
+        ),
+        totalCertificadoRedeterminacion: new NumberProp(
+          'Total Certificado de Redeterminaciones',
+          {
+            decimal: true,
+            isMoney: true,
+            big: true,
+            sum: true,
+            pre: '$',
+          },
+        ),
+        totalOrdenPagoRedeterminacion: new NumberProp(
+          'Total Orden de Pago de Redeterminaciones',
+          {
+            decimal: true,
+            isMoney: true,
+            big: true,
+            sum: true,
+            pre: '$',
+          },
+        ),
+        totalPagadoRedeterminacion: new NumberProp(
+          'Total Pagado de Redeterminaciones',
+          {
+            decimal: true,
+            isMoney: true,
+            big: true,
+            sum: true,
+            pre: '$',
+          },
+        ),
+        totalPendientePagoRedeterminacion: new NumberProp(
+          'Total Pendiente de Pago de Redeterminaciones',
+          {
+            decimal: true,
+            isMoney: true,
+            big: true,
+            sum: true,
+            pre: '$',
+          },
+        ),
+        porcentajePendienteCertificar: new NumberProp(
+          'Porcentaje Pendiente a Certificar',
+          {
+            decimal: true,
+            sub: '%',
+          },
+        ),
+        montoPendienteCertificar: new NumberProp(
+          'Monto Pendiente a Certificar',
+          {
+            decimal: true,
+            isMoney: true,
+            big: true,
+            sum: true,
+            pre: '$',
+          },
+        ),
+        id: COMMON_PROPS.id,
       },
     },
   ],
