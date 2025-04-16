@@ -75,29 +75,9 @@ export interface CreateBody {
   localidadId: number
 }
 
-export interface UpdateData {
-  cuil?: number
-  apellido?: string
-  nombre?: string
-  direccion?: string
-  numeroMatricula?: string
+export type UpdateData = Partial<CreateData>
 
-  paisId?: number
-  provinciaId?: number
-  localidadId?: number
-}
-
-export interface UpdateBody {
-  cuil?: number
-  apellido?: string
-  nombre?: string
-  direccion?: string
-  numeroMatricula?: string
-
-  paisId?: number
-  provinciaId?: number
-  localidadId?: number
-}
+export type UpdateBody = Partial<CreateBody>
 
 export const scheme: Scheme<Entity> = {
   key: 'representante',

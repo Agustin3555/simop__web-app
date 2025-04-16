@@ -55,23 +55,9 @@ export interface CreateBody {
   tipoRepresentanteId: number
 }
 
-export interface UpdateData {
-  vigencia?: boolean
-  fecha?: string
+export type UpdateData = Partial<CreateData>
 
-  obraId?: number
-  representanteId?: number
-  tipoRepresentanteId?: number
-}
-
-export interface UpdateBody {
-  vigencia?: boolean
-  fecha?: string
-
-  obraId?: number
-  representanteId?: number
-  tipoRepresentanteId?: number
-}
+export type UpdateBody = Partial<CreateBody>
 
 export const scheme: Scheme<Entity> = {
   key: 'representanteObra',

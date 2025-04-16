@@ -91,33 +91,9 @@ export interface CreateBody {
   tipoParalizacionId: number
 }
 
-export interface UpdateData {
-  numero?: number
-  numeroExpediente?: string
-  fechaReinicio?: string
-  nuevaFechaFinObra?: string
-  fecha?: string
-  observaciones?: string
+export type UpdateData = Partial<CreateData>
 
-  direccionId?: number
-  departamentoId?: number
-  obraId?: number
-  tipoParalizacionId?: number
-}
-
-export interface UpdateBody {
-  numero?: number
-  numeroExpediente?: string
-  fechaReinicio?: string
-  nuevaFechaFinObra?: string
-  fecha?: string
-  observaciones?: string
-
-  direccionId?: number
-  departamentoId?: number
-  obraId?: number
-  tipoParalizacionId?: number
-}
+export type UpdateBody = Partial<CreateBody>
 
 export const scheme: Scheme<Entity> = {
   key: 'paralizacion',

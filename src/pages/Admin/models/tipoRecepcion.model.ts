@@ -36,13 +36,9 @@ export interface CreateBody {
   nombre: string
 }
 
-export interface UpdateData {
-  nombre?: string
-}
+export type UpdateData = Partial<CreateData>
 
-export interface UpdateBody {
-  nombre?: string
-}
+export type UpdateBody = Partial<CreateBody>
 
 export const scheme: Scheme<Entity> = {
   key: 'tipoRecepcion',
