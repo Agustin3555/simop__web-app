@@ -1,6 +1,12 @@
 import { Entity } from '@/services/config'
 import { ForView, GetScheme, MinSize, PropScheme, Required } from './utils'
-import { AutoCombobox, FetchRef, TextFilter } from '../../components'
+import {
+  AutoCombobox,
+  Combobox,
+  FetchRef,
+  RefFilter,
+  TextFilter,
+} from '../../components'
 import { AccessorFn, Column, FilterFn, Row } from '@tanstack/react-table'
 import { getFlatProps } from './scheme'
 
@@ -84,40 +90,52 @@ export class RefProp implements PropScheme {
     return row[key]?.[anchorField]
   }
 
-  // filterFn: FilterFn<Entity> = (row, filterValue) => {
-  //   if (!filterValue) return true
+  filterFn: FilterFn<Entity> = (row, columnId, filterValue?: string[]) => {
+    if (!filterValue?.length) return true
 
-  //   const { key } = this
+    const entity = row.original[columnId] as undefined | Entity
 
-  //   const value = row.original[key] as undefined | Partial<Entity>
+    if (entity === undefined) return false
 
-  //   return String(value?.id) === filterValue
-  // }
+    return filterValue.includes(String(entity.id))
+  }
 
   getHeader = (column: Column<Entity>) => {
-    const { verboseKey, title, config } = this
+    const { key, verboseKey, title, config } = this
     const { getScheme } = config
 
     const scheme = getScheme()
     const { anchorField } = scheme
     const flatProps = getFlatProps(scheme)
 
-    const { getFacetedUniqueValues, getFilterValue, setFilterValue } = column
-    const filterValue = getFilterValue()
+    const { getFacetedRowModel, getFilterValue, setFilterValue } = column
+    const { rows } = getFacetedRowModel()
 
-    // const reportOption = (id?: string) => setFilterValue(id)
+    const refs = rows
+      .map(({ original }) => original[key])
+      .filter(Boolean) as Entity[]
 
-    // const filter = (
-    //   <AutoCombobox
-    //     keyName={verboseKey}
-    //     hideLabel
-    //     {...{ title, scheme, reportOption }}
-    //   />
-    // )
+    const uniqueRefs = new Map<number, Entity>()
+
+    refs.forEach(ref => {
+      const { id } = ref
+
+      if (!uniqueRefs.has(id)) uniqueRefs.set(id, ref)
+    })
+
+    const options = Array.from(uniqueRefs.values()).map(ref => {
+      const { id } = ref
+
+      return {
+        id: String(id),
+        title: String(ref[anchorField]),
+      }
+    })
 
     const filter = (
-      <TextFilter
-        {...{ filterValue, getFacetedUniqueValues, setFilterValue }}
+      <RefFilter
+        keyName={verboseKey}
+        {...{ title, options, getFilterValue, setFilterValue }}
       />
     )
 
