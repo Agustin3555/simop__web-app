@@ -20,7 +20,7 @@ export const generateTableImages = (tableElement: HTMLElement) => {
     const auxTableElement = document.createElement('div')
     auxTableElement.classList.add('table')
 
-    if (i === 0) auxTableElement.appendChild(headElement.cloneNode(true))
+    auxTableElement.appendChild(headElement.cloneNode(true))
 
     const auxBodyElement = document.createElement('div')
     auxBodyElement.classList.add('body')
