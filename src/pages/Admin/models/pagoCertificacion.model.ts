@@ -105,7 +105,11 @@ export const scheme: Scheme<Entity> = {
             required: true,
           },
         }),
-        ordenPago: new TextProp('Orden de pago'),
+        ordenPago: new TextProp('Orden de pago', {
+          field: {
+            required: true,
+          },
+        }),
         fecha: new DateProp('Fecha de Pago'),
         monto: new NumberProp('Monto', {
           decimal: true,
