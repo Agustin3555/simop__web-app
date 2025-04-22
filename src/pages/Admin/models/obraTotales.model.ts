@@ -75,7 +75,7 @@ export const scheme: Scheme<Entity> = {
     plural: 'Totales de Obra',
   },
   anchorField: 'nombre',
-  quickFilters: ['empresa', 'fechaInicio', 'localidad'],
+  quickFilters: ['empresa', 'fechaInicio', 'localidad', 'tipoEstadoObra'],
 
   groups: [
     {
