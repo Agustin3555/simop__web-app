@@ -7,7 +7,6 @@ import {
   TextProp,
 } from '../services/config'
 import { ObraTotalesService } from '../services'
-import { COMMON_PROPS } from '../constants/commonProps.const'
 
 export interface RawEntity {
   id: number
@@ -151,7 +150,7 @@ export const scheme: Scheme<Entity> = {
           },
         ),
         totalCertificadoRedeterminacion: new NumberProp(
-          'Total Certificado de Redeterminaciones',
+          'Total Certificado de Redeterm.',
           {
             decimal: true,
             isMoney: true,
@@ -161,7 +160,7 @@ export const scheme: Scheme<Entity> = {
           },
         ),
         totalOrdenPagoRedeterminacion: new NumberProp(
-          'Total Orden de Pago de Redeterminaciones',
+          'Total Orden de Pago de Redeterm.',
           {
             decimal: true,
             isMoney: true,
@@ -171,7 +170,7 @@ export const scheme: Scheme<Entity> = {
           },
         ),
         totalPagadoRedeterminacion: new NumberProp(
-          'Total Pagado de Redeterminaciones',
+          'Total Pagado de Redeterm.',
           {
             decimal: true,
             isMoney: true,
@@ -181,7 +180,7 @@ export const scheme: Scheme<Entity> = {
           },
         ),
         totalPendientePagoRedeterminacion: new NumberProp(
-          'Total Pendiente de Pago de Redeterminaciones',
+          'Total Pendiente de Pago de Redeterm.',
           {
             decimal: true,
             isMoney: true,
@@ -207,7 +206,6 @@ export const scheme: Scheme<Entity> = {
             pre: '$',
           },
         ),
-        id: COMMON_PROPS.id,
       },
     },
   ],
