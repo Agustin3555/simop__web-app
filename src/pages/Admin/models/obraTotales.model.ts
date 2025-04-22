@@ -1,4 +1,4 @@
-import { EmpresaModel, LocalidadModel } from '.'
+import { EmpresaModel, LocalidadModel, TipoEstadoObraModel } from '.'
 import {
   DateProp,
   NumberProp,
@@ -35,6 +35,7 @@ export interface RawEntity {
 
   empresa?: EmpresaModel.RawRef
   localidad?: LocalidadModel.RawRef
+  tipoEstadoObra?: TipoEstadoObraModel.RawRef
 }
 
 export interface Entity {
@@ -63,6 +64,7 @@ export interface Entity {
 
   empresa?: EmpresaModel.Ref
   localidad?: LocalidadModel.Ref
+  tipoEstadoObra?: TipoEstadoObraModel.Ref
 }
 
 export const scheme: Scheme<Entity> = {
@@ -90,6 +92,9 @@ export const scheme: Scheme<Entity> = {
           getScheme: () => LocalidadModel.scheme,
         }),
         fechaInicio: new DateProp('Fecha de Inicio'),
+        tipoEstadoObra: new RefProp({
+          getScheme: () => TipoEstadoObraModel.scheme,
+        }),
         avanceTotal: new NumberProp('Porcentaje de Avance Total', {
           decimal: true,
           sub: '%',
