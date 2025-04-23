@@ -21,17 +21,34 @@ export enum FontSize {
   XL3 = 4,
 }
 
-const COLOR_MATCHER: Record<string, [number, number, number]> = {
+type ColorKeys =
+  | 'AD3'
+  | 'AD2'
+  | 'AD1'
+  | 'A'
+  | 'AL1'
+  | 'AL2'
+  | 'AL3'
+  | 'BD3'
+  | 'BD2'
+  | 'BD1'
+  | 'B'
+  | 'BL1'
+  | 'BL2'
+  | 'BL3'
+  | 'C'
+
+const COLOR_MATCHER: Record<ColorKeys, [number, number, number]> = {
   AD3: [12, 13, 28],
   AD2: [35, 39, 82],
-  AD1: [35, 39, 82],
-  A: [35, 39, 82],
+  AD1: [57, 64, 135],
+  A: [80, 89, 188],
   AL1: [130, 136, 207],
-  AL2: [35, 39, 82],
+  AL2: [179, 183, 226],
   AL3: [229, 230, 245],
 
   BD3: [20, 22, 11],
-  BD2: [20, 22, 11],
+  BD2: [58, 65, 30],
   BD1: [95, 107, 50],
   B: [133, 149, 70],
   BL1: [168, 179, 122],
@@ -56,7 +73,7 @@ const COLOR_GS_MATCHER = {
   '450': 140,
   '400': 153,
   '350': 166,
-  '300': 176,
+  '300': 179,
   '250': 191,
   '200': 204,
   '150': 217,
@@ -69,8 +86,7 @@ export const palSize = (size: Size | FontSize) => size * 16
 
 const buildRGB = (r: number, g: number, b: number) => `rgb(${r}, ${g}, ${b})`
 
-export const palColor = (color: keyof typeof COLOR_MATCHER) =>
-  buildRGB(...COLOR_MATCHER[color])
+export const palColor = (color: ColorKeys) => buildRGB(...COLOR_MATCHER[color])
 
 export const palColorGS = (color: keyof typeof COLOR_GS_MATCHER) => {
   const value = COLOR_GS_MATCHER[color]

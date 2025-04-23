@@ -36,6 +36,8 @@
     > .selected-items {
       --padding: 0.3125rem;
 
+      flex-grow: 1;
+
       display: flex;
       flex-wrap: wrap;
       gap: var(--padding);
@@ -45,22 +47,22 @@
 
       > .item {
         --border-color: var(--pal-color-a-l3);
-        --border-width: var(--pal-color-a-l3);
 
         display: flex;
         align-items: center;
         border-width: var(--line-thickness);
         border-style: solid;
         border-color: var(--border-color);
+        max-width: 15rem;
 
         border-radius: var(--pal-size-3xs);
         background-color: var(--pal-color-white);
+        overflow: hidden;
 
         > p {
           flex-grow: 1;
 
           padding-inline: var(--pal-size-s);
-          max-width: 20rem;
 
           line-height: initial;
           white-space: nowrap;
@@ -70,6 +72,8 @@
         }
 
         > .cmp-button {
+          flex-shrink: 0;
+
           border-width: 0;
           border-color: var(--border-color);
           border-left-width: var(--line-thickness);

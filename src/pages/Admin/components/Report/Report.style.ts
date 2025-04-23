@@ -1,4 +1,4 @@
-import { FontSize, palColorGS, palSize, Size } from '@/styles/palette'
+import { FontSize, palColor, palColorGS, palSize, Size } from '@/styles/palette'
 import { StyleSheet } from '@react-pdf/renderer'
 
 export const styles = StyleSheet.create({
@@ -12,6 +12,8 @@ export const styles = StyleSheet.create({
     fontFamily: 'Manrope Variable',
   },
   header: {
+    flexShrink: 1,
+
     display: 'flex',
     flexDirection: 'row',
     alignItems: 'center',
@@ -19,7 +21,7 @@ export const styles = StyleSheet.create({
     padding: palSize(Size.M),
     width: '100%',
 
-    color: '#5059bc',
+    color: palColor('A'),
 
     borderRadius: palSize(Size.XS2),
     backgroundColor: '#e5e6f5',
@@ -43,7 +45,7 @@ export const styles = StyleSheet.create({
     width: 0.5,
     height: 17,
 
-    backgroundColor: '#5059bc',
+    backgroundColor: palColor('A'),
   },
   subsecretaria: {
     width: 80,
@@ -79,7 +81,7 @@ export const styles = StyleSheet.create({
     width: 0.5,
     height: 7,
 
-    backgroundColor: '#e5e6f5',
+    backgroundColor: palColor('AL2'),
   },
   date: {},
 })
