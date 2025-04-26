@@ -73,6 +73,8 @@ const BaseCombobox = ({
   const toggleItem = useCallback(
     (id: string) => {
       setSelected(prev => {
+        if (!prev) return [id]
+
         const exists = prev.includes(id)
 
         if (multiple)

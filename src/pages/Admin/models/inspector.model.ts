@@ -61,21 +61,9 @@ export interface CreateBody {
   profesiones?: number[]
 }
 
-export interface UpdateData {
-  cuil?: number
-  apellido?: string
-  nombre?: string
+export type UpdateData = Partial<CreateData>
 
-  profesiones?: number[]
-}
-
-export interface UpdateBody {
-  cuil?: number
-  apellido?: string
-  nombre?: string
-
-  profesiones?: number[]
-}
+export type UpdateBody = Partial<CreateBody>
 
 export const scheme: Scheme<Entity> = {
   key: 'inspector',

@@ -4,6 +4,8 @@
   padding: 0;
 
   line-height: 1;
+  font-weight: inherit;
+  letter-spacing: inherit;
   color: inherit;
 
   scroll-behavior: smooth;
@@ -27,6 +29,10 @@ html {
 
 body {
   font-family: var(--pal-font-a);
+  /* font-weight: 550;
+  letter-spacing: 0.015625rem;
+  word-spacing: 0.0625rem; */
+  color: var(--pal-color-a-d3);
 }
 
 ::selection {

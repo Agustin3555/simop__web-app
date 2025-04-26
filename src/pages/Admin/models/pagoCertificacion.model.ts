@@ -83,34 +83,12 @@ export interface CreateBody {
   fojaMedicionId?: number
 }
 
-export interface UpdateData {
-  numero?: number
-  ordenPago?: string
-  fecha?: string
-  observaciones?: string
-  monto?: number
+export type UpdateData = Partial<CreateData>
 
-  direccionId?: number
-  departamentoId?: number
-  redeterminacion?: number
-  fojaMedicionId?: number
-}
-
-export interface UpdateBody {
-  numero?: number
-  ordenPago?: string
-  fecha?: string
-  observaciones?: string
-  monto?: number
-
-  direccionId?: number
-  departamentoId?: number
-  redeterminacion?: number
-  fojaMedicionId?: number
-}
+export type UpdateBody = Partial<CreateBody>
 
 export const scheme: Scheme<Entity> = {
-  key: 'PagoCertificacion',
+  key: 'pagoCertificacion',
   service: PagoCertificacionService,
   refreshRate: 'medium',
   title: {
@@ -127,7 +105,11 @@ export const scheme: Scheme<Entity> = {
             required: true,
           },
         }),
-        ordenPago: new TextProp('Orden de pago'),
+        ordenPago: new TextProp('Orden de pago', {
+          field: {
+            required: true,
+          },
+        }),
         fecha: new DateProp('Fecha de Pago'),
         monto: new NumberProp('Monto', {
           decimal: true,

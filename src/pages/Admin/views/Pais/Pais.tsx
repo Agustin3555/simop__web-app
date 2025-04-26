@@ -1,6 +1,6 @@
-import { View } from '../../components'
+import { SchemeView } from '../../components'
 import { PaisModel } from '../../models'
 
-const Pais = () => <View scheme={PaisModel.scheme} />
+const Pais = () => <SchemeView scheme={PaisModel.scheme} />
 
 export default Pais

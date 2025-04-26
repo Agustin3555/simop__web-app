@@ -58,7 +58,7 @@ const ReportButton = ({ localQueryRef }: ReportButtonProps) => {
       <StateButton
         text="Informe"
         faIcon="fa-solid fa-file-pdf"
-        type="secondary"
+        _type="secondary"
         {...submitActionResult}
       />
       {/* <PDFViewer key={key} width="100%" height="420px">

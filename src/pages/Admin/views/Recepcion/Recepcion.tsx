@@ -1,6 +1,6 @@
-import { View } from '../../components'
+import { SchemeView } from '../../components'
 import { RecepcionModel } from '../../models'
 
-const Recepcion = () => <View scheme={RecepcionModel.scheme} />
+const Recepcion = () => <SchemeView scheme={RecepcionModel.scheme} />
 
 export default Recepcion

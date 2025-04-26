@@ -1,6 +1,6 @@
-import { View } from '../../components'
+import { SchemeView } from '../../components'
 import { TipoInspectorModel } from '../../models'
 
-const TipoInspector = () => <View scheme={TipoInspectorModel.scheme} />
+const TipoInspector = () => <SchemeView scheme={TipoInspectorModel.scheme} />
 
 export default TipoInspector

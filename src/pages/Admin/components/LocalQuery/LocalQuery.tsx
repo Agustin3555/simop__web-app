@@ -180,9 +180,9 @@ const LocalQuery = () => {
             <>
               <ReportButton {...{ localQueryRef: componentRef }} />
               <Button
-                text="Descargar Excel"
+                text="Excel"
                 title={`Descargar Excel (${
-                  selectedRowIds.length === 0 ? 'todo' : 'seleccionados'
+                  selectedRowIds.length ? 'seleccionados' : 'todo'
                 })`}
                 faIcon="fa-solid fa-file-excel"
                 _type="secondary"

@@ -110,41 +110,9 @@ export interface CreateBody {
   tipoRedeterminacionId: number
 }
 
-export interface UpdateData {
-  numeroExpedienteSolicitud?: string
-  numeroExpediente?: string
-  numeroResolucion?: string
-  montoTotal?: number
-  nuevoMontoObra?: number
-  fechaRedeterminacion?: string
-  observaciones?: string
-  fechaCertificacion?: string
-  tieneHijas?: boolean
+export type UpdateData = Partial<CreateData>
 
-  redeterminacionId?: number
-  direccionId?: number
-  departamentoId?: number
-  obraId?: number
-  tipoRedeterminacionId?: number
-}
-
-export interface UpdateBody {
-  numeroExpedienteSolicitud?: string
-  numeroExpediente?: string
-  numeroResolucion?: string
-  montoTotal?: number
-  nuevoMontoObra?: number
-  fechaRedeterminacion?: string
-  observaciones?: string
-  fechaCertificacion?: string
-  tieneHijas?: boolean
-
-  redeterminacionId?: number
-  direccionId?: number
-  departamentoId?: number
-  obraId?: number
-  tipoRedeterminacionId?: number
-}
+export type UpdateBody = Partial<CreateBody>
 
 export const scheme: Scheme<Entity> = {
   key: 'redeterminacion',

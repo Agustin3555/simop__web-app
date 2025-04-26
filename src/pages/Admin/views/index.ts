@@ -21,6 +21,7 @@ export { default as TipoModificacion } from './TipoModificacion/TipoModificacion
 export { default as Empresa } from './Empresa/Empresa'
 export { default as Obra } from './Obra/Obra'
 export { default as ObraGeneral } from './ObraGeneral/ObraGeneral'
+export { default as ObraTotales } from './ObraTotales/ObraTotales'
 export { default as Inspector } from './Inspector/Inspector'
 export { default as FojaMedicion } from './FojaMedicion/FojaMedicion'
 export { default as PagoCertificacion } from './PagoCertificacion/PagoCertificacion'

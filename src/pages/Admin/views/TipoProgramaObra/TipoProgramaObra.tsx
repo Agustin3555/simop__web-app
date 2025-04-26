@@ -1,6 +1,6 @@
-import { View } from '../../components'
+import { SchemeView } from '../../components'
 import { TipoProgramaObraModel } from '../../models'
 
-const ProgramaObra = () => <View scheme={TipoProgramaObraModel.scheme} />
+const ProgramaObra = () => <SchemeView scheme={TipoProgramaObraModel.scheme} />
 
 export default ProgramaObra

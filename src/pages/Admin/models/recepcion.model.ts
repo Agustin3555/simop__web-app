@@ -75,30 +75,12 @@ export interface CreateBody {
   tipoRecepcionId: number
 }
 
-export interface UpdateData {
-  numeroActa?: number
-  fecha?: string
-  observaciones?: string
+export type UpdateData = Partial<CreateData>
 
-  direccionId?: number
-  departamentoId?: number
-  obraId?: number
-  tipoRecepcionId?: number
-}
-
-export interface UpdateBody {
-  numeroActa?: number
-  fecha?: string
-  observaciones?: string
-
-  direccionId?: number
-  departamentoId?: number
-  obraId?: number
-  tipoRecepcionId?: number
-}
+export type UpdateBody = Partial<CreateBody>
 
 export const scheme: Scheme<Entity> = {
-  key: 'Recepcion',
+  key: 'recepcion',
   service: RecepcionService,
   refreshRate: 'medium',
   title: {

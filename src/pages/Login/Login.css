@@ -1,11 +1,5 @@
-.cmp-login > form {
-  display: flex;
-  flex-direction: column;
-  gap: var(--pal-size-m);
+.cmp-login > form > .cmp-state-button {
+  color: var(--pal-color-white);
 
-  > .cmp-state-button {
-    color: var(--pal-color-white);
-
-    background-color: var(--pal-color-a);
-  }
+  background-color: var(--pal-color-a);
 }

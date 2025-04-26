@@ -1,6 +1,6 @@
-import { View } from '../../components'
+import { SchemeView } from '../../components'
 import { SubSecretariaModel } from '../../models'
 
-const SubSecretaria = () => <View scheme={SubSecretariaModel.scheme} />
+const SubSecretaria = () => <SchemeView scheme={SubSecretariaModel.scheme} />
 
 export default SubSecretaria

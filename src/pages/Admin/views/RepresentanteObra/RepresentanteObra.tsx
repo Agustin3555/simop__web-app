@@ -1,6 +1,8 @@
-import { View } from '../../components'
+import { SchemeView } from '../../components'
 import { RepresentanteObraModel } from '../../models'
 
-const RepresentanteObra = () => <View scheme={RepresentanteObraModel.scheme} />
+const RepresentanteObra = () => (
+  <SchemeView scheme={RepresentanteObraModel.scheme} />
+)
 
 export default RepresentanteObra

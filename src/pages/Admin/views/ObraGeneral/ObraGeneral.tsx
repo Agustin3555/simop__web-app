@@ -1,5 +1,5 @@
 import { Entity } from '@/services/config'
-import { View } from '../../components'
+import { SchemeView } from '../../components'
 import {
   EmpresaModel,
   LocalidadModel,
@@ -162,7 +162,7 @@ const obraGeneralScheme: Scheme<Entity> = {
 }
 
 const ObraGeneral = () => (
-  <View scheme={obraGeneralScheme} add={false} edit={false} />
+  <SchemeView scheme={obraGeneralScheme} add={false} edit={false} />
 )
 
 export default ObraGeneral

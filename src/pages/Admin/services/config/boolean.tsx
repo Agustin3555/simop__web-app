@@ -1,7 +1,7 @@
 import { Entity } from '@/services/config'
 import { Color, ForView, MinSize, PropScheme } from './utils'
-import { Checkbox } from '../../components'
-import { Column, Row } from '@tanstack/react-table'
+import { BooleanFilter, Checkbox } from '../../components'
+import { Column, FilterFn, Row } from '@tanstack/react-table'
 import { classList } from '@/helpers'
 
 export class BooleanProp implements PropScheme {
@@ -54,9 +54,17 @@ export class BooleanProp implements PropScheme {
   }
 
   getHeader = (column: Column<Entity>) => {
-    const { title } = this
+    const { key, title, config } = this
+    const { falseText = 'No', trueText = 'Si' } = config ?? {}
 
-    const filter = undefined
+    const { getFilterValue, setFilterValue } = column
+
+    const filter = (
+      <BooleanFilter
+        keyName={key}
+        {...{ title, falseText, trueText, getFilterValue, setFilterValue }}
+      />
+    )
 
     return { title, filter }
   }

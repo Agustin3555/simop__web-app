@@ -64,25 +64,9 @@ export interface CreateBody {
   tipoProfesionId: number
 }
 
-export interface UpdateData {
-  fecha?: string
-  vigencia?: boolean
+export type UpdateData = Partial<CreateData>
 
-  obraId?: number
-  inspectorId?: number
-  tipoInspectorId?: number
-  tipoProfesionId?: number
-}
-
-export interface UpdateBody {
-  fecha?: string
-  vigencia?: boolean
-
-  obraId?: number
-  inspectorId?: number
-  tipoInspectorId?: number
-  tipoProfesionId?: number
-}
+export type UpdateBody = Partial<CreateBody>
 
 export const scheme: Scheme<Entity> = {
   key: 'inspectorObra',
