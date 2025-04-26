@@ -1,17 +1,25 @@
 import './LocalAdd.css'
-import { KeyboardEventHandler, useCallback, useMemo } from 'react'
+import {
+  KeyboardEventHandler,
+  useCallback,
+  useMemo,
+  useRef,
+  useState,
+} from 'react'
 import { useAppStore } from '@/store/config'
 import { useSubmitAction } from '@/hooks'
-import { useReset, useScheme } from '../../hooks'
+import { useResetForm, useScheme } from '../../hooks'
 import { FieldResetFnsContext } from '../../contexts'
-import { Button, StateButton } from '@/components'
+import { Button2, Toggle } from '@/components'
 
 const HydratedLocalAdd = () => {
   const { scheme } = useScheme()
   const { service, groups } = scheme
 
   const toasting = useAppStore(store => store.toasting)
-  const reset = useReset()
+  const [resetOnCompletion, setResetOnCompletion] = useState(true)
+  const formRef = useRef<HTMLFormElement | null>(null)
+  const resetForm = useResetForm(formRef)
 
   const fieldGroups = useMemo(
     () =>
@@ -41,6 +49,7 @@ const HydratedLocalAdd = () => {
 
         await service.create!(createData)
         toasting('success', 'Agregado con éxito')
+        if (resetOnCompletion) resetForm()
 
         await setSuccess()
       } catch (error) {
@@ -49,8 +58,6 @@ const HydratedLocalAdd = () => {
     },
   )
 
-  const handleResetClick = useCallback(() => reset(), [])
-
   const handleKeyDown = useCallback<KeyboardEventHandler<HTMLFormElement>>(
     e => e.key === 'Enter' && e.preventDefault(),
     [],
@@ -58,7 +65,13 @@ const HydratedLocalAdd = () => {
 
   return (
     <div className="cmp-local-add">
-      <form onSubmit={handleSubmit} onKeyDown={handleKeyDown}>
+      <Toggle
+        title="Limpiar después de crear"
+        faIcon="fa-solid fa-eraser"
+        value={resetOnCompletion}
+        setValue={setResetOnCompletion}
+      />
+      <form ref={formRef} onSubmit={handleSubmit} onKeyDown={handleKeyDown}>
         <div className="field-groups">
           {fieldGroups.map(({ title, fields }, index) => (
             <div key={index} className="group">
@@ -67,22 +80,12 @@ const HydratedLocalAdd = () => {
             </div>
           ))}
         </div>
-        <div className="actions">
-          <Button
-            text="Limpiar"
-            title="Limpiar formulario"
-            faIcon="fa-solid fa-eraser"
-            type="reset"
-            _type="secondary"
-            onClick={handleResetClick}
-          />
-          <StateButton
-            text="Confirmar"
-            faIcon="fa-solid fa-check"
-            type="submit"
-            {...{ actionState }}
-          />
-        </div>
+        <Button2
+          text="Confirmar"
+          faIcon="fa-solid fa-check"
+          submit
+          {...{ actionState }}
+        />
       </form>
     </div>
   )

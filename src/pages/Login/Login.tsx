@@ -2,7 +2,7 @@ import './Login.css'
 import { useSubmitAction } from '@/hooks'
 import { useAppStore } from '@/store/config'
 import { useLocation } from 'wouter'
-import { CardPage, Input, StateButton } from '@/components'
+import { Button2, CardPage, Input } from '@/components'
 
 const Login = () => {
   const [, navigate] = useLocation()
@@ -34,10 +34,10 @@ const Login = () => {
             required
             inputHTMLAttrs={{ type: 'password' }}
           />
-          <StateButton
+          <Button2
             text="Acceder"
             faIcon="fa-solid fa-arrow-right"
-            type="submit"
+            submit
             {...{ actionState }}
           />
         </form>

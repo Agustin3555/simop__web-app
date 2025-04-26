@@ -6,23 +6,28 @@ import { Dispatch, SetStateAction, useCallback } from 'react'
 export interface ToggleProps {
   title: string
   faIcon: string
+  size?: 's' | 'm'
+  asSwitch?: boolean
   value: boolean
   setValue: Dispatch<SetStateAction<boolean>>
-  size?: 'xs'
 }
 
 const Toggle = ({
   title,
   faIcon,
+  size = 's',
+  asSwitch = false,
   value: checked,
   setValue,
-  size,
 }: ToggleProps) => {
   const handleChange = useCallback(() => setValue(prevValue => !prevValue), [])
 
   return (
-    <label className={classList('cmp-toggle', size)}>
-      <input type="checkbox" onChange={handleChange} {...{ title, checked }} />
+    <label
+      className={classList('cmp-toggle', size, { switch: asSwitch })}
+      {...{ title }}
+    >
+      <input type="checkbox" onChange={handleChange} {...{ checked }} />
       <div className="toggle">
         <div className="lever">
           <Icon {...{ faIcon }} />

@@ -1,5 +1,12 @@
 import './Table.css'
-import { Dispatch, SetStateAction, useEffect, useMemo, useState } from 'react'
+import {
+  Dispatch,
+  SetStateAction,
+  useCallback,
+  useEffect,
+  useMemo,
+  useState,
+} from 'react'
 import { useRowSelection, useScheme } from '@/pages/Admin/hooks'
 import {
   ColumnDef,
@@ -14,9 +21,14 @@ import {
   ColumnOrderState,
   VisibilityState,
 } from '@tanstack/react-table'
+import { Button2, Toggle } from '@/components'
 import { Cell, Footer, Header, RowSelectorCell } from './components'
+import { Value } from '../../..'
 import { Entity } from '@/services/config'
 import { MinSize, PropScheme } from '@/pages/Admin/services/config'
+import { classList } from '@/helpers'
+import { format } from '@formkit/tempo'
+import { utils, writeFile } from 'xlsx'
 
 export type GetHeaderResult = ReturnType<NonNullable<PropScheme['getHeader']>>
 
@@ -37,9 +49,13 @@ const Table = ({
   setQuickFilters,
 }: TableProps) => {
   const { scheme, flatProps } = useScheme()
-  const { quickFilters, groups } = scheme
+  const { title, quickFilters, groups } = scheme
 
   const { rowSelection, setRowSelection, selectedRowIds } = useRowSelection()
+  const [filters, setFilters] = useState(true)
+  const [simplifyMatches, setSimplifyMatches] = useState(true)
+  const [stickHead, setStickHead] = useState(false)
+  const [stickFoot, setStickFoot] = useState(false)
   const [sorting, setSorting] = useState<SortingState>([])
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([])
 
@@ -120,10 +136,102 @@ const Table = ({
     setQuickFilters(results)
   }, [])
 
+  const exportHandleClick = useCallback(() => {
+    if (!data) return
+
+    const selectedData =
+      selectedRowIds.length === 0
+        ? data
+        : data.filter(({ id }) => selectedRowIds.includes(id))
+
+    const convertedData = selectedData.map(row =>
+      Object.fromEntries(
+        Object.keys(flatProps).map(key => [
+          flatProps[key].title,
+          flatProps[key].getExcelValue(row),
+        ]),
+      ),
+    )
+
+    const worksheet = utils.json_to_sheet(convertedData)
+
+    // Calcular el ancho óptimo por columna
+    const colWidths = Object.keys(flatProps).map(key => {
+      const header = flatProps[key].title
+
+      const maxLength = Math.max(
+        header.length,
+        ...convertedData.map(
+          row => String(row[flatProps[key].title] ?? '').length,
+        ),
+      )
+
+      return { wch: maxLength + 1 }
+    })
+
+    worksheet['!cols'] = colWidths
+
+    // Crea el libro de trabajo y agrega una hoja
+    const workbook = utils.book_new()
+    utils.book_append_sheet(workbook, worksheet, 'Datos')
+
+    const date = format('', { date: 'short' }).replaceAll('/', '-')
+    const fileName = `${title.plural} (${date}).xlsx`
+
+    writeFile(workbook, fileName)
+  }, [data, selectedRowIds])
+
   return (
-    <div className="cmp-table">
-      <div className="table stick-head">
-        <div className="head">
+    <div className={classList('cmp-table', { ['show-filters']: filters })}>
+      <div className="actions">
+        <div className="group">
+          <Toggle
+            title="Filtros"
+            faIcon="fa-solid fa-filter"
+            value={filters}
+            setValue={setFilters}
+          />
+          <Toggle
+            title="Simplificar coincidencias"
+            faIcon="fa-solid fa-down-left-and-up-right-to-center fa-rotate-by"
+            value={simplifyMatches}
+            setValue={setSimplifyMatches}
+          />
+          <Toggle
+            title="Fijar cabecera de tabla"
+            faIcon="fa-regular fa-window-maximize"
+            value={stickHead}
+            setValue={setStickHead}
+          />
+          <Toggle
+            title="Fijar pie de tabla"
+            faIcon="fa-regular fa-window-maximize fa-rotate-180"
+            value={stickFoot}
+            setValue={setStickFoot}
+          />
+        </div>
+        <Value
+          text={data.length}
+          faIcon="fa-solid fa-cubes-stacked"
+          size="s"
+          type="secondary"
+          pill
+        />
+        <div className="group">
+          <Button2
+            text="Excel"
+            title={`Descargar Excel (${
+              selectedRowIds.length ? 'seleccionados' : 'todo'
+            })`}
+            faIcon="fa-solid fa-file-arrow-down"
+            size="s"
+            type="secondary"
+            onAction={exportHandleClick}
+          />
+        </div>
+      </div>
+      <div className="table">
+        <div className={classList('head', { stick: stickHead })}>
           {table.getHeaderGroups().map(headerGroup => (
             <div className="row" key={headerGroup.id}>
               {headerGroup.headers.map(header =>
@@ -174,7 +282,7 @@ const Table = ({
             </div>
           ))}
         </div>
-        <div className="foot">
+        <div className={classList('foot', { stick: stickFoot })}>
           {table.getFooterGroups().map(footerGroup => (
             <div className="row" key={footerGroup.id}>
               {footerGroup.headers.map(header =>

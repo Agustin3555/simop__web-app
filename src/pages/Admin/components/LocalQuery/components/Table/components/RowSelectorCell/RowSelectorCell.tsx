@@ -15,7 +15,7 @@ const RowSelectorCell = ({
   selectionCounter,
   ...rest
 }: RowSelectorCellProps) => {
-  const inputRef = useRef<HTMLInputElement>(null)
+  const inputRef = useRef<HTMLInputElement | null>(null)
 
   useEffect(() => {
     if (!inputRef.current) return

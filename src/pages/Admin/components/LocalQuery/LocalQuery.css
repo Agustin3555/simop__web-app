@@ -41,29 +41,10 @@
       align-items: center;
       gap: var(--pal-size-m);
 
-      > .cmp-state-button {
-        flex-shrink: 0;
-
-        padding: 0;
-        aspect-ratio: 1;
-
+      > .cmp-button {
         color: var(--pal-color-white);
 
         background-color: var(--pal-color-a);
-      }
-
-      > .total-items {
-        display: flex;
-        align-items: center;
-        gap: var(--pal-size-s);
-        padding-block: var(--pal-size-xs);
-        padding-inline: var(--pal-size-s);
-
-        font-weight: 650;
-        color: var(--pal-color-a);
-
-        border-radius: var(--pal-size-3xl);
-        background-color: var(--pal-color-a-l3);
       }
     }
 
@@ -79,14 +60,10 @@
         color: var(--pal-color-a);
       }
 
-      > .cmp-button,
-      .cmp-state-button {
+      .cmp-button {
         border-color: var(--pal-color-b);
-        color: var(--pal-color-b-d1);
-      }
 
-      > .cmp-state-button {
-        width: 8rem;
+        color: var(--pal-color-b-d1);
       }
     }
   }

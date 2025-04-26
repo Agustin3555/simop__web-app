@@ -1,0 +1,28 @@
+.cmp-value {
+  flex-shrink: 0;
+
+  display: flex;
+  align-items: center;
+  padding-inline: calc(var(--cls-font-size) * 1.25);
+  gap: var(--cls-gap);
+
+  font-size: var(--cls-font-size);
+  line-height: 1.4;
+  white-space: nowrap;
+  letter-spacing: 0.03125rem;
+
+  border-radius: var(--pal-size-2xs);
+
+  &.pill {
+    border-radius: var(--pal-size-3xl);
+  }
+
+  &.primary {
+    letter-spacing: inherit;
+  }
+
+  &.secondary {
+    border-width: var(--line-thickness);
+    border-style: solid;
+  }
+}

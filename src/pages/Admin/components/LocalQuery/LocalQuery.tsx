@@ -10,16 +10,14 @@ import {
   useScheme,
 } from '../../hooks'
 import { VisibilityState } from '@tanstack/react-table'
-import { Button, Icon, StateButton } from '@/components'
+import { Button2 } from '@/components'
 import { Combobox } from '..'
 import { DeleteButton, ReportButton, Table } from './components'
 import { GetHeaderResult } from './components/Table/Table'
-import { format } from '@formkit/tempo'
-import { utils, writeFile } from 'xlsx'
 
 const LocalQuery = () => {
   const { scheme, flatProps } = useScheme()
-  const { key, title, columnVisibility: schemeColumnVisibility } = scheme
+  const { key, columnVisibility: schemeColumnVisibility } = scheme
 
   const allColumnsVisible = useMemo(
     () => Object.fromEntries(Object.keys(flatProps).map(id => [id, true])),
@@ -91,51 +89,6 @@ const LocalQuery = () => {
     [],
   )
 
-  const exportHandleClick = useCallback(() => {
-    if (!data) return
-
-    const selectedData =
-      selectedRowIds.length === 0
-        ? data
-        : data.filter(({ id }) => selectedRowIds.includes(id))
-
-    const convertedData = selectedData.map(row =>
-      Object.fromEntries(
-        Object.keys(flatProps).map(key => [
-          flatProps[key].title,
-          flatProps[key].getExcelValue(row),
-        ]),
-      ),
-    )
-
-    const worksheet = utils.json_to_sheet(convertedData)
-
-    // Calcular el ancho óptimo por columna
-    const colWidths = Object.keys(flatProps).map(key => {
-      const header = flatProps[key].title
-
-      const maxLength = Math.max(
-        header.length,
-        ...convertedData.map(
-          row => String(row[flatProps[key].title] ?? '').length,
-        ),
-      )
-
-      return { wch: maxLength + 1 }
-    })
-
-    worksheet['!cols'] = colWidths
-
-    // Crea el libro de trabajo y agrega una hoja
-    const workbook = utils.book_new()
-    utils.book_append_sheet(workbook, worksheet, 'Datos')
-
-    const date = format('', { date: 'short' }).replaceAll('/', '-')
-    const fileName = `${title.plural} (${date}).xlsx`
-
-    writeFile(workbook, fileName)
-  }, [data, selectedRowIds])
-
   return (
     <div className="cmp-local-query" ref={componentRef}>
       <header>
@@ -160,36 +113,16 @@ const LocalQuery = () => {
           </div>
         )}
         <div className="left">
-          <StateButton
-            text="Consultar datos"
-            hiddenText
+          <Button2
+            title="Consultar datos"
             faIcon="fa-solid fa-cloud-arrow-down"
             actionState={queryActionState}
-            handleAction={queryHandleClick}
+            onAction={queryHandleClick}
           />
-          {data && (
-            <div className="total-items">
-              <Icon faIcon="fa-solid fa-cubes-stacked" />
-              <p>{data.length}</p>
-            </div>
-          )}
         </div>
         <div className="actions">
           {selectedRowIds.length !== 0 && <DeleteButton />}
-          {data && (
-            <>
-              <ReportButton {...{ localQueryRef: componentRef }} />
-              <Button
-                text="Excel"
-                title={`Descargar Excel (${
-                  selectedRowIds.length ? 'seleccionados' : 'todo'
-                })`}
-                faIcon="fa-solid fa-file-excel"
-                _type="secondary"
-                onClick={exportHandleClick}
-              />
-            </>
-          )}
+          {data && <ReportButton {...{ localQueryRef: componentRef }} />}
         </div>
       </header>
       {data && (

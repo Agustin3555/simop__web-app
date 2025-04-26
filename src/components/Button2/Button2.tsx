@@ -2,8 +2,10 @@ import './Button.css'
 import { ActionState } from '@/hooks'
 import { Icon, Loader } from '..'
 import { classList } from '@/helpers'
+import { MouseEventHandler } from 'react'
 
 interface ButtonProps {
+  name?: string
   title?: string
   text?: string
   faIcon?: string
@@ -12,15 +14,16 @@ interface ButtonProps {
   inverted?: boolean
   submit?: boolean
   actionState?: ActionState
-  onAction?: () => void
+  onAction?: MouseEventHandler<HTMLButtonElement>
 }
 
 const Button = ({
+  name,
   title,
   text,
   faIcon,
-  type = 'primary',
   size = 'l',
+  type = 'primary',
   inverted = false,
   submit = false,
   actionState = 'ready',
@@ -35,6 +38,7 @@ const Button = ({
     type={submit ? 'submit' : 'button'}
     disabled={actionState !== 'ready'}
     onClick={onAction}
+    {...{ name }}
   >
     <Loader handlingClass={classList({ active: actionState === 'loading' })} />
     <Icon

@@ -31,6 +31,7 @@ export interface RawEntity {
 
   porcentajePendienteCertificar?: number
   montoPendienteCertificar?: string
+  balanceEconomico?: string
 
   empresa?: EmpresaModel.RawRef
   localidad?: LocalidadModel.RawRef
@@ -60,6 +61,7 @@ export interface Entity {
 
   porcentajePendienteCertificar?: number
   montoPendienteCertificar?: string
+  balanceEconomico?: string
 
   empresa?: EmpresaModel.Ref
   localidad?: LocalidadModel.Ref
@@ -206,6 +208,13 @@ export const scheme: Scheme<Entity> = {
             pre: '$',
           },
         ),
+        balanceEconomico: new NumberProp('Balance Económico', {
+          decimal: true,
+          isMoney: true,
+          big: true,
+          sum: true,
+          pre: '$',
+        }),
       },
     },
   ],

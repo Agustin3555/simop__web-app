@@ -1,7 +1,7 @@
 import './ControlLabel.css'
 import { useMemo } from 'react'
 import { Control } from '@/types'
-import { Button, Toggle } from '..'
+import { Button2, Toggle } from '..'
 import { ToggleProps } from '../Toggle/Toggle'
 
 export interface ControlLabelProps
@@ -44,14 +44,12 @@ const ControlLabel = ({
         {editMode && (
           <div className="editing-actions">
             {resetHandleClick && (
-              <Button
+              <Button2
                 title="Reiniciar valor"
                 faIcon="fa-solid fa-arrow-rotate-left"
-                hideText
-                type="button"
-                onClick={resetHandleClick}
-                _type="secondary"
-                size="xs"
+                size="s"
+                type="secondary"
+                onAction={resetHandleClick}
               />
             )}
             <Toggle
@@ -59,7 +57,6 @@ const ControlLabel = ({
               faIcon="fa-solid fa-pen"
               value={!disabled}
               setValue={setDisabled}
-              size="xs"
             />
           </div>
         )}

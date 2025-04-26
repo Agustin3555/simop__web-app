@@ -1,70 +1,64 @@
-.cmp-local-add > form {
-  > .field-groups {
-    --gap: var(--pal-size-m);
+.cmp-local-add {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--gap);
 
-    display: grid;
+  > form {
     align-items: flex-start;
-    grid-template-columns: repeat(auto-fill, minmax(min(100%, 30rem), 1fr));
-    gap: var(--gap);
 
-    > .group {
-      display: flex;
-      flex-direction: column;
-      gap: var(--pal-size-2xl);
-      padding: var(--pal-size-l);
+    > .field-groups {
+      --gap: var(--pal-size-m);
 
-      border-radius: var(--pal-size-xs);
-      background-color: var(--pal-color-white);
+      display: grid;
+      align-items: flex-start;
+      grid-template-columns: repeat(auto-fill, minmax(min(100%, 30rem), 1fr));
+      gap: var(--gap);
 
-      > small {
+      > .group {
         display: flex;
-        align-items: center;
-        gap: var(--gap);
+        flex-direction: column;
+        gap: var(--pal-size-2xl);
+        padding: var(--pal-size-l);
 
-        font-size: var(--pal-size-font-m);
-        color: var(--pal-color-a-l1);
-      }
+        border-radius: var(--pal-size-xs);
+        background-color: var(--pal-color-white);
 
-      > .fields {
-        display: flex;
-        flex-wrap: wrap;
+        > small {
+          display: flex;
+          align-items: center;
+          gap: var(--gap);
 
-        gap: var(--gap);
+          font-size: var(--pal-size-font-m);
+          color: var(--pal-color-a-l1);
+        }
 
-        > .control {
-          flex-grow: 1;
+        > .fields {
+          display: flex;
+          flex-wrap: wrap;
 
-          &.s {
-            flex-basis: 5rem;
-          }
+          gap: var(--gap);
 
-          &.m {
-            flex-basis: 14.25rem;
-          }
+          > .control {
+            flex-grow: 1;
 
-          &.l {
-            flex-basis: 50rem;
+            &.s {
+              flex-basis: 5rem;
+            }
+
+            &.m {
+              flex-basis: 14.25rem;
+            }
+
+            &.l {
+              flex-basis: 50rem;
+            }
           }
         }
       }
     }
-  }
-
-  > .actions {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    gap: var(--pal-size-m);
 
     > .cmp-button {
-      border-color: var(--pal-color-a-l2);
-
-      color: var(--pal-color-a);
-    }
-
-    > .cmp-state-button {
-      width: 9rem;
-
       color: var(--pal-color-white);
 
       background-color: var(--pal-color-a);

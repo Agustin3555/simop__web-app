@@ -25,7 +25,6 @@
 
     > .cmp-button {
       border-color: var(--pal-color-a-l2);
-      aspect-ratio: 1;
 
       color: var(--pal-color-a);
     }

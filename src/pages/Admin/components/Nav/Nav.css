@@ -19,7 +19,7 @@
       display var(--pal-time-m) ease allow-discrete;
   }
 
-  .cmp-button {
+  > .cmp-button {
     --gap: var(--pal-size-m);
 
     position: absolute;

@@ -3,7 +3,7 @@ import { Slice } from '../config'
 // Entre 200 a 400
 const WORDS_PER_MINUTE = 250
 // Entre 1 a 10
-const READING_DIFFICULTY = 4
+const READING_DIFFICULTY = 6
 
 const readingTimeInMs = (text: string) => {
   if (text === '') return 1000

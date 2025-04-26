@@ -42,9 +42,9 @@ const Input = ({
         className="input box"
         title={inputTitle}
         name={keyName}
+        autoComplete="off"
         {...(editMode && { disabled })}
         {...{ defaultValue, required, ...inputHTMLAttrs }}
-        autoComplete="off"
       />
     </div>
   )

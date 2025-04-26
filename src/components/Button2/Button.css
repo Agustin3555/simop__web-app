@@ -1,12 +1,15 @@
 .cmp-button {
   position: relative;
 
+  flex-shrink: 0;
+
   display: flex;
   align-items: center;
   justify-content: center;
-  padding-inline: calc(var(--font-size) * 1.5);
+  padding-inline: calc(var(--cls-font-size) * 1.25);
+  height: var(--cls-height);
 
-  font-size: var(--font-size);
+  font-size: var(--cls-font-size);
   line-height: 1.4;
   white-space: nowrap;
   letter-spacing: 0.03125rem;
@@ -30,7 +33,7 @@
   > .body {
     display: flex;
     align-items: center;
-    gap: calc(var(--font-size) * 0.75);
+    gap: var(--cls-gap);
   }
 
   > .active {
@@ -38,29 +41,13 @@
     opacity: initial;
   }
 
-  &.l {
-    --font-size: var(--pal-size-font-s);
-    --cmp-icon-size: var(--pal-size-font-s);
-
-    height: var(--pal-size-2xl);
-
-    font-weight: 600;
-  }
-
+  &.l,
   &.m {
-    --font-size: var(--pal-size-font-xs);
-    --cmp-icon-size: var(--pal-size-font-s);
-
-    height: var(--pal-size-xl);
-
     font-weight: 600;
   }
 
   &.s {
-    --font-size: var(--pal-size-font-2xs);
-    --cmp-icon-size: var(--pal-size-font-xs);
-
-    height: var(--pal-size-l);
+    padding-inline: calc(var(--cls-gap) * 2);
   }
 
   &.primary {
