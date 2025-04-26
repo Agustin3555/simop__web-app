@@ -18,3 +18,60 @@
     }
   }
 }
+
+.tooltip-container {
+  background-color: white;
+  border: 1px solid #e5e7eb;
+  padding: 12px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.08);
+  z-index: 100;
+  overflow: visible;
+}
+
+.tooltip-content {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  max-width: 300px;
+}
+
+.tooltip-header h3 {
+  font-size: 1rem;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+}
+
+.data-container {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.data-row {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.875rem;
+}
+
+.data-label {
+  font-weight: 600;
+  color: #4b5563;
+}
+
+.data-content {
+  text-align: right;
+  color: #1f2937;
+}
+
+.null-value {
+  color: #9ca3af;
+  font-style: italic;
+}
+
+.loading-state,
+.no-data {
+  text-align: center;
+  color: #6b7280;
+  font-size: 0.875rem;
+}
