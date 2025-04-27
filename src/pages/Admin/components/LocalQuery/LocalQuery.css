@@ -28,7 +28,6 @@
         gap: var(--pal-size-xs);
         min-width: 14rem;
 
-        font-weight: 600;
         white-space: nowrap;
         color: var(--pal-color-a-d1);
       }

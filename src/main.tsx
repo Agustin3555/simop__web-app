@@ -1,4 +1,4 @@
-import '@fontsource-variable/inter'
+import '@fontsource-variable/manrope'
 import './styles/index.css'
 
 import { StrictMode } from 'react'

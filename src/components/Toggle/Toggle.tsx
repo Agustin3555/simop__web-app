@@ -28,11 +28,17 @@ const Toggle = ({
       {...{ title }}
     >
       <input type="checkbox" onChange={handleChange} {...{ checked }} />
-      <div className="toggle">
-        <div className="lever">
+      {asSwitch ? (
+        <div className="switch">
+          <div className="lever">
+            <Icon {...{ faIcon }} />
+          </div>
+        </div>
+      ) : (
+        <div className="toggle">
           <Icon {...{ faIcon }} />
         </div>
-      </div>
+      )}
     </label>
   )
 }

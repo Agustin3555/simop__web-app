@@ -10,7 +10,6 @@
     gap: var(--pal-size-s);
 
     font-size: var(--pal-size-font-s);
-    font-weight: initial;
     color: var(--pal-color-a);
 
     > strong {

@@ -68,6 +68,7 @@ const HydratedLocalAdd = () => {
       <Toggle
         title="Limpiar después de crear"
         faIcon="fa-solid fa-eraser"
+        asSwitch
         value={resetOnCompletion}
         setValue={setResetOnCompletion}
       />

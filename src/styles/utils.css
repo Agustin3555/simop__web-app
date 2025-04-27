@@ -213,4 +213,6 @@
   --cls-height: var(--pal-size-l);
   --cls-font-size: var(--pal-size-font-2xs);
   --cmp-icon-size: var(--pal-size-s);
+
+  line-height: normal;
 }

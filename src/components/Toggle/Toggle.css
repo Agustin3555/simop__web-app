@@ -1,28 +1,27 @@
 .cmp-toggle {
+  --border-radius: var(--pal-size-2xs);
+
   color: var(--pal-color-gs-400);
 
   cursor: pointer;
-
-  transition: color var(--pal-time-xs) ease-out;
 
   > input {
     display: none;
   }
 
-  > .toggle {
-    --toggle-height: var(--cls-height);
-    --toggle-width: var(--pal-size-2xl);
-    --toggle-border-radius: var(--pal-size-2xs);
+  > .switch {
+    --height: var(--cls-height);
+    --width: var(--pal-size-2xl);
 
     position: relative;
 
     border-width: var(--line-thickness);
     border-style: solid;
     border-color: var(--pal-color-a-l2);
-    width: var(--toggle-width);
-    height: var(--toggle-height);
+    width: var(--width);
+    height: var(--height);
 
-    border-radius: var(--toggle-border-radius);
+    border-radius: var(--border-radius);
     background: linear-gradient(
       90deg,
       var(--pal-color-a-l1) 0%,
@@ -32,7 +31,8 @@
     );
     overflow: hidden;
 
-    transition: border-color var(--pal-time-xs) ease-out;
+    transition: border-color var(--pal-time-xs) ease-out,
+      color var(--pal-time-xs) ease-out;
 
     > .lever {
       position: absolute;
@@ -42,7 +42,7 @@
       aspect-ratio: 1;
       height: 100%;
 
-      border-radius: calc(var(--toggle-border-radius) - var(--line-thickness));
+      border-radius: calc(var(--border-radius) - var(--line-thickness));
       background-color: var(--pal-color-white);
 
       transition: left var(--pal-time-s) ease;
@@ -53,15 +53,42 @@
     }
   }
 
+  > .toggle {
+    align-content: center;
+    border-width: var(--line-thickness);
+    border-style: solid;
+    border-color: var(--pal-color-a-l2);
+    aspect-ratio: 1;
+    width: var(--cls-height);
+
+    border-radius: var(--border-radius);
+
+    transition: border-color var(--pal-time-xs) ease-out,
+      color var(--pal-time-xs) ease-out,
+      background-color var(--pal-time-xs) ease-out;
+
+    > * {
+      margin-inline: auto;
+    }
+  }
+
   &:has(input:checked) {
-    color: var(--pal-color-a);
+    > .switch {
+      color: var(--pal-color-a);
+
+      border-color: var(--pal-color-a-l1);
+
+      > .lever {
+        left: calc(var(--width) - var(--height));
+      }
+    }
 
     > .toggle {
       border-color: var(--pal-color-a-l1);
 
-      > .lever {
-        left: calc(var(--toggle-width) - var(--toggle-height));
-      }
+      color: var(--pal-color-white);
+
+      background-color: var(--pal-color-a-l1);
     }
   }
 }

@@ -29,10 +29,10 @@ html {
 
 body {
   font-family: var(--pal-font-a);
-  /* font-weight: 550;
-  letter-spacing: 0.015625rem;
-  word-spacing: 0.0625rem; */
-  color: var(--pal-color-a-d3);
+  font-weight: 550;
+  letter-spacing: 0.0125rem;
+  word-spacing: 0.0625rem;
+  color: var(--pal-color-a-d2);
 }
 
 ::selection {
@@ -44,10 +44,7 @@ body {
 :is(h1, h2, h3, h4) > * {
   margin: 0;
 
-  font-family: var(--pal-font-b);
-  font-weight: 550;
-  word-spacing: initial;
-  letter-spacing: initial;
+  font-weight: 650;
 }
 
 small {
@@ -55,7 +52,7 @@ small {
 }
 
 strong {
-  font-weight: 600;
+  font-weight: 750;
 }
 
 ul,

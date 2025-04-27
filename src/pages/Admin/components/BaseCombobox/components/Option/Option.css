@@ -17,7 +17,7 @@
     background-color var(--pal-time-xs) ease-out;
 
   > strong {
-    font-weight: 500;
+    font-weight: unset;
   }
 
   > ul {
