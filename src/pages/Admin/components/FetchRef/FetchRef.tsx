@@ -1,9 +1,6 @@
 import './FetchRef.css'
-import { Button } from '@/components'
-import { GetOneProvider, Ref } from '@/services/config'
 import { useState, useRef } from 'react'
 import { useQuery } from '@tanstack/react-query'
-import { useQueryActionState } from '@/hooks'
 import {
   useFloating,
   autoUpdate,
@@ -16,26 +13,26 @@ import {
   useInteractions,
   FloatingArrow,
 } from '@floating-ui/react'
+import { useQueryActionState } from '@/hooks'
+import { GetOneProvider, Ref } from '@/services/config'
+import { Button } from '@/components'
+import { palColorGS, palSize, Size } from '@/styles/palette'
+
+const ARROW_HEIGHT = palSize(Size.XS)
 
 interface FetchRefProps extends GetOneProvider, Ref {
   title: string
-  key: string
+  keyScheme: string
 }
 
-const ARROW_HEIGHT = 10
-const GAP = 8
-
-const FetchRef = ({ id, title, getOne, key }: FetchRefProps) => {
+const FetchRef = ({ keyScheme, id, title, getOne }: FetchRefProps) => {
   const [isOpen, setIsOpen] = useState(false)
   const arrowRef = useRef(null)
 
-  const {
-    data: responseData,
-    status,
-    isFetching,
-  } = useQuery({
-    queryKey: [key, id],
+  const { data, status, isFetching } = useQuery({
+    queryKey: [keyScheme, id],
     queryFn: () => getOne(id),
+    retry: false,
     enabled: isOpen,
   })
 
@@ -45,22 +42,23 @@ const FetchRef = ({ id, title, getOne, key }: FetchRefProps) => {
     open: isOpen,
     onOpenChange: setIsOpen,
     placement: 'right',
+    whileElementsMounted: autoUpdate,
     middleware: [
       offset({
-        mainAxis: ARROW_HEIGHT + GAP,
-        crossAxis: -10,
+        mainAxis: ARROW_HEIGHT + palSize(Size.XS2),
       }),
       flip({
         fallbackAxisSideDirection: 'start',
         padding: 10,
       }),
-      shift({ padding: 10 }),
+      shift({
+        padding: 10,
+      }),
       arrow({
         element: arrowRef,
-        padding: 5,
+        padding: palSize(Size.XS),
       }),
     ],
-    whileElementsMounted: autoUpdate,
   })
 
   const click = useClick(context)
@@ -103,53 +101,45 @@ const FetchRef = ({ id, title, getOne, key }: FetchRefProps) => {
       <Button
         ref={refs.setReference}
         text={title}
-        title={`Ver más de '${title}'`}
-        faIcon="fa-solid fa-cube"
-        _type="secondary"
+        title="Ver más"
+        type="secondary"
         inverted
-        {...getReferenceProps()}
+        wrap
+        buttonHTMLAttrs={getReferenceProps()}
       />
-
       {isOpen && (
         <div
           ref={refs.setFloating}
+          className="tooltip"
           style={floatingStyles}
-          className="tooltip-container"
           {...getFloatingProps()}
         >
           <FloatingArrow
             ref={arrowRef}
-            context={context}
-            fill="#ffffff"
-            stroke="#d1d5db"
-            strokeWidth={1}
             height={ARROW_HEIGHT}
             width={ARROW_HEIGHT * 2}
+            fill={palColorGS('white')}
+            {...{ context }}
           />
-          <div className="tooltip-content">
-            <div className="tooltip-header">
-              <h3>{title}</h3>
-            </div>
-            <div className="tooltip-body">
-              {actionState === 'loading' ? (
-                <div className="loading-state">
-                  <i className="fas fa-spinner fa-spin"></i> Cargando
-                  información...
-                </div>
-              ) : actionState === 'error' ? (
-                <div className="no-data">
-                  <i className="fas fa-exclamation-circle"></i> Error al cargar
-                  los datos
-                </div>
-              ) : responseData ? (
-                renderSimpleList(responseData)
-              ) : (
-                <div className="no-data">
-                  <i className="fas fa-info-circle"></i> No se encontraron datos
-                  disponibles
-                </div>
-              )}
-            </div>
+          <div className="content">
+            {actionState === 'loading' ? (
+              <div className="loading-state">
+                <i className="fas fa-spinner fa-spin"></i> Cargando
+                información...
+              </div>
+            ) : actionState === 'error' ? (
+              <div className="no-data">
+                <i className="fas fa-exclamation-circle"></i> Error al cargar
+                los datos
+              </div>
+            ) : data ? (
+              renderSimpleList(data)
+            ) : (
+              <div className="no-data">
+                <i className="fas fa-info-circle"></i> No se encontraron datos
+                disponibles
+              </div>
+            )}
           </div>
         </div>
       )}

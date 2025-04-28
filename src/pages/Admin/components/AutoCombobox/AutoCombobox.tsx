@@ -6,7 +6,7 @@ import { Control } from '@/types'
 import { Entity } from '@/services/config'
 import { getFlatProps, Scheme } from '../../services/config'
 import { REFETCH_INTERVALS } from '../../constants/refetchIntervals.const'
-import { Button2 } from '@/components'
+import { Button } from '@/components'
 import BaseCombobox, { BaseComboboxProps } from '../BaseCombobox/BaseCombobox'
 import { baseSorter } from '../../helpers'
 
@@ -166,7 +166,7 @@ const AutoCombobox = ({
         )
       }
       searchSlot={
-        <Button2
+        <Button
           title="Actualizar opciones"
           faIcon="fa-solid fa-rotate"
           onAction={handleAction}

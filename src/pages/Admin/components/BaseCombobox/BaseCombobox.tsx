@@ -14,7 +14,7 @@ import {
 import { useControl } from '@/hooks'
 import { useInputHandler } from '../../hooks'
 import { Control } from '@/types'
-import { Button2, ControlLabel, Icon } from '@/components'
+import { Button, ControlLabel, Icon } from '@/components'
 import { Option } from './components'
 import { OptionProps } from './components/Option/Option'
 import { classList } from '@/helpers'
@@ -159,7 +159,7 @@ const BaseCombobox = ({
           {selected.map(id => (
             <div key={id} className="item">
               <p>{getItemTitle(id)}</p>
-              <Button2
+              <Button
                 name={id}
                 title="Eliminar selección"
                 faIcon="fa-solid fa-xmark"

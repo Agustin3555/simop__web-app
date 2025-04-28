@@ -87,7 +87,7 @@ export class RefListProp implements PropScheme {
     const { key, config } = this
     const { getScheme } = config ?? {}
 
-    const { service, anchorField } = getScheme()
+    const { service, anchorField, key: keyScheme } = getScheme()
     const { getOne } = service
 
     const value = row.original[key] as undefined | Entity[]
@@ -99,7 +99,7 @@ export class RefListProp implements PropScheme {
           key={item.id}
           id={item.id}
           title={item[anchorField]}
-          {...{ getOne }}
+          {...{ keyScheme, getOne }}
         />
       ))
     )

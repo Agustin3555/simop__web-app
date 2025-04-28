@@ -8,7 +8,7 @@ import {
   useScheme,
   useLocalView,
 } from '../../hooks'
-import { Button2 } from '@/components'
+import { Button } from '@/components'
 import { useMutation } from '@tanstack/react-query'
 
 const LocalEdit = () => {
@@ -102,7 +102,7 @@ const LocalEdit = () => {
               ))}
             </div>
             <div className="actions">
-              <Button2
+              <Button
                 text="Confirmar"
                 faIcon="fa-solid fa-check"
                 submit
@@ -117,7 +117,7 @@ const LocalEdit = () => {
             <p className="text">
               Seleccione un/a <strong>{title.singular}</strong> a editar en
             </p>
-            <Button2
+            <Button
               text="Consultar"
               faIcon="fa-solid fa-search"
               size="m"

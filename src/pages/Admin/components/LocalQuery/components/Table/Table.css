@@ -9,6 +9,7 @@
   border-style: solid;
   border-color: var(--pal-color-a-l3);
   max-width: max-content;
+  max-height: max-content;
 
   border-radius: var(--pal-size-xs);
   background-color: var(--pal-color-white);
@@ -20,8 +21,8 @@
 
     display: flex;
     justify-content: space-between;
-    padding: var(--pal-size-2xs);
     gap: var(--pal-size-2xs);
+    padding: var(--pal-size-2xs);
 
     > .group {
       display: flex;

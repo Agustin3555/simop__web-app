@@ -1,7 +1,7 @@
 import { MutableRefObject } from 'react'
 import { useHandleAction } from '@/hooks'
 import { useScheme } from '@/pages/Admin/hooks'
-import { Button2 } from '@/components'
+import { Button } from '@/components'
 import { ReportInTable } from './components'
 import { generateTableImages } from '@/pages/Admin/helpers'
 import { pdf } from '@react-pdf/renderer'
@@ -55,7 +55,7 @@ const ReportButton = ({ localQueryRef }: ReportButtonProps) => {
 
   return (
     <>
-      <Button2
+      <Button
         text="Informe"
         faIcon="fa-solid fa-file-pdf"
         type="secondary"

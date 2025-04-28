@@ -1,6 +1,6 @@
 import './Nav.css'
 import { useCallback, useState } from 'react'
-import { Button2, ExternalLink } from '@/components'
+import { Button, ExternalLink } from '@/components'
 import { Section } from './components'
 import { TREE } from '../../constants/navTree.const'
 import { classList } from '@/helpers'
@@ -19,7 +19,7 @@ const Nav = () => {
         title="Cerrar"
         onClick={backdropHandleClick}
       />
-      <Button2
+      <Button
         title={open ? 'Cerrar' : 'Abrir'}
         faIcon="fa-solid fa-bars-staggered"
         type="secondary"

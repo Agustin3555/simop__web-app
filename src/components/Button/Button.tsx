@@ -1,44 +1,73 @@
 import './Button.css'
-import { Icon } from '..'
-import { ButtonHTMLAttributes, forwardRef } from 'react'
+import { ActionState } from '@/hooks'
+import { Icon, Loader } from '..'
 import { classList } from '@/helpers'
+import { ButtonHTMLAttributes, forwardRef, MouseEventHandler } from 'react'
 
-interface Props extends ButtonHTMLAttributes<HTMLButtonElement> {
-  text?: string
+interface ButtonProps {
+  name?: string
   title?: string
+  text?: string
   faIcon?: string
-  hideText?: boolean
-  _type?: 'secondary'
-  size?: 'xs' | 's'
+  type?: 'primary' | 'secondary' | 'tertiary'
+  size?: 'l' | 'm' | 's'
   inverted?: boolean
+  wrap?: boolean
+  submit?: boolean
+  actionState?: ActionState
+  onAction?: MouseEventHandler<HTMLButtonElement>
+  buttonHTMLAttrs?: ButtonHTMLAttributes<HTMLButtonElement>
 }
 
-const Button = forwardRef<HTMLButtonElement, Props>(
+const Button = forwardRef<HTMLButtonElement, ButtonProps>(
   (
     {
-      text,
+      name,
       title,
+      text,
       faIcon,
-      hideText,
-      _type,
-      size,
+      size = 'l',
+      type = 'primary',
       inverted = false,
-      children,
-      ...rest
+      wrap = false,
+      submit = false,
+      actionState = 'ready',
+      onAction,
+      buttonHTMLAttrs,
     },
     ref,
   ) => (
     <button
-      ref={ref}
-      className={classList('cmp-button', 'button-look', size, _type, {
+      className={classList('cmp-button', size, type, {
         inverted,
+        wrap,
+        square: faIcon !== undefined && text === undefined,
       })}
-      title={title || text}
-      {...rest}
+      title={title ?? text}
+      type={submit ? 'submit' : 'button'}
+      disabled={actionState !== 'ready'}
+      onClick={onAction}
+      {...{ ref, name, ...buttonHTMLAttrs }}
     >
-      {!hideText && (text || title)}
-      {faIcon && <Icon faIcon={faIcon} />}
-      {children}
+      <Loader
+        handlingClass={classList({ active: actionState === 'loading' })}
+      />
+      <Icon
+        faIcon="fa-solid fa-xmark"
+        handlingClass={classList({ active: actionState === 'error' })}
+      />
+      <Icon
+        faIcon="fa-solid fa-check"
+        handlingClass={classList({ active: actionState === 'success' })}
+      />
+      <div
+        className={classList('body', 'text', {
+          active: actionState === 'ready',
+        })}
+      >
+        {text}
+        {faIcon && <Icon {...{ faIcon }} />}
+      </div>
     </button>
   ),
 )

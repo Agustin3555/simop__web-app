@@ -149,15 +149,14 @@ export class RefProp implements PropScheme {
     const { service, anchorField, key: keyScheme } = getScheme()
     const { getOne } = service
 
-    const value = row.original[key] as undefined | any
+    const value = row.original[key] as undefined | Entity
 
     return (
       value && (
         <FetchRef
-          key={keyScheme}
           id={value.id}
           title={value[anchorField]}
-          {...{ getOne }}
+          {...{ keyScheme, getOne }}
         />
       )
     )

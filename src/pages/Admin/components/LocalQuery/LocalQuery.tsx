@@ -10,7 +10,7 @@ import {
   useScheme,
 } from '../../hooks'
 import { VisibilityState } from '@tanstack/react-table'
-import { Button2 } from '@/components'
+import { Button } from '@/components'
 import { Combobox } from '..'
 import { DeleteButton, ReportButton, Table } from './components'
 import { GetHeaderResult } from './components/Table/Table'
@@ -113,7 +113,7 @@ const LocalQuery = () => {
           </div>
         )}
         <div className="left">
-          <Button2
+          <Button
             title="Consultar datos"
             faIcon="fa-solid fa-cloud-arrow-down"
             actionState={queryActionState}

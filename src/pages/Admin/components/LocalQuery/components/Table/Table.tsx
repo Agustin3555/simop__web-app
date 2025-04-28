@@ -21,7 +21,7 @@ import {
   ColumnOrderState,
   VisibilityState,
 } from '@tanstack/react-table'
-import { Button2, Toggle } from '@/components'
+import { Button, Toggle } from '@/components'
 import { Cell, Footer, Header, RowSelectorCell } from './components'
 import { Value } from '../../..'
 import { Entity } from '@/services/config'
@@ -218,7 +218,7 @@ const Table = ({
           pill
         />
         <div className="group">
-          <Button2
+          <Button
             text="Excel"
             title={`Descargar Excel (${
               selectedRowIds.length ? 'seleccionados' : 'todo'

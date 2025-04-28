@@ -10,9 +10,9 @@ import { useAppStore } from '@/store/config'
 import { useSubmitAction } from '@/hooks'
 import { useResetForm, useScheme } from '../../hooks'
 import { FieldResetFnsContext } from '../../contexts'
-import { Button2, Toggle } from '@/components'
+import { Button, Toggle } from '@/components'
 
-const HydratedLocalAdd = () => {
+const ContextualizedLocalAdd = () => {
   const { scheme } = useScheme()
   const { service, groups } = scheme
 
@@ -81,7 +81,7 @@ const HydratedLocalAdd = () => {
             </div>
           ))}
         </div>
-        <Button2
+        <Button
           text="Confirmar"
           faIcon="fa-solid fa-check"
           submit
@@ -94,7 +94,7 @@ const HydratedLocalAdd = () => {
 
 const LocalAdd = () => (
   <FieldResetFnsContext.Provider value={[]}>
-    <HydratedLocalAdd />
+    <ContextualizedLocalAdd />
   </FieldResetFnsContext.Provider>
 )
 
