@@ -10,7 +10,6 @@
 
   font-size: var(--cls-font-size);
   line-height: 1.4;
-  letter-spacing: 0.03125rem;
 
   border-radius: var(--pal-size-2xs);
   overflow: hidden;
@@ -50,17 +49,9 @@
     padding-inline: calc(var(--cls-gap) * 2);
   }
 
-  &.primary {
-    letter-spacing: inherit;
-  }
-
   &.secondary {
     border-width: var(--line-thickness);
     border-style: solid;
-  }
-
-  &.tertiary {
-    letter-spacing: inherit;
   }
 
   &.inverted > .body > .cmp-icon {

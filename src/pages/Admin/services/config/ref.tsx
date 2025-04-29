@@ -1,12 +1,6 @@
 import { Entity } from '@/services/config'
 import { ForView, GetScheme, MinSize, PropScheme, Required } from './utils'
-import {
-  AutoCombobox,
-  Combobox,
-  FetchRef,
-  RefFilter,
-  TextFilter,
-} from '../../components'
+import { AutoCombobox, FetchRef, RefFilter } from '../../components'
 import { AccessorFn, Column, FilterFn, Row } from '@tanstack/react-table'
 import { getFlatProps } from './scheme'
 
