@@ -115,7 +115,9 @@ const LocalQuery = () => {
         <div className="left">
           <Button
             title="Consultar datos"
-            faIcon="fa-solid fa-cloud-arrow-down"
+            faIcon={`fa-solid ${
+              data ? 'fa-arrows-rotate' : 'fa-cloud-arrow-down'
+            }`}
             actionState={queryActionState}
             onAction={queryHandleClick}
           />

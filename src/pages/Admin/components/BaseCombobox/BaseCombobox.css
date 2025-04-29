@@ -127,43 +127,10 @@
       display: flex;
       flex-direction: column;
 
-      > .search-mode {
-        display: flex;
-        flex-wrap: wrap;
-        align-items: center;
-        gap: var(--pal-size-2xs);
-        border: none;
+      > .cmp-option-selectors {
         padding-inline: var(--control-padding-inline);
         padding-top: var(--pal-size-xs);
         padding-bottom: var(--pal-size-2xs);
-
-        > label {
-          border-width: 0.0625rem;
-          border-style: solid;
-          border-color: var(--pal-color-a-l2);
-          padding-block: var(--pal-size-2xs);
-          padding-inline: var(--pal-size-xs);
-
-          font-size: var(--pal-size-font-xs);
-          white-space: nowrap;
-          color: var(--pal-color-a-l1);
-
-          border-radius: var(--pal-size-3xl);
-          cursor: pointer;
-
-          transition: color var(--pal-time-xs) ease-out,
-            background-color var(--pal-time-xs) ease-out;
-
-          > input {
-            display: none;
-          }
-
-          &:has(input:checked) {
-            color: var(--pal-color-white);
-
-            background-color: var(--pal-color-a-l2);
-          }
-        }
       }
 
       > .search {

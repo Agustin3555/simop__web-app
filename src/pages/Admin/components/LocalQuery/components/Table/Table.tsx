@@ -134,7 +134,7 @@ const Table = ({
     })
 
     setQuickFilters(results)
-  }, [])
+  }, [table])
 
   const exportHandleClick = useCallback(() => {
     if (!data) return

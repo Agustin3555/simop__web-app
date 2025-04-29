@@ -54,7 +54,7 @@ export interface PropScheme<E = Entity> {
   accessorFn?: AccessorFn<E>
   filterFn?: FilterFn<E> | BuiltInFilterFn
   footer?: (info: HeaderContext<E, unknown>) => ReactNode
-  getHeader?: (column: Column<E>) => {
+  getHeader: (column: Column<E>) => {
     title: string
     subtitle?: string
     filter: ReactNode

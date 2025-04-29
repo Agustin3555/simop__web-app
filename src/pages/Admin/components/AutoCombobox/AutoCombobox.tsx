@@ -1,22 +1,15 @@
 import { useCallback, useMemo, useState } from 'react'
 import { useQueryActionState } from '@/hooks'
-import { useAddFieldReset, useInputHandler } from '../../hooks'
+import { useAddFieldReset } from '../../hooks'
 import { useQuery } from '@tanstack/react-query'
 import { Control } from '@/types'
 import { Entity } from '@/services/config'
 import { getFlatProps, Scheme } from '../../services/config'
 import { REFETCH_INTERVALS } from '../../constants/refetchIntervals.const'
 import { Button } from '@/components'
+import { OptionSelectors } from '..'
 import BaseCombobox, { BaseComboboxProps } from '../BaseCombobox/BaseCombobox'
-import { baseSorter } from '../../helpers'
-
-const extractKeys = (array?: object[]) => {
-  // TODO: mejorar, ya que ahora un item puede o no traer algún campo
-
-  if (!array?.length) return
-
-  return Object.keys(array[0])
-}
+import { baseSorter, extractKeys } from '../../helpers'
 
 export interface AutoComboboxProps
   extends Control,
@@ -83,7 +76,7 @@ const AutoCombobox = ({
   const searchModes = useMemo(
     () =>
       searchModeKeys?.map(mode => ({
-        mode,
+        value: mode,
         title: flatProps[mode].title,
       })),
     [searchModeKeys],
@@ -124,10 +117,6 @@ const AutoCombobox = ({
 
   const handleReset = useCallback(() => setSelected(calculateInitSelected), [])
 
-  const handleSearchModeChange = useInputHandler(value =>
-    setSelectedSearchMode(value),
-  )
-
   return (
     <BaseCombobox
       required={editMode ? false : required}
@@ -149,20 +138,12 @@ const AutoCombobox = ({
       }}
       modeSlot={
         searchModes && (
-          <fieldset className="search-mode">
-            {searchModes.map(({ mode, title }) => (
-              <label key={mode}>
-                {title}
-                <input
-                  type="radio"
-                  name={`search-mode-${keyName}`}
-                  value={mode}
-                  checked={selectedSearchMode === mode}
-                  onChange={handleSearchModeChange}
-                />
-              </label>
-            ))}
-          </fieldset>
+          <OptionSelectors
+            name={`search-mode-${keyName}`}
+            selected={selectedSearchMode}
+            setSelected={setSelectedSearchMode}
+            options={searchModes}
+          />
         )
       }
       searchSlot={

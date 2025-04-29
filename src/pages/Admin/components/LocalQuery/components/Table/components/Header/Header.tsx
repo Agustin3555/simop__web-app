@@ -19,7 +19,7 @@ import { Entity } from '@/services/config'
 import { classList } from '@/helpers'
 import { steppedSizes } from '../../helpers'
 
-const sortIconMatcher: Record<SortDirection, string> = {
+const SORT_ICON_MATCHER: Record<SortDirection, string> = {
   asc: 'fa-solid fa-arrow-up-wide-short',
   desc: 'fa-solid fa-arrow-down-short-wide',
 }
@@ -47,19 +47,18 @@ const Header = ({
 
   const [dragging, setDragging] = useState(false)
 
-  if (!getHeader) return null
-
-  // TODO: contener en un useMemo
   const { title, subtitle, filter } = getHeader(column) ?? {}
 
   const sortValue = getIsSorted() || null
 
   const sortIcon = useMemo(() => {
     if (sortValue === null) return null //chequeamos que no sea null
-    return sortIconMatcher[sortValue]
+    return SORT_ICON_MATCHER[sortValue]
   }, [sortValue])
 
-  const handleSortingClick = () => {
+  //
+
+  const handleSortingClick = useCallback(() => {
     const isAlreadySorted = sorting.find(sort => sort.id === column.id)
 
     setSorting(prev => {
@@ -78,7 +77,7 @@ const Header = ({
         return [...prev, { id: column.id, desc: false }]
       }
     })
-  }
+  }, [sorting])
 
   const handleDragStart = useCallback<DragEventHandler<HTMLDivElement>>(
     e => {
@@ -120,8 +119,6 @@ const Header = ({
     [columnOrder],
   )
 
-  const width = steppedSizes(column.columnDef.minSize!, getSize())
-
   const calculateTranslate = useCallback(() => {
     if (!getIsResizing()) return
 
@@ -129,6 +126,8 @@ const Header = ({
 
     return steppedSizes(column.columnDef.minSize!, deltaOffset ?? 0) + 'px'
   }, [])
+
+  const width = steppedSizes(column.columnDef.minSize!, getSize())
 
   return (
     <div className={classList('cmp-header', { dragging })} style={{ width }}>
