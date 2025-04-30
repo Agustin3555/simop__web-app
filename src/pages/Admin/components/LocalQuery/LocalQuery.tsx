@@ -104,7 +104,7 @@ const LocalQuery = () => {
         />
         {quickFilters && (
           <div className="filters">
-            {quickFilters.map(({ title, filter }) => (
+            {quickFilters.map(({ title, getFilter: filter }) => (
               <div key={title} className="item">
                 <small>{title}</small>
                 {filter}

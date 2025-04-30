@@ -39,6 +39,8 @@ interface TableProps {
   setQuickFilters: Dispatch<SetStateAction<GetHeaderResult[] | undefined>>
 }
 
+export type AccesorKeys = Record<string, string>
+
 const SELECT_COLUMN = 'select'
 const STEP_WIDTH = 32
 
@@ -63,6 +65,8 @@ const Table = ({
     // Inicializar el orden de columnas
     [SELECT_COLUMN, ...groups.flatMap(({ props }) => Object.keys(props))],
   )
+
+  const [accesorKeys, setAccesorKeys] = useState<AccesorKeys>({})
 
   const columns = useMemo(
     () => [
@@ -254,6 +258,8 @@ const Table = ({
                       setSorting,
                       columnOrder,
                       setColumnOrder,
+                      accesorKeys,
+                      setAccesorKeys,
                     }}
                   />
                 ),
@@ -276,7 +282,10 @@ const Table = ({
                       onChange={row.getToggleSelectedHandler()}
                     />
                   ) : (
-                    <Cell key={cell.id} {...{ flatProps, cell }} />
+                    <Cell
+                      key={cell.id}
+                      {...{ flatProps, cell, accesorKeys, setAccesorKeys }}
+                    />
                   ),
                 )}
             </div>

@@ -57,11 +57,6 @@
             text-align: start;
             color: var(--pal-color-a-d2);
           }
-
-          > small {
-            font-size: var(--pal-size-font-2xs);
-            color: var(--pal-color-a);
-          }
         }
 
         > .sort {

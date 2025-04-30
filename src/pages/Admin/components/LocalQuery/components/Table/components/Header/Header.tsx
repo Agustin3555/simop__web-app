@@ -4,6 +4,7 @@ import {
   DragEventHandler,
   SetStateAction,
   useCallback,
+  useEffect,
   useMemo,
   useState,
 } from 'react'
@@ -18,6 +19,10 @@ import {
 import { Entity } from '@/services/config'
 import { classList } from '@/helpers'
 import { steppedSizes } from '../../helpers'
+import { OptionSelectors } from '@/pages/Admin/components'
+import { extractKeys } from '@/pages/Admin/helpers'
+import { getFlatProps } from '@/pages/Admin/services/config'
+import { AccesorKeys } from '../../Table'
 
 const SORT_ICON_MATCHER: Record<SortDirection, string> = {
   asc: 'fa-solid fa-arrow-up-wide-short',
@@ -31,6 +36,8 @@ interface Props {
   setSorting: Dispatch<SetStateAction<SortingState>>
   columnOrder: ColumnOrderState
   setColumnOrder: Dispatch<SetStateAction<ColumnOrderState>>
+  accesorKeys: AccesorKeys
+  setAccesorKeys: Dispatch<SetStateAction<AccesorKeys>>
 }
 
 const Header = ({
@@ -40,14 +47,79 @@ const Header = ({
   setSorting,
   columnOrder,
   setColumnOrder,
+  accesorKeys,
+  setAccesorKeys,
 }: Props) => {
   const { column, getContext, getResizeHandler, getSize } = header
-  const { getIsSorted, getSortIndex, resetSize, getIsResizing } = column
+
+  const {
+    getIsSorted,
+    getSortIndex,
+    resetSize,
+    getIsResizing,
+    getFilterValue,
+    getFacetedRowModel,
+  } = column
+
   const { getHeader } = flatProps[column.id] ?? {}
+
+  const { title, scheme, getFilter } = useMemo(() => getHeader(column), [])
 
   const [dragging, setDragging] = useState(false)
 
-  const { title, subtitle, filter } = getHeader(column) ?? {}
+  const [selectedSearchMode, setSelectedSearchMode] = useState(
+    scheme?.anchorField,
+  )
+
+  useEffect(() => {
+    setAccesorKeys()
+  }, [selectedSearchMode])
+
+  const options = useMemo(() => {
+    const { rows } = getFacetedRowModel()
+
+    const refs = rows
+      .map(({ original }) => original[column.id])
+      .filter(Boolean) as Entity[]
+
+    const uniqueRefs = new Map<number, Entity>()
+
+    refs.forEach(ref => {
+      const { id } = ref
+
+      if (!uniqueRefs.has(id)) uniqueRefs.set(id, ref)
+    })
+
+    return Array.from(uniqueRefs.values()).map(ref => {
+      const { id } = ref
+
+      return {
+        id: String(id),
+        title: String(ref[selectedSearchMode!]),
+      }
+    })
+  }, [selectedSearchMode])
+
+  const searchModes = useMemo(() => {
+    if (!scheme) return
+
+    const flatProps = getFlatProps(scheme)
+
+    const { rows } = getFacetedRowModel()
+
+    const firstValid = rows.find(
+      ({ original }) => original[column.id] !== undefined,
+    )
+
+    if (!firstValid) return
+
+    const keys = extractKeys([firstValid.original[column.id]])
+
+    return keys?.map(key => ({
+      value: key,
+      title: flatProps[key].title,
+    }))
+  }, [])
 
   const sortValue = getIsSorted() || null
 
@@ -146,7 +218,14 @@ const Header = ({
           <button onClick={handleSortingClick}>
             <div className="title-group">
               <p className="title text">{title}</p>
-              {subtitle && <small>{subtitle}</small>}
+              {selectedSearchMode && (
+                <OptionSelectors
+                  name={`search-mode-header-${column.id}`}
+                  selected={selectedSearchMode}
+                  setSelected={setSelectedSearchMode}
+                  options={searchModes!}
+                />
+              )}
             </div>
             {sortIcon && (
               <div className="sort">
@@ -156,7 +235,7 @@ const Header = ({
             )}
           </button>
         </div>
-        {filter && <div className="filters">{filter}</div>}
+        <div className="filters">{getFilter({ getFilterValue, options })}</div>
       </div>
       <div
         className={classList('resizer', { resizing: getIsResizing() })}

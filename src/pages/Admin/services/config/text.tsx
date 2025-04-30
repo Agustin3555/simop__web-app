@@ -1,5 +1,5 @@
 import { Entity } from '@/services/config'
-import { ForView, MinSize, PropScheme, Required } from './utils'
+import { ForView, GetFilter, MinSize, PropScheme, Required } from './utils'
 import { Input } from '@/components'
 import { Column, Row } from '@tanstack/react-table'
 import { TextFilter } from '../../components'
@@ -52,16 +52,16 @@ export class TextProp implements PropScheme {
   getHeader = (column: Column<Entity>) => {
     const { title } = this
 
-    const { getFacetedUniqueValues, getFilterValue, setFilterValue } = column
-    const filterValue = getFilterValue()
+    const { getFacetedUniqueValues, setFilterValue } = column
 
-    const filter = (
+    const getFilter: GetFilter = ({ getFilterValue }) => (
       <TextFilter
-        {...{ filterValue, getFacetedUniqueValues, setFilterValue }}
+        filterValue={getFilterValue()}
+        {...{ getFacetedUniqueValues, setFilterValue }}
       />
     )
 
-    return { title, filter }
+    return { title, getFilter }
   }
 
   getCellComponent = (row: Row<Entity>) => {

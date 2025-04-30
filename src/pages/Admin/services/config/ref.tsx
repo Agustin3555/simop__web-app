@@ -1,8 +1,14 @@
 import { Entity } from '@/services/config'
-import { ForView, GetScheme, MinSize, PropScheme, Required } from './utils'
+import {
+  GetFilter,
+  ForView,
+  GetScheme,
+  MinSize,
+  PropScheme,
+  Required,
+} from './utils'
 import { AutoCombobox, FetchRef, RefFilter } from '../../components'
 import { AccessorFn, Column, FilterFn, Row } from '@tanstack/react-table'
-import { getFlatProps } from './scheme'
 
 export const isFieldEnabled = (form: HTMLFormElement, key: string) => {
   const inputOption = form.querySelector<HTMLInputElement>(`[name="${key}"]`)
@@ -95,52 +101,29 @@ export class RefProp implements PropScheme {
   }
 
   getHeader = (column: Column<Entity>) => {
-    const { key, verboseKey, title, config } = this
+    const { verboseKey, title, config } = this
     const { getScheme } = config
 
     const scheme = getScheme()
-    const { anchorField } = scheme
-    const flatProps = getFlatProps(scheme)
 
-    const { getFacetedRowModel, getFilterValue, setFilterValue } = column
-    const { rows } = getFacetedRowModel()
+    const { setFilterValue } = column
 
-    const refs = rows
-      .map(({ original }) => original[key])
-      .filter(Boolean) as Entity[]
-
-    const uniqueRefs = new Map<number, Entity>()
-
-    refs.forEach(ref => {
-      const { id } = ref
-
-      if (!uniqueRefs.has(id)) uniqueRefs.set(id, ref)
-    })
-
-    const options = Array.from(uniqueRefs.values()).map(ref => {
-      const { id } = ref
-
-      return {
-        id: String(id),
-        title: String(ref[anchorField]),
-      }
-    })
-
-    const filter = (
+    const getFilter: GetFilter = ({ options, ...rest }) => (
       <RefFilter
         keyName={verboseKey}
-        {...{ title, options, getFilterValue, setFilterValue }}
+        options={options!}
+        {...{ title, setFilterValue, ...rest }}
       />
     )
 
-    return { title, subtitle: flatProps[anchorField].title, filter }
+    return { title, scheme, getFilter }
   }
 
-  getCellComponent = (row: Row<Entity>) => {
+  getCellComponent = (row: Row<Entity>, selectedSearchMode?: string) => {
     const { key, config } = this
     const { getScheme } = config ?? {}
 
-    const { service, anchorField, key: keyScheme } = getScheme()
+    const { service, key: keyScheme } = getScheme()
     const { getOne } = service
 
     const value = row.original[key] as undefined | Entity
@@ -149,7 +132,7 @@ export class RefProp implements PropScheme {
       value && (
         <FetchRef
           id={value.id}
-          title={value[anchorField]}
+          title={value[selectedSearchMode!]}
           {...{ keyScheme, getOne }}
         />
       )

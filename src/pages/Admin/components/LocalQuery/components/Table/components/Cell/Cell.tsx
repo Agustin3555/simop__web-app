@@ -2,8 +2,9 @@ import './Cell.css'
 import { useScheme } from '@/pages/Admin/hooks'
 import { Cell as TsCell } from '@tanstack/react-table'
 import { Entity } from '@/services/config'
-import { useMemo } from 'react'
+import { Dispatch, SetStateAction, useMemo } from 'react'
 import { steppedSizes } from '../../helpers'
+import { AccesorKeys } from '../../Table'
 
 /*
   No se usa 'getValue' porque se necesita tener el valor original. 'getValue'
@@ -14,9 +15,11 @@ import { steppedSizes } from '../../helpers'
 interface Props {
   flatProps: ReturnType<typeof useScheme>['flatProps']
   cell: TsCell<Entity, unknown>
+  accesorKeys: AccesorKeys
+  setAccesorKeys: Dispatch<SetStateAction<AccesorKeys>>
 }
 
-const Cell = ({ flatProps, cell }: Props) => {
+const Cell = ({ flatProps, cell, accesorKeys, setAccesorKeys }: Props) => {
   const { column, row } = cell
 
   const component = useMemo(

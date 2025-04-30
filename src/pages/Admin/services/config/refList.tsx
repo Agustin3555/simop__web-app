@@ -72,15 +72,10 @@ export class RefListProp implements PropScheme {
 
     const scheme = getScheme()
     const { anchorField } = scheme
-    const flatProps = getFlatProps(scheme)
 
-    const filter = undefined
+    const getFilter = () => undefined
 
-    return {
-      title,
-      subtitle: flatProps[anchorField].title,
-      filter,
-    }
+    return { title, getFilter }
   }
 
   getCellComponent = (row: Row<Entity>) => {

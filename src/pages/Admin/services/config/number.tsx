@@ -1,5 +1,5 @@
 import { Entity } from '@/services/config'
-import { ForView, MinSize, PropScheme, Required } from './utils'
+import { ForView, GetFilter, MinSize, PropScheme, Required } from './utils'
 import { Input } from '@/components'
 import {
   BuiltInFilterFn,
@@ -91,15 +91,15 @@ export class NumberProp implements PropScheme {
   getHeader = (column: Column<Entity>) => {
     const { title, config } = this
     const { decimal = false } = config ?? {}
-    const { getFilterValue, setFilterValue, getFacetedMinMaxValues } = column
+    const { setFilterValue, getFacetedMinMaxValues } = column
 
-    const filter = (
+    const getFilter: GetFilter = ({ getFilterValue }) => (
       <NumberFilter
         {...{ decimal, getFilterValue, setFilterValue, getFacetedMinMaxValues }}
       />
     )
 
-    return { title, filter }
+    return { title, getFilter }
   }
 
   getCellComponent = (row: Row<Entity>) => {

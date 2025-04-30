@@ -1,5 +1,5 @@
 import { Entity } from '@/services/config'
-import { ForView, MinSize, PropScheme, Required } from './utils'
+import { ForView, GetFilter, MinSize, PropScheme, Required } from './utils'
 import { Input } from '@/components'
 import { Column, FilterFn, Row } from '@tanstack/react-table'
 import { format } from '@formkit/tempo'
@@ -72,11 +72,13 @@ export class DateTimeProp implements PropScheme {
   getHeader = (column: Column<Entity>) => {
     const { title } = this
 
-    const { getFilterValue, setFilterValue } = column
+    const { setFilterValue } = column
 
-    const filter = <DateTimeFilter {...{ getFilterValue, setFilterValue }} />
+    const getFilter: GetFilter = ({ getFilterValue }) => (
+      <DateTimeFilter {...{ getFilterValue, setFilterValue }} />
+    )
 
-    return { title, filter }
+    return { title, getFilter }
   }
 
   getCellComponent = (row: Row<Entity>) => {

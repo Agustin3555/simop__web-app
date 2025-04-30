@@ -9,6 +9,7 @@ import {
   Row,
 } from '@tanstack/react-table'
 import { Entity } from '@/services/config'
+import { ComboboxProps } from '../../components/Combobox/Combobox'
 
 export type Color = 'blue' | 'green' | 'yellow' | 'red' | 'grey'
 
@@ -37,6 +38,11 @@ export interface GetScheme {
   getScheme: () => Scheme
 }
 
+export type GetFilter = (
+  props: Pick<Column<Entity>, 'getFilterValue'> &
+    Partial<Pick<ComboboxProps, 'options'>>,
+) => ReactNode
+
 export interface PropScheme<E = Entity> {
   key: string
   verboseKey?: string
@@ -56,10 +62,10 @@ export interface PropScheme<E = Entity> {
   footer?: (info: HeaderContext<E, unknown>) => ReactNode
   getHeader: (column: Column<E>) => {
     title: string
-    subtitle?: string
-    filter: ReactNode
+    scheme?: Scheme
+    getFilter: GetFilter
   }
-  getCellComponent: (row: Row<E>) => ReactNode
+  getCellComponent: (row: Row<E>, selectedSearchMode?: string) => ReactNode
 
-  getExcelValue: (item: E) => unknown
+  getExcelValue: (item: E, selectedSearchMode?: string) => unknown
 }
