@@ -21,6 +21,11 @@ const LocalQuery = () => {
 
   const [quickFilters, setQuickFilters] = useState<QuickFilters>({})
 
+  const hasQuickFilters = useMemo(
+    () => Object.keys(quickFilters).length !== 0,
+    [quickFilters],
+  )
+
   const allColumnsVisible = useMemo(
     () => Object.fromEntries(Object.keys(flatProps).map(id => [id, true])),
     [],
@@ -102,7 +107,7 @@ const LocalQuery = () => {
           setSelected={setVisibleKeys}
           options={columnOptions}
         />
-        {quickFilters && (
+        {hasQuickFilters && (
           <div className="filter-container">
             {Object.values(quickFilters).map(({ title, filter }) => (
               <div key={title} className="item">

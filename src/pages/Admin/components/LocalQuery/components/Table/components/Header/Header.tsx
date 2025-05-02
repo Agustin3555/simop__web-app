@@ -37,7 +37,7 @@ interface Props {
   columnOrder: ColumnOrderState
   setColumnOrder: Dispatch<SetStateAction<ColumnOrderState>>
   setAccesorKeys: Dispatch<SetStateAction<AccesorKeys>>
-  quickFilterKeys: string[]
+  quickFilterKeys: string[] | undefined
   setQuickFilters: Dispatch<SetStateAction<QuickFilters>>
 }
 
@@ -107,7 +107,7 @@ const Header = ({
   const filter = useMemo(() => {
     const filter = getFilter({ getFilterValue, options })
 
-    if (quickFilterKeys.includes(column.id)) {
+    if (quickFilterKeys?.includes(column.id)) {
       const newQuickFilter = { [column.id]: { title, filter } }
 
       setQuickFilters(prev => ({ ...prev, ...newQuickFilter }))

@@ -52,9 +52,7 @@ const Table = ({
   setQuickFilters,
 }: TableProps) => {
   const { scheme, flatProps } = useScheme()
-  const { title, quickFilters, groups } = scheme
-
-  const quickFilterKeys = quickFilters!
+  const { title, quickFilters: quickFilterKeys, groups } = scheme
 
   const { rowSelection, setRowSelection, selectedRowIds } = useRowSelection()
   const [filters, setFilters] = useState(true)
