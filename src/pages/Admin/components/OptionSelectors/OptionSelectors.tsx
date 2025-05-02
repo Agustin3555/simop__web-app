@@ -6,6 +6,7 @@ interface OptionSelectorsProps {
   name: string
   selected: string
   setSelected: Dispatch<SetStateAction<string>>
+  // TODO: pasar siempre un título corto
   options: { value: string; title: string }[]
 }
 

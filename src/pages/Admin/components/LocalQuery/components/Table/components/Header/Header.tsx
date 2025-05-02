@@ -22,7 +22,7 @@ import { steppedSizes } from '../../helpers'
 import { OptionSelectors } from '@/pages/Admin/components'
 import { extractKeys } from '@/pages/Admin/helpers'
 import { getFlatProps } from '@/pages/Admin/services/config'
-import { AccesorKeys } from '../../Table'
+import { AccesorKeys, QuickFilters } from '../../Table'
 
 const SORT_ICON_MATCHER: Record<SortDirection, string> = {
   asc: 'fa-solid fa-arrow-up-wide-short',
@@ -36,8 +36,9 @@ interface Props {
   setSorting: Dispatch<SetStateAction<SortingState>>
   columnOrder: ColumnOrderState
   setColumnOrder: Dispatch<SetStateAction<ColumnOrderState>>
-  accesorKeys: AccesorKeys
   setAccesorKeys: Dispatch<SetStateAction<AccesorKeys>>
+  quickFilterKeys: string[]
+  setQuickFilters: Dispatch<SetStateAction<QuickFilters>>
 }
 
 const Header = ({
@@ -47,8 +48,9 @@ const Header = ({
   setSorting,
   columnOrder,
   setColumnOrder,
-  accesorKeys,
   setAccesorKeys,
+  quickFilterKeys,
+  setQuickFilters,
 }: Props) => {
   const { column, getContext, getResizeHandler, getSize } = header
 
@@ -72,7 +74,7 @@ const Header = ({
   )
 
   useEffect(() => {
-    setAccesorKeys()
+    setAccesorKeys(prev => ({ ...prev, [column.id]: selectedSearchMode! }))
   }, [selectedSearchMode])
 
   const options = useMemo(() => {
@@ -100,6 +102,21 @@ const Header = ({
     })
   }, [selectedSearchMode])
 
+  const filterValue = getFilterValue()
+
+  const filter = useMemo(() => {
+    const filter = getFilter({ getFilterValue, options })
+
+    if (quickFilterKeys.includes(column.id)) {
+      const newQuickFilter = { [column.id]: { title, filter } }
+
+      setQuickFilters(prev => ({ ...prev, ...newQuickFilter }))
+    }
+
+    return filter
+  }, [options, filterValue])
+
+  // TODO: actualizar si se actualiza la data
   const searchModes = useMemo(() => {
     if (!scheme) return
 
@@ -204,29 +221,19 @@ const Header = ({
   return (
     <div className={classList('cmp-header', { dragging })} style={{ width }}>
       <div className="content">
-        <div className="management">
-          <div
-            className="grip-area"
-            draggable
-            onDragStart={handleDragStart}
-            onDragOver={handleDragOver}
-            onDragEnd={handleDragEnd}
-            onDrop={handleDrop}
-          >
-            <span />
-          </div>
+        <div
+          className="grip-area"
+          draggable
+          onDragStart={handleDragStart}
+          onDragOver={handleDragOver}
+          onDragEnd={handleDragEnd}
+          onDrop={handleDrop}
+        >
+          <span />
+        </div>
+        <div className="main">
           <button onClick={handleSortingClick}>
-            <div className="title-group">
-              <p className="title text">{title}</p>
-              {selectedSearchMode && (
-                <OptionSelectors
-                  name={`search-mode-header-${column.id}`}
-                  selected={selectedSearchMode}
-                  setSelected={setSelectedSearchMode}
-                  options={searchModes!}
-                />
-              )}
-            </div>
+            <p className="text">{title}</p>
             {sortIcon && (
               <div className="sort">
                 <Icon faIcon={sortIcon} />
@@ -234,8 +241,16 @@ const Header = ({
               </div>
             )}
           </button>
+          {searchModes && (
+            <OptionSelectors
+              name={`search-mode-header-${column.id}`}
+              selected={selectedSearchMode}
+              setSelected={setSelectedSearchMode}
+              options={searchModes}
+            />
+          )}
         </div>
-        <div className="filters">{getFilter({ getFilterValue, options })}</div>
+        <div className="filter-container">{filter}</div>
       </div>
       <div
         className={classList('resizer', { resizing: getIsResizing() })}

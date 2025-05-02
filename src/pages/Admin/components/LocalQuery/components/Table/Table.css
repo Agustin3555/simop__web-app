@@ -46,7 +46,7 @@
     }
   }
 
-  &:not(.show-filters) .filters {
+  &:not(.show-filters) .filter-container {
     display: none !important;
   }
 }

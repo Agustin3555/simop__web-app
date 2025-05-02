@@ -13,11 +13,13 @@ import { VisibilityState } from '@tanstack/react-table'
 import { Button } from '@/components'
 import { Combobox } from '..'
 import { DeleteButton, ReportButton, Table } from './components'
-import { GetHeaderResult } from './components/Table/Table'
+import { QuickFilters } from './components/Table/Table'
 
 const LocalQuery = () => {
   const { scheme, flatProps } = useScheme()
   const { key, columnVisibility: schemeColumnVisibility } = scheme
+
+  const [quickFilters, setQuickFilters] = useState<QuickFilters>({})
 
   const allColumnsVisible = useMemo(
     () => Object.fromEntries(Object.keys(flatProps).map(id => [id, true])),
@@ -64,8 +66,6 @@ const LocalQuery = () => {
     fromKeysToVisibility,
   )
 
-  const [quickFilters, setQuickFilters] = useState<GetHeaderResult[]>()
-
   const { selectedRowIds } = useRowSelection()
   const componentRef = useRef<HTMLDivElement | null>(null)
 
@@ -103,8 +103,8 @@ const LocalQuery = () => {
           options={columnOptions}
         />
         {quickFilters && (
-          <div className="filters">
-            {quickFilters.map(({ title, getFilter: filter }) => (
+          <div className="filter-container">
+            {Object.values(quickFilters).map(({ title, filter }) => (
               <div key={title} className="item">
                 <small>{title}</small>
                 {filter}

@@ -1,3 +1,9 @@
+:root {
+  --cmp-option-selectors-color: var(--pal-color-a-l1);
+  --cmp-option-selectors-bg-color: var(--pal-color-a-l2);
+  --cmp-option-selectors-color-active: var(--pal-color-white);
+}
+
 .cmp-option-selectors {
   display: flex;
   flex-wrap: wrap;
@@ -6,15 +12,17 @@
   border: none;
 
   > label {
-    border-width: 0.0625rem;
+    align-content: center;
+    border-width: var(--line-thickness);
     border-style: solid;
-    border-color: var(--pal-color-a-l2);
-    padding-block: var(--pal-size-2xs);
+    border-color: var(--cmp-option-selectors-bg-color);
     padding-inline: var(--pal-size-xs);
+    height: var(--pal-size-l);
 
-    font-size: var(--pal-size-font-xs);
+    font-size: var(--pal-size-font-2xs);
+    line-height: 0;
     white-space: nowrap;
-    color: var(--pal-color-a-l1);
+    color: var(--cmp-option-selectors-color);
 
     border-radius: var(--pal-size-3xl);
     cursor: pointer;
@@ -27,9 +35,9 @@
     }
 
     &:has(input:checked) {
-      color: var(--pal-color-white);
+      color: var(--cmp-option-selectors-color-active);
 
-      background-color: var(--pal-color-a-l2);
+      background-color: var(--cmp-option-selectors-bg-color);
     }
   }
 }

@@ -1,6 +1,7 @@
 import './Table.css'
 import {
   Dispatch,
+  ReactNode,
   SetStateAction,
   useCallback,
   useEffect,
@@ -25,18 +26,18 @@ import { Button, Toggle } from '@/components'
 import { Cell, Footer, Header, RowSelectorCell } from './components'
 import { Value } from '../../..'
 import { Entity } from '@/services/config'
-import { MinSize, PropScheme } from '@/pages/Admin/services/config'
+import { MinSize } from '@/pages/Admin/services/config'
 import { classList } from '@/helpers'
 import { format } from '@formkit/tempo'
 import { utils, writeFile } from 'xlsx'
 
-export type GetHeaderResult = ReturnType<NonNullable<PropScheme['getHeader']>>
+export type QuickFilters = Record<string, { title: string; filter: ReactNode }>
 
 interface TableProps {
   data: Entity[]
   columnVisibility: VisibilityState
   setColumnVisibility: Dispatch<SetStateAction<VisibilityState>>
-  setQuickFilters: Dispatch<SetStateAction<GetHeaderResult[] | undefined>>
+  setQuickFilters: Dispatch<SetStateAction<QuickFilters>>
 }
 
 export type AccesorKeys = Record<string, string>
@@ -52,6 +53,8 @@ const Table = ({
 }: TableProps) => {
   const { scheme, flatProps } = useScheme()
   const { title, quickFilters, groups } = scheme
+
+  const quickFilterKeys = quickFilters!
 
   const { rowSelection, setRowSelection, selectedRowIds } = useRowSelection()
   const [filters, setFilters] = useState(true)
@@ -118,27 +121,6 @@ const Table = ({
     enableSortingRemoval: false,
     columnResizeMode: 'onEnd',
   })
-
-  useEffect(() => {
-    if (!quickFilters) return
-
-    let results: GetHeaderResult[] = []
-
-    quickFilters.forEach(key => {
-      const { getHeader } = flatProps[key]
-
-      if (!getHeader) return
-
-      const { column } =
-        table.getHeaderGroups()[0].headers.find(({ id }) => id === key) ?? {}
-
-      if (!column) return
-
-      results = [...results, getHeader(column)]
-    })
-
-    setQuickFilters(results)
-  }, [table])
 
   const exportHandleClick = useCallback(() => {
     if (!data) return
@@ -258,8 +240,9 @@ const Table = ({
                       setSorting,
                       columnOrder,
                       setColumnOrder,
-                      accesorKeys,
                       setAccesorKeys,
+                      quickFilterKeys,
+                      setQuickFilters,
                     }}
                   />
                 ),
@@ -282,10 +265,7 @@ const Table = ({
                       onChange={row.getToggleSelectedHandler()}
                     />
                   ) : (
-                    <Cell
-                      key={cell.id}
-                      {...{ flatProps, cell, accesorKeys, setAccesorKeys }}
-                    />
+                    <Cell key={cell.id} {...{ flatProps, cell, accesorKeys }} />
                   ),
                 )}
             </div>

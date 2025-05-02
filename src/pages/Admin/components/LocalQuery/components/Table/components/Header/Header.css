@@ -13,29 +13,39 @@
     justify-content: space-between;
     height: 100%;
 
-    > .management {
+    > .grip-area {
+      padding: var(--gap);
+      padding-bottom: 0;
+
+      cursor: grab;
+
+      > span {
+        width: 100%;
+        height: var(--pal-size-m);
+
+        border-radius: calc(var(--table-border-radius) - var(--gap));
+        background-image: radial-gradient(
+          circle at 0.125rem 0.125rem,
+          var(--pal-color-a-l1) 0.0625rem,
+          transparent 0
+        );
+        background-size: 0.25rem 0.25rem;
+      }
+    }
+
+    > .main {
+      --cmp-option-selectors-color: var(--pal-color-a);
+      --cmp-option-selectors-bg-color: var(--pal-color-a-l1);
+      --cmp-option-selectors-color-active: var(--pal-color-white);
+
+      flex-grow: 1;
+
       display: flex;
       flex-direction: column;
-
-      > .grip-area {
-        padding: var(--gap);
-        padding-bottom: 0;
-
-        cursor: grab;
-
-        > span {
-          width: 100%;
-          height: var(--pal-size-m);
-
-          border-radius: calc(var(--table-border-radius) - var(--gap));
-          background-image: radial-gradient(
-            circle at 0.125rem 0.125rem,
-            var(--pal-color-a-l1) 0.0625rem,
-            transparent 0
-          );
-          background-size: 0.25rem 0.25rem;
-        }
-      }
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: var(--cell-padding-inline);
+      padding: var(--cell-padding-inline);
 
       > button {
         display: flex;
@@ -43,20 +53,11 @@
         align-items: flex-start;
         justify-content: space-between;
         gap: var(--cell-padding-inline);
-        padding: var(--cell-padding-inline);
 
-        > .title-group {
-          display: flex;
-          flex-direction: column;
-          align-items: flex-start;
-          gap: var(--pal-size-2xs);
-
+        > .text {
           font-weight: 750;
-
-          > .title {
-            text-align: start;
-            color: var(--pal-color-a-d2);
-          }
+          text-align: start;
+          color: var(--pal-color-a-d2);
         }
 
         > .sort {
@@ -75,7 +76,7 @@
       }
     }
 
-    > .filters {
+    > .filter-container {
       display: flex;
       flex-direction: column;
       gap: var(--gap);

@@ -2,7 +2,7 @@ import './Cell.css'
 import { useScheme } from '@/pages/Admin/hooks'
 import { Cell as TsCell } from '@tanstack/react-table'
 import { Entity } from '@/services/config'
-import { Dispatch, SetStateAction, useMemo } from 'react'
+import { useMemo } from 'react'
 import { steppedSizes } from '../../helpers'
 import { AccesorKeys } from '../../Table'
 
@@ -16,15 +16,14 @@ interface Props {
   flatProps: ReturnType<typeof useScheme>['flatProps']
   cell: TsCell<Entity, unknown>
   accesorKeys: AccesorKeys
-  setAccesorKeys: Dispatch<SetStateAction<AccesorKeys>>
 }
 
-const Cell = ({ flatProps, cell, accesorKeys, setAccesorKeys }: Props) => {
+const Cell = ({ flatProps, cell, accesorKeys }: Props) => {
   const { column, row } = cell
 
   const component = useMemo(
-    () => flatProps[column.id].getCellComponent(row),
-    [column.id, row],
+    () => flatProps[column.id].getCellComponent(row, accesorKeys[column.id]),
+    [row, accesorKeys],
   )
 
   const width = steppedSizes(column.columnDef.minSize!, column.getSize())
