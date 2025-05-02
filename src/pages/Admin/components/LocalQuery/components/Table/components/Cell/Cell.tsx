@@ -19,14 +19,16 @@ interface Props {
 }
 
 const Cell = ({ flatProps, cell, accesorKeys }: Props) => {
-  const { column, row } = cell
+  const { row, column } = cell
+  const { original } = row
+  const { id, columnDef, getSize } = column
 
   const component = useMemo(
-    () => flatProps[column.id].getCellComponent(row, accesorKeys[column.id]),
-    [row, accesorKeys],
+    () => flatProps[id].getValueComponent(original, accesorKeys[id]),
+    [original, accesorKeys],
   )
 
-  const width = steppedSizes(column.columnDef.minSize!, column.getSize())
+  const width = steppedSizes(columnDef.minSize!, getSize())
 
   return (
     <div className="cmp-cell" style={{ width }}>

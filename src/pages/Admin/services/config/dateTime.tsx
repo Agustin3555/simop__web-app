@@ -1,7 +1,7 @@
 import { Entity } from '@/services/config'
 import { ForView, GetFilter, MinSize, PropScheme, Required } from './utils'
 import { Input } from '@/components'
-import { Column, FilterFn, Row } from '@tanstack/react-table'
+import { Column, FilterFn } from '@tanstack/react-table'
 import { format } from '@formkit/tempo'
 import { DateTimeFilter } from '../../components'
 
@@ -81,10 +81,10 @@ export class DateTimeProp implements PropScheme {
     return { title, getFilter }
   }
 
-  getCellComponent = (row: Row<Entity>) => {
+  getValueComponent = (item: Entity) => {
     const { key } = this
 
-    const value = row.original[key] as undefined | string
+    const value = item[key] as undefined | string
 
     return value && <p>{format(value, { date: 'short', time: 'short' })}</p>
   }

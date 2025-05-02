@@ -1,8 +1,7 @@
 import { Entity } from '@/services/config'
 import { ForView, GetScheme, MinSize, PropScheme, Required } from './utils'
 import { AutoCombobox, FetchRef } from '../../components'
-import { Column, Row } from '@tanstack/react-table'
-import { getFlatProps } from './scheme'
+import { Column } from '@tanstack/react-table'
 import { isFieldEnabled } from '.'
 
 /*
@@ -78,14 +77,14 @@ export class RefListProp implements PropScheme {
     return { title, getFilter }
   }
 
-  getCellComponent = (row: Row<Entity>) => {
+  getValueComponent = (item: Entity) => {
     const { key, config } = this
     const { getScheme } = config ?? {}
 
     const { service, anchorField, key: keyScheme } = getScheme()
     const { getOne } = service
 
-    const value = row.original[key] as undefined | Entity[]
+    const value = item[key] as undefined | Entity[]
 
     return (
       value &&

@@ -1,6 +1,6 @@
 import { Entity } from '@/services/config'
 import { ForView, GetFilter, MinSize, PropScheme, Required } from './utils'
-import { Column, Row } from '@tanstack/react-table'
+import { Column } from '@tanstack/react-table'
 import { InputArea, TextFilter } from '../../components'
 
 export class TextLongProp implements PropScheme {
@@ -63,10 +63,10 @@ export class TextLongProp implements PropScheme {
     return { title, getFilter }
   }
 
-  getCellComponent = (row: Row<Entity>) => {
+  getValueComponent = (item: Entity) => {
     const { key } = this
 
-    const value = row.original[key] as undefined | string
+    const value = item[key] as undefined | string
 
     return value && <p className="text">{value}</p>
   }

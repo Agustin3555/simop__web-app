@@ -8,7 +8,7 @@ import {
   Required,
 } from './utils'
 import { AutoCombobox, FetchRef, RefFilter } from '../../components'
-import { AccessorFn, Column, FilterFn, Row } from '@tanstack/react-table'
+import { AccessorFn, Column, FilterFn } from '@tanstack/react-table'
 
 export const isFieldEnabled = (form: HTMLFormElement, key: string) => {
   const inputOption = form.querySelector<HTMLInputElement>(`[name="${key}"]`)
@@ -119,20 +119,20 @@ export class RefProp implements PropScheme {
     return { title, scheme, getFilter }
   }
 
-  getCellComponent = (row: Row<Entity>, selectedSearchMode?: string) => {
+  getValueComponent = (item: Entity, selectedSearchMode?: string) => {
     const { key, config } = this
     const { getScheme } = config ?? {}
 
-    const { service, key: keyScheme } = getScheme()
+    const { key: keyScheme, service, anchorField } = getScheme()
     const { getOne } = service
 
-    const value = row.original[key] as undefined | Entity
+    const value = item[key] as undefined | Entity
 
     return (
       value && (
         <FetchRef
           id={value.id}
-          title={value[selectedSearchMode!]}
+          title={value[selectedSearchMode ?? anchorField]}
           {...{ keyScheme, getOne }}
         />
       )

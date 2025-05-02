@@ -152,7 +152,7 @@ export class NumberProp implements PropScheme {
     return { title: title.short ?? title.long, filter }
   }
 
-  getCellComponent = (row: Row<Entity>) => {
+  getValueComponent = (row: Row<Entity>) => {
     const { key, global } = this
     const { isMoney, pre, sub } = global
 

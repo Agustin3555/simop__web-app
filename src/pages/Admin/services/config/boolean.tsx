@@ -1,7 +1,7 @@
 import { Entity } from '@/services/config'
 import { Color, ForView, GetFilter, MinSize, PropScheme } from './utils'
 import { BooleanFilter, Checkbox } from '../../components'
-import { Column, FilterFn, Row } from '@tanstack/react-table'
+import { Column } from '@tanstack/react-table'
 import { classList } from '@/helpers'
 
 export class BooleanProp implements PropScheme {
@@ -69,12 +69,12 @@ export class BooleanProp implements PropScheme {
     return { title, getFilter }
   }
 
-  getCellComponent = (row: Row<Entity>) => {
+  getValueComponent = (item: Entity) => {
     const { key, config } = this
     const { falseText = 'No', trueText = 'Si', column } = config ?? {}
     const { falseColor = 'grey', trueColor = 'green' } = column ?? {}
 
-    const value = row.original[key] as undefined | boolean
+    const value = item[key] as undefined | boolean
 
     return (
       value !== undefined && (

@@ -1,12 +1,7 @@
 import { Entity } from '@/services/config'
 import { ForView, GetFilter, MinSize, PropScheme, Required } from './utils'
 import { Input } from '@/components'
-import {
-  BuiltInFilterFn,
-  Column,
-  HeaderContext,
-  Row,
-} from '@tanstack/react-table'
+import { BuiltInFilterFn, Column, HeaderContext } from '@tanstack/react-table'
 import { NumberFilter, StylizedNumber } from '../../components'
 
 export class NumberProp implements PropScheme {
@@ -102,11 +97,11 @@ export class NumberProp implements PropScheme {
     return { title, getFilter }
   }
 
-  getCellComponent = (row: Row<Entity>) => {
+  getValueComponent = (item: Entity) => {
     const { key, config } = this
     const { isMoney = false, pre, sub } = config ?? {}
 
-    let value = row.original[key] as undefined | number | string
+    let value = item[key] as undefined | number | string
 
     if (typeof value === 'string') value = Number(value)
 

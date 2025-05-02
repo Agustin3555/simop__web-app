@@ -6,7 +6,6 @@ import {
   Column,
   FilterFn,
   HeaderContext,
-  Row,
 } from '@tanstack/react-table'
 import { Entity } from '@/services/config'
 import { ComboboxProps } from '../../components/Combobox/Combobox'
@@ -65,7 +64,7 @@ export interface PropScheme<E = Entity> {
     scheme?: Scheme
     getFilter: GetFilter
   }
-  getCellComponent: (row: Row<E>, selectedSearchMode?: string) => ReactNode
+  getValueComponent: (item: E, selectedSearchMode?: string) => ReactNode
 
   getExcelValue: (item: E, selectedSearchMode?: string) => unknown
 }
