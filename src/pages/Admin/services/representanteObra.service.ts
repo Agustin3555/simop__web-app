@@ -20,13 +20,13 @@ export const RepresentanteObraService: Service<RepresentanteObraModel.Entity> =
       return RepresentanteObraAdapter.getOne.output(response.data)
     },
 
-    create: async (data: RepresentanteObraModel.CreateData) => {
+    create: async (data: RepresentanteObraModel.CreateEntity) => {
       const adaptedInput = RepresentanteObraAdapter.create.input(data)
 
       await publicInstance.post(collection(), adaptedInput)
     },
 
-    updateOne: async (id, data: RepresentanteObraModel.UpdateData) => {
+    updateOne: async (id, data: RepresentanteObraModel.UpdateEntity) => {
       const adaptedInput = RepresentanteObraAdapter.updateOne.input(data)
 
       await publicInstance.put(collection(id), adaptedInput)

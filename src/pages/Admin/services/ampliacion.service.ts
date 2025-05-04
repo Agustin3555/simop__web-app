@@ -13,10 +13,10 @@ export const AmpliacionService: Service<AmpliacionModel.Entity> = {
     return AmpliacionAdapter.getAll.output(response.data)
   },
 
-  getForConnect: async () => {
-    const response = await publicInstance.get(collection('for-connect'))
+  getRefs: async () => {
+    const response = await publicInstance.get(collection('refs'))
 
-    return AmpliacionAdapter.getForConnect.output(response.data)
+    return AmpliacionAdapter.getRefs.output(response.data)
   },
 
   getOne: async id => {
@@ -25,13 +25,13 @@ export const AmpliacionService: Service<AmpliacionModel.Entity> = {
     return AmpliacionAdapter.getOne.output(response.data)
   },
 
-  create: async (data: AmpliacionModel.CreateData) => {
+  create: async (data: AmpliacionModel.CreateEntity) => {
     const adaptedInput = AmpliacionAdapter.create.input(data)
 
     await publicInstance.post(collection(), adaptedInput)
   },
 
-  updateOne: async (id, data: AmpliacionModel.UpdateData) => {
+  updateOne: async (id, data: AmpliacionModel.UpdateEntity) => {
     const adaptedInput = AmpliacionAdapter.updateOne.input(data)
 
     await publicInstance.put(collection(id), adaptedInput)

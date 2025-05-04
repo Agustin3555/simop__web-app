@@ -13,10 +13,10 @@ export const RedeterminacionService: Service<RedeterminacionModel.Entity> = {
     return RedeterminacionAdapter.getAll.output(response.data)
   },
 
-  getForConnect: async () => {
-    const response = await publicInstance.get(collection('for-connect'))
+  getRefs: async () => {
+    const response = await publicInstance.get(collection('refs'))
 
-    return RedeterminacionAdapter.getForConnect.output(response.data)
+    return RedeterminacionAdapter.getRefs.output(response.data)
   },
 
   getOne: async id => {
@@ -25,13 +25,13 @@ export const RedeterminacionService: Service<RedeterminacionModel.Entity> = {
     return RedeterminacionAdapter.getOne.output(response.data)
   },
 
-  create: async (data: RedeterminacionModel.CreateData) => {
+  create: async (data: RedeterminacionModel.CreateEntity) => {
     const adaptedInput = RedeterminacionAdapter.create.input(data)
 
     await publicInstance.post(collection(), adaptedInput)
   },
 
-  updateOne: async (id, data: RedeterminacionModel.UpdateData) => {
+  updateOne: async (id, data: RedeterminacionModel.UpdateEntity) => {
     const adaptedInput = RedeterminacionAdapter.updateOne.input(data)
 
     await publicInstance.put(collection(id), adaptedInput)

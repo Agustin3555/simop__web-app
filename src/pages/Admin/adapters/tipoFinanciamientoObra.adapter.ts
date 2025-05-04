@@ -10,7 +10,7 @@ export const getAll: {
   output: response => response,
 }
 
-export const getForConnect: {
+export const getRefs: {
   output: OutputAdapter<
     TipoFinanciamientoObraModel.RawRef[],
     TipoFinanciamientoObraModel.Ref[]
@@ -30,7 +30,7 @@ export const getOne: {
 
 export const create: {
   input: InputAdapter<
-    TipoFinanciamientoObraModel.CreateData,
+    TipoFinanciamientoObraModel.CreateEntity,
     TipoFinanciamientoObraModel.CreateBody
   >
 } = {
@@ -39,7 +39,7 @@ export const create: {
 
 export const updateOne: {
   input: InputAdapter<
-    TipoFinanciamientoObraModel.UpdateData,
+    TipoFinanciamientoObraModel.UpdateEntity,
     TipoFinanciamientoObraModel.UpdateBody
   >
 } = {

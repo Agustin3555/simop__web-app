@@ -13,10 +13,10 @@ export const TipoRescisionService: Service<TipoRescisionModel.Entity> = {
     return TipoRescisionAdapter.getAll.output(response.data)
   },
 
-  getForConnect: async () => {
-    const response = await publicInstance.get(collection('for-connect'))
+  getRefs: async () => {
+    const response = await publicInstance.get(collection('refs'))
 
-    return TipoRescisionAdapter.getForConnect.output(response.data)
+    return TipoRescisionAdapter.getRefs.output(response.data)
   },
 
   getOne: async id => {
@@ -25,13 +25,13 @@ export const TipoRescisionService: Service<TipoRescisionModel.Entity> = {
     return TipoRescisionAdapter.getOne.output(response.data)
   },
 
-  create: async (data: TipoRescisionModel.CreateData) => {
+  create: async (data: TipoRescisionModel.CreateEntity) => {
     const adaptedInput = TipoRescisionAdapter.create.input(data)
 
     await publicInstance.post(collection(), adaptedInput)
   },
 
-  updateOne: async (id, data: TipoRescisionModel.UpdateData) => {
+  updateOne: async (id, data: TipoRescisionModel.UpdateEntity) => {
     const adaptedInput = TipoRescisionAdapter.updateOne.input(data)
 
     await publicInstance.put(collection(id), adaptedInput)

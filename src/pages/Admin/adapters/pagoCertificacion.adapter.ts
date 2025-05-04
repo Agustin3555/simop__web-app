@@ -10,7 +10,7 @@ export const getAll: {
   output: response => response,
 }
 
-export const getForConnect: {
+export const getRefs: {
   output: OutputAdapter<
     PagoCertificacionModel.RawRef[],
     PagoCertificacionModel.Ref[]
@@ -30,7 +30,7 @@ export const getOne: {
 
 export const create: {
   input: InputAdapter<
-    PagoCertificacionModel.CreateData,
+    PagoCertificacionModel.CreateEntity,
     PagoCertificacionModel.CreateBody
   >
 } = {
@@ -39,7 +39,7 @@ export const create: {
 
 export const updateOne: {
   input: InputAdapter<
-    PagoCertificacionModel.UpdateData,
+    PagoCertificacionModel.UpdateEntity,
     PagoCertificacionModel.UpdateBody
   >
 } = {

@@ -13,10 +13,10 @@ export const TipoProgramaObraService: Service<TipoProgramaObraModel.Entity> = {
     return TipoProgramaObraAdapter.getAll.output(response.data)
   },
 
-  getForConnect: async () => {
-    const response = await publicInstance.get(collection('for-connect'))
+  getRefs: async () => {
+    const response = await publicInstance.get(collection('refs'))
 
-    return TipoProgramaObraAdapter.getForConnect.output(response.data)
+    return TipoProgramaObraAdapter.getRefs.output(response.data)
   },
 
   getOne: async id => {
@@ -25,13 +25,13 @@ export const TipoProgramaObraService: Service<TipoProgramaObraModel.Entity> = {
     return TipoProgramaObraAdapter.getOne.output(response.data)
   },
 
-  create: async (data: TipoProgramaObraModel.CreateData) => {
+  create: async (data: TipoProgramaObraModel.CreateEntity) => {
     const adaptedInput = TipoProgramaObraAdapter.create.input(data)
 
     await publicInstance.post(collection(), adaptedInput)
   },
 
-  updateOne: async (id, data: TipoProgramaObraModel.UpdateData) => {
+  updateOne: async (id, data: TipoProgramaObraModel.UpdateEntity) => {
     const adaptedInput = TipoProgramaObraAdapter.updateOne.input(data)
 
     await publicInstance.put(collection(id), adaptedInput)

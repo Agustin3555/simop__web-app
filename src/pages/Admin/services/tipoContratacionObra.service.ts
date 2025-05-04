@@ -14,10 +14,10 @@ export const TipoContratacionObraService: Service<TipoContratacionObraModel.Enti
       return TipoContratacionObraAdapter.getAll.output(response.data)
     },
 
-    getForConnect: async () => {
-      const response = await publicInstance.get(collection('for-connect'))
+    getRefs: async () => {
+      const response = await publicInstance.get(collection('refs'))
 
-      return TipoContratacionObraAdapter.getForConnect.output(response.data)
+      return TipoContratacionObraAdapter.getRefs.output(response.data)
     },
 
     getOne: async id => {
@@ -26,13 +26,13 @@ export const TipoContratacionObraService: Service<TipoContratacionObraModel.Enti
       return TipoContratacionObraAdapter.getOne.output(response.data)
     },
 
-    create: async (data: TipoContratacionObraModel.CreateData) => {
+    create: async (data: TipoContratacionObraModel.CreateEntity) => {
       const adaptedInput = TipoContratacionObraAdapter.create.input(data)
 
       await publicInstance.post(collection(), adaptedInput)
     },
 
-    updateOne: async (id, data: TipoContratacionObraModel.UpdateData) => {
+    updateOne: async (id, data: TipoContratacionObraModel.UpdateEntity) => {
       const adaptedInput = TipoContratacionObraAdapter.updateOne.input(data)
 
       await publicInstance.put(collection(id), adaptedInput)

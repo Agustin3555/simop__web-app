@@ -59,7 +59,7 @@ export interface Ref {
   numero: number
 }
 
-export interface CreateData {
+export interface CreateEntity {
   numero: number
   ordenPago?: string
   fecha?: string
@@ -83,7 +83,7 @@ export interface CreateBody {
   fojaMedicionId?: number
 }
 
-export type UpdateData = Partial<CreateData>
+export type UpdateEntity = Partial<CreateEntity>
 
 export type UpdateBody = Partial<CreateBody>
 

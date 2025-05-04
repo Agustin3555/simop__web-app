@@ -1,4 +1,5 @@
-import { Entity, EntityKey, Service } from '@/services/config'
+import { GeneralEntity, EntityKey } from '@/models/config'
+import { Service } from '@/services/config'
 import { PropScheme } from './utils'
 
 // interface RefConfig
@@ -13,7 +14,7 @@ import { PropScheme } from './utils'
 
 export type RefreshRate = 'high' | 'medium' | 'low'
 
-export interface Scheme<E = Entity> {
+export interface Scheme<E = GeneralEntity> {
   key: string
   service: Service
   refreshRate?: RefreshRate

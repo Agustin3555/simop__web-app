@@ -25,7 +25,7 @@ import {
 import { Button, Toggle } from '@/components'
 import { Cell, Footer, Header, RowSelectorCell } from './components'
 import { Value } from '../../..'
-import { Entity } from '@/services/config'
+import { GeneralEntity } from '@/models/config'
 import { MinSize } from '@/pages/Admin/services/config'
 import { classList } from '@/helpers'
 import { format } from '@formkit/tempo'
@@ -34,7 +34,7 @@ import { utils, writeFile } from 'xlsx'
 export type QuickFilters = Record<string, { title: string; filter: ReactNode }>
 
 interface TableProps {
-  data: Entity[]
+  data: GeneralEntity[]
   columnVisibility: VisibilityState
   setColumnVisibility: Dispatch<SetStateAction<VisibilityState>>
   setQuickFilters: Dispatch<SetStateAction<QuickFilters>>
@@ -72,7 +72,7 @@ const Table = ({
   const columns = useMemo(
     () => [
       { id: SELECT_COLUMN },
-      ...groups.flatMap<ColumnDef<Entity>>(({ props }) =>
+      ...groups.flatMap<ColumnDef<GeneralEntity>>(({ props }) =>
         Object.values(props).map(
           ({ key, minSize, accessorFn, filterFn, footer }) => ({
             id: key,

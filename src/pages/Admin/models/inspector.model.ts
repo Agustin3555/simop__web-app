@@ -2,68 +2,25 @@ import { TipoProfesionModel } from '.'
 import { NumberProp, RefListProp, Scheme, TextProp } from '../services/config'
 import { InspectorService } from '../services'
 import { COMMON_PROPS } from '../constants/commonProps.const'
+import { BaseEntity, BaseRef } from '@/models/config'
 
-export interface RawEntity {
-  id: number
-
-  cuil: number
-  apellido: string
-  nombre?: string
-
-  profesiones: TipoProfesionModel.RawRef[]
-
-  creado: string
-  modificado: string
-}
-
-export interface Entity {
-  id: number
-
+export interface OwnFields {
   cuil: number
   apellido: string
   nombre: string
+}
 
+interface RelationFields {
   profesiones: TipoProfesionModel.Ref[]
-
-  creado: string
-  modificado: string
 }
 
-export interface RawRef {
-  id: number
+export interface Entity extends BaseEntity, OwnFields, RelationFields {}
 
-  cuil: number
-  nombre: string
-  apellido: string
-}
+export type CreateEntity = OwnFields & { profesiones: number[] }
 
-export interface Ref {
-  id: number
+export type UpdateEntity = Partial<CreateEntity>
 
-  cuil: number
-  nombre: string
-  apellido: string
-}
-
-export interface CreateData {
-  cuil: number
-  apellido: string
-  nombre?: string
-
-  profesiones?: number[]
-}
-
-export interface CreateBody {
-  cuil: number
-  apellido: string
-  nombre?: string
-
-  profesiones?: number[]
-}
-
-export type UpdateData = Partial<CreateData>
-
-export type UpdateBody = Partial<CreateBody>
+export type Ref = BaseRef<OwnFields, 'cuil' | 'apellido' | 'nombre'>
 
 export const scheme: Scheme<Entity> = {
   key: 'inspector',

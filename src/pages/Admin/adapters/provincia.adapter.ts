@@ -7,7 +7,7 @@ export const getAll: {
   output: response => response,
 }
 
-export const getForConnect: {
+export const getRefs: {
   output: OutputAdapter<ProvinciaModel.RawRef[], ProvinciaModel.Ref[]>
 } = {
   output: response => response,
@@ -20,13 +20,13 @@ export const getOne: {
 }
 
 export const create: {
-  input: InputAdapter<ProvinciaModel.CreateData, ProvinciaModel.CreateBody>
+  input: InputAdapter<ProvinciaModel.CreateEntity, ProvinciaModel.CreateBody>
 } = {
   input: data => data,
 }
 
 export const updateOne: {
-  input: InputAdapter<ProvinciaModel.UpdateData, ProvinciaModel.UpdateBody>
+  input: InputAdapter<ProvinciaModel.UpdateEntity, ProvinciaModel.UpdateBody>
 } = {
   input: data => data,
 }

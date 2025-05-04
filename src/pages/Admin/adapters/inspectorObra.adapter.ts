@@ -10,7 +10,7 @@ export const getAll: {
   output: response => response,
 }
 
-export const getForConnect: {
+export const getRefs: {
   output: OutputAdapter<InspectorObraModel.RawRef[], InspectorObraModel.Ref[]>
 } = {
   output: response => response,
@@ -24,7 +24,7 @@ export const getOne: {
 
 export const create: {
   input: InputAdapter<
-    InspectorObraModel.CreateData,
+    InspectorObraModel.CreateEntity,
     InspectorObraModel.CreateBody
   >
 } = {
@@ -33,7 +33,7 @@ export const create: {
 
 export const updateOne: {
   input: InputAdapter<
-    InspectorObraModel.UpdateData,
+    InspectorObraModel.UpdateEntity,
     InspectorObraModel.UpdateBody
   >
 } = {

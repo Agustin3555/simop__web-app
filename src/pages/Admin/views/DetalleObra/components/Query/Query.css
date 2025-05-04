@@ -1,0 +1,28 @@
+.cmp-query {
+  display: flex;
+  flex-direction: column;
+  gap: var(--pal-size-l);
+
+  > header {
+    display: flex;
+    gap: var(--gap);
+
+    > form {
+      flex-grow: 1;
+
+      flex-direction: unset;
+      align-items: flex-end;
+      gap: var(--gap);
+
+      > .cmp-base-combobox {
+        flex-grow: 1;
+      }
+
+      > .cmp-button {
+        background-color: var(--pal-color-a);
+
+        color: var(--pal-color-white);
+      }
+    }
+  }
+}

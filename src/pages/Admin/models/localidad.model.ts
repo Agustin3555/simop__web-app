@@ -33,7 +33,7 @@ export interface Ref {
   nombre: string
 }
 
-export interface CreateData {
+export interface CreateEntity {
   nombre: string
 
   provinciaId: number
@@ -45,7 +45,7 @@ export interface CreateBody {
   provinciaId: number
 }
 
-export type UpdateData = Partial<CreateData>
+export type UpdateEntity = Partial<CreateEntity>
 
 export type UpdateBody = Partial<CreateBody>
 

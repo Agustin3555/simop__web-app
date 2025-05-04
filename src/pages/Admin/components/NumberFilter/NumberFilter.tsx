@@ -2,17 +2,17 @@ import { useCallback } from 'react'
 import { DebouncedInput } from '..'
 import { DebouncedInputProps } from '../DebouncedInput/DebouncedInput'
 import { ColumnFiltersColumn, FacetedColumn } from '@tanstack/react-table'
-import { Entity } from '@/services/config'
+import { GeneralEntity } from '@/models/config'
 
 // TODO: optimizar tratando el filtro como objeto al igual que DateTimeFilter
 type FilterValuePair = [string, string] | undefined
 
 interface Props
   extends Pick<
-      ColumnFiltersColumn<Entity>,
+      ColumnFiltersColumn<GeneralEntity>,
       'getFilterValue' | 'setFilterValue'
     >,
-    Pick<FacetedColumn<Entity>, 'getFacetedMinMaxValues'> {
+    Pick<FacetedColumn<GeneralEntity>, 'getFacetedMinMaxValues'> {
   decimal: boolean
 }
 

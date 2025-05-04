@@ -2,80 +2,30 @@ import { LocalidadModel, PaisModel, ProvinciaModel } from '.'
 import { NumberProp, RefProp, Scheme, TextProp } from '../services/config'
 import { EmpresaService } from '../services'
 import { COMMON_PROPS } from '../constants/commonProps.const'
+import { BaseEntity, BaseRef } from '@/models/config'
 
-export interface RawEntity {
-  id: number
-  cuit: number
-  nombre: string
-  direccion?: string
-  numeroContacto?: number
-  email?: string
-
-  pais?: PaisModel.RawRef
-  provincia?: ProvinciaModel.RawRef
-  localidad?: LocalidadModel.RawRef
-
-  creado: string
-  modificado: string
-}
-
-export interface Entity {
-  id: number
-  cuit: number
-  nombre: string
-  direccion?: string
-  numeroContacto?: number
-  email?: string
-
-  pais?: PaisModel.Ref
-  provincia?: ProvinciaModel.Ref
-  localidad?: LocalidadModel.Ref
-
-  creado: string
-  modificado: string
-}
-
-export interface RawRef {
-  id: number
-
-  cuit: number
-  nombre: string
-}
-
-export interface Ref {
-  id: number
-
-  cuit: number
-  nombre: string
-}
-
-export interface CreateData {
+interface OwnFields {
   cuit: number
   nombre: string
   direccion: string
   numeroContacto: number
   email: string
-
-  paisId?: number
-  provinciaId?: number
-  localidadId?: number
 }
 
-export interface CreateBody {
-  cuit: number
-  nombre: string
-  direccion: string
-  numeroContacto: number
-  email: string
-
-  paisId?: number
-  provinciaId?: number
-  localidadId?: number
+interface RelationFields {
+  pais: PaisModel.Ref
+  provincia: ProvinciaModel.Ref
+  localidad: LocalidadModel.Ref
 }
 
-export type UpdateData = Partial<CreateData>
+export interface Entity extends BaseEntity, OwnFields, RelationFields {}
 
-export type UpdateBody = Partial<CreateBody>
+export type CreateEntity = OwnFields &
+  Record<'paisId' | 'provinciaId' | 'localidadId', number>
+
+export type UpdateEntity = Partial<CreateEntity>
+
+export type Ref = BaseRef<OwnFields, 'cuit' | 'nombre'>
 
 export const scheme: Scheme<Entity> = {
   key: 'empresa',

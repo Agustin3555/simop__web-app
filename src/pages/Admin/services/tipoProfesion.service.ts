@@ -13,10 +13,10 @@ export const TipoProfesionService: Service<TipoProfesionModel.Entity> = {
     return TipoProfesionAdapter.getAll.output(response.data)
   },
 
-  getForConnect: async () => {
-    const response = await publicInstance.get(collection('for-connect'))
+  getRefs: async () => {
+    const response = await publicInstance.get(collection('refs'))
 
-    return TipoProfesionAdapter.getForConnect.output(response.data)
+    return TipoProfesionAdapter.getRefs.output(response.data)
   },
 
   getOne: async id => {
@@ -25,13 +25,13 @@ export const TipoProfesionService: Service<TipoProfesionModel.Entity> = {
     return TipoProfesionAdapter.getOne.output(response.data)
   },
 
-  create: async (data: TipoProfesionModel.CreateData) => {
+  create: async (data: TipoProfesionModel.CreateEntity) => {
     const adaptedInput = TipoProfesionAdapter.create.input(data)
 
     await publicInstance.post(collection(), adaptedInput)
   },
 
-  updateOne: async (id, data: TipoProfesionModel.UpdateData) => {
+  updateOne: async (id, data: TipoProfesionModel.UpdateEntity) => {
     const adaptedInput = TipoProfesionAdapter.updateOne.input(data)
 
     await publicInstance.put(collection(id), adaptedInput)

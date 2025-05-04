@@ -1,10 +1,10 @@
 import { Column } from '@tanstack/react-table'
-import { Entity } from '@/services/config'
+import { GeneralEntity } from '@/models/config'
 import Combobox, { ComboboxProps } from '../Combobox/Combobox'
 
 interface RefFilterProps
   extends Pick<ComboboxProps, 'keyName' | 'title' | 'options'>,
-    Pick<Column<Entity>, 'getFilterValue' | 'setFilterValue'> {}
+    Pick<Column<GeneralEntity>, 'getFilterValue' | 'setFilterValue'> {}
 
 const RefFilter = ({
   keyName,

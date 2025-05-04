@@ -1,7 +1,7 @@
 import './Cell.css'
 import { useScheme } from '@/pages/Admin/hooks'
 import { Cell as TsCell } from '@tanstack/react-table'
-import { Entity } from '@/services/config'
+import { GeneralEntity } from '@/models/config'
 import { useMemo } from 'react'
 import { steppedSizes } from '../../helpers'
 import { AccesorKeys } from '../../Table'
@@ -14,7 +14,7 @@ import { AccesorKeys } from '../../Table'
 
 interface Props {
   flatProps: ReturnType<typeof useScheme>['flatProps']
-  cell: TsCell<Entity, unknown>
+  cell: TsCell<GeneralEntity, unknown>
   accesorKeys: AccesorKeys
 }
 

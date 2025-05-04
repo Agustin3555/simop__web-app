@@ -10,7 +10,7 @@ export const getAll: {
   output: response => response,
 }
 
-export const getForConnect: {
+export const getRefs: {
   output: OutputAdapter<
     TipoTematicaObraModel.RawRef[],
     TipoTematicaObraModel.Ref[]
@@ -30,7 +30,7 @@ export const getOne: {
 
 export const create: {
   input: InputAdapter<
-    TipoTematicaObraModel.CreateData,
+    TipoTematicaObraModel.CreateEntity,
     TipoTematicaObraModel.CreateBody
   >
 } = {
@@ -39,7 +39,7 @@ export const create: {
 
 export const updateOne: {
   input: InputAdapter<
-    TipoTematicaObraModel.UpdateData,
+    TipoTematicaObraModel.UpdateEntity,
     TipoTematicaObraModel.UpdateBody
   >
 } = {

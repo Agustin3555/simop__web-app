@@ -53,7 +53,7 @@ export interface Ref {
   numeroActa: number
 }
 
-export interface CreateData {
+export interface CreateEntity {
   numeroActa: number
   fecha: string
   observaciones: string
@@ -75,7 +75,7 @@ export interface CreateBody {
   tipoRecepcionId: number
 }
 
-export type UpdateData = Partial<CreateData>
+export type UpdateEntity = Partial<CreateEntity>
 
 export type UpdateBody = Partial<CreateBody>
 

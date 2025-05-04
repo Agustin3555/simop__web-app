@@ -1,4 +1,4 @@
-import { Entity } from '@/services/config'
+import { GeneralEntity } from '@/models/config'
 import { ForView, GetScheme, MinSize, PropScheme, Required } from './utils'
 import { AutoCombobox, FetchRef } from '../../components'
 import { Column } from '@tanstack/react-table'
@@ -27,7 +27,7 @@ export class RefListProp implements PropScheme {
     return scheme.title.plural
   }
 
-  getFieldComponent = (value?: Entity[], editMode = false) => {
+  getFieldComponent = (value?: GeneralEntity[], editMode = false) => {
     const { key, config } = this
     const { getScheme, field } = config
     const { hidden, required } = field ?? {}
@@ -65,7 +65,7 @@ export class RefListProp implements PropScheme {
     return value.map(Number)
   }
 
-  getHeader = (column: Column<Entity>) => {
+  getHeader = (column: Column<GeneralEntity>) => {
     const { title, config } = this
     const { getScheme } = config
 
@@ -77,14 +77,14 @@ export class RefListProp implements PropScheme {
     return { title, getFilter }
   }
 
-  getValueComponent = (item: Entity) => {
+  getValueComponent = (item: GeneralEntity) => {
     const { key, config } = this
     const { getScheme } = config ?? {}
 
     const { service, anchorField, key: keyScheme } = getScheme()
     const { getOne } = service
 
-    const value = item[key] as undefined | Entity[]
+    const value = item[key] as undefined | GeneralEntity[]
 
     return (
       value &&
@@ -99,13 +99,13 @@ export class RefListProp implements PropScheme {
     )
   }
 
-  getExcelValue = (item: Entity) => {
+  getExcelValue = (item: GeneralEntity) => {
     const { key, config } = this
     const { getScheme } = config
 
     const { anchorField } = getScheme()
 
-    const values = item[key] as undefined | Entity[]
+    const values = item[key] as undefined | GeneralEntity[]
 
     if (!values || values.length === 0) return
 

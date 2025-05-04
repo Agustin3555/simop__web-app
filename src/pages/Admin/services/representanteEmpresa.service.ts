@@ -20,13 +20,13 @@ export const RepresentanteEmpresaService: Service<RepresentanteEmpresaModel.Enti
       return RepresentanteEmpresaAdapter.getOne.output(response.data)
     },
 
-    create: async (data: RepresentanteEmpresaModel.CreateData) => {
+    create: async (data: RepresentanteEmpresaModel.CreateEntity) => {
       const adaptedInput = RepresentanteEmpresaAdapter.create.input(data)
 
       await publicInstance.post(collection(), adaptedInput)
     },
 
-    updateOne: async (id, data: RepresentanteEmpresaModel.UpdateData) => {
+    updateOne: async (id, data: RepresentanteEmpresaModel.UpdateEntity) => {
       const adaptedInput = RepresentanteEmpresaAdapter.updateOne.input(data)
 
       await publicInstance.put(collection(id), adaptedInput)

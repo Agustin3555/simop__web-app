@@ -56,7 +56,7 @@ export interface Ref {
   numeroExpediente: string
 }
 
-export interface CreateData {
+export interface CreateEntity {
   numeroExpediente: string
   numeroResolucion: string
   fecha: string
@@ -80,7 +80,7 @@ export interface CreateBody {
   tipoRescisionId: number
 }
 
-export type UpdateData = Partial<CreateData>
+export type UpdateEntity = Partial<CreateEntity>
 
 export type UpdateBody = Partial<CreateBody>
 

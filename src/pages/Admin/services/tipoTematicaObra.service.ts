@@ -13,10 +13,10 @@ export const TipoTematicaObraService: Service<TipoTematicaObraModel.Entity> = {
     return TipoTematicaObraAdapter.getAll.output(response.data)
   },
 
-  getForConnect: async () => {
-    const response = await publicInstance.get(collection('for-connect'))
+  getRefs: async () => {
+    const response = await publicInstance.get(collection('refs'))
 
-    return TipoTematicaObraAdapter.getForConnect.output(response.data)
+    return TipoTematicaObraAdapter.getRefs.output(response.data)
   },
 
   getOne: async id => {
@@ -25,13 +25,13 @@ export const TipoTematicaObraService: Service<TipoTematicaObraModel.Entity> = {
     return TipoTematicaObraAdapter.getOne.output(response.data)
   },
 
-  create: async (data: TipoTematicaObraModel.CreateData) => {
+  create: async (data: TipoTematicaObraModel.CreateEntity) => {
     const adaptedInput = TipoTematicaObraAdapter.create.input(data)
 
     await publicInstance.post(collection(), adaptedInput)
   },
 
-  updateOne: async (id, data: TipoTematicaObraModel.UpdateData) => {
+  updateOne: async (id, data: TipoTematicaObraModel.UpdateEntity) => {
     const adaptedInput = TipoTematicaObraAdapter.updateOne.input(data)
 
     await publicInstance.put(collection(id), adaptedInput)

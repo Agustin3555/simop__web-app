@@ -2,31 +2,31 @@ import { InputAdapter, OutputAdapter } from '@/adapters/config'
 import { InspectorModel } from '../models'
 
 export const getAll: {
-  output: OutputAdapter<InspectorModel.RawEntity[], InspectorModel.Entity[]>
+  output: OutputAdapter<InspectorModel.Entity[], InspectorModel.Entity[]>
 } = {
   output: response => response,
 }
 
-export const getForConnect: {
-  output: OutputAdapter<InspectorModel.RawRef[], InspectorModel.Ref[]>
+export const getRefs: {
+  output: OutputAdapter<InspectorModel.Ref[], InspectorModel.Ref[]>
 } = {
   output: response => response,
 }
 
 export const getOne: {
-  output: OutputAdapter<InspectorModel.RawEntity, InspectorModel.Entity>
+  output: OutputAdapter<InspectorModel.Entity, InspectorModel.Entity>
 } = {
   output: response => response,
 }
 
 export const create: {
-  input: InputAdapter<InspectorModel.CreateData, InspectorModel.CreateBody>
+  input: InputAdapter<InspectorModel.CreateEntity, InspectorModel.CreateEntity>
 } = {
   input: data => data,
 }
 
 export const updateOne: {
-  input: InputAdapter<InspectorModel.UpdateData, InspectorModel.UpdateBody>
+  input: InputAdapter<InspectorModel.UpdateEntity, InspectorModel.UpdateEntity>
 } = {
   input: data => data,
 }

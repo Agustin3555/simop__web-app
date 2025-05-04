@@ -10,7 +10,7 @@ export const getAll: {
   output: response => response,
 }
 
-export const getForConnect: {
+export const getRefs: {
   output: OutputAdapter<TipoInspectorModel.RawRef[], TipoInspectorModel.Ref[]>
 } = {
   output: response => response,
@@ -24,7 +24,7 @@ export const getOne: {
 
 export const create: {
   input: InputAdapter<
-    TipoInspectorModel.CreateData,
+    TipoInspectorModel.CreateEntity,
     TipoInspectorModel.CreateBody
   >
 } = {
@@ -33,7 +33,7 @@ export const create: {
 
 export const updateOne: {
   input: InputAdapter<
-    TipoInspectorModel.UpdateData,
+    TipoInspectorModel.UpdateEntity,
     TipoInspectorModel.UpdateBody
   >
 } = {

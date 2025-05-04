@@ -1,4 +1,4 @@
-import { Entity } from '@/services/config'
+import { GeneralEntity } from '@/models/config'
 import { ForView, GetFilter, MinSize, PropScheme, Required } from './utils'
 import { Column } from '@tanstack/react-table'
 import { InputArea, TextFilter } from '../../components'
@@ -48,7 +48,7 @@ export class TextLongProp implements PropScheme {
     return value as string
   }
 
-  getHeader = (column: Column<Entity>) => {
+  getHeader = (column: Column<GeneralEntity>) => {
     const { title } = this
 
     const { getFacetedUniqueValues, setFilterValue } = column
@@ -63,7 +63,7 @@ export class TextLongProp implements PropScheme {
     return { title, getFilter }
   }
 
-  getValueComponent = (item: Entity) => {
+  getValueComponent = (item: GeneralEntity) => {
     const { key } = this
 
     const value = item[key] as undefined | string
@@ -71,7 +71,7 @@ export class TextLongProp implements PropScheme {
     return value && <p className="text">{value}</p>
   }
 
-  getExcelValue = (item: Entity) => {
+  getExcelValue = (item: GeneralEntity) => {
     const { key } = this
 
     const value = item[key] as string | undefined

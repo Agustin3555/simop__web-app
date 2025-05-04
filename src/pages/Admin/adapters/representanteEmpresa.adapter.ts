@@ -10,7 +10,7 @@ export const getAll: {
   output: response => response,
 }
 
-export const getForConnect: {
+export const getRefs: {
   output: OutputAdapter<
     RepresentanteEmpresaModel.RawRef[],
     RepresentanteEmpresaModel.Ref[]
@@ -30,7 +30,7 @@ export const getOne: {
 
 export const create: {
   input: InputAdapter<
-    RepresentanteEmpresaModel.CreateData,
+    RepresentanteEmpresaModel.CreateEntity,
     RepresentanteEmpresaModel.CreateBody
   >
 } = {
@@ -39,7 +39,7 @@ export const create: {
 
 export const updateOne: {
   input: InputAdapter<
-    RepresentanteEmpresaModel.UpdateData,
+    RepresentanteEmpresaModel.UpdateEntity,
     RepresentanteEmpresaModel.UpdateBody
   >
 } = {

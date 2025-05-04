@@ -16,7 +16,7 @@ import {
   SortingState,
   Header as TsHeader,
 } from '@tanstack/react-table'
-import { Entity } from '@/services/config'
+import { GeneralEntity } from '@/models/config'
 import { classList } from '@/helpers'
 import { steppedSizes } from '../../helpers'
 import { OptionSelectors } from '@/pages/Admin/components'
@@ -31,7 +31,7 @@ const SORT_ICON_MATCHER: Record<SortDirection, string> = {
 
 interface Props {
   flatProps: ReturnType<typeof useScheme>['flatProps']
-  header: TsHeader<Entity, unknown>
+  header: TsHeader<GeneralEntity, unknown>
   sorting: SortingState
   setSorting: Dispatch<SetStateAction<SortingState>>
   columnOrder: ColumnOrderState
@@ -82,9 +82,9 @@ const Header = ({
 
     const refs = rows
       .map(({ original }) => original[column.id])
-      .filter(Boolean) as Entity[]
+      .filter(Boolean) as GeneralEntity[]
 
-    const uniqueRefs = new Map<number, Entity>()
+    const uniqueRefs = new Map<number, GeneralEntity>()
 
     refs.forEach(ref => {
       const { id } = ref

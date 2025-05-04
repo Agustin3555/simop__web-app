@@ -3,7 +3,7 @@ import { useQueryActionState } from '@/hooks'
 import { useAddFieldReset } from '../../hooks'
 import { useQuery } from '@tanstack/react-query'
 import { Control } from '@/types'
-import { Entity } from '@/services/config'
+import { GeneralEntity } from '@/models/config'
 import { getFlatProps, Scheme } from '../../services/config'
 import { REFETCH_INTERVALS } from '../../constants/refetchIntervals.const'
 import { Button } from '@/components'
@@ -16,7 +16,7 @@ export interface AutoComboboxProps
     Pick<BaseComboboxProps, 'multiple'> {
   scheme: Scheme
   initSelected?: string[]
-  initOptions?: Entity[]
+  initOptions?: GeneralEntity[]
 }
 
 const AutoCombobox = ({
@@ -46,7 +46,7 @@ const AutoCombobox = ({
   useAddFieldReset(() => setSelected([]))
 
   const queryFn = useCallback(async () => {
-    const options = await service.getForConnect!()
+    const options = await service.getRefs!()
 
     setSearchModeKeys(extractKeys(options))
     return options

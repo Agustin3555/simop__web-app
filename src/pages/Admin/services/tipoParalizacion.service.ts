@@ -13,10 +13,10 @@ export const TipoParalizacionService: Service<TipoParalizacionModel.Entity> = {
     return TipoParalizacionAdapter.getAll.output(response.data)
   },
 
-  getForConnect: async () => {
-    const response = await publicInstance.get(collection('for-connect'))
+  getRefs: async () => {
+    const response = await publicInstance.get(collection('refs'))
 
-    return TipoParalizacionAdapter.getForConnect.output(response.data)
+    return TipoParalizacionAdapter.getRefs.output(response.data)
   },
 
   getOne: async id => {
@@ -25,13 +25,13 @@ export const TipoParalizacionService: Service<TipoParalizacionModel.Entity> = {
     return TipoParalizacionAdapter.getOne.output(response.data)
   },
 
-  create: async (data: TipoParalizacionModel.CreateData) => {
+  create: async (data: TipoParalizacionModel.CreateEntity) => {
     const adaptedInput = TipoParalizacionAdapter.create.input(data)
 
     await publicInstance.post(collection(), adaptedInput)
   },
 
-  updateOne: async (id, data: TipoParalizacionModel.UpdateData) => {
+  updateOne: async (id, data: TipoParalizacionModel.UpdateEntity) => {
     const adaptedInput = TipoParalizacionAdapter.updateOne.input(data)
 
     await publicInstance.put(collection(id), adaptedInput)

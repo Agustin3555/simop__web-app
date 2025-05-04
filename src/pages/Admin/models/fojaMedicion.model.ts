@@ -62,7 +62,7 @@ export interface Ref {
   numeroExpediente: string
 }
 
-export interface CreateData {
+export interface CreateEntity {
   numero: number
   numeroExpediente: string
   avance: number
@@ -90,7 +90,7 @@ export interface CreateBody {
   inspectorId?: number
 }
 
-export type UpdateData = Partial<CreateData>
+export type UpdateEntity = Partial<CreateEntity>
 
 export type UpdateBody = Partial<CreateBody>
 

@@ -13,10 +13,10 @@ export const ModificacionService: Service<ModificacionModel.Entity> = {
     return ModificacionAdapter.getAll.output(response.data)
   },
 
-  getForConnect: async () => {
-    const response = await publicInstance.get(collection('for-connect'))
+  getRefs: async () => {
+    const response = await publicInstance.get(collection('refs'))
 
-    return ModificacionAdapter.getForConnect.output(response.data)
+    return ModificacionAdapter.getRefs.output(response.data)
   },
 
   getOne: async id => {
@@ -25,13 +25,13 @@ export const ModificacionService: Service<ModificacionModel.Entity> = {
     return ModificacionAdapter.getOne.output(response.data)
   },
 
-  create: async (data: ModificacionModel.CreateData) => {
+  create: async (data: ModificacionModel.CreateEntity) => {
     const adaptedInput = ModificacionAdapter.create.input(data)
 
     await publicInstance.post(collection(), adaptedInput)
   },
 
-  updateOne: async (id, data: ModificacionModel.UpdateData) => {
+  updateOne: async (id, data: ModificacionModel.UpdateEntity) => {
     const adaptedInput = ModificacionAdapter.updateOne.input(data)
 
     await publicInstance.put(collection(id), adaptedInput)

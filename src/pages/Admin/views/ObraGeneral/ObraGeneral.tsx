@@ -1,4 +1,4 @@
-import { Entity } from '@/services/config'
+import { GeneralEntity } from '@/models/config'
 import { SchemeView } from '../../components'
 import {
   EmpresaModel,
@@ -21,7 +21,7 @@ import {
 import { ObraService } from '../../services'
 import { COMMON_PROPS } from '../../constants/commonProps.const'
 
-const obraGeneralScheme: Scheme<Entity> = {
+const obraGeneralScheme: Scheme<GeneralEntity> = {
   key: 'obraGeneral',
   service: ObraService,
   refreshRate: 'medium',

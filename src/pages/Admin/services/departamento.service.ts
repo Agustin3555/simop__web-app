@@ -13,10 +13,10 @@ export const DepartamentoService: Service<DepartamentoModel.Entity> = {
     return DepartamentoAdapter.getAll.output(response.data)
   },
 
-  getForConnect: async () => {
-    const response = await publicInstance.get(collection('for-connect'))
+  getRefs: async () => {
+    const response = await publicInstance.get(collection('refs'))
 
-    return DepartamentoAdapter.getForConnect.output(response.data)
+    return DepartamentoAdapter.getRefs.output(response.data)
   },
 
   getOne: async id => {
@@ -25,13 +25,13 @@ export const DepartamentoService: Service<DepartamentoModel.Entity> = {
     return DepartamentoAdapter.getOne.output(response.data)
   },
 
-  create: async (data: DepartamentoModel.CreateData) => {
+  create: async (data: DepartamentoModel.CreateEntity) => {
     const adaptedInput = DepartamentoAdapter.create.input(data)
 
     await publicInstance.post(collection(), adaptedInput)
   },
 
-  updateOne: async (id, data: DepartamentoModel.UpdateData) => {
+  updateOne: async (id, data: DepartamentoModel.UpdateEntity) => {
     const adaptedInput = DepartamentoAdapter.updateOne.input(data)
 
     await publicInstance.put(collection(id), adaptedInput)

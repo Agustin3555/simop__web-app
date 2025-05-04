@@ -51,7 +51,7 @@ export interface Ref {
   apellido: string
 }
 
-export interface CreateData {
+export interface CreateEntity {
   cuil: number
   apellido: string
   nombre: string
@@ -75,7 +75,7 @@ export interface CreateBody {
   localidadId: number
 }
 
-export type UpdateData = Partial<CreateData>
+export type UpdateEntity = Partial<CreateEntity>
 
 export type UpdateBody = Partial<CreateBody>
 

@@ -7,7 +7,7 @@ import {
   FilterFn,
   HeaderContext,
 } from '@tanstack/react-table'
-import { Entity } from '@/services/config'
+import { GeneralEntity } from '@/models/config'
 import { ComboboxProps } from '../../components/Combobox/Combobox'
 
 export type Color = 'blue' | 'green' | 'yellow' | 'red' | 'grey'
@@ -38,11 +38,11 @@ export interface GetScheme {
 }
 
 export type GetFilter = (
-  props: Pick<Column<Entity>, 'getFilterValue'> &
+  props: Pick<Column<GeneralEntity>, 'getFilterValue'> &
     Partial<Pick<ComboboxProps, 'options'>>,
 ) => ReactNode
 
-export interface PropScheme<E = Entity> {
+export interface PropScheme<E = GeneralEntity> {
   key: string
   verboseKey?: string
   title: string

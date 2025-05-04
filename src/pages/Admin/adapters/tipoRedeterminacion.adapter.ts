@@ -10,7 +10,7 @@ export const getAll: {
   output: response => response,
 }
 
-export const getForConnect: {
+export const getRefs: {
   output: OutputAdapter<
     TipoRedeterminacionModel.RawRef[],
     TipoRedeterminacionModel.Ref[]
@@ -30,7 +30,7 @@ export const getOne: {
 
 export const create: {
   input: InputAdapter<
-    TipoRedeterminacionModel.CreateData,
+    TipoRedeterminacionModel.CreateEntity,
     TipoRedeterminacionModel.CreateBody
   >
 } = {
@@ -39,7 +39,7 @@ export const create: {
 
 export const updateOne: {
   input: InputAdapter<
-    TipoRedeterminacionModel.UpdateData,
+    TipoRedeterminacionModel.UpdateEntity,
     TipoRedeterminacionModel.UpdateBody
   >
 } = {

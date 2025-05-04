@@ -7,7 +7,7 @@ export const getAll: {
   output: response => response,
 }
 
-export const getForConnect: {
+export const getRefs: {
   output: OutputAdapter<ObraModel.RawRef[], ObraModel.Ref[]>
 } = {
   output: response => response,
@@ -20,13 +20,13 @@ export const getOne: {
 }
 
 export const create: {
-  input: InputAdapter<ObraModel.CreateData, ObraModel.CreateBody>
+  input: InputAdapter<ObraModel.CreateEntity, ObraModel.CreateBody>
 } = {
   input: data => data,
 }
 
 export const updateOne: {
-  input: InputAdapter<ObraModel.UpdateData, ObraModel.UpdateBody>
+  input: InputAdapter<ObraModel.UpdateEntity, ObraModel.UpdateBody>
 } = {
   input: data => data,
 }

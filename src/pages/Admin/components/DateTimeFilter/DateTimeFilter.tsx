@@ -2,13 +2,13 @@ import { useCallback } from 'react'
 import { DebouncedInput } from '..'
 import { ColumnFiltersColumn } from '@tanstack/react-table'
 import { DebouncedInputProps } from '../DebouncedInput/DebouncedInput'
-import { Entity } from '@/services/config'
+import { GeneralEntity } from '@/models/config'
 
 type FilterValuePair = { min: string; max: string } | undefined
 
 interface Props
   extends Pick<
-    ColumnFiltersColumn<Entity>,
+    ColumnFiltersColumn<GeneralEntity>,
     'getFilterValue' | 'setFilterValue'
   > {
   notTime?: boolean

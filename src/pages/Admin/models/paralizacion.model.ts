@@ -65,7 +65,7 @@ export interface Ref {
   numero: number
 }
 
-export interface CreateData {
+export interface CreateEntity {
   numero: number
   numeroExpediente: string
   fechaReinicio: string
@@ -91,7 +91,7 @@ export interface CreateBody {
   tipoParalizacionId: number
 }
 
-export type UpdateData = Partial<CreateData>
+export type UpdateEntity = Partial<CreateEntity>
 
 export type UpdateBody = Partial<CreateBody>
 

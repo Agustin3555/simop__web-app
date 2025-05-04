@@ -7,7 +7,7 @@ export const getAll: {
   output: response => response,
 }
 
-export const getForConnect: {
+export const getRefs: {
   output: OutputAdapter<AmpliacionModel.RawRef[], AmpliacionModel.Ref[]>
 } = {
   output: response => response,
@@ -20,13 +20,13 @@ export const getOne: {
 }
 
 export const create: {
-  input: InputAdapter<AmpliacionModel.CreateData, AmpliacionModel.CreateBody>
+  input: InputAdapter<AmpliacionModel.CreateEntity, AmpliacionModel.CreateBody>
 } = {
   input: data => data,
 }
 
 export const updateOne: {
-  input: InputAdapter<AmpliacionModel.UpdateData, AmpliacionModel.UpdateBody>
+  input: InputAdapter<AmpliacionModel.UpdateEntity, AmpliacionModel.UpdateBody>
 } = {
   input: data => data,
 }

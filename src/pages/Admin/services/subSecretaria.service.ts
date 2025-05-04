@@ -13,10 +13,10 @@ export const SubSecretariaService: Service<SubSecretariaModel.Entity> = {
     return SubSecretariaAdapter.getAll.output(response.data)
   },
 
-  getForConnect: async () => {
-    const response = await publicInstance.get(collection('for-connect'))
+  getRefs: async () => {
+    const response = await publicInstance.get(collection('refs'))
 
-    return SubSecretariaAdapter.getForConnect.output(response.data)
+    return SubSecretariaAdapter.getRefs.output(response.data)
   },
 
   getOne: async id => {
@@ -25,13 +25,13 @@ export const SubSecretariaService: Service<SubSecretariaModel.Entity> = {
     return SubSecretariaAdapter.getOne.output(response.data)
   },
 
-  create: async (data: SubSecretariaModel.CreateData) => {
+  create: async (data: SubSecretariaModel.CreateEntity) => {
     const adaptedInput = SubSecretariaAdapter.create.input(data)
 
     await publicInstance.post(collection(), adaptedInput)
   },
 
-  updateOne: async (id, data: SubSecretariaModel.UpdateData) => {
+  updateOne: async (id, data: SubSecretariaModel.UpdateEntity) => {
     const adaptedInput = SubSecretariaAdapter.updateOne.input(data)
 
     await publicInstance.put(collection(id), adaptedInput)

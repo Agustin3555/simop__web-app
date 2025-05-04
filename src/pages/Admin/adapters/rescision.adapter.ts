@@ -7,7 +7,7 @@ export const getAll: {
   output: response => response,
 }
 
-export const getForConnect: {
+export const getRefs: {
   output: OutputAdapter<RescisionModel.RawRef[], RescisionModel.Ref[]>
 } = {
   output: response => response,
@@ -20,13 +20,13 @@ export const getOne: {
 }
 
 export const create: {
-  input: InputAdapter<RescisionModel.CreateData, RescisionModel.CreateBody>
+  input: InputAdapter<RescisionModel.CreateEntity, RescisionModel.CreateBody>
 } = {
   input: data => data,
 }
 
 export const updateOne: {
-  input: InputAdapter<RescisionModel.UpdateData, RescisionModel.UpdateBody>
+  input: InputAdapter<RescisionModel.UpdateEntity, RescisionModel.UpdateBody>
 } = {
   input: data => data,
 }

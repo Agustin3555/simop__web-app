@@ -14,10 +14,10 @@ export const TipoRepresentanteService: Service<TipoRepresentanteModel.Entity> =
       return TipoRepresentanteAdapter.getAll.output(response.data)
     },
 
-    getForConnect: async () => {
-      const response = await publicInstance.get(collection('for-connect'))
+    getRefs: async () => {
+      const response = await publicInstance.get(collection('refs'))
 
-      return TipoRepresentanteAdapter.getForConnect.output(response.data)
+      return TipoRepresentanteAdapter.getRefs.output(response.data)
     },
 
     getOne: async id => {
@@ -26,13 +26,13 @@ export const TipoRepresentanteService: Service<TipoRepresentanteModel.Entity> =
       return TipoRepresentanteAdapter.getOne.output(response.data)
     },
 
-    create: async (data: TipoRepresentanteModel.CreateData) => {
+    create: async (data: TipoRepresentanteModel.CreateEntity) => {
       const adaptedInput = TipoRepresentanteAdapter.create.input(data)
 
       await publicInstance.post(collection(), adaptedInput)
     },
 
-    updateOne: async (id, data: TipoRepresentanteModel.UpdateData) => {
+    updateOne: async (id, data: TipoRepresentanteModel.UpdateEntity) => {
       const adaptedInput = TipoRepresentanteAdapter.updateOne.input(data)
 
       await publicInstance.put(collection(id), adaptedInput)

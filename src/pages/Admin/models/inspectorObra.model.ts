@@ -44,7 +44,7 @@ export interface Ref {
   id: number
 }
 
-export interface CreateData {
+export interface CreateEntity {
   fecha?: string
   vigencia: boolean
 
@@ -64,7 +64,7 @@ export interface CreateBody {
   tipoProfesionId: number
 }
 
-export type UpdateData = Partial<CreateData>
+export type UpdateEntity = Partial<CreateEntity>
 
 export type UpdateBody = Partial<CreateBody>
 

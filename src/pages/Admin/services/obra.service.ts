@@ -13,10 +13,10 @@ export const ObraService: Service<ObraModel.Entity> = {
     return ObraAdapter.getAll.output(response.data)
   },
 
-  getForConnect: async () => {
-    const response = await publicInstance.get(collection('for-connect'))
+  getRefs: async () => {
+    const response = await publicInstance.get(collection('refs'))
 
-    return ObraAdapter.getForConnect.output(response.data)
+    return ObraAdapter.getRefs.output(response.data)
   },
 
   getOne: async id => {
@@ -25,13 +25,19 @@ export const ObraService: Service<ObraModel.Entity> = {
     return ObraAdapter.getOne.output(response.data)
   },
 
-  create: async (data: ObraModel.CreateData) => {
+  getOneDetail: async (id: number) => {
+    const response = await publicInstance.get(collection(id, 'detail'))
+
+    return ObraAdapter.getOne.output(response.data)
+  },
+
+  create: async (data: ObraModel.CreateEntity) => {
     const adaptedInput = ObraAdapter.create.input(data)
 
     await publicInstance.post(collection(), adaptedInput)
   },
 
-  updateOne: async (id, data: ObraModel.UpdateData) => {
+  updateOne: async (id, data: ObraModel.UpdateEntity) => {
     const adaptedInput = ObraAdapter.updateOne.input(data)
 
     await publicInstance.put(collection(id), adaptedInput)

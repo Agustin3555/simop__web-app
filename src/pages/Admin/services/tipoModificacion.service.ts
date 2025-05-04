@@ -13,10 +13,10 @@ export const TipoModificacionService: Service<TipoModificacionModel.Entity> = {
     return TipoModificacionAdapter.getAll.output(response.data)
   },
 
-  getForConnect: async () => {
-    const response = await publicInstance.get(collection('for-connect'))
+  getRefs: async () => {
+    const response = await publicInstance.get(collection('refs'))
 
-    return TipoModificacionAdapter.getForConnect.output(response.data)
+    return TipoModificacionAdapter.getRefs.output(response.data)
   },
 
   getOne: async id => {
@@ -25,13 +25,13 @@ export const TipoModificacionService: Service<TipoModificacionModel.Entity> = {
     return TipoModificacionAdapter.getOne.output(response.data)
   },
 
-  create: async (data: TipoModificacionModel.CreateData) => {
+  create: async (data: TipoModificacionModel.CreateEntity) => {
     const adaptedInput = TipoModificacionAdapter.create.input(data)
 
     await publicInstance.post(collection(), adaptedInput)
   },
 
-  updateOne: async (id, data: TipoModificacionModel.UpdateData) => {
+  updateOne: async (id, data: TipoModificacionModel.UpdateEntity) => {
     const adaptedInput = TipoModificacionAdapter.updateOne.input(data)
 
     await publicInstance.put(collection(id), adaptedInput)

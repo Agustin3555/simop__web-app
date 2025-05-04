@@ -13,10 +13,10 @@ export const InspectorService: Service<InspectorModel.Entity> = {
     return InspectorAdapter.getAll.output(response.data)
   },
 
-  getForConnect: async () => {
-    const response = await publicInstance.get(collection('for-connect'))
+  getRefs: async () => {
+    const response = await publicInstance.get(collection('refs'))
 
-    return InspectorAdapter.getForConnect.output(response.data)
+    return InspectorAdapter.getRefs.output(response.data)
   },
 
   getOne: async id => {
@@ -25,13 +25,13 @@ export const InspectorService: Service<InspectorModel.Entity> = {
     return InspectorAdapter.getOne.output(response.data)
   },
 
-  create: async (data: InspectorModel.CreateData) => {
+  create: async (data: InspectorModel.CreateEntity) => {
     const adaptedInput = InspectorAdapter.create.input(data)
 
     await publicInstance.post(collection(), adaptedInput)
   },
 
-  updateOne: async (id, data: InspectorModel.UpdateData) => {
+  updateOne: async (id, data: InspectorModel.UpdateEntity) => {
     const adaptedInput = InspectorAdapter.updateOne.input(data)
 
     await publicInstance.put(collection(id), adaptedInput)

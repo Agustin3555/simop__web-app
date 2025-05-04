@@ -127,4 +127,12 @@ export const TREE: SectionNode[] = [
       { scheme: ObraTotalesModel.scheme },
     ],
   },
+  {
+    scheme: {
+      key: 'detalleObra',
+      title: {
+        plural: 'Detalle de Obra',
+      },
+    },
+  },
 ]

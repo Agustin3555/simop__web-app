@@ -13,10 +13,10 @@ export const LocalidadService: Service<LocalidadModel.Entity> = {
     return LocalidadAdapter.getAll.output(response.data)
   },
 
-  getForConnect: async () => {
-    const response = await publicInstance.get(collection('for-connect'))
+  getRefs: async () => {
+    const response = await publicInstance.get(collection('refs'))
 
-    return LocalidadAdapter.getForConnect.output(response.data)
+    return LocalidadAdapter.getRefs.output(response.data)
   },
 
   getOne: async id => {
@@ -25,13 +25,13 @@ export const LocalidadService: Service<LocalidadModel.Entity> = {
     return LocalidadAdapter.getOne.output(response.data)
   },
 
-  create: async (data: LocalidadModel.CreateData) => {
+  create: async (data: LocalidadModel.CreateEntity) => {
     const adaptedInput = LocalidadAdapter.create.input(data)
 
     await publicInstance.post(collection(), adaptedInput)
   },
 
-  updateOne: async (id, data: LocalidadModel.UpdateData) => {
+  updateOne: async (id, data: LocalidadModel.UpdateEntity) => {
     const adaptedInput = LocalidadAdapter.updateOne.input(data)
 
     await publicInstance.put(collection(id), adaptedInput)

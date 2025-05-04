@@ -117,7 +117,7 @@ export interface Ref {
   numero: number
 }
 
-export interface CreateData {
+export interface CreateEntity {
   numero: number
   nombre: string
   numeroExpediente?: number
@@ -193,7 +193,7 @@ export interface CreateBody {
   localidadId?: number
 }
 
-export type UpdateData = Partial<CreateData>
+export type UpdateEntity = Partial<CreateEntity>
 
 export type UpdateBody = Partial<CreateBody>
 

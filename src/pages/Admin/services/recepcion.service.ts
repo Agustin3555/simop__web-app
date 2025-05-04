@@ -13,10 +13,10 @@ export const RecepcionService: Service<RecepcionModel.Entity> = {
     return RecepcionAdapter.getAll.output(response.data)
   },
 
-  getForConnect: async () => {
-    const response = await publicInstance.get(collection('for-connect'))
+  getRefs: async () => {
+    const response = await publicInstance.get(collection('refs'))
 
-    return RecepcionAdapter.getForConnect.output(response.data)
+    return RecepcionAdapter.getRefs.output(response.data)
   },
 
   getOne: async id => {
@@ -25,13 +25,13 @@ export const RecepcionService: Service<RecepcionModel.Entity> = {
     return RecepcionAdapter.getOne.output(response.data)
   },
 
-  create: async (data: RecepcionModel.CreateData) => {
+  create: async (data: RecepcionModel.CreateEntity) => {
     const adaptedInput = RecepcionAdapter.create.input(data)
 
     await publicInstance.post(collection(), adaptedInput)
   },
 
-  updateOne: async (id, data: RecepcionModel.UpdateData) => {
+  updateOne: async (id, data: RecepcionModel.UpdateEntity) => {
     const adaptedInput = RecepcionAdapter.updateOne.input(data)
 
     await publicInstance.put(collection(id), adaptedInput)

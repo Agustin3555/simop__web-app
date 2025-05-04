@@ -1,20 +1,9 @@
-export type EntityKey = string
+import { GeneralEntity } from '@/models/config'
 
-export interface Ref {
-  id: number
-}
-
-interface BaseEntity extends Ref {
-  creado: string
-  modificado: string
-}
-
-export type Entity = BaseEntity & Record<EntityKey, any>
-
-export interface Service<T = Entity> {
-  getAll: () => Promise<T[]>
-  getForConnect?: () => Promise<Partial<T>[]>
-  getOne: (id: number) => Promise<T>
+export type Service<E = GeneralEntity> = Record<string, any> & {
+  getAll: () => Promise<E[]>
+  getRefs?: () => Promise<Partial<E>[]>
+  getOne: (id: number) => Promise<E>
   create?: (data: any) => Promise<void>
   updateOne?: (id: number, data: any) => Promise<void>
   deleteMany: (ids: number[]) => Promise<void>

@@ -1,10 +1,10 @@
 import { steppedSizes } from '../../helpers'
 import { Column, HeaderContext } from '@tanstack/react-table'
-import { Entity } from '@/services/config'
+import { GeneralEntity } from '@/models/config'
 
 interface Props {
-  column: Column<Entity, unknown>
-  getContext: () => HeaderContext<Entity, unknown>
+  column: Column<GeneralEntity, unknown>
+  getContext: () => HeaderContext<GeneralEntity, unknown>
 }
 
 const Footer = ({ column, getContext }: Props) => {

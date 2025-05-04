@@ -13,10 +13,10 @@ export const RepresentanteService: Service<RepresentanteModel.Entity> = {
     return RepresentanteAdapter.getAll.output(response.data)
   },
 
-  getForConnect: async () => {
-    const response = await publicInstance.get(collection('for-connect'))
+  getRefs: async () => {
+    const response = await publicInstance.get(collection('refs'))
 
-    return RepresentanteAdapter.getForConnect.output(response.data)
+    return RepresentanteAdapter.getRefs.output(response.data)
   },
 
   getOne: async id => {
@@ -25,13 +25,13 @@ export const RepresentanteService: Service<RepresentanteModel.Entity> = {
     return RepresentanteAdapter.getOne.output(response.data)
   },
 
-  create: async (data: RepresentanteModel.CreateData) => {
+  create: async (data: RepresentanteModel.CreateEntity) => {
     const adaptedInput = RepresentanteAdapter.create.input(data)
 
     await publicInstance.post(collection(), adaptedInput)
   },
 
-  updateOne: async (id, data: RepresentanteModel.UpdateData) => {
+  updateOne: async (id, data: RepresentanteModel.UpdateEntity) => {
     const adaptedInput = RepresentanteAdapter.updateOne.input(data)
 
     await publicInstance.put(collection(id), adaptedInput)

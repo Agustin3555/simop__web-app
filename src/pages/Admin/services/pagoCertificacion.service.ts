@@ -14,10 +14,10 @@ export const PagoCertificacionService: Service<PagoCertificacionModel.Entity> =
       return PagoCertificacionAdapter.getAll.output(response.data)
     },
 
-    getForConnect: async () => {
-      const response = await publicInstance.get(collection('for-connect'))
+    getRefs: async () => {
+      const response = await publicInstance.get(collection('refs'))
 
-      return PagoCertificacionAdapter.getForConnect.output(response.data)
+      return PagoCertificacionAdapter.getRefs.output(response.data)
     },
 
     getOne: async id => {
@@ -26,13 +26,13 @@ export const PagoCertificacionService: Service<PagoCertificacionModel.Entity> =
       return PagoCertificacionAdapter.getOne.output(response.data)
     },
 
-    create: async (data: PagoCertificacionModel.CreateData) => {
+    create: async (data: PagoCertificacionModel.CreateEntity) => {
       const adaptedInput = PagoCertificacionAdapter.create.input(data)
 
       await publicInstance.post(collection(), adaptedInput)
     },
 
-    updateOne: async (id, data: PagoCertificacionModel.UpdateData) => {
+    updateOne: async (id, data: PagoCertificacionModel.UpdateEntity) => {
       const adaptedInput = PagoCertificacionAdapter.updateOne.input(data)
 
       await publicInstance.put(collection(id), adaptedInput)

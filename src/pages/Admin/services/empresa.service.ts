@@ -13,10 +13,10 @@ export const EmpresaService: Service<EmpresaModel.Entity> = {
     return EmpresaAdapter.getAll.output(response.data)
   },
 
-  getForConnect: async () => {
-    const response = await publicInstance.get(collection('for-connect'))
+  getRefs: async () => {
+    const response = await publicInstance.get(collection('refs'))
 
-    return EmpresaAdapter.getForConnect.output(response.data)
+    return EmpresaAdapter.getRefs.output(response.data)
   },
 
   getOne: async id => {
@@ -25,13 +25,13 @@ export const EmpresaService: Service<EmpresaModel.Entity> = {
     return EmpresaAdapter.getOne.output(response.data)
   },
 
-  create: async (data: EmpresaModel.CreateData) => {
+  create: async (data: EmpresaModel.CreateEntity) => {
     const adaptedInput = EmpresaAdapter.create.input(data)
 
     await publicInstance.post(collection(), adaptedInput)
   },
 
-  updateOne: async (id, data: EmpresaModel.UpdateData) => {
+  updateOne: async (id, data: EmpresaModel.UpdateEntity) => {
     const adaptedInput = EmpresaAdapter.updateOne.input(data)
 
     await publicInstance.put(collection(id), adaptedInput)

@@ -7,7 +7,7 @@ export const getAll: {
   output: response => response,
 }
 
-export const getForConnect: {
+export const getRefs: {
   output: OutputAdapter<LocalidadModel.RawRef[], LocalidadModel.Ref[]>
 } = {
   output: response => response,
@@ -20,13 +20,13 @@ export const getOne: {
 }
 
 export const create: {
-  input: InputAdapter<LocalidadModel.CreateData, LocalidadModel.CreateBody>
+  input: InputAdapter<LocalidadModel.CreateEntity, LocalidadModel.CreateBody>
 } = {
   input: data => data,
 }
 
 export const updateOne: {
-  input: InputAdapter<LocalidadModel.UpdateData, LocalidadModel.UpdateBody>
+  input: InputAdapter<LocalidadModel.UpdateEntity, LocalidadModel.UpdateBody>
 } = {
   input: data => data,
 }

@@ -13,10 +13,10 @@ export const FojaMedicionService: Service<FojaMedicionModel.Entity> = {
     return FojaMedicionAdapter.getAll.output(response.data)
   },
 
-  getForConnect: async () => {
-    const response = await publicInstance.get(collection('for-connect'))
+  getRefs: async () => {
+    const response = await publicInstance.get(collection('refs'))
 
-    return FojaMedicionAdapter.getForConnect.output(response.data)
+    return FojaMedicionAdapter.getRefs.output(response.data)
   },
 
   getOne: async id => {
@@ -25,13 +25,13 @@ export const FojaMedicionService: Service<FojaMedicionModel.Entity> = {
     return FojaMedicionAdapter.getOne.output(response.data)
   },
 
-  create: async (data: FojaMedicionModel.CreateData) => {
+  create: async (data: FojaMedicionModel.CreateEntity) => {
     const adaptedInput = FojaMedicionAdapter.create.input(data)
 
     await publicInstance.post(collection(), adaptedInput)
   },
 
-  updateOne: async (id, data: FojaMedicionModel.UpdateData) => {
+  updateOne: async (id, data: FojaMedicionModel.UpdateEntity) => {
     const adaptedInput = FojaMedicionAdapter.updateOne.input(data)
 
     await publicInstance.put(collection(id), adaptedInput)

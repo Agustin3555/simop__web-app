@@ -1,4 +1,4 @@
-import { Entity } from '@/services/config'
+import { GeneralEntity } from '@/models/config'
 import {
   GetFilter,
   ForView,
@@ -45,7 +45,7 @@ export class RefProp implements PropScheme {
     return scheme.title.singular
   }
 
-  getFieldComponent = (value?: Entity, editMode = false) => {
+  getFieldComponent = (value?: GeneralEntity, editMode = false) => {
     const { verboseKey, title, config } = this
     const { getScheme, field } = config
     const { hidden, required } = field ?? {}
@@ -80,7 +80,7 @@ export class RefProp implements PropScheme {
     return Number(value)
   }
 
-  accessorFn: AccessorFn<Entity> = row => {
+  accessorFn: AccessorFn<GeneralEntity> = row => {
     const { key, config } = this
     const { getScheme } = config
 
@@ -90,17 +90,21 @@ export class RefProp implements PropScheme {
     return row[key]?.[anchorField]
   }
 
-  filterFn: FilterFn<Entity> = (row, columnId, filterValue?: string[]) => {
+  filterFn: FilterFn<GeneralEntity> = (
+    row,
+    columnId,
+    filterValue?: string[],
+  ) => {
     if (!filterValue?.length) return true
 
-    const entity = row.original[columnId] as undefined | Entity
+    const entity = row.original[columnId] as undefined | GeneralEntity
 
     if (entity === undefined) return false
 
     return filterValue.includes(String(entity.id))
   }
 
-  getHeader = (column: Column<Entity>) => {
+  getHeader = (column: Column<GeneralEntity>) => {
     const { verboseKey, title, config } = this
     const { getScheme } = config
 
@@ -119,14 +123,14 @@ export class RefProp implements PropScheme {
     return { title, scheme, getFilter }
   }
 
-  getValueComponent = (item: Entity, selectedSearchMode?: string) => {
+  getValueComponent = (item: GeneralEntity, selectedSearchMode?: string) => {
     const { key, config } = this
     const { getScheme } = config ?? {}
 
     const { key: keyScheme, service, anchorField } = getScheme()
     const { getOne } = service
 
-    const value = item[key] as undefined | Entity
+    const value = item[key] as undefined | GeneralEntity
 
     return (
       value && (
@@ -139,13 +143,13 @@ export class RefProp implements PropScheme {
     )
   }
 
-  getExcelValue = (item: Entity) => {
+  getExcelValue = (item: GeneralEntity) => {
     const { key, config } = this
     const { getScheme } = config
 
     const { anchorField } = getScheme()
 
-    const value = item[key] as undefined | Partial<Entity>
+    const value = item[key] as undefined | Partial<GeneralEntity>
 
     if (value === undefined) return
 

@@ -19,13 +19,13 @@ export const InspectorObraService: Service<InspectorObraModel.Entity> = {
     return InspectorObraAdapter.getOne.output(response.data)
   },
 
-  create: async (data: InspectorObraModel.CreateData) => {
+  create: async (data: InspectorObraModel.CreateEntity) => {
     const adaptedInput = InspectorObraAdapter.create.input(data)
 
     await publicInstance.post(collection(), adaptedInput)
   },
 
-  updateOne: async (id, data: InspectorObraModel.UpdateData) => {
+  updateOne: async (id, data: InspectorObraModel.UpdateEntity) => {
     const adaptedInput = InspectorObraAdapter.updateOne.input(data)
 
     await publicInstance.put(collection(id), adaptedInput)

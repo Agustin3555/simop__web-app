@@ -13,10 +13,10 @@ export const RescisionService: Service<RescisionModel.Entity> = {
     return RescisionAdapter.getAll.output(response.data)
   },
 
-  getForConnect: async () => {
-    const response = await publicInstance.get(collection('for-connect'))
+  getRefs: async () => {
+    const response = await publicInstance.get(collection('refs'))
 
-    return RescisionAdapter.getForConnect.output(response.data)
+    return RescisionAdapter.getRefs.output(response.data)
   },
 
   getOne: async id => {
@@ -25,13 +25,13 @@ export const RescisionService: Service<RescisionModel.Entity> = {
     return RescisionAdapter.getOne.output(response.data)
   },
 
-  create: async (data: RescisionModel.CreateData) => {
+  create: async (data: RescisionModel.CreateEntity) => {
     const adaptedInput = RescisionAdapter.create.input(data)
 
     await publicInstance.post(collection(), adaptedInput)
   },
 
-  updateOne: async (id, data: RescisionModel.UpdateData) => {
+  updateOne: async (id, data: RescisionModel.UpdateEntity) => {
     const adaptedInput = RescisionAdapter.updateOne.input(data)
 
     await publicInstance.put(collection(id), adaptedInput)

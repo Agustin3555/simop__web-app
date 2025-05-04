@@ -14,10 +14,10 @@ export const TipoFinanciamientoObraService: Service<TipoFinanciamientoObraModel.
       return TipoFinanciamientoObraAdapter.getAll.output(response.data)
     },
 
-    getForConnect: async () => {
-      const response = await publicInstance.get(collection('for-connect'))
+    getRefs: async () => {
+      const response = await publicInstance.get(collection('refs'))
 
-      return TipoFinanciamientoObraAdapter.getForConnect.output(response.data)
+      return TipoFinanciamientoObraAdapter.getRefs.output(response.data)
     },
 
     getOne: async id => {
@@ -26,13 +26,13 @@ export const TipoFinanciamientoObraService: Service<TipoFinanciamientoObraModel.
       return TipoFinanciamientoObraAdapter.getOne.output(response.data)
     },
 
-    create: async (data: TipoFinanciamientoObraModel.CreateData) => {
+    create: async (data: TipoFinanciamientoObraModel.CreateEntity) => {
       const adaptedInput = TipoFinanciamientoObraAdapter.create.input(data)
 
       await publicInstance.post(collection(), adaptedInput)
     },
 
-    updateOne: async (id, data: TipoFinanciamientoObraModel.UpdateData) => {
+    updateOne: async (id, data: TipoFinanciamientoObraModel.UpdateEntity) => {
       const adaptedInput = TipoFinanciamientoObraAdapter.updateOne.input(data)
 
       await publicInstance.put(collection(id), adaptedInput)
