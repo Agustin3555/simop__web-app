@@ -19,9 +19,30 @@
       }
 
       > .cmp-button {
-        background-color: var(--pal-color-a);
-
         color: var(--pal-color-white);
+
+        background-color: var(--pal-color-a);
+      }
+    }
+  }
+
+  > ul {
+    flex-direction: column;
+    gap: var(--pal-size-l);
+    padding: var(--pal-size-l);
+    max-width: max-content;
+
+    border-radius: var(--pal-size-xs);
+    background-color: var(--pal-color-white);
+
+    > li {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: var(--pal-size-3xl);
+
+      > strong {
+        color: var(--pal-color-a);
       }
     }
   }
