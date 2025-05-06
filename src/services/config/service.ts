@@ -1,5 +1,12 @@
 import { GeneralEntity } from '@/models/config'
 
+export enum Method {
+  GetAll,
+  GetOne,
+  Create,
+  UpdateOne,
+}
+
 export type Service<E = GeneralEntity> = Record<string, any> & {
   getAll: () => Promise<E[]>
   getRefs?: () => Promise<Partial<E>[]>

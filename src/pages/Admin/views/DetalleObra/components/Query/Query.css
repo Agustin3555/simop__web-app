@@ -43,6 +43,7 @@
 
       > strong {
         color: var(--pal-color-a);
+        white-space: nowrap;
       }
     }
   }
