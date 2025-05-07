@@ -10,9 +10,16 @@ import { useQueryActionState } from '@/hooks'
 import { useQuery } from '@tanstack/react-query'
 import { Button } from '@/components'
 import { AutoCombobox } from '@/pages/Admin/components'
-import { ObraModel } from '@/pages/Admin/models'
+import { ObraModel, ObraTotalesModel } from '@/pages/Admin/models'
 import { ObraService } from '@/pages/Admin/services'
-import { getFlatProps } from '@/pages/Admin/services/config'
+import { getFlatProps, Scheme } from '@/pages/Admin/services/config'
+
+const { groups, ...rest } = ObraModel.scheme
+
+const schemeAux: Scheme = {
+  ...rest,
+  groups: [...groups, ...ObraTotalesModel.scheme.groups],
+}
 
 const KEY_NAME = 'obra'
 
@@ -44,7 +51,7 @@ const Query = () => {
   const fields = useMemo(() => {
     if (!data) return
 
-    const flatProps = getFlatProps(ObraModel.scheme)
+    const flatProps = getFlatProps(schemeAux)
 
     const acc: { title: string; value: ReactNode }[] = []
 

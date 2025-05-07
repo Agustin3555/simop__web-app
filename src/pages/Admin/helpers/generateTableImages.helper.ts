@@ -2,6 +2,7 @@ import domtoimage from 'dom-to-image'
 
 const CHUNK_ROWS = 10
 const CHUNK_COLS = 8
+const SCALE = 3
 
 export const generateTableImages = (tableElement: HTMLElement) => {
   const headElement = tableElement.querySelector<HTMLElement>('.head')
@@ -76,7 +77,14 @@ export const generateTableImages = (tableElement: HTMLElement) => {
 
       document.body.appendChild(container)
 
-      const imageUrl = await domtoimage.toPng(auxTable)
+      const imageUrl = await domtoimage.toPng(auxTable, {
+        height: auxTable.offsetHeight * SCALE,
+        width: auxTable.offsetWidth * SCALE,
+        style: {
+          scale: SCALE,
+          transformOrigin: 'top left',
+        },
+      })
 
       document.body.removeChild(container)
 
