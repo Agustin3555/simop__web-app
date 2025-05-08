@@ -3,7 +3,7 @@ import { RepresentanteEmpresaModel } from '../models'
 
 export const getAll: {
   output: OutputAdapter<
-    RepresentanteEmpresaModel.RawEntity[],
+    RepresentanteEmpresaModel.Entity[],
     RepresentanteEmpresaModel.Entity[]
   >
 } = {
@@ -12,7 +12,7 @@ export const getAll: {
 
 export const getRefs: {
   output: OutputAdapter<
-    RepresentanteEmpresaModel.RawRef[],
+    RepresentanteEmpresaModel.Ref[],
     RepresentanteEmpresaModel.Ref[]
   >
 } = {
@@ -21,7 +21,7 @@ export const getRefs: {
 
 export const getOne: {
   output: OutputAdapter<
-    RepresentanteEmpresaModel.RawEntity,
+    RepresentanteEmpresaModel.Entity,
     RepresentanteEmpresaModel.Entity
   >
 } = {
@@ -31,7 +31,7 @@ export const getOne: {
 export const create: {
   input: InputAdapter<
     RepresentanteEmpresaModel.CreateEntity,
-    RepresentanteEmpresaModel.CreateBody
+    RepresentanteEmpresaModel.CreateEntity
   >
 } = {
   input: data => data,
@@ -40,7 +40,7 @@ export const create: {
 export const updateOne: {
   input: InputAdapter<
     RepresentanteEmpresaModel.UpdateEntity,
-    RepresentanteEmpresaModel.UpdateBody
+    RepresentanteEmpresaModel.UpdateEntity
   >
 } = {
   input: data => data,

@@ -14,78 +14,34 @@ import {
   TextProp,
 } from '../services/config'
 import { PagoCertificacionService } from '../services'
+import { BaseEntity, BaseRef } from '@/models/config'
 
-export interface RawEntity {
-  id: number
+export interface OwnFields {
   numero: number
-  ordenPago?: string
-  monto?: number
-  fecha?: string
-  observaciones?: string
-
-  direccion?: DireccionModel.RawRef
-  departamento?: DepartamentoModel.RawRef
-  redeterminacion?: RedeterminacionModel.RawRef
-  fojaMedicion?: FojaMedicionModel.RawRef
-
-  creado: string
-  modificado: string
+  ordenPago: string
+  monto: number
+  fecha: string
+  observaciones: string
 }
 
-export interface Entity {
-  id: number
-  numero: number
-  ordenPago?: string
-  monto?: number
-  fecha?: string
-  observaciones?: string
-
-  direccion?: DireccionModel.Ref
-  departamento?: DepartamentoModel.Ref
-  redeterminacion?: RedeterminacionModel.Ref
-  fojaMedicion?: FojaMedicionModel.Ref
-
-  creado: string
-  modificado: string
+export interface RelationFields {
+  direccion: DireccionModel.Ref
+  departamento: DepartamentoModel.Ref
+  redeterminacion: RedeterminacionModel.Ref
+  fojaMedicion: FojaMedicionModel.Ref
 }
 
-export interface RawRef {
-  id: number
-  numero: number
-}
+export interface Entity extends BaseEntity, OwnFields, RelationFields {}
 
-export interface Ref {
-  id: number
-  numero: number
-}
-
-export interface CreateEntity {
-  numero: number
-  ordenPago?: string
-  fecha?: string
-  observaciones?: string
-  monto?: number
-
-  direccionId?: number
-  departamentoId?: number
-  redeterminacionId?: number
-  fojaMedicionId?: number
-}
-
-export interface CreateBody {
-  numero: number
-  ordenPago?: string
-  fecha?: string
-  observaciones?: string
-  monto?: number
-
-  redeterminacionId?: number
-  fojaMedicionId?: number
-}
+export type CreateEntity = OwnFields &
+  Record<
+    'direccionId' | 'departamentoId' | 'redeterminacionId' | 'ojaMedicionId',
+    number
+  >
 
 export type UpdateEntity = Partial<CreateEntity>
 
-export type UpdateBody = Partial<CreateBody>
+export type Ref = BaseRef<OwnFields, 'numero'>
 
 export const scheme: MetaModel<Entity> = {
   key: 'pagoCertificacion',

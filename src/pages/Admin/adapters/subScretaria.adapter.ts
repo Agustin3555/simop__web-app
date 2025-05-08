@@ -3,7 +3,7 @@ import { SubSecretariaModel } from '../models'
 
 export const getAll: {
   output: OutputAdapter<
-    SubSecretariaModel.RawEntity[],
+    SubSecretariaModel.Entity[],
     SubSecretariaModel.Entity[]
   >
 } = {
@@ -11,13 +11,13 @@ export const getAll: {
 }
 
 export const getRefs: {
-  output: OutputAdapter<SubSecretariaModel.RawRef[], SubSecretariaModel.Ref[]>
+  output: OutputAdapter<SubSecretariaModel.Ref[], SubSecretariaModel.Ref[]>
 } = {
   output: response => response,
 }
 
 export const getOne: {
-  output: OutputAdapter<SubSecretariaModel.RawEntity, SubSecretariaModel.Entity>
+  output: OutputAdapter<SubSecretariaModel.Entity, SubSecretariaModel.Entity>
 } = {
   output: response => response,
 }
@@ -25,7 +25,7 @@ export const getOne: {
 export const create: {
   input: InputAdapter<
     SubSecretariaModel.CreateEntity,
-    SubSecretariaModel.CreateBody
+    SubSecretariaModel.CreateEntity
   >
 } = {
   input: data => data,
@@ -34,7 +34,7 @@ export const create: {
 export const updateOne: {
   input: InputAdapter<
     SubSecretariaModel.UpdateEntity,
-    SubSecretariaModel.UpdateBody
+    SubSecretariaModel.UpdateEntity
   >
 } = {
   input: data => data,

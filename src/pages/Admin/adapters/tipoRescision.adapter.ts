@@ -3,7 +3,7 @@ import { TipoRescisionModel } from '../models'
 
 export const getAll: {
   output: OutputAdapter<
-    TipoRescisionModel.RawEntity[],
+    TipoRescisionModel.Entity[],
     TipoRescisionModel.Entity[]
   >
 } = {
@@ -11,13 +11,13 @@ export const getAll: {
 }
 
 export const getRefs: {
-  output: OutputAdapter<TipoRescisionModel.RawRef[], TipoRescisionModel.Ref[]>
+  output: OutputAdapter<TipoRescisionModel.Ref[], TipoRescisionModel.Ref[]>
 } = {
   output: response => response,
 }
 
 export const getOne: {
-  output: OutputAdapter<TipoRescisionModel.RawEntity, TipoRescisionModel.Entity>
+  output: OutputAdapter<TipoRescisionModel.Entity, TipoRescisionModel.Entity>
 } = {
   output: response => response,
 }
@@ -25,7 +25,7 @@ export const getOne: {
 export const create: {
   input: InputAdapter<
     TipoRescisionModel.CreateEntity,
-    TipoRescisionModel.CreateBody
+    TipoRescisionModel.CreateEntity
   >
 } = {
   input: data => data,
@@ -34,7 +34,7 @@ export const create: {
 export const updateOne: {
   input: InputAdapter<
     TipoRescisionModel.UpdateEntity,
-    TipoRescisionModel.UpdateBody
+    TipoRescisionModel.UpdateEntity
   >
 } = {
   input: data => data,

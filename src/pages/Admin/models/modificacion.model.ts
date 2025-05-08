@@ -14,84 +14,35 @@ import {
 } from '../services/config'
 import { ModificacionService } from '../services'
 import { COMMON_PROPS } from '../constants/commonProps.const'
+import { BaseEntity, BaseRef } from '@/models/config'
 
-export interface RawEntity {
-  id: number
-  numeroExpediente: string
-  numeroResolucion?: string
-  monto?: number
-  nuevoMontoObra?: number
-  fecha?: string
-  observaciones?: string
-
-  direccion?: DireccionModel.RawRef
-  departamento?: DepartamentoModel.RawRef
-  obra?: ObraModel.RawRef
-  tipoModificacion?: TipoModificacionModel.RawRef
-
-  creado: string
-  modificado: string
-}
-
-export interface Entity {
-  id: number
-  numeroExpediente: string
-  numeroResolucion?: string
-  monto?: number
-  nuevoMontoObra?: number
-  fecha?: string
-  observaciones?: string
-
-  direccion?: DireccionModel.Ref
-  departamento?: DepartamentoModel.Ref
-  obra?: ObraModel.Ref
-  tipoModificacion?: TipoModificacionModel.Ref
-
-  creado: string
-  modificado: string
-}
-
-export interface RawRef {
-  id: number
-  numeroExpediente: string
-}
-
-export interface Ref {
-  id: number
-  numeroExpediente: string
-}
-
-export interface CreateEntity {
+export interface OwnFields {
   numeroExpediente: string
   numeroResolucion: string
   monto: number
   nuevoMontoObra: number
   fecha: string
   observaciones: string
-
-  direccionId?: number
-  departamentoId?: number
-  obraId: number
-  tipoModificacionId: number
 }
 
-export interface CreateBody {
-  numeroExpediente: string
-  numeroResolucion: string
-  monto: number
-  nuevoMontoObra: number
-  fecha: string
-  observaciones: string
-
-  direccionId?: number
-  departamentoId?: number
-  obraId: number
-  tipoModificacionId: number
+export interface RelationFields {
+  direccion: DireccionModel.Ref
+  departamento: DepartamentoModel.Ref
+  obra: ObraModel.Ref
+  tipoModificacion: TipoModificacionModel.Ref
 }
+
+export interface Entity extends BaseEntity, OwnFields, RelationFields {}
+
+export type CreateEntity = OwnFields &
+  Record<
+    'direccionId' | 'departamentoId' | 'obraId' | 'tipoModificacionId',
+    number
+  >
 
 export type UpdateEntity = Partial<CreateEntity>
 
-export type UpdateBody = Partial<CreateBody>
+export type Ref = BaseRef<OwnFields, 'numeroExpediente'>
 
 export const scheme: MetaModel<Entity> = {
   key: 'modificacion',

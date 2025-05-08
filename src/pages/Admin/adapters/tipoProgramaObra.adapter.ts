@@ -3,7 +3,7 @@ import { TipoProgramaObraModel } from '../models'
 
 export const getAll: {
   output: OutputAdapter<
-    TipoProgramaObraModel.RawEntity[],
+    TipoProgramaObraModel.Entity[],
     TipoProgramaObraModel.Entity[]
   >
 } = {
@@ -12,7 +12,7 @@ export const getAll: {
 
 export const getRefs: {
   output: OutputAdapter<
-    TipoProgramaObraModel.RawRef[],
+    TipoProgramaObraModel.Ref[],
     TipoProgramaObraModel.Ref[]
   >
 } = {
@@ -21,7 +21,7 @@ export const getRefs: {
 
 export const getOne: {
   output: OutputAdapter<
-    TipoProgramaObraModel.RawEntity,
+    TipoProgramaObraModel.Entity,
     TipoProgramaObraModel.Entity
   >
 } = {
@@ -31,7 +31,7 @@ export const getOne: {
 export const create: {
   input: InputAdapter<
     TipoProgramaObraModel.CreateEntity,
-    TipoProgramaObraModel.CreateBody
+    TipoProgramaObraModel.CreateEntity
   >
 } = {
   input: data => data,
@@ -40,7 +40,7 @@ export const create: {
 export const updateOne: {
   input: InputAdapter<
     TipoProgramaObraModel.UpdateEntity,
-    TipoProgramaObraModel.UpdateBody
+    TipoProgramaObraModel.UpdateEntity
   >
 } = {
   input: data => data,

@@ -3,7 +3,7 @@ import { TipoModificacionModel } from '../models'
 
 export const getAll: {
   output: OutputAdapter<
-    TipoModificacionModel.RawEntity[],
+    TipoModificacionModel.Entity[],
     TipoModificacionModel.Entity[]
   >
 } = {
@@ -12,7 +12,7 @@ export const getAll: {
 
 export const getRefs: {
   output: OutputAdapter<
-    TipoModificacionModel.RawRef[],
+    TipoModificacionModel.Ref[],
     TipoModificacionModel.Ref[]
   >
 } = {
@@ -21,7 +21,7 @@ export const getRefs: {
 
 export const getOne: {
   output: OutputAdapter<
-    TipoModificacionModel.RawEntity,
+    TipoModificacionModel.Entity,
     TipoModificacionModel.Entity
   >
 } = {
@@ -31,7 +31,7 @@ export const getOne: {
 export const create: {
   input: InputAdapter<
     TipoModificacionModel.CreateEntity,
-    TipoModificacionModel.CreateBody
+    TipoModificacionModel.CreateEntity
   >
 } = {
   input: data => data,
@@ -40,7 +40,7 @@ export const create: {
 export const updateOne: {
   input: InputAdapter<
     TipoModificacionModel.UpdateEntity,
-    TipoModificacionModel.UpdateBody
+    TipoModificacionModel.UpdateEntity
   >
 } = {
   input: data => data,

@@ -3,7 +3,7 @@ import { TipoContratacionObraModel } from '../models'
 
 export const getAll: {
   output: OutputAdapter<
-    TipoContratacionObraModel.RawEntity[],
+    TipoContratacionObraModel.Entity[],
     TipoContratacionObraModel.Entity[]
   >
 } = {
@@ -12,7 +12,7 @@ export const getAll: {
 
 export const getRefs: {
   output: OutputAdapter<
-    TipoContratacionObraModel.RawRef[],
+    TipoContratacionObraModel.Ref[],
     TipoContratacionObraModel.Ref[]
   >
 } = {
@@ -21,7 +21,7 @@ export const getRefs: {
 
 export const getOne: {
   output: OutputAdapter<
-    TipoContratacionObraModel.RawEntity,
+    TipoContratacionObraModel.Entity,
     TipoContratacionObraModel.Entity
   >
 } = {
@@ -31,7 +31,7 @@ export const getOne: {
 export const create: {
   input: InputAdapter<
     TipoContratacionObraModel.CreateEntity,
-    TipoContratacionObraModel.CreateBody
+    TipoContratacionObraModel.CreateEntity
   >
 } = {
   input: data => data,
@@ -40,7 +40,7 @@ export const create: {
 export const updateOne: {
   input: InputAdapter<
     TipoContratacionObraModel.UpdateEntity,
-    TipoContratacionObraModel.UpdateBody
+    TipoContratacionObraModel.UpdateEntity
   >
 } = {
   input: data => data,

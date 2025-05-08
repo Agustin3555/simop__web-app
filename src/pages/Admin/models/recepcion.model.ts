@@ -13,71 +13,32 @@ import {
 } from '../services/config'
 import { RecepcionService } from '../services'
 import { COMMON_PROPS } from '../constants/commonProps.const'
+import { BaseEntity, BaseRef } from '@/models/config'
 
-export interface RawEntity {
-  id: number
-  numeroActa: number
-  fecha?: string
-  observaciones?: string
-
-  direccion?: DireccionModel.RawRef
-  departamento?: DepartamentoModel.RawRef
-  obra?: ObraModel.RawRef
-  tipoRecepcion?: TipoRecepcionModel.RawRef
-
-  creado: string
-  modificado: string
-}
-
-export interface Entity {
-  id: number
-  numeroActa: number
-  fecha?: string
-  observaciones?: string
-
-  direccion?: DireccionModel.Ref
-  departamento?: DepartamentoModel.Ref
-  obra?: ObraModel.Ref
-  tipoRecepcion?: TipoRecepcionModel.Ref
-  creado: string
-  modificado: string
-}
-
-export interface RawRef {
-  id: number
-  numeroActa: number
-}
-
-export interface Ref {
-  id: number
-  numeroActa: number
-}
-
-export interface CreateEntity {
+export interface OwnFields {
   numeroActa: number
   fecha: string
   observaciones: string
-
-  direccionId?: number
-  departamentoId?: number
-  obraId: number
-  tipoRecepcionId: number
 }
 
-export interface CreateBody {
-  numeroActa: number
-  fecha: string
-  observaciones: string
-
-  direccionId?: number
-  departamentoId?: number
-  obraId: number
-  tipoRecepcionId: number
+export interface RelationFields {
+  direccion: DireccionModel.Ref
+  departamento: DepartamentoModel.Ref
+  obra: ObraModel.Ref
+  tipoRecepcion: TipoRecepcionModel.Ref
 }
+
+export interface Entity extends BaseEntity, OwnFields, RelationFields {}
+
+export type CreateEntity = OwnFields &
+  Record<
+    'direccionId' | 'departamentoId' | 'obraId' | ' tipoRecepcionId',
+    number
+  >
 
 export type UpdateEntity = Partial<CreateEntity>
 
-export type UpdateBody = Partial<CreateBody>
+export type Ref = BaseRef<OwnFields, 'numeroActa'>
 
 export const scheme: MetaModel<Entity> = {
   key: 'recepcion',

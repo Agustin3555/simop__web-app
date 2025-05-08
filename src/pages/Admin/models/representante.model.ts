@@ -2,82 +2,30 @@ import { PaisModel, ProvinciaModel, LocalidadModel } from '.'
 import { NumberProp, RefProp, MetaModel, TextProp } from '../services/config'
 import { RepresentanteService } from '../services'
 import { COMMON_PROPS } from '../constants/commonProps.const'
+import { BaseEntity, BaseRef } from '@/models/config'
 
-export interface RawEntity {
-  id: number
-  cuil: number
-  apellido: string
-  nombre?: string
-  direccion?: string
-  numeroMatricula?: string
-
-  pais?: PaisModel.RawRef
-  provincia?: ProvinciaModel.RawRef
-  localidad?: LocalidadModel.RawRef
-
-  creado: string
-  modificado: string
-}
-
-export interface Entity {
-  id: number
-  cuil: number
-  apellido: string
-  nombre?: string
-  direccion?: string
-  numeroMatricula?: string
-
-  pais?: PaisModel.Ref
-  provincia?: ProvinciaModel.Ref
-  localidad?: LocalidadModel.Ref
-
-  creado: string
-  modificado: string
-}
-
-export interface RawRef {
-  id: number
-
-  cuil: number
-  nombre: string
-  apellido: string
-}
-
-export interface Ref {
-  id: number
-
-  cuil: number
-  nombre: string
-  apellido: string
-}
-
-export interface CreateEntity {
+export interface OwnFields {
   cuil: number
   apellido: string
   nombre: string
   direccion: string
   numeroMatricula: string
-
-  paisId: number
-  provinciaId: number
-  localidadId: number
 }
 
-export interface CreateBody {
-  cuil: number
-  apellido: string
-  nombre: string
-  direccion: string
-  numeroMatricula: string
-
-  paisId: number
-  provinciaId: number
-  localidadId: number
+export interface RelationFields {
+  pais: PaisModel.Ref
+  provincia: ProvinciaModel.Ref
+  localidad: LocalidadModel.Ref
 }
+
+export interface Entity extends BaseEntity, OwnFields, RelationFields {}
+
+export type CreateEntity = OwnFields &
+  Record<'paisId' | 'provinciaId' | 'localidadId', number>
 
 export type UpdateEntity = Partial<CreateEntity>
 
-export type UpdateBody = Partial<CreateBody>
+export type Ref = BaseRef<OwnFields, 'cuil' | 'nombre' | 'apellido'>
 
 export const scheme: MetaModel<Entity> = {
   key: 'representante',

@@ -3,7 +3,7 @@ import { RedeterminacionModel } from '../models'
 
 export const getAll: {
   output: OutputAdapter<
-    RedeterminacionModel.RawEntity[],
+    RedeterminacionModel.Entity[],
     RedeterminacionModel.Entity[]
   >
 } = {
@@ -11,17 +11,14 @@ export const getAll: {
 }
 
 export const getRefs: {
-  output: OutputAdapter<
-    RedeterminacionModel.RawRef[],
-    RedeterminacionModel.Ref[]
-  >
+  output: OutputAdapter<RedeterminacionModel.Ref[], RedeterminacionModel.Ref[]>
 } = {
   output: response => response,
 }
 
 export const getOne: {
   output: OutputAdapter<
-    RedeterminacionModel.RawEntity,
+    RedeterminacionModel.Entity,
     RedeterminacionModel.Entity
   >
 } = {
@@ -31,7 +28,7 @@ export const getOne: {
 export const create: {
   input: InputAdapter<
     RedeterminacionModel.CreateEntity,
-    RedeterminacionModel.CreateBody
+    RedeterminacionModel.CreateEntity
   >
 } = {
   input: data => data,
@@ -40,7 +37,7 @@ export const create: {
 export const updateOne: {
   input: InputAdapter<
     RedeterminacionModel.UpdateEntity,
-    RedeterminacionModel.UpdateBody
+    RedeterminacionModel.UpdateEntity
   >
 } = {
   input: data => data,

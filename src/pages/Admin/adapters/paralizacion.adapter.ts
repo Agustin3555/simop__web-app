@@ -2,22 +2,19 @@ import { InputAdapter, OutputAdapter } from '@/adapters/config'
 import { ParalizacionModel } from '../models'
 
 export const getAll: {
-  output: OutputAdapter<
-    ParalizacionModel.RawEntity[],
-    ParalizacionModel.Entity[]
-  >
+  output: OutputAdapter<ParalizacionModel.Entity[], ParalizacionModel.Entity[]>
 } = {
   output: response => response,
 }
 
 export const getRefs: {
-  output: OutputAdapter<ParalizacionModel.RawRef[], ParalizacionModel.Ref[]>
+  output: OutputAdapter<ParalizacionModel.Ref[], ParalizacionModel.Ref[]>
 } = {
   output: response => response,
 }
 
 export const getOne: {
-  output: OutputAdapter<ParalizacionModel.RawEntity, ParalizacionModel.Entity>
+  output: OutputAdapter<ParalizacionModel.Entity, ParalizacionModel.Entity>
 } = {
   output: response => response,
 }
@@ -25,7 +22,7 @@ export const getOne: {
 export const create: {
   input: InputAdapter<
     ParalizacionModel.CreateEntity,
-    ParalizacionModel.CreateBody
+    ParalizacionModel.CreateEntity
   >
 } = {
   input: data => data,
@@ -34,7 +31,7 @@ export const create: {
 export const updateOne: {
   input: InputAdapter<
     ParalizacionModel.UpdateEntity,
-    ParalizacionModel.UpdateBody
+    ParalizacionModel.UpdateEntity
   >
 } = {
   input: data => data,

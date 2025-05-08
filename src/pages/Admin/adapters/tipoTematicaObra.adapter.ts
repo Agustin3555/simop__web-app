@@ -3,7 +3,7 @@ import { TipoTematicaObraModel } from '../models'
 
 export const getAll: {
   output: OutputAdapter<
-    TipoTematicaObraModel.RawEntity[],
+    TipoTematicaObraModel.Entity[],
     TipoTematicaObraModel.Entity[]
   >
 } = {
@@ -12,7 +12,7 @@ export const getAll: {
 
 export const getRefs: {
   output: OutputAdapter<
-    TipoTematicaObraModel.RawRef[],
+    TipoTematicaObraModel.Ref[],
     TipoTematicaObraModel.Ref[]
   >
 } = {
@@ -21,7 +21,7 @@ export const getRefs: {
 
 export const getOne: {
   output: OutputAdapter<
-    TipoTematicaObraModel.RawEntity,
+    TipoTematicaObraModel.Entity,
     TipoTematicaObraModel.Entity
   >
 } = {
@@ -31,7 +31,7 @@ export const getOne: {
 export const create: {
   input: InputAdapter<
     TipoTematicaObraModel.CreateEntity,
-    TipoTematicaObraModel.CreateBody
+    TipoTematicaObraModel.CreateEntity
   >
 } = {
   input: data => data,
@@ -40,7 +40,7 @@ export const create: {
 export const updateOne: {
   input: InputAdapter<
     TipoTematicaObraModel.UpdateEntity,
-    TipoTematicaObraModel.UpdateBody
+    TipoTematicaObraModel.UpdateEntity
   >
 } = {
   input: data => data,

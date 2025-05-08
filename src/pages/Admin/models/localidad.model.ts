@@ -2,52 +2,23 @@ import { ProvinciaModel } from '.'
 import { RefProp, MetaModel, TextProp } from '../services/config'
 import { LocalidadService } from '../services'
 import { COMMON_PROPS } from '../constants/commonProps.const'
+import { BaseEntity, BaseRef } from '@/models/config'
 
-export interface RawEntity {
-  id: number
-  nombre: string
-
-  provincia?: ProvinciaModel.RawRef
-
-  creado: string
-  modificado: string
-}
-
-export interface Entity {
-  id: number
-  nombre: string
-
-  provincia?: ProvinciaModel.Ref
-
-  creado: string
-  modificado: string
-}
-
-export interface RawRef {
-  id: number
+export interface OwnFields {
   nombre: string
 }
 
-export interface Ref {
-  id: number
-  nombre: string
+export interface RelationFields {
+  provincia: ProvinciaModel.Ref
 }
 
-export interface CreateEntity {
-  nombre: string
+export interface Entity extends BaseEntity, OwnFields, RelationFields {}
 
-  provinciaId: number
-}
-
-export interface CreateBody {
-  nombre: string
-
-  provinciaId: number
-}
+export type CreateEntity = OwnFields & Record<'provinciaId', number>
 
 export type UpdateEntity = Partial<CreateEntity>
 
-export type UpdateBody = Partial<CreateBody>
+export type Ref = BaseRef<OwnFields, 'nombre'>
 
 export const scheme: MetaModel<Entity> = {
   key: 'localidad',

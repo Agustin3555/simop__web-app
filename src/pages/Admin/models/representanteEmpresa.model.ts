@@ -2,62 +2,27 @@ import { EmpresaModel, RepresentanteModel, TipoRepresentanteModel } from '.'
 import { BooleanProp, RefProp, MetaModel, DateProp } from '../services/config'
 import { RepresentanteEmpresaService } from '../services'
 import { COMMON_PROPS } from '../constants/commonProps.const'
+import { BaseEntity, BaseRef } from '@/models/config'
 
-export interface RawEntity {
-  id: number
-  vigencia: boolean
-  fecha?: string
-
-  empresa?: EmpresaModel.RawRef
-  representante?: RepresentanteModel.RawRef
-  tipoRepresentante?: TipoRepresentanteModel.RawRef
-
-  creado: string
-  modificado: string
-}
-
-export interface Entity {
-  id: number
-  vigencia: boolean
-  fecha?: string
-
-  empresa?: EmpresaModel.Ref
-  representante?: RepresentanteModel.Ref
-  tipoRepresentante?: TipoRepresentanteModel.Ref
-
-  creado: string
-  modificado: string
-}
-
-export interface RawRef {
-  id: number
-}
-
-export interface Ref {
-  id: number
-}
-
-export interface CreateEntity {
+export interface OwnFields {
   vigencia: boolean
   fecha: string
-
-  empresaId: number
-  representanteId: number
-  tipoRepresentanteId: number
 }
 
-export interface CreateBody {
-  vigencia: boolean
-  fecha: string
-
-  empresaId: number
-  representanteId: number
-  tipoRepresentanteId: number
+export interface RelationFields {
+  empresa: EmpresaModel.Ref
+  representante: RepresentanteModel.Ref
+  tipoRepresentante: TipoRepresentanteModel.Ref
 }
+
+export interface Entity extends BaseEntity, OwnFields, RelationFields {}
+
+export type CreateEntity = OwnFields &
+  Record<'empresaId' | 'representanteId' | 'tipoRepresentanteId', number>
 
 export type UpdateEntity = Partial<CreateEntity>
 
-export type UpdateBody = Partial<CreateBody>
+export type Ref = BaseRef<OwnFields, 'fecha'>
 
 export const scheme: MetaModel<Entity> = {
   key: 'representanteEmpresa',
