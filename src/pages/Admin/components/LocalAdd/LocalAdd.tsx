@@ -77,7 +77,7 @@ const ContextualizedLocalAdd = () => {
           {fieldGroups.map(({ title, fields }, index) => (
             <div key={index} className="group">
               {title && <small>{title}</small>}
-              <div className="fields">{fields.map(item => item)}</div>
+              <div className="fields">{fields}</div>
             </div>
           ))}
         </div>

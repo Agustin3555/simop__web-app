@@ -131,7 +131,7 @@ export const TREE: SectionNode[] = [
     scheme: {
       key: 'detalleObra',
       title: {
-        plural: 'Detalle de Obra',
+        plural: 'Detalle de Obra Básica',
       },
     },
   },

@@ -4,7 +4,7 @@ import { Query } from './components'
 const DetalleObra = () => (
   <View
     viewKey="detalleObra"
-    title="Detalle de Obra"
+    title="Detalle de Obra Básica"
     localViews={[
       {
         localViewKey: 'query',

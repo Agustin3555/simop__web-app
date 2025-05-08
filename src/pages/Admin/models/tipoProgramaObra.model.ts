@@ -20,8 +20,8 @@ export const scheme: Scheme<Entity> = {
   key: 'tipoProgramaObra',
   service: TipoProgramaObraService,
   title: {
-    singular: 'Tipo de Programa de Obra',
-    plural: 'Tipos de Programas de Obra',
+    singular: 'Obra Inaugurada',
+    plural: 'Obra Inaugurada',
   },
   anchorField: 'nombre',
 
