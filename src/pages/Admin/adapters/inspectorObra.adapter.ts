@@ -3,7 +3,7 @@ import { InspectorObraModel } from '../models'
 
 export const getAll: {
   output: OutputAdapter<
-    InspectorObraModel.RawEntity[],
+    InspectorObraModel.Entity[],
     InspectorObraModel.Entity[]
   >
 } = {
@@ -11,13 +11,13 @@ export const getAll: {
 }
 
 export const getRefs: {
-  output: OutputAdapter<InspectorObraModel.RawRef[], InspectorObraModel.Ref[]>
+  output: OutputAdapter<InspectorObraModel.Ref[], InspectorObraModel.Ref[]>
 } = {
   output: response => response,
 }
 
 export const getOne: {
-  output: OutputAdapter<InspectorObraModel.RawEntity, InspectorObraModel.Entity>
+  output: OutputAdapter<InspectorObraModel.Entity, InspectorObraModel.Entity>
 } = {
   output: response => response,
 }
@@ -25,7 +25,7 @@ export const getOne: {
 export const create: {
   input: InputAdapter<
     InspectorObraModel.CreateEntity,
-    InspectorObraModel.CreateBody
+    InspectorObraModel.CreateEntity
   >
 } = {
   input: data => data,
@@ -34,7 +34,7 @@ export const create: {
 export const updateOne: {
   input: InputAdapter<
     InspectorObraModel.UpdateEntity,
-    InspectorObraModel.UpdateBody
+    InspectorObraModel.UpdateEntity
   >
 } = {
   input: data => data,

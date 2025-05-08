@@ -3,7 +3,7 @@ import { TipoFinanciamientoObraModel } from '../models'
 
 export const getAll: {
   output: OutputAdapter<
-    TipoFinanciamientoObraModel.RawEntity[],
+    TipoFinanciamientoObraModel.Entity[],
     TipoFinanciamientoObraModel.Entity[]
   >
 } = {
@@ -12,7 +12,7 @@ export const getAll: {
 
 export const getRefs: {
   output: OutputAdapter<
-    TipoFinanciamientoObraModel.RawRef[],
+    TipoFinanciamientoObraModel.Ref[],
     TipoFinanciamientoObraModel.Ref[]
   >
 } = {
@@ -21,7 +21,7 @@ export const getRefs: {
 
 export const getOne: {
   output: OutputAdapter<
-    TipoFinanciamientoObraModel.RawEntity,
+    TipoFinanciamientoObraModel.Entity,
     TipoFinanciamientoObraModel.Entity
   >
 } = {
@@ -31,7 +31,7 @@ export const getOne: {
 export const create: {
   input: InputAdapter<
     TipoFinanciamientoObraModel.CreateEntity,
-    TipoFinanciamientoObraModel.CreateBody
+    TipoFinanciamientoObraModel.CreateEntity
   >
 } = {
   input: data => data,
@@ -40,7 +40,7 @@ export const create: {
 export const updateOne: {
   input: InputAdapter<
     TipoFinanciamientoObraModel.UpdateEntity,
-    TipoFinanciamientoObraModel.UpdateBody
+    TipoFinanciamientoObraModel.UpdateEntity
   >
 } = {
   input: data => data,

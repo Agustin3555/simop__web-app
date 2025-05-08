@@ -2,52 +2,23 @@ import { SubSecretariaModel } from '.'
 import { RefProp, Scheme, TextProp } from '../services/config'
 import { DireccionService } from '../services'
 import { COMMON_PROPS } from '../constants/commonProps.const'
+import { BaseEntity, BaseRef } from '@/models/config'
 
-export interface RawEntity {
-  id: number
-  nombre: string
-
-  subSecretaria?: SubSecretariaModel.RawRef
-
-  creado: string
-  modificado: string
-}
-
-export interface Entity {
-  id: number
-  nombre: string
-
-  subSecretaria?: SubSecretariaModel.Ref
-
-  creado: string
-  modificado: string
-}
-
-export interface RawRef {
-  id: number
-  nombre: string
-}
-export interface Ref {
-  id: number
-
+export interface OwnFields {
   nombre: string
 }
 
-export interface CreateEntity {
-  nombre: string
-
-  subSecretariaId: number
+export interface RelationFields {
+  subSecretaria: SubSecretariaModel.Ref
 }
 
-export interface CreateBody {
-  nombre: string
+export interface Entity extends BaseEntity, OwnFields, RelationFields {}
 
-  subSecretariaId: number
-}
+export type CreateEntity = OwnFields & Record<'subsecretariaId', number>
+
+export type Ref = BaseRef<OwnFields, 'nombre'>
 
 export type UpdateEntity = Partial<CreateEntity>
-
-export type UpdateBody = Partial<CreateBody>
 
 export const scheme: Scheme<Entity> = {
   key: 'direccion',

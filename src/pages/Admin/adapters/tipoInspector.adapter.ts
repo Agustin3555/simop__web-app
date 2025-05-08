@@ -3,7 +3,7 @@ import { TipoInspectorModel } from '../models'
 
 export const getAll: {
   output: OutputAdapter<
-    TipoInspectorModel.RawEntity[],
+    TipoInspectorModel.Entity[],
     TipoInspectorModel.Entity[]
   >
 } = {
@@ -11,13 +11,13 @@ export const getAll: {
 }
 
 export const getRefs: {
-  output: OutputAdapter<TipoInspectorModel.RawRef[], TipoInspectorModel.Ref[]>
+  output: OutputAdapter<TipoInspectorModel.Ref[], TipoInspectorModel.Ref[]>
 } = {
   output: response => response,
 }
 
 export const getOne: {
-  output: OutputAdapter<TipoInspectorModel.RawEntity, TipoInspectorModel.Entity>
+  output: OutputAdapter<TipoInspectorModel.Entity, TipoInspectorModel.Entity>
 } = {
   output: response => response,
 }
@@ -25,7 +25,7 @@ export const getOne: {
 export const create: {
   input: InputAdapter<
     TipoInspectorModel.CreateEntity,
-    TipoInspectorModel.CreateBody
+    TipoInspectorModel.CreateEntity
   >
 } = {
   input: data => data,
@@ -34,7 +34,7 @@ export const create: {
 export const updateOne: {
   input: InputAdapter<
     TipoInspectorModel.UpdateEntity,
-    TipoInspectorModel.UpdateBody
+    TipoInspectorModel.UpdateEntity
   >
 } = {
   input: data => data,

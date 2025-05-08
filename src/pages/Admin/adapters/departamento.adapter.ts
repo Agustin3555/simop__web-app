@@ -2,22 +2,19 @@ import { InputAdapter, OutputAdapter } from '@/adapters/config'
 import { DepartamentoModel } from '../models'
 
 export const getAll: {
-  output: OutputAdapter<
-    DepartamentoModel.RawEntity[],
-    DepartamentoModel.Entity[]
-  >
+  output: OutputAdapter<DepartamentoModel.Entity[], DepartamentoModel.Entity[]>
 } = {
   output: response => response,
 }
 
 export const getRefs: {
-  output: OutputAdapter<DepartamentoModel.RawRef[], DepartamentoModel.Ref[]>
+  output: OutputAdapter<DepartamentoModel.Ref[], DepartamentoModel.Ref[]>
 } = {
   output: response => response,
 }
 
 export const getOne: {
-  output: OutputAdapter<DepartamentoModel.RawEntity, DepartamentoModel.Entity>
+  output: OutputAdapter<DepartamentoModel.Entity, DepartamentoModel.Entity>
 } = {
   output: response => response,
 }
@@ -25,7 +22,7 @@ export const getOne: {
 export const create: {
   input: InputAdapter<
     DepartamentoModel.CreateEntity,
-    DepartamentoModel.CreateBody
+    DepartamentoModel.CreateEntity
   >
 } = {
   input: data => data,
@@ -34,7 +31,7 @@ export const create: {
 export const updateOne: {
   input: InputAdapter<
     DepartamentoModel.UpdateEntity,
-    DepartamentoModel.UpdateBody
+    DepartamentoModel.UpdateEntity
   >
 } = {
   input: data => data,

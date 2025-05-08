@@ -3,7 +3,7 @@ import { TipoProfesionModel } from '../models'
 
 export const getAll: {
   output: OutputAdapter<
-    TipoProfesionModel.RawEntity[],
+    TipoProfesionModel.Entity[],
     TipoProfesionModel.Entity[]
   >
 } = {
@@ -11,13 +11,13 @@ export const getAll: {
 }
 
 export const getRefs: {
-  output: OutputAdapter<TipoProfesionModel.RawRef[], TipoProfesionModel.Ref[]>
+  output: OutputAdapter<TipoProfesionModel.Ref[], TipoProfesionModel.Ref[]>
 } = {
   output: response => response,
 }
 
 export const getOne: {
-  output: OutputAdapter<TipoProfesionModel.RawEntity, TipoProfesionModel.Entity>
+  output: OutputAdapter<TipoProfesionModel.Entity, TipoProfesionModel.Entity>
 } = {
   output: response => response,
 }
@@ -25,7 +25,7 @@ export const getOne: {
 export const create: {
   input: InputAdapter<
     TipoProfesionModel.CreateEntity,
-    TipoProfesionModel.CreateBody
+    TipoProfesionModel.CreateEntity
   >
 } = {
   input: data => data,
@@ -34,7 +34,7 @@ export const create: {
 export const updateOne: {
   input: InputAdapter<
     TipoProfesionModel.UpdateEntity,
-    TipoProfesionModel.UpdateBody
+    TipoProfesionModel.UpdateEntity
   >
 } = {
   input: data => data,

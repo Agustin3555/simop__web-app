@@ -3,7 +3,7 @@ import { TipoEstadoObraModel } from '../models'
 
 export const getAll: {
   output: OutputAdapter<
-    TipoEstadoObraModel.RawEntity[],
+    TipoEstadoObraModel.Entity[],
     TipoEstadoObraModel.Entity[]
   >
 } = {
@@ -11,16 +11,13 @@ export const getAll: {
 }
 
 export const getRefs: {
-  output: OutputAdapter<TipoEstadoObraModel.RawRef[], TipoEstadoObraModel.Ref[]>
+  output: OutputAdapter<TipoEstadoObraModel.Ref[], TipoEstadoObraModel.Ref[]>
 } = {
   output: response => response,
 }
 
 export const getOne: {
-  output: OutputAdapter<
-    TipoEstadoObraModel.RawEntity,
-    TipoEstadoObraModel.Entity
-  >
+  output: OutputAdapter<TipoEstadoObraModel.Entity, TipoEstadoObraModel.Entity>
 } = {
   output: response => response,
 }
@@ -28,7 +25,7 @@ export const getOne: {
 export const create: {
   input: InputAdapter<
     TipoEstadoObraModel.CreateEntity,
-    TipoEstadoObraModel.CreateBody
+    TipoEstadoObraModel.CreateEntity
   >
 } = {
   input: data => data,
@@ -37,7 +34,7 @@ export const create: {
 export const updateOne: {
   input: InputAdapter<
     TipoEstadoObraModel.UpdateEntity,
-    TipoEstadoObraModel.UpdateBody
+    TipoEstadoObraModel.UpdateEntity
   >
 } = {
   input: data => data,

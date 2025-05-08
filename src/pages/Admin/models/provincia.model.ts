@@ -2,53 +2,23 @@ import { PaisModel } from '.'
 import { RefProp, Scheme, TextProp } from '../services/config'
 import { ProvinciaService } from '../services'
 import { COMMON_PROPS } from '../constants/commonProps.const'
+import { BaseEntity, BaseRef } from '@/models/config'
 
-export interface RawEntity {
-  id: number
-  nombre: string
-
-  pais?: PaisModel.RawRef
-
-  creado: string
-  modificado: string
-}
-
-export interface Entity {
-  id: number
-  nombre: string
-
-  pais?: PaisModel.Ref
-
-  creado: string
-  modificado: string
-}
-
-export interface RawRef {
-  id: number
+export interface OwnFields {
   nombre: string
 }
 
-export interface Ref {
-  id: number
-
-  nombre: string
+export interface RelationFields {
+  pais: PaisModel.Ref
 }
 
-export interface CreateEntity {
-  nombre: string
+export interface Entity extends BaseEntity, OwnFields, RelationFields {}
 
-  paisId: number
-}
-
-export interface CreateBody {
-  nombre: string
-
-  paisId: number
-}
+export type CreateEntity = OwnFields & Record<'paisId', number>
 
 export type UpdateEntity = Partial<CreateEntity>
 
-export type UpdateBody = Partial<CreateBody>
+export type Ref = BaseRef<OwnFields, 'nombre'>
 
 export const scheme: Scheme<Entity> = {
   key: 'provincia',

@@ -3,7 +3,7 @@ import { TipoParalizacionModel } from '../models'
 
 export const getAll: {
   output: OutputAdapter<
-    TipoParalizacionModel.RawEntity[],
+    TipoParalizacionModel.Entity[],
     TipoParalizacionModel.Entity[]
   >
 } = {
@@ -12,7 +12,7 @@ export const getAll: {
 
 export const getRefs: {
   output: OutputAdapter<
-    TipoParalizacionModel.RawRef[],
+    TipoParalizacionModel.Ref[],
     TipoParalizacionModel.Ref[]
   >
 } = {
@@ -21,7 +21,7 @@ export const getRefs: {
 
 export const getOne: {
   output: OutputAdapter<
-    TipoParalizacionModel.RawEntity,
+    TipoParalizacionModel.Entity,
     TipoParalizacionModel.Entity
   >
 } = {
@@ -31,7 +31,7 @@ export const getOne: {
 export const create: {
   input: InputAdapter<
     TipoParalizacionModel.CreateEntity,
-    TipoParalizacionModel.CreateBody
+    TipoParalizacionModel.CreateEntity
   >
 } = {
   input: data => data,
@@ -40,7 +40,7 @@ export const create: {
 export const updateOne: {
   input: InputAdapter<
     TipoParalizacionModel.UpdateEntity,
-    TipoParalizacionModel.UpdateBody
+    TipoParalizacionModel.UpdateEntity
   >
 } = {
   input: data => data,

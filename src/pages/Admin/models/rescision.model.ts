@@ -13,76 +13,33 @@ import {
 } from '../services/config'
 import { RescisionService } from '../services'
 import { COMMON_PROPS } from '../constants/commonProps.const'
+import { BaseEntity, BaseRef } from '@/models/config'
 
-export interface RawEntity {
-  id: number
-  numeroExpediente: string
-  numeroResolucion?: string
-  fecha?: string
-  observaciones?: string
-
-  direccion?: DireccionModel.RawRef
-  departamento?: DepartamentoModel.RawRef
-  obra?: ObraModel.RawRef
-  tipoRescision?: TipoRescisionModel.RawRef
-
-  creado: string
-  modificado: string
-}
-
-export interface Entity {
-  id: number
-  numeroExpediente: string
-  numeroResolucion?: string
-  fecha?: string
-  observaciones?: string
-
-  direccion?: DireccionModel.Ref
-  departamento?: DepartamentoModel.Ref
-  obra?: ObraModel.Ref
-  tipoRescision?: TipoRescisionModel.Ref
-
-  creado: string
-  modificado: string
-}
-
-export interface RawRef {
-  id: number
-  numeroExpediente: string
-}
-
-export interface Ref {
-  id: number
-  numeroExpediente: string
-}
-
-export interface CreateEntity {
+export interface OwnFields {
   numeroExpediente: string
   numeroResolucion: string
   fecha: string
   observaciones: string
-
-  direccionId?: number
-  departamentoId?: number
-  obraId: number
-  tipoRescisionId: number
 }
 
-export interface CreateBody {
-  numeroExpediente: string
-  numeroResolucion: string
-  fecha: string
-  observaciones: string
-
-  direccionId?: number
-  departamentoId?: number
-  obraId: number
-  tipoRescisionId: number
+export interface RelationFields {
+  direccion: DireccionModel.Ref
+  departamento: DepartamentoModel.Ref
+  obra: ObraModel.Ref
+  tipoRescision: TipoRescisionModel.Ref
 }
+
+export interface Entity extends BaseEntity, OwnFields, RelationFields {}
+
+export type CreateEntity = OwnFields &
+  Record<
+    'direccionId' | 'departamentoId' | 'obraId' | ' tipoRescisionId',
+    number
+  >
 
 export type UpdateEntity = Partial<CreateEntity>
 
-export type UpdateBody = Partial<CreateBody>
+export type Ref = BaseRef<OwnFields, 'numeroExpediente'>
 
 export const scheme: Scheme<Entity> = {
   key: 'rescision',

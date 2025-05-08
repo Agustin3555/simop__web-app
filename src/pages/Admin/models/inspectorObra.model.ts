@@ -7,66 +7,31 @@ import {
 import { RefProp, Scheme, BooleanProp, DateProp } from '../services/config'
 import { InspectorObraService } from '../services'
 import { COMMON_PROPS } from '../constants/commonProps.const'
+import { BaseEntity, BaseRef } from '@/models/config'
 
-export interface RawEntity {
-  id: number
+export interface OwnFields {
   vigencia: boolean
-  fecha?: string
-
-  obra: ObraModel.RawRef
-  inspector: InspectorModel.RawRef
-  tipoInspector: TipoInspectorModel.RawRef
-  tipoProfesion: TipoProfesionModel.RawRef
-
-  creado: string
-  modificado: string
+  fecha: string
 }
 
-export interface Entity {
-  id: number
-  vigencia: boolean
-  fecha?: string
-
+export interface RelationFields {
   obra: ObraModel.Ref
   inspector: InspectorModel.Ref
   tipoInspector: TipoInspectorModel.Ref
   tipoProfesion: TipoProfesionModel.Ref
-
-  creado: string
-  modificado: string
 }
 
-export interface RawRef {
-  id: number
-}
+export interface Entity extends BaseEntity, OwnFields, RelationFields {}
 
-export interface Ref {
-  id: number
-}
+export type CreateEntity = OwnFields &
+  Record<
+    'obraId' | 'inspectorId' | 'tipoInspectorId' | 'tipoProfesionId',
+    number
+  >
 
-export interface CreateEntity {
-  fecha?: string
-  vigencia: boolean
-
-  obraId: number
-  inspectorId: number
-  tipoInspectorId: number
-  tipoProfesionId: number
-}
-
-export interface CreateBody {
-  fecha?: string
-  vigencia: boolean
-
-  obraId: number
-  inspectorId: number
-  tipoInspectorId: number
-  tipoProfesionId: number
-}
+export type Ref = BaseRef<OwnFields, 'fecha'>
 
 export type UpdateEntity = Partial<CreateEntity>
-
-export type UpdateBody = Partial<CreateBody>
 
 export const scheme: Scheme<Entity> = {
   key: 'inspectorObra',

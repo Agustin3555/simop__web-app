@@ -17,102 +17,44 @@ import {
 } from '../services/config'
 import { RedeterminacionService } from '../services'
 import { COMMON_PROPS } from '../constants/commonProps.const'
+import { BaseEntity, BaseRef } from '@/models/config'
 
-export interface RawEntity {
-  id: number
+export interface OwnFields {
   numeroExpedienteSolicitud: string
-  numeroExpediente?: string
-  numeroResolucion?: string
-  montoTotal?: number
-  nuevoMontoObra?: number
-  fechaRedeterminacion?: string
-  observaciones?: string
-  fechaCertificacion?: string
+  numeroExpediente: string
+  numeroResolucion: string
+  montoTotal: number
+  nuevoMontoObra: number
+  fechaRedeterminacion: string
+  observaciones: string
+  fechaCertificacion: string
   tieneHijas: boolean
-
-  redeterminacionesHijas: RawRef[]
-  direccion?: DireccionModel.RawRef
-  departamento?: DepartamentoModel.RawRef
-  obra?: ObraModel.RawRef
-  tipoRedeterminacion?: TipoRedeterminacionModel.RawRef
-
-  creado: string
-  modificado: string
 }
 
-export interface Entity {
-  id: number
-  numeroExpedienteSolicitud: string
-  numeroExpediente?: string
-  numeroResolucion?: string
-  montoTotal?: number
-  nuevoMontoObra?: number
-  fechaRedeterminacion?: string
-  observaciones?: string
-  fechaCertificacion?: string
-  tieneHijas: boolean
-
+export interface RelationFields {
   redeterminacionesHijas: Ref[]
-  direccion?: DireccionModel.Ref
-  departamento?: DepartamentoModel.Ref
-  obra?: ObraModel.Ref
-  tipoRedeterminacion?: TipoRedeterminacionModel.Ref
+  direccion: DireccionModel.Ref
+  departamento: DepartamentoModel.Ref
+  obra: ObraModel.Ref
+  tipoRedeterminacion: TipoRedeterminacionModel.Ref
 
   creado: string
   modificado: string
 }
 
-export interface RawRef {
-  id: number
+export interface Entity extends BaseEntity, OwnFields, RelationFields {}
 
-  numeroExpediente: string
-}
-
-export interface Ref {
-  id: number
-
-  numeroExpediente: string
-}
-
-export interface CreateEntity {
-  numeroExpediente: string
-  numeroResolucion: string
-  numeroExpedienteSolicitud: string
-  montoTotal: number
-  nuevoMontoObra: number
-  fechaRedeterminacion: string
-  observaciones: string
-  fechaCertificacion: string
-  tieneHijas: boolean
-
-  redeterminacionId?: number
-  direccionId?: number
-  departamentoId?: number
-  obraId: number
-  tipoRedeterminacionId: number
-}
-
-export interface CreateBody {
-  numeroExpedienteSolicitud: string
-  numeroExpediente: string
-  numeroResolucion: string
-  montoTotal: number
-  nuevoMontoObra: number
-  fechaRedeterminacion: string
-  observaciones: string
-  fechaCertificacion: string
-  tieneHijas: boolean
-
-  redeterminacionId?: number
-  direccionId?: number
-  departamentoId?: number
+export type CreateEntity = OwnFields & {
+  redeterminacionesHijas: number[]
+  direccionId: number
+  departamentoId: number
   obraId: number
   tipoRedeterminacionId: number
 }
 
 export type UpdateEntity = Partial<CreateEntity>
 
-export type UpdateBody = Partial<CreateBody>
+export type Ref = BaseRef<OwnFields, 'numeroExpediente'>
 
 export const scheme: Scheme<Entity> = {
   key: 'redeterminacion',
