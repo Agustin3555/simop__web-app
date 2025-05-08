@@ -2,7 +2,7 @@ import { ObraModel, InspectorModel, DireccionModel, DepartamentoModel } from '.'
 import {
   NumberProp,
   RefProp,
-  Scheme,
+  MetaModel,
   TextProp,
   TextLongProp,
   DateProp,
@@ -94,7 +94,7 @@ export type UpdateEntity = Partial<CreateEntity>
 
 export type UpdateBody = Partial<CreateBody>
 
-export const scheme: Scheme<Entity> = {
+export const scheme: MetaModel<Entity> = {
   key: 'fojaMedicion',
   service: FojaMedicionService,
   refreshRate: 'medium',

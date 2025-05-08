@@ -12,11 +12,11 @@ import { Button } from '@/components'
 import { AutoCombobox } from '@/pages/Admin/components'
 import { ObraModel, ObraTotalesModel } from '@/pages/Admin/models'
 import { ObraService } from '@/pages/Admin/services'
-import { getFlatProps, Scheme } from '@/pages/Admin/services/config'
+import { getFlatProps, MetaModel } from '@/pages/Admin/services/config'
 
 const { groups, ...rest } = ObraModel.scheme
 
-const schemeAux: Scheme = {
+const schemeAux: MetaModel = {
   ...rest,
   groups: [...groups, ...ObraTotalesModel.scheme.groups],
 }

@@ -1,8 +1,8 @@
 import { createContext } from 'react'
-import { Scheme } from '../services/config'
+import { MetaModel } from '../services/config'
 
 interface SchemeContextProps {
-  scheme: Scheme
+  scheme: MetaModel
 }
 
 export const SchemeContext = createContext<SchemeContextProps | undefined>(

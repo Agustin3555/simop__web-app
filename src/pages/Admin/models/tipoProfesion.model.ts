@@ -1,4 +1,4 @@
-import { Scheme } from '../services/config'
+import { MetaModel } from '../services/config'
 import { TipoProfesionService } from '../services'
 import { TIPO_PROPS } from '../constants/commonProps.const'
 
@@ -44,7 +44,7 @@ export type UpdateEntity = Partial<CreateEntity>
 
 export type UpdateBody = Partial<CreateBody>
 
-export const scheme: Scheme<Entity> = {
+export const scheme: MetaModel<Entity> = {
   key: 'tipoProfesion',
   service: TipoProfesionService,
   title: {

@@ -4,7 +4,7 @@ import {
   TipoInspectorModel,
   TipoProfesionModel,
 } from '.'
-import { RefProp, Scheme, BooleanProp, DateProp } from '../services/config'
+import { RefProp, MetaModel, BooleanProp, DateProp } from '../services/config'
 import { InspectorObraService } from '../services'
 import { COMMON_PROPS } from '../constants/commonProps.const'
 
@@ -68,7 +68,7 @@ export type UpdateEntity = Partial<CreateEntity>
 
 export type UpdateBody = Partial<CreateBody>
 
-export const scheme: Scheme<Entity> = {
+export const scheme: MetaModel<Entity> = {
   key: 'inspectorObra',
   service: InspectorObraService,
   refreshRate: 'medium',

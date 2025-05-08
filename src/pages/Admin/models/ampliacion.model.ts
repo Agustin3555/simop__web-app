@@ -4,7 +4,7 @@ import {
   NumberProp,
   TextLongProp,
   RefProp,
-  Scheme,
+  MetaModel,
   TextProp,
 } from '../services/config'
 import { AmpliacionService } from '../services'
@@ -94,7 +94,7 @@ export type UpdateEntity = Partial<CreateEntity>
 
 export type UpdateBody = Partial<CreateBody>
 
-export const scheme: Scheme<Entity> = {
+export const scheme: MetaModel<Entity> = {
   key: 'ampliacion',
   service: AmpliacionService,
   refreshRate: 'medium',

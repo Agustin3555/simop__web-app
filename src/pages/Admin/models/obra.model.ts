@@ -12,7 +12,7 @@ import {
   DateProp,
   NumberProp,
   RefProp,
-  Scheme,
+  MetaModel,
   TextLongProp,
   TextProp,
 } from '../services/config'
@@ -197,7 +197,7 @@ export type UpdateEntity = Partial<CreateEntity>
 
 export type UpdateBody = Partial<CreateBody>
 
-export const scheme: Scheme<Entity> = {
+export const scheme: MetaModel<Entity> = {
   key: 'obra',
   service: ObraService,
   refreshRate: 'medium',

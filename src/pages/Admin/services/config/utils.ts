@@ -1,5 +1,5 @@
 import { ReactNode } from 'react'
-import { Scheme } from './scheme'
+import { MetaModel } from './scheme'
 import {
   AccessorFn,
   BuiltInFilterFn,
@@ -34,7 +34,7 @@ export interface Required {
   circulares.
 */
 export interface GetScheme {
-  getScheme: () => Scheme
+  getScheme: () => MetaModel
 }
 
 export type GetFilter = (
@@ -61,7 +61,7 @@ export interface PropScheme<E = GeneralEntity> {
   footer?: (info: HeaderContext<E, unknown>) => ReactNode
   getHeader: (column: Column<E>) => {
     title: string
-    scheme?: Scheme
+    scheme?: MetaModel
     getFilter: GetFilter
   }
   getValueComponent: (item: E, selectedSearchMode?: string) => ReactNode

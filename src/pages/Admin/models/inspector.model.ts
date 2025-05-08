@@ -1,5 +1,10 @@
 import { TipoProfesionModel } from '.'
-import { NumberProp, RefListProp, Scheme, TextProp } from '../services/config'
+import {
+  NumberProp,
+  RefListProp,
+  MetaModel,
+  TextProp,
+} from '../services/config'
 import { InspectorService } from '../services'
 import { COMMON_PROPS } from '../constants/commonProps.const'
 import { BaseEntity, BaseRef } from '@/models/config'
@@ -22,7 +27,7 @@ export type UpdateEntity = Partial<CreateEntity>
 
 export type Ref = BaseRef<OwnFields, 'cuil' | 'apellido' | 'nombre'>
 
-export const scheme: Scheme<Entity> = {
+export const scheme: MetaModel<Entity> = {
   key: 'inspector',
   service: InspectorService,
   refreshRate: 'low',

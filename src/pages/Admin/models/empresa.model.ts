@@ -1,5 +1,5 @@
 import { LocalidadModel, PaisModel, ProvinciaModel } from '.'
-import { NumberProp, RefProp, Scheme, TextProp } from '../services/config'
+import { NumberProp, RefProp, MetaModel, TextProp } from '../services/config'
 import { EmpresaService } from '../services'
 import { COMMON_PROPS } from '../constants/commonProps.const'
 import { BaseEntity, BaseRef } from '@/models/config'
@@ -27,7 +27,7 @@ export type UpdateEntity = Partial<CreateEntity>
 
 export type Ref = BaseRef<OwnFields, 'cuit' | 'nombre'>
 
-export const scheme: Scheme<Entity> = {
+export const scheme: MetaModel<Entity> = {
   key: 'empresa',
   service: EmpresaService,
   refreshRate: 'low',

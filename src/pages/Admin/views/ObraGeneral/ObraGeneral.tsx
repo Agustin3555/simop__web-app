@@ -14,14 +14,14 @@ import {
   DateProp,
   NumberProp,
   RefProp,
-  Scheme,
+  MetaModel,
   TextLongProp,
   TextProp,
 } from '../../services/config'
 import { ObraService } from '../../services'
 import { COMMON_PROPS } from '../../constants/commonProps.const'
 
-const obraGeneralScheme: Scheme<GeneralEntity> = {
+const obraGeneralScheme: MetaModel<GeneralEntity> = {
   key: 'obraGeneral',
   service: ObraService,
   refreshRate: 'medium',

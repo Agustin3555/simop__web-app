@@ -1,4 +1,4 @@
-import { Scheme } from '../services/config'
+import { MetaModel } from '../services/config'
 import {
   DepartamentoModel,
   DireccionModel,
@@ -40,7 +40,7 @@ import {
 export interface SectionNode {
   title?: string
   sections?: SectionNode[]
-  scheme?: Scheme
+  scheme?: MetaModel
 }
 
 export const TREE: SectionNode[] = [

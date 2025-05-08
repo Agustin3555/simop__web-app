@@ -1,13 +1,13 @@
 import { useCallback, useMemo, useState } from 'react'
 import { RowSelectionContext, SchemeContext } from '../../contexts'
-import { Scheme } from '../../services/config'
+import { MetaModel } from '../../services/config'
 import { addIf } from '@/helpers'
 import { RowSelectionState } from '@tanstack/react-table'
 import { LocalAdd, LocalEdit, LocalQuery, View } from '..'
 import { LocalView, ViewProps } from '../View/View'
 
 interface SchemeViewProps extends Pick<ViewProps, 'localViews'> {
-  scheme: Scheme
+  scheme: MetaModel
   query?: boolean
   add?: boolean
   edit?: boolean

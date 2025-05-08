@@ -8,7 +8,7 @@ import {
   DateProp,
   TextLongProp,
   RefProp,
-  Scheme,
+  MetaModel,
   NumberProp,
 } from '../services/config'
 import { RecepcionService } from '../services'
@@ -79,7 +79,7 @@ export type UpdateEntity = Partial<CreateEntity>
 
 export type UpdateBody = Partial<CreateBody>
 
-export const scheme: Scheme<Entity> = {
+export const scheme: MetaModel<Entity> = {
   key: 'recepcion',
   service: RecepcionService,
   refreshRate: 'medium',

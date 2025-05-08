@@ -4,7 +4,7 @@ import { useAddFieldReset } from '../../hooks'
 import { useQuery } from '@tanstack/react-query'
 import { Control } from '@/types'
 import { GeneralEntity } from '@/models/config'
-import { getFlatProps, Scheme } from '../../services/config'
+import { getFlatProps, MetaModel } from '../../services/config'
 import { REFETCH_INTERVALS } from '../../constants/refetchIntervals.const'
 import { Button } from '@/components'
 import { OptionSelectors } from '..'
@@ -14,7 +14,7 @@ import { baseSorter, extractKeys } from '../../helpers'
 export interface AutoComboboxProps
   extends Control,
     Pick<BaseComboboxProps, 'multiple'> {
-  scheme: Scheme
+  scheme: MetaModel
   initSelected?: string[]
   initOptions?: GeneralEntity[]
 }

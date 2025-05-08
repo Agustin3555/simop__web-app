@@ -1,4 +1,4 @@
-import { Scheme, TextProp } from '../services/config'
+import { MetaModel, TextProp } from '../services/config'
 import { PaisService } from '../services'
 import { COMMON_PROPS } from '../constants/commonProps.const'
 
@@ -40,7 +40,7 @@ export type UpdateEntity = Partial<CreateEntity>
 
 export type UpdateBody = Partial<CreateBody>
 
-export const scheme: Scheme<Entity> = {
+export const scheme: MetaModel<Entity> = {
   key: 'pais',
   service: PaisService,
   title: {

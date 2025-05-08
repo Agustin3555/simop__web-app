@@ -1,5 +1,5 @@
 import { DireccionModel } from '.'
-import { RefProp, Scheme, TextProp } from '../services/config'
+import { RefProp, MetaModel, TextProp } from '../services/config'
 import { DepartamentoService } from '../services'
 import { COMMON_PROPS } from '../constants/commonProps.const'
 
@@ -49,7 +49,7 @@ export type UpdateEntity = Partial<CreateEntity>
 
 export type UpdateBody = Partial<CreateBody>
 
-export const scheme: Scheme<Entity> = {
+export const scheme: MetaModel<Entity> = {
   key: 'departamento',
   service: DepartamentoService,
   title: {

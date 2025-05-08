@@ -6,7 +6,7 @@ import {
 } from '.'
 import { COMMON_PROPS } from '../constants/commonProps.const'
 import {
-  Scheme,
+  MetaModel,
   NumberProp,
   RefProp,
   DateProp,
@@ -87,7 +87,7 @@ export type UpdateEntity = Partial<CreateEntity>
 
 export type UpdateBody = Partial<CreateBody>
 
-export const scheme: Scheme<Entity> = {
+export const scheme: MetaModel<Entity> = {
   key: 'pagoCertificacion',
   service: PagoCertificacionService,
   refreshRate: 'medium',

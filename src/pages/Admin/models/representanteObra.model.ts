@@ -1,5 +1,5 @@
 import { ObraModel, RepresentanteModel, TipoRepresentanteModel } from '.'
-import { BooleanProp, RefProp, Scheme, DateProp } from '../services/config'
+import { BooleanProp, RefProp, MetaModel, DateProp } from '../services/config'
 import { RepresentanteObraService } from '../services'
 import { COMMON_PROPS } from '../constants/commonProps.const'
 
@@ -59,7 +59,7 @@ export type UpdateEntity = Partial<CreateEntity>
 
 export type UpdateBody = Partial<CreateBody>
 
-export const scheme: Scheme<Entity> = {
+export const scheme: MetaModel<Entity> = {
   key: 'representanteObra',
   service: RepresentanteObraService,
   refreshRate: 'low',

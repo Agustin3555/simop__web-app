@@ -1,5 +1,5 @@
 import { PaisModel } from '.'
-import { RefProp, Scheme, TextProp } from '../services/config'
+import { RefProp, MetaModel, TextProp } from '../services/config'
 import { ProvinciaService } from '../services'
 import { COMMON_PROPS } from '../constants/commonProps.const'
 
@@ -50,7 +50,7 @@ export type UpdateEntity = Partial<CreateEntity>
 
 export type UpdateBody = Partial<CreateBody>
 
-export const scheme: Scheme<Entity> = {
+export const scheme: MetaModel<Entity> = {
   key: 'provincia',
   service: ProvinciaService,
   refreshRate: 'low',

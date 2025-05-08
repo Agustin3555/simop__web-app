@@ -3,7 +3,7 @@ import {
   DateProp,
   NumberProp,
   RefProp,
-  Scheme,
+  MetaModel,
   TextProp,
 } from '../services/config'
 import { ObraTotalesService } from '../services'
@@ -68,7 +68,7 @@ export interface Entity {
   tipoEstadoObra?: TipoEstadoObraModel.Ref
 }
 
-export const scheme: Scheme<Entity> = {
+export const scheme: MetaModel<Entity> = {
   key: 'obraTotales',
   service: ObraTotalesService,
   refreshRate: 'medium',
