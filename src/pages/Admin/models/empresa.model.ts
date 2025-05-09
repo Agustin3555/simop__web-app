@@ -27,7 +27,7 @@ export type UpdateEntity = Partial<CreateEntity>
 
 export type Ref = BaseRef<OwnFields, 'cuit' | 'nombre'>
 
-export const scheme: MetaModel<Entity> = {
+export const scheme = new MetaModel<Entity>({
   key: 'empresa',
   service: EmpresaService,
   refreshRate: 'low',
@@ -35,38 +35,34 @@ export const scheme: MetaModel<Entity> = {
     singular: 'Empresa',
     plural: 'Empresas',
   },
-  anchorField: 'nombre',
 
-  groups: [
-    {
-      props: {
-        cuit: new NumberProp('CUIT', {
-          big: true,
-          field: {
-            required: true,
-          },
-        }),
-        nombre: new TextProp('Nombre', {
-          field: {
-            required: true,
-          },
-        }),
-        direccion: new TextProp('Dirección declarada'),
-        numeroContacto: new NumberProp('Número de contacto', {
-          big: true,
-        }),
-        email: new TextProp('Email'),
-        pais: new RefProp({
-          getScheme: () => PaisModel.scheme,
-        }),
-        provincia: new RefProp({
-          getScheme: () => ProvinciaModel.scheme,
-        }),
-        localidad: new RefProp({
-          getScheme: () => LocalidadModel.scheme,
-        }),
-        ...COMMON_PROPS,
+  anchorField: 'nombre',
+  props: {
+    cuit: new NumberProp('CUIT', {
+      big: true,
+      field: {
+        required: true,
       },
-    },
-  ],
-}
+    }),
+    nombre: new TextProp('Nombre', {
+      field: {
+        required: true,
+      },
+    }),
+    direccion: new TextProp('Dirección declarada'),
+    numeroContacto: new NumberProp('Número de contacto', {
+      big: true,
+    }),
+    email: new TextProp('Email'),
+    pais: new RefProp({
+      getScheme: () => PaisModel.scheme,
+    }),
+    provincia: new RefProp({
+      getScheme: () => ProvinciaModel.scheme,
+    }),
+    localidad: new RefProp({
+      getScheme: () => LocalidadModel.scheme,
+    }),
+    ...COMMON_PROPS,
+  },
+})

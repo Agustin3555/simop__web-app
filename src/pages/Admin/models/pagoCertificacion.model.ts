@@ -43,7 +43,7 @@ export type UpdateEntity = Partial<CreateEntity>
 
 export type Ref = BaseRef<OwnFields, 'numero'>
 
-export const scheme: MetaModel<Entity> = {
+export const scheme = new MetaModel<Entity>({
   key: 'pagoCertificacion',
   service: PagoCertificacionService,
   refreshRate: 'medium',
@@ -51,44 +51,40 @@ export const scheme: MetaModel<Entity> = {
     singular: 'Pago de Certificación',
     plural: 'Pagos de Certificación',
   },
-  anchorField: 'numero',
 
-  groups: [
-    {
-      props: {
-        numero: new NumberProp('Número de Pago', {
-          field: {
-            required: true,
-          },
-        }),
-        ordenPago: new TextProp('Orden de pago', {
-          field: {
-            required: true,
-          },
-        }),
-        fecha: new DateProp('Fecha de Pago'),
-        monto: new NumberProp('Monto', {
-          decimal: true,
-          isMoney: true,
-          big: true,
-          sum: true,
-          pre: '$',
-        }),
-        fojaMedicion: new RefProp({
-          getScheme: () => FojaMedicionModel.scheme,
-        }),
-        redeterminacion: new RefProp({
-          getScheme: () => RedeterminacionModel.scheme,
-        }),
-        direccion: new RefProp({
-          getScheme: () => DireccionModel.scheme,
-        }),
-        departamento: new RefProp({
-          getScheme: () => DepartamentoModel.scheme,
-        }),
-        observaciones: new TextLongProp('Observaciones'),
-        ...COMMON_PROPS,
+  anchorField: 'numero',
+  props: {
+    numero: new NumberProp('Número de Pago', {
+      field: {
+        required: true,
       },
-    },
-  ],
-}
+    }),
+    ordenPago: new TextProp('Orden de pago', {
+      field: {
+        required: true,
+      },
+    }),
+    fecha: new DateProp('Fecha de Pago'),
+    monto: new NumberProp('Monto', {
+      decimal: true,
+      isMoney: true,
+      big: true,
+      sum: true,
+      pre: '$',
+    }),
+    fojaMedicion: new RefProp({
+      getScheme: () => FojaMedicionModel.scheme,
+    }),
+    redeterminacion: new RefProp({
+      getScheme: () => RedeterminacionModel.scheme,
+    }),
+    direccion: new RefProp({
+      getScheme: () => DireccionModel.scheme,
+    }),
+    departamento: new RefProp({
+      getScheme: () => DepartamentoModel.scheme,
+    }),
+    observaciones: new TextLongProp('Observaciones'),
+    ...COMMON_PROPS,
+  },
+})

@@ -24,7 +24,7 @@ export type UpdateEntity = Partial<CreateEntity>
 
 export type Ref = BaseRef<OwnFields, 'fecha'>
 
-export const scheme: MetaModel<Entity> = {
+export const scheme = new MetaModel<Entity>({
   key: 'representanteEmpresa',
   service: RepresentanteEmpresaService,
   refreshRate: 'low',
@@ -32,27 +32,23 @@ export const scheme: MetaModel<Entity> = {
     singular: 'Representante de Empresa',
     plural: 'Representantes de Empresa',
   },
-  anchorField: 'id',
 
-  groups: [
-    {
-      props: {
-        empresa: new RefProp({
-          getScheme: () => EmpresaModel.scheme,
-        }),
-        representante: new RefProp({
-          getScheme: () => RepresentanteModel.scheme,
-        }),
-        tipoRepresentante: new RefProp({
-          getScheme: () => TipoRepresentanteModel.scheme,
-        }),
-        vigencia: new BooleanProp('Vigencia', {
-          falseText: 'No Vigente',
-          trueText: 'Vigente',
-        }),
-        fecha: new DateProp('Fecha'),
-        ...COMMON_PROPS,
-      },
-    },
-  ],
-}
+  anchorField: 'id',
+  props: {
+    empresa: new RefProp({
+      getScheme: () => EmpresaModel.scheme,
+    }),
+    representante: new RefProp({
+      getScheme: () => RepresentanteModel.scheme,
+    }),
+    tipoRepresentante: new RefProp({
+      getScheme: () => TipoRepresentanteModel.scheme,
+    }),
+    vigencia: new BooleanProp('Vigencia', {
+      falseText: 'No Vigente',
+      trueText: 'Vigente',
+    }),
+    fecha: new DateProp('Fecha'),
+    ...COMMON_PROPS,
+  },
+})

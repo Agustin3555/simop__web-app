@@ -24,31 +24,27 @@ export type UpdateEntity = Partial<CreateEntity>
 
 export type Ref = BaseRef<OwnFields, 'nombre'>
 
-export const scheme: MetaModel<Entity> = {
+export const scheme = new MetaModel<Entity>({
   key: 'departamento',
   service: DepartamentoService,
   title: {
     singular: 'Departamento',
     plural: 'Departamentos',
   },
-  anchorField: 'nombre',
 
-  groups: [
-    {
-      props: {
-        nombre: new TextProp('Nombre', {
-          field: {
-            required: true,
-          },
-        }),
-        direccion: new RefProp({
-          getScheme: () => DireccionModel.scheme,
-          field: {
-            required: true,
-          },
-        }),
-        ...COMMON_PROPS,
+  anchorField: 'nombre',
+  props: {
+    nombre: new TextProp('Nombre', {
+      field: {
+        required: true,
       },
-    },
-  ],
-}
+    }),
+    direccion: new RefProp({
+      getScheme: () => DireccionModel.scheme,
+      field: {
+        required: true,
+      },
+    }),
+    ...COMMON_PROPS,
+  },
+})

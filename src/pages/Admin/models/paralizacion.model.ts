@@ -44,7 +44,7 @@ export type UpdateEntity = Partial<CreateEntity>
 
 export type Ref = BaseRef<OwnFields, 'numero' | 'numeroExpediente'>
 
-export const scheme: MetaModel<Entity> = {
+export const scheme = new MetaModel<Entity>({
   key: 'paralizacion',
   service: ParalizacionService,
   refreshRate: 'medium',
@@ -52,43 +52,38 @@ export const scheme: MetaModel<Entity> = {
     singular: 'Paralización',
     plural: 'Paralizaciones',
   },
+
   anchorField: 'numeroExpediente',
-
-  groups: [
-    {
-      props: {
-        obra: new RefProp({
-          getScheme: () => ObraModel.scheme,
-          field: {
-            required: true,
-          },
-        }),
-        numero: new NumberProp('Número de Paralización', {
-          field: {
-            required: true,
-          },
-        }),
-        numeroExpediente: new TextProp('Número De Expediente', {
-          field: {
-            required: true,
-          },
-        }),
-        fechaReinicio: new DateProp('Fecha Reinicio', {}),
-        nuevaFechaFinObra: new DateProp('Nueva Fecha Fin de Obra', {}),
-        fecha: new DateProp('Fecha'),
-        tipoParalizacion: new RefProp({
-          getScheme: () => TipoParalizacionModel.scheme,
-        }),
-
-        direccion: new RefProp({
-          getScheme: () => DireccionModel.scheme,
-        }),
-        departamento: new RefProp({
-          getScheme: () => DepartamentoModel.scheme,
-        }),
-        observaciones: new TextLongProp('Observaciones'),
-        ...COMMON_PROPS,
+  props: {
+    obra: new RefProp({
+      getScheme: () => ObraModel.scheme,
+      field: {
+        required: true,
       },
-    },
-  ],
-}
+    }),
+    numero: new NumberProp('Número de Paralización', {
+      field: {
+        required: true,
+      },
+    }),
+    numeroExpediente: new TextProp('Número De Expediente', {
+      field: {
+        required: true,
+      },
+    }),
+    fechaReinicio: new DateProp('Fecha Reinicio', {}),
+    nuevaFechaFinObra: new DateProp('Nueva Fecha Fin de Obra', {}),
+    fecha: new DateProp('Fecha'),
+    tipoParalizacion: new RefProp({
+      getScheme: () => TipoParalizacionModel.scheme,
+    }),
+    direccion: new RefProp({
+      getScheme: () => DireccionModel.scheme,
+    }),
+    departamento: new RefProp({
+      getScheme: () => DepartamentoModel.scheme,
+    }),
+    observaciones: new TextLongProp('Observaciones'),
+    ...COMMON_PROPS,
+  },
+})

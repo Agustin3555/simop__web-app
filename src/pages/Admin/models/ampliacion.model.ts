@@ -37,7 +37,7 @@ export type UpdateEntity = Partial<CreateEntity>
 
 export type Ref = BaseRef<OwnFields, 'numero' | 'numeroResolucion'>
 
-export const scheme: MetaModel<Entity> = {
+export const scheme = new MetaModel<Entity>({
   key: 'ampliacion',
   service: AmpliacionService,
   refreshRate: 'medium',
@@ -45,39 +45,35 @@ export const scheme: MetaModel<Entity> = {
     singular: 'Ampliación',
     plural: 'Ampliaciones',
   },
-  anchorField: 'numeroExpedienteSolicitud',
 
-  groups: [
-    {
-      props: {
-        obra: new RefProp({
-          getScheme: () => ObraModel.scheme,
-          field: {
-            required: true,
-          },
-        }),
-        numero: new NumberProp('Número De Ampliación', {
-          field: {
-            required: true,
-          },
-        }),
-        numeroResolucion: new TextProp('Número De Resolución'),
-        numeroExpedienteSolicitud: new TextProp(
-          'Número de Expediente de Solicitud',
-        ),
-        plazoMesesSolicitado: new NumberProp('Plazo de Meses Solicitado '),
-        plazoMesesOtorgado: new NumberProp('Plazo de Meses Otorgado'),
-        nuevaFechaFinObra: new DateProp('Nueva Fecha Fin De Obra'),
-        fecha: new DateProp('Fecha'),
-        observaciones: new TextLongProp('Observaciones'),
-        direccion: new RefProp({
-          getScheme: () => DireccionModel.scheme,
-        }),
-        departamento: new RefProp({
-          getScheme: () => DepartamentoModel.scheme,
-        }),
-        ...COMMON_PROPS,
+  anchorField: 'numeroExpedienteSolicitud',
+  props: {
+    obra: new RefProp({
+      getScheme: () => ObraModel.scheme,
+      field: {
+        required: true,
       },
-    },
-  ],
-}
+    }),
+    numero: new NumberProp('Número De Ampliación', {
+      field: {
+        required: true,
+      },
+    }),
+    numeroResolucion: new TextProp('Número De Resolución'),
+    numeroExpedienteSolicitud: new TextProp(
+      'Número de Expediente de Solicitud',
+    ),
+    plazoMesesSolicitado: new NumberProp('Plazo de Meses Solicitado '),
+    plazoMesesOtorgado: new NumberProp('Plazo de Meses Otorgado'),
+    nuevaFechaFinObra: new DateProp('Nueva Fecha Fin De Obra'),
+    fecha: new DateProp('Fecha'),
+    observaciones: new TextLongProp('Observaciones'),
+    direccion: new RefProp({
+      getScheme: () => DireccionModel.scheme,
+    }),
+    departamento: new RefProp({
+      getScheme: () => DepartamentoModel.scheme,
+    }),
+    ...COMMON_PROPS,
+  },
+})

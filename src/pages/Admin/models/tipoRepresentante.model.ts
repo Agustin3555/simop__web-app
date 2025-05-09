@@ -17,20 +17,16 @@ export type UpdateEntity = Partial<CreateEntity>
 
 export type Ref = BaseRef<OwnFields, 'nombre'>
 
-export const scheme: MetaModel<Entity> = {
+export const scheme = new MetaModel<Entity>({
   key: 'tipoRepresentante',
   service: TipoRepresentanteService,
   title: {
     singular: 'Tipo de Representante',
     plural: 'Tipos de Representantes',
   },
-  anchorField: 'nombre',
 
-  groups: [
-    {
-      props: {
-        ...TIPO_PROPS,
-      },
-    },
-  ],
-}
+  anchorField: 'nombre',
+  props: {
+    ...TIPO_PROPS,
+  },
+})

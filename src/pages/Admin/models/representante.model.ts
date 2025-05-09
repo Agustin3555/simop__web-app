@@ -27,7 +27,7 @@ export type UpdateEntity = Partial<CreateEntity>
 
 export type Ref = BaseRef<OwnFields, 'cuil' | 'nombre' | 'apellido'>
 
-export const scheme: MetaModel<Entity> = {
+export const scheme = new MetaModel<Entity>({
   key: 'representante',
   service: RepresentanteService,
   refreshRate: 'low',
@@ -35,36 +35,32 @@ export const scheme: MetaModel<Entity> = {
     singular: 'Representante',
     plural: 'Representantes',
   },
-  anchorField: 'apellido',
 
-  groups: [
-    {
-      props: {
-        cuil: new NumberProp('CUIL', {
-          big: true,
-          field: {
-            required: true,
-          },
-        }),
-        apellido: new TextProp('Apellido', {
-          field: {
-            required: true,
-          },
-        }),
-        nombre: new TextProp('Nombre'),
-        direccion: new TextProp('Dirección'),
-        numeroMatricula: new TextProp('Número de Matricula'),
-        pais: new RefProp({
-          getScheme: () => PaisModel.scheme,
-        }),
-        provincia: new RefProp({
-          getScheme: () => ProvinciaModel.scheme,
-        }),
-        localidad: new RefProp({
-          getScheme: () => LocalidadModel.scheme,
-        }),
-        ...COMMON_PROPS,
+  anchorField: 'apellido',
+  props: {
+    cuil: new NumberProp('CUIL', {
+      big: true,
+      field: {
+        required: true,
       },
-    },
-  ],
-}
+    }),
+    apellido: new TextProp('Apellido', {
+      field: {
+        required: true,
+      },
+    }),
+    nombre: new TextProp('Nombre'),
+    direccion: new TextProp('Dirección'),
+    numeroMatricula: new TextProp('Número de Matricula'),
+    pais: new RefProp({
+      getScheme: () => PaisModel.scheme,
+    }),
+    provincia: new RefProp({
+      getScheme: () => ProvinciaModel.scheme,
+    }),
+    localidad: new RefProp({
+      getScheme: () => LocalidadModel.scheme,
+    }),
+    ...COMMON_PROPS,
+  },
+})

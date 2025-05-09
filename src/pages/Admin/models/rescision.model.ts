@@ -41,7 +41,7 @@ export type UpdateEntity = Partial<CreateEntity>
 
 export type Ref = BaseRef<OwnFields, 'numeroExpediente'>
 
-export const scheme: MetaModel<Entity> = {
+export const scheme = new MetaModel<Entity>({
   key: 'rescision',
   service: RescisionService,
   refreshRate: 'medium',
@@ -49,36 +49,32 @@ export const scheme: MetaModel<Entity> = {
     singular: 'Rescision',
     plural: 'Rescisiones',
   },
-  anchorField: 'numeroExpediente',
 
-  groups: [
-    {
-      props: {
-        obra: new RefProp({
-          getScheme: () => ObraModel.scheme,
-          field: {
-            required: true,
-          },
-        }),
-        numeroExpediente: new TextProp('Número De Expediente', {
-          field: {
-            required: true,
-          },
-        }),
-        numeroResolucion: new TextProp('Número De Resolución'),
-        fecha: new DateProp('Fecha'),
-        tipoRescision: new RefProp({
-          getScheme: () => TipoRescisionModel.scheme,
-        }),
-        direccion: new RefProp({
-          getScheme: () => DireccionModel.scheme,
-        }),
-        departamento: new RefProp({
-          getScheme: () => DepartamentoModel.scheme,
-        }),
-        observaciones: new TextLongProp('Observaciones'),
-        ...COMMON_PROPS,
+  anchorField: 'numeroExpediente',
+  props: {
+    obra: new RefProp({
+      getScheme: () => ObraModel.scheme,
+      field: {
+        required: true,
       },
-    },
-  ],
-}
+    }),
+    numeroExpediente: new TextProp('Número De Expediente', {
+      field: {
+        required: true,
+      },
+    }),
+    numeroResolucion: new TextProp('Número De Resolución'),
+    fecha: new DateProp('Fecha'),
+    tipoRescision: new RefProp({
+      getScheme: () => TipoRescisionModel.scheme,
+    }),
+    direccion: new RefProp({
+      getScheme: () => DireccionModel.scheme,
+    }),
+    departamento: new RefProp({
+      getScheme: () => DepartamentoModel.scheme,
+    }),
+    observaciones: new TextLongProp('Observaciones'),
+    ...COMMON_PROPS,
+  },
+})

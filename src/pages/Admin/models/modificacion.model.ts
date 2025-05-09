@@ -44,7 +44,7 @@ export type UpdateEntity = Partial<CreateEntity>
 
 export type Ref = BaseRef<OwnFields, 'numeroExpediente'>
 
-export const scheme: MetaModel<Entity> = {
+export const scheme = new MetaModel<Entity>({
   key: 'modificacion',
   service: ModificacionService,
   refreshRate: 'medium',
@@ -52,50 +52,46 @@ export const scheme: MetaModel<Entity> = {
     singular: 'Modificación',
     plural: 'Modificaciones',
   },
-  anchorField: 'numeroExpediente',
 
-  groups: [
-    {
-      props: {
-        obra: new RefProp({
-          getScheme: () => ObraModel.scheme,
-          field: {
-            required: true,
-          },
-        }),
-        numeroExpediente: new TextProp('Número De Expediente', {
-          field: {
-            required: true,
-          },
-        }),
-        numeroResolucion: new TextProp('Número De Resolución'),
-        monto: new NumberProp('Monto', {
-          decimal: true,
-          isMoney: true,
-          big: true,
-          sum: true,
-          pre: '$',
-        }),
-        nuevoMontoObra: new NumberProp('Nuevo Monto', {
-          decimal: true,
-          isMoney: true,
-          big: true,
-          sum: true,
-          pre: '$',
-        }),
-        fecha: new DateProp('Fecha'),
-        tipoModificacion: new RefProp({
-          getScheme: () => TipoModificacionModel.scheme,
-        }),
-        direccion: new RefProp({
-          getScheme: () => DireccionModel.scheme,
-        }),
-        departamento: new RefProp({
-          getScheme: () => DepartamentoModel.scheme,
-        }),
-        observaciones: new TextLongProp('Observaciones'),
-        ...COMMON_PROPS,
+  anchorField: 'numeroExpediente',
+  props: {
+    obra: new RefProp({
+      getScheme: () => ObraModel.scheme,
+      field: {
+        required: true,
       },
-    },
-  ],
-}
+    }),
+    numeroExpediente: new TextProp('Número De Expediente', {
+      field: {
+        required: true,
+      },
+    }),
+    numeroResolucion: new TextProp('Número De Resolución'),
+    monto: new NumberProp('Monto', {
+      decimal: true,
+      isMoney: true,
+      big: true,
+      sum: true,
+      pre: '$',
+    }),
+    nuevoMontoObra: new NumberProp('Nuevo Monto', {
+      decimal: true,
+      isMoney: true,
+      big: true,
+      sum: true,
+      pre: '$',
+    }),
+    fecha: new DateProp('Fecha'),
+    tipoModificacion: new RefProp({
+      getScheme: () => TipoModificacionModel.scheme,
+    }),
+    direccion: new RefProp({
+      getScheme: () => DireccionModel.scheme,
+    }),
+    departamento: new RefProp({
+      getScheme: () => DepartamentoModel.scheme,
+    }),
+    observaciones: new TextLongProp('Observaciones'),
+    ...COMMON_PROPS,
+  },
+})

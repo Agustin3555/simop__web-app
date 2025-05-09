@@ -37,9 +37,6 @@ export interface RelationFields {
   departamento: DepartamentoModel.Ref
   obra: ObraModel.Ref
   tipoRedeterminacion: TipoRedeterminacionModel.Ref
-
-  creado: string
-  modificado: string
 }
 
 export interface Entity extends BaseEntity, OwnFields, RelationFields {}
@@ -55,7 +52,7 @@ export type UpdateEntity = Partial<CreateEntity>
 
 export type Ref = BaseRef<OwnFields, 'numeroExpediente'>
 
-export const scheme: MetaModel<Entity> = {
+export const scheme = new MetaModel<Entity>({
   key: 'redeterminacion',
   service: RedeterminacionService,
   refreshRate: 'medium',
@@ -63,68 +60,59 @@ export const scheme: MetaModel<Entity> = {
     singular: 'Redeterminación',
     plural: 'Redeterminaciones',
   },
+
   anchorField: 'numeroExpedienteSolicitud',
-
-  groups: [
-    {
-      props: {
-        obra: new RefProp({
-          getScheme: () => ObraModel.scheme,
-          field: {
-            required: true,
-          },
-        }),
-        numeroExpediente: new TextProp(
-          'Número De Expediente de Redeterminación',
-          {
-            field: {
-              required: true,
-            },
-          },
-        ),
-
-        numeroResolucion: new TextProp('Número De Resolución'),
-
-        numeroExpedienteSolicitud: new TextProp(
-          'Número de Expediente de Solicitud',
-          {
-            field: {
-              required: true,
-            },
-          },
-        ),
-        montoTotal: new NumberProp('Monto Total', {
-          decimal: true,
-          isMoney: true,
-          big: true,
-          sum: true,
-          pre: '$',
-        }),
-        nuevoMontoObra: new NumberProp('Nuevo Monto', {
-          decimal: true,
-          isMoney: true,
-          big: true,
-          sum: true,
-          pre: '$',
-        }),
-        fechaRedeterminacion: new DateProp('Fecha de Solicitud'),
-        fechaCertificacion: new DateProp('Fecha Certificación'),
-        tieneHijas: new BooleanProp('AE Acum.'),
-        tipoRedeterminacion: new RefProp({
-          getScheme: () => TipoRedeterminacionModel.scheme,
-        }),
-        direccion: new RefProp({
-          getScheme: () => DireccionModel.scheme,
-        }),
-        departamento: new RefProp({
-          getScheme: () => DepartamentoModel.scheme,
-        }),
-        redeterminacionesHijas: new RefListProp({
-          getScheme: () => RedeterminacionModel.scheme,
-        }),
-        observaciones: new TextLongProp('Observaciones'),
-        ...COMMON_PROPS,
+  props: {
+    obra: new RefProp({
+      getScheme: () => ObraModel.scheme,
+      field: {
+        required: true,
       },
-    },
-  ],
-}
+    }),
+    numeroExpediente: new TextProp('Número De Expediente de Redeterminación', {
+      field: {
+        required: true,
+      },
+    }),
+    numeroResolucion: new TextProp('Número De Resolución'),
+    numeroExpedienteSolicitud: new TextProp(
+      'Número de Expediente de Solicitud',
+      {
+        field: {
+          required: true,
+        },
+      },
+    ),
+    montoTotal: new NumberProp('Monto Total', {
+      decimal: true,
+      isMoney: true,
+      big: true,
+      sum: true,
+      pre: '$',
+    }),
+    nuevoMontoObra: new NumberProp('Nuevo Monto', {
+      decimal: true,
+      isMoney: true,
+      big: true,
+      sum: true,
+      pre: '$',
+    }),
+    fechaRedeterminacion: new DateProp('Fecha de Solicitud'),
+    fechaCertificacion: new DateProp('Fecha Certificación'),
+    tieneHijas: new BooleanProp('AE Acum.'),
+    tipoRedeterminacion: new RefProp({
+      getScheme: () => TipoRedeterminacionModel.scheme,
+    }),
+    direccion: new RefProp({
+      getScheme: () => DireccionModel.scheme,
+    }),
+    departamento: new RefProp({
+      getScheme: () => DepartamentoModel.scheme,
+    }),
+    redeterminacionesHijas: new RefListProp({
+      getScheme: () => RedeterminacionModel.scheme,
+    }),
+    observaciones: new TextLongProp('Observaciones'),
+    ...COMMON_PROPS,
+  },
+})

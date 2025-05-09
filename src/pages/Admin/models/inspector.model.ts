@@ -27,7 +27,7 @@ export type UpdateEntity = Partial<CreateEntity>
 
 export type Ref = BaseRef<OwnFields, 'cuil' | 'apellido' | 'nombre'>
 
-export const scheme: MetaModel<Entity> = {
+export const scheme = new MetaModel<Entity>({
   key: 'inspector',
   service: InspectorService,
   refreshRate: 'low',
@@ -35,28 +35,24 @@ export const scheme: MetaModel<Entity> = {
     singular: 'Inspector',
     plural: 'Inspectores',
   },
-  anchorField: 'apellido',
 
-  groups: [
-    {
-      props: {
-        cuil: new NumberProp('CUIL', {
-          big: true,
-          field: {
-            required: true,
-          },
-        }),
-        apellido: new TextProp('Apellido', {
-          field: {
-            required: true,
-          },
-        }),
-        nombre: new TextProp('Nombre'),
-        profesiones: new RefListProp({
-          getScheme: () => TipoProfesionModel.scheme,
-        }),
-        ...COMMON_PROPS,
+  anchorField: 'apellido',
+  props: {
+    cuil: new NumberProp('CUIL', {
+      big: true,
+      field: {
+        required: true,
       },
-    },
-  ],
-}
+    }),
+    apellido: new TextProp('Apellido', {
+      field: {
+        required: true,
+      },
+    }),
+    nombre: new TextProp('Nombre'),
+    profesiones: new RefListProp({
+      getScheme: () => TipoProfesionModel.scheme,
+    }),
+    ...COMMON_PROPS,
+  },
+})

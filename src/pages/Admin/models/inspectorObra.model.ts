@@ -29,11 +29,11 @@ export type CreateEntity = OwnFields &
     number
   >
 
-export type Ref = BaseRef<OwnFields, 'fecha'>
-
 export type UpdateEntity = Partial<CreateEntity>
 
-export const scheme: MetaModel<Entity> = {
+export type Ref = BaseRef<OwnFields, 'fecha'>
+
+export const scheme = new MetaModel<Entity>({
   key: 'inspectorObra',
   service: InspectorObraService,
   refreshRate: 'medium',
@@ -41,36 +41,32 @@ export const scheme: MetaModel<Entity> = {
     singular: 'Inspector de Obra',
     plural: 'Inspectores de Obra',
   },
-  anchorField: 'id',
 
-  groups: [
-    {
-      props: {
-        obra: new RefProp({
-          getScheme: () => ObraModel.scheme,
-          field: {
-            required: true,
-          },
-        }),
-        inspector: new RefProp({
-          getScheme: () => InspectorModel.scheme,
-          field: {
-            required: true,
-          },
-        }),
-        tipoInspector: new RefProp({
-          getScheme: () => TipoInspectorModel.scheme,
-        }),
-        tipoProfesion: new RefProp({
-          getScheme: () => TipoProfesionModel.scheme,
-        }),
-        vigencia: new BooleanProp('Vigencia', {
-          falseText: 'No Vigente',
-          trueText: 'Vigente',
-        }),
-        fecha: new DateProp('Fecha'),
-        ...COMMON_PROPS,
+  anchorField: 'id',
+  props: {
+    obra: new RefProp({
+      getScheme: () => ObraModel.scheme,
+      field: {
+        required: true,
       },
-    },
-  ],
-}
+    }),
+    inspector: new RefProp({
+      getScheme: () => InspectorModel.scheme,
+      field: {
+        required: true,
+      },
+    }),
+    tipoInspector: new RefProp({
+      getScheme: () => TipoInspectorModel.scheme,
+    }),
+    tipoProfesion: new RefProp({
+      getScheme: () => TipoProfesionModel.scheme,
+    }),
+    vigencia: new BooleanProp('Vigencia', {
+      falseText: 'No Vigente',
+      trueText: 'Vigente',
+    }),
+    fecha: new DateProp('Fecha'),
+    ...COMMON_PROPS,
+  },
+})

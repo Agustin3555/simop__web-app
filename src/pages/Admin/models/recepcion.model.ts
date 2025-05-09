@@ -40,7 +40,7 @@ export type UpdateEntity = Partial<CreateEntity>
 
 export type Ref = BaseRef<OwnFields, 'numeroActa'>
 
-export const scheme: MetaModel<Entity> = {
+export const scheme = new MetaModel<Entity>({
   key: 'recepcion',
   service: RecepcionService,
   refreshRate: 'medium',
@@ -48,35 +48,31 @@ export const scheme: MetaModel<Entity> = {
     singular: 'Recepcion',
     plural: 'Recepciones',
   },
-  anchorField: 'numeroActa',
 
-  groups: [
-    {
-      props: {
-        obra: new RefProp({
-          getScheme: () => ObraModel.scheme,
-          field: {
-            required: true,
-          },
-        }),
-        numeroActa: new NumberProp('Número De Acta', {
-          field: {
-            required: true,
-          },
-        }),
-        fecha: new DateProp('Fecha'),
-        tipoRecepcion: new RefProp({
-          getScheme: () => TipoRecepcionModel.scheme,
-        }),
-        direccion: new RefProp({
-          getScheme: () => DireccionModel.scheme,
-        }),
-        departamento: new RefProp({
-          getScheme: () => DepartamentoModel.scheme,
-        }),
-        observaciones: new TextLongProp('Observaciones'),
-        ...COMMON_PROPS,
+  anchorField: 'numeroActa',
+  props: {
+    obra: new RefProp({
+      getScheme: () => ObraModel.scheme,
+      field: {
+        required: true,
       },
-    },
-  ],
-}
+    }),
+    numeroActa: new NumberProp('Número De Acta', {
+      field: {
+        required: true,
+      },
+    }),
+    fecha: new DateProp('Fecha'),
+    tipoRecepcion: new RefProp({
+      getScheme: () => TipoRecepcionModel.scheme,
+    }),
+    direccion: new RefProp({
+      getScheme: () => DireccionModel.scheme,
+    }),
+    departamento: new RefProp({
+      getScheme: () => DepartamentoModel.scheme,
+    }),
+    observaciones: new TextLongProp('Observaciones'),
+    ...COMMON_PROPS,
+  },
+})

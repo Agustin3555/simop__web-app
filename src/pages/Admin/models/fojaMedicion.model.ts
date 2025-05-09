@@ -37,7 +37,7 @@ export type UpdateEntity = Partial<CreateEntity>
 
 export type Ref = BaseRef<OwnFields, 'numero' | 'numeroExpediente'>
 
-export const scheme: MetaModel<Entity> = {
+export const scheme = new MetaModel<Entity>({
   key: 'fojaMedicion',
   service: FojaMedicionService,
   refreshRate: 'medium',
@@ -45,55 +45,48 @@ export const scheme: MetaModel<Entity> = {
     singular: 'Foja de Medición',
     plural: 'Fojas de Mediciones',
   },
+
   anchorField: 'numeroExpediente',
-
-  groups: [
-    {
-      props: {
-        obra: new RefProp({
-          getScheme: () => ObraModel.scheme,
-          field: {
-            required: true,
-          },
-        }),
-        numeroExpediente: new TextProp('Numero de Expediente de Foja', {
-          field: {
-            required: true,
-          },
-        }),
-        numero: new NumberProp('Número de foja', {
-          field: {
-            required: true,
-          },
-        }),
-        avance: new NumberProp('Porcentaje de avance', {
-          decimal: true,
-          sub: '%',
-        }),
-        fechaFoja: new DateProp('Fecha de Solicitud'),
-
-        fechaCertificacion: new DateProp('Fecha Certificación'),
-
-        montoTotal: new NumberProp('Monto Total', {
-          decimal: true,
-          isMoney: true,
-          big: true,
-          sum: true,
-          pre: '$',
-        }),
-
-        inspector: new RefProp({
-          getScheme: () => InspectorModel.scheme,
-        }),
-        direccion: new RefProp({
-          getScheme: () => DireccionModel.scheme,
-        }),
-        departamento: new RefProp({
-          getScheme: () => DepartamentoModel.scheme,
-        }),
-        observaciones: new TextLongProp('Observaciones'),
-        ...COMMON_PROPS,
+  props: {
+    obra: new RefProp({
+      getScheme: () => ObraModel.scheme,
+      field: {
+        required: true,
       },
-    },
-  ],
-}
+    }),
+    numeroExpediente: new TextProp('Numero de Expediente de Foja', {
+      field: {
+        required: true,
+      },
+    }),
+    numero: new NumberProp('Número de foja', {
+      field: {
+        required: true,
+      },
+    }),
+    avance: new NumberProp('Porcentaje de avance', {
+      decimal: true,
+      sub: '%',
+    }),
+    fechaFoja: new DateProp('Fecha de Solicitud'),
+    fechaCertificacion: new DateProp('Fecha Certificación'),
+    montoTotal: new NumberProp('Monto Total', {
+      decimal: true,
+      isMoney: true,
+      big: true,
+      sum: true,
+      pre: '$',
+    }),
+    inspector: new RefProp({
+      getScheme: () => InspectorModel.scheme,
+    }),
+    direccion: new RefProp({
+      getScheme: () => DireccionModel.scheme,
+    }),
+    departamento: new RefProp({
+      getScheme: () => DepartamentoModel.scheme,
+    }),
+    observaciones: new TextLongProp('Observaciones'),
+    ...COMMON_PROPS,
+  },
+})

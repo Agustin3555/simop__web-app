@@ -16,35 +16,31 @@ export interface Entity extends BaseEntity, OwnFields, RelationFields {}
 
 export type CreateEntity = OwnFields & Record<'subsecretariaId', number>
 
-export type Ref = BaseRef<OwnFields, 'nombre'>
-
 export type UpdateEntity = Partial<CreateEntity>
 
-export const scheme: MetaModel<Entity> = {
+export type Ref = BaseRef<OwnFields, 'nombre'>
+
+export const scheme = new MetaModel<Entity>({
   key: 'direccion',
   service: DireccionService,
   title: {
     singular: 'Dirección',
     plural: 'Direcciones',
   },
-  anchorField: 'nombre',
 
-  groups: [
-    {
-      props: {
-        nombre: new TextProp('Nombre', {
-          field: {
-            required: true,
-          },
-        }),
-        subSecretaria: new RefProp({
-          getScheme: () => SubSecretariaModel.scheme,
-          field: {
-            required: true,
-          },
-        }),
-        ...COMMON_PROPS,
+  anchorField: 'nombre',
+  props: {
+    nombre: new TextProp('Nombre', {
+      field: {
+        required: true,
       },
-    },
-  ],
-}
+    }),
+    subSecretaria: new RefProp({
+      getScheme: () => SubSecretariaModel.scheme,
+      field: {
+        required: true,
+      },
+    }),
+    ...COMMON_PROPS,
+  },
+})
