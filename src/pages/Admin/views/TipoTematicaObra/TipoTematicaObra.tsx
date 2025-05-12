@@ -2,7 +2,7 @@ import { SchemeView } from '../../components'
 import { TipoTematicaObraModel } from '../../models'
 
 const TipoTematicaObra = () => (
-  <SchemeView scheme={TipoTematicaObraModel.scheme} />
+  <SchemeView metaModel={TipoTematicaObraModel.metaModel} />
 )
 
 export default TipoTematicaObra

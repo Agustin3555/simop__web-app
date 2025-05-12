@@ -10,6 +10,8 @@ import {
 import { AmpliacionService } from '../services'
 import { COMMON_PROPS } from '../constants/commonProps.const'
 import { BaseEntity, BaseRef } from '@/models/config'
+import { Method } from '@/services/config'
+import { omitBaseEntity } from '../constants/selectors.const'
 
 export interface OwnFields {
   numero: number
@@ -37,7 +39,7 @@ export type UpdateEntity = Partial<CreateEntity>
 
 export type Ref = BaseRef<OwnFields, 'numero' | 'numeroResolucion'>
 
-export const scheme = new MetaModel<Entity>({
+export const metaModel = new MetaModel<Entity>({
   key: 'ampliacion',
   service: AmpliacionService,
   refreshRate: 'medium',
@@ -49,7 +51,7 @@ export const scheme = new MetaModel<Entity>({
   anchorField: 'numeroExpedienteSolicitud',
   props: {
     obra: new RefProp({
-      getScheme: () => ObraModel.scheme,
+      getMetaModel: () => ObraModel.metaModel,
       field: {
         required: true,
       },
@@ -69,11 +71,22 @@ export const scheme = new MetaModel<Entity>({
     fecha: new DateProp('Fecha'),
     observaciones: new TextLongProp('Observaciones'),
     direccion: new RefProp({
-      getScheme: () => DireccionModel.scheme,
+      getMetaModel: () => DireccionModel.metaModel,
     }),
     departamento: new RefProp({
-      getScheme: () => DepartamentoModel.scheme,
+      getMetaModel: () => DepartamentoModel.metaModel,
     }),
     ...COMMON_PROPS,
   },
 })
+
+metaModel.fieldsByService = [
+  {
+    methods: [Method.GetAll, Method.GetOne],
+    fields: metaModel.allFields,
+  },
+  {
+    methods: [Method.Create, Method.UpdateOne],
+    groups: [{ key: '', fields: omitBaseEntity(metaModel.allFields) }],
+  },
+]

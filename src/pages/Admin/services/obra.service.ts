@@ -13,6 +13,12 @@ export const ObraService: Service<ObraModel.Entity> = {
     return ObraAdapter.getAll.output(response.data)
   },
 
+  getAllTotales: async () => {
+    const response = await publicInstance.get(collection('totales'))
+
+    return ObraAdapter.getAll.output(response.data)
+  },
+
   getRefs: async () => {
     const response = await publicInstance.get(collection('refs'))
 
@@ -25,8 +31,8 @@ export const ObraService: Service<ObraModel.Entity> = {
     return ObraAdapter.getOne.output(response.data)
   },
 
-  getOneDetail: async (id: number) => {
-    const response = await publicInstance.get(collection(id, 'detail'))
+  getOneDetalle: async (id: number) => {
+    const response = await publicInstance.get(collection(id, 'detalle'))
 
     return ObraAdapter.getOne.output(response.data)
   },

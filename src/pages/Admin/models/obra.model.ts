@@ -19,6 +19,8 @@ import {
 import { ObraService } from '../services'
 import { COMMON_PROPS } from '../constants/commonProps.const'
 import { BaseEntity, BaseRef } from '@/models/config'
+import { Method } from '@/services/config'
+import { select } from '../helpers'
 
 export interface OwnFields {
   numero: number
@@ -94,7 +96,7 @@ export type UpdateEntity = Partial<CreateEntity>
 
 export type Ref = BaseRef<OwnFields, 'nombre' | 'numero'>
 
-export const scheme = new MetaModel<Entity>({
+export const metaModel = new MetaModel<Entity>({
   key: 'obra',
   service: ObraService,
   refreshRate: 'medium',
@@ -117,7 +119,7 @@ export const scheme = new MetaModel<Entity>({
       },
     }),
     empresa: new RefProp({
-      getScheme: () => EmpresaModel.scheme,
+      getMetaModel: () => EmpresaModel.metaModel,
     }),
     numeroExpediente: new TextProp('Número de Expediente de Contrato'),
     numeroResolucion: new TextProp('Número de Resolución'),
@@ -132,19 +134,19 @@ export const scheme = new MetaModel<Entity>({
       pre: '$',
     }),
     tipoContratacionObra: new RefProp({
-      getScheme: () => TipoContratacionObraModel.scheme,
+      getMetaModel: () => TipoContratacionObraModel.metaModel,
     }),
     tipoFinanciamientoObra: new RefProp({
-      getScheme: () => TipoFinanciamientoObraModel.scheme,
+      getMetaModel: () => TipoFinanciamientoObraModel.metaModel,
     }),
     tipoProgramaObra: new RefProp({
-      getScheme: () => TipoProgramaObraModel.scheme,
+      getMetaModel: () => TipoProgramaObraModel.metaModel,
     }),
     tipoTematicaObra: new RefProp({
-      getScheme: () => TipoTematicaObraModel.scheme,
+      getMetaModel: () => TipoTematicaObraModel.metaModel,
     }),
     tipoEstadoObra: new RefProp({
-      getScheme: () => TipoEstadoObraModel.scheme,
+      getMetaModel: () => TipoEstadoObraModel.metaModel,
     }),
     fechaInicio: new DateProp('Fecha de Inicio'),
     fechaFin: new DateProp('Fecha de Fin'),
@@ -156,7 +158,7 @@ export const scheme = new MetaModel<Entity>({
     }),
     nomenclaturaCatastral: new TextProp('Nomenclatura Catastral'),
     localidad: new RefProp({
-      getScheme: () => LocalidadModel.scheme,
+      getMetaModel: () => LocalidadModel.metaModel,
     }),
     direccion: new TextProp('Dirección'),
     lugar: new TextLongProp('Lugar'),
@@ -308,8 +310,142 @@ export const scheme = new MetaModel<Entity>({
   },
 })
 
-// title: 'Modalidad',
+const BASICO: (keyof Entity)[] = select(metaModel.allFields, 'only', [
+  'numero',
+  'nombre',
+  'empresa',
+  'numeroExpediente',
+  'numeroResolucion',
+  'anioResolucion',
+  'numeroContratacion',
+  'fechaContratacion',
+  'montoContratacion',
+  'tipoContratacionObra',
+  'tipoFinanciamientoObra',
+  'tipoProgramaObra',
+  'tipoTematicaObra',
+  'tipoEstadoObra',
+  'fechaInicio',
+  'fechaFin',
+  'plazoMeses',
+  'plazoDias',
+  'avanceTotal',
+  'nomenclaturaCatastral',
+  'localidad',
+  'direccion',
+  'lugar',
+  'observaciones',
+])
 
-// 'Totales de Obra'
-// key: 'obraTotales',
-// quickFilters: ['empresa', 'fechaInicio', 'localidad', 'tipoEstadoObra'],
+const TOTALES: (keyof Entity)[] = select(metaModel.allFields, 'only', [
+  'balanceEconomico',
+  'nuevoMonto',
+  'totalCertificadoFojaMedicion',
+  'totalOrdenPagoFojaMedicion',
+  'totalPagadoFojaMedicion',
+  'totalPendientePagoFojaMedicion',
+  'totalCertificadoRedeterminacion',
+  'totalOrdenPagoRedeterminacion',
+  'totalPagadoRedeterminacion',
+  'totalPendientePagoRedeterminacion',
+  'porcentajePendienteCertificar',
+  'montoPendienteCertificar',
+])
+
+metaModel.fieldsByService = [
+  {
+    methods: [Method.GetAll, Method.GetOne],
+    fields: select(metaModel.allFields, 'except', TOTALES),
+  },
+  {
+    methods: [Method.Create, Method.UpdateOne],
+    groups: [
+      {
+        key: '',
+        fields: BASICO,
+      },
+      {
+        key: 'modalidad',
+        title: 'Modalidad',
+        fields: select(metaModel.allFields, 'only', [
+          'obraNueva',
+          'porcentajeObraNueva',
+          'metrosCuadradosObraNueva',
+          'metrosLinealesObraNueva',
+          'observacionesObraNueva',
+          'obraRefaccionada',
+          'porcentajeObraRefaccionada',
+          'metrosCuadradosObraRefaccionada',
+          'metrosLinealesObraRefaccionada',
+          'observacionesObraRefaccionada',
+        ]),
+      },
+    ],
+  },
+  {
+    methods: ['general'],
+    fields: select(metaModel.allFields, 'only', [
+      'numero',
+      'nombre',
+      'empresa',
+      'numeroExpediente',
+      'fechaContratacion',
+      'montoContratacion',
+      'tipoFinanciamientoObra',
+      'tipoEstadoObra',
+      'fechaInicio',
+      'avanceTotal',
+      'localidad',
+    ]),
+  },
+  {
+    methods: ['general-quickFilters'],
+    fields: select(metaModel.allFields, 'only', [
+      'empresa',
+      'fechaInicio',
+      'localidad',
+      'tipoEstadoObra',
+    ]),
+  },
+  {
+    methods: ['totales'],
+    fields: [
+      ...select(metaModel.allFields, 'only', [
+        'numero',
+        'nombre',
+        'empresa',
+        'localidad',
+        'numeroExpediente',
+        'fechaInicio',
+        'tipoEstadoObra',
+        'avanceTotal',
+        'montoContratacion',
+      ]),
+      ...TOTALES,
+    ] as (keyof Entity)[],
+  },
+  {
+    methods: ['totales-quickFilters'],
+    fields: select(metaModel.allFields, 'only', [
+      'empresa',
+      'fechaInicio',
+      'localidad',
+      'tipoEstadoObra',
+    ]),
+  },
+  {
+    methods: ['detalle'],
+    groups: [
+      {
+        key: '',
+        title: '',
+        fields: BASICO,
+      },
+      {
+        key: 'totales',
+        title: 'Totales',
+        fields: TOTALES,
+      },
+    ],
+  },
+]

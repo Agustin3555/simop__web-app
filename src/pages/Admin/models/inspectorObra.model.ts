@@ -8,6 +8,8 @@ import { RefProp, MetaModel, BooleanProp, DateProp } from '../services/config'
 import { InspectorObraService } from '../services'
 import { COMMON_PROPS } from '../constants/commonProps.const'
 import { BaseEntity, BaseRef } from '@/models/config'
+import { Method } from '@/services/config'
+import { omitBaseEntity } from '../constants/selectors.const'
 
 export interface OwnFields {
   vigencia: boolean
@@ -33,7 +35,7 @@ export type UpdateEntity = Partial<CreateEntity>
 
 export type Ref = BaseRef<OwnFields, 'fecha'>
 
-export const scheme = new MetaModel<Entity>({
+export const metaModel = new MetaModel<Entity>({
   key: 'inspectorObra',
   service: InspectorObraService,
   refreshRate: 'medium',
@@ -45,22 +47,22 @@ export const scheme = new MetaModel<Entity>({
   anchorField: 'id',
   props: {
     obra: new RefProp({
-      getScheme: () => ObraModel.scheme,
+      getMetaModel: () => ObraModel.metaModel,
       field: {
         required: true,
       },
     }),
     inspector: new RefProp({
-      getScheme: () => InspectorModel.scheme,
+      getMetaModel: () => InspectorModel.metaModel,
       field: {
         required: true,
       },
     }),
     tipoInspector: new RefProp({
-      getScheme: () => TipoInspectorModel.scheme,
+      getMetaModel: () => TipoInspectorModel.metaModel,
     }),
     tipoProfesion: new RefProp({
-      getScheme: () => TipoProfesionModel.scheme,
+      getMetaModel: () => TipoProfesionModel.metaModel,
     }),
     vigencia: new BooleanProp('Vigencia', {
       falseText: 'No Vigente',
@@ -70,3 +72,14 @@ export const scheme = new MetaModel<Entity>({
     ...COMMON_PROPS,
   },
 })
+
+metaModel.fieldsByService = [
+  {
+    methods: [Method.GetAll, Method.GetOne],
+    fields: metaModel.allFields,
+  },
+  {
+    methods: [Method.Create, Method.UpdateOne],
+    groups: [{ key: '', fields: omitBaseEntity(metaModel.allFields) }],
+  },
+]

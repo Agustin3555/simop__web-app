@@ -14,9 +14,10 @@ import {
   FloatingArrow,
 } from '@floating-ui/react'
 import { useQueryActionState } from '@/hooks'
-import { GetOneProvider, Identificable } from '@/models/config'
+import { Identificable } from '@/models/config'
 import { Button } from '@/components'
 import { palColorGS, palSize, Size } from '@/styles/palette'
+import { GetOneProvider } from '@/services/config'
 
 const ARROW_HEIGHT = palSize(Size.XS)
 

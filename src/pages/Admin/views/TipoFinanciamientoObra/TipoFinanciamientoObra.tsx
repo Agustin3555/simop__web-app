@@ -2,7 +2,7 @@ import { SchemeView } from '../../components'
 import { TipoFinanciamientoObraModel } from '../../models'
 
 const TipoFinanciamientoObra = () => (
-  <SchemeView scheme={TipoFinanciamientoObraModel.scheme} />
+  <SchemeView metaModel={TipoFinanciamientoObraModel.metaModel} />
 )
 
 export default TipoFinanciamientoObra

@@ -8,6 +8,8 @@ import {
 import { InspectorService } from '../services'
 import { COMMON_PROPS } from '../constants/commonProps.const'
 import { BaseEntity, BaseRef } from '@/models/config'
+import { Method } from '@/services/config'
+import { omitBaseEntity } from '../constants/selectors.const'
 
 export interface OwnFields {
   cuil: number
@@ -27,7 +29,7 @@ export type UpdateEntity = Partial<CreateEntity>
 
 export type Ref = BaseRef<OwnFields, 'cuil' | 'apellido' | 'nombre'>
 
-export const scheme = new MetaModel<Entity>({
+export const metaModel = new MetaModel<Entity>({
   key: 'inspector',
   service: InspectorService,
   refreshRate: 'low',
@@ -51,8 +53,19 @@ export const scheme = new MetaModel<Entity>({
     }),
     nombre: new TextProp('Nombre'),
     profesiones: new RefListProp({
-      getScheme: () => TipoProfesionModel.scheme,
+      getMetaModel: () => TipoProfesionModel.metaModel,
     }),
     ...COMMON_PROPS,
   },
 })
+
+metaModel.fieldsByService = [
+  {
+    methods: [Method.GetAll, Method.GetOne],
+    fields: metaModel.allFields,
+  },
+  {
+    methods: [Method.Create, Method.UpdateOne],
+    groups: [{ key: '', fields: omitBaseEntity(metaModel.allFields) }],
+  },
+]

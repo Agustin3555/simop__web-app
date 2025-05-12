@@ -1,6 +1,8 @@
 import { SchemeView } from '../../components'
 import { TipoEstadoObraModel } from '../../models'
 
-const TipoEstadoObra = () => <SchemeView scheme={TipoEstadoObraModel.scheme} />
+const TipoEstadoObra = () => (
+  <SchemeView metaModel={TipoEstadoObraModel.metaModel} />
+)
 
 export default TipoEstadoObra

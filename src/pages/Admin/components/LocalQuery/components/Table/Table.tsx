@@ -7,7 +7,7 @@ import {
   useMemo,
   useState,
 } from 'react'
-import { useRowSelection, useScheme } from '@/pages/Admin/hooks'
+import { useRowSelection, useMetaModel } from '@/pages/Admin/hooks'
 import {
   ColumnDef,
   ColumnFiltersState,
@@ -29,17 +29,22 @@ import { MinSize } from '@/pages/Admin/services/config'
 import { classList } from '@/helpers'
 import { format } from '@formkit/tempo'
 import { utils, writeFile } from 'xlsx'
+import { Method } from '@/services/config'
 
 export type QuickFilters = Record<string, { title: string; filter: ReactNode }>
 
-interface TableProps {
+export interface TableProps {
   data: GeneralEntity[]
   columnVisibility: VisibilityState
   setColumnVisibility: Dispatch<SetStateAction<VisibilityState>>
   setQuickFilters: Dispatch<SetStateAction<QuickFilters>>
+  methods?: {
+    forGetAll?: string
+    forQuickFilters?: string
+  }
 }
 
-export type AccesorKeys = Record<string, string>
+export type AccessorKeys = Record<string, string>
 
 const SELECT_COLUMN = 'select'
 const STEP_WIDTH = 32
@@ -49,41 +54,62 @@ const Table = ({
   columnVisibility,
   setColumnVisibility,
   setQuickFilters,
+  methods,
 }: TableProps) => {
-  const { scheme, flatProps } = useScheme()
-  const { title, quickFilters: quickFilterKeys, groups } = scheme
+  const { forGetAll, forQuickFilters } = methods ?? {}
 
-  const { rowSelection, setRowSelection, selectedRowIds } = useRowSelection()
+  const { title, getFields, getPropFields, getPropFieldsRecord } =
+    useMetaModel()
+
   const [filters, setFilters] = useState(true)
   const [simplifyMatches, setSimplifyMatches] = useState(true)
   const [stickHead, setStickHead] = useState(false)
   const [stickFoot, setStickFoot] = useState(false)
   const [sorting, setSorting] = useState<SortingState>([])
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([])
+  const { rowSelection, setRowSelection, selectedRowIds } = useRowSelection()
 
-  const [columnOrder, setColumnOrder] = useState<ColumnOrderState>(
-    // Inicializar el orden de columnas
-    [SELECT_COLUMN, ...groups.flatMap(({ props }) => Object.keys(props))],
+  const getAllFields = useMemo(
+    () => getFields(forGetAll ?? Method.GetAll) ?? [],
+    [],
   )
 
-  const [accesorKeys, setAccesorKeys] = useState<AccesorKeys>({})
+  const getAllProps = useMemo(
+    () => getPropFields(forGetAll ?? Method.GetAll) ?? [],
+    [],
+  )
+
+  const getAllPropsRecord = useMemo(
+    () => getPropFieldsRecord(forGetAll ?? Method.GetAll),
+    [],
+  )
+
+  const quickFilterFields = useMemo(
+    () => getFields(forQuickFilters ?? 'quickFilters'),
+    [],
+  )
+
+  const [columnOrder, setColumnOrder] = useState<ColumnOrderState>([
+    SELECT_COLUMN,
+    ...getAllFields,
+  ])
+
+  const [accessorKeys, setAccessorKeys] = useState<AccessorKeys>({})
 
   const columns = useMemo(
     () => [
       { id: SELECT_COLUMN },
-      ...groups.flatMap<ColumnDef<GeneralEntity>>(({ props }) =>
-        Object.values(props).map(
-          ({ key, minSize, accessorFn, filterFn, footer }) => ({
-            id: key,
-            accessorKey: key,
-            header: key,
-            minSize: MinSize.xs * STEP_WIDTH,
-            size: minSize * STEP_WIDTH,
-            ...(accessorFn && { accessorFn }),
-            ...(filterFn && { filterFn }),
-            ...(footer && { footer }),
-          }),
-        ),
+      ...getAllProps.map<ColumnDef<GeneralEntity>>(
+        ({ key, minSize, accessorFn, filterFn, footer }) => ({
+          id: key,
+          accessorKey: key,
+          header: key,
+          minSize: MinSize.xs * STEP_WIDTH,
+          size: minSize * STEP_WIDTH,
+          ...(accessorFn && { accessorFn }),
+          ...(filterFn && { filterFn }),
+          ...(footer && { footer }),
+        }),
       ),
     ],
     [],
@@ -129,9 +155,9 @@ const Table = ({
 
     const convertedData = selectedData.map(row =>
       Object.fromEntries(
-        Object.keys(flatProps).map(key => [
-          flatProps[key].title,
-          flatProps[key].getExcelValue(row),
+        getAllProps.map(({ title, getExcelValue }) => [
+          title,
+          getExcelValue(row),
         ]),
       ),
     )
@@ -139,14 +165,10 @@ const Table = ({
     const worksheet = utils.json_to_sheet(convertedData)
 
     // Calcular el ancho óptimo por columna
-    const colWidths = Object.keys(flatProps).map(key => {
-      const header = flatProps[key].title
-
+    const colWidths = getAllProps.map(({ title }) => {
       const maxLength = Math.max(
-        header.length,
-        ...convertedData.map(
-          row => String(row[flatProps[key].title] ?? '').length,
-        ),
+        title.length,
+        ...convertedData.map(row => String(row[title] ?? '').length),
       )
 
       return { wch: maxLength + 1 }
@@ -231,14 +253,14 @@ const Table = ({
                   <Header
                     key={header.id}
                     {...{
-                      flatProps,
+                      getAllPropsRecord,
                       header,
                       sorting,
                       setSorting,
                       columnOrder,
                       setColumnOrder,
-                      setAccesorKeys,
-                      quickFilterKeys,
+                      setAccessorKeys,
+                      quickFilterFields,
                       setQuickFilters,
                     }}
                   />
@@ -262,7 +284,10 @@ const Table = ({
                       onChange={row.getToggleSelectedHandler()}
                     />
                   ) : (
-                    <Cell key={cell.id} {...{ flatProps, cell, accesorKeys }} />
+                    <Cell
+                      key={cell.id}
+                      {...{ getAllPropsRecord, cell, accessorKeys }}
+                    />
                   ),
                 )}
             </div>

@@ -1,9 +1,9 @@
 import { View } from '../../components'
 import { Query } from './components'
 
-const DetalleObra = () => (
+const ObraDetalle = () => (
   <View
-    viewKey="detalleObra"
+    viewKey="obraDetalle"
     title="Detalle de Obra Básica"
     localViews={[
       {
@@ -16,4 +16,4 @@ const DetalleObra = () => (
   />
 )
 
-export default DetalleObra
+export default ObraDetalle

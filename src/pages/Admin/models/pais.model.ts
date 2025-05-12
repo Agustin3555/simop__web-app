@@ -2,6 +2,8 @@ import { MetaModel, TextProp } from '../services/config'
 import { PaisService } from '../services'
 import { COMMON_PROPS } from '../constants/commonProps.const'
 import { BaseEntity, BaseRef } from '@/models/config'
+import { Method } from '@/services/config'
+import { omitBaseEntity } from '../constants/selectors.const'
 
 export interface OwnFields {
   nombre: string
@@ -17,7 +19,7 @@ export type UpdateEntity = Partial<CreateEntity>
 
 export type Ref = BaseRef<OwnFields, 'nombre'>
 
-export const scheme = new MetaModel<Entity>({
+export const metaModel = new MetaModel<Entity>({
   key: 'pais',
   service: PaisService,
   title: {
@@ -35,3 +37,14 @@ export const scheme = new MetaModel<Entity>({
     ...COMMON_PROPS,
   },
 })
+
+metaModel.fieldsByService = [
+  {
+    methods: [Method.GetAll, Method.GetOne],
+    fields: metaModel.allFields,
+  },
+  {
+    methods: [Method.Create, Method.UpdateOne],
+    groups: [{ key: '', fields: omitBaseEntity(metaModel.allFields) }],
+  },
+]

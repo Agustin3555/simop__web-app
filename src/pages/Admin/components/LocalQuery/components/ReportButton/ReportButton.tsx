@@ -1,6 +1,6 @@
 import { MutableRefObject } from 'react'
 import { useHandleAction } from '@/hooks'
-import { useScheme } from '@/pages/Admin/hooks'
+import { useMetaModel } from '@/pages/Admin/hooks'
 import { Button } from '@/components'
 import { ReportInTable } from './components'
 import { generateTableImages } from '@/pages/Admin/helpers'
@@ -11,8 +11,7 @@ interface ReportButtonProps {
 }
 
 const ReportButton = ({ localQueryRef }: ReportButtonProps) => {
-  const { scheme } = useScheme()
-  const { title } = scheme
+  const { title } = useMetaModel()
 
   // const [key, setKey] = useState(0)
   // const [imageUrls, setImageUrls] = useState<string[]>()

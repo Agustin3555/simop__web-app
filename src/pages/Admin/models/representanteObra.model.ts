@@ -3,6 +3,8 @@ import { BooleanProp, RefProp, MetaModel, DateProp } from '../services/config'
 import { RepresentanteObraService } from '../services'
 import { COMMON_PROPS } from '../constants/commonProps.const'
 import { BaseEntity, BaseRef } from '@/models/config'
+import { Method } from '@/services/config'
+import { omitBaseEntity } from '../constants/selectors.const'
 
 export interface OwnFields {
   vigencia: boolean
@@ -24,7 +26,7 @@ export type UpdateEntity = Partial<CreateEntity>
 
 export type Ref = BaseRef<OwnFields, 'fecha'>
 
-export const scheme = new MetaModel<Entity>({
+export const metaModel = new MetaModel<Entity>({
   key: 'representanteObra',
   service: RepresentanteObraService,
   refreshRate: 'low',
@@ -36,16 +38,16 @@ export const scheme = new MetaModel<Entity>({
   anchorField: 'id',
   props: {
     obra: new RefProp({
-      getScheme: () => ObraModel.scheme,
+      getMetaModel: () => ObraModel.metaModel,
       field: {
         required: true,
       },
     }),
     representante: new RefProp({
-      getScheme: () => RepresentanteModel.scheme,
+      getMetaModel: () => RepresentanteModel.metaModel,
     }),
     tipoRepresentante: new RefProp({
-      getScheme: () => TipoRepresentanteModel.scheme,
+      getMetaModel: () => TipoRepresentanteModel.metaModel,
     }),
     vigencia: new BooleanProp('Vigencia', {
       falseText: 'No Vigente',
@@ -55,3 +57,14 @@ export const scheme = new MetaModel<Entity>({
     ...COMMON_PROPS,
   },
 })
+
+metaModel.fieldsByService = [
+  {
+    methods: [Method.GetAll, Method.GetOne],
+    fields: metaModel.allFields,
+  },
+  {
+    methods: [Method.Create, Method.UpdateOne],
+    groups: [{ key: '', fields: omitBaseEntity(metaModel.allFields) }],
+  },
+]

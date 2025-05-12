@@ -15,44 +15,25 @@
       grid-template-columns: repeat(auto-fill, minmax(min(100%, 30rem), 1fr));
       gap: var(--gap);
 
-      > .group {
+      > .section > .fields {
         display: flex;
-        flex-direction: column;
-        gap: var(--pal-size-2xl);
-        padding: var(--pal-size-l);
+        flex-wrap: wrap;
 
-        border-radius: var(--pal-size-xs);
-        background-color: var(--pal-color-white);
+        gap: var(--gap);
 
-        > small {
-          display: flex;
-          align-items: center;
-          gap: var(--gap);
+        > .control {
+          flex-grow: 1;
 
-          font-size: var(--pal-size-font-m);
-          color: var(--pal-color-a-l1);
-        }
+          &.s {
+            flex-basis: 5rem;
+          }
 
-        > .fields {
-          display: flex;
-          flex-wrap: wrap;
+          &.m {
+            flex-basis: 14.25rem;
+          }
 
-          gap: var(--gap);
-
-          > .control {
-            flex-grow: 1;
-
-            &.s {
-              flex-basis: 5rem;
-            }
-
-            &.m {
-              flex-basis: 14.25rem;
-            }
-
-            &.l {
-              flex-basis: 50rem;
-            }
+          &.l {
+            flex-basis: 50rem;
           }
         }
       }

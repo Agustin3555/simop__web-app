@@ -2,7 +2,7 @@ import { GeneralEntity } from '@/models/config'
 import {
   GetFilter,
   ForView,
-  GetScheme,
+  GetMetaModel,
   MinSize,
   PropScheme,
   Required,
@@ -22,7 +22,7 @@ export class RefProp implements PropScheme {
   verboseKey = ''
 
   constructor(
-    public config: GetScheme & {
+    public config: GetMetaModel & {
       // column?: ForView,
       field?: ForView & Required
     },
@@ -40,14 +40,14 @@ export class RefProp implements PropScheme {
   }
 
   public get title() {
-    const scheme = this.config.getScheme()
+    const scheme = this.config.getMetaModel()
 
     return scheme.title.singular
   }
 
   getFieldComponent = (value?: GeneralEntity, editMode = false) => {
     const { verboseKey, title, config } = this
-    const { getScheme, field } = config
+    const { getMetaModel: getScheme, field } = config
     const { hidden, required } = field ?? {}
 
     if (hidden === true) return
@@ -58,7 +58,7 @@ export class RefProp implements PropScheme {
       <AutoCombobox
         keyName={verboseKey}
         initOptions={value && [value]}
-        {...{ title, required, editMode, scheme }}
+        {...{ title, required, editMode, metaModel: scheme }}
       />
     )
   }
@@ -82,7 +82,7 @@ export class RefProp implements PropScheme {
 
   accessorFn: AccessorFn<GeneralEntity> = row => {
     const { key, config } = this
-    const { getScheme } = config
+    const { getMetaModel: getScheme } = config
 
     const scheme = getScheme()
     const { anchorField } = scheme
@@ -106,7 +106,7 @@ export class RefProp implements PropScheme {
 
   getHeader = (column: Column<GeneralEntity>) => {
     const { verboseKey, title, config } = this
-    const { getScheme } = config
+    const { getMetaModel: getScheme } = config
 
     const scheme = getScheme()
 
@@ -125,7 +125,7 @@ export class RefProp implements PropScheme {
 
   getValueComponent = (item: GeneralEntity, selectedSearchMode?: string) => {
     const { key, config } = this
-    const { getScheme } = config ?? {}
+    const { getMetaModel: getScheme } = config ?? {}
 
     const { key: keyScheme, service, anchorField } = getScheme()
     const { getOne } = service
@@ -145,7 +145,7 @@ export class RefProp implements PropScheme {
 
   getExcelValue = (item: GeneralEntity) => {
     const { key, config } = this
-    const { getScheme } = config
+    const { getMetaModel: getScheme } = config
 
     const { anchorField } = getScheme()
 

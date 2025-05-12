@@ -1,26 +1,28 @@
 import { useCallback, useMemo, useState } from 'react'
-import { RowSelectionContext, SchemeContext } from '../../contexts'
+import { RowSelectionContext, MetaModelContext } from '../../contexts'
 import { MetaModel } from '../../services/config'
 import { addIf } from '@/helpers'
 import { RowSelectionState } from '@tanstack/react-table'
 import { LocalAdd, LocalEdit, LocalQuery, View } from '..'
 import { LocalView, ViewProps } from '../View/View'
+import { LocalQueryProps } from '../LocalQuery/LocalQuery'
 
-interface SchemeViewProps extends Pick<ViewProps, 'localViews'> {
-  scheme: MetaModel
-  query?: boolean
+interface SchemeViewProps {
+  view?: Partial<ViewProps>
+  metaModel: MetaModel
+  query?: boolean | LocalQueryProps
   add?: boolean
   edit?: boolean
 }
 
 const SchemeView = ({
-  scheme,
+  view,
+  metaModel,
   query = true,
   add = true,
   edit = true,
-  localViews: customLocalViews = [],
 }: SchemeViewProps) => {
-  const { key, title } = scheme
+  const { key, title } = metaModel
 
   const localViews = useMemo(
     () => [
@@ -29,7 +31,7 @@ const SchemeView = ({
           title: 'Consultar',
           faIcon: 'fa-solid fa-search',
           localViewKey: 'query',
-          component: <LocalQuery />,
+          component: <LocalQuery {...(query !== true && { ...query })} />,
         },
         add && {
           title: 'Agregar',
@@ -44,7 +46,7 @@ const SchemeView = ({
           component: <LocalEdit />,
         },
       ]),
-      ...customLocalViews,
+      ...(view?.localViews ?? []),
     ],
     [],
   )
@@ -62,13 +64,17 @@ const SchemeView = ({
   const deselectRows = useCallback(() => setRowSelection({}), [])
 
   return (
-    <SchemeContext.Provider value={{ scheme }}>
+    <MetaModelContext.Provider value={{ metaModel }}>
       <RowSelectionContext.Provider
         value={{ rowSelection, setRowSelection, selectedRowIds, deselectRows }}
       >
-        <View viewKey={key} title={title.plural} {...{ localViews }} />
+        <View
+          viewKey={view?.viewKey ?? key}
+          title={view?.title ?? title.plural}
+          {...{ localViews }}
+        />
       </RowSelectionContext.Provider>
-    </SchemeContext.Provider>
+    </MetaModelContext.Provider>
   )
 }
 

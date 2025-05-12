@@ -8,7 +8,6 @@ import {
   useMemo,
   useState,
 } from 'react'
-import { useScheme } from '@/pages/Admin/hooks'
 import { Icon } from '@/components'
 import {
   ColumnOrderState,
@@ -21,8 +20,9 @@ import { classList } from '@/helpers'
 import { steppedSizes } from '../../helpers'
 import { OptionSelectors } from '@/pages/Admin/components'
 import { extractKeys } from '@/pages/Admin/helpers'
-import { getFlatProps } from '@/pages/Admin/services/config'
-import { AccesorKeys, QuickFilters } from '../../Table'
+import { AccessorKeys, QuickFilters } from '../../Table'
+import { PropScheme } from '@/pages/Admin/services/config'
+import { Method } from '@/services/config'
 
 const SORT_ICON_MATCHER: Record<SortDirection, string> = {
   asc: 'fa-solid fa-arrow-up-wide-short',
@@ -30,26 +30,26 @@ const SORT_ICON_MATCHER: Record<SortDirection, string> = {
 }
 
 interface Props {
-  flatProps: ReturnType<typeof useScheme>['flatProps']
+  getAllPropsRecord: Record<string, PropScheme<GeneralEntity>>
   header: TsHeader<GeneralEntity, unknown>
   sorting: SortingState
   setSorting: Dispatch<SetStateAction<SortingState>>
   columnOrder: ColumnOrderState
   setColumnOrder: Dispatch<SetStateAction<ColumnOrderState>>
-  setAccesorKeys: Dispatch<SetStateAction<AccesorKeys>>
-  quickFilterKeys: string[] | undefined
+  setAccessorKeys: Dispatch<SetStateAction<AccessorKeys>>
+  quickFilterFields: string[] | undefined
   setQuickFilters: Dispatch<SetStateAction<QuickFilters>>
 }
 
 const Header = ({
-  flatProps,
+  getAllPropsRecord,
   header,
   sorting,
   setSorting,
   columnOrder,
   setColumnOrder,
-  setAccesorKeys,
-  quickFilterKeys,
+  setAccessorKeys,
+  quickFilterFields,
   setQuickFilters,
 }: Props) => {
   const { column, getContext, getResizeHandler, getSize } = header
@@ -63,18 +63,18 @@ const Header = ({
     getFacetedRowModel,
   } = column
 
-  const { getHeader } = flatProps[column.id] ?? {}
+  const { getHeader } = getAllPropsRecord[column.id] ?? {}
 
-  const { title, scheme, getFilter } = useMemo(() => getHeader(column), [])
+  const { title, metaModel, getFilter } = useMemo(() => getHeader(column), [])
 
   const [dragging, setDragging] = useState(false)
 
   const [selectedSearchMode, setSelectedSearchMode] = useState(
-    scheme?.anchorField,
+    metaModel?.anchorField,
   )
 
   useEffect(() => {
-    setAccesorKeys(prev => ({ ...prev, [column.id]: selectedSearchMode! }))
+    setAccessorKeys(prev => ({ ...prev, [column.id]: selectedSearchMode! }))
   }, [selectedSearchMode])
 
   const options = useMemo(() => {
@@ -107,7 +107,7 @@ const Header = ({
   const filter = useMemo(() => {
     const filter = getFilter({ getFilterValue, options })
 
-    if (quickFilterKeys?.includes(column.id)) {
+    if (quickFilterFields?.includes(column.id)) {
       const newQuickFilter = { [column.id]: { title, filter } }
 
       setQuickFilters(prev => ({ ...prev, ...newQuickFilter }))
@@ -116,11 +116,14 @@ const Header = ({
     return filter
   }, [options, filterValue])
 
+  const getAllPropsRecordForSearchModes = useMemo(
+    () => metaModel?.getPropGroupsRecord(Method.GetAll)?.[0].props,
+    [],
+  )
+
   // TODO: actualizar si se actualiza la data
   const searchModes = useMemo(() => {
-    if (!scheme) return
-
-    const flatProps = getFlatProps(scheme)
+    if (!getAllPropsRecordForSearchModes) return
 
     const { rows } = getFacetedRowModel()
 
@@ -134,18 +137,16 @@ const Header = ({
 
     return keys?.map(key => ({
       value: key,
-      title: flatProps[key].title,
+      title: getAllPropsRecordForSearchModes[key].title,
     }))
   }, [])
 
-  const sortValue = getIsSorted() || null
+  const sortValue = getIsSorted()
 
-  const sortIcon = useMemo(() => {
-    if (sortValue === null) return null //chequeamos que no sea null
-    return SORT_ICON_MATCHER[sortValue]
-  }, [sortValue])
-
-  //
+  const sortIcon = useMemo(
+    () => (sortValue === false ? undefined : SORT_ICON_MATCHER[sortValue]),
+    [sortValue],
+  )
 
   const handleSortingClick = useCallback(() => {
     const isAlreadySorted = sorting.find(sort => sort.id === column.id)

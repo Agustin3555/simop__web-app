@@ -3,6 +3,8 @@ import { NumberProp, RefProp, MetaModel, TextProp } from '../services/config'
 import { RepresentanteService } from '../services'
 import { COMMON_PROPS } from '../constants/commonProps.const'
 import { BaseEntity, BaseRef } from '@/models/config'
+import { Method } from '@/services/config'
+import { omitBaseEntity } from '../constants/selectors.const'
 
 export interface OwnFields {
   cuil: number
@@ -27,7 +29,7 @@ export type UpdateEntity = Partial<CreateEntity>
 
 export type Ref = BaseRef<OwnFields, 'cuil' | 'nombre' | 'apellido'>
 
-export const scheme = new MetaModel<Entity>({
+export const metaModel = new MetaModel<Entity>({
   key: 'representante',
   service: RepresentanteService,
   refreshRate: 'low',
@@ -53,14 +55,25 @@ export const scheme = new MetaModel<Entity>({
     direccion: new TextProp('Dirección'),
     numeroMatricula: new TextProp('Número de Matricula'),
     pais: new RefProp({
-      getScheme: () => PaisModel.scheme,
+      getMetaModel: () => PaisModel.metaModel,
     }),
     provincia: new RefProp({
-      getScheme: () => ProvinciaModel.scheme,
+      getMetaModel: () => ProvinciaModel.metaModel,
     }),
     localidad: new RefProp({
-      getScheme: () => LocalidadModel.scheme,
+      getMetaModel: () => LocalidadModel.metaModel,
     }),
     ...COMMON_PROPS,
   },
 })
+
+metaModel.fieldsByService = [
+  {
+    methods: [Method.GetAll, Method.GetOne],
+    fields: metaModel.allFields,
+  },
+  {
+    methods: [Method.Create, Method.UpdateOne],
+    groups: [{ key: '', fields: omitBaseEntity(metaModel.allFields) }],
+  },
+]

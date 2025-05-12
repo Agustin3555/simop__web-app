@@ -1,5 +1,5 @@
 import { GeneralEntity } from '@/models/config'
-import { ForView, GetScheme, MinSize, PropScheme, Required } from './utils'
+import { ForView, GetMetaModel, MinSize, PropScheme, Required } from './utils'
 import { AutoCombobox, FetchRef } from '../../components'
 import { Column } from '@tanstack/react-table'
 import { isFieldEnabled } from '.'
@@ -13,7 +13,7 @@ export class RefListProp implements PropScheme {
   key = ''
 
   constructor(
-    public config: GetScheme & {
+    public config: GetMetaModel & {
       // column?: ForView,
       field?: ForView & Required
     },
@@ -22,14 +22,14 @@ export class RefListProp implements PropScheme {
   ) {}
 
   public get title() {
-    const scheme = this.config.getScheme()
+    const scheme = this.config.getMetaModel()
 
     return scheme.title.plural
   }
 
   getFieldComponent = (value?: GeneralEntity[], editMode = false) => {
     const { key, config } = this
-    const { getScheme, field } = config
+    const { getMetaModel: getScheme, field } = config
     const { hidden, required } = field ?? {}
 
     if (hidden === true) return
@@ -43,7 +43,7 @@ export class RefListProp implements PropScheme {
         title={title.singular}
         multiple
         initOptions={value}
-        {...{ required, editMode, scheme }}
+        {...{ required, editMode, metaModel: scheme }}
       />
     )
   }
@@ -67,7 +67,7 @@ export class RefListProp implements PropScheme {
 
   getHeader = (column: Column<GeneralEntity>) => {
     const { title, config } = this
-    const { getScheme } = config
+    const { getMetaModel: getScheme } = config
 
     const scheme = getScheme()
     const { anchorField } = scheme
@@ -79,7 +79,7 @@ export class RefListProp implements PropScheme {
 
   getValueComponent = (item: GeneralEntity) => {
     const { key, config } = this
-    const { getScheme } = config ?? {}
+    const { getMetaModel: getScheme } = config ?? {}
 
     const { service, anchorField, key: keyScheme } = getScheme()
     const { getOne } = service
@@ -101,7 +101,7 @@ export class RefListProp implements PropScheme {
 
   getExcelValue = (item: GeneralEntity) => {
     const { key, config } = this
-    const { getScheme } = config
+    const { getMetaModel: getScheme } = config
 
     const { anchorField } = getScheme()
 

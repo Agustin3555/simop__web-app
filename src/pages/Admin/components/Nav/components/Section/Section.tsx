@@ -1,5 +1,5 @@
 import './Section.css'
-import { useCallback, useMemo, useState } from 'react'
+import { useCallback, useState } from 'react'
 import { useViewActive, useViewNavigation } from '@/pages/Admin/hooks'
 import { SectionNode } from '@/pages/Admin/constants/navTree.const'
 import { classList } from '@/helpers'
@@ -9,24 +9,26 @@ interface Props extends SectionNode {
   closeNav: () => void
 }
 
-const Section = ({ title, sections, scheme, closeNav }: Props) => {
-  const hasView = useMemo(() => scheme !== undefined, [])
+const Section = ({ viewKey, title, sections, closeNav }: Props) => {
   const [isOpen, setOpen] = useState(false)
   const viewNavigate = useViewNavigation()
-  const isActive = useViewActive(scheme?.key ?? '')
+  const isActive = useViewActive(viewKey)
 
   const handleClick = useCallback(() => {
-    if (hasView) {
-      viewNavigate(scheme!.key)
+    if (viewKey) {
+      viewNavigate(viewKey)
       closeNav()
-    } else setOpen(prev => !prev)
+      return
+    }
+
+    setOpen(prev => !prev)
   }, [])
 
   return (
     <div className={classList('cmp-section', { open: isOpen })}>
       <button className={classList({ active: isActive })} onClick={handleClick}>
         {sections && <Icon faIcon="fa-solid fa-angle-right" />}
-        {hasView ? scheme!.title.plural : title}
+        {title}
       </button>
       {sections && (
         <div className="items">
@@ -34,9 +36,8 @@ const Section = ({ title, sections, scheme, closeNav }: Props) => {
           <div className="sections">
             {sections.map(section => (
               <Section
-                key={section.title || section.scheme?.title.plural}
-                {...section}
-                {...{ closeNav }}
+                key={section.viewKey ?? section.title}
+                {...{ closeNav, ...section }}
               />
             ))}
           </div>

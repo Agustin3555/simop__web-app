@@ -4,7 +4,7 @@ import { useAddFieldReset } from '../../hooks'
 import { useQuery } from '@tanstack/react-query'
 import { Control } from '@/types'
 import { GeneralEntity } from '@/models/config'
-import { getFlatProps, MetaModel } from '../../services/config'
+import { MetaModel } from '../../services/config'
 import { REFETCH_INTERVALS } from '../../constants/refetchIntervals.const'
 import { Button } from '@/components'
 import { OptionSelectors } from '..'
@@ -14,7 +14,7 @@ import { baseSorter, extractKeys } from '../../helpers'
 export interface AutoComboboxProps
   extends Control,
     Pick<BaseComboboxProps, 'multiple'> {
-  scheme: MetaModel
+  metaModel: MetaModel
   initSelected?: string[]
   initOptions?: GeneralEntity[]
 }
@@ -23,12 +23,12 @@ const AutoCombobox = ({
   keyName,
   required,
   editMode,
-  scheme,
+  metaModel,
   initSelected,
   initOptions: initialData,
   ...rest
 }: AutoComboboxProps) => {
-  const { key, service, refreshRate, anchorField } = scheme
+  const { key, service, refreshRate, anchorField, props } = metaModel
 
   const calculateInitSelected = useMemo(
     () =>
@@ -71,13 +71,11 @@ const AutoCombobox = ({
     [options],
   )
 
-  const flatProps = useMemo(() => getFlatProps(scheme), [])
-
   const searchModes = useMemo(
     () =>
       searchModeKeys?.map(mode => ({
         value: mode,
-        title: flatProps[mode].title,
+        title: props[mode].title,
       })),
     [searchModeKeys],
   )
@@ -92,7 +90,7 @@ const AutoCombobox = ({
         searchModeKeys
           ?.filter(mode => mode !== selectedSearchMode)
           .forEach(mode =>
-            fields.push({ title: flatProps[mode].title, value: option[mode] }),
+            fields.push({ title: props[mode].title, value: option[mode] }),
           )
 
         return { id: String(option.id), fields }

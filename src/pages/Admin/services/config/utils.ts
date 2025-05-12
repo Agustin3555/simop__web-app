@@ -1,5 +1,4 @@
 import { ReactNode } from 'react'
-import { MetaModel } from './scheme'
 import {
   AccessorFn,
   BuiltInFilterFn,
@@ -9,6 +8,7 @@ import {
 } from '@tanstack/react-table'
 import { GeneralEntity } from '@/models/config'
 import { ComboboxProps } from '../../components/Combobox/Combobox'
+import { MetaModel } from '.'
 
 export type Color = 'blue' | 'green' | 'yellow' | 'red' | 'grey'
 
@@ -33,8 +33,8 @@ export interface Required {
   El scheme se debe obtener desde un método para evitar el problema de referencias
   circulares.
 */
-export interface GetScheme {
-  getScheme: () => MetaModel
+export interface GetMetaModel {
+  getMetaModel: () => MetaModel
 }
 
 export type GetFilter = (
@@ -61,7 +61,7 @@ export interface PropScheme<E = GeneralEntity> {
   footer?: (info: HeaderContext<E, unknown>) => ReactNode
   getHeader: (column: Column<E>) => {
     title: string
-    scheme?: MetaModel
+    metaModel?: MetaModel
     getFilter: GetFilter
   }
   getValueComponent: (item: E, selectedSearchMode?: string) => ReactNode

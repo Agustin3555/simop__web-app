@@ -1,6 +1,8 @@
 import { SchemeView } from '../../components'
 import { ModificacionModel } from '../../models'
 
-const Modificacion = () => <SchemeView scheme={ModificacionModel.scheme} />
+const Modificacion = () => (
+  <SchemeView metaModel={ModificacionModel.metaModel} />
+)
 
 export default Modificacion

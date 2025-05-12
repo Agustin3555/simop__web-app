@@ -1,6 +1,6 @@
 import { SchemeView } from '../../components'
 import { EmpresaModel } from '../../models'
 
-const Empresa = () => <SchemeView scheme={EmpresaModel.scheme} />
+const Empresa = () => <SchemeView metaModel={EmpresaModel.metaModel} />
 
 export default Empresa

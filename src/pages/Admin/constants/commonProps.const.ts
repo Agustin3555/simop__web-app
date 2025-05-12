@@ -7,7 +7,7 @@ import {
 
 type ScalarProps<T> = Record<keyof T, PropScheme>
 
-interface CommonFields {
+export interface CommonFields {
   id: unknown
   creado: unknown
   modificado: unknown

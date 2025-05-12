@@ -2,7 +2,7 @@ import { SchemeView } from '../../components'
 import { TipoRedeterminacionModel } from '../../models'
 
 const TipoRedeterminacion = () => (
-  <SchemeView scheme={TipoRedeterminacionModel.scheme} />
+  <SchemeView metaModel={TipoRedeterminacionModel.metaModel} />
 )
 
 export default TipoRedeterminacion

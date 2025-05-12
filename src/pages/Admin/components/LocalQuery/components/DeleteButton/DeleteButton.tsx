@@ -3,15 +3,14 @@ import { useMutationActionState } from '@/hooks'
 import {
   UseEntitiesData,
   useRowSelection,
-  useScheme,
+  useMetaModel,
 } from '@/pages/Admin/hooks'
 import { useAppStore } from '@/store/config'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { SecureHoldButton } from '../../..'
 
 const DeleteButton = () => {
-  const { scheme } = useScheme()
-  const { key, service } = scheme
+  const { key, service } = useMetaModel()
 
   const toasting = useAppStore(store => store.toasting)
   const { selectedRowIds, deselectRows } = useRowSelection()

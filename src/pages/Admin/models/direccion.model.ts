@@ -3,6 +3,8 @@ import { RefProp, MetaModel, TextProp } from '../services/config'
 import { DireccionService } from '../services'
 import { COMMON_PROPS } from '../constants/commonProps.const'
 import { BaseEntity, BaseRef } from '@/models/config'
+import { Method } from '@/services/config'
+import { omitBaseEntity } from '../constants/selectors.const'
 
 export interface OwnFields {
   nombre: string
@@ -20,7 +22,7 @@ export type UpdateEntity = Partial<CreateEntity>
 
 export type Ref = BaseRef<OwnFields, 'nombre'>
 
-export const scheme = new MetaModel<Entity>({
+export const metaModel = new MetaModel<Entity>({
   key: 'direccion',
   service: DireccionService,
   title: {
@@ -36,7 +38,7 @@ export const scheme = new MetaModel<Entity>({
       },
     }),
     subSecretaria: new RefProp({
-      getScheme: () => SubSecretariaModel.scheme,
+      getMetaModel: () => SubSecretariaModel.metaModel,
       field: {
         required: true,
       },
@@ -44,3 +46,14 @@ export const scheme = new MetaModel<Entity>({
     ...COMMON_PROPS,
   },
 })
+
+metaModel.fieldsByService = [
+  {
+    methods: [Method.GetAll, Method.GetOne],
+    fields: metaModel.allFields,
+  },
+  {
+    methods: [Method.Create, Method.UpdateOne],
+    groups: [{ key: '', fields: omitBaseEntity(metaModel.allFields) }],
+  },
+]

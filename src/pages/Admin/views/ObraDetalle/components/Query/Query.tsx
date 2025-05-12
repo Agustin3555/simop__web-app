@@ -1,25 +1,12 @@
 import './Query.css'
-import {
-  FormEventHandler,
-  ReactNode,
-  useCallback,
-  useMemo,
-  useState,
-} from 'react'
+import { FormEventHandler, useCallback, useMemo, useState } from 'react'
 import { useQueryActionState } from '@/hooks'
 import { useQuery } from '@tanstack/react-query'
 import { Button } from '@/components'
 import { AutoCombobox } from '@/pages/Admin/components'
-import { ObraModel, ObraTotalesModel } from '@/pages/Admin/models'
+import { ObraModel } from '@/pages/Admin/models'
 import { ObraService } from '@/pages/Admin/services'
-import { getFlatProps, MetaModel } from '@/pages/Admin/services/config'
-
-const { groups, ...rest } = ObraModel.scheme
-
-const schemeAux: MetaModel = {
-  ...rest,
-  groups: [...groups, ...ObraTotalesModel.scheme.groups],
-}
+import { Service } from '@/services/config'
 
 const KEY_NAME = 'obra'
 
@@ -27,9 +14,15 @@ const Query = () => {
   const [enabled, setEnabled] = useState(false)
   const [id, setId] = useState<number>()
 
+  const queryFn = useCallback(() => {
+    if (id === undefined) return
+
+    return (ObraService.getOneDetalle as Service['getOne'])(id)
+  }, [id])
+
   const { data, status, isFetching, refetch } = useQuery({
-    queryKey: ['obras', id, 'detail'],
-    queryFn: () => ObraService.getOneDetail(id),
+    queryKey: ['obras', id, 'detalle'],
+    queryFn,
     retry: false,
     enabled,
   })
@@ -48,24 +41,18 @@ const Query = () => {
     [enabled],
   )
 
-  const fields = useMemo(() => {
+  const groups = useMemo(() => {
     if (!data) return
 
-    const flatProps = getFlatProps(schemeAux)
+    const detallePropGroups = ObraModel.metaModel.getPropGroups('detalle')
 
-    const acc: { title: string; value: ReactNode }[] = []
-
-    Object.keys(data).forEach(key => {
-      const prop = flatProps[key]
-
-      if (prop === undefined) return
-
-      const { title, getValueComponent } = prop
-
-      acc.push({ title, value: getValueComponent(data) })
-    })
-
-    return acc
+    return detallePropGroups?.map(({ props, ...rest }) => ({
+      components: props.map(({ title, getValueComponent }) => ({
+        title,
+        component: getValueComponent(data),
+      })),
+      ...rest,
+    }))
   }, [data])
 
   return (
@@ -75,7 +62,7 @@ const Query = () => {
           <AutoCombobox
             keyName={KEY_NAME}
             title="Obra"
-            scheme={ObraModel.scheme}
+            metaModel={ObraModel.metaModel}
             required
           />
           <Button
@@ -91,14 +78,21 @@ const Query = () => {
         {data && <></>}
       </header>
       {data && (
-        <ul>
-          {fields?.map(({ title, value }) => (
-            <li>
-              <strong>{title}</strong>
-              {value}
-            </li>
+        <div className="content">
+          {groups?.map(({ title, components }) => (
+            <div className="section">
+              {title && <small>{title}</small>}
+              <ul>
+                {components.map(({ title, component }) => (
+                  <li>
+                    <strong>{title}</strong>
+                    {component}
+                  </li>
+                ))}
+              </ul>
+            </div>
           ))}
-        </ul>
+        </div>
       )}
     </div>
   )

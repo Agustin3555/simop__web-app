@@ -16,7 +16,7 @@ const client = new QueryClient({
 
 const Admin = () => (
   <ViewActiveProvider
-    initView={lastVisitedView || SubSecretariaModel.scheme.key}
+    initView={lastVisitedView || SubSecretariaModel.metaModel.key}
   >
     <QueryClientProvider {...{ client }}>
       <Nav />

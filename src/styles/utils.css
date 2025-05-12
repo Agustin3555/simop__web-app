@@ -216,3 +216,22 @@
 
   line-height: normal;
 }
+
+.section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--pal-size-2xl);
+  padding: var(--pal-size-l);
+
+  border-radius: var(--pal-size-xs);
+  background-color: var(--pal-color-white);
+
+  > small {
+    display: flex;
+    align-items: center;
+    gap: var(--gap);
+
+    font-size: var(--pal-size-font-m);
+    color: var(--pal-color-a-l1);
+  }
+}

@@ -1,6 +1,8 @@
 import { SchemeView } from '../../components'
 import { DepartamentoModel } from '../../models'
 
-const Departamento = () => <SchemeView scheme={DepartamentoModel.scheme} />
+const Departamento = () => (
+  <SchemeView metaModel={DepartamentoModel.metaModel} />
+)
 
 export default Departamento

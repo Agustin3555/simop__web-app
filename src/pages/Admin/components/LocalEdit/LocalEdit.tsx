@@ -5,21 +5,22 @@ import { useMutationActionState } from '@/hooks'
 import {
   useEntities,
   useRowSelection,
-  useScheme,
+  useMetaModel,
   useLocalView,
 } from '../../hooks'
 import { Button } from '@/components'
 import { useMutation } from '@tanstack/react-query'
+import { Method } from '@/services/config'
 
 const LocalEdit = () => {
-  const { scheme } = useScheme()
-  const { service, title, anchorField, groups } = scheme
+  const metaModel = useMetaModel()
+  const { key, service, title, anchorField, getPropGroups } = metaModel
 
   const toasting = useAppStore(store => store.toasting)
   const { setLocalView } = useLocalView()
   const { selectedRowIds, deselectRows } = useRowSelection()
 
-  const { query } = useEntities(scheme)
+  const { query } = useEntities([key], service.getAll)
   const { data, refetch } = query
 
   const isEditing = useMemo(
@@ -32,14 +33,16 @@ const LocalEdit = () => {
     [data, selectedRowIds],
   )
 
-  const fieldGroups = useMemo(() => {
+  const editPropGroups = useMemo(() => getPropGroups(Method.UpdateOne), [])
+
+  const componentGroups = useMemo(() => {
     if (!isEditing) return
 
-    return groups.map(({ title, props }) => ({
-      title,
+    return editPropGroups?.map(({ props, ...rest }) => ({
       fields: Object.entries(props).map(([key, { getFieldComponent }]) =>
         getFieldComponent(selectedEntity![key], true),
       ),
+      ...rest,
     }))
   }, [isEditing, selectedEntity])
 
@@ -48,15 +51,15 @@ const LocalEdit = () => {
       const id = selectedRowIds[0]
       const formData = new FormData(form)
 
-      const updateData = groups.reduce((acc, { props }) => {
+      const updateData: Record<string, unknown> = {}
+
+      editPropGroups?.forEach(({ props }) =>
         Object.values(props).forEach(({ key, verboseKey, getFieldValue }) => {
           const value = getFieldValue(formData, form, true)
 
-          if (value !== undefined) acc[verboseKey || key] = value
-        })
-
-        return acc
-      }, {} as Record<string, unknown>)
+          if (value !== undefined) updateData[verboseKey || key] = value
+        }),
+      )
 
       await service.updateOne!(id, updateData)
       await refetch()
@@ -94,8 +97,8 @@ const LocalEdit = () => {
           </h2>
           <form onSubmit={handleSubmit}>
             <div className="field-groups">
-              {fieldGroups?.map(({ title, fields }, index) => (
-                <div key={index} className="group">
+              {componentGroups?.map(({ key, title, fields }) => (
+                <div key={key} className="group">
                   {title && <small>{title}</small>}
                   <div className="fields">{fields}</div>
                 </div>

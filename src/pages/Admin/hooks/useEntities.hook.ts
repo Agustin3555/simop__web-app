@@ -1,8 +1,8 @@
 import { useCallback, useState } from 'react'
 import { useQuery } from '@tanstack/react-query'
-import { MetaModel } from '../services/config'
+import { Service } from '@/services/config'
 
-export const useEntities = ({ key, service }: MetaModel) => {
+export const useEntities = (queryKey: string[], queryFn: Service['getAll']) => {
   const [enabled, setEnabled] = useState(false)
 
   const enableQuery = useCallback(() => {
@@ -10,8 +10,8 @@ export const useEntities = ({ key, service }: MetaModel) => {
   }, [enabled])
 
   const query = useQuery({
-    queryKey: [key],
-    queryFn: service.getAll,
+    queryKey,
+    queryFn,
     retry: false,
     enabled,
   })

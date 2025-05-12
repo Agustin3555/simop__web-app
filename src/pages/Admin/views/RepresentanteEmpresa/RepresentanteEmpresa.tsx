@@ -2,7 +2,7 @@ import { SchemeView } from '../../components'
 import { RepresentanteEmpresaModel } from '../../models'
 
 const RepresentanteEmpresa = () => (
-  <SchemeView scheme={RepresentanteEmpresaModel.scheme} />
+  <SchemeView metaModel={RepresentanteEmpresaModel.metaModel} />
 )
 
 export default RepresentanteEmpresa

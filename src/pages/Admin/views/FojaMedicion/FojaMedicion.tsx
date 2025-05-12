@@ -1,6 +1,8 @@
 import { SchemeView } from '../../components'
 import { FojaMedicionModel } from '../../models'
 
-const FojaMedicion = () => <SchemeView scheme={FojaMedicionModel.scheme} />
+const FojaMedicion = () => (
+  <SchemeView metaModel={FojaMedicionModel.metaModel} />
+)
 
 export default FojaMedicion

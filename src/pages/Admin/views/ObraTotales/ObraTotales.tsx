@@ -1,8 +1,26 @@
 import { SchemeView } from '../../components'
-import { ObraTotalesModel } from '../../models'
+import { ObraModel } from '../../models'
 
 const ObraTotales = () => (
-  <SchemeView scheme={ObraTotalesModel.scheme} add={false} edit={false} />
+  <SchemeView
+    view={{
+      viewKey: 'obraTotales',
+      title: 'Totales de Obra',
+    }}
+    metaModel={ObraModel.metaModel}
+    query={{
+      fetch: {
+        key: 'totales',
+        getAll: 'getAllTotales',
+      },
+      methods: {
+        forGetAll: 'totales',
+        forQuickFilters: 'totales-quickFilters',
+      },
+    }}
+    add={false}
+    edit={false}
+  />
 )
 
 export default ObraTotales

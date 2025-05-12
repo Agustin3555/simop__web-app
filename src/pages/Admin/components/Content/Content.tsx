@@ -36,7 +36,7 @@ import {
   PagoCertificacion,
   ObraGeneral,
   ObraTotales,
-  DetalleObra,
+  ObraDetalle,
 } from '../../views'
 
 const Content = () => (
@@ -77,7 +77,7 @@ const Content = () => (
     <Recepcion />
     <ObraGeneral />
     <ObraTotales />
-    <DetalleObra />
+    <ObraDetalle />
   </div>
 )
 

@@ -15,6 +15,8 @@ import {
 } from '../services/config'
 import { PagoCertificacionService } from '../services'
 import { BaseEntity, BaseRef } from '@/models/config'
+import { Method } from '@/services/config'
+import { omitBaseEntity } from '../constants/selectors.const'
 
 export interface OwnFields {
   numero: number
@@ -43,7 +45,7 @@ export type UpdateEntity = Partial<CreateEntity>
 
 export type Ref = BaseRef<OwnFields, 'numero'>
 
-export const scheme = new MetaModel<Entity>({
+export const metaModel = new MetaModel<Entity>({
   key: 'pagoCertificacion',
   service: PagoCertificacionService,
   refreshRate: 'medium',
@@ -73,18 +75,29 @@ export const scheme = new MetaModel<Entity>({
       pre: '$',
     }),
     fojaMedicion: new RefProp({
-      getScheme: () => FojaMedicionModel.scheme,
+      getMetaModel: () => FojaMedicionModel.metaModel,
     }),
     redeterminacion: new RefProp({
-      getScheme: () => RedeterminacionModel.scheme,
+      getMetaModel: () => RedeterminacionModel.metaModel,
     }),
     direccion: new RefProp({
-      getScheme: () => DireccionModel.scheme,
+      getMetaModel: () => DireccionModel.metaModel,
     }),
     departamento: new RefProp({
-      getScheme: () => DepartamentoModel.scheme,
+      getMetaModel: () => DepartamentoModel.metaModel,
     }),
     observaciones: new TextLongProp('Observaciones'),
     ...COMMON_PROPS,
   },
 })
+
+metaModel.fieldsByService = [
+  {
+    methods: [Method.GetAll, Method.GetOne],
+    fields: metaModel.allFields,
+  },
+  {
+    methods: [Method.Create, Method.UpdateOne],
+    groups: [{ key: '', fields: omitBaseEntity(metaModel.allFields) }],
+  },
+]

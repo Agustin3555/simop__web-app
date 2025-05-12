@@ -1,4 +1,3 @@
-import { MetaModel } from '../services/config'
 import {
   DepartamentoModel,
   DireccionModel,
@@ -34,13 +33,12 @@ import {
   ParalizacionModel,
   RescisionModel,
   RecepcionModel,
-  ObraTotalesModel,
 } from '../models'
 
 export interface SectionNode {
+  viewKey?: string
   title?: string
   sections?: SectionNode[]
-  scheme?: MetaModel
 }
 
 export const TREE: SectionNode[] = [
@@ -50,89 +48,186 @@ export const TREE: SectionNode[] = [
       {
         title: 'Organigrama',
         sections: [
-          { scheme: SubSecretariaModel.scheme },
-          { scheme: DireccionModel.scheme },
-          { scheme: DepartamentoModel.scheme },
+          {
+            viewKey: SubSecretariaModel.metaModel.key,
+            title: SubSecretariaModel.metaModel.title.plural,
+          },
+          {
+            viewKey: DireccionModel.metaModel.key,
+            title: DireccionModel.metaModel.title.plural,
+          },
+          {
+            viewKey: DepartamentoModel.metaModel.key,
+            title: DepartamentoModel.metaModel.title.plural,
+          },
         ],
       },
       {
         title: 'Ubicación Geográfica',
         sections: [
-          { scheme: PaisModel.scheme },
-          { scheme: ProvinciaModel.scheme },
-          { scheme: LocalidadModel.scheme },
+          {
+            viewKey: PaisModel.metaModel.key,
+            title: PaisModel.metaModel.title.plural,
+          },
+          {
+            viewKey: ProvinciaModel.metaModel.key,
+            title: ProvinciaModel.metaModel.title.plural,
+          },
+          {
+            viewKey: LocalidadModel.metaModel.key,
+            title: LocalidadModel.metaModel.title.plural,
+          },
         ],
       },
       {
         title: 'Tipos',
         sections: [
-          { scheme: TipoProfesionModel.scheme },
-          { scheme: TipoRepresentanteModel.scheme },
-          { scheme: TipoInspectorModel.scheme },
+          {
+            viewKey: TipoProfesionModel.metaModel.key,
+            title: TipoProfesionModel.metaModel.title.plural,
+          },
+          {
+            viewKey: TipoRepresentanteModel.metaModel.key,
+            title: TipoRepresentanteModel.metaModel.title.plural,
+          },
+          {
+            viewKey: TipoInspectorModel.metaModel.key,
+            title: TipoInspectorModel.metaModel.title.plural,
+          },
           {
             title: 'Obras',
             sections: [
-              { scheme: TipoContratacionObraModel.scheme },
-              { scheme: TipoFinanciamientoObraModel.scheme },
-              { scheme: TipoParalizacionModel.scheme },
-              { scheme: TipoProgramaObraModel.scheme },
-              { scheme: TipoTematicaObraModel.scheme },
-              { scheme: TipoEstadoObraModel.scheme },
-              { scheme: TipoRescisionModel.scheme },
-              { scheme: TipoRedeterminacionModel.scheme },
-              { scheme: TipoRecepcionModel.scheme },
-              { scheme: TipoModificacionModel.scheme },
+              {
+                viewKey: TipoContratacionObraModel.metaModel.key,
+                title: TipoContratacionObraModel.metaModel.title.plural,
+              },
+              {
+                viewKey: TipoFinanciamientoObraModel.metaModel.key,
+                title: TipoFinanciamientoObraModel.metaModel.title.plural,
+              },
+              {
+                viewKey: TipoParalizacionModel.metaModel.key,
+                title: TipoParalizacionModel.metaModel.title.plural,
+              },
+              {
+                viewKey: TipoProgramaObraModel.metaModel.key,
+                title: TipoProgramaObraModel.metaModel.title.plural,
+              },
+              {
+                viewKey: TipoTematicaObraModel.metaModel.key,
+                title: TipoTematicaObraModel.metaModel.title.plural,
+              },
+              {
+                viewKey: TipoEstadoObraModel.metaModel.key,
+                title: TipoEstadoObraModel.metaModel.title.plural,
+              },
+              {
+                viewKey: TipoRescisionModel.metaModel.key,
+                title: TipoRescisionModel.metaModel.title.plural,
+              },
+              {
+                viewKey: TipoRedeterminacionModel.metaModel.key,
+                title: TipoRedeterminacionModel.metaModel.title.plural,
+              },
+              {
+                viewKey: TipoRecepcionModel.metaModel.key,
+                title: TipoRecepcionModel.metaModel.title.plural,
+              },
+              {
+                viewKey: TipoModificacionModel.metaModel.key,
+                title: TipoModificacionModel.metaModel.title.plural,
+              },
             ],
           },
         ],
       },
-      { scheme: InspectorModel.scheme },
-      { scheme: RepresentanteModel.scheme },
+      {
+        viewKey: InspectorModel.metaModel.key,
+        title: InspectorModel.metaModel.title.plural,
+      },
+      {
+        viewKey: RepresentanteModel.metaModel.key,
+        title: RepresentanteModel.metaModel.title.plural,
+      },
     ],
   },
   {
     title: 'Empresas',
     sections: [
-      { scheme: EmpresaModel.scheme },
-      { scheme: RepresentanteEmpresaModel.scheme },
+      {
+        viewKey: EmpresaModel.metaModel.key,
+        title: EmpresaModel.metaModel.title.plural,
+      },
+      {
+        viewKey: RepresentanteEmpresaModel.metaModel.key,
+        title: RepresentanteEmpresaModel.metaModel.title.plural,
+      },
     ],
   },
   {
     title: 'Obras',
     sections: [
-      { scheme: ObraModel.scheme },
-      { scheme: RepresentanteObraModel.scheme },
-      { scheme: InspectorObraModel.scheme },
-      { scheme: FojaMedicionModel.scheme },
-      { scheme: PagoCertificacionModel.scheme },
-      { scheme: RedeterminacionModel.scheme },
-      { scheme: AmpliacionModel.scheme },
-      { scheme: ModificacionModel.scheme },
-      { scheme: ParalizacionModel.scheme },
-      { scheme: RescisionModel.scheme },
-      { scheme: RecepcionModel.scheme },
+      {
+        viewKey: ObraModel.metaModel.key,
+        title: 'Obra Básica',
+      },
+      {
+        viewKey: RepresentanteObraModel.metaModel.key,
+        title: RepresentanteObraModel.metaModel.title.plural,
+      },
+      {
+        viewKey: InspectorObraModel.metaModel.key,
+        title: InspectorObraModel.metaModel.title.plural,
+      },
+      {
+        viewKey: FojaMedicionModel.metaModel.key,
+        title: FojaMedicionModel.metaModel.title.plural,
+      },
+      {
+        viewKey: PagoCertificacionModel.metaModel.key,
+        title: PagoCertificacionModel.metaModel.title.plural,
+      },
+      {
+        viewKey: RedeterminacionModel.metaModel.key,
+        title: RedeterminacionModel.metaModel.title.plural,
+      },
+      {
+        viewKey: AmpliacionModel.metaModel.key,
+        title: AmpliacionModel.metaModel.title.plural,
+      },
+      {
+        viewKey: ModificacionModel.metaModel.key,
+        title: ModificacionModel.metaModel.title.plural,
+      },
+      {
+        viewKey: ParalizacionModel.metaModel.key,
+        title: ParalizacionModel.metaModel.title.plural,
+      },
+      {
+        viewKey: RescisionModel.metaModel.key,
+        title: RescisionModel.metaModel.title.plural,
+      },
+      {
+        viewKey: RecepcionModel.metaModel.key,
+        title: RecepcionModel.metaModel.title.plural,
+      },
     ],
   },
   {
     title: 'Tablero de Gestión',
     sections: [
       {
-        scheme: {
-          key: 'obraGeneral',
-          title: {
-            plural: 'Obra Básica General',
-          },
-        },
+        viewKey: 'obraGeneral',
+        title: 'Obra Básica General',
       },
-      { scheme: ObraTotalesModel.scheme },
+      {
+        viewKey: 'obraTotales',
+        title: 'Totales de Obra',
+      },
+      {
+        viewKey: 'obraDetalle',
+        title: 'Detalle de Obra Básica',
+      },
     ],
-  },
-  {
-    scheme: {
-      key: 'detalleObra',
-      title: {
-        plural: 'Detalle de Obra Básica',
-      },
-    },
   },
 ]
