@@ -6,6 +6,15 @@ import {
   TipoFinanciamientoObraModel,
   TipoProgramaObraModel,
   TipoEstadoObraModel,
+  AmpliacionModel,
+  RepresentanteModel,
+  InspectorModel,
+  FojaMedicionModel,
+  RedeterminacionModel,
+  ModificacionModel,
+  ParalizacionModel,
+  RescisionModel,
+  RecepcionModel,
 } from '.'
 import {
   BooleanProp,
@@ -15,6 +24,7 @@ import {
   MetaModel,
   TextLongProp,
   TextProp,
+  RefListProp,
 } from '../services/config'
 import { ObraService } from '../services'
 import { COMMON_PROPS } from '../constants/commonProps.const'
@@ -76,6 +86,16 @@ export interface RelationFields {
   tipoTematicaObra: TipoTematicaObraModel.Ref
   tipoEstadoObra: TipoEstadoObraModel.Ref
   localidad: LocalidadModel.Ref
+
+  representantes: RepresentanteModel.Ref[]
+  inspectores: InspectorModel.Ref[]
+  fojasMedicion: FojaMedicionModel.Ref[]
+  redeterminaciones: RedeterminacionModel.Ref[]
+  ampliaciones: AmpliacionModel.Ref[]
+  modificaciones: ModificacionModel.Ref[]
+  paralizaciones: ParalizacionModel.Ref[]
+  rescisiones: RescisionModel.Ref[]
+  recepciones: RecepcionModel.Ref[]
 }
 
 export interface Entity extends BaseEntity, OwnFields, RelationFields {}
@@ -306,6 +326,35 @@ export const metaModel = new MetaModel<Entity>({
       sum: true,
       pre: '$',
     }),
+
+    representantes: new RefListProp({
+      getMetaModel: () => RepresentanteModel.metaModel,
+    }),
+    inspectores: new RefListProp({
+      getMetaModel: () => InspectorModel.metaModel,
+    }),
+    fojasMedicion: new RefListProp({
+      getMetaModel: () => FojaMedicionModel.metaModel,
+    }),
+    redeterminaciones: new RefListProp({
+      getMetaModel: () => RedeterminacionModel.metaModel,
+    }),
+    ampliaciones: new RefListProp({
+      getMetaModel: () => AmpliacionModel.metaModel,
+    }),
+    modificaciones: new RefListProp({
+      getMetaModel: () => ModificacionModel.metaModel,
+    }),
+    paralizaciones: new RefListProp({
+      getMetaModel: () => ParalizacionModel.metaModel,
+    }),
+    rescisiones: new RefListProp({
+      getMetaModel: () => RescisionModel.metaModel,
+    }),
+    recepciones: new RefListProp({
+      getMetaModel: () => RecepcionModel.metaModel,
+    }),
+
     ...COMMON_PROPS,
   },
 })
@@ -445,6 +494,21 @@ metaModel.fieldsByService = [
         key: 'totales',
         title: 'Totales',
         fields: TOTALES,
+      },
+      {
+        key: 'derivados',
+        title: 'Derivados',
+        fields: select(metaModel.allFields, 'only', [
+          'representantes',
+          'inspectores',
+          'fojasMedicion',
+          'redeterminaciones',
+          'ampliaciones',
+          'modificaciones',
+          'paralizaciones',
+          'rescisiones',
+          'recepciones',
+        ]),
       },
     ],
   },

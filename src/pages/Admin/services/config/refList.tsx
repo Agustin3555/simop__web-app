@@ -22,20 +22,20 @@ export class RefListProp implements PropScheme {
   ) {}
 
   public get title() {
-    const scheme = this.config.getMetaModel()
+    const metaModel = this.config.getMetaModel()
 
-    return scheme.title.plural
+    return metaModel.title.plural
   }
 
   getFieldComponent = (value?: GeneralEntity[], editMode = false) => {
     const { key, config } = this
-    const { getMetaModel: getScheme, field } = config
+    const { getMetaModel, field } = config
     const { hidden, required } = field ?? {}
 
     if (hidden === true) return
 
-    const scheme = getScheme()
-    const { title } = scheme
+    const metaModel = getMetaModel()
+    const { title } = metaModel
 
     return (
       <AutoCombobox
@@ -43,7 +43,7 @@ export class RefListProp implements PropScheme {
         title={title.singular}
         multiple
         initOptions={value}
-        {...{ required, editMode, metaModel: scheme }}
+        {...{ required, editMode, metaModel }}
       />
     )
   }
@@ -67,10 +67,10 @@ export class RefListProp implements PropScheme {
 
   getHeader = (column: Column<GeneralEntity>) => {
     const { title, config } = this
-    const { getMetaModel: getScheme } = config
+    const { getMetaModel } = config
 
-    const scheme = getScheme()
-    const { anchorField } = scheme
+    const metaModel = getMetaModel()
+    const { anchorField } = metaModel
 
     const getFilter = () => undefined
 
@@ -79,9 +79,9 @@ export class RefListProp implements PropScheme {
 
   getValueComponent = (item: GeneralEntity) => {
     const { key, config } = this
-    const { getMetaModel: getScheme } = config ?? {}
+    const { getMetaModel } = config ?? {}
 
-    const { service, anchorField, key: keyScheme } = getScheme()
+    const { service, anchorField, key: keyScheme } = getMetaModel()
     const { getOne } = service
 
     const value = item[key] as undefined | GeneralEntity[]
@@ -101,9 +101,9 @@ export class RefListProp implements PropScheme {
 
   getExcelValue = (item: GeneralEntity) => {
     const { key, config } = this
-    const { getMetaModel: getScheme } = config
+    const { getMetaModel } = config
 
-    const { anchorField } = getScheme()
+    const { anchorField } = getMetaModel()
 
     const values = item[key] as undefined | GeneralEntity[]
 

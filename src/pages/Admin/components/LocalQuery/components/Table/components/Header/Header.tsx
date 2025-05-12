@@ -117,7 +117,7 @@ const Header = ({
   }, [options, filterValue])
 
   const getAllPropsRecordForSearchModes = useMemo(
-    () => metaModel?.getPropGroupsRecord(Method.GetAll)?.[0].props,
+    () => metaModel?.getPropFieldsRecord(Method.GetAll),
     [],
   )
 

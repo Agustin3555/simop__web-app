@@ -86,7 +86,7 @@ const Query = () => {
                 {components.map(({ title, component }) => (
                   <li>
                     <strong>{title}</strong>
-                    {component}
+                    <div className="value">{component}</div>
                   </li>
                 ))}
               </ul>

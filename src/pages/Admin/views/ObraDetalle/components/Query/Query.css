@@ -30,7 +30,6 @@
     display: grid;
     align-items: flex-start;
     grid-template-columns: repeat(auto-fill, minmax(min(100%, 30rem), 1fr));
-    grid-auto-flow: dense;
     gap: var(--gap);
 
     p {
@@ -53,6 +52,13 @@
         > strong {
           white-space: nowrap;
           color: var(--pal-color-a);
+        }
+
+        > .value {
+          display: flex;
+          flex-wrap: wrap;
+          justify-content: flex-end;
+          gap: var(--pal-size-xs);
         }
       }
     }
