@@ -235,3 +235,11 @@
     color: var(--pal-color-a-l1);
   }
 }
+
+.capture-container {
+  position: fixed;
+  left: -1000rem;
+
+  width: 0;
+  overflow: 'auto';
+}

@@ -11,10 +11,11 @@ import {
 } from '../../hooks'
 import { VisibilityState } from '@tanstack/react-table'
 import { Button } from '@/components'
-import { Combobox } from '..'
-import { DeleteButton, ReportButton, Table } from './components'
+import { Combobox, ReportButton } from '..'
+import { DeleteButton, ReportInTable, Table } from './components'
 import { QuickFilters, TableProps } from './components/Table/Table'
 import { Method } from '@/services/config'
+import { generateTableImages } from '../../helpers'
 
 export interface LocalQueryProps extends Pick<TableProps, 'methods'> {
   fetch?: {
@@ -27,7 +28,7 @@ const LocalQuery = ({ fetch, methods }: LocalQueryProps) => {
   const { forGetAll } = methods ?? {}
 
   const metaModel = useMetaModel()
-  const { key, service, getFields, getPropFields } = metaModel
+  const { key, title, service, getFields, getPropFields } = metaModel
 
   const [quickFilters, setQuickFilters] = useState<QuickFilters>({})
 
@@ -86,7 +87,6 @@ const LocalQuery = ({ fetch, methods }: LocalQueryProps) => {
   )
 
   const { selectedRowIds } = useRowSelection()
-  const componentRef = useRef<HTMLDivElement | null>(null)
 
   const { query, enableQuery } = useEntities(
     fetch?.key ? [key, fetch.key] : [key],
@@ -111,6 +111,22 @@ const LocalQuery = ({ fetch, methods }: LocalQueryProps) => {
       })) ?? [],
     [],
   )
+
+  const componentRef = useRef<HTMLDivElement | null>(null)
+
+  const handleReportGenerate = useCallback(async () => {
+    if (!componentRef.current) return
+
+    const localQueryElement = componentRef.current
+
+    const tableElement = localQueryElement.querySelector<HTMLElement>('.table')
+    if (!tableElement) return
+
+    const imageUrls = await generateTableImages(tableElement)
+    if (!imageUrls) return
+
+    return <ReportInTable schemeTitle={title.plural} {...{ imageUrls }} />
+  }, [])
 
   return (
     <div className="cmp-local-query" ref={componentRef}>
@@ -147,7 +163,7 @@ const LocalQuery = ({ fetch, methods }: LocalQueryProps) => {
         </div>
         <div className="actions">
           {selectedRowIds.length !== 0 && <DeleteButton />}
-          {data && <ReportButton {...{ localQueryRef: componentRef }} />}
+          {data && <ReportButton onGenerate={handleReportGenerate} />}
         </div>
       </header>
       {data && (

@@ -1,18 +1,21 @@
 import './Query.css'
-import { FormEventHandler, useCallback, useMemo, useState } from 'react'
+import { FormEventHandler, useCallback, useMemo, useRef, useState } from 'react'
 import { useQueryActionState } from '@/hooks'
 import { useQuery } from '@tanstack/react-query'
 import { Button } from '@/components'
-import { AutoCombobox } from '@/pages/Admin/components'
+import { AutoCombobox, Report, ReportButton } from '@/pages/Admin/components'
 import { ObraModel } from '@/pages/Admin/models'
 import { ObraService } from '@/pages/Admin/services'
 import { Service } from '@/services/config'
+import { Image } from '@react-pdf/renderer'
+import { captureElementImage } from '@/pages/Admin/helpers'
 
 const KEY_NAME = 'obra'
 
 const Query = () => {
   const [enabled, setEnabled] = useState(false)
   const [id, setId] = useState<number>()
+  const contentRef = useRef<HTMLDivElement | null>(null)
 
   const queryFn = useCallback(() => {
     if (id === undefined) return
@@ -55,6 +58,44 @@ const Query = () => {
     }))
   }, [data])
 
+  const handleReportGenerate = useCallback(async () => {
+    if (!contentRef.current) return
+
+    const contentElement = contentRef.current
+
+    const generators = Array.from(contentElement.children).map(
+      child => async () => {
+        const clonedContent = child.cloneNode(true) as HTMLElement
+        clonedContent.classList.add('for-capture')
+
+        const container = document.createElement('div')
+        container.classList.add('capture-container')
+
+        container.appendChild(clonedContent)
+
+        document.body.appendChild(container)
+
+        const imageUrl = await captureElementImage(clonedContent)
+
+        document.body.removeChild(container)
+
+        return imageUrl
+      },
+    )
+
+    const imageUrls = await Promise.all(
+      generators.map(generator => generator()),
+    )
+
+    return (
+      <Report title="Detalle de Obra Básica">
+        {imageUrls.map((src, i) => (
+          <Image style={{ alignSelf: 'center' }} {...{ src }} break={i !== 0} />
+        ))}
+      </Report>
+    )
+  }, [])
+
   return (
     <div className="cmp-query">
       <header>
@@ -74,11 +115,10 @@ const Query = () => {
             {...{ actionState }}
           />
         </form>
-        {/* ReportButton */}
-        {data && <></>}
+        {data && <ReportButton onGenerate={handleReportGenerate} />}
       </header>
       {data && (
-        <div className="content">
+        <div className="content" ref={contentRef}>
           {groups?.map(({ title, components }) => (
             <div className="section">
               {title && <small>{title}</small>}

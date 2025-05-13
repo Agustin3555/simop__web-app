@@ -5,6 +5,7 @@
 
   > header {
     display: flex;
+    align-items: flex-end;
     gap: var(--gap);
 
     > form {
@@ -24,6 +25,12 @@
         background-color: var(--pal-color-a);
       }
     }
+
+    > .cmp-button {
+      border-color: var(--pal-color-b);
+
+      color: var(--pal-color-b-d1);
+    }
   }
 
   > .content {
@@ -35,32 +42,39 @@
     p {
       text-align: right;
     }
+  }
+}
 
-    > .section > ul {
-      flex-direction: column;
-      gap: var(--pal-size-l);
+.section {
+  > ul {
+    flex-direction: column;
+    gap: var(--pal-size-l);
 
-      border-radius: var(--pal-size-xs);
-      background-color: var(--pal-color-white);
+    border-radius: var(--pal-size-xs);
+    background-color: var(--pal-color-white);
 
-      > li {
+    > li {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: var(--pal-size-3xl);
+
+      > strong {
+        white-space: nowrap;
+        color: var(--pal-color-a);
+      }
+
+      > .value {
         display: flex;
-        align-items: baseline;
-        justify-content: space-between;
-        gap: var(--pal-size-3xl);
-
-        > strong {
-          white-space: nowrap;
-          color: var(--pal-color-a);
-        }
-
-        > .value {
-          display: flex;
-          flex-wrap: wrap;
-          justify-content: flex-end;
-          gap: var(--pal-size-xs);
-        }
+        flex-wrap: wrap;
+        justify-content: flex-end;
+        gap: var(--pal-size-xs);
       }
     }
+  }
+
+  &.for-capture {
+    padding: 0;
+    width: 40rem;
   }
 }

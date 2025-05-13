@@ -1,8 +1,7 @@
-import domtoimage from 'dom-to-image'
+import { captureElementImage } from '.'
 
 const CHUNK_ROWS = 10
 const CHUNK_COLS = 8
-const SCALE = 3
 
 export const generateTableImages = (tableElement: HTMLElement) => {
   const headElement = tableElement.querySelector<HTMLElement>('.head')
@@ -67,24 +66,13 @@ export const generateTableImages = (tableElement: HTMLElement) => {
       }
 
       const container = document.createElement('div')
-      Object.assign(container.style, {
-        position: 'fixed',
-        width: 0,
-        overflow: 'auto',
-      })
+      container.classList.add('capture-container')
 
       container.appendChild(auxTable)
 
       document.body.appendChild(container)
 
-      const imageUrl = await domtoimage.toPng(auxTable, {
-        height: auxTable.offsetHeight * SCALE,
-        width: auxTable.offsetWidth * SCALE,
-        style: {
-          scale: SCALE,
-          transformOrigin: 'top left',
-        },
-      })
+      const imageUrl = await captureElementImage(auxTable)
 
       document.body.removeChild(container)
 

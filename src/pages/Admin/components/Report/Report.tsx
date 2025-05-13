@@ -1,5 +1,6 @@
 import { styles } from './Report.style'
 import { Font, Image, Page, Text, View, Document } from '@react-pdf/renderer'
+import { Orientation } from '@react-pdf/types'
 import { format } from '@formkit/tempo'
 import { ReactNode } from 'react'
 
@@ -18,12 +19,13 @@ Font.register({ family: 'Manrope Variable', fonts })
 
 interface ReportProps {
   title: string
+  orientation?: Orientation
   children: ReactNode
 }
 
-const Report = ({ title, children }: ReportProps) => (
+const Report = ({ title, orientation = 'portrait', children }: ReportProps) => (
   <Document>
-    <Page style={styles.page} size="A4" orientation="landscape">
+    <Page style={styles.page} size="A4" {...{ orientation }}>
       <View style={styles.header} fixed>
         <Text style={styles.h1}>{title}</Text>
         <View style={styles.by}>
