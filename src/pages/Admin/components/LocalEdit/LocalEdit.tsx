@@ -39,7 +39,7 @@ const LocalEdit = () => {
     if (!isEditing) return
 
     return editPropGroups?.map(({ props, ...rest }) => ({
-      fields: Object.entries(props).map(([key, { getFieldComponent }]) =>
+      fields: props.map(({ key, getFieldComponent }) =>
         getFieldComponent(selectedEntity![key], true),
       ),
       ...rest,
