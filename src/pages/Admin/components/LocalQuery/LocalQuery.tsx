@@ -1,20 +1,11 @@
 import './LocalQuery.css'
 import { useCallback, useMemo, useRef, useState } from 'react'
 import { useQueryActionState } from '@/hooks'
-import {
-  StateToDerived,
-  DerivedToState,
-  useDerivedState,
-  useEntities,
-  useRowSelection,
-  useMetaModel,
-} from '../../hooks'
-import { VisibilityState } from '@tanstack/react-table'
+import { useEntities, useRowSelection, useMetaModel } from '../../hooks'
 import { Button } from '@/components'
-import { Combobox, ReportButton } from '..'
+import { ReportButton } from '..'
 import { DeleteButton, ReportInTable, Table } from './components'
 import { QuickFilters, TableProps } from './components/Table/Table'
-import { Method } from '@/services/config'
 import { generateTableImages } from '../../helpers'
 
 export interface LocalQueryProps extends Pick<TableProps, 'methods'> {
@@ -25,65 +16,13 @@ export interface LocalQueryProps extends Pick<TableProps, 'methods'> {
 }
 
 const LocalQuery = ({ fetch, methods }: LocalQueryProps) => {
-  const { forGetAll } = methods ?? {}
-
-  const metaModel = useMetaModel()
-  const { key, title, service, getFields, getPropFields } = metaModel
+  const { key, title, service } = useMetaModel()
 
   const [quickFilters, setQuickFilters] = useState<QuickFilters>({})
 
   const hasQuickFilters = useMemo(
     () => Object.keys(quickFilters).length !== 0,
     [quickFilters],
-  )
-
-  const getAllFields = useMemo(() => getFields(forGetAll ?? Method.GetAll), [])
-
-  const allColumnsVisible = useMemo(
-    () => Object.fromEntries(getAllFields?.map(key => [key, true]) ?? []),
-    [],
-  )
-
-  const [columnVisibility, setColumnVisibility] = useState<VisibilityState>(
-    () => {
-      const metaModelColumnVisibility = getFields('columnVisibility')
-
-      return metaModelColumnVisibility
-        ? {
-            ...Object.fromEntries(getAllFields?.map(key => [key, false]) ?? []),
-            ...Object.fromEntries(
-              metaModelColumnVisibility.map(key => [key, true]),
-            ),
-          }
-        : allColumnsVisible
-    },
-  )
-
-  const fromVisibilityToKeys = useCallback<
-    StateToDerived<VisibilityState, string[]>
-  >(
-    visibility =>
-      Object.entries(visibility)
-        .filter(([, value]) => value)
-        .map(([key]) => key),
-    [],
-  )
-
-  const fromKeysToVisibility = useCallback<
-    DerivedToState<VisibilityState, string[]>
-  >((keys, prev) => {
-    const newVisibility: VisibilityState = {}
-
-    for (const key of Object.keys(prev)) newVisibility[key] = keys.includes(key)
-
-    return newVisibility
-  }, [])
-
-  const [visibleKeys, setVisibleKeys] = useDerivedState(
-    columnVisibility,
-    setColumnVisibility,
-    fromVisibilityToKeys,
-    fromKeysToVisibility,
   )
 
   const { selectedRowIds } = useRowSelection()
@@ -102,15 +41,6 @@ const LocalQuery = ({ fetch, methods }: LocalQueryProps) => {
 
     if (data || status === 'error') await refetch()
   }, [data, status])
-
-  const columnOptions = useMemo(
-    () =>
-      getPropFields(forGetAll ?? Method.GetAll)?.map(({ key, title }) => ({
-        id: key,
-        title,
-      })) ?? [],
-    [],
-  )
 
   const componentRef = useRef<HTMLDivElement | null>(null)
 
@@ -131,16 +61,6 @@ const LocalQuery = ({ fetch, methods }: LocalQueryProps) => {
   return (
     <div className="cmp-local-query" ref={componentRef}>
       <header>
-        <Combobox
-          keyName={`visibility-${key}`}
-          title="Columnas activas"
-          hideLabel
-          multiple
-          reduceHeader
-          selected={visibleKeys}
-          setSelected={setVisibleKeys}
-          options={columnOptions}
-        />
         {hasQuickFilters && (
           <div className="filter-container">
             {Object.values(quickFilters).map(({ title, filter }) => (
@@ -166,17 +86,7 @@ const LocalQuery = ({ fetch, methods }: LocalQueryProps) => {
           {data && <ReportButton onGenerate={handleReportGenerate} />}
         </div>
       </header>
-      {data && (
-        <Table
-          {...{
-            data,
-            columnVisibility,
-            setColumnVisibility,
-            setQuickFilters,
-            methods,
-          }}
-        />
-      )}
+      {data && <Table {...{ data, setQuickFilters, methods }} />}
     </div>
   )
 }
