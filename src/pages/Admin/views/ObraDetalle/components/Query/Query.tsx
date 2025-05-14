@@ -63,25 +63,25 @@ const Query = () => {
 
     const contentElement = contentRef.current
 
-    const generators = Array.from(contentElement.children).map(
-      child => async () => {
-        const clonedContent = child.cloneNode(true) as HTMLElement
-        clonedContent.classList.add('for-capture')
+    const { children } = contentElement
 
-        const container = document.createElement('div')
-        container.classList.add('capture-container')
+    const generators = Array.from(children).map(child => async () => {
+      const clonedContent = child.cloneNode(true) as HTMLElement
+      clonedContent.classList.add('for-capture')
 
-        container.appendChild(clonedContent)
+      const container = document.createElement('div')
+      container.classList.add('capture-container')
 
-        document.body.appendChild(container)
+      container.appendChild(clonedContent)
 
-        const imageUrl = await captureElementImage(clonedContent)
+      document.body.appendChild(container)
 
-        document.body.removeChild(container)
+      const imageUrl = await captureElementImage(clonedContent)
 
-        return imageUrl
-      },
-    )
+      document.body.removeChild(container)
+
+      return imageUrl
+    })
 
     const imageUrls = await Promise.all(
       generators.map(generator => generator()),
@@ -90,7 +90,12 @@ const Query = () => {
     return (
       <Report title="Detalle de Obra Básica">
         {imageUrls.map((src, i) => (
-          <Image style={{ alignSelf: 'center' }} {...{ src }} break={i !== 0} />
+          <Image
+            key={i}
+            style={{ alignSelf: 'center' }}
+            {...{ src }}
+            break={i !== 0}
+          />
         ))}
       </Report>
     )

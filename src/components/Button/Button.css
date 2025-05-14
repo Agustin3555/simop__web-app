@@ -27,11 +27,14 @@
     position: absolute;
   }
 
-  > .body {
+  > .loading,
+  .body {
     display: flex;
     align-items: center;
     gap: var(--cls-gap);
+  }
 
+  > .body {
     text-align: start;
   }
 

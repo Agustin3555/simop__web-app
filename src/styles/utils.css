@@ -238,8 +238,7 @@
 
 .capture-container {
   position: fixed;
-  left: -1000rem;
 
   width: 0;
-  overflow: 'auto';
+  overflow: auto;
 }

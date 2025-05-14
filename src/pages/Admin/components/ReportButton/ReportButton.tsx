@@ -2,15 +2,16 @@ import { useHandleAction } from '@/hooks'
 import { Button } from '@/components'
 import { DocumentProps, pdf } from '@react-pdf/renderer'
 import { ReactElement } from 'react'
+import { ButtonProps } from '@/components/Button/Button'
 
-interface ReportButtonProps {
+interface ReportButtonProps extends Pick<ButtonProps, 'progress'> {
   onGenerate: () => Promise<ReactElement<DocumentProps> | undefined>
 }
 
-const ReportButton = ({ onGenerate: onClick }: ReportButtonProps) => {
+const ReportButton = ({ progress, onGenerate }: ReportButtonProps) => {
   const actionResult = useHandleAction(async ({ setError, setSuccess }) => {
     try {
-      const component = await onClick()
+      const component = await onGenerate()
       if (!component) return
 
       const blob = await pdf(component).toBlob()
@@ -29,7 +30,7 @@ const ReportButton = ({ onGenerate: onClick }: ReportButtonProps) => {
       text="Informe"
       faIcon="fa-solid fa-file-pdf"
       type="secondary"
-      {...actionResult}
+      {...{ progress, ...actionResult }}
     />
   )
 }

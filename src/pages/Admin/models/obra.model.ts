@@ -389,22 +389,40 @@ const BASICO: (keyof Entity)[] = select(metaModel.allFields, 'only', [
 const TOTALES: (keyof Entity)[] = select(metaModel.allFields, 'only', [
   'balanceEconomico',
   'nuevoMonto',
+
   'totalCertificadoFojaMedicion',
-  'totalOrdenPagoFojaMedicion',
   'totalPagadoFojaMedicion',
+  'totalOrdenPagoFojaMedicion',
   'totalPendientePagoFojaMedicion',
+
   'totalCertificadoRedeterminacion',
-  'totalOrdenPagoRedeterminacion',
   'totalPagadoRedeterminacion',
+  'totalOrdenPagoRedeterminacion',
   'totalPendientePagoRedeterminacion',
+
   'porcentajePendienteCertificar',
   'montoPendienteCertificar',
+])
+
+const DERIVADOS: (keyof Entity)[] = select(metaModel.allFields, 'only', [
+  'representantes',
+  'inspectores',
+  'fojasMedicion',
+  'redeterminaciones',
+  'ampliaciones',
+  'modificaciones',
+  'paralizaciones',
+  'rescisiones',
+  'recepciones',
 ])
 
 metaModel.fieldsByService = [
   {
     methods: [Method.GetAll, Method.GetOne],
-    fields: select(metaModel.allFields, 'except', TOTALES),
+    fields: select(metaModel.allFields, 'except', [
+      ...TOTALES,
+      ...DERIVADOS,
+    ] as (keyof Entity)[]),
   },
   {
     methods: [Method.Create, Method.UpdateOne],

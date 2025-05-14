@@ -1,6 +1,6 @@
 import domtoimage from 'dom-to-image'
 
-const SCALE = 3
+const SCALE = 2
 
 export const captureElementImage = async (element: HTMLElement) =>
   await domtoimage.toPng(element, {

@@ -4,9 +4,9 @@ const CHUNK_ROWS = 10
 const CHUNK_COLS = 8
 
 export const generateTableImages = (tableElement: HTMLElement) => {
-  const headElement = tableElement.querySelector<HTMLElement>('.head')
-  const bodyElement = tableElement.querySelector<HTMLElement>('.body')
-  const footElement = tableElement.querySelector<HTMLElement>('.foot')
+  const headElement = tableElement.querySelector<HTMLElement>('& > .head')
+  const bodyElement = tableElement.querySelector<HTMLElement>('& > .body')
+  const footElement = tableElement.querySelector<HTMLElement>('& > .foot')
 
   if (!(headElement && bodyElement && footElement)) return
 
@@ -38,9 +38,19 @@ export const generateTableImages = (tableElement: HTMLElement) => {
         const newRow = document.createElement(sourceRow.tagName)
         newRow.className = sourceRow.className
 
-        Array.from(sourceRow.children)
-          .slice(start, end)
-          .forEach(cell => newRow.appendChild(cell.cloneNode(true)))
+        const children = Array.from(sourceRow.children)
+
+        // Siempre incluye la primera y segunda columnas si existen
+        if (children[0]) newRow.appendChild(children[0].cloneNode(true))
+        if (children[1]) newRow.appendChild(children[1].cloneNode(true))
+
+        // Luego incluye el resto del grupo, evitando duplicar 0 y 1
+        children.slice(start, end).forEach((cell, i) => {
+          const cellIndex = start + i
+
+          if (cellIndex !== 0 && cellIndex !== 1)
+            newRow.appendChild(cell.cloneNode(true))
+        })
 
         return newRow
       }
@@ -74,7 +84,7 @@ export const generateTableImages = (tableElement: HTMLElement) => {
 
       const imageUrl = await captureElementImage(auxTable)
 
-      document.body.removeChild(container)
+      // document.body.removeChild(container)
 
       return imageUrl
     }),

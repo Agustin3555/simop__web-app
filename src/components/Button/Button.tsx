@@ -4,7 +4,7 @@ import { Icon, Loader } from '..'
 import { classList } from '@/helpers'
 import { ButtonHTMLAttributes, forwardRef, MouseEventHandler } from 'react'
 
-interface ButtonProps {
+export interface ButtonProps {
   name?: string
   title?: string
   text?: string
@@ -15,6 +15,7 @@ interface ButtonProps {
   wrap?: boolean
   submit?: boolean
   actionState?: ActionState
+  progress?: number
   onAction?: MouseEventHandler<HTMLButtonElement>
   buttonHTMLAttrs?: ButtonHTMLAttributes<HTMLButtonElement>
 }
@@ -32,6 +33,7 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       wrap = false,
       submit = false,
       actionState = 'ready',
+      progress,
       onAction,
       buttonHTMLAttrs,
     },
@@ -49,9 +51,12 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       onClick={onAction}
       {...{ ref, name, ...buttonHTMLAttrs }}
     >
-      <Loader
-        handlingClass={classList({ active: actionState === 'loading' })}
-      />
+      <div
+        className={classList('loading', { active: actionState === 'loading' })}
+      >
+        {progress && <p>{progress.toFixed(0)} %</p>}
+        <Loader />
+      </div>
       <Icon
         faIcon="fa-solid fa-xmark"
         handlingClass={classList({ active: actionState === 'error' })}
