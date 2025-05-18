@@ -516,17 +516,7 @@ metaModel.fieldsByService = [
       {
         key: 'derivados',
         title: 'Derivados',
-        fields: select(metaModel.allFields, 'only', [
-          'representantes',
-          'inspectores',
-          'fojasMedicion',
-          'redeterminaciones',
-          'ampliaciones',
-          'modificaciones',
-          'paralizaciones',
-          'rescisiones',
-          'recepciones',
-        ]),
+        fields: DERIVADOS,
       },
     ],
   },

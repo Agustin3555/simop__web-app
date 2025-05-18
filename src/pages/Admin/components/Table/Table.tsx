@@ -29,7 +29,7 @@ import {
 } from '@tanstack/react-table'
 import { Button, Toggle } from '@/components'
 import { Cell, Footer, Header, RowSelectorCell } from './components'
-import { Combobox, Value } from '../../..'
+import { Combobox, Value } from '..'
 import { GeneralEntity } from '@/models/config'
 import { MinSize } from '@/pages/Admin/services/config'
 import { classList } from '@/helpers'
@@ -41,7 +41,7 @@ export type QuickFilters = Record<string, { title: string; filter: ReactNode }>
 
 export interface TableProps {
   data: GeneralEntity[]
-  setQuickFilters: Dispatch<SetStateAction<QuickFilters>>
+  setQuickFilters?: Dispatch<SetStateAction<QuickFilters>>
   methods?: {
     forGetAll?: string
     forQuickFilters?: string
@@ -66,7 +66,9 @@ const Table = ({ data, setQuickFilters, methods }: TableProps) => {
   const [enableStickFoot, setEnableStickFoot] = useState(false)
   const [sorting, setSorting] = useState<SortingState>([])
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([])
-  const { rowSelection, setRowSelection, selectedRowIds } = useRowSelection()
+
+  const { rowSelection, setRowSelection, selectedRowIds } =
+    useRowSelection() ?? {}
 
   const getAllFields = useMemo(
     () => getFields(forGetAll ?? Method.GetAll) ?? [],
@@ -204,9 +206,9 @@ const Table = ({ data, setQuickFilters, methods }: TableProps) => {
     if (!data) return
 
     const selectedData =
-      selectedRowIds.length === 0
+      selectedRowIds?.length === 0
         ? data
-        : data.filter(({ id }) => selectedRowIds.includes(id))
+        : data.filter(({ id }) => selectedRowIds?.includes(id))
 
     const convertedData = selectedData.map(row =>
       Object.fromEntries(
@@ -249,7 +251,7 @@ const Table = ({ data, setQuickFilters, methods }: TableProps) => {
         <div className="main-bar">
           <div className="left">
             <Toggle
-              title="Filtros"
+              title="Filtrar"
               faIcon="fa-solid fa-filter"
               value={enableFilters}
               setValue={setEnableFilters}
@@ -261,7 +263,7 @@ const Table = ({ data, setQuickFilters, methods }: TableProps) => {
               setValue={setEnableSimplifyMatches}
             />
             <Toggle
-              title="Control de columnas"
+              title="Controlar columnas"
               faIcon="fa-solid fa-table-columns"
               value={enableColumnControl}
               setValue={setEnableColumnControl}
@@ -290,7 +292,7 @@ const Table = ({ data, setQuickFilters, methods }: TableProps) => {
             <Button
               text="Excel"
               title={`Descargar Excel (${
-                selectedRowIds.length ? 'seleccionados' : 'todo'
+                selectedRowIds?.length ? 'seleccionados' : 'todo'
               })`}
               faIcon="fa-solid fa-file-arrow-down"
               size="s"
@@ -324,14 +326,16 @@ const Table = ({ data, setQuickFilters, methods }: TableProps) => {
             <div className="row" key={headerGroup.id}>
               {headerGroup.headers.map(header =>
                 header.id === SELECT_COLUMN ? (
-                  <RowSelectorCell
-                    key={header.id}
-                    checked={table.getIsAllRowsSelected()}
-                    indeterminate={table.getIsSomeRowsSelected()}
-                    onChange={table.getToggleAllRowsSelectedHandler()}
-                    asHeader
-                    selectionCounter={selectedRowIds.length}
-                  />
+                  selectedRowIds && (
+                    <RowSelectorCell
+                      key={header.id}
+                      checked={table.getIsAllRowsSelected()}
+                      indeterminate={table.getIsSomeRowsSelected()}
+                      onChange={table.getToggleAllRowsSelectedHandler()}
+                      asHeader
+                      selectionCounter={selectedRowIds.length}
+                    />
+                  )
                 ) : (
                   <Header
                     key={header.id}
@@ -359,13 +363,15 @@ const Table = ({ data, setQuickFilters, methods }: TableProps) => {
                 .getVisibleCells()
                 .map(cell =>
                   cell.column.columnDef.id === SELECT_COLUMN ? (
-                    <RowSelectorCell
-                      key={cell.id}
-                      checked={row.getIsSelected()}
-                      disabled={!row.getCanSelect()}
-                      indeterminate={row.getIsSomeSelected()}
-                      onChange={row.getToggleSelectedHandler()}
-                    />
+                    selectedRowIds && (
+                      <RowSelectorCell
+                        key={cell.id}
+                        checked={row.getIsSelected()}
+                        disabled={!row.getCanSelect()}
+                        indeterminate={row.getIsSomeSelected()}
+                        onChange={row.getToggleSelectedHandler()}
+                      />
+                    )
                   ) : (
                     <Cell
                       key={cell.id}
@@ -381,14 +387,16 @@ const Table = ({ data, setQuickFilters, methods }: TableProps) => {
             <div className="row" key={footerGroup.id}>
               {footerGroup.headers.map(header =>
                 header.id === SELECT_COLUMN ? (
-                  <RowSelectorCell
-                    key={header.id}
-                    checked={table.getIsAllRowsSelected()}
-                    indeterminate={table.getIsSomeRowsSelected()}
-                    onChange={table.getToggleAllRowsSelectedHandler()}
-                    asHeader
-                    selectionCounter={selectedRowIds.length}
-                  />
+                  selectedRowIds && (
+                    <RowSelectorCell
+                      key={header.id}
+                      checked={table.getIsAllRowsSelected()}
+                      indeterminate={table.getIsSomeRowsSelected()}
+                      onChange={table.getToggleAllRowsSelectedHandler()}
+                      asHeader
+                      selectionCounter={selectedRowIds.length}
+                    />
+                  )
                 ) : (
                   <Footer
                     key={header.id}

@@ -90,13 +90,19 @@
       }
     }
 
+    &:not(.enable-column-control) {
+      position: initial;
+
+      .grip-area,
+      .resizer,
+      .ruler {
+        display: none;
+      }
+    }
+
     &.enable-stick {
       position: sticky;
       top: 0;
-    }
-
-    &:not(.enable-column-control) .grip-area {
-      display: none;
     }
   }
 

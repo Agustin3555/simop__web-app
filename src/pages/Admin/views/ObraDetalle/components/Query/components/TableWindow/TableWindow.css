@@ -1,0 +1,11 @@
+.cmp-table-window {
+  display: flex;
+  flex-direction: column;
+  gap: var(--pal-size-l);
+  padding: var(--pal-size-s);
+
+  > h1 {
+    font-size: var(--pal-size-font-m);
+    color: var(--pal-color-a-l1);
+  }
+}

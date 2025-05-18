@@ -18,7 +18,7 @@ const LocalEdit = () => {
 
   const toasting = useAppStore(store => store.toasting)
   const { setLocalView } = useLocalView()
-  const { selectedRowIds, deselectRows } = useRowSelection()
+  const { selectedRowIds, deselectRows } = useRowSelection()!
 
   const { query } = useEntities([key], service.getAll)
   const { data, refetch } = query

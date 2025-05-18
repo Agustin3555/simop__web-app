@@ -59,9 +59,22 @@
       justify-content: space-between;
       gap: var(--pal-size-3xl);
 
-      > strong {
-        white-space: nowrap;
+      > .group {
+        display: flex;
+        align-items: center;
+        gap: var(--pal-size-m);
+
         color: var(--pal-color-a);
+
+        > .cmp-button {
+          border-color: var(--pal-color-a-l2);
+
+          color: var(--pal-color-a-l1);
+        }
+
+        > strong {
+          white-space: nowrap;
+        }
       }
 
       > .value {

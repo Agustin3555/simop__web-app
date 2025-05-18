@@ -13,7 +13,7 @@ const DeleteButton = () => {
   const { key, service } = useMetaModel()
 
   const toasting = useAppStore(store => store.toasting)
-  const { selectedRowIds, deselectRows } = useRowSelection()
+  const { selectedRowIds, deselectRows } = useRowSelection()!
   const queryClient = useQueryClient()
 
   const mutationFn = useCallback(

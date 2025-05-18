@@ -8,7 +8,10 @@ import { ObraModel } from '@/pages/Admin/models'
 import { ObraService } from '@/pages/Admin/services'
 import { Service } from '@/services/config'
 import { Image } from '@react-pdf/renderer'
-import { captureElementImage } from '@/pages/Admin/helpers'
+import { captureElementImage, newWindow } from '@/pages/Admin/helpers'
+import { MetaModel } from '@/pages/Admin/services/config'
+import { TableWindow } from './components'
+import { TableWindowProps } from './components/TableWindow/TableWindow'
 
 const KEY_NAME = 'obra'
 
@@ -50,10 +53,13 @@ const Query = () => {
     const detallePropGroups = ObraModel.metaModel.getPropGroups('detalle')
 
     return detallePropGroups?.map(({ props, ...rest }) => ({
-      components: props.map(({ title, getValueComponent }) => ({
-        title,
-        component: getValueComponent(data),
-      })),
+      components: props.map(({ key, title, getValueComponent, config }) => {
+        let metaModel: MetaModel | undefined
+
+        if (config?.getMetaModel) metaModel = config.getMetaModel() as MetaModel
+
+        return { key, title, component: getValueComponent(data), metaModel }
+      }),
       ...rest,
     }))
   }, [data])
@@ -101,6 +107,16 @@ const Query = () => {
     )
   }, [])
 
+  const handleOpen = useCallback(
+    ({ metaModel, data }: TableWindowProps) =>
+      () =>
+        newWindow({
+          title: metaModel.title.plural,
+          content: <TableWindow {...{ metaModel, data }} />,
+        }),
+    [data],
+  )
+
   return (
     <div className="cmp-query">
       <header>
@@ -124,13 +140,28 @@ const Query = () => {
       </header>
       {data && (
         <div className="content" ref={contentRef}>
-          {groups?.map(({ title, components }) => (
-            <div className="section">
+          {groups?.map(({ key: groupKey, title, components }, i) => (
+            <div key={groupKey ?? i} className="section">
               {title && <small>{title}</small>}
               <ul>
-                {components.map(({ title, component }) => (
-                  <li>
-                    <strong>{title}</strong>
+                {components.map(({ key, title, component, metaModel }) => (
+                  <li key={key}>
+                    <div className="group">
+                      {groupKey === 'derivados' &&
+                        (data[key] as [])?.length !== 0 && (
+                          <Button
+                            title="Ver tabla"
+                            faIcon="fa-solid fa-table-list"
+                            type="secondary"
+                            size="m"
+                            onAction={handleOpen({
+                              metaModel: metaModel!,
+                              data: data[key],
+                            })}
+                          />
+                        )}
+                      <strong>{title}:</strong>
+                    </div>
                     <div className="value">{component}</div>
                   </li>
                 ))}

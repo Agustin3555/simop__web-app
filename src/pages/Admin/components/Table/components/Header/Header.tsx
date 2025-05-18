@@ -37,8 +37,8 @@ interface Props {
   columnOrder: ColumnOrderState
   setColumnOrder: Dispatch<SetStateAction<ColumnOrderState>>
   setAccessorKeys: Dispatch<SetStateAction<AccessorKeys>>
-  quickFilterFields: string[] | undefined
-  setQuickFilters: Dispatch<SetStateAction<QuickFilters>>
+  quickFilterFields?: string[]
+  setQuickFilters?: Dispatch<SetStateAction<QuickFilters>>
 }
 
 const Header = ({
@@ -110,7 +110,8 @@ const Header = ({
     if (quickFilterFields?.includes(column.id)) {
       const newQuickFilter = { [column.id]: { title, filter } }
 
-      setQuickFilters(prev => ({ ...prev, ...newQuickFilter }))
+      setQuickFilters &&
+        setQuickFilters(prev => ({ ...prev, ...newQuickFilter }))
     }
 
     return filter

@@ -3,9 +3,9 @@ import { useCallback, useMemo, useRef, useState } from 'react'
 import { useQueryActionState } from '@/hooks'
 import { useEntities, useRowSelection, useMetaModel } from '../../hooks'
 import { Button } from '@/components'
-import { ReportButton } from '..'
-import { DeleteButton, ReportInTable, Table } from './components'
-import { QuickFilters, TableProps } from './components/Table/Table'
+import { ReportButton, Table } from '..'
+import { QuickFilters, TableProps } from '../Table/Table'
+import { DeleteButton, ReportInTable } from './components'
 import { generateTableImages } from '../../helpers'
 
 export interface LocalQueryProps extends Pick<TableProps, 'methods'> {
@@ -25,7 +25,7 @@ const LocalQuery = ({ fetch, methods }: LocalQueryProps) => {
     [quickFilters],
   )
 
-  const { selectedRowIds } = useRowSelection()
+  const { selectedRowIds } = useRowSelection()!
 
   const { query, enableQuery } = useEntities(
     fetch?.key ? [key, fetch.key] : [key],
