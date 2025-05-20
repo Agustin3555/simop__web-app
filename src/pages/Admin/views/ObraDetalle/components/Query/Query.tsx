@@ -1,7 +1,11 @@
 import './Query.css'
 import { FormEventHandler, useCallback, useMemo, useRef, useState } from 'react'
 import { useQueryActionState } from '@/hooks'
-import { useQuery } from '@tanstack/react-query'
+import {
+  QueryClient,
+  QueryClientProvider,
+  useQuery,
+} from '@tanstack/react-query'
 import { Button } from '@/components'
 import { AutoCombobox, Report, ReportButton } from '@/pages/Admin/components'
 import { ObraModel } from '@/pages/Admin/models'
@@ -12,6 +16,7 @@ import { captureElementImage, newWindow } from '@/pages/Admin/helpers'
 import { MetaModel } from '@/pages/Admin/services/config'
 import { TableWindow } from './components'
 import { TableWindowProps } from './components/TableWindow/TableWindow'
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 
 const KEY_NAME = 'obra'
 
@@ -109,11 +114,25 @@ const Query = () => {
 
   const handleOpen = useCallback(
     ({ metaModel, data }: TableWindowProps) =>
-      () =>
-        newWindow({
+      () => {
+        const client = new QueryClient({
+          defaultOptions: {
+            queries: {
+              refetchOnWindowFocus: false,
+            },
+          },
+        })
+
+        return newWindow({
           title: metaModel.title.plural,
-          content: <TableWindow {...{ metaModel, data }} />,
-        }),
+          content: (
+            <QueryClientProvider {...{ client }}>
+              <TableWindow {...{ metaModel, data }} />
+              <ReactQueryDevtools />
+            </QueryClientProvider>
+          ),
+        })
+      },
     [data],
   )
 
