@@ -181,7 +181,11 @@ const Query = () => {
                         )}
                       <strong>{title}:</strong>
                     </div>
-                    <div className="value">{component}</div>
+                    {groupKey === 'derivados' ? (
+                      <div className="value">{(component as []).length}</div>
+                    ) : (
+                      <div className="value">{component}</div>
+                    )}
                   </li>
                 ))}
               </ul>
