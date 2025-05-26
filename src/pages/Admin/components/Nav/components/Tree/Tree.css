@@ -1,0 +1,11 @@
+.cmp-tree {
+  --items-gap: var(--pal-size-2xs);
+
+  display: flex;
+  flex-direction: column;
+  gap: var(--items-gap);
+
+  :not(nav[data-view-mode='tree']) > & {
+    display: none !important;
+  }
+}

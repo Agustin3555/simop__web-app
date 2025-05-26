@@ -40,7 +40,7 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
     ref,
   ) => (
     <button
-      className={classList('cmp-button', size, type, {
+      className={classList('cmp-button', `ui-${size}`, type, {
         inverted,
         wrap,
         square: faIcon !== undefined && text === undefined,

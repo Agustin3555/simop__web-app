@@ -10,16 +10,14 @@
 
   scroll-behavior: smooth;
   scrollbar-width: thin;
-  scrollbar-color: var(--pal-color-a-l2) transparent;
+  scrollbar-color: var(--pal-color-a-l3) transparent;
 }
 
 :root {
   --line-thickness: 0.0625rem;
-  --document-background-color: color-mix(
-    in srgb,
-    var(--pal-color-a-l3),
-    var(--pal-color-white)
-  );
+  --pill-radius: 100rem;
+  --document-background-color: var(--pal-color-a-l4);
+  --transition-dummy: outline-width 0s;
 }
 
 html {
@@ -48,7 +46,7 @@ body {
 }
 
 small {
-  font-size: var(--pal-size-font-xs);
+  font-size: var(--pal-size-font-2xs);
 }
 
 strong {

@@ -62,6 +62,7 @@ export const metaModel = new MetaModel<Entity>({
     singular: 'Redeterminación',
     plural: 'Redeterminaciones',
   },
+  faIcon: 'fa-solid fa-',
 
   anchorField: 'numeroExpedienteSolicitud',
   props: {

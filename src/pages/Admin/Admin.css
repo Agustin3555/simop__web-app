@@ -1,0 +1,20 @@
+.cmp-admin {
+  --nav-width: 22rem;
+
+  height: 100dvh;
+  width: 100dvw;
+
+  > .main-panel {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+
+    transition: margin-left var(--pal-time-m) ease;
+
+    @media (50rem < width) {
+      [data-nav-open='true'] & {
+        margin-left: var(--nav-width);
+      }
+    }
+  }
+}

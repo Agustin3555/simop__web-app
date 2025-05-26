@@ -1,45 +1,42 @@
 import './Nav.css'
-import { useCallback, useState } from 'react'
-import { Button, ExternalLink } from '@/components'
-import { Section } from './components'
-import { TREE } from '../../constants/navTree.const'
-import { classList } from '@/helpers'
+import { useState } from 'react'
+import { useNavState } from '../../hooks'
+import { FavoriteViews, SegmentedControl } from '..'
+import { SegmentedControlProps } from '../SegmentedControl/SegmentedControl'
+import { Tree } from './components'
+
+type ViewMode = 'tree' | 'favorites'
+
+const VIEW_MODES_OPTIONS: SegmentedControlProps<ViewMode>['options'] = [
+  { value: 'tree', text: 'Secciones', faIcon: 'fa-solid fa-bars-staggered' },
+  { value: 'favorites', text: 'Favoritos', faIcon: 'fa-solid fa-star' },
+]
 
 const Nav = () => {
-  const [open, setOpen] = useState(false)
-
-  const closeNav = useCallback(() => setOpen(false), [])
-  const toggleHandleClick = useCallback(() => setOpen(prev => !prev), [])
-  const backdropHandleClick = useCallback(() => closeNav(), [])
+  const [viewMode, setViewMode] = useState<ViewMode>('favorites')
+  const { closeNav } = useNavState()
 
   return (
-    <div className={classList('cmp-nav', { open })}>
-      <button
-        className="backdrop"
-        title="Cerrar"
-        onClick={backdropHandleClick}
-      />
-      <Button
-        title={open ? 'Cerrar' : 'Abrir'}
-        faIcon="fa-solid fa-bars-staggered"
-        type="secondary"
-        onAction={toggleHandleClick}
-      />
-      <nav>
-        <div className="tree">
-          {TREE.map(section => (
-            <Section
-              key={section.viewKey ?? section.title}
-              {...{ closeNav, ...section }}
-            />
-          ))}
+    <div className="cmp-nav">
+      <button className="backdrop" title="Cerrar" onClick={closeNav} />
+      <div className="layout">
+        <header>
+          <img src="/isologotipo-gobierno-ministerio.webp" />
+          <small>v1.0.0</small>
+        </header>
+        <div className="content">
+          <SegmentedControl
+            name="viewMode"
+            selected={viewMode}
+            setSelected={setViewMode}
+            options={VIEW_MODES_OPTIONS}
+          />
+          <nav data-view-mode={viewMode}>
+            <Tree />
+            {/* <FavoriteViews /> */}
+          </nav>
         </div>
-        <ExternalLink
-          title="Manual"
-          faIcon="fa-solid fa-book"
-          url="https://almondine-week-483.notion.site/SIMOP-Manual-del-Usuario-1528314303d88055a9c1da4222bea187"
-        />
-      </nav>
+      </div>
     </div>
   )
 }

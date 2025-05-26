@@ -1,0 +1,15 @@
+.cmp-header {
+  display: flex;
+  justify-content: space-between;
+  padding: var(--pal-size-s);
+
+  color: var(--pal-color-white);
+
+  background-color: var(--pal-color-a-d1);
+
+  @media (50rem < width) {
+    [data-nav-open='true'] & {
+      border-bottom-left-radius: var(--pal-size-xs);
+    }
+  }
+}

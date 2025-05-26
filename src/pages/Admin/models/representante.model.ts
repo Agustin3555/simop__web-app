@@ -37,6 +37,7 @@ export const metaModel = new MetaModel<Entity>({
     singular: 'Representante',
     plural: 'Representantes',
   },
+  faIcon: 'fa-solid fa-user-tie',
 
   anchorField: 'apellido',
   props: {

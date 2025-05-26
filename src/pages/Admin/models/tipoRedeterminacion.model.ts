@@ -26,6 +26,7 @@ export const metaModel = new MetaModel<Entity>({
     singular: 'Tipo Redeterminación',
     plural: 'Tipos de Redeterminación',
   },
+  faIcon: 'fa-solid fa-shapes',
 
   anchorField: 'nombre',
   props: {

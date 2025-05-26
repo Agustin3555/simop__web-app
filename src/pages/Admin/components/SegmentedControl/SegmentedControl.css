@@ -1,0 +1,61 @@
+:root {
+  --cmp-segmented-control-color: var(--pal-color-a-l1);
+  --cmp-segmented-control-bg-color: var(--pal-color-a-l2);
+  --cmp-segmented-control-color-active: var(--pal-color-white);
+}
+
+.cmp-segmented-control {
+  --cmp-icon-size: var(--ui-icon-size);
+
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: 1fr;
+  border-width: var(--line-thickness);
+  border-style: solid;
+  border-color: var(--cmp-segmented-control-bg-color);
+
+  border-radius: var(--ui-border-radius);
+
+  > label {
+    --interact-color: var(--cmp-segmented-control-bg-color);
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--ui-gap);
+    padding-inline: var(--ui-padding-inline);
+    height: var(--ui-height);
+
+    font-size: var(--ui-font-size);
+    line-height: 0;
+    white-space: nowrap;
+    color: var(--cmp-segmented-control-color);
+
+    cursor: pointer;
+
+    transition: color var(--pal-time-xs) ease-out,
+      background-color var(--pal-time-xs) ease-out;
+
+    > input {
+      display: none;
+    }
+
+    &:has(input:checked) {
+      color: var(--cmp-segmented-control-color-active);
+
+      background-color: var(--cmp-segmented-control-bg-color);
+
+      &:hover {
+        --interact-color: #fff;
+      }
+    }
+
+    &:hover {
+      background-color: color-mix(
+        in srgb,
+        var(--cmp-segmented-control-bg-color) 10%,
+        transparent
+      );
+    }
+  }
+}

@@ -124,6 +124,7 @@ export const metaModel = new MetaModel<Entity>({
     singular: 'Obra',
     plural: 'Obras',
   },
+  faIcon: 'fa-solid fa-tree-city',
 
   anchorField: 'nombre',
   props: {

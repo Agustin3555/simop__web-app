@@ -1,4 +1,4 @@
-.cmp-header {
+.cmp-table-header {
   position: relative;
 
   flex-shrink: 0;
@@ -132,7 +132,7 @@
       width: var(--pal-size-2xs);
       height: var(--pal-size-2xl);
 
-      border-radius: var(--pal-size-3xl);
+      border-radius: var(--pill-radius);
       background-color: var(--pal-color-a-l2);
 
       content: '';

@@ -29,6 +29,7 @@ export const metaModel = new MetaModel<Entity>({
     singular: 'Dirección',
     plural: 'Direcciones',
   },
+  faIcon: 'fa-solid fa-network-wired',
 
   anchorField: 'nombre',
   props: {

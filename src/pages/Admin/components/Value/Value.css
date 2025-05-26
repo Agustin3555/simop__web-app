@@ -3,17 +3,17 @@
 
   display: flex;
   align-items: center;
-  padding-inline: calc(var(--cls-font-size) * 1.25);
-  gap: var(--cls-gap);
+  padding-inline: calc(var(--ui-font-size) * 1.25);
+  gap: var(--ui-gap);
 
-  font-size: var(--cls-font-size);
+  font-size: var(--ui-font-size);
   line-height: 1.4;
   white-space: nowrap;
 
   border-radius: var(--pal-size-2xs);
 
   &.pill {
-    border-radius: var(--pal-size-3xl);
+    border-radius: var(--pill-radius);
   }
 
   &.secondary {

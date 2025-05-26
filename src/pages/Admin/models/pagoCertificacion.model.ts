@@ -53,6 +53,7 @@ export const metaModel = new MetaModel<Entity>({
     singular: 'Pago de Certificación',
     plural: 'Pagos de Certificación',
   },
+  faIcon: 'fa-solid fa-',
 
   anchorField: 'numero',
   props: {

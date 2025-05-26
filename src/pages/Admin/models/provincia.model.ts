@@ -30,6 +30,7 @@ export const metaModel = new MetaModel<Entity>({
     singular: 'Provincia',
     plural: 'Provincias',
   },
+  faIcon: 'fa-solid fa-vector-square',
 
   anchorField: 'nombre',
   props: {

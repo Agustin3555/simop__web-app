@@ -1,4 +1,4 @@
-import './Content.css'
+import './ViewManager.css'
 import {
   SubSecretaria,
   Direccion,
@@ -39,8 +39,8 @@ import {
   ObraDetalle,
 } from '../../views'
 
-const Content = () => (
-  <div className="cmp-content">
+const ViewManager = () => (
+  <div className="cmp-view-manager">
     <SubSecretaria />
     <Direccion />
     <Departamento />
@@ -81,4 +81,4 @@ const Content = () => (
   </div>
 )
 
-export default Content
+export default ViewManager

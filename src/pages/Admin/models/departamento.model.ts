@@ -33,6 +33,7 @@ export const metaModel = new MetaModel<Entity>({
     singular: 'Departamento',
     plural: 'Departamentos',
   },
+  faIcon: 'fa-solid fa-network-wired',
 
   anchorField: 'nombre',
   props: {

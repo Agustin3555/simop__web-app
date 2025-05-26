@@ -1,8 +1,8 @@
 import './View.css'
 import { ReactNode, useState } from 'react'
-import { useInputHandler, useViewActive } from '../../hooks'
+import { useInputHandler, useViews } from '../../hooks'
 import { LocalViewContext } from '../../contexts'
-import { Icon, Separator } from '@/components'
+import { Icon } from '@/components'
 import { classList } from '@/helpers'
 
 export interface LocalView {
@@ -19,18 +19,19 @@ export interface ViewProps {
 }
 
 const View = ({ viewKey, title, localViews = [] }: ViewProps) => {
-  const isActive = useViewActive(viewKey)
-
+  const { isActive } = useViews()
   const [localView, setLocalView] = useState(localViews[0].localViewKey)
 
   const handleChange = useInputHandler(key => setLocalView(key))
 
   return (
-    <div className={classList('cmp-view', viewKey, { active: isActive })}>
+    <div
+      className={classList('cmp-view', viewKey, { active: isActive(viewKey) })}
+    >
       <header>
         <fieldset>
           {localViews.map(({ localViewKey, title, faIcon }) => (
-            <label key={localViewKey}>
+            <label key={localViewKey} className="ui-l">
               {faIcon && <Icon {...{ faIcon }} />}
               <div className="text">{title}</div>
               <input
@@ -45,7 +46,6 @@ const View = ({ viewKey, title, localViews = [] }: ViewProps) => {
         </fieldset>
         <h1>{title}</h1>
       </header>
-      <Separator />
       <div className="local-views">
         <LocalViewContext.Provider value={{ setLocalView }}>
           {localViews.map(({ localViewKey, component }) => (

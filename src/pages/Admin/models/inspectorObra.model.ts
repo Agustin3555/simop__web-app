@@ -43,6 +43,7 @@ export const metaModel = new MetaModel<Entity>({
     singular: 'Inspector de Obra',
     plural: 'Inspectores de Obra',
   },
+  faIcon: 'fa-solid fa-',
 
   anchorField: 'id',
   props: {

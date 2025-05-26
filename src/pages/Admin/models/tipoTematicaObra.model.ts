@@ -26,6 +26,7 @@ export const metaModel = new MetaModel<Entity>({
     singular: 'Tipo de Temática de Obra',
     plural: 'Tipos de Temáticas de Obra',
   },
+  faIcon: 'fa-solid fa-shapes',
 
   anchorField: 'nombre',
   props: {

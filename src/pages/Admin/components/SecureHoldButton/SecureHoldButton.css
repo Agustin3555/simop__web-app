@@ -17,7 +17,7 @@
 
     content: '';
 
-    border-radius: var(--pal-size-3xl);
+    border-radius: var(--pill-radius);
     background-color: var(--cmp-secure-hold-button-progress-color);
 
     transition: width var(--width-transition-time) ease-out,

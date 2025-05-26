@@ -24,7 +24,7 @@
     white-space: nowrap;
     color: var(--cmp-option-selectors-color);
 
-    border-radius: var(--pal-size-3xl);
+    border-radius: var(--pill-radius);
     cursor: pointer;
 
     transition: color var(--pal-time-xs) ease-out,

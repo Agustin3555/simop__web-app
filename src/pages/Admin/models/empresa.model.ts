@@ -37,6 +37,7 @@ export const metaModel = new MetaModel<Entity>({
     singular: 'Empresa',
     plural: 'Empresas',
   },
+  faIcon: 'fa-solid fa-industry',
 
   anchorField: 'nombre',
   props: {

@@ -4,7 +4,7 @@ import { Admin, Login, NotFound } from './pages'
 import { Snackbar } from './components'
 
 const App = () => (
-  <main>
+  <main className="cmp-app">
     <Switch>
       <Route path="/" component={Login} />
       <Route path="/admin" component={Admin} />

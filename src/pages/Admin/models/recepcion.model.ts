@@ -50,6 +50,7 @@ export const metaModel = new MetaModel<Entity>({
     singular: 'Recepcion',
     plural: 'Recepciones',
   },
+  faIcon: 'fa-solid fa-',
 
   anchorField: 'numeroActa',
   props: {

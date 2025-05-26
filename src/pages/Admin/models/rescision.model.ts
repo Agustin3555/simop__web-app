@@ -51,6 +51,7 @@ export const metaModel = new MetaModel<Entity>({
     singular: 'Rescision',
     plural: 'Rescisiones',
   },
+  faIcon: 'fa-solid fa-',
 
   anchorField: 'numeroExpediente',
   props: {

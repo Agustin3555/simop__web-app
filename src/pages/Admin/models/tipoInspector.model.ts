@@ -26,6 +26,7 @@ export const metaModel = new MetaModel<Entity>({
     singular: 'Tipo de Inspector',
     plural: 'Tipos de Inspectores',
   },
+  faIcon: 'fa-solid fa-shapes',
 
   anchorField: 'nombre',
   props: {

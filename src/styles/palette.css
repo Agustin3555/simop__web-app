@@ -28,13 +28,15 @@
 
   /* COLOR */
 
-  --pal-color-base-a-d3: 12, 13, 28;
-  --pal-color-base-a-d2: 35, 39, 82;
-  --pal-color-base-a-d1: 57, 64, 135;
+  --pal-color-base-a-d4: 8, 9, 19;
+  --pal-color-base-a-d3: 26, 29, 61;
+  --pal-color-base-a-d2: 44, 49, 103;
+  --pal-color-base-a-d1: 62, 69, 146;
   --pal-color-base-a: 80, 89, 188;
-  --pal-color-base-a-l1: 130, 136, 207;
-  --pal-color-base-a-l2: 179, 183, 226;
-  --pal-color-base-a-l3: 229, 230, 245;
+  --pal-color-base-a-l1: 119, 126, 203;
+  --pal-color-base-a-l2: 159, 164, 218;
+  --pal-color-base-a-l3: 198, 201, 233;
+  --pal-color-base-a-l4: 238, 238, 248;
 
   --pal-color-base-b-d3: 20, 22, 11;
   --pal-color-base-b-d2: 58, 65, 30;
@@ -68,6 +70,7 @@
   --pal-color-base-gs-50: 242, 242, 242;
   --pal-color-base-white: 255, 255, 255;
 
+  --pal-color-a-d4: rgb(var(--pal-color-base-a-d4));
   --pal-color-a-d3: rgb(var(--pal-color-base-a-d3));
   --pal-color-a-d2: rgb(var(--pal-color-base-a-d2));
   --pal-color-a-d1: rgb(var(--pal-color-base-a-d1));
@@ -75,6 +78,7 @@
   --pal-color-a-l1: rgb(var(--pal-color-base-a-l1));
   --pal-color-a-l2: rgb(var(--pal-color-base-a-l2));
   --pal-color-a-l3: rgb(var(--pal-color-base-a-l3));
+  --pal-color-a-l4: rgb(var(--pal-color-base-a-l4));
 
   --pal-color-b-d3: rgb(var(--pal-color-base-b-d3));
   --pal-color-b-d2: rgb(var(--pal-color-base-b-d2));

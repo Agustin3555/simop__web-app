@@ -26,6 +26,7 @@ export const metaModel = new MetaModel<Entity>({
     singular: 'Tipo de Representante',
     plural: 'Tipos de Representantes',
   },
+  faIcon: 'fa-solid fa-shapes',
 
   anchorField: 'nombre',
   props: {

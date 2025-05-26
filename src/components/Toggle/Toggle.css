@@ -10,7 +10,7 @@
   }
 
   > .switch {
-    --height: var(--cls-height);
+    --height: var(--ui-height);
     --width: var(--pal-size-2xl);
 
     position: relative;
@@ -59,7 +59,7 @@
     border-style: solid;
     border-color: var(--pal-color-a-l2);
     aspect-ratio: 1;
-    width: var(--cls-height);
+    width: var(--ui-height);
 
     border-radius: var(--border-radius);
 

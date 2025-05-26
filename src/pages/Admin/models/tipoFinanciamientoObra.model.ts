@@ -26,6 +26,7 @@ export const metaModel = new MetaModel<Entity>({
     singular: 'Tipo de Financiamiento de Obra',
     plural: 'Tipos de Financiamientos de Obra',
   },
+  faIcon: 'fa-solid fa-shapes',
 
   anchorField: 'nombre',
   props: {

@@ -221,7 +221,10 @@ const Header = ({
   const width = steppedSizes(column.columnDef.minSize!, getSize())
 
   return (
-    <div className={classList('cmp-header', { dragging })} style={{ width }}>
+    <div
+      className={classList('cmp-table-header', { dragging })}
+      style={{ width }}
+    >
       <div className="content">
         <div
           className="grip-area"

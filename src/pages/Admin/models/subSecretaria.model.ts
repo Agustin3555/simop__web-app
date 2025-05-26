@@ -26,6 +26,8 @@ export const metaModel = new MetaModel<Entity>({
     singular: 'Subsecretaría',
     plural: 'Subsecretarías',
   },
+  faIcon: 'fa-solid fa-network-wired',
+  // faIcon: 'fa-solid fa-sitemap',
 
   anchorField: 'nombre',
   props: {

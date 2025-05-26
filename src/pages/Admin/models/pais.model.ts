@@ -26,6 +26,7 @@ export const metaModel = new MetaModel<Entity>({
     singular: 'País',
     plural: 'Países',
   },
+  faIcon: 'fa-solid fa-earth-americas',
 
   anchorField: 'nombre',
   props: {

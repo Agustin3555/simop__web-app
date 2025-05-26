@@ -1,0 +1,21 @@
+.cmp-view-manager {
+  position: relative;
+
+  flex-grow: 1;
+
+  display: flex;
+  padding: var(--pal-size-s);
+  height: 0;
+
+  transition: padding var(--pal-time-m) ease;
+
+  /* TODO: conseguirlo */
+  /* @media (width <= 50rem) { */
+  /* @media (50rem < width) {
+    padding-left: 0;
+  } */
+
+  [data-nav-open='true'] & {
+    padding-left: 0;
+  }
+}

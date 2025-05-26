@@ -26,6 +26,7 @@ export const metaModel = new MetaModel<Entity>({
     singular: 'Obra Inaugurada',
     plural: 'Obra Inaugurada',
   },
+  faIcon: 'fa-solid fa-shapes',
 
   anchorField: 'nombre',
   props: {

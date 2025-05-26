@@ -34,6 +34,7 @@ export const metaModel = new MetaModel<Entity>({
     singular: 'Representante de Obra',
     plural: 'Representantes de Obra',
   },
+  faIcon: 'fa-solid fa-',
 
   anchorField: 'id',
   props: {

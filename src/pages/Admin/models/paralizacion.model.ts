@@ -54,6 +54,7 @@ export const metaModel = new MetaModel<Entity>({
     singular: 'Paralización',
     plural: 'Paralizaciones',
   },
+  faIcon: 'fa-solid fa-circle-stop',
 
   anchorField: 'numeroExpediente',
   props: {

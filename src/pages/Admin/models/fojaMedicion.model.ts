@@ -47,6 +47,7 @@ export const metaModel = new MetaModel<Entity>({
     singular: 'Foja de Medición',
     plural: 'Fojas de Mediciones',
   },
+  faIcon: 'fa-solid fa-clipboard-list',
 
   anchorField: 'numeroExpediente',
   props: {

@@ -13,6 +13,7 @@ interface MetaModelArgs<T = GeneralEntity> {
     singular: string
     plural: string
   }
+  faIcon?: string
 
   anchorField: keyof T
   props: Record<keyof T, PropScheme>
