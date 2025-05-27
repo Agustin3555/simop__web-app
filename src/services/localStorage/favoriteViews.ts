@@ -8,9 +8,9 @@ import { LocalStorageEntity } from './config'
 export const favoriteViewsEntity = new LocalStorageEntity<string[]>(
   'favorite-views',
   [
-    EmpresaModel.metaModel.key,
-    ObraModel.metaModel.key,
-    FojaMedicionModel.metaModel.key,
+    EmpresaMeta.key,
+    ObraMeta.key,
+    FojaMedicionMeta.key,
     'obraTotales',
     'obraDetalle',
   ],

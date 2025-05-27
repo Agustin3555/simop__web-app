@@ -55,7 +55,7 @@ const Query = () => {
   const groups = useMemo(() => {
     if (!data) return
 
-    const detallePropGroups = ObraModel.metaModel.getPropGroups('detalle')
+    const detallePropGroups = ObraMeta.getPropGroups('detalle')
 
     return detallePropGroups?.map(({ props, ...rest }) => ({
       components: props.map(({ key, title, getValueComponent, config }) => {
@@ -143,7 +143,7 @@ const Query = () => {
           <AutoCombobox
             keyName={KEY_NAME}
             title="Obra"
-            metaModel={ObraModel.metaModel}
+            metaModel={ObraMeta}
             required
           />
           <Button

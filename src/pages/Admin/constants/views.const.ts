@@ -40,108 +40,108 @@ const VIEWS_BASE: Record<
   string,
   { metaModel?: MetaModel; title?: string; faIcon?: string }
 > = {
-  [SubSecretariaModel.metaModel.key]: {
-    metaModel: SubSecretariaModel.metaModel,
+  [SubSecretariaMeta.key]: {
+    metaModel: SubSecretariaMeta,
   },
-  [DireccionModel.metaModel.key]: {
-    metaModel: DireccionModel.metaModel,
+  [DireccionMeta.key]: {
+    metaModel: DireccionMeta,
   },
-  [DepartamentoModel.metaModel.key]: {
-    metaModel: DepartamentoModel.metaModel,
+  [DepartamentoMeta.key]: {
+    metaModel: DepartamentoMeta,
   },
-  [PaisModel.metaModel.key]: {
-    metaModel: PaisModel.metaModel,
+  [PaisMeta.key]: {
+    metaModel: PaisMeta,
   },
-  [ProvinciaModel.metaModel.key]: {
-    metaModel: ProvinciaModel.metaModel,
+  [ProvinciaMeta.key]: {
+    metaModel: ProvinciaMeta,
   },
-  [LocalidadModel.metaModel.key]: {
-    metaModel: LocalidadModel.metaModel,
+  [LocalidadMeta.key]: {
+    metaModel: LocalidadMeta,
   },
-  [TipoProfesionModel.metaModel.key]: {
-    metaModel: TipoProfesionModel.metaModel,
+  [TipoProfesionMeta.key]: {
+    metaModel: TipoProfesionMeta,
   },
-  [TipoRepresentanteModel.metaModel.key]: {
-    metaModel: TipoRepresentanteModel.metaModel,
+  [TipoRepresentanteMeta.key]: {
+    metaModel: TipoRepresentanteMeta,
   },
-  [TipoInspectorModel.metaModel.key]: {
-    metaModel: TipoInspectorModel.metaModel,
+  [TipoInspectorMeta.key]: {
+    metaModel: TipoInspectorMeta,
   },
-  [TipoContratacionObraModel.metaModel.key]: {
-    metaModel: TipoContratacionObraModel.metaModel,
+  [TipoContratacionObraMeta.key]: {
+    metaModel: TipoContratacionObraMeta,
   },
-  [TipoFinanciamientoObraModel.metaModel.key]: {
-    metaModel: TipoFinanciamientoObraModel.metaModel,
+  [TipoFinanciamientoObraMeta.key]: {
+    metaModel: TipoFinanciamientoObraMeta,
   },
-  [TipoParalizacionModel.metaModel.key]: {
-    metaModel: TipoParalizacionModel.metaModel,
+  [TipoParalizacionMeta.key]: {
+    metaModel: TipoParalizacionMeta,
   },
-  [TipoProgramaObraModel.metaModel.key]: {
-    metaModel: TipoProgramaObraModel.metaModel,
+  [TipoProgramaObraMeta.key]: {
+    metaModel: TipoProgramaObraMeta,
   },
-  [TipoTematicaObraModel.metaModel.key]: {
-    metaModel: TipoTematicaObraModel.metaModel,
+  [TipoTematicaObraMeta.key]: {
+    metaModel: TipoTematicaObraMeta,
   },
-  [TipoEstadoObraModel.metaModel.key]: {
-    metaModel: TipoEstadoObraModel.metaModel,
+  [TipoEstadoObraMeta.key]: {
+    metaModel: TipoEstadoObraMeta,
   },
-  [TipoRescisionModel.metaModel.key]: {
-    metaModel: TipoRescisionModel.metaModel,
+  [TipoRescisionMeta.key]: {
+    metaModel: TipoRescisionMeta,
   },
-  [TipoRedeterminacionModel.metaModel.key]: {
-    metaModel: TipoRedeterminacionModel.metaModel,
+  [TipoRedeterminacionMeta.key]: {
+    metaModel: TipoRedeterminacionMeta,
   },
-  [TipoRecepcionModel.metaModel.key]: {
-    metaModel: TipoRecepcionModel.metaModel,
+  [TipoRecepcionMeta.key]: {
+    metaModel: TipoRecepcionMeta,
   },
-  [TipoModificacionModel.metaModel.key]: {
-    metaModel: TipoModificacionModel.metaModel,
+  [TipoModificacionMeta.key]: {
+    metaModel: TipoModificacionMeta,
   },
-  [InspectorModel.metaModel.key]: {
-    metaModel: InspectorModel.metaModel,
+  [InspectorMeta.key]: {
+    metaModel: InspectorMeta,
   },
-  [RepresentanteModel.metaModel.key]: {
-    metaModel: RepresentanteModel.metaModel,
+  [RepresentanteMeta.key]: {
+    metaModel: RepresentanteMeta,
   },
-  [EmpresaModel.metaModel.key]: {
-    metaModel: EmpresaModel.metaModel,
+  [EmpresaMeta.key]: {
+    metaModel: EmpresaMeta,
   },
-  [RepresentanteEmpresaModel.metaModel.key]: {
-    metaModel: RepresentanteEmpresaModel.metaModel,
+  [RepresentanteEmpresaMeta.key]: {
+    metaModel: RepresentanteEmpresaMeta,
   },
-  [ObraModel.metaModel.key]: {
-    metaModel: ObraModel.metaModel,
+  [ObraMeta.key]: {
+    metaModel: ObraMeta,
     title: 'Obra Básica',
   },
-  [RepresentanteObraModel.metaModel.key]: {
-    metaModel: RepresentanteObraModel.metaModel,
+  [RepresentanteObraMeta.key]: {
+    metaModel: RepresentanteObraMeta,
   },
-  [InspectorObraModel.metaModel.key]: {
-    metaModel: InspectorObraModel.metaModel,
+  [InspectorObraMeta.key]: {
+    metaModel: InspectorObraMeta,
   },
-  [FojaMedicionModel.metaModel.key]: {
-    metaModel: FojaMedicionModel.metaModel,
+  [FojaMedicionMeta.key]: {
+    metaModel: FojaMedicionMeta,
   },
-  [PagoCertificacionModel.metaModel.key]: {
-    metaModel: PagoCertificacionModel.metaModel,
+  [PagoCertificacionMeta.key]: {
+    metaModel: PagoCertificacionMeta,
   },
-  [RedeterminacionModel.metaModel.key]: {
-    metaModel: RedeterminacionModel.metaModel,
+  [RedeterminacionMeta.key]: {
+    metaModel: RedeterminacionMeta,
   },
-  [AmpliacionModel.metaModel.key]: {
-    metaModel: AmpliacionModel.metaModel,
+  [AmpliacionMeta.key]: {
+    metaModel: AmpliacionMeta,
   },
-  [ModificacionModel.metaModel.key]: {
-    metaModel: ModificacionModel.metaModel,
+  [ModificacionMeta.key]: {
+    metaModel: ModificacionMeta,
   },
-  [ParalizacionModel.metaModel.key]: {
-    metaModel: ParalizacionModel.metaModel,
+  [ParalizacionMeta.key]: {
+    metaModel: ParalizacionMeta,
   },
-  [RescisionModel.metaModel.key]: {
-    metaModel: RescisionModel.metaModel,
+  [RescisionMeta.key]: {
+    metaModel: RescisionMeta,
   },
-  [RecepcionModel.metaModel.key]: {
-    metaModel: RecepcionModel.metaModel,
+  [RecepcionMeta.key]: {
+    metaModel: RecepcionMeta,
   },
   obraGeneral: {
     title: 'Obra Básica General',

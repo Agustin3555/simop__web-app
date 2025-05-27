@@ -1,0 +1,31 @@
+import { MetaModel } from '../../services/config'
+import { TIPO_PROPS } from '../../constants/commonProps.const'
+import { Method } from '@/services/config'
+import { omitBaseEntity } from '../../constants/selectors.const'
+import { TipoEstadoObraModel, TipoEstadoObraService } from '.'
+
+export const TipoEstadoObraMeta = new MetaModel<TipoEstadoObraModel.Entity>({
+  key: 'tipoEstadoObra',
+  service: TipoEstadoObraService,
+  title: {
+    singular: 'Tipo de Estado de Obra',
+    plural: 'Tipos de Estados de Obra',
+  },
+  faIcon: 'fa-solid fa-shapes',
+
+  anchorField: 'nombre',
+  props: {
+    ...TIPO_PROPS,
+  },
+})
+
+TipoEstadoObraMeta.fieldsByService = [
+  {
+    methods: [Method.GetAll, Method.GetOne],
+    fields: TipoEstadoObraMeta.allFields,
+  },
+  {
+    methods: [Method.Create, Method.UpdateOne],
+    groups: [{ key: '', fields: omitBaseEntity(TipoEstadoObraMeta.allFields) }],
+  },
+]

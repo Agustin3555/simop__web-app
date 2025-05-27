@@ -7,7 +7,7 @@ const ObraGeneral = () => (
       viewKey: 'obraGeneral',
       title: 'Obra Básica General',
     }}
-    metaModel={ObraModel.metaModel}
+    metaModel={ObraMeta}
     query={{
       methods: {
         forGetAll: 'general',

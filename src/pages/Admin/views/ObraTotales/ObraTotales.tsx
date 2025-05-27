@@ -7,7 +7,7 @@ const ObraTotales = () => (
       viewKey: 'obraTotales',
       title: 'Totales de Obra',
     }}
-    metaModel={ObraModel.metaModel}
+    metaModel={ObraMeta}
     query={{
       fetch: {
         key: 'totales',
