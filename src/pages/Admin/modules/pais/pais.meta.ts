@@ -2,7 +2,8 @@ import { MetaModel, TextProp } from '../../services/config'
 import { COMMON_PROPS } from '../../constants/commonProps.const'
 import { Method } from '@/services/config'
 import { omitBaseEntity } from '../../constants/selectors.const'
-import { PaisModel, PaisService } from '.'
+import { PaisService } from './pais.service'
+import { PaisModel } from '.'
 
 export const PaisMeta = new MetaModel<PaisModel.Entity>({
   key: 'pais',

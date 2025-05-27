@@ -1,5 +1,5 @@
 import { SchemeView } from '../../components'
-import { TipoTematicaObraModel } from '../../models'
+import { TipoTematicaObraMeta } from '../../modules/tipoTematicaObra'
 
 const TipoTematicaObra = () => <SchemeView metaModel={TipoTematicaObraMeta} />
 

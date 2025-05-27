@@ -7,11 +7,12 @@ import {
 import { COMMON_PROPS } from '../../constants/commonProps.const'
 import { Method } from '@/services/config'
 import { omitBaseEntity } from '../../constants/selectors.const'
-import { InspectorObraModel, InspectorObraService } from '.'
 import { InspectorMeta } from '../inspector'
 import { TipoInspectorMeta } from '../tipoInspector'
 import { TipoProfesionMeta } from '../tipoProfesion'
 import { ObraMeta } from '../obra'
+import { InspectorObraService } from './inspectorObra.service'
+import { InspectorObraModel } from '.'
 
 export const InspectorObraMeta = new MetaModel<InspectorObraModel.Entity>({
   key: 'inspectorObra',

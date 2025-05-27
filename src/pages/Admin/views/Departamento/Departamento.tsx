@@ -1,5 +1,5 @@
 import { SchemeView } from '../../components'
-import { DepartamentoModel } from '../../models'
+import { DepartamentoMeta } from '../../modules/departamento'
 
 const Departamento = () => <SchemeView metaModel={DepartamentoMeta} />
 

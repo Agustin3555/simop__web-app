@@ -3,7 +3,8 @@ import { COMMON_PROPS } from '../../constants/commonProps.const'
 import { Method } from '@/services/config'
 import { omitBaseEntity } from '../../constants/selectors.const'
 import { ProvinciaMeta } from '../provincia'
-import { LocalidadModel, LocalidadService } from '.'
+import { LocalidadService } from './localidad.service'
+import { LocalidadModel } from '.'
 
 export const LocalidadMeta = new MetaModel<LocalidadModel.Entity>({
   key: 'localidad',

@@ -9,8 +9,11 @@ import {
 import { COMMON_PROPS } from '../../constants/commonProps.const'
 import { Method } from '@/services/config'
 import { omitBaseEntity } from '../../constants/selectors.const'
-import { AmpliacionModel, AmpliacionService } from '.'
 import { DireccionMeta } from '../direccion'
+import { AmpliacionService } from './ampliacion.service'
+import { AmpliacionModel } from '.'
+import { ObraMeta } from '../obra'
+import { DepartamentoMeta } from '../departamento'
 
 export const AmpliacionMeta = new MetaModel<AmpliacionModel.Entity>({
   key: 'ampliacion',
@@ -54,13 +57,13 @@ export const AmpliacionMeta = new MetaModel<AmpliacionModel.Entity>({
   },
 })
 
-metaModel.fieldsByService = [
+AmpliacionMeta.fieldsByService = [
   {
     methods: [Method.GetAll, Method.GetOne],
-    fields: metaModel.allFields,
+    fields: AmpliacionMeta.allFields,
   },
   {
     methods: [Method.Create, Method.UpdateOne],
-    groups: [{ key: '', fields: omitBaseEntity(metaModel.allFields) }],
+    groups: [{ key: '', fields: omitBaseEntity(AmpliacionMeta.allFields) }],
   },
 ]

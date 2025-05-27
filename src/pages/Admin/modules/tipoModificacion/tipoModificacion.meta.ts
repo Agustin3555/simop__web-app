@@ -2,7 +2,8 @@ import { MetaModel } from '../../services/config'
 import { TIPO_PROPS } from '../../constants/commonProps.const'
 import { Method } from '@/services/config'
 import { omitBaseEntity } from '../../constants/selectors.const'
-import { TipoModificacionModel, TipoModificacionService } from '.'
+import { TipoModificacionService } from './tipoModificacion.service'
+import { TipoModificacionModel } from '.'
 
 export const TipoModificacionMeta = new MetaModel<TipoModificacionModel.Entity>(
   {

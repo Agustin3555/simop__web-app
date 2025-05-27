@@ -1,5 +1,5 @@
 import { SchemeView } from '../../components'
-import { LocalidadModel } from '../../models'
+import { LocalidadMeta } from '../../modules/localidad'
 
 const Localidad = () => <SchemeView metaModel={LocalidadMeta} />
 

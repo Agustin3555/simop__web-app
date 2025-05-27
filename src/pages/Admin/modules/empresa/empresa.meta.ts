@@ -2,10 +2,11 @@ import { NumberProp, RefProp, MetaModel, TextProp } from '../../services/config'
 import { COMMON_PROPS } from '../../constants/commonProps.const'
 import { Method } from '@/services/config'
 import { omitBaseEntity } from '../../constants/selectors.const'
-import { EmpresaModel, EmpresaService } from '.'
 import { PaisMeta } from '../pais'
 import { ProvinciaMeta } from '../provincia'
 import { LocalidadMeta } from '../localidad'
+import { EmpresaService } from './empresa.service'
+import { EmpresaModel } from '.'
 
 export const EmpresaMeta = new MetaModel<EmpresaModel.Entity>({
   key: 'empresa',

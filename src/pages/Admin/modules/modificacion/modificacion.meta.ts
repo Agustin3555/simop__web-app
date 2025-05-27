@@ -9,11 +9,12 @@ import {
 import { COMMON_PROPS } from '../../constants/commonProps.const'
 import { Method } from '@/services/config'
 import { omitBaseEntity } from '../../constants/selectors.const'
-import { ModificacionModel, ModificacionService } from '.'
 import { TipoModificacionMeta } from '../tipoModificacion'
 import { DireccionMeta } from '../direccion'
 import { DepartamentoMeta } from '../departamento'
 import { ObraMeta } from '../obra'
+import { ModificacionService } from './modificacion.service'
+import { ModificacionModel } from '.'
 
 export const ModificacionMeta = new MetaModel<ModificacionModel.Entity>({
   key: 'modificacion',

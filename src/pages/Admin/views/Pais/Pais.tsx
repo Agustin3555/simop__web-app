@@ -1,5 +1,5 @@
 import { SchemeView } from '../../components'
-import { PaisModel } from '../../models'
+import { PaisMeta } from '../../modules/pais'
 
 const Pais = () => <SchemeView metaModel={PaisMeta} />
 

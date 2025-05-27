@@ -2,10 +2,11 @@ import { NumberProp, RefProp, MetaModel, TextProp } from '../../services/config'
 import { COMMON_PROPS } from '../../constants/commonProps.const'
 import { Method } from '@/services/config'
 import { omitBaseEntity } from '../../constants/selectors.const'
-import { RepresentanteModel, RepresentanteService } from '.'
 import { PaisMeta } from '../pais'
 import { ProvinciaMeta } from '../provincia'
 import { LocalidadMeta } from '../localidad'
+import { RepresentanteService } from './representante.service'
+import { RepresentanteModel } from '.'
 
 export const RepresentanteMeta = new MetaModel<RepresentanteModel.Entity>({
   key: 'representante',

@@ -3,7 +3,8 @@ import { omitBaseEntity } from '../../constants/selectors.const'
 import { COMMON_PROPS } from '../../constants/commonProps.const'
 import { MetaModel, RefProp, TextProp } from '../../services/config'
 import { SubsecretariaMeta } from '../subsecretaria'
-import { DireccionModel, DireccionService } from '.'
+import { DireccionService } from './direccion.service'
+import { DireccionModel } from '.'
 
 export const DireccionMeta = new MetaModel<DireccionModel.Entity>({
   key: 'direccion',

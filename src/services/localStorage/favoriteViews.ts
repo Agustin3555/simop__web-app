@@ -1,9 +1,7 @@
-import {
-  EmpresaModel,
-  FojaMedicionModel,
-  ObraModel,
-} from '@/pages/Admin/models'
 import { LocalStorageEntity } from './config'
+import { EmpresaMeta } from '@/pages/Admin/modules/empresa'
+import { FojaMedicionMeta } from '@/pages/Admin/modules/fojaMedicion'
+import { ObraMeta } from '@/pages/Admin/modules/obra'
 
 export const favoriteViewsEntity = new LocalStorageEntity<string[]>(
   'favorite-views',

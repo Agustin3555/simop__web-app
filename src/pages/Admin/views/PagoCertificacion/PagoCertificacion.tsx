@@ -1,5 +1,5 @@
 import { SchemeView } from '../../components'
-import { PagoCertificacionModel } from '../../models'
+import { PagoCertificacionMeta } from '../../modules/pagoCertificacion'
 
 const PagoCertificacion = () => <SchemeView metaModel={PagoCertificacionMeta} />
 

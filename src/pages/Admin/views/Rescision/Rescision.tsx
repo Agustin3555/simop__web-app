@@ -1,5 +1,5 @@
 import { SchemeView } from '../../components'
-import { RescisionModel } from '../../models'
+import { RescisionMeta } from '../../modules/rescision'
 
 const Rescision = () => <SchemeView metaModel={RescisionMeta} />
 

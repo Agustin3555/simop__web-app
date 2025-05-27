@@ -1,5 +1,5 @@
 import { SchemeView } from '../../components'
-import { TipoContratacionObraModel } from '../../models'
+import { TipoContratacionObraMeta } from '../../modules/tipoContratacionObra'
 
 const TipoContratacionObra = () => (
   <SchemeView metaModel={TipoContratacionObraMeta} />

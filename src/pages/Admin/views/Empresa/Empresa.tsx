@@ -1,5 +1,5 @@
 import { SchemeView } from '../../components'
-import { EmpresaModel } from '../../models'
+import { EmpresaMeta } from '../../modules/empresa'
 
 const Empresa = () => <SchemeView metaModel={EmpresaMeta} />
 

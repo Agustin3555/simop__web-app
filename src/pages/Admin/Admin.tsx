@@ -3,7 +3,11 @@ import { useNavState } from './hooks'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 import { ViewManager, Nav, Header } from './components'
-import { NavStateProvider, ViewsProvider } from './contexts'
+import {
+  FavoriteViewsProvider,
+  NavStateProvider,
+  ViewsProvider,
+} from './contexts'
 
 const client = new QueryClient({
   defaultOptions: {
@@ -31,9 +35,9 @@ const Admin = () => (
   <QueryClientProvider {...{ client }}>
     <ViewsProvider>
       <NavStateProvider>
-        {/* <FavoriteViewsProvider> */}
-        <ContextualizedAdmin />
-        {/* </FavoriteViewsProvider> */}
+        <FavoriteViewsProvider>
+          <ContextualizedAdmin />
+        </FavoriteViewsProvider>
       </NavStateProvider>
     </ViewsProvider>
     <ReactQueryDevtools />

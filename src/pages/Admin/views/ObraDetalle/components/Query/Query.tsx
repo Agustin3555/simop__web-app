@@ -8,8 +8,6 @@ import {
 } from '@tanstack/react-query'
 import { Button } from '@/components'
 import { AutoCombobox, Report, ReportButton } from '@/pages/Admin/components'
-import { ObraModel } from '@/pages/Admin/models'
-import { ObraService } from '@/pages/Admin/services'
 import { Service } from '@/services/config'
 import { Image } from '@react-pdf/renderer'
 import { captureElementImage, newWindow } from '@/pages/Admin/helpers'
@@ -17,6 +15,7 @@ import { MetaModel } from '@/pages/Admin/services/config'
 import { TableWindow } from './components'
 import { TableWindowProps } from './components/TableWindow/TableWindow'
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
+import { ObraMeta, ObraService } from '@/pages/Admin/modules/obra'
 
 const KEY_NAME = 'obra'
 

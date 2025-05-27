@@ -1,5 +1,5 @@
 import { SchemeView } from '../../components'
-import { ProvinciaModel } from '../../models'
+import { ProvinciaMeta } from '../../modules/provincia'
 
 const Provincia = () => <SchemeView metaModel={ProvinciaMeta} />
 

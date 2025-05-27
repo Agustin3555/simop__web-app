@@ -1,6 +1,6 @@
 import { SchemeView } from '../../components'
-import { SubSecretariaModel } from '../../models'
+import { SubsecretariaMeta } from '../../modules/subsecretaria'
 
-const SubSecretaria = () => <SchemeView metaModel={SubSecretariaMeta} />
+const SubSecretaria = () => <SchemeView metaModel={SubsecretariaMeta} />
 
 export default SubSecretaria

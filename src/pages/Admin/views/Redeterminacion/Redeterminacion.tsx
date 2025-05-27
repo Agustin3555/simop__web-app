@@ -1,5 +1,5 @@
 import { SchemeView } from '../../components'
-import { RedeterminacionModel } from '../../models'
+import { RedeterminacionMeta } from '../../modules/redeterminacion'
 
 const Redeterminacion = () => <SchemeView metaModel={RedeterminacionMeta} />
 

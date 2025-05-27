@@ -2,7 +2,8 @@ import { MetaModel } from '../../services/config'
 import { TIPO_PROPS } from '../../constants/commonProps.const'
 import { Method } from '@/services/config'
 import { omitBaseEntity } from '../../constants/selectors.const'
-import { TipoContratacionObraModel, TipoContratacionObraService } from '.'
+import { TipoContratacionObraService } from './tipoContratacionObra.service'
+import { TipoContratacionObraModel } from '.'
 
 export const TipoContratacionObraMeta =
   new MetaModel<TipoContratacionObraModel.Entity>({

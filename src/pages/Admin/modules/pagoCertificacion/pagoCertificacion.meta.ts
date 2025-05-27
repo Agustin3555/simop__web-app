@@ -9,11 +9,12 @@ import {
 } from '../../services/config'
 import { Method } from '@/services/config'
 import { omitBaseEntity } from '../../constants/selectors.const'
-import { PagoCertificacionModel, PagoCertificacionService } from '.'
 import { FojaMedicionMeta } from '../fojaMedicion'
 import { DireccionMeta } from '../direccion'
 import { DepartamentoMeta } from '../departamento'
 import { RedeterminacionMeta } from '../redeterminacion'
+import { PagoCertificacionService } from './pagoCertificacion.service'
+import { PagoCertificacionModel } from '.'
 
 export const PagoCertificacionMeta =
   new MetaModel<PagoCertificacionModel.Entity>({

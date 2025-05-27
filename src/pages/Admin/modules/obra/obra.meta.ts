@@ -11,7 +11,6 @@ import {
 import { COMMON_PROPS } from '../../constants/commonProps.const'
 import { Method } from '@/services/config'
 import { select } from '../../helpers'
-import { ObraModel, ObraService } from '.'
 import { EmpresaMeta } from '../empresa'
 import { AmpliacionMeta } from '../ampliacion'
 import { FojaMedicionMeta } from '../fojaMedicion'
@@ -28,6 +27,8 @@ import { TipoFinanciamientoObraMeta } from '../tipoFinanciamientoObra'
 import { TipoProgramaObraMeta } from '../tipoProgramaObra'
 import { TipoTematicaObraMeta } from '../tipoTematicaObra'
 import { ModificacionMeta } from '../modificacion'
+import { ObraService } from './obra.service'
+import { ObraModel } from '.'
 
 export const ObraMeta = new MetaModel<ObraModel.Entity>({
   key: 'obra',
