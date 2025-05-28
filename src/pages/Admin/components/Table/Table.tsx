@@ -31,11 +31,11 @@ import { Button, Toggle } from '@/components'
 import { Cell, Footer, Header, RowSelectorCell } from './components'
 import { Combobox, Value } from '..'
 import { GeneralEntity } from '@/models/config'
-import { MinSize } from '@/pages/Admin/services/config'
 import { classList } from '@/helpers'
 import { format } from '@formkit/tempo'
 import { utils, writeFile } from 'xlsx'
 import { Method } from '@/services/config'
+import { MinSize } from '../../meta'
 
 export type QuickFilters = Record<string, { title: string; filter: ReactNode }>
 

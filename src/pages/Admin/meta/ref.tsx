@@ -7,7 +7,7 @@ import {
   PropScheme,
   Required,
 } from './utils'
-import { AutoCombobox, FetchRef, RefFilter } from '../../components'
+import { AutoCombobox, FetchRef, RefFilter } from '../components'
 import { AccessorFn, Column, FilterFn } from '@tanstack/react-table'
 
 export const isFieldEnabled = (form: HTMLFormElement, key: string) => {

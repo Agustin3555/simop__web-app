@@ -1,4 +1,4 @@
-import { MetaModel } from '../../services/config'
+import { MetaModel } from '../../meta'
 import { TIPO_PROPS } from '../../constants/commonProps.const'
 import { Method } from '@/services/config'
 import { omitBaseEntity } from '../../constants/selectors.const'

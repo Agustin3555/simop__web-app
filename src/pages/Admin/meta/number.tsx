@@ -2,7 +2,7 @@ import { GeneralEntity } from '@/models/config'
 import { ForView, GetFilter, MinSize, PropScheme, Required } from './utils'
 import { Input } from '@/components'
 import { BuiltInFilterFn, Column, HeaderContext } from '@tanstack/react-table'
-import { NumberFilter, StylizedNumber } from '../../components'
+import { NumberFilter, StylizedNumber } from '../components'
 
 export class NumberProp implements PropScheme {
   key = ''

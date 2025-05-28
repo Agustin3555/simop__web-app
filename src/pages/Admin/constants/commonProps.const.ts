@@ -1,9 +1,7 @@
-import {
-  DateTimeProp,
-  NumberProp,
-  PropScheme,
-  TextProp,
-} from '../services/config'
+import { DateTimeProp } from '../meta/dateTime'
+import { NumberProp } from '../meta/number'
+import { TextProp } from '../meta/text'
+import { PropScheme } from '../meta/utils'
 
 type ScalarProps<T> = Record<keyof T, PropScheme>
 

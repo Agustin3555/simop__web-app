@@ -1,5 +1,5 @@
 import { createContext } from 'react'
-import { MetaModel } from '../services/config'
+import { MetaModel } from '../meta'
 
 interface MetaModelContextProps {
   metaModel: MetaModel

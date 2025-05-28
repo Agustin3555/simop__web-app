@@ -3,7 +3,7 @@ import { ForView, GetFilter, MinSize, PropScheme, Required } from './utils'
 import { Input } from '@/components'
 import { Column, FilterFn } from '@tanstack/react-table'
 import { format } from '@formkit/tempo'
-import { DateTimeFilter } from '../../components'
+import { DateTimeFilter } from '../components'
 
 export class DateTimeProp implements PropScheme {
   key = ''

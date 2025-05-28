@@ -1,6 +1,6 @@
 import { useCallback, useMemo, useState } from 'react'
 import { RowSelectionContext, MetaModelContext } from '../../contexts'
-import { MetaModel } from '../../services/config'
+import { MetaModel } from '../../meta'
 import { addIf } from '@/helpers'
 import { RowSelectionState } from '@tanstack/react-table'
 import { LocalAdd, LocalEdit, LocalQuery, View } from '..'

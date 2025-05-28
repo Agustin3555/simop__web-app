@@ -1,11 +1,9 @@
 import { GeneralEntity } from '@/models/config'
 import { ForView, GetFilter, MinSize, PropScheme, Required } from './utils'
-import { Input } from '@/components'
-import { Column, FilterFn } from '@tanstack/react-table'
-import { format } from '@formkit/tempo'
-import { DateTimeFilter } from '../../components'
+import { Column } from '@tanstack/react-table'
+import { InputArea, TextFilter } from '../components'
 
-export class DateProp implements PropScheme {
+export class TextLongProp implements PropScheme {
   key = ''
 
   constructor(
@@ -16,7 +14,7 @@ export class DateProp implements PropScheme {
       field?: ForView & Required
     },
 
-    public minSize = MinSize.xs,
+    public minSize = MinSize.xl,
   ) {}
 
   getFieldComponent = (value?: string, editMode = false) => {
@@ -26,15 +24,11 @@ export class DateProp implements PropScheme {
 
     if (hidden === true) return
 
-    // Obtiene solo la fecha
-    if (value) value = value.split('T')[0]
-
     return (
-      <Input
+      <InputArea
         keyName={key}
         {...(!editMode && { required })}
         {...{ title, value, editMode }}
-        inputHTMLAttrs={{ type: 'date' }}
       />
     )
   }
@@ -46,36 +40,24 @@ export class DateProp implements PropScheme {
   ) => {
     const { key } = this
 
-    let value = formData.get(key) as null | string
+    const value = formData.get(key)
 
     if (value === null) return
     if (value === '') return editMode ? null : undefined
 
-    // Año '0024' --> '2024'
-    if (value.startsWith('00')) value = '20' + value.slice(2)
-
-    return value + 'T00:00:00Z'
-  }
-
-  filterFn: FilterFn<GeneralEntity> = (row, columnId, filterValue) => {
-    if (!filterValue) return true // No hay filtro, muestra todo
-
-    const { min, max } = filterValue
-    const rowDate = new Date(row.getValue(columnId))
-
-    const isAfterMin = min ? rowDate >= new Date(min) : true
-    const isBeforeMax = max ? rowDate <= new Date(max) : true
-
-    return isAfterMin && isBeforeMax
+    return value as string
   }
 
   getHeader = (column: Column<GeneralEntity>) => {
     const { title } = this
 
-    const { setFilterValue } = column
+    const { getFacetedUniqueValues, setFilterValue } = column
 
     const getFilter: GetFilter = ({ getFilterValue }) => (
-      <DateTimeFilter {...{ getFilterValue, setFilterValue }} notTime />
+      <TextFilter
+        filterValue={getFilterValue()}
+        {...{ getFacetedUniqueValues, setFilterValue }}
+      />
     )
 
     return { title, getFilter }
@@ -86,7 +68,7 @@ export class DateProp implements PropScheme {
 
     const value = item[key] as undefined | string
 
-    return value && <p>{format(value, { date: 'short' })}</p>
+    return value && <p className="text">{value}</p>
   }
 
   getExcelValue = (item: GeneralEntity) => {
@@ -96,6 +78,6 @@ export class DateProp implements PropScheme {
 
     if (value === undefined) return
 
-    return format(value, { date: 'short' })
+    return value
   }
 }

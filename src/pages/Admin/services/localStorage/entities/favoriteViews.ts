@@ -1,4 +1,4 @@
-import { LocalStorageEntity } from './config'
+import { LocalStorageEntity } from '..'
 import { EmpresaMeta } from '@/pages/Admin/modules/empresa'
 import { FojaMedicionMeta } from '@/pages/Admin/modules/fojaMedicion'
 import { ObraMeta } from '@/pages/Admin/modules/obra'

@@ -4,7 +4,7 @@ import { GeneralEntity } from '@/models/config'
 import { useMemo } from 'react'
 import { steppedSizes } from '../../helpers'
 import { AccessorKeys } from '../../Table'
-import { PropScheme } from '@/pages/Admin/services/config'
+import { PropScheme } from '@/pages/Admin/meta'
 
 /*
   No se usa 'getValue' porque se necesita tener el valor original. 'getValue'

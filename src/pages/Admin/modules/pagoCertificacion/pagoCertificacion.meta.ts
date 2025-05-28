@@ -6,7 +6,7 @@ import {
   DateProp,
   TextLongProp,
   TextProp,
-} from '../../services/config'
+} from '../../meta'
 import { Method } from '@/services/config'
 import { omitBaseEntity } from '../../constants/selectors.const'
 import { FojaMedicionMeta } from '../fojaMedicion'

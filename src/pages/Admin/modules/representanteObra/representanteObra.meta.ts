@@ -1,9 +1,4 @@
-import {
-  BooleanProp,
-  RefProp,
-  MetaModel,
-  DateProp,
-} from '../../services/config'
+import { BooleanProp, RefProp, MetaModel, DateProp } from '../../meta'
 import { COMMON_PROPS } from '../../constants/commonProps.const'
 import { Method } from '@/services/config'
 import { omitBaseEntity } from '../../constants/selectors.const'

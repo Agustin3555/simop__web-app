@@ -1,7 +1,7 @@
 import { Method } from '@/services/config'
 import { omitBaseEntity } from '../../constants/selectors.const'
 import { COMMON_PROPS } from '../../constants/commonProps.const'
-import { MetaModel, RefProp, TextProp } from '../../services/config'
+import { MetaModel, RefProp, TextProp } from '../../meta'
 import { SubsecretariaMeta } from '../subsecretaria'
 import { DireccionService } from './direccion.service'
 import { DireccionModel } from '.'

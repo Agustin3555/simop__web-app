@@ -1,7 +1,7 @@
 import { GeneralEntity } from '@/models/config'
 import { Method, Service } from '@/services/config'
 import { PropScheme } from './utils'
-import { TrustedProps } from '../../types'
+import { TrustedProps } from '../types'
 
 export type RefreshRate = 'high' | 'medium' | 'low'
 

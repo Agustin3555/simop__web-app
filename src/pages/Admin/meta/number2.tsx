@@ -7,7 +7,7 @@ import {
   HeaderContext,
   Row,
 } from '@tanstack/react-table'
-import { NumberFilter, StylizedNumber } from '../../components'
+import { NumberFilter, StylizedNumber } from '../components'
 
 interface Base {
   title: { long: string; short?: string }

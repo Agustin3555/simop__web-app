@@ -1,3 +1,4 @@
+import { MetaModel } from '../meta'
 import { AmpliacionMeta } from '../modules/ampliacion'
 import { DepartamentoMeta } from '../modules/departamento'
 import { DireccionMeta } from '../modules/direccion'
@@ -32,7 +33,6 @@ import { TipoRedeterminacionMeta } from '../modules/tipoRedeterminacion'
 import { TipoRepresentanteMeta } from '../modules/tipoRepresentante'
 import { TipoRescisionMeta } from '../modules/tipoRescision'
 import { TipoTematicaObraMeta } from '../modules/tipoTematicaObra'
-import { MetaModel } from '../services/config'
 
 const VIEWS_BASE: Record<
   string,

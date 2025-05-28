@@ -2,7 +2,7 @@ import './TableWindow.css'
 import { GeneralEntity } from '@/models/config'
 import { Table } from '@/pages/Admin/components'
 import { MetaModelContext } from '@/pages/Admin/contexts'
-import { MetaModel } from '@/pages/Admin/services/config'
+import { MetaModel } from '@/pages/Admin/meta'
 
 export interface TableWindowProps {
   metaModel: MetaModel

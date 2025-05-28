@@ -7,7 +7,7 @@ import {
   TextLongProp,
   TextProp,
   RefListProp,
-} from '../../services/config'
+} from '../../meta'
 import { COMMON_PROPS } from '../../constants/commonProps.const'
 import { Method } from '@/services/config'
 import { select } from '../../helpers'

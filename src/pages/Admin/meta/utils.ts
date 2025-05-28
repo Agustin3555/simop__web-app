@@ -7,7 +7,7 @@ import {
   HeaderContext,
 } from '@tanstack/react-table'
 import { GeneralEntity } from '@/models/config'
-import { ComboboxProps } from '../../components/Combobox/Combobox'
+import { ComboboxProps } from '../components/Combobox/Combobox'
 import { MetaModel } from '.'
 
 export type Color = 'blue' | 'green' | 'yellow' | 'red' | 'grey'

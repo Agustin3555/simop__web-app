@@ -1,4 +1,4 @@
-import { RefreshRate } from '../services/config'
+import { RefreshRate } from '../meta'
 
 const minToMs = (minutes: number) => 1000 * 60 * minutes
 

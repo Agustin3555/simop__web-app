@@ -1,5 +1,5 @@
-import { favoriteViewsEntity } from '@/services/localStorage'
 import { createContext, ReactNode, useCallback, useState } from 'react'
+import { favoriteViewsEntity } from '../services/localStorage'
 
 interface FavoriteViewsContextProps {
   views: string[]

@@ -21,8 +21,8 @@ import { steppedSizes } from '../../helpers'
 import { OptionSelectors } from '@/pages/Admin/components'
 import { extractKeys } from '@/pages/Admin/helpers'
 import { AccessorKeys, QuickFilters } from '../../Table'
-import { PropScheme } from '@/pages/Admin/services/config'
 import { Method } from '@/services/config'
+import { PropScheme } from '@/pages/Admin/meta'
 
 const SORT_ICON_MATCHER: Record<SortDirection, string> = {
   asc: 'fa-solid fa-arrow-up-wide-short',

@@ -1,6 +1,6 @@
 import { GeneralEntity } from '@/models/config'
 import { Color, ForView, GetFilter, MinSize, PropScheme } from './utils'
-import { BooleanFilter, Checkbox } from '../../components'
+import { BooleanFilter, Checkbox } from '../components'
 import { Column } from '@tanstack/react-table'
 import { classList } from '@/helpers'
 

@@ -1,5 +1,5 @@
-import { EmpresaModel } from '@/pages/Admin/models'
-import { LocalStorageEntity } from './config'
+import { LocalStorageEntity } from '..'
+import { EmpresaMeta } from '@/pages/Admin/modules/empresa'
 
 export const lastVisitedViewEntity = new LocalStorageEntity(
   'last-visited-view',

@@ -1,6 +1,6 @@
 import { GeneralEntity } from '@/models/config'
 import { ForView, GetMetaModel, MinSize, PropScheme, Required } from './utils'
-import { AutoCombobox, FetchRef } from '../../components'
+import { AutoCombobox, FetchRef } from '../components'
 import { Column } from '@tanstack/react-table'
 import { isFieldEnabled } from '.'
 
