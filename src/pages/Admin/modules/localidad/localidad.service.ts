@@ -1,7 +1,8 @@
 import { publicInstance, Service } from '@/services/config'
 import { deleteManyHandler } from '@/services/handlers'
 import { buildPath } from '@/helpers'
-import { LocalidadAdapter, LocalidadModel } from '.'
+import { LocalidadModel } from '.'
+import { LocalidadAdapter } from './localidad.adapter'
 
 const collection = buildPath('localidades')
 

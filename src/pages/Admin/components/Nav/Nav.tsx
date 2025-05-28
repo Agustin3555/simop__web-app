@@ -1,7 +1,7 @@
 import './Nav.css'
 import { useState } from 'react'
 import { useNavState } from '../../hooks'
-import { FavoriteViews, SegmentedControl } from '..'
+import { SegmentedControl } from '..'
 import { SegmentedControlProps } from '../SegmentedControl/SegmentedControl'
 import { Tree } from './components'
 

@@ -1,7 +1,8 @@
 import { publicInstance, Service } from '@/services/config'
 import { deleteManyHandler } from '@/services/handlers'
 import { buildPath } from '@/helpers'
-import { RepresentanteEmpresaAdapter, RepresentanteEmpresaModel } from '.'
+import { RepresentanteEmpresaModel } from '.'
+import { RepresentanteEmpresaAdapter } from './representanteEmpresa.adapter'
 
 const collection = buildPath('representantes-empresas')
 

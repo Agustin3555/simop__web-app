@@ -1,5 +1,5 @@
 import { SchemeView } from '../../components'
-import { TipoRecepcionMeta } from '../../modules/tipoRecepcion'
+import { TipoRecepcionMeta } from '../../modules/tipoRecepcion/tipoRecepcion.meta'
 
 const TipoRecepcion = () => <SchemeView metaModel={TipoRecepcionMeta} />
 

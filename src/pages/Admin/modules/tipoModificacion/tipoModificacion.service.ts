@@ -1,7 +1,8 @@
 import { publicInstance, Service } from '@/services/config'
 import { deleteManyHandler } from '@/services/handlers'
 import { buildPath } from '@/helpers'
-import { TipoModificacionAdapter, TipoModificacionModel } from '.'
+import { TipoModificacionModel } from '.'
+import { TipoModificacionAdapter } from './tipoModificacion.adapter'
 
 const collection = buildPath('tipos-modificaciones')
 

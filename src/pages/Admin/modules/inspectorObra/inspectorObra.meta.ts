@@ -2,12 +2,12 @@ import { RefProp, MetaModel, BooleanProp, DateProp } from '../../meta'
 import { COMMON_PROPS } from '../../constants/commonProps.const'
 import { Method } from '@/services/config'
 import { omitBaseEntity } from '../../constants/selectors.const'
-import { InspectorMeta } from '../inspector'
-import { TipoInspectorMeta } from '../tipoInspector'
-import { TipoProfesionMeta } from '../tipoProfesion'
-import { ObraMeta } from '../obra'
 import { InspectorObraService } from './inspectorObra.service'
 import { InspectorObraModel } from '.'
+import { InspectorMeta } from '../inspector/inspector.meta'
+import { ObraMeta } from '../obra/obra.meta'
+import { TipoInspectorMeta } from '../tipoInspector/tipoInspector.meta'
+import { TipoProfesionMeta } from '../tipoProfesion/tipoProfesion.meta'
 
 export const InspectorObraMeta = new MetaModel<InspectorObraModel.Entity>({
   key: 'inspectorObra',

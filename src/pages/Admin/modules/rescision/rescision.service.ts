@@ -1,7 +1,8 @@
 import { publicInstance, Service } from '@/services/config'
 import { deleteManyHandler } from '@/services/handlers'
 import { buildPath } from '@/helpers'
-import { RescisionModel, RescisionAdapter } from '.'
+import { RescisionModel } from '.'
+import { RescisionAdapter } from './rescision.adapter'
 
 const collection = buildPath('rescisiones')
 

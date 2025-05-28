@@ -1,7 +1,8 @@
 import { publicInstance, Service } from '@/services/config'
 import { deleteManyHandler } from '@/services/handlers'
 import { buildPath } from '@/helpers'
-import { FojaMedicionAdapter, FojaMedicionModel } from '.'
+import { FojaMedicionModel } from '.'
+import { FojaMedicionAdapter } from './fojaMedicion.adapter'
 
 const collection = buildPath('fojas-mediciones')
 

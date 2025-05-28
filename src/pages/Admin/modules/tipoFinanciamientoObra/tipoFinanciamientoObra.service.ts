@@ -1,7 +1,8 @@
 import { publicInstance, Service } from '@/services/config'
 import { deleteManyHandler } from '@/services/handlers'
 import { buildPath } from '@/helpers'
-import { TipoFinanciamientoObraModel, TipoFinanciamientoObraAdapter } from '.'
+import { TipoFinanciamientoObraModel } from '.'
+import { TipoFinanciamientoObraAdapter } from './tipoFinanciamientoObra.adapter'
 
 const collection = buildPath('tipos-financiamientos-obra')
 

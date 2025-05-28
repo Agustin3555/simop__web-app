@@ -9,12 +9,12 @@ import {
 import { COMMON_PROPS } from '../../constants/commonProps.const'
 import { Method } from '@/services/config'
 import { omitBaseEntity } from '../../constants/selectors.const'
-import { TipoParalizacionMeta } from '../tipoParalizacion'
-import { DireccionMeta } from '../direccion'
-import { DepartamentoMeta } from '../departamento'
-import { ObraMeta } from '../obra'
 import { ParalizacionService } from './paralizacion.service'
 import { ParalizacionModel } from '.'
+import { DepartamentoMeta } from '../departamento/departamento.meta'
+import { DireccionMeta } from '../direccion/direccion.meta'
+import { ObraMeta } from '../obra/obra.meta'
+import { TipoParalizacionMeta } from '../tipoParalizacion/tipoParalizacion.meta'
 
 export const ParalizacionMeta = new MetaModel<ParalizacionModel.Entity>({
   key: 'paralizacion',

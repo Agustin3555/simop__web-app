@@ -1,7 +1,8 @@
 import { publicInstance, Service } from '@/services/config'
 import { deleteManyHandler } from '@/services/handlers'
 import { buildPath } from '@/helpers'
-import { RecepcionModel, RecepcionAdapter } from '.'
+import { RecepcionModel } from '.'
+import { RecepcionAdapter } from './recepcion.adapter'
 
 const collection = buildPath('recepciones')
 

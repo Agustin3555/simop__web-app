@@ -1,7 +1,8 @@
 import { publicInstance, Service } from '@/services/config'
 import { deleteManyHandler } from '@/services/handlers'
 import { buildPath } from '@/helpers'
-import { InspectorObraModel, InspectorObraAdapter } from '.'
+import { InspectorObraModel } from '.'
+import { InspectorObraAdapter } from './inspectorObra.adapter'
 
 const collection = buildPath('inspectores-obras')
 

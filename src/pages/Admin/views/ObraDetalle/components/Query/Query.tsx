@@ -14,8 +14,9 @@ import { captureElementImage, newWindow } from '@/pages/Admin/helpers'
 import { TableWindow } from './components'
 import { TableWindowProps } from './components/TableWindow/TableWindow'
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
-import { ObraMeta, ObraService } from '@/pages/Admin/modules/obra'
 import { MetaModel } from '@/pages/Admin/meta'
+import { ObraMeta } from '@/pages/Admin/modules/obra/obra.meta'
+import { ObraService } from '@/pages/Admin/modules/obra/obra.service'
 
 const KEY_NAME = 'obra'
 

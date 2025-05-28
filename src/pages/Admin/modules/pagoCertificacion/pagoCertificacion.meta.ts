@@ -9,12 +9,12 @@ import {
 } from '../../meta'
 import { Method } from '@/services/config'
 import { omitBaseEntity } from '../../constants/selectors.const'
-import { FojaMedicionMeta } from '../fojaMedicion'
-import { DireccionMeta } from '../direccion'
-import { DepartamentoMeta } from '../departamento'
-import { RedeterminacionMeta } from '../redeterminacion'
 import { PagoCertificacionService } from './pagoCertificacion.service'
 import { PagoCertificacionModel } from '.'
+import { DepartamentoMeta } from '../departamento/departamento.meta'
+import { DireccionMeta } from '../direccion/direccion.meta'
+import { FojaMedicionMeta } from '../fojaMedicion/fojaMedicion.meta'
+import { RedeterminacionMeta } from '../redeterminacion/redeterminacion.meta'
 
 export const PagoCertificacionMeta =
   new MetaModel<PagoCertificacionModel.Entity>({

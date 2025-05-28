@@ -1,7 +1,8 @@
 import { publicInstance, Service } from '@/services/config'
 import { deleteManyHandler } from '@/services/handlers'
 import { buildPath } from '@/helpers'
-import { TipoRedeterminacionAdapter, TipoRedeterminacionModel } from '.'
+import { TipoRedeterminacionModel } from '.'
+import { TipoRedeterminacionAdapter } from './tipoRedeterminacion.adapter'
 
 const collection = buildPath('tipos-redeterminaciones')
 

@@ -1,7 +1,8 @@
 import { publicInstance, Service } from '@/services/config'
 import { deleteManyHandler } from '@/services/handlers'
 import { buildPath } from '@/helpers'
-import { TipoProgramaObraAdapter, TipoProgramaObraModel } from '.'
+import { TipoProgramaObraModel } from '.'
+import { TipoProgramaObraAdapter } from './tipoProgramaObra.adapter'
 
 const collection = buildPath('tipos-programas-obra')
 

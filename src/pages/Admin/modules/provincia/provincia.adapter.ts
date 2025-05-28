@@ -1,32 +1,40 @@
 import { InputAdapter, OutputAdapter } from '@/adapters/config'
 import { ProvinciaModel } from '.'
 
-export const getAll: {
+const getAll: {
   output: OutputAdapter<ProvinciaModel.Entity[], ProvinciaModel.Entity[]>
 } = {
   output: response => response,
 }
 
-export const getRefs: {
+const getRefs: {
   output: OutputAdapter<ProvinciaModel.Ref[], ProvinciaModel.Ref[]>
 } = {
   output: response => response,
 }
 
-export const getOne: {
+const getOne: {
   output: OutputAdapter<ProvinciaModel.Entity, ProvinciaModel.Entity>
 } = {
   output: response => response,
 }
 
-export const create: {
+const create: {
   input: InputAdapter<ProvinciaModel.CreateEntity, ProvinciaModel.CreateEntity>
 } = {
   input: data => data,
 }
 
-export const updateOne: {
+const updateOne: {
   input: InputAdapter<ProvinciaModel.UpdateEntity, ProvinciaModel.UpdateEntity>
 } = {
   input: data => data,
+}
+
+export const ProvinciaAdapter = {
+  getAll,
+  getRefs,
+  getOne,
+  create,
+  updateOne,
 }

@@ -1,32 +1,40 @@
 import { InputAdapter, OutputAdapter } from '@/adapters/config'
 import { PaisModel } from '.'
 
-export const getAll: {
+const getAll: {
   output: OutputAdapter<PaisModel.Entity[], PaisModel.Entity[]>
 } = {
   output: response => response,
 }
 
-export const getRefs: {
+const getRefs: {
   output: OutputAdapter<PaisModel.Ref[], PaisModel.Ref[]>
 } = {
   output: response => response,
 }
 
-export const getOne: {
+const getOne: {
   output: OutputAdapter<PaisModel.Entity, PaisModel.Entity>
 } = {
   output: response => response,
 }
 
-export const create: {
+const create: {
   input: InputAdapter<PaisModel.CreateEntity, PaisModel.CreateEntity>
 } = {
   input: data => data,
 }
 
-export const updateOne: {
+const updateOne: {
   input: InputAdapter<PaisModel.UpdateEntity, PaisModel.UpdateEntity>
 } = {
   input: data => data,
+}
+
+export const PaisAdapter = {
+  getAll,
+  getRefs,
+  getOne,
+  create,
+  updateOne,
 }

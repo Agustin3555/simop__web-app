@@ -11,12 +11,12 @@ import {
 import { COMMON_PROPS } from '../../constants/commonProps.const'
 import { Method } from '@/services/config'
 import { omitBaseEntity } from '../../constants/selectors.const'
-import { DireccionMeta } from '../direccion'
-import { DepartamentoMeta } from '../departamento'
-import { TipoRedeterminacionMeta } from '../tipoRedeterminacion'
-import { ObraMeta } from '../obra'
 import { RedeterminacionService } from './redeterminacion.service'
 import { RedeterminacionModel } from '.'
+import { DepartamentoMeta } from '../departamento/departamento.meta'
+import { DireccionMeta } from '../direccion/direccion.meta'
+import { ObraMeta } from '../obra/obra.meta'
+import { TipoRedeterminacionMeta } from '../tipoRedeterminacion/tipoRedeterminacion.meta'
 
 export const RedeterminacionMeta = new MetaModel<RedeterminacionModel.Entity>({
   key: 'redeterminacion',

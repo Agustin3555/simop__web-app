@@ -2,9 +2,9 @@ import { RefProp, MetaModel, TextProp } from '../../meta'
 import { COMMON_PROPS } from '../../constants/commonProps.const'
 import { Method } from '@/services/config'
 import { omitBaseEntity } from '../../constants/selectors.const'
-import { PaisMeta } from '../pais'
 import { ProvinciaService } from './provincia.service'
 import { ProvinciaModel } from '.'
+import { PaisMeta } from '../pais/pais.meta'
 
 export const ProvinciaMeta = new MetaModel<ProvinciaModel.Entity>({
   key: 'provincia',

@@ -1,7 +1,8 @@
 import { publicInstance, Service } from '@/services/config'
 import { deleteManyHandler } from '@/services/handlers'
 import { buildPath } from '@/helpers'
-import { AmpliacionAdapter, AmpliacionModel } from '.'
+import { AmpliacionAdapter } from './ampliacion.adapter'
+import { AmpliacionModel } from '.'
 
 const collection = buildPath('ampliaciones')
 

@@ -2,11 +2,11 @@ import { NumberProp, RefProp, MetaModel, TextProp } from '../../meta'
 import { COMMON_PROPS } from '../../constants/commonProps.const'
 import { Method } from '@/services/config'
 import { omitBaseEntity } from '../../constants/selectors.const'
-import { PaisMeta } from '../pais'
-import { ProvinciaMeta } from '../provincia'
-import { LocalidadMeta } from '../localidad'
 import { RepresentanteService } from './representante.service'
 import { RepresentanteModel } from '.'
+import { LocalidadMeta } from '../localidad/localidad.meta'
+import { PaisMeta } from '../pais/pais.meta'
+import { ProvinciaMeta } from '../provincia/provincia.meta'
 
 export const RepresentanteMeta = new MetaModel<RepresentanteModel.Entity>({
   key: 'representante',

@@ -1,7 +1,8 @@
 import { publicInstance, Service } from '@/services/config'
 import { deleteManyHandler } from '@/services/handlers'
 import { buildPath } from '@/helpers'
-import { DireccionAdapter, DireccionModel } from '.'
+import { DireccionModel } from '.'
+import { DireccionAdapter } from './direccion.adapter'
 
 const collection = buildPath('direcciones')
 

@@ -1,25 +1,25 @@
 import { InputAdapter, OutputAdapter } from '@/adapters/config'
 import { ModificacionModel } from '.'
 
-export const getAll: {
+const getAll: {
   output: OutputAdapter<ModificacionModel.Entity[], ModificacionModel.Entity[]>
 } = {
   output: response => response,
 }
 
-export const getRefs: {
+const getRefs: {
   output: OutputAdapter<ModificacionModel.Ref[], ModificacionModel.Ref[]>
 } = {
   output: response => response,
 }
 
-export const getOne: {
+const getOne: {
   output: OutputAdapter<ModificacionModel.Entity, ModificacionModel.Entity>
 } = {
   output: response => response,
 }
 
-export const create: {
+const create: {
   input: InputAdapter<
     ModificacionModel.CreateEntity,
     ModificacionModel.CreateEntity
@@ -28,11 +28,19 @@ export const create: {
   input: data => data,
 }
 
-export const updateOne: {
+const updateOne: {
   input: InputAdapter<
     ModificacionModel.UpdateEntity,
     ModificacionModel.UpdateEntity
   >
 } = {
   input: data => data,
+}
+
+export const ModificacionAdapter = {
+  getAll,
+  getRefs,
+  getOne,
+  create,
+  updateOne,
 }

@@ -1,7 +1,8 @@
 import { publicInstance, Service } from '@/services/config'
 import { deleteManyHandler } from '@/services/handlers'
 import { buildPath } from '@/helpers'
-import { PagoCertificacionAdapter, PagoCertificacionModel } from '.'
+import { PagoCertificacionModel } from '.'
+import { PagoCertificacionAdapter } from './pagoCertificacion.adapter'
 
 const collection = buildPath('pagos-certificaciones')
 

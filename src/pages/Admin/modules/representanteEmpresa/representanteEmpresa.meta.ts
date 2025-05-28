@@ -2,11 +2,11 @@ import { BooleanProp, RefProp, MetaModel, DateProp } from '../../meta'
 import { COMMON_PROPS } from '../../constants/commonProps.const'
 import { Method } from '@/services/config'
 import { omitBaseEntity } from '../../constants/selectors.const'
-import { EmpresaMeta } from '../empresa'
 import { RepresentanteMeta } from '../representante/representante.meta'
-import { TipoRepresentanteMeta } from '../tipoRepresentante'
 import { RepresentanteEmpresaService } from './representanteEmpresa.service'
 import { RepresentanteEmpresaModel } from '.'
+import { TipoRepresentanteMeta } from '../tipoRepresentante/tipoRepresentante.meta'
+import { EmpresaMeta } from '../empresa/empresa.meta'
 
 export const RepresentanteEmpresaMeta =
   new MetaModel<RepresentanteEmpresaModel.Entity>({

@@ -8,12 +8,12 @@ import {
 import { COMMON_PROPS } from '../../constants/commonProps.const'
 import { Method } from '@/services/config'
 import { omitBaseEntity } from '../../constants/selectors.const'
-import { TipoRecepcionMeta } from '../tipoRecepcion'
-import { DireccionMeta } from '../direccion'
-import { DepartamentoMeta } from '../departamento'
-import { ObraMeta } from '../obra'
 import { RecepcionService } from './recepcion.service'
 import { RecepcionModel } from '.'
+import { DepartamentoMeta } from '../departamento/departamento.meta'
+import { DireccionMeta } from '../direccion/direccion.meta'
+import { ObraMeta } from '../obra/obra.meta'
+import { TipoRecepcionMeta } from '../tipoRecepcion/tipoRecepcion.meta'
 
 export const RecepcionMeta = new MetaModel<RecepcionModel.Entity>({
   key: 'recepcion',

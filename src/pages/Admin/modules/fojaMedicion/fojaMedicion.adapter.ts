@@ -1,25 +1,25 @@
 import { InputAdapter, OutputAdapter } from '@/adapters/config'
 import { FojaMedicionModel } from '.'
 
-export const getAll: {
+const getAll: {
   output: OutputAdapter<FojaMedicionModel.Entity[], FojaMedicionModel.Entity[]>
 } = {
   output: response => response,
 }
 
-export const getRefs: {
+const getRefs: {
   output: OutputAdapter<FojaMedicionModel.Ref[], FojaMedicionModel.Ref[]>
 } = {
   output: response => response,
 }
 
-export const getOne: {
+const getOne: {
   output: OutputAdapter<FojaMedicionModel.Entity, FojaMedicionModel.Entity>
 } = {
   output: response => response,
 }
 
-export const create: {
+const create: {
   input: InputAdapter<
     FojaMedicionModel.CreateEntity,
     FojaMedicionModel.CreateEntity
@@ -28,11 +28,19 @@ export const create: {
   input: data => data,
 }
 
-export const updateOne: {
+const updateOne: {
   input: InputAdapter<
     FojaMedicionModel.UpdateEntity,
     FojaMedicionModel.UpdateEntity
   >
 } = {
   input: data => data,
+}
+
+export const FojaMedicionAdapter = {
+  getAll,
+  getRefs,
+  getOne,
+  create,
+  updateOne,
 }

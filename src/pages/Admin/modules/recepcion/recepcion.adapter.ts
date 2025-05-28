@@ -1,32 +1,40 @@
 import { InputAdapter, OutputAdapter } from '@/adapters/config'
 import { RecepcionModel } from '.'
 
-export const getAll: {
+const getAll: {
   output: OutputAdapter<RecepcionModel.Entity[], RecepcionModel.Entity[]>
 } = {
   output: response => response,
 }
 
-export const getRefs: {
+const getRefs: {
   output: OutputAdapter<RecepcionModel.Ref[], RecepcionModel.Ref[]>
 } = {
   output: response => response,
 }
 
-export const getOne: {
+const getOne: {
   output: OutputAdapter<RecepcionModel.Entity, RecepcionModel.Entity>
 } = {
   output: response => response,
 }
 
-export const create: {
+const create: {
   input: InputAdapter<RecepcionModel.CreateEntity, RecepcionModel.CreateEntity>
 } = {
   input: data => data,
 }
 
-export const updateOne: {
+const updateOne: {
   input: InputAdapter<RecepcionModel.UpdateEntity, RecepcionModel.UpdateEntity>
 } = {
   input: data => data,
+}
+
+export const RecepcionAdapter = {
+  getAll,
+  getRefs,
+  getOne,
+  create,
+  updateOne,
 }

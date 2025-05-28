@@ -1,7 +1,7 @@
 import { InputAdapter, OutputAdapter } from '@/adapters/config'
 import { RepresentanteModel } from '.'
 
-export const getAll: {
+const getAll: {
   output: OutputAdapter<
     RepresentanteModel.Entity[],
     RepresentanteModel.Entity[]
@@ -10,19 +10,19 @@ export const getAll: {
   output: response => response,
 }
 
-export const getRefs: {
+const getRefs: {
   output: OutputAdapter<RepresentanteModel.Ref[], RepresentanteModel.Ref[]>
 } = {
   output: response => response,
 }
 
-export const getOne: {
+const getOne: {
   output: OutputAdapter<RepresentanteModel.Entity, RepresentanteModel.Entity>
 } = {
   output: response => response,
 }
 
-export const create: {
+const create: {
   input: InputAdapter<
     RepresentanteModel.CreateEntity,
     RepresentanteModel.CreateEntity
@@ -31,11 +31,19 @@ export const create: {
   input: data => data,
 }
 
-export const updateOne: {
+const updateOne: {
   input: InputAdapter<
     RepresentanteModel.UpdateEntity,
     RepresentanteModel.UpdateEntity
   >
 } = {
   input: data => data,
+}
+
+export const RepresentanteAdapter = {
+  getAll,
+  getRefs,
+  getOne,
+  create,
+  updateOne,
 }

@@ -1,7 +1,8 @@
 import { publicInstance, Service } from '@/services/config'
 import { deleteManyHandler } from '@/services/handlers'
 import { buildPath } from '@/helpers'
-import { SubsecretariaAdapter, SubsecretariaModel } from '.'
+import { SubsecretariaModel } from '.'
+import { SubsecretariaAdapter } from './subsecretaria.adapter'
 
 const collection = buildPath('sub-secretarias')
 

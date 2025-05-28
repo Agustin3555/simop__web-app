@@ -1,7 +1,7 @@
 import { InputAdapter, OutputAdapter } from '@/adapters/config'
 import { TipoRescisionModel } from '.'
 
-export const getAll: {
+const getAll: {
   output: OutputAdapter<
     TipoRescisionModel.Entity[],
     TipoRescisionModel.Entity[]
@@ -10,19 +10,19 @@ export const getAll: {
   output: response => response,
 }
 
-export const getRefs: {
+const getRefs: {
   output: OutputAdapter<TipoRescisionModel.Ref[], TipoRescisionModel.Ref[]>
 } = {
   output: response => response,
 }
 
-export const getOne: {
+const getOne: {
   output: OutputAdapter<TipoRescisionModel.Entity, TipoRescisionModel.Entity>
 } = {
   output: response => response,
 }
 
-export const create: {
+const create: {
   input: InputAdapter<
     TipoRescisionModel.CreateEntity,
     TipoRescisionModel.CreateEntity
@@ -31,11 +31,19 @@ export const create: {
   input: data => data,
 }
 
-export const updateOne: {
+const updateOne: {
   input: InputAdapter<
     TipoRescisionModel.UpdateEntity,
     TipoRescisionModel.UpdateEntity
   >
 } = {
   input: data => data,
+}
+
+export const TipoRescisionAdapter = {
+  getAll,
+  getRefs,
+  getOne,
+  create,
+  updateOne,
 }

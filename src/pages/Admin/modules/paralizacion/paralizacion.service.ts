@@ -1,7 +1,8 @@
 import { publicInstance, Service } from '@/services/config'
 import { deleteManyHandler } from '@/services/handlers'
 import { buildPath } from '@/helpers'
-import { ParalizacionModel, ParalizacionAdapter } from '.'
+import { ParalizacionModel } from '.'
+import { ParalizacionAdapter } from './paralizacion.adapter'
 
 const collection = buildPath('paralizaciones')
 

@@ -1,25 +1,25 @@
 import { InputAdapter, OutputAdapter } from '@/adapters/config'
 import { ParalizacionModel } from '.'
 
-export const getAll: {
+const getAll: {
   output: OutputAdapter<ParalizacionModel.Entity[], ParalizacionModel.Entity[]>
 } = {
   output: response => response,
 }
 
-export const getRefs: {
+const getRefs: {
   output: OutputAdapter<ParalizacionModel.Ref[], ParalizacionModel.Ref[]>
 } = {
   output: response => response,
 }
 
-export const getOne: {
+const getOne: {
   output: OutputAdapter<ParalizacionModel.Entity, ParalizacionModel.Entity>
 } = {
   output: response => response,
 }
 
-export const create: {
+const create: {
   input: InputAdapter<
     ParalizacionModel.CreateEntity,
     ParalizacionModel.CreateEntity
@@ -28,11 +28,19 @@ export const create: {
   input: data => data,
 }
 
-export const updateOne: {
+const updateOne: {
   input: InputAdapter<
     ParalizacionModel.UpdateEntity,
     ParalizacionModel.UpdateEntity
   >
 } = {
   input: data => data,
+}
+
+export const ParalizacionAdapter = {
+  getAll,
+  getRefs,
+  getOne,
+  create,
+  updateOne,
 }

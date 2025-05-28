@@ -1,7 +1,8 @@
 import { publicInstance, Service } from '@/services/config'
 import { deleteManyHandler } from '@/services/handlers'
 import { buildPath } from '@/helpers'
-import { PaisAdapter, PaisModel } from '.'
+import { PaisModel } from '.'
+import { PaisAdapter } from './pais.adapter'
 
 const collection = buildPath('paises')
 

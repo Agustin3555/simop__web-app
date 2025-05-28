@@ -9,11 +9,11 @@ import {
 import { COMMON_PROPS } from '../../constants/commonProps.const'
 import { Method } from '@/services/config'
 import { omitBaseEntity } from '../../constants/selectors.const'
-import { DireccionMeta } from '../direccion'
 import { AmpliacionService } from './ampliacion.service'
 import { AmpliacionModel } from '.'
-import { ObraMeta } from '../obra'
-import { DepartamentoMeta } from '../departamento'
+import { DepartamentoMeta } from '../departamento/departamento.meta'
+import { DireccionMeta } from '../direccion/direccion.meta'
+import { ObraMeta } from '../obra/obra.meta'
 
 export const AmpliacionMeta = new MetaModel<AmpliacionModel.Entity>({
   key: 'ampliacion',

@@ -2,9 +2,9 @@ import { Method } from '@/services/config'
 import { omitBaseEntity } from '../../constants/selectors.const'
 import { COMMON_PROPS } from '../../constants/commonProps.const'
 import { MetaModel, RefProp, TextProp } from '../../meta'
-import { SubsecretariaMeta } from '../subsecretaria'
 import { DireccionService } from './direccion.service'
 import { DireccionModel } from '.'
+import { SubsecretariaMeta } from '../subsecretaria/subsecretaria.meta'
 
 export const DireccionMeta = new MetaModel<DireccionModel.Entity>({
   key: 'direccion',

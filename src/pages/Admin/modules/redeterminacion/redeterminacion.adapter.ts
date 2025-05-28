@@ -1,7 +1,7 @@
 import { InputAdapter, OutputAdapter } from '@/adapters/config'
 import { RedeterminacionModel } from '.'
 
-export const getAll: {
+const getAll: {
   output: OutputAdapter<
     RedeterminacionModel.Entity[],
     RedeterminacionModel.Entity[]
@@ -10,13 +10,13 @@ export const getAll: {
   output: response => response,
 }
 
-export const getRefs: {
+const getRefs: {
   output: OutputAdapter<RedeterminacionModel.Ref[], RedeterminacionModel.Ref[]>
 } = {
   output: response => response,
 }
 
-export const getOne: {
+const getOne: {
   output: OutputAdapter<
     RedeterminacionModel.Entity,
     RedeterminacionModel.Entity
@@ -25,7 +25,7 @@ export const getOne: {
   output: response => response,
 }
 
-export const create: {
+const create: {
   input: InputAdapter<
     RedeterminacionModel.CreateEntity,
     RedeterminacionModel.CreateEntity
@@ -34,11 +34,19 @@ export const create: {
   input: data => data,
 }
 
-export const updateOne: {
+const updateOne: {
   input: InputAdapter<
     RedeterminacionModel.UpdateEntity,
     RedeterminacionModel.UpdateEntity
   >
 } = {
   input: data => data,
+}
+
+export const RedeterminacionAdapter = {
+  getAll,
+  getRefs,
+  getOne,
+  create,
+  updateOne,
 }

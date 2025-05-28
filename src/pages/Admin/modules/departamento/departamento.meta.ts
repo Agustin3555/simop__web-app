@@ -2,9 +2,9 @@ import { RefProp, MetaModel, TextProp } from '../../meta'
 import { COMMON_PROPS } from '../../constants/commonProps.const'
 import { Method } from '@/services/config'
 import { omitBaseEntity } from '../../constants/selectors.const'
-import { DireccionMeta } from '../direccion'
 import { DepartamentoService } from './departamento.service'
 import { DepartamentoModel } from '.'
+import { DireccionMeta } from '../direccion/direccion.meta'
 
 export const DepartamentoMeta = new MetaModel<DepartamentoModel.Entity>({
   key: 'departamento',

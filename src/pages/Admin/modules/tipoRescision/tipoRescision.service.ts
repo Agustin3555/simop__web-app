@@ -1,7 +1,8 @@
 import { publicInstance, Service } from '@/services/config'
 import { deleteManyHandler } from '@/services/handlers'
 import { buildPath } from '@/helpers'
-import { TipoRescisionAdapter, TipoRescisionModel } from '.'
+import { TipoRescisionModel } from '.'
+import { TipoRescisionAdapter } from './tipoRescision.adapter'
 
 const collection = buildPath('tipos-rescisiones')
 

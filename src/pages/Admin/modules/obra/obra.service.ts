@@ -1,7 +1,8 @@
 import { publicInstance, Service } from '@/services/config'
 import { deleteManyHandler } from '@/services/handlers'
 import { buildPath } from '@/helpers'
-import { ObraModel, ObraAdapter } from '.'
+import { ObraModel } from '.'
+import { ObraAdapter } from './obra.adapter'
 
 const collection = buildPath('obras')
 

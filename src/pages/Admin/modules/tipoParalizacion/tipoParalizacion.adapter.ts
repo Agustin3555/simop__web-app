@@ -1,7 +1,7 @@
 import { InputAdapter, OutputAdapter } from '@/adapters/config'
 import { TipoParalizacionModel } from '.'
 
-export const getAll: {
+const getAll: {
   output: OutputAdapter<
     TipoParalizacionModel.Entity[],
     TipoParalizacionModel.Entity[]
@@ -10,7 +10,7 @@ export const getAll: {
   output: response => response,
 }
 
-export const getRefs: {
+const getRefs: {
   output: OutputAdapter<
     TipoParalizacionModel.Ref[],
     TipoParalizacionModel.Ref[]
@@ -19,7 +19,7 @@ export const getRefs: {
   output: response => response,
 }
 
-export const getOne: {
+const getOne: {
   output: OutputAdapter<
     TipoParalizacionModel.Entity,
     TipoParalizacionModel.Entity
@@ -28,7 +28,7 @@ export const getOne: {
   output: response => response,
 }
 
-export const create: {
+const create: {
   input: InputAdapter<
     TipoParalizacionModel.CreateEntity,
     TipoParalizacionModel.CreateEntity
@@ -37,11 +37,19 @@ export const create: {
   input: data => data,
 }
 
-export const updateOne: {
+const updateOne: {
   input: InputAdapter<
     TipoParalizacionModel.UpdateEntity,
     TipoParalizacionModel.UpdateEntity
   >
 } = {
   input: data => data,
+}
+
+export const TipoParalizacionAdapter = {
+  getAll,
+  getRefs,
+  getOne,
+  create,
+  updateOne,
 }
