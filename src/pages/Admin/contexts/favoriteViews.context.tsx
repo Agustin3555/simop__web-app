@@ -1,8 +1,9 @@
 import { createContext, ReactNode, useCallback, useState } from 'react'
-// import { favoriteViewsEntity } from '../services/localStorage'
+import { favoriteViewsEntity } from '../services/localStorage/entities/favoriteViews'
 
 interface FavoriteViewsContextProps {
   views: string[]
+  isFavorite: (viewKey: string) => boolean
   add: (viewKey: string) => void
   remove: (viewKey: string) => void
   toggle: (viewKey: string) => void
@@ -19,7 +20,27 @@ interface FavoriteViewsProviderProps {
 export const FavoriteViewsProvider = ({
   children,
 }: FavoriteViewsProviderProps) => {
-  const [views, setViews] = useState(favoriteViewsEntity.state)
+  const [views, setViews] = useState(() => {
+    try {
+      return favoriteViewsEntity.state
+    } catch (error) {
+      const defaultValue: string[] = [
+        'empresa',
+        'obra',
+        'fojaMedicion',
+        'obraTotales',
+        'obraDetalle',
+      ]
+
+      favoriteViewsEntity.state = defaultValue
+      return defaultValue
+    }
+  })
+
+  const isFavorite = useCallback<FavoriteViewsContextProps['isFavorite']>(
+    viewKey => views.includes(viewKey),
+    [views],
+  )
 
   const add = useCallback<FavoriteViewsContextProps['add']>(
     viewKey =>
@@ -51,7 +72,9 @@ export const FavoriteViewsProvider = ({
   )
 
   return (
-    <FavoriteViewsContext.Provider value={{ views, add, remove, toggle }}>
+    <FavoriteViewsContext.Provider
+      value={{ views, isFavorite, add, remove, toggle }}
+    >
       {children}
     </FavoriteViewsContext.Provider>
   )

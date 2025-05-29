@@ -1,16 +1,26 @@
 import './FavoriteViews.css'
-import { useCallback } from 'react'
-import { useFavoriteViews, useInputHandler } from '../../hooks'
+import { MouseEventHandler, useCallback } from 'react'
+import { useFavoriteViews, useViews } from '../../hooks'
 import { Button, Icon } from '@/components'
 import { VIEWS_INFO } from '../../constants/views.const'
+import { classList } from '@/helpers'
 
 const FavoriteViews = () => {
   const { views, remove } = useFavoriteViews()
+  const { isActive, select } = useViews()
 
-  const handleChange = useInputHandler(value => console.log(value))
+  const handleClick = useCallback(
+    (viewKey: string) => () => select(viewKey, 0),
+    [],
+  )
 
-  const handleDeleteButtonClick = useCallback(
-    (viewKey: string) => () => remove(viewKey),
+  const handleDeleteButtonClick = useCallback<
+    (viewKey: string) => MouseEventHandler<HTMLButtonElement>
+  >(
+    viewKey => e => {
+      e.stopPropagation()
+      remove(viewKey)
+    },
     [],
   )
 
@@ -20,13 +30,14 @@ const FavoriteViews = () => {
         const { title, faIcon } = VIEWS_INFO[viewKey]
 
         return (
-          <label key={viewKey} className="favorites ui-l" {...{ title }}>
-            <input
-              name="favorite-views"
-              type="checkbox"
-              value={viewKey}
-              onChange={handleChange}
-            />
+          <div
+            key={viewKey}
+            className={classList('item', 'ui-l', {
+              active: isActive(viewKey),
+            })}
+            {...{ title }}
+            onClick={handleClick(viewKey)}
+          >
             <Button
               faIcon="fa-solid fa-minus"
               size="s"
@@ -34,7 +45,7 @@ const FavoriteViews = () => {
             />
             <Icon {...{ faIcon }} />
             <p className="text">{title}</p>
-          </label>
+          </div>
         )
       })}
     </fieldset>

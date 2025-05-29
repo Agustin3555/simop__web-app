@@ -86,6 +86,8 @@ export class DateProp implements PropScheme {
 
     const value = item[key] as undefined | string
 
+    // BUG si no se pasa un formato correcto, explota
+
     return value && <p>{format(value, { date: 'short' })}</p>
   }
 

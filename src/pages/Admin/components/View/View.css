@@ -100,8 +100,6 @@
   }
 
   > .local-views {
-    position: relative;
-
     padding: var(--pal-size-s);
     height: 100%;
 

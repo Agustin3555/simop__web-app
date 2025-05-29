@@ -9,13 +9,11 @@
 
   transition: padding var(--pal-time-m) ease;
 
-  /* TODO: conseguirlo */
-  /* @media (width <= 50rem) { */
-  /* @media (50rem < width) {
-    padding-left: 0;
-  } */
-
   [data-nav-open='true'] & {
     padding-left: 0;
+  }
+
+  @media (width <= 50rem) {
+    padding-left: var(--pal-size-s) !important;
   }
 }

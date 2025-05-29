@@ -1,7 +1,7 @@
 import './Nav.css'
 import { useState } from 'react'
 import { useNavState } from '../../hooks'
-import { SegmentedControl } from '..'
+import { FavoriteViews, SegmentedControl } from '..'
 import { SegmentedControlProps } from '../SegmentedControl/SegmentedControl'
 import { Tree } from './components'
 
@@ -33,7 +33,7 @@ const Nav = () => {
           />
           <nav data-view-mode={viewMode}>
             <Tree />
-            {/* <FavoriteViews /> */}
+            <FavoriteViews />
           </nav>
         </div>
       </div>

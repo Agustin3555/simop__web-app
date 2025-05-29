@@ -1,7 +1,6 @@
-import { EmpresaMeta } from '@/pages/Admin/modules/empresa/empresa.meta'
-import { LocalStorageEntity } from '..'
+import { LocalStorageEntity } from '../localStorageEntity'
 
 export const lastVisitedViewEntity = new LocalStorageEntity(
   'last-visited-view',
-  EmpresaMeta.key,
+  data => typeof data === 'string',
 )

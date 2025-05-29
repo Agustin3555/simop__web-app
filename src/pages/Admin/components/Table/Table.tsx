@@ -315,6 +315,7 @@ const Table = ({ data, setQuickFilters, methods }: TableProps) => {
         )}
       </div>
       <div className="table">
+        {/* <pre>{JSON.stringify(data, undefined, 1)}</pre> */}
         <div
           className={classList(
             'head',

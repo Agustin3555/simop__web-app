@@ -2,7 +2,7 @@ import { createContext, ReactNode, useCallback, useState } from 'react'
 
 interface ViewsContextProps {
   isActive: (viewKey?: string) => boolean
-  selectView: (viewKey: string, i: 0 | 1) => void
+  select: (viewKey: string, i: 0 | 1) => void
 }
 
 export const ViewsContext = createContext<ViewsContextProps | undefined>(
@@ -21,18 +21,21 @@ export const ViewsProvider = ({ children }: ViewsProviderProps) => {
     [selectedViews],
   )
 
-  const selectView = useCallback<ViewsContextProps['selectView']>(
+  const select = useCallback<ViewsContextProps['select']>(
     (viewKey, i) =>
       setSelectedViews(prev => {
         const newState = [...prev]
-        newState[i] = viewKey
+
+        if (newState[i] === viewKey) newState[i] = ''
+        else newState[i] = viewKey
+
         return newState.slice(0, 2)
       }),
     [],
   )
 
   return (
-    <ViewsContext.Provider value={{ isActive, selectView }}>
+    <ViewsContext.Provider value={{ isActive, select }}>
       {children}
     </ViewsContext.Provider>
   )

@@ -1,15 +1,6 @@
-import { LocalStorageEntity } from '..'
-import { EmpresaMeta } from '@/pages/Admin/modules/empresa/empresa.meta'
-import { FojaMedicionMeta } from '@/pages/Admin/modules/fojaMedicion/fojaMedicion.meta'
-import { ObraMeta } from '@/pages/Admin/modules/obra/obra.meta'
+import { LocalStorageEntity } from '../localStorageEntity'
 
-export const favoriteViewsEntity = new LocalStorageEntity<string[]>(
+export const favoriteViewsEntity = new LocalStorageEntity(
   'favorite-views',
-  [
-    EmpresaMeta.key,
-    ObraMeta.key,
-    FojaMedicionMeta.key,
-    'obraTotales',
-    'obraDetalle',
-  ],
+  data => Array.isArray(data) && data.every(item => typeof item === 'string'),
 )

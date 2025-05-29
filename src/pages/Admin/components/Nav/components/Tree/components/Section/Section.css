@@ -9,7 +9,7 @@
   transition: height var(--pal-time-s) ease;
   interpolate-size: allow-keywords;
 
-  > button {
+  > .node {
     --cmp-icon-size: var(--ui-icon-size);
 
     flex-shrink: 0;
@@ -17,10 +17,12 @@
     display: flex;
     align-items: center;
     gap: var(--ui-gap);
-    padding-inline: var(--ui-padding-inline);
+    padding-right: var(--pal-size-2xs);
+    padding-left: var(--ui-padding-inline);
     height: var(--ui-height);
 
     border-radius: var(--ui-border-radius);
+    cursor: pointer;
 
     transition: background-color var(--pal-time-xs) ease-out;
 
@@ -29,6 +31,8 @@
     }
 
     > p {
+      flex-grow: 1;
+
       font-size: var(--ui-font-size);
       line-height: initial;
       text-align: start;
@@ -38,14 +42,39 @@
       overflow: hidden;
     }
 
+    > .actions {
+      > .cmp-button {
+        --cmp-button-bg-color: transparent;
+        --cmp-button-transition: opacity var(--pal-time-xs) ease-out;
+
+        color: var(--pal-color-a-l1);
+
+        @media (hover: hover) {
+          opacity: 0;
+        }
+      }
+
+      &.show-favorite > .cmp-button {
+        opacity: initial;
+      }
+    }
+
     &:hover {
       background-color: var(--pal-color-white);
+
+      > .actions > .cmp-button {
+        opacity: initial;
+      }
     }
 
     &.active {
       color: var(--pal-color-white);
 
       background-color: var(--pal-color-a-l2);
+
+      > .actions > .cmp-button {
+        color: unset;
+      }
     }
   }
 
@@ -76,7 +105,7 @@
   &.open {
     height: auto;
 
-    > button > .cmp-icon {
+    > .node > .cmp-icon {
       rotate: 0.25turn;
     }
   }

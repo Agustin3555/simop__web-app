@@ -1,34 +1,63 @@
 import './Section.css'
-import { useCallback, useState } from 'react'
-import { useViews } from '@/pages/Admin/hooks'
-import { Icon } from '@/components'
+import { MouseEventHandler, useCallback, useState } from 'react'
+import { useFavoriteViews, useViews } from '@/pages/Admin/hooks'
+import { Button, Icon } from '@/components'
 import { SectionNode } from '@/pages/Admin/constants/navTree.const'
 import { VIEWS_INFO } from '@/pages/Admin/constants/views.const'
 import { classList } from '@/helpers'
 
 const Section = ({ viewKey, title, sections }: SectionNode) => {
   const [isOpen, setOpen] = useState(false)
-  const { isActive, selectView } = useViews()
+  const { isActive, select } = useViews()
+  const { isFavorite, toggle } = useFavoriteViews()
 
   const handleClick = useCallback(() => {
     if (viewKey) {
-      selectView(viewKey, 0)
+      select(viewKey, 0)
       return
     }
 
     setOpen(prev => !prev)
   }, [])
 
+  const handleToggleFavoriteClick = useCallback<
+    (viewKey: string) => MouseEventHandler<HTMLButtonElement>
+  >(
+    viewKey => e => {
+      e.stopPropagation()
+      toggle(viewKey)
+    },
+    [toggle],
+  )
+
   return (
     <div className={classList('cmp-section', 'ui-m', { open: isOpen })}>
-      <button
-        className={classList({ active: isActive(viewKey) })}
+      <div
+        className={classList('node', { active: isActive(viewKey) })}
         onClick={handleClick}
       >
         {viewKey ? (
           <>
             <Icon faIcon={VIEWS_INFO[viewKey].faIcon} />
             <p>{VIEWS_INFO[viewKey].title}</p>
+            <div
+              className={classList('actions', {
+                'show-favorite': isFavorite(viewKey),
+              })}
+            >
+              <Button
+                title={
+                  isFavorite(viewKey)
+                    ? 'Eliminar de favoritos'
+                    : 'Agregar a favoritos'
+                }
+                faIcon={`fa-${
+                  isFavorite(viewKey) ? 'solid' : 'regular'
+                } fa-star`}
+                size="s"
+                onAction={handleToggleFavoriteClick(viewKey)}
+              />
+            </div>
           </>
         ) : (
           <>
@@ -36,7 +65,7 @@ const Section = ({ viewKey, title, sections }: SectionNode) => {
             <p>{title}</p>
           </>
         )}
-      </button>
+      </div>
       {sections && (
         <div className="items">
           <span className="bar" />

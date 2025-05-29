@@ -8,7 +8,7 @@
     display: none !important;
   }
 
-  > label {
+  > .item {
     position: relative;
 
     display: flex;
@@ -21,7 +21,6 @@
     padding: var(--pal-size-m);
     height: 5.5rem;
 
-    font-weight: 650;
     color: var(--pal-color-a-l1);
 
     border-radius: var(--ui-border-radius);
@@ -29,10 +28,6 @@
 
     transition: color var(--pal-time-xs) ease-out,
       background-color var(--pal-time-xs) ease-out;
-
-    > input {
-      display: none;
-    }
 
     > .cmp-button {
       --separation: var(--pal-size-2xs);
@@ -58,6 +53,7 @@
       width: 100%;
 
       font-size: var(--pal-size-font-xs);
+      font-weight: 650;
       text-align: center;
       white-space: nowrap;
       text-overflow: ellipsis;
@@ -65,14 +61,14 @@
       overflow: hidden;
     }
 
-    &:hover > .cmp-button {
-      opacity: initial;
-    }
-
-    &:has(input:checked) {
+    &.active {
       color: var(--pal-color-white);
 
       background-color: var(--pal-color-a-l2);
+    }
+
+    &:hover > .cmp-button {
+      opacity: initial;
     }
   }
 }

@@ -9,7 +9,7 @@ export interface ToggleProps {
   size?: 's' | 'm'
   asSwitch?: boolean
   value: boolean
-  setValue: Dispatch<SetStateAction<boolean>>
+  setValue?: Dispatch<SetStateAction<boolean>>
 }
 
 const Toggle = ({
@@ -20,7 +20,9 @@ const Toggle = ({
   value: checked,
   setValue,
 }: ToggleProps) => {
-  const handleChange = useCallback(() => setValue(prevValue => !prevValue), [])
+  const handleChange = useCallback(() => {
+    setValue && setValue(prevValue => !prevValue)
+  }, [])
 
   return (
     <label
