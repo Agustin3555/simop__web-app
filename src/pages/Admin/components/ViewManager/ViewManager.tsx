@@ -1,4 +1,5 @@
 import './ViewManager.css'
+import { FavoriteViews } from '..'
 import Ampliacion from '../../views/Ampliacion/Ampliacion'
 import Departamento from '../../views/Departamento/Departamento'
 import Direccion from '../../views/Direccion/Direccion'
@@ -39,6 +40,9 @@ import TipoTematicaObra from '../../views/TipoTematicaObra/TipoTematicaObra'
 
 const ViewManager = () => (
   <div className="cmp-view-manager">
+    <div className="default">
+      <FavoriteViews />
+    </div>
     <SubSecretaria />
     <Direccion />
     <Departamento />

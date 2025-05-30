@@ -16,4 +16,24 @@
   @media (width <= 50rem) {
     padding-left: var(--pal-size-s) !important;
   }
+
+  > .default {
+    align-content: center;
+    border-width: var(--line-thickness);
+    border-style: solid;
+    border-color: var(--pal-color-a-l3);
+    padding: var(--pal-size-s);
+    width: 100%;
+    height: 100%;
+
+    border-radius: var(--pal-size-xs);
+
+    > * {
+      margin-inline: auto;
+    }
+  }
+
+  &:has(.cmp-view.active) > .default {
+    display: none;
+  }
 }

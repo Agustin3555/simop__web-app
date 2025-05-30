@@ -25,7 +25,7 @@ const FavoriteViews = () => {
   )
 
   return (
-    <fieldset className="cmp-favorite-views">
+    <div className="cmp-favorite-views">
       {views.map(viewKey => {
         const { title, faIcon } = VIEWS_INFO[viewKey]
 
@@ -48,7 +48,7 @@ const FavoriteViews = () => {
           </div>
         )
       })}
-    </fieldset>
+    </div>
   )
 }
 

@@ -1,12 +1,8 @@
 .cmp-favorite-views {
   display: grid;
   gap: var(--pal-size-xs);
-  border: none;
+  max-width: 30rem;
   grid-template-columns: repeat(auto-fill, minmax(min(100%, 8rem), 1fr));
-
-  :not(nav[data-view-mode='favorites']) > & {
-    display: none !important;
-  }
 
   > .item {
     position: relative;
@@ -70,5 +66,9 @@
     &:hover > .cmp-button {
       opacity: initial;
     }
+  }
+
+  nav:not([data-view-mode='favorites']) > & {
+    display: none;
   }
 }

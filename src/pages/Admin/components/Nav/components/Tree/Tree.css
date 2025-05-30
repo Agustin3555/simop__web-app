@@ -5,7 +5,7 @@
   flex-direction: column;
   gap: var(--items-gap);
 
-  :not(nav[data-view-mode='tree']) > & {
-    display: none !important;
+  nav:not([data-view-mode='tree']) > & {
+    display: none;
   }
 }
