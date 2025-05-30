@@ -225,10 +225,12 @@
   display: flex;
   flex-direction: column;
   gap: var(--pal-size-2xl);
-  padding: var(--pal-size-l);
+  border-width: var(--line-thickness);
+  border-style: solid;
+  border-color: var(--pal-color-a-l4);
+  padding: var(--pal-size-m);
 
   border-radius: var(--pal-size-xs);
-  background-color: var(--pal-color-white);
 
   > small {
     display: flex;

@@ -2,7 +2,7 @@
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  gap: var(--gap);
+  gap: var(--pal-size-s);
 
   > form {
     align-items: flex-start;
@@ -18,7 +18,6 @@
       > .section > .fields {
         display: flex;
         flex-wrap: wrap;
-
         gap: var(--gap);
 
         > .control {
@@ -41,8 +40,6 @@
 
     > .cmp-button {
       color: var(--pal-color-white);
-
-      background-color: var(--pal-color-a);
     }
   }
 }

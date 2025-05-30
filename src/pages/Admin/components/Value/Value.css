@@ -1,4 +1,6 @@
 .cmp-value {
+  --cmp-icon-size: var(--ui-icon-size);
+
   flex-shrink: 0;
 
   display: flex;

@@ -13,9 +13,6 @@
 
   cursor: pointer;
 
-  transition: color var(--pal-time-xs) ease-out,
-    background-color var(--pal-time-xs) ease-out;
-
   > strong {
     font-weight: unset;
   }
@@ -45,18 +42,18 @@
   }
 
   &:not(:last-child) {
-    border-bottom-color: var(--pal-color-a-l3);
+    border-bottom-color: var(--pal-color-a-l4);
     border-bottom-style: solid;
     border-bottom-width: var(--line-thickness);
   }
 
   &:hover {
-    background-color: var(--pal-color-a-l3);
+    background-color: var(--pal-color-a-l4);
   }
 
   &:has(input:checked) {
     color: var(--pal-color-a-d3);
 
-    background-color: var(--pal-color-a-l2);
+    background-color: var(--pal-color-a-l3);
   }
 }

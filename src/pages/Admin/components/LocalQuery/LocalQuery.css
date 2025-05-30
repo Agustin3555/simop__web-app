@@ -1,7 +1,7 @@
 .cmp-local-query {
   display: flex;
   flex-direction: column;
-  gap: var(--pal-size-m);
+  gap: var(--pal-size-s);
 
   /* mask-image: linear-gradient(to right, #fff 95%, transparent); */
 
@@ -10,7 +10,7 @@
     flex-wrap: wrap;
     align-items: center;
     justify-content: space-between;
-    gap: var(--pal-size-m);
+    gap: var(--pal-size-s);
 
     > .cmp-base-combobox {
       width: 100%;
@@ -19,7 +19,7 @@
     > .filter-container {
       display: flex;
       flex-wrap: wrap;
-      gap: var(--pal-size-m);
+      gap: var(--pal-size-s);
       width: 100%;
 
       > .item {
@@ -38,19 +38,17 @@
 
       display: flex;
       align-items: center;
-      gap: var(--pal-size-m);
+      gap: var(--pal-size-s);
 
       > .cmp-button {
         color: var(--pal-color-white);
-
-        background-color: var(--pal-color-a);
       }
     }
 
     > .actions {
       display: flex;
       flex-wrap: wrap;
-      gap: var(--pal-size-m);
+      gap: var(--pal-size-s);
 
       > .cmp-secure-hold-button {
         border-color: var(--pal-color-a-l1);

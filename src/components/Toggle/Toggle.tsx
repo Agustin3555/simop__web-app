@@ -26,7 +26,7 @@ const Toggle = ({
 
   return (
     <label
-      className={classList('cmp-toggle', size, { switch: asSwitch })}
+      className={classList('cmp-toggle', `ui-${size}`, { switch: asSwitch })}
       {...{ title }}
     >
       <input type="checkbox" onChange={handleChange} {...{ checked }} />

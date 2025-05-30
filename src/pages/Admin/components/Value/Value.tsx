@@ -18,7 +18,7 @@ const Value = ({
   pill = false,
 }: ValueProps) => (
   <div
-    className={classList('cmp-value', size, type, {
+    className={classList('cmp-value', `ui-${size}`, type, {
       square: faIcon !== undefined && text === undefined,
       pill,
     })}

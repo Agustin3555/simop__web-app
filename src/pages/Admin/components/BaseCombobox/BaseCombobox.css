@@ -44,7 +44,7 @@
       cursor: default;
 
       > .item {
-        --border-color: var(--pal-color-a-l3);
+        --border-color: var(--pal-color-a-l4);
 
         display: flex;
         align-items: center;
@@ -72,6 +72,8 @@
         }
 
         > .cmp-button {
+          --cmp-button-bg-color: transparent;
+
           border-width: 0;
           border-color: var(--border-color);
           border-left-width: var(--line-thickness);
@@ -152,6 +154,8 @@
         }
 
         > .cmp-button {
+          --cmp-button-bg-color: transparent;
+
           position: absolute;
           top: 0;
           right: 0;

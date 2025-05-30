@@ -40,7 +40,7 @@
       }
 
       > .cmp-value {
-        border-color: var(--pal-color-a-l3);
+        border-color: var(--pal-color-a-l4);
 
         color: var(--pal-color-a);
       }
@@ -117,20 +117,20 @@
     > .row {
       border-bottom-width: var(--line-thickness);
       border-bottom-style: solid;
-      border-bottom-color: var(--pal-color-a-l3);
+      border-bottom-color: var(--pal-color-a-l4);
 
       &:last-of-type {
         border: none;
       }
 
       &:hover {
-        background-color: var(--pal-color-a-l3);
+        background-color: var(--pal-color-a-l4);
       }
     }
   }
 
   > .foot {
-    background-color: var(--pal-color-a-l3);
+    background-color: var(--pal-color-a-l4);
 
     &.enable-stick {
       position: sticky;

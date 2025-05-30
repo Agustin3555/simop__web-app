@@ -1,4 +1,5 @@
 .cmp-toggle {
+  --cmp-icon-size: var(--ui-icon-size);
   --border-radius: var(--pal-size-2xs);
 
   color: var(--pal-color-gs-400);

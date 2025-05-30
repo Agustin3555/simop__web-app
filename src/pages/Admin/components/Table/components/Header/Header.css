@@ -68,7 +68,7 @@
           gap: var(--pal-size-xs);
           padding: var(--pal-size-xs);
 
-          color: var(--pal-color-a-l3);
+          color: var(--pal-color-white);
 
           border-radius: var(--pal-size-2xs);
           background-color: var(--pal-color-a);
@@ -109,7 +109,7 @@
     width: var(--width);
     height: 100%;
 
-    background-color: var(--pal-color-a-l3);
+    background-color: var(--pal-color-a-l4);
     box-shadow: var(--pal-shadow-0);
     opacity: 0;
     cursor: col-resize;
