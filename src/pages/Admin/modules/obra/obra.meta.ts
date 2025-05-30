@@ -378,6 +378,7 @@ ObraMeta.fieldsByService = [
       'fechaContratacion',
       'montoContratacion',
       'tipoFinanciamientoObra',
+      'tipoProgramaObra',
       'tipoEstadoObra',
       'fechaInicio',
       'avanceTotal',
@@ -391,6 +392,7 @@ ObraMeta.fieldsByService = [
       'fechaInicio',
       'localidad',
       'tipoEstadoObra',
+      'tipoProgramaObra',
     ]),
   },
   {
@@ -403,6 +405,7 @@ ObraMeta.fieldsByService = [
         'localidad',
         'numeroExpediente',
         'fechaInicio',
+        'tipoProgramaObra',
         'tipoEstadoObra',
         'avanceTotal',
         'montoContratacion',
@@ -417,6 +420,7 @@ ObraMeta.fieldsByService = [
       'fechaInicio',
       'localidad',
       'tipoEstadoObra',
+      'tipoProgramaObra',
     ]),
   },
   {

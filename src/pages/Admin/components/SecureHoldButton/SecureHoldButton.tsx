@@ -1,5 +1,5 @@
 import './SecureHoldButton.css'
-import { useRef } from 'react'
+import { useCallback, useEffect, useRef } from 'react'
 import { ActionState } from '@/hooks'
 import { Icon, Loader } from '@/components'
 import { classList } from '@/helpers'
@@ -25,17 +25,21 @@ const SecureHoldButton = ({
 }: Props) => {
   const timerRef = useRef<number | null>(null)
 
-  const handleMouseDown = () => {
+  const clearTimer = useCallback(() => {
+    if (!timerRef.current) return
+
+    clearTimeout(timerRef.current)
+    timerRef.current = null
+  }, [])
+
+  const handleMouseDown = useCallback(() => {
     if (actionState === 'ready')
       timerRef.current = setTimeout(handleAction, 3000)
-  }
+  }, [actionState, handleAction])
 
-  const handleMouseUp = () => {
-    if (timerRef.current) {
-      clearTimeout(timerRef.current)
-      timerRef.current = null
-    }
-  }
+  useEffect(() => {
+    return clearTimer
+  }, [clearTimer])
 
   return (
     <button
@@ -48,7 +52,8 @@ const SecureHoldButton = ({
       title={`${title} (mantener)`}
       disabled={actionState !== 'ready'}
       onMouseDown={handleMouseDown}
-      onMouseUp={handleMouseUp}
+      onMouseUp={clearTimer}
+      onMouseLeave={clearTimer}
     >
       <Loader
         handlingClass={classList({ active: actionState === 'loading' })}
