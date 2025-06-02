@@ -34,6 +34,7 @@ const Section = ({ viewKey, title, sections }: SectionNode) => {
     <div className={classList('cmp-section', 'ui-m', { open: isOpen })}>
       <div
         className={classList('node', { active: isActive(viewKey) })}
+        title={viewKey ? VIEWS_INFO[viewKey].title : title}
         onClick={handleClick}
       >
         {viewKey ? (
