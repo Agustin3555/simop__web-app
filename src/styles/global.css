@@ -16,7 +16,7 @@
 :root {
   --line-thickness: 0.0625rem;
   --pill-radius: 100rem;
-  --document-background-color: var(--pal-color-a-l4);
+  --document-background-color: var(--pal-color-a-l5);
   --transition-dummy: outline-width 0s;
 }
 
@@ -30,7 +30,7 @@ body {
   font-weight: 550;
   letter-spacing: 0.0125rem;
   word-spacing: 0.0625rem;
-  color: var(--pal-color-a-d2);
+  color: var(--pal-color-a-d3);
 }
 
 ::selection {

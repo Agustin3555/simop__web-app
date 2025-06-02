@@ -90,7 +90,7 @@
 
       .box {
         border-radius: calc(var(--table-border-radius) - var(--gap));
-        background-color: var(--pal-color-a-l3);
+        background-color: var(--pal-color-a-l4);
       }
     }
   }
@@ -109,7 +109,7 @@
     width: var(--width);
     height: 100%;
 
-    background-color: var(--pal-color-a-l4);
+    background-color: var(--pal-color-a-l5);
     box-shadow: var(--pal-shadow-0);
     opacity: 0;
     cursor: col-resize;

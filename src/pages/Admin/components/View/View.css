@@ -26,7 +26,7 @@
         gap: var(--ui-gap);
         border-width: 0;
         border-style: solid;
-        border-color: var(--pal-color-a-l3);
+        border-color: var(--pal-color-a-l4);
         border-top-width: var(--line-thickness);
         border-right-width: var(--line-thickness);
         padding-inline: var(--ui-padding-inline);
@@ -100,7 +100,7 @@
   }
 
   > .local-views {
-    padding: var(--pal-size-s);
+    padding: var(--pal-size-m);
     height: 100%;
 
     border-radius: var(--pal-size-xs);

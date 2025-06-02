@@ -42,18 +42,18 @@
   }
 
   &:not(:last-child) {
-    border-bottom-color: var(--pal-color-a-l4);
+    border-bottom-color: var(--pal-color-a-l5);
     border-bottom-style: solid;
     border-bottom-width: var(--line-thickness);
   }
 
   &:hover {
-    background-color: var(--pal-color-a-l4);
+    background-color: var(--pal-color-a-l5);
   }
 
   &:has(input:checked) {
     color: var(--pal-color-a-d3);
 
-    background-color: var(--pal-color-a-l3);
+    background-color: var(--pal-color-a-l4);
   }
 }

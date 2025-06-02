@@ -17,7 +17,7 @@ export const RepresentanteObraMeta =
       singular: 'Representante de Obra',
       plural: 'Representantes de Obra',
     },
-    faIcon: 'fa-solid fa-',
+    faIcon: 'fa-solid fa-user-tie',
 
     anchorField: 'id',
     props: {

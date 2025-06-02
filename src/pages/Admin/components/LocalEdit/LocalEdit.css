@@ -16,7 +16,7 @@
     > strong {
       font-weight: 650;
 
-      background-color: var(--pal-color-a-l3);
+      background-color: var(--pal-color-a-l4);
     }
   }
 
@@ -37,7 +37,7 @@
       color: var(--pal-color-a-l1);
 
       border-radius: var(--pal-size-xs);
-      background-color: var(--pal-color-a-l4);
+      background-color: var(--pal-color-a-l5);
 
       > p > strong {
         color: var(--pal-color-a);

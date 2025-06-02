@@ -7,7 +7,7 @@
   flex-direction: column;
   border-width: var(--line-thickness);
   border-style: solid;
-  border-color: var(--pal-color-a-l3);
+  border-color: var(--pal-color-a-l4);
   max-width: max-content;
   max-height: max-content;
 
@@ -40,7 +40,7 @@
       }
 
       > .cmp-value {
-        border-color: var(--pal-color-a-l4);
+        border-color: var(--pal-color-a-l5);
 
         color: var(--pal-color-a);
       }
@@ -78,7 +78,7 @@
   }
 
   > .head {
-    background-color: var(--pal-color-a-l2);
+    background-color: var(--pal-color-a-l3);
 
     > .row > * {
       border-right-width: var(--line-thickness);
@@ -117,20 +117,20 @@
     > .row {
       border-bottom-width: var(--line-thickness);
       border-bottom-style: solid;
-      border-bottom-color: var(--pal-color-a-l4);
+      border-bottom-color: var(--pal-color-a-l5);
 
       &:last-of-type {
         border: none;
       }
 
       &:hover {
-        background-color: var(--pal-color-a-l4);
+        background-color: var(--pal-color-a-l5);
       }
     }
   }
 
   > .foot {
-    background-color: var(--pal-color-a-l4);
+    background-color: var(--pal-color-a-l5);
 
     &.enable-stick {
       position: sticky;

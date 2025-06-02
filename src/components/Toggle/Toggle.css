@@ -18,7 +18,7 @@
 
     border-width: var(--line-thickness);
     border-style: solid;
-    border-color: var(--pal-color-a-l2);
+    border-color: var(--pal-color-a-l3);
     width: var(--width);
     height: var(--height);
 
@@ -58,7 +58,7 @@
     align-content: center;
     border-width: var(--line-thickness);
     border-style: solid;
-    border-color: var(--pal-color-a-l2);
+    border-color: var(--pal-color-a-l4);
     aspect-ratio: 1;
     width: var(--ui-height);
 
@@ -85,11 +85,11 @@
     }
 
     > .toggle {
-      border-color: var(--pal-color-a-l1);
+      border-color: var(--pal-color-a-l2);
 
       color: var(--pal-color-white);
 
-      background-color: var(--pal-color-a-l1);
+      background-color: var(--pal-color-a-l2);
     }
   }
 }

@@ -44,7 +44,7 @@
       cursor: default;
 
       > .item {
-        --border-color: var(--pal-color-a-l4);
+        --border-color: var(--pal-color-a-l5);
 
         display: flex;
         align-items: center;
@@ -181,7 +181,7 @@
       align-content: center;
       height: calc(var(--control-height) * 2);
 
-      color: var(--pal-color-a-l3);
+      color: var(--pal-color-a-l4);
 
       > * {
         margin-inline: auto;

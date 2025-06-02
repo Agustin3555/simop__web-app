@@ -5,7 +5,7 @@
 
   color: var(--pal-color-white);
 
-  background-color: var(--pal-color-a-d1);
+  background-color: var(--pal-color-a-d2);
 
   @media (50rem < width) {
     [data-nav-open='true'] & {

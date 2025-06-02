@@ -1,8 +1,8 @@
 .cmp-favorite-views {
   display: grid;
   gap: var(--pal-size-xs);
-  max-width: 30rem;
-  grid-template-columns: repeat(auto-fill, minmax(min(100%, 8rem), 1fr));
+  max-width: 28rem;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 10rem), 1fr));
 
   > .item {
     position: relative;
@@ -11,11 +11,11 @@
     flex-direction: column;
     align-items: center;
     justify-content: space-between;
+    gap: var(--pal-size-m);
     border-width: var(--line-thickness);
     border-style: solid;
     border-color: var(--pal-color-a-l2);
     padding: var(--pal-size-m);
-    height: 5.5rem;
 
     color: var(--pal-color-a-l1);
 
@@ -51,7 +51,7 @@
       font-size: var(--pal-size-font-xs);
       font-weight: 650;
       text-align: center;
-      white-space: nowrap;
+      text-wrap: balance;
       text-overflow: ellipsis;
 
       overflow: hidden;

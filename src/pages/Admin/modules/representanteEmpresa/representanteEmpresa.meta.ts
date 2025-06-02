@@ -17,7 +17,7 @@ export const RepresentanteEmpresaMeta =
       singular: 'Representante de Empresa',
       plural: 'Representantes de Empresa',
     },
-    faIcon: 'fa-solid fa-',
+    faIcon: 'fa-solid fa-user-tie',
 
     anchorField: 'id',
     props: {

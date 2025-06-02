@@ -17,7 +17,7 @@ export const InspectorObraMeta = new MetaModel<InspectorObraModel.Entity>({
     singular: 'Inspector de Obra',
     plural: 'Inspectores de Obra',
   },
-  faIcon: 'fa-solid fa-',
+  faIcon: 'fa-solid fa-helmet-safety',
 
   anchorField: 'id',
   props: {
