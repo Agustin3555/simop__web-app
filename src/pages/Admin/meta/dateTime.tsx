@@ -34,25 +34,22 @@ export class DateTimeProp implements PropScheme {
         keyName={key}
         {...(!editMode && { required })}
         {...{ title, value, editMode }}
-        inputHTMLAttrs={{ type: 'datetime-local' }}
+        inputHTMLAttrs={{ type: 'datetime-local', min: '1900-01-01T00:00' }}
       />
     )
   }
 
   getFieldValue = (
     formData: FormData,
-    form: HTMLFormElement,
+    _: HTMLFormElement,
     editMode = false,
   ) => {
     const { key } = this
 
-    let value = formData.get(key) as null | string
+    const value = formData.get(key) as null | string
 
     if (value === null) return
     if (value === '') return editMode ? null : undefined
-
-    // Año '0024' --> '2024'
-    if (value.startsWith('00')) value = '20' + value.slice(2)
 
     return value + ':00Z'
   }

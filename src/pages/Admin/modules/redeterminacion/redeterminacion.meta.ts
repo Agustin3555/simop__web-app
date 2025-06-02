@@ -26,7 +26,7 @@ export const RedeterminacionMeta = new MetaModel<RedeterminacionModel.Entity>({
     singular: 'Redeterminación',
     plural: 'Redeterminaciones',
   },
-  faIcon: 'fa-solid fa-',
+  faIcon: 'fa-solid fa-calculator',
 
   anchorField: 'numeroExpedienteSolicitud',
   props: {
@@ -36,11 +36,7 @@ export const RedeterminacionMeta = new MetaModel<RedeterminacionModel.Entity>({
         required: true,
       },
     }),
-    numeroExpediente: new TextProp('Número De Expediente de Redeterminación', {
-      field: {
-        required: true,
-      },
-    }),
+    numeroExpediente: new TextProp('Número De Expediente de Redeterminación'),
     numeroResolucion: new TextProp('Número De Resolución'),
     numeroExpedienteSolicitud: new TextProp(
       'Número de Expediente de Solicitud',

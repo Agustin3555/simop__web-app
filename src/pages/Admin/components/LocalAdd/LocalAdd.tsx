@@ -1,17 +1,12 @@
 import './LocalAdd.css'
-import {
-  KeyboardEventHandler,
-  useCallback,
-  useMemo,
-  useRef,
-  useState,
-} from 'react'
+import { useMemo, useRef, useState } from 'react'
 import { useAppStore } from '@/store/config'
 import { useSubmitAction } from '@/hooks'
 import { useResetForm, useMetaModel } from '../../hooks'
 import { FieldResetFnsContext } from '../../contexts'
-import { Button, Toggle } from '@/components'
+import { Toggle } from '@/components'
 import { Method } from '@/services/config'
+import { Form } from '..'
 
 const ContextualizedLocalAdd = () => {
   const { service, getPropGroups } = useMetaModel()
@@ -23,10 +18,10 @@ const ContextualizedLocalAdd = () => {
 
   const createPropGroups = useMemo(() => getPropGroups(Method.Create), [])
 
-  const componentGroups = useMemo(
+  const fieldGroups = useMemo(
     () =>
       createPropGroups?.map(({ props, ...rest }) => ({
-        components: Object.values(props).map(({ getFieldComponent }) =>
+        fields: Object.values(props).map(({ getFieldComponent }) =>
           getFieldComponent(),
         ),
         ...rest,
@@ -34,7 +29,7 @@ const ContextualizedLocalAdd = () => {
     [],
   )
 
-  const { handleSubmit, actionState } = useSubmitAction(
+  const submitActionResult = useSubmitAction(
     async ({ form, formData, setError, setSuccess }) => {
       try {
         const createData: Record<string, unknown> = {}
@@ -58,11 +53,6 @@ const ContextualizedLocalAdd = () => {
     },
   )
 
-  const handleKeyDown = useCallback<KeyboardEventHandler<HTMLFormElement>>(
-    event => event.key === 'Enter' && event.preventDefault(),
-    [],
-  )
-
   return (
     <div className="cmp-local-add">
       <Toggle
@@ -72,22 +62,7 @@ const ContextualizedLocalAdd = () => {
         value={resetOnCompletion}
         setValue={setResetOnCompletion}
       />
-      <form ref={formRef} onSubmit={handleSubmit} onKeyDown={handleKeyDown}>
-        <div className="field-groups">
-          {componentGroups?.map(({ key, title, components }) => (
-            <div key={key} className="section">
-              {title && <small>{title}</small>}
-              <div className="fields">{components}</div>
-            </div>
-          ))}
-        </div>
-        <Button
-          text="Confirmar"
-          faIcon="fa-solid fa-check"
-          submit
-          {...{ actionState }}
-        />
-      </form>
+      <Form {...{ ...submitActionResult, formRef, fieldGroups }} />
     </div>
   )
 }

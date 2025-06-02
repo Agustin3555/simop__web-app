@@ -11,6 +11,7 @@ import {
 import { Button } from '@/components'
 import { useMutation } from '@tanstack/react-query'
 import { Method } from '@/services/config'
+import { Form } from '..'
 
 const LocalEdit = () => {
   const metaModel = useMetaModel()
@@ -35,7 +36,7 @@ const LocalEdit = () => {
 
   const editPropGroups = useMemo(() => getPropGroups(Method.UpdateOne), [])
 
-  const componentGroups = useMemo(() => {
+  const fieldGroups = useMemo(() => {
     if (!isEditing) return
 
     return editPropGroups?.map(({ props, ...rest }) => ({
@@ -95,24 +96,7 @@ const LocalEdit = () => {
               {selectedEntity![anchorField]}
             </strong>
           </h2>
-          <form onSubmit={handleSubmit}>
-            <div className="field-groups">
-              {componentGroups?.map(({ key, title, fields }) => (
-                <div key={key} className="group">
-                  {title && <small>{title}</small>}
-                  <div className="fields">{fields}</div>
-                </div>
-              ))}
-            </div>
-            <div className="actions">
-              <Button
-                text="Confirmar"
-                faIcon="fa-solid fa-check"
-                submit
-                {...{ actionState }}
-              />
-            </div>
-          </form>
+          <Form {...{ actionState, handleSubmit, fieldGroups }} />
         </>
       ) : (
         <div className="banner-container">

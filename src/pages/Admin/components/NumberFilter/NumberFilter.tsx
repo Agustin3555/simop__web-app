@@ -33,7 +33,7 @@ const NumberFilter = ({
     type: 'number',
     min: minFaceted,
     max: maxFaceted,
-    step: decimal ? '0.01' : '',
+    step: decimal ? '0.0001' : '',
   }
 
   const handleMinChange = useCallback<DebouncedInputProps['handleChange']>(
@@ -52,7 +52,7 @@ const NumberFilter = ({
         value={minValue}
         hideLabel
         inputHTMLAttrs={{
-          placeholder: minFaceted ? `Min (${minFaceted})` : '',
+          placeholder: minFaceted === undefined ? '' : `Min (${minFaceted})`,
           ...commonInputHTMLAttrs,
         }}
         handleChange={handleMinChange}
@@ -61,7 +61,7 @@ const NumberFilter = ({
         value={maxValue}
         hideLabel
         inputHTMLAttrs={{
-          placeholder: maxFaceted ? `Max (${maxFaceted})` : '',
+          placeholder: maxFaceted === undefined ? '' : `Max (${maxFaceted})`,
           ...commonInputHTMLAttrs,
         }}
         handleChange={handleMaxChange}

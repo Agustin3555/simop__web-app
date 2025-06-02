@@ -23,7 +23,7 @@ export const RecepcionMeta = new MetaModel<RecepcionModel.Entity>({
     singular: 'Recepcion',
     plural: 'Recepciones',
   },
-  faIcon: 'fa-solid fa-',
+  faIcon: 'fa-solid fa-handshake',
 
   anchorField: 'numeroActa',
   props: {

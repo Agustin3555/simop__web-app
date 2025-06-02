@@ -23,7 +23,7 @@ export const RescisionMeta = new MetaModel<RescisionModel.Entity>({
     singular: 'Rescision',
     plural: 'Rescisiones',
   },
-  faIcon: 'fa-solid fa-',
+  faIcon: 'fa-solid fa-ban',
 
   anchorField: 'numeroExpediente',
   props: {

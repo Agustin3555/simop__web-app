@@ -293,7 +293,6 @@ const BASICO: (keyof ObraModel.Entity)[] = select(ObraMeta.allFields, 'only', [
   'fechaFin',
   'plazoMeses',
   'plazoDias',
-  'avanceTotal',
   'nomenclaturaCatastral',
   'localidad',
   'direccion',
@@ -302,6 +301,7 @@ const BASICO: (keyof ObraModel.Entity)[] = select(ObraMeta.allFields, 'only', [
 ])
 
 const TOTALES: (keyof ObraModel.Entity)[] = select(ObraMeta.allFields, 'only', [
+  'avanceTotal',
   'balanceEconomico',
   'nuevoMonto',
 
@@ -381,7 +381,6 @@ ObraMeta.fieldsByService = [
       'tipoProgramaObra',
       'tipoEstadoObra',
       'fechaInicio',
-      'avanceTotal',
       'localidad',
     ]),
   },
@@ -407,7 +406,6 @@ ObraMeta.fieldsByService = [
         'fechaInicio',
         'tipoProgramaObra',
         'tipoEstadoObra',
-        'avanceTotal',
         'montoContratacion',
       ]),
       ...TOTALES,

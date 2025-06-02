@@ -43,8 +43,8 @@ export interface OwnFields {
   metrosCuadradosObraRefaccionada: number
   metrosLinealesObraRefaccionada: number
   observacionesObraRefaccionada: string
-  avanceTotal: number
 
+  avanceTotal: number
   balanceEconomico: string
   nuevoMonto: string
 

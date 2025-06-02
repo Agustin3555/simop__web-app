@@ -25,7 +25,7 @@ export const PagoCertificacionMeta =
       singular: 'Pago de Certificación',
       plural: 'Pagos de Certificación',
     },
-    faIcon: 'fa-solid fa-',
+    faIcon: 'fa-solid fa-file-invoice-dollar',
 
     anchorField: 'numero',
     props: {

@@ -6,14 +6,14 @@
   > header {
     display: flex;
     align-items: flex-end;
-    gap: var(--gap);
+    gap: var(--pal-size-s);
 
     > form {
       flex-grow: 1;
 
       flex-direction: unset;
       align-items: flex-end;
-      gap: var(--gap);
+      gap: var(--pal-size-s);
 
       > .cmp-base-combobox {
         flex-grow: 1;
@@ -37,7 +37,7 @@
     display: grid;
     align-items: flex-start;
     grid-template-columns: repeat(auto-fill, minmax(min(100%, 30rem), 1fr));
-    gap: var(--gap);
+    gap: var(--pal-size-s);
 
     p {
       text-align: right;
@@ -50,7 +50,7 @@
     flex-direction: column;
     gap: var(--pal-size-l);
 
-    border-radius: var(--pal-size-xs);
+    border-radius: var(--pal-size-s);
     background-color: var(--pal-color-white);
 
     > li {
@@ -81,12 +81,13 @@
         display: flex;
         flex-wrap: wrap;
         justify-content: flex-end;
-        gap: var(--pal-size-xs);
+        gap: var(--pal-size-s);
       }
     }
   }
 
   &.for-capture {
+    border: none;
     padding: 0;
     width: 40rem;
   }

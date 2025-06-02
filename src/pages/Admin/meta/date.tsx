@@ -34,25 +34,22 @@ export class DateProp implements PropScheme {
         keyName={key}
         {...(!editMode && { required })}
         {...{ title, value, editMode }}
-        inputHTMLAttrs={{ type: 'date' }}
+        inputHTMLAttrs={{ type: 'date', min: '1900-01-01' }}
       />
     )
   }
 
   getFieldValue = (
     formData: FormData,
-    form: HTMLFormElement,
+    _: HTMLFormElement,
     editMode = false,
   ) => {
     const { key } = this
 
-    let value = formData.get(key) as null | string
+    const value = formData.get(key) as null | string
 
     if (value === null) return
     if (value === '') return editMode ? null : undefined
-
-    // Año '0024' --> '2024'
-    if (value.startsWith('00')) value = '20' + value.slice(2)
 
     return value + 'T00:00:00Z'
   }
@@ -86,9 +83,7 @@ export class DateProp implements PropScheme {
 
     const value = item[key] as undefined | string
 
-    // BUG si no se pasa un formato correcto, explota
-
-    return value && <p>{format(value, { date: 'short' })}</p>
+    return value && <p>{format(value.slice(0, 10), { date: 'short' })}</p>
   }
 
   getExcelValue = (item: GeneralEntity) => {
@@ -98,6 +93,6 @@ export class DateProp implements PropScheme {
 
     if (value === undefined) return
 
-    return format(value, { date: 'short' })
+    return format(value.slice(0, 10), { date: 'short' })
   }
 }

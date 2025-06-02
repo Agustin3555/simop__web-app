@@ -41,14 +41,17 @@ export class NumberProp implements PropScheme {
         keyName={key}
         {...(!editMode && { required })}
         {...{ title, value, editMode }}
-        inputHTMLAttrs={{ type: 'number', step: decimal ? '0.01' : undefined }}
+        inputHTMLAttrs={{
+          type: 'number',
+          step: decimal ? '0.0001' : undefined,
+        }}
       />
     )
   }
 
   getFieldValue = (
     formData: FormData,
-    form: HTMLFormElement,
+    _: HTMLFormElement,
     editMode = false,
   ) => {
     const { key, config } = this

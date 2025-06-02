@@ -23,7 +23,7 @@ export const AmpliacionMeta = new MetaModel<AmpliacionModel.Entity>({
     singular: 'Ampliación',
     plural: 'Ampliaciones',
   },
-  faIcon: 'fa-solid fa-',
+  faIcon: 'fa-solid fa-expand',
 
   anchorField: 'numeroExpedienteSolicitud',
   props: {

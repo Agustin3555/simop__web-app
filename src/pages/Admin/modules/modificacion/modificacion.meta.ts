@@ -24,7 +24,7 @@ export const ModificacionMeta = new MetaModel<ModificacionModel.Entity>({
     singular: 'Modificación',
     plural: 'Modificaciones',
   },
-  faIcon: 'fa-solid fa-',
+  faIcon: 'fa-solid fa-file-pen',
 
   anchorField: 'numeroExpediente',
   props: {
