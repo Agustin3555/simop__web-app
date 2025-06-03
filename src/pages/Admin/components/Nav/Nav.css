@@ -64,7 +64,7 @@
       backdrop-filter: blur(0.5rem);
     }
 
-    @media (width <= 26rem) {
+    @media (width <= 27.5rem) {
       width: calc(100% - var(--pal-size-2xl));
     }
   }

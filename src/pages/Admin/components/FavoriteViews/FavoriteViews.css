@@ -1,8 +1,8 @@
 .cmp-favorite-views {
   display: grid;
   gap: var(--pal-size-xs);
-  max-width: 28rem;
-  grid-template-columns: repeat(auto-fill, minmax(min(100%, 10rem), 1fr));
+  max-width: 26rem;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 8.5rem), 1fr));
 
   > .item {
     position: relative;
