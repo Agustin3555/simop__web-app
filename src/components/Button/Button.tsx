@@ -32,7 +32,7 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       inverted = false,
       wrap = false,
       submit = false,
-      actionState = 'ready',
+      actionState,
       progress,
       onAction,
       buttonHTMLAttrs,
@@ -47,27 +47,33 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       })}
       title={title ?? text}
       type={submit ? 'submit' : 'button'}
-      disabled={actionState !== 'ready'}
+      disabled={actionState ? actionState !== 'ready' : false}
       onClick={onAction}
       {...{ ref, name, ...buttonHTMLAttrs }}
     >
-      <div
-        className={classList('loading', { active: actionState === 'loading' })}
-      >
-        {progress && <p>{progress.toFixed(0)} %</p>}
-        <Loader />
-      </div>
-      <Icon
-        faIcon="fa-solid fa-xmark"
-        handlingClass={classList({ active: actionState === 'error' })}
-      />
-      <Icon
-        faIcon="fa-solid fa-check"
-        handlingClass={classList({ active: actionState === 'success' })}
-      />
+      {actionState && (
+        <>
+          <div
+            className={classList('loading', {
+              active: actionState === 'loading',
+            })}
+          >
+            {progress && <p>{progress.toFixed(0)} %</p>}
+            <Loader />
+          </div>
+          <Icon
+            faIcon="fa-solid fa-xmark"
+            handlingClass={classList({ active: actionState === 'error' })}
+          />
+          <Icon
+            faIcon="fa-solid fa-check"
+            handlingClass={classList({ active: actionState === 'success' })}
+          />
+        </>
+      )}
       <div
         className={classList('body', 'text', {
-          active: actionState === 'ready',
+          active: actionState ? actionState === 'ready' : true,
         })}
       >
         {text}
