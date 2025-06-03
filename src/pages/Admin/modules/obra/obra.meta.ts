@@ -87,16 +87,16 @@ export const ObraMeta = new MetaModel<ObraModel.Entity>({
     fechaFin: new DateProp('Fecha de Fin'),
     plazoMeses: new NumberProp('Plazo en Meses'),
     plazoDias: new NumberProp('Plazo en Días'),
-    avanceTotal: new NumberProp('Porcentaje de Avance Total', {
-      decimal: true,
-      sub: '%',
-    }),
     nomenclaturaCatastral: new TextProp('Nomenclatura Catastral'),
     localidad: new RefProp({
       getMetaModel: () => LocalidadMeta,
     }),
     direccion: new TextProp('Dirección'),
     lugar: new TextLongProp('Lugar'),
+    avanceTotal: new NumberProp('Avance Acumulado', {
+      decimal: true,
+      sub: '%',
+    }),
     observaciones: new TextLongProp('Observaciones generales'),
 
     obraNueva: new BooleanProp('Obra nueva'),
@@ -297,11 +297,11 @@ const BASICO: (keyof ObraModel.Entity)[] = select(ObraMeta.allFields, 'only', [
   'localidad',
   'direccion',
   'lugar',
+  'avanceTotal',
   'observaciones',
 ])
 
 const TOTALES: (keyof ObraModel.Entity)[] = select(ObraMeta.allFields, 'only', [
-  'avanceTotal',
   'balanceEconomico',
   'nuevoMonto',
 
@@ -332,6 +332,19 @@ const DERIVADOS: (keyof ObraModel.Entity)[] = select(
     'paralizaciones',
     'rescisiones',
     'recepciones',
+  ],
+)
+
+const QUICK_FILTERS: (keyof ObraModel.Entity)[] = select(
+  ObraMeta.allFields,
+  'only',
+  [
+    'empresa',
+    'fechaInicio',
+    'localidad',
+    'tipoEstadoObra',
+    'tipoProgramaObra',
+    'tipoTematicaObra',
   ],
 )
 
@@ -379,20 +392,16 @@ ObraMeta.fieldsByService = [
       'montoContratacion',
       'tipoFinanciamientoObra',
       'tipoProgramaObra',
+      'tipoTematicaObra',
       'tipoEstadoObra',
       'fechaInicio',
       'localidad',
+      'avanceTotal',
     ]),
   },
   {
     methods: ['general-quickFilters'],
-    fields: select(ObraMeta.allFields, 'only', [
-      'empresa',
-      'fechaInicio',
-      'localidad',
-      'tipoEstadoObra',
-      'tipoProgramaObra',
-    ]),
+    fields: QUICK_FILTERS,
   },
   {
     methods: ['totales'],
@@ -405,7 +414,9 @@ ObraMeta.fieldsByService = [
         'numeroExpediente',
         'fechaInicio',
         'tipoProgramaObra',
+        'tipoTematicaObra',
         'tipoEstadoObra',
+        'avanceTotal',
         'montoContratacion',
       ]),
       ...TOTALES,
@@ -413,13 +424,7 @@ ObraMeta.fieldsByService = [
   },
   {
     methods: ['totales-quickFilters'],
-    fields: select(ObraMeta.allFields, 'only', [
-      'empresa',
-      'fechaInicio',
-      'localidad',
-      'tipoEstadoObra',
-      'tipoProgramaObra',
-    ]),
+    fields: QUICK_FILTERS,
   },
   {
     methods: ['detalle'],
