@@ -2,15 +2,17 @@ import './LocalAdd.css'
 import { useMemo, useRef, useState } from 'react'
 import { useAppStore } from '@/store/config'
 import { useSubmitAction } from '@/hooks'
-import { useResetForm, useMetaModel } from '../../hooks'
+import { useResetForm, useMetaModel, UseEntitiesData } from '../../hooks'
 import { FieldResetFnsContext } from '../../contexts'
 import { Toggle } from '@/components'
 import { Method } from '@/services/config'
 import { Form } from '..'
+import { useQueryClient } from '@tanstack/react-query'
 
 const ContextualizedLocalAdd = () => {
-  const { service, getPropGroups } = useMetaModel()
+  const { key, service, getPropGroups } = useMetaModel()
 
+  const queryClient = useQueryClient()
   const toasting = useAppStore(store => store.toasting)
   const [resetOnCompletion, setResetOnCompletion] = useState(true)
   const formRef = useRef<HTMLFormElement | null>(null)
@@ -42,7 +44,12 @@ const ContextualizedLocalAdd = () => {
           }),
         )
 
-        await service.create!(createData)
+        const newEntity = await service.create!(createData)
+
+        queryClient.setQueryData<UseEntitiesData>([key], oldData => {
+          if (oldData) return [newEntity, ...oldData]
+        })
+
         toasting('success', 'Agregado con éxito')
         if (resetOnCompletion) resetForm()
 
