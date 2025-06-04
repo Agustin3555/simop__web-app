@@ -24,8 +24,10 @@ const create: {
     DepartamentoModel.CreateEntity,
     DepartamentoModel.CreateEntity
   >
+  output: OutputAdapter<DepartamentoModel.Entity, DepartamentoModel.Entity>
 } = {
   input: data => data,
+  output: response => response,
 }
 
 const updateOne: {
@@ -33,8 +35,10 @@ const updateOne: {
     DepartamentoModel.UpdateEntity,
     DepartamentoModel.UpdateEntity
   >
+  output: OutputAdapter<DepartamentoModel.Entity, DepartamentoModel.Entity>
 } = {
   input: data => data,
+  output: response => response,
 }
 
 export const DepartamentoAdapter = {

@@ -28,13 +28,17 @@ export const RescisionService: Service<RescisionModel.Entity> = {
   create: async (data: RescisionModel.CreateEntity) => {
     const adaptedInput = RescisionAdapter.create.input(data)
 
-    await publicInstance.post(collection(), adaptedInput)
+    const response = await publicInstance.post(collection(), adaptedInput)
+
+    return RescisionAdapter.create.output(response.data)
   },
 
   updateOne: async (id, data: RescisionModel.UpdateEntity) => {
     const adaptedInput = RescisionAdapter.updateOne.input(data)
 
-    await publicInstance.put(collection(id), adaptedInput)
+    const response = await publicInstance.put(collection(id), adaptedInput)
+
+    return RescisionAdapter.updateOne.output(response.data)
   },
 
   deleteMany: async ids => await deleteManyHandler(collection, ids),

@@ -21,14 +21,18 @@ const getOne: {
 
 const create: {
   input: InputAdapter<ProvinciaModel.CreateEntity, ProvinciaModel.CreateEntity>
+  output: OutputAdapter<ProvinciaModel.Entity, ProvinciaModel.Entity>
 } = {
   input: data => data,
+  output: response => response,
 }
 
 const updateOne: {
   input: InputAdapter<ProvinciaModel.UpdateEntity, ProvinciaModel.UpdateEntity>
+  output: OutputAdapter<ProvinciaModel.Entity, ProvinciaModel.Entity>
 } = {
   input: data => data,
+  output: response => response,
 }
 
 export const ProvinciaAdapter = {

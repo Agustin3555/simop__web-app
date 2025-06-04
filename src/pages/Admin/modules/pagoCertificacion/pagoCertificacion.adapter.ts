@@ -33,8 +33,13 @@ const create: {
     PagoCertificacionModel.CreateEntity,
     PagoCertificacionModel.CreateEntity
   >
+  output: OutputAdapter<
+    PagoCertificacionModel.Entity,
+    PagoCertificacionModel.Entity
+  >
 } = {
   input: data => data,
+  output: response => response,
 }
 
 const updateOne: {
@@ -42,8 +47,13 @@ const updateOne: {
     PagoCertificacionModel.UpdateEntity,
     PagoCertificacionModel.UpdateEntity
   >
+  output: OutputAdapter<
+    PagoCertificacionModel.Entity,
+    PagoCertificacionModel.Entity
+  >
 } = {
   input: data => data,
+  output: response => response,
 }
 
 export const PagoCertificacionAdapter = {

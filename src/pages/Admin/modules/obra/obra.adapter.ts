@@ -21,14 +21,18 @@ const getOne: {
 
 const create: {
   input: InputAdapter<ObraModel.CreateEntity, ObraModel.CreateEntity>
+  output: OutputAdapter<ObraModel.Entity, ObraModel.Entity>
 } = {
   input: data => data,
+  output: response => response,
 }
 
 const updateOne: {
   input: InputAdapter<ObraModel.UpdateEntity, ObraModel.UpdateEntity>
+  output: OutputAdapter<ObraModel.Entity, ObraModel.Entity>
 } = {
   input: data => data,
+  output: response => response,
 }
 
 export const ObraAdapter = {

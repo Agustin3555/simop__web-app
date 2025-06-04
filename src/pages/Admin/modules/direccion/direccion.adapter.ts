@@ -21,14 +21,18 @@ const getOne: {
 
 const create: {
   input: InputAdapter<DireccionModel.CreateEntity, DireccionModel.CreateEntity>
+  output: OutputAdapter<DireccionModel.Entity, DireccionModel.Entity>
 } = {
   input: data => data,
+  output: response => response,
 }
 
 const updateOne: {
   input: InputAdapter<DireccionModel.UpdateEntity, DireccionModel.UpdateEntity>
+  output: OutputAdapter<DireccionModel.Entity, DireccionModel.Entity>
 } = {
   input: data => data,
+  output: response => response,
 }
 
 export const DireccionAdapter = {

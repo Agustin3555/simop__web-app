@@ -29,13 +29,17 @@ export const TipoFinanciamientoObraService: Service<TipoFinanciamientoObraModel.
     create: async (data: TipoFinanciamientoObraModel.CreateEntity) => {
       const adaptedInput = TipoFinanciamientoObraAdapter.create.input(data)
 
-      await publicInstance.post(collection(), adaptedInput)
+      const response = await publicInstance.post(collection(), adaptedInput)
+
+      return TipoFinanciamientoObraAdapter.create.output(response.data)
     },
 
     updateOne: async (id, data: TipoFinanciamientoObraModel.UpdateEntity) => {
       const adaptedInput = TipoFinanciamientoObraAdapter.updateOne.input(data)
 
-      await publicInstance.put(collection(id), adaptedInput)
+      const response = await publicInstance.put(collection(id), adaptedInput)
+
+      return TipoFinanciamientoObraAdapter.updateOne.output(response.data)
     },
 
     deleteMany: async ids => await deleteManyHandler(collection, ids),

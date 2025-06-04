@@ -28,13 +28,17 @@ export const LocalidadService: Service<LocalidadModel.Entity> = {
   create: async (data: LocalidadModel.CreateEntity) => {
     const adaptedInput = LocalidadAdapter.create.input(data)
 
-    await publicInstance.post(collection(), adaptedInput)
+    const response = await publicInstance.post(collection(), adaptedInput)
+
+    return LocalidadAdapter.create.output(response.data)
   },
 
   updateOne: async (id, data: LocalidadModel.UpdateEntity) => {
     const adaptedInput = LocalidadAdapter.updateOne.input(data)
 
-    await publicInstance.put(collection(id), adaptedInput)
+    const response = await publicInstance.put(collection(id), adaptedInput)
+
+    return LocalidadAdapter.updateOne.output(response.data)
   },
 
   deleteMany: async ids => await deleteManyHandler(collection, ids),

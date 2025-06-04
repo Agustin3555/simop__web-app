@@ -27,8 +27,10 @@ const create: {
     InspectorObraModel.CreateEntity,
     InspectorObraModel.CreateEntity
   >
+  output: OutputAdapter<InspectorObraModel.Entity, InspectorObraModel.Entity>
 } = {
   input: data => data,
+  output: response => response,
 }
 
 const updateOne: {
@@ -36,8 +38,10 @@ const updateOne: {
     InspectorObraModel.UpdateEntity,
     InspectorObraModel.UpdateEntity
   >
+  output: OutputAdapter<InspectorObraModel.Entity, InspectorObraModel.Entity>
 } = {
   input: data => data,
+  output: response => response,
 }
 
 export const InspectorObraAdapter = {

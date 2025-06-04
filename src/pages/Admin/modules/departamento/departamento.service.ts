@@ -28,13 +28,17 @@ export const DepartamentoService: Service<DepartamentoModel.Entity> = {
   create: async (data: DepartamentoModel.CreateEntity) => {
     const adaptedInput = DepartamentoAdapter.create.input(data)
 
-    await publicInstance.post(collection(), adaptedInput)
+    const response = await publicInstance.post(collection(), adaptedInput)
+
+    return DepartamentoAdapter.create.output(response.data)
   },
 
   updateOne: async (id, data: DepartamentoModel.UpdateEntity) => {
     const adaptedInput = DepartamentoAdapter.updateOne.input(data)
 
-    await publicInstance.put(collection(id), adaptedInput)
+    const response = await publicInstance.put(collection(id), adaptedInput)
+
+    return DepartamentoAdapter.updateOne.output(response.data)
   },
 
   deleteMany: async ids => await deleteManyHandler(collection, ids),

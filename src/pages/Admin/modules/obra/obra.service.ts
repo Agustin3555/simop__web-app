@@ -40,13 +40,17 @@ export const ObraService: Service<ObraModel.Entity> = {
   create: async (data: ObraModel.CreateEntity) => {
     const adaptedInput = ObraAdapter.create.input(data)
 
-    await publicInstance.post(collection(), adaptedInput)
+    const response = await publicInstance.post(collection(), adaptedInput)
+
+    return ObraAdapter.create.output(response.data)
   },
 
   updateOne: async (id, data: ObraModel.UpdateEntity) => {
     const adaptedInput = ObraAdapter.updateOne.input(data)
 
-    await publicInstance.put(collection(id), adaptedInput)
+    const response = await publicInstance.put(collection(id), adaptedInput)
+
+    return ObraAdapter.updateOne.output(response.data)
   },
 
   deleteMany: async ids => await deleteManyHandler(collection, ids),

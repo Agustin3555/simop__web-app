@@ -29,13 +29,17 @@ export const PagoCertificacionService: Service<PagoCertificacionModel.Entity> =
     create: async (data: PagoCertificacionModel.CreateEntity) => {
       const adaptedInput = PagoCertificacionAdapter.create.input(data)
 
-      await publicInstance.post(collection(), adaptedInput)
+      const response = await publicInstance.post(collection(), adaptedInput)
+
+      return PagoCertificacionAdapter.create.output(response.data)
     },
 
     updateOne: async (id, data: PagoCertificacionModel.UpdateEntity) => {
       const adaptedInput = PagoCertificacionAdapter.updateOne.input(data)
 
-      await publicInstance.put(collection(id), adaptedInput)
+      const response = await publicInstance.put(collection(id), adaptedInput)
+
+      return PagoCertificacionAdapter.updateOne.output(response.data)
     },
 
     deleteMany: async ids => await deleteManyHandler(collection, ids),

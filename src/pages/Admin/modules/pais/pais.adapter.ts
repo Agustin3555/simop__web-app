@@ -21,14 +21,18 @@ const getOne: {
 
 const create: {
   input: InputAdapter<PaisModel.CreateEntity, PaisModel.CreateEntity>
+  output: OutputAdapter<PaisModel.Entity, PaisModel.Entity>
 } = {
   input: data => data,
+  output: response => response,
 }
 
 const updateOne: {
   input: InputAdapter<PaisModel.UpdateEntity, PaisModel.UpdateEntity>
+  output: OutputAdapter<PaisModel.Entity, PaisModel.Entity>
 } = {
   input: data => data,
+  output: response => response,
 }
 
 export const PaisAdapter = {

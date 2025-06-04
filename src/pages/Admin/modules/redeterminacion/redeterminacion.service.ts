@@ -28,13 +28,17 @@ export const RedeterminacionService: Service<RedeterminacionModel.Entity> = {
   create: async (data: RedeterminacionModel.CreateEntity) => {
     const adaptedInput = RedeterminacionAdapter.create.input(data)
 
-    await publicInstance.post(collection(), adaptedInput)
+    const response = await publicInstance.post(collection(), adaptedInput)
+
+    return RedeterminacionAdapter.create.output(response.data)
   },
 
   updateOne: async (id, data: RedeterminacionModel.UpdateEntity) => {
     const adaptedInput = RedeterminacionAdapter.updateOne.input(data)
 
-    await publicInstance.put(collection(id), adaptedInput)
+    const response = await publicInstance.put(collection(id), adaptedInput)
+
+    return RedeterminacionAdapter.updateOne.output(response.data)
   },
 
   deleteMany: async ids => await deleteManyHandler(collection, ids),

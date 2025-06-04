@@ -28,13 +28,17 @@ export const RecepcionService: Service<RecepcionModel.Entity> = {
   create: async (data: RecepcionModel.CreateEntity) => {
     const adaptedInput = RecepcionAdapter.create.input(data)
 
-    await publicInstance.post(collection(), adaptedInput)
+    const response = await publicInstance.post(collection(), adaptedInput)
+
+    return RecepcionAdapter.create.output(response.data)
   },
 
   updateOne: async (id, data: RecepcionModel.UpdateEntity) => {
     const adaptedInput = RecepcionAdapter.updateOne.input(data)
 
-    await publicInstance.put(collection(id), adaptedInput)
+    const response = await publicInstance.put(collection(id), adaptedInput)
+
+    return RecepcionAdapter.updateOne.output(response.data)
   },
 
   deleteMany: async ids => await deleteManyHandler(collection, ids),

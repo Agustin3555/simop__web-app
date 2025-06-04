@@ -33,8 +33,13 @@ const create: {
     TipoTematicaObraModel.CreateEntity,
     TipoTematicaObraModel.CreateEntity
   >
+  output: OutputAdapter<
+    TipoTematicaObraModel.Entity,
+    TipoTematicaObraModel.Entity
+  >
 } = {
   input: data => data,
+  output: response => response,
 }
 
 const updateOne: {
@@ -42,8 +47,13 @@ const updateOne: {
     TipoTematicaObraModel.UpdateEntity,
     TipoTematicaObraModel.UpdateEntity
   >
+  output: OutputAdapter<
+    TipoTematicaObraModel.Entity,
+    TipoTematicaObraModel.Entity
+  >
 } = {
   input: data => data,
+  output: response => response,
 }
 
 export const TipoTematicaObraAdapter = {

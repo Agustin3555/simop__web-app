@@ -27,8 +27,10 @@ const create: {
     RepresentanteModel.CreateEntity,
     RepresentanteModel.CreateEntity
   >
+  output: OutputAdapter<RepresentanteModel.Entity, RepresentanteModel.Entity>
 } = {
   input: data => data,
+  output: response => response,
 }
 
 const updateOne: {
@@ -36,8 +38,10 @@ const updateOne: {
     RepresentanteModel.UpdateEntity,
     RepresentanteModel.UpdateEntity
   >
+  output: OutputAdapter<RepresentanteModel.Entity, RepresentanteModel.Entity>
 } = {
   input: data => data,
+  output: response => response,
 }
 
 export const RepresentanteAdapter = {

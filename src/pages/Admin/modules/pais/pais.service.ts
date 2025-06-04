@@ -28,13 +28,17 @@ export const PaisService: Service<PaisModel.Entity> = {
   create: async (data: PaisModel.CreateEntity) => {
     const adaptedInput = PaisAdapter.create.input(data)
 
-    await publicInstance.post(collection(), adaptedInput)
+    const response = await publicInstance.post(collection(), adaptedInput)
+
+    return PaisAdapter.create.output(response.data)
   },
 
   updateOne: async (id, data: PaisModel.UpdateEntity) => {
     const adaptedInput = PaisAdapter.updateOne.input(data)
 
-    await publicInstance.put(collection(id), adaptedInput)
+    const response = await publicInstance.put(collection(id), adaptedInput)
+
+    return PaisAdapter.updateOne.output(response.data)
   },
 
   deleteMany: async ids => await deleteManyHandler(collection, ids),

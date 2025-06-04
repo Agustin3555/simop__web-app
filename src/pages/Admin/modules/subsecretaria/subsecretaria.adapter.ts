@@ -27,8 +27,10 @@ const create: {
     SubsecretariaModel.CreateEntity,
     SubsecretariaModel.CreateEntity
   >
+  output: OutputAdapter<SubsecretariaModel.Entity, SubsecretariaModel.Entity>
 } = {
   input: data => data,
+  output: response => response,
 }
 
 const updateOne: {
@@ -36,8 +38,10 @@ const updateOne: {
     SubsecretariaModel.UpdateEntity,
     SubsecretariaModel.UpdateEntity
   >
+  output: OutputAdapter<SubsecretariaModel.Entity, SubsecretariaModel.Entity>
 } = {
   input: data => data,
+  output: response => response,
 }
 
 export const SubsecretariaAdapter = {

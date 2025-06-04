@@ -27,8 +27,10 @@ const create: {
     TipoEstadoObraModel.CreateEntity,
     TipoEstadoObraModel.CreateEntity
   >
+  output: OutputAdapter<TipoEstadoObraModel.Entity, TipoEstadoObraModel.Entity>
 } = {
   input: data => data,
+  output: response => response,
 }
 
 const updateOne: {
@@ -36,8 +38,10 @@ const updateOne: {
     TipoEstadoObraModel.UpdateEntity,
     TipoEstadoObraModel.UpdateEntity
   >
+  output: OutputAdapter<TipoEstadoObraModel.Entity, TipoEstadoObraModel.Entity>
 } = {
   input: data => data,
+  output: response => response,
 }
 
 export const TipoEstadoObraAdapter = {

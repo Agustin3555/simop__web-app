@@ -27,8 +27,10 @@ const create: {
     TipoProfesionModel.CreateEntity,
     TipoProfesionModel.CreateEntity
   >
+  output: OutputAdapter<TipoProfesionModel.Entity, TipoProfesionModel.Entity>
 } = {
   input: data => data,
+  output: response => response,
 }
 
 const updateOne: {
@@ -36,8 +38,10 @@ const updateOne: {
     TipoProfesionModel.UpdateEntity,
     TipoProfesionModel.UpdateEntity
   >
+  output: OutputAdapter<TipoProfesionModel.Entity, TipoProfesionModel.Entity>
 } = {
   input: data => data,
+  output: response => response,
 }
 
 export const TipoProfesionAdapter = {

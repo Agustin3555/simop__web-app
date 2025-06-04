@@ -7,6 +7,7 @@ import {
   TextLongProp,
   TextProp,
   RefListProp,
+  MinSize,
 } from '../../meta'
 import { COMMON_PROPS } from '../../constants/commonProps.const'
 import { Method } from '@/services/config'
@@ -234,13 +235,17 @@ export const ObraMeta = new MetaModel<ObraModel.Entity>({
         sub: '%',
       },
     ),
-    montoPendienteCertificar: new NumberProp('Monto Pendiente a Certificar', {
-      decimal: true,
-      isMoney: true,
-      big: true,
-      sum: true,
-      pre: '$',
-    }),
+    montoPendienteCertificar: new NumberProp(
+      'Monto Pendiente a Certificar',
+      {
+        decimal: true,
+        isMoney: true,
+        big: true,
+        sum: true,
+        pre: '$',
+      },
+      MinSize.m,
+    ),
 
     representantes: new RefListProp({
       getMetaModel: () => RepresentanteMeta,
@@ -432,7 +437,32 @@ ObraMeta.fieldsByService = [
       {
         key: '',
         title: '',
-        fields: BASICO,
+        fields: select(ObraMeta.allFields, 'only', [
+          'numero',
+          'nombre',
+          'empresa',
+          'localidad',
+          'tipoTematicaObra',
+          'tipoProgramaObra',
+          'avanceTotal',
+          'montoContratacion',
+          'fechaContratacion',
+          'fechaInicio',
+          'plazoMeses',
+          'numeroExpediente',
+          'numeroResolucion',
+          'anioResolucion',
+          'numeroContratacion',
+          'tipoContratacionObra',
+          'tipoFinanciamientoObra',
+          'tipoEstadoObra',
+          'fechaFin',
+          'plazoDias',
+          'nomenclaturaCatastral',
+          'direccion',
+          'lugar',
+          'observaciones',
+        ]),
       },
       {
         key: 'totales',

@@ -29,13 +29,17 @@ export const TipoContratacionObraService: Service<TipoContratacionObraModel.Enti
     create: async (data: TipoContratacionObraModel.CreateEntity) => {
       const adaptedInput = TipoContratacionObraAdapter.create.input(data)
 
-      await publicInstance.post(collection(), adaptedInput)
+      const response = await publicInstance.post(collection(), adaptedInput)
+
+      return TipoContratacionObraAdapter.create.output(response.data)
     },
 
     updateOne: async (id, data: TipoContratacionObraModel.UpdateEntity) => {
       const adaptedInput = TipoContratacionObraAdapter.updateOne.input(data)
 
-      await publicInstance.put(collection(id), adaptedInput)
+      const response = await publicInstance.put(collection(id), adaptedInput)
+
+      return TipoContratacionObraAdapter.updateOne.output(response.data)
     },
 
     deleteMany: async ids => await deleteManyHandler(collection, ids),

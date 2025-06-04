@@ -28,13 +28,17 @@ export const FojaMedicionService: Service<FojaMedicionModel.Entity> = {
   create: async (data: FojaMedicionModel.CreateEntity) => {
     const adaptedInput = FojaMedicionAdapter.create.input(data)
 
-    await publicInstance.post(collection(), adaptedInput)
+    const response = await publicInstance.post(collection(), adaptedInput)
+
+    return FojaMedicionAdapter.create.output(response.data)
   },
 
   updateOne: async (id, data: FojaMedicionModel.UpdateEntity) => {
     const adaptedInput = FojaMedicionAdapter.updateOne.input(data)
 
-    await publicInstance.put(collection(id), adaptedInput)
+    const response = await publicInstance.put(collection(id), adaptedInput)
+
+    return FojaMedicionAdapter.updateOne.output(response.data)
   },
 
   deleteMany: async ids => await deleteManyHandler(collection, ids),

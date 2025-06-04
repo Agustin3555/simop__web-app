@@ -33,8 +33,13 @@ const create: {
     TipoModificacionModel.CreateEntity,
     TipoModificacionModel.CreateEntity
   >
+  output: OutputAdapter<
+    TipoModificacionModel.Entity,
+    TipoModificacionModel.Entity
+  >
 } = {
   input: data => data,
+  output: response => response,
 }
 
 const updateOne: {
@@ -42,8 +47,13 @@ const updateOne: {
     TipoModificacionModel.UpdateEntity,
     TipoModificacionModel.UpdateEntity
   >
+  output: OutputAdapter<
+    TipoModificacionModel.Entity,
+    TipoModificacionModel.Entity
+  >
 } = {
   input: data => data,
+  output: response => response,
 }
 
 export const TipoModificacionAdapter = {

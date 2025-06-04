@@ -23,13 +23,17 @@ export const RepresentanteEmpresaService: Service<RepresentanteEmpresaModel.Enti
     create: async (data: RepresentanteEmpresaModel.CreateEntity) => {
       const adaptedInput = RepresentanteEmpresaAdapter.create.input(data)
 
-      await publicInstance.post(collection(), adaptedInput)
+      const response = await publicInstance.post(collection(), adaptedInput)
+
+      return RepresentanteEmpresaAdapter.create.output(response.data)
     },
 
     updateOne: async (id, data: RepresentanteEmpresaModel.UpdateEntity) => {
       const adaptedInput = RepresentanteEmpresaAdapter.updateOne.input(data)
 
-      await publicInstance.put(collection(id), adaptedInput)
+      const response = await publicInstance.put(collection(id), adaptedInput)
+
+      return RepresentanteEmpresaAdapter.updateOne.output(response.data)
     },
 
     deleteMany: async ids => await deleteManyHandler(collection, ids),

@@ -33,8 +33,13 @@ const create: {
     RepresentanteObraModel.CreateEntity,
     RepresentanteObraModel.CreateEntity
   >
+  output: OutputAdapter<
+    RepresentanteObraModel.Entity,
+    RepresentanteObraModel.Entity
+  >
 } = {
   input: data => data,
+  output: response => response,
 }
 
 const updateOne: {
@@ -42,8 +47,13 @@ const updateOne: {
     RepresentanteObraModel.UpdateEntity,
     RepresentanteObraModel.UpdateEntity
   >
+  output: OutputAdapter<
+    RepresentanteObraModel.Entity,
+    RepresentanteObraModel.Entity
+  >
 } = {
   input: data => data,
+  output: response => response,
 }
 
 export const RepresentanteObraAdapter = {

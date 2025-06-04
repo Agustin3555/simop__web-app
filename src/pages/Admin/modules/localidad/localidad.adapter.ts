@@ -21,14 +21,18 @@ const getOne: {
 
 const create: {
   input: InputAdapter<LocalidadModel.CreateEntity, LocalidadModel.CreateEntity>
+  output: OutputAdapter<LocalidadModel.Entity, LocalidadModel.Entity>
 } = {
   input: data => data,
+  output: response => response,
 }
 
 const updateOne: {
   input: InputAdapter<LocalidadModel.UpdateEntity, LocalidadModel.UpdateEntity>
+  output: OutputAdapter<LocalidadModel.Entity, LocalidadModel.Entity>
 } = {
   input: data => data,
+  output: response => response,
 }
 
 export const LocalidadAdapter = {

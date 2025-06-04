@@ -28,13 +28,17 @@ export const SubsecretariaService: Service<SubsecretariaModel.Entity> = {
   create: async (data: SubsecretariaModel.CreateEntity) => {
     const adaptedInput = SubsecretariaAdapter.create.input(data)
 
-    await publicInstance.post(collection(), adaptedInput)
+    const response = await publicInstance.post(collection(), adaptedInput)
+
+    return SubsecretariaAdapter.create.output(response.data)
   },
 
   updateOne: async (id, data: SubsecretariaModel.UpdateEntity) => {
     const adaptedInput = SubsecretariaAdapter.updateOne.input(data)
 
-    await publicInstance.put(collection(id), adaptedInput)
+    const response = await publicInstance.put(collection(id), adaptedInput)
+
+    return SubsecretariaAdapter.updateOne.output(response.data)
   },
 
   deleteMany: async ids => await deleteManyHandler(collection, ids),

@@ -24,8 +24,10 @@ const create: {
     FojaMedicionModel.CreateEntity,
     FojaMedicionModel.CreateEntity
   >
+  output: OutputAdapter<FojaMedicionModel.Entity, FojaMedicionModel.Entity>
 } = {
   input: data => data,
+  output: response => response,
 }
 
 const updateOne: {
@@ -33,8 +35,10 @@ const updateOne: {
     FojaMedicionModel.UpdateEntity,
     FojaMedicionModel.UpdateEntity
   >
+  output: OutputAdapter<FojaMedicionModel.Entity, FojaMedicionModel.Entity>
 } = {
   input: data => data,
+  output: response => response,
 }
 
 export const FojaMedicionAdapter = {

@@ -33,8 +33,13 @@ const create: {
     TipoContratacionObraModel.CreateEntity,
     TipoContratacionObraModel.CreateEntity
   >
+  output: OutputAdapter<
+    TipoContratacionObraModel.Entity,
+    TipoContratacionObraModel.Entity
+  >
 } = {
   input: data => data,
+  output: response => response,
 }
 
 const updateOne: {
@@ -42,8 +47,13 @@ const updateOne: {
     TipoContratacionObraModel.UpdateEntity,
     TipoContratacionObraModel.UpdateEntity
   >
+  output: OutputAdapter<
+    TipoContratacionObraModel.Entity,
+    TipoContratacionObraModel.Entity
+  >
 } = {
   input: data => data,
+  output: response => response,
 }
 
 export const TipoContratacionObraAdapter = {

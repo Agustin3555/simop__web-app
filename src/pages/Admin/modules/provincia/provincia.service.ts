@@ -28,13 +28,17 @@ export const ProvinciaService: Service<ProvinciaModel.Entity> = {
   create: async (data: ProvinciaModel.CreateEntity) => {
     const adaptedInput = ProvinciaAdapter.create.input(data)
 
-    await publicInstance.post(collection(), adaptedInput)
+    const response = await publicInstance.post(collection(), adaptedInput)
+
+    return ProvinciaAdapter.create.output(response.data)
   },
 
   updateOne: async (id, data: ProvinciaModel.UpdateEntity) => {
     const adaptedInput = ProvinciaAdapter.updateOne.input(data)
 
-    await publicInstance.put(collection(id), adaptedInput)
+    const response = await publicInstance.put(collection(id), adaptedInput)
+
+    return ProvinciaAdapter.updateOne.output(response.data)
   },
 
   deleteMany: async ids => await deleteManyHandler(collection, ids),

@@ -22,13 +22,17 @@ export const InspectorObraService: Service<InspectorObraModel.Entity> = {
   create: async (data: InspectorObraModel.CreateEntity) => {
     const adaptedInput = InspectorObraAdapter.create.input(data)
 
-    await publicInstance.post(collection(), adaptedInput)
+    const response = await publicInstance.post(collection(), adaptedInput)
+
+    return InspectorObraAdapter.create.output(response.data)
   },
 
   updateOne: async (id, data: InspectorObraModel.UpdateEntity) => {
     const adaptedInput = InspectorObraAdapter.updateOne.input(data)
 
-    await publicInstance.put(collection(id), adaptedInput)
+    const response = await publicInstance.put(collection(id), adaptedInput)
+
+    return InspectorObraAdapter.updateOne.output(response.data)
   },
 
   deleteMany: async ids => await deleteManyHandler(collection, ids),

@@ -29,13 +29,17 @@ export const TipoRepresentanteService: Service<TipoRepresentanteModel.Entity> =
     create: async (data: TipoRepresentanteModel.CreateEntity) => {
       const adaptedInput = TipoRepresentanteAdapter.create.input(data)
 
-      await publicInstance.post(collection(), adaptedInput)
+      const response = await publicInstance.post(collection(), adaptedInput)
+
+      return TipoRepresentanteAdapter.create.output(response.data)
     },
 
     updateOne: async (id, data: TipoRepresentanteModel.UpdateEntity) => {
       const adaptedInput = TipoRepresentanteAdapter.updateOne.input(data)
 
-      await publicInstance.put(collection(id), adaptedInput)
+      const response = await publicInstance.put(collection(id), adaptedInput)
+
+      return TipoRepresentanteAdapter.updateOne.output(response.data)
     },
 
     deleteMany: async ids => await deleteManyHandler(collection, ids),

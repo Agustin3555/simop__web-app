@@ -28,13 +28,17 @@ export const InspectorService: Service<InspectorModel.Entity> = {
   create: async (data: InspectorModel.CreateEntity) => {
     const adaptedInput = InspectorAdapter.create.input(data)
 
-    await publicInstance.post(collection(), adaptedInput)
+    const response = await publicInstance.post(collection(), adaptedInput)
+
+    return InspectorAdapter.create.output(response.data)
   },
 
   updateOne: async (id, data: InspectorModel.UpdateEntity) => {
     const adaptedInput = InspectorAdapter.updateOne.input(data)
 
-    await publicInstance.put(collection(id), adaptedInput)
+    const response = await publicInstance.put(collection(id), adaptedInput)
+
+    return InspectorAdapter.updateOne.output(response.data)
   },
 
   deleteMany: async ids => await deleteManyHandler(collection, ids),

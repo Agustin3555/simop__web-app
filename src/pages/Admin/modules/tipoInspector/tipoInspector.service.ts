@@ -28,13 +28,17 @@ export const TipoInspectorService: Service<TipoInspectorModel.Entity> = {
   create: async (data: TipoInspectorModel.CreateEntity) => {
     const adaptedInput = TipoInspectorAdapter.create.input(data)
 
-    await publicInstance.post(collection(), adaptedInput)
+    const response = await publicInstance.post(collection(), adaptedInput)
+
+    return TipoInspectorAdapter.create.output(response.data)
   },
 
   updateOne: async (id, data: TipoInspectorModel.UpdateEntity) => {
     const adaptedInput = TipoInspectorAdapter.updateOne.input(data)
 
-    await publicInstance.put(collection(id), adaptedInput)
+    const response = await publicInstance.put(collection(id), adaptedInput)
+
+    return TipoInspectorAdapter.updateOne.output(response.data)
   },
 
   deleteMany: async ids => await deleteManyHandler(collection, ids),

@@ -27,8 +27,10 @@ const create: {
     TipoRecepcionModel.CreateEntity,
     TipoRecepcionModel.CreateEntity
   >
+  output: OutputAdapter<TipoRecepcionModel.Entity, TipoRecepcionModel.Entity>
 } = {
   input: data => data,
+  output: response => response,
 }
 
 const updateOne: {
@@ -36,8 +38,10 @@ const updateOne: {
     TipoRecepcionModel.UpdateEntity,
     TipoRecepcionModel.UpdateEntity
   >
+  output: OutputAdapter<TipoRecepcionModel.Entity, TipoRecepcionModel.Entity>
 } = {
   input: data => data,
+  output: response => response,
 }
 
 export const TipoRecepcionAdapter = {

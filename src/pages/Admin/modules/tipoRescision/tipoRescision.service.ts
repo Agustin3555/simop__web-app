@@ -28,13 +28,17 @@ export const TipoRescisionService: Service<TipoRescisionModel.Entity> = {
   create: async (data: TipoRescisionModel.CreateEntity) => {
     const adaptedInput = TipoRescisionAdapter.create.input(data)
 
-    await publicInstance.post(collection(), adaptedInput)
+    const response = await publicInstance.post(collection(), adaptedInput)
+
+    return TipoRescisionAdapter.create.output(response.data)
   },
 
   updateOne: async (id, data: TipoRescisionModel.UpdateEntity) => {
     const adaptedInput = TipoRescisionAdapter.updateOne.input(data)
 
-    await publicInstance.put(collection(id), adaptedInput)
+    const response = await publicInstance.put(collection(id), adaptedInput)
+
+    return TipoRescisionAdapter.updateOne.output(response.data)
   },
 
   deleteMany: async ids => await deleteManyHandler(collection, ids),

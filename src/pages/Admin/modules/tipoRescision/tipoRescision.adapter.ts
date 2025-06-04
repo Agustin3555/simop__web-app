@@ -27,8 +27,10 @@ const create: {
     TipoRescisionModel.CreateEntity,
     TipoRescisionModel.CreateEntity
   >
+  output: OutputAdapter<TipoRescisionModel.Entity, TipoRescisionModel.Entity>
 } = {
   input: data => data,
+  output: response => response,
 }
 
 const updateOne: {
@@ -36,8 +38,10 @@ const updateOne: {
     TipoRescisionModel.UpdateEntity,
     TipoRescisionModel.UpdateEntity
   >
+  output: OutputAdapter<TipoRescisionModel.Entity, TipoRescisionModel.Entity>
 } = {
   input: data => data,
+  output: response => response,
 }
 
 export const TipoRescisionAdapter = {

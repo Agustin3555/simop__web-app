@@ -21,14 +21,18 @@ const getOne: {
 
 const create: {
   input: InputAdapter<EmpresaModel.CreateEntity, EmpresaModel.CreateEntity>
+  output: OutputAdapter<EmpresaModel.Entity, EmpresaModel.Entity>
 } = {
   input: data => data,
+  output: response => response,
 }
 
 const updateOne: {
   input: InputAdapter<EmpresaModel.UpdateEntity, EmpresaModel.UpdateEntity>
+  output: OutputAdapter<EmpresaModel.Entity, EmpresaModel.Entity>
 } = {
   input: data => data,
+  output: response => response,
 }
 
 export const EmpresaAdapter = {

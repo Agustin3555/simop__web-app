@@ -28,13 +28,17 @@ export const DireccionService: Service<DireccionModel.Entity> = {
   create: async (data: DireccionModel.CreateEntity) => {
     const adaptedInput = DireccionAdapter.create.input(data)
 
-    await publicInstance.post(collection(), adaptedInput)
+    const response = await publicInstance.post(collection(), adaptedInput)
+
+    return DireccionAdapter.create.output(response.data)
   },
 
   updateOne: async (id, data: DireccionModel.UpdateEntity) => {
     const adaptedInput = DireccionAdapter.updateOne.input(data)
 
-    await publicInstance.put(collection(id), adaptedInput)
+    const response = await publicInstance.put(collection(id), adaptedInput)
+
+    return DireccionAdapter.updateOne.output(response.data)
   },
 
   deleteMany: async ids => await deleteManyHandler(collection, ids),

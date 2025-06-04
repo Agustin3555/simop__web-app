@@ -28,13 +28,17 @@ export const EmpresaService: Service<EmpresaModel.Entity> = {
   create: async (data: EmpresaModel.CreateEntity) => {
     const adaptedInput = EmpresaAdapter.create.input(data)
 
-    await publicInstance.post(collection(), adaptedInput)
+    const response = await publicInstance.post(collection(), adaptedInput)
+
+    return EmpresaAdapter.create.output(response.data)
   },
 
   updateOne: async (id, data: EmpresaModel.UpdateEntity) => {
     const adaptedInput = EmpresaAdapter.updateOne.input(data)
 
-    await publicInstance.put(collection(id), adaptedInput)
+    const response = await publicInstance.put(collection(id), adaptedInput)
+
+    return EmpresaAdapter.updateOne.output(response.data)
   },
 
   deleteMany: async ids => await deleteManyHandler(collection, ids),

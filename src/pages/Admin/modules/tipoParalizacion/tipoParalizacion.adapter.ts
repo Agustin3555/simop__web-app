@@ -33,8 +33,13 @@ const create: {
     TipoParalizacionModel.CreateEntity,
     TipoParalizacionModel.CreateEntity
   >
+  output: OutputAdapter<
+    TipoParalizacionModel.Entity,
+    TipoParalizacionModel.Entity
+  >
 } = {
   input: data => data,
+  output: response => response,
 }
 
 const updateOne: {
@@ -42,8 +47,13 @@ const updateOne: {
     TipoParalizacionModel.UpdateEntity,
     TipoParalizacionModel.UpdateEntity
   >
+  output: OutputAdapter<
+    TipoParalizacionModel.Entity,
+    TipoParalizacionModel.Entity
+  >
 } = {
   input: data => data,
+  output: response => response,
 }
 
 export const TipoParalizacionAdapter = {

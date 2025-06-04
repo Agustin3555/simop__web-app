@@ -24,8 +24,10 @@ const create: {
     AmpliacionModel.CreateEntity,
     AmpliacionModel.CreateEntity
   >
+  output: OutputAdapter<AmpliacionModel.Entity, AmpliacionModel.Entity>
 } = {
   input: data => data,
+  output: response => response,
 }
 
 const updateOne: {
@@ -33,8 +35,10 @@ const updateOne: {
     AmpliacionModel.UpdateEntity,
     AmpliacionModel.UpdateEntity
   >
+  output: OutputAdapter<AmpliacionModel.Entity, AmpliacionModel.Entity>
 } = {
   input: data => data,
+  output: response => response,
 }
 
 export const AmpliacionAdapter = {

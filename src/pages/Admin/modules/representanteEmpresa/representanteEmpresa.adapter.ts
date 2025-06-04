@@ -33,8 +33,13 @@ const create: {
     RepresentanteEmpresaModel.CreateEntity,
     RepresentanteEmpresaModel.CreateEntity
   >
+  output: OutputAdapter<
+    RepresentanteEmpresaModel.Entity,
+    RepresentanteEmpresaModel.Entity
+  >
 } = {
   input: data => data,
+  output: response => response,
 }
 
 const updateOne: {
@@ -42,8 +47,13 @@ const updateOne: {
     RepresentanteEmpresaModel.UpdateEntity,
     RepresentanteEmpresaModel.UpdateEntity
   >
+  output: OutputAdapter<
+    RepresentanteEmpresaModel.Entity,
+    RepresentanteEmpresaModel.Entity
+  >
 } = {
   input: data => data,
+  output: response => response,
 }
 
 export const RepresentanteEmpresaAdapter = {

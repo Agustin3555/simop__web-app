@@ -33,8 +33,13 @@ const create: {
     TipoFinanciamientoObraModel.CreateEntity,
     TipoFinanciamientoObraModel.CreateEntity
   >
+  output: OutputAdapter<
+    TipoFinanciamientoObraModel.Entity,
+    TipoFinanciamientoObraModel.Entity
+  >
 } = {
   input: data => data,
+  output: response => response,
 }
 
 const updateOne: {
@@ -42,8 +47,13 @@ const updateOne: {
     TipoFinanciamientoObraModel.UpdateEntity,
     TipoFinanciamientoObraModel.UpdateEntity
   >
+  output: OutputAdapter<
+    TipoFinanciamientoObraModel.Entity,
+    TipoFinanciamientoObraModel.Entity
+  >
 } = {
   input: data => data,
+  output: response => response,
 }
 
 export const TipoFinanciamientoObraAdapter = {

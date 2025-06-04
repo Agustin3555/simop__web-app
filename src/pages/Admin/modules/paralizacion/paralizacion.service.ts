@@ -28,13 +28,17 @@ export const ParalizacionService: Service<ParalizacionModel.Entity> = {
   create: async (data: ParalizacionModel.CreateEntity) => {
     const adaptedInput = ParalizacionAdapter.create.input(data)
 
-    await publicInstance.post(collection(), adaptedInput)
+    const response = await publicInstance.post(collection(), adaptedInput)
+
+    return ParalizacionAdapter.create.output(response.data)
   },
 
   updateOne: async (id, data: ParalizacionModel.UpdateEntity) => {
     const adaptedInput = ParalizacionAdapter.updateOne.input(data)
 
-    await publicInstance.put(collection(id), adaptedInput)
+    const response = await publicInstance.put(collection(id), adaptedInput)
+
+    return ParalizacionAdapter.updateOne.output(response.data)
   },
 
   deleteMany: async ids => await deleteManyHandler(collection, ids),
