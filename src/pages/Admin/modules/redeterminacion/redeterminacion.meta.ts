@@ -36,8 +36,6 @@ export const RedeterminacionMeta = new MetaModel<RedeterminacionModel.Entity>({
         required: true,
       },
     }),
-    numeroExpediente: new TextProp('Número De Expediente de Redeterminación'),
-    numeroResolucion: new TextProp('Número De Resolución'),
     numeroExpedienteSolicitud: new TextProp(
       'Número de Expediente de Solicitud',
       {
@@ -46,6 +44,8 @@ export const RedeterminacionMeta = new MetaModel<RedeterminacionModel.Entity>({
         },
       },
     ),
+    numeroExpediente: new TextProp('Número De Expediente de Redeterminación'),
+    numeroResolucion: new TextProp('Número De Resolución'),
     montoTotal: new NumberProp('Monto Total', {
       decimal: true,
       isMoney: true,

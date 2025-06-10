@@ -104,33 +104,28 @@ export class NumberProp implements PropScheme {
     const { key, config } = this
     const { isMoney = false, pre, sub } = config ?? {}
 
-    let value = item[key] as undefined | number | string
+    const value = item[key] as undefined | number | string
 
-    if (typeof value === 'string') value = Number(value)
+    if (value === undefined) return
 
-    return (
-      value !== undefined && (
-        <StylizedNumber {...{ value, isMoney, pre, sub }} />
-      )
-    )
+    return <StylizedNumber {...{ value, isMoney, pre, sub }} />
   }
 
   getExcelValue = (item: GeneralEntity) => {
     const { key, config } = this
     const { isMoney = false, pre = '', sub = '' } = config ?? {}
 
-    let value = item[key] as undefined | number | string
+    const value = item[key] as undefined | number | string
 
     if (value === undefined) return
 
-    if (typeof value === 'string') value = Number(value)
+    const displayValue = isMoney
+      ? new Intl.NumberFormat('es-ES', {
+          minimumFractionDigits: 2,
+          maximumFractionDigits: 6,
+        }).format(Number(value))
+      : value
 
-    return (
-      pre +
-      (isMoney
-        ? value.toLocaleString('es-ES', { minimumFractionDigits: 2 })
-        : value) +
-      sub
-    )
+    return pre + displayValue + sub
   }
 }

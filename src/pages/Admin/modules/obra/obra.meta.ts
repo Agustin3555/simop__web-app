@@ -413,18 +413,17 @@ ObraMeta.fieldsByService = [
     fields: [
       ...select(ObraMeta.allFields, 'only', [
         'numero',
-        'nombre',
         'empresa',
+        'nombre',
         'localidad',
-        'numeroExpediente',
-        'fechaInicio',
-        'tipoProgramaObra',
-        'tipoTematicaObra',
         'tipoEstadoObra',
         'avanceTotal',
         'montoContratacion',
+        'fechaContratacion',
+        'tipoTematicaObra',
+        'tipoProgramaObra',
       ]),
-      ...TOTALES,
+      // ...TOTALES,
     ] as (keyof ObraModel.Entity)[],
   },
   {

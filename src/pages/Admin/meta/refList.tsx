@@ -40,7 +40,7 @@ export class RefListProp implements PropScheme {
     return (
       <AutoCombobox
         keyName={key}
-        title={title.singular}
+        title={title.plural}
         multiple
         initOptions={value}
         {...{ required, editMode, metaModel }}
@@ -58,7 +58,7 @@ export class RefListProp implements PropScheme {
     const value = formData.getAll(key)
 
     if (value.length === 0) {
-      if (editMode && isFieldEnabled(form, key)) return null
+      if (editMode && isFieldEnabled(form, key)) return []
       return
     }
 
