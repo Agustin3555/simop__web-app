@@ -49,19 +49,24 @@ export const ObraMeta = new MetaModel<ObraModel.Entity>({
         required: true,
       },
     }),
+    empresa: new RefProp({
+      getMetaModel: () => EmpresaMeta,
+    }),
     nombre: new TextProp('Nombre', {
       field: {
         required: true,
       },
     }),
-    empresa: new RefProp({
-      getMetaModel: () => EmpresaMeta,
+    localidad: new RefProp({
+      getMetaModel: () => LocalidadMeta,
     }),
-    numeroExpediente: new TextProp('Número de Expediente de Contrato'),
-    numeroResolucion: new TextProp('Número de Resolución'),
-    anioResolucion: new NumberProp('Año de Resolución'),
-    numeroContratacion: new TextProp('Número de Contratación'),
-    fechaContratacion: new DateProp('Fecha de Contratación'),
+    tipoEstadoObra: new RefProp({
+      getMetaModel: () => TipoEstadoObraMeta,
+    }),
+    avanceTotal: new NumberProp('Avance Acumulado', {
+      decimal: true,
+      sub: '%',
+    }),
     montoContratacion: new NumberProp('Monto de Contratación', {
       decimal: true,
       isMoney: true,
@@ -69,35 +74,30 @@ export const ObraMeta = new MetaModel<ObraModel.Entity>({
       sum: true,
       pre: '$',
     }),
+    fechaContratacion: new DateProp('Fecha de Contratación'),
+    tipoTematicaObra: new RefProp({
+      getMetaModel: () => TipoTematicaObraMeta,
+    }),
+    tipoProgramaObra: new RefProp({
+      getMetaModel: () => TipoProgramaObraMeta,
+    }),
+    numeroExpediente: new TextProp('Número de Expediente de Contrato'),
+    numeroResolucion: new TextProp('Número de Resolución'),
+    anioResolucion: new NumberProp('Año de Resolución'),
+    numeroContratacion: new TextProp('Número de Contratación'),
     tipoContratacionObra: new RefProp({
       getMetaModel: () => TipoContratacionObraMeta,
     }),
     tipoFinanciamientoObra: new RefProp({
       getMetaModel: () => TipoFinanciamientoObraMeta,
     }),
-    tipoProgramaObra: new RefProp({
-      getMetaModel: () => TipoProgramaObraMeta,
-    }),
-    tipoTematicaObra: new RefProp({
-      getMetaModel: () => TipoTematicaObraMeta,
-    }),
-    tipoEstadoObra: new RefProp({
-      getMetaModel: () => TipoEstadoObraMeta,
-    }),
     fechaInicio: new DateProp('Fecha de Inicio'),
     fechaFin: new DateProp('Fecha de Fin'),
     plazoMeses: new NumberProp('Plazo en Meses'),
     plazoDias: new NumberProp('Plazo en Días'),
     nomenclaturaCatastral: new TextProp('Nomenclatura Catastral'),
-    localidad: new RefProp({
-      getMetaModel: () => LocalidadMeta,
-    }),
     direccion: new TextProp('Dirección'),
     lugar: new TextLongProp('Lugar'),
-    avanceTotal: new NumberProp('Avance Acumulado', {
-      decimal: true,
-      sub: '%',
-    }),
     observaciones: new TextLongProp('Observaciones generales'),
 
     obraNueva: new BooleanProp('Obra nueva'),
