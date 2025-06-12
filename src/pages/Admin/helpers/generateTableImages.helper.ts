@@ -1,7 +1,7 @@
 import { captureElementImage } from '.'
 
 const CHUNK_ROWS = 10
-const CHUNK_COLS = 8
+const CHUNK_COLS = 12
 
 export const generateTableImages = (tableElement: HTMLElement) => {
   const headElement = tableElement.querySelector<HTMLElement>('& > .head')
@@ -84,7 +84,7 @@ export const generateTableImages = (tableElement: HTMLElement) => {
 
       const imageUrl = await captureElementImage(auxTable)
 
-      // document.body.removeChild(container)
+      document.body.removeChild(container)
 
       return imageUrl
     }),

@@ -10,7 +10,7 @@ export const TipoTematicaObraMeta = new MetaModel<TipoTematicaObraModel.Entity>(
     key: 'tipoTematicaObra',
     service: TipoTematicaObraService,
     title: {
-      singular: 'Tipo de Temática de Obra',
+      singular: 'Temática',
       plural: 'Tipos de Temáticas de Obra',
     },
     faIcon: 'fa-solid fa-shapes',

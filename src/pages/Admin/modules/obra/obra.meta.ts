@@ -49,13 +49,13 @@ export const ObraMeta = new MetaModel<ObraModel.Entity>({
         required: true,
       },
     }),
-    empresa: new RefProp({
-      getMetaModel: () => EmpresaMeta,
-    }),
     nombre: new TextProp('Nombre', {
       field: {
         required: true,
       },
+    }),
+    empresa: new RefProp({
+      getMetaModel: () => EmpresaMeta,
     }),
     localidad: new RefProp({
       getMetaModel: () => LocalidadMeta,
@@ -412,7 +412,6 @@ ObraMeta.fieldsByService = [
     methods: ['totales'],
     fields: [
       ...select(ObraMeta.allFields, 'only', [
-        'numero',
         'empresa',
         'nombre',
         'localidad',

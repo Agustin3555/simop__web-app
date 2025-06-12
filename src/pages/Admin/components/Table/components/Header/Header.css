@@ -148,23 +148,33 @@
     position: absolute;
     z-index: 1;
     top: calc(50% - var(--height) / 2);
-    right: calc(var(--width) / -2);
+    right: 0;
 
-    width: var(--width);
+    width: calc(var(--width) / 2);
     height: var(--height);
 
-    background-image: repeating-linear-gradient(
-      to right,
-      var(--step-color) 0,
-      var(--step-color) 0.0625rem,
-      transparent 0.0625rem,
-      transparent var(--step-width)
-    );
     opacity: 0;
-    mask-image: radial-gradient(#fff, transparent 87.5%);
     pointer-events: none;
 
     transition: opacity var(--pal-time-xs) ease-out;
+
+    &::before {
+      position: absolute;
+
+      width: var(--width);
+      height: var(--height);
+
+      content: '';
+
+      background-image: repeating-linear-gradient(
+        to right,
+        var(--step-color) 0,
+        var(--step-color) 0.0625rem,
+        transparent 0.0625rem,
+        transparent var(--step-width)
+      );
+      mask-image: radial-gradient(#fff, transparent 87.5%);
+    }
   }
 
   &:hover > .resizer {
@@ -172,10 +182,12 @@
   }
 
   &:last-child {
-    overflow: hidden;
-
     > .resizer {
       right: 0;
+    }
+
+    > .ruler {
+      overflow: hidden;
     }
   }
 

@@ -6,8 +6,8 @@ export const styles = StyleSheet.create({
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'flex-start',
-    gap: 20,
-    padding: 20,
+    gap: palSize(Size.S),
+    padding: palSize(Size.S),
 
     fontFamily: 'Manrope Variable',
   },
@@ -18,7 +18,7 @@ export const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    padding: palSize(Size.M),
+    padding: palSize(Size.S),
     width: '100%',
 
     color: palColor('A'),

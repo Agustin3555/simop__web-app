@@ -57,19 +57,6 @@
 
         &:first-child {
           border-left-width: var(--line-thickness);
-
-          &::before {
-            position: absolute;
-            bottom: 0;
-            left: calc(var(--line-thickness) * -1);
-
-            width: var(--line-thickness);
-            height: 100%;
-
-            content: '';
-
-            background: linear-gradient(transparent, var(--pal-color-white));
-          }
         }
 
         &:has(input:checked) {
@@ -100,6 +87,10 @@
   }
 
   > .local-views {
+    border-width: 0;
+    border-left-width: var(--line-thickness);
+    border-style: solid;
+    border-color: var(--pal-color-a-l4);
     padding: var(--pal-size-m);
     height: 100%;
 

@@ -9,7 +9,7 @@ export const TipoEstadoObraMeta = new MetaModel<TipoEstadoObraModel.Entity>({
   key: 'tipoEstadoObra',
   service: TipoEstadoObraService,
   title: {
-    singular: 'Tipo de Estado de Obra',
+    singular: 'Estado',
     plural: 'Tipos de Estados de Obra',
   },
   faIcon: 'fa-solid fa-shapes',

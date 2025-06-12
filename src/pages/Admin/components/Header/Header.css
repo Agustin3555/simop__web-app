@@ -7,6 +7,8 @@
 
   background-color: var(--pal-color-a-d2);
 
+  transition: border-radius var(--pal-time-m) ease;
+
   @media (50rem < width) {
     [data-nav-open='true'] & {
       border-bottom-left-radius: var(--pal-size-xs);
