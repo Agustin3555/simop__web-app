@@ -37,6 +37,7 @@ import TipoRedeterminacion from '../../views/TipoRedeterminacion/TipoRedetermina
 import TipoRepresentante from '../../views/TipoRepresentante/TipoRepresentante'
 import TipoRescision from '../../views/TipoRescision/TipoRescision'
 import TipoTematicaObra from '../../views/TipoTematicaObra/TipoTematicaObra'
+import GM from '../../views/G/GM'
 
 const ViewManager = () => (
   <div className="cmp-view-manager">
@@ -80,6 +81,7 @@ const ViewManager = () => (
     <ObraGeneral />
     <ObraTotales />
     <ObraDetalle />
+    <GM />
   </div>
 )
 

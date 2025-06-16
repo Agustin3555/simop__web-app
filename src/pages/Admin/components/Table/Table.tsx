@@ -281,13 +281,24 @@ const Table = ({ data, setQuickFilters, methods }: TableProps) => {
               setValue={setEnableStickFoot}
             />
           </div>
-          <Value
-            text={data.length}
-            faIcon="fa-solid fa-cubes-stacked"
-            size="s"
-            type="secondary"
-            pill
-          />
+          <div className="center">
+            {table.getFilteredRowModel().rows.length !== data.length && (
+              <Value
+                text={table.getFilteredRowModel().rows.length}
+                faIcon="fa-solid fa-filter"
+                size="s"
+                type="secondary"
+                pill
+              />
+            )}
+            <Value
+              text={data.length}
+              faIcon="fa-solid fa-cubes-stacked"
+              size="s"
+              type="secondary"
+              pill
+            />
+          </div>
           <div className="right">
             <Button
               text="Excel"

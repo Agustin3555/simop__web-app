@@ -150,6 +150,10 @@ const VIEWS_BASE: Record<
   obraDetalle: {
     title: 'Detalle de Obra Básica',
   },
+  gm: {
+    title: 'GM',
+    faIcon: 'G',
+  },
 }
 
 export const VIEWS_INFO: Record<string, { title: string; faIcon: string }> = {}

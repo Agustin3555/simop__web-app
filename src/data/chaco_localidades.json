@@ -1,0 +1,1592 @@
+{
+  "type": "FeatureCollection",
+  "generator": "overpass-turbo",
+  "copyright": "The data included in this document is from www.openstreetmap.org. The data is made available under ODbL.",
+  "timestamp": "2025-06-12T13:11:56Z",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/198396647",
+        "name": "La Verde",
+        "place": "village",
+        "population": "2486",
+        "source_ref": "http://earth-info.nga.mil/gns/html/cntyfile/ar.zip",
+        "wikidata": "Q1657869",
+        "wikipedia": "es:La Verde (Chaco)"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-59.3762738, -27.1304632]
+      },
+      "id": "node/198396647"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/198400971",
+        "name": "Machagai",
+        "place": "town",
+        "population": "21997",
+        "source_ref": "http://earth-info.nga.mil/gns/html/cntyfile/ar.zip",
+        "wikidata": "Q1579325",
+        "wikipedia": "es:Machagai"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-60.0484514, -26.9262074]
+      },
+      "id": "node/198400971"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/198401284",
+        "name": "Makallé",
+        "place": "village",
+        "population": "3812",
+        "source_ref": "http://earth-info.nga.mil/gns/html/cntyfile/ar.zip",
+        "wikidata": "Q602345",
+        "wikipedia": "es:Makallé"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-59.2871558, -27.2058189]
+      },
+      "id": "node/198401284"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/198403656",
+        "name": "Mesón de Fierro",
+        "place": "village",
+        "population": "423",
+        "source_ref": "http://earth-info.nga.mil/gns/html/cntyfile/ar.zip",
+        "wikidata": "Q6822203",
+        "wikipedia": "es:Mesón de Fierro"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-61.0184124, -27.4299142]
+      },
+      "id": "node/198403656"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/198406069",
+        "name": "Napenay",
+        "place": "village",
+        "population": "3194",
+        "population:date": "2022",
+        "source:population": "INDEC, Censo 2022",
+        "source_ref": "http://earth-info.nga.mil/gns/html/cntyfile/ar.zip",
+        "wikidata": "Q1579131",
+        "wikipedia": "es:Napenay"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-60.6168519, -26.7295358]
+      },
+      "id": "node/198406069"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/198408711",
+        "name": "Pampa Almirón",
+        "place": "village",
+        "population": "1278",
+        "source_ref": "http://earth-info.nga.mil/gns/html/cntyfile/ar.zip",
+        "wikidata": "Q1656116",
+        "wikipedia": "es:Pampa Almirón"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-59.1240566, -26.7010215]
+      },
+      "id": "node/198408711"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/198408798",
+        "ele": "80",
+        "name": "Pampa del Indio",
+        "place": "village",
+        "population": "5674",
+        "postal_code": "H3531",
+        "source_ref": "http://earth-info.nga.mil/gns/html/cntyfile/ar.zip",
+        "wikidata": "Q1656045",
+        "wikipedia": "es:Pampa del Indio"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-59.9447808, -26.0485147]
+      },
+      "id": "node/198408798"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/198408815",
+        "is_in:country": "Argentina",
+        "is_in:country_code": "AR",
+        "is_in:state": "Chaco",
+        "name": "Pampa del Infierno",
+        "place": "village",
+        "population": "9063",
+        "postal_code": "H3708",
+        "source_ref": "http://earth-info.nga.mil/gns/html/cntyfile/ar.zip",
+        "wikidata": "Q1578938",
+        "wikipedia": "es:Pampa del Infierno"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-61.1764799, -26.5034702]
+      },
+      "id": "node/198408815"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/198412386",
+        "name": "Presidencia de la Plaza",
+        "place": "village",
+        "population": "8417",
+        "postal_code": "H3536",
+        "source_ref": "http://earth-info.nga.mil/gns/html/cntyfile/ar.zip",
+        "wikidata": "Q1656867",
+        "wikipedia": "es:Presidencia de la Plaza"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-59.8465764, -26.998633]
+      },
+      "id": "node/198412386"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/198412412",
+        "capital": "5",
+        "name": "Presidencia Roque Sáenz Peña",
+        "name:el": "Πρεσιντένσια Ρόκε Σαένθ Πένια",
+        "place": "town",
+        "population": "89882",
+        "wikidata": "Q1656936",
+        "wikipedia": "es:Presidencia Roque Sáenz Peña"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-60.4410391, -26.7909093]
+      },
+      "id": "node/198412412"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/198413425",
+        "name": "Puerto Bermejo Viejo",
+        "place": "village",
+        "population": "86",
+        "source_ref": "http://earth-info.nga.mil/gns/html/cntyfile/ar.zip",
+        "wikidata": "Q6091966",
+        "wikipedia": "es:Puerto Bermejo Viejo"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-58.5089509, -26.92909]
+      },
+      "id": "node/198413425"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/198414399",
+        "name": "Puerto Tirol",
+        "place": "village",
+        "population": "8819",
+        "source_ref": "http://earth-info.nga.mil/gns/html/cntyfile/ar.zip",
+        "wikidata": "Q1003738",
+        "wikipedia": "es:Puerto Tirol"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-59.087509, -27.3750604]
+      },
+      "id": "node/198414399"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/198414440",
+        "name": "Puerto Vilelas",
+        "place": "village",
+        "population": "8278",
+        "source_ref": "http://earth-info.nga.mil/gns/html/cntyfile/ar.zip",
+        "wikidata": "Q1656101",
+        "wikipedia": "es:Puerto Vilelas"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-58.9405157, -27.5171208]
+      },
+      "id": "node/198414440"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/198415478",
+        "name": "Quitilipi",
+        "place": "town",
+        "population": "24517",
+        "source_ref": "http://geoengine.nga.mil/ftpdir/archive/vpf_data/v0soa.tar.gz",
+        "wikidata": "Q1656947",
+        "wikipedia": "es:Quitilipi"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-60.2150144, -26.870771]
+      },
+      "id": "node/198415478"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/198418679",
+        "name": "Samuhú",
+        "place": "village",
+        "population": "1251",
+        "source_ref": "http://earth-info.nga.mil/gns/html/cntyfile/ar.zip",
+        "wikidata": "Q7413040",
+        "wikipedia": "es:Samuhú (Chaco)"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-60.3934925, -27.5187374]
+      },
+      "id": "node/198418679"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/198419385",
+        "name": "San Bernardo",
+        "place": "village",
+        "population": "9379",
+        "postal_code": "H3701",
+        "source_ref": "http://earth-info.nga.mil/gns/html/cntyfile/ar.zip",
+        "wikidata": "Q967629",
+        "wikipedia": "es:San Bernardo (Chaco)"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-60.7128954, -27.2867286]
+      },
+      "id": "node/198419385"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/198424845",
+        "name": "Santa Sylvina",
+        "place": "village",
+        "population": "7340",
+        "postal_code": "H3542",
+        "source_ref": "http://earth-info.nga.mil/gns/html/cntyfile/ar.zip",
+        "wikidata": "Q1015553",
+        "wikipedia": "es:Santa Sylvina"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-61.1360183, -27.8315753]
+      },
+      "id": "node/198424845"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/198426265",
+        "name": "Selvas del Río de Oro",
+        "place": "village",
+        "population": "606",
+        "source_ref": "http://earth-info.nga.mil/gns/html/cntyfile/ar.zip",
+        "wikidata": "Q7448867",
+        "wikipedia": "es:Selvas del Río de Oro"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-58.956749, -26.8029435]
+      },
+      "id": "node/198426265"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/198428089",
+        "name": "Taco Pozo",
+        "place": "village",
+        "population": "7813",
+        "source": "http://ign.gob.ar",
+        "source_ref": "http://geoengine.nga.mil/ftpdir/archive/vpf_data/v0soa.tar.gz",
+        "wikidata": "Q1579288",
+        "wikipedia": "es:Taco Pozo"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-63.2649055, -25.6149753]
+      },
+      "id": "node/198428089"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/198430948",
+        "fixme": "Poblacion estimada. Completar si se consigue el dato y borrar este fixme",
+        "name": "Tres Estacas",
+        "place": "village",
+        "population": "400",
+        "source_ref": "http://earth-info.nga.mil/gns/html/cntyfile/ar.zip",
+        "wikidata": "Q6152169",
+        "wikipedia": "es:Tres Estacas"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-61.626999, -26.9208525]
+      },
+      "id": "node/198430948"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/198430978",
+        "name": "Tres Isletas",
+        "place": "town",
+        "population": "16976",
+        "source_ref": "http://earth-info.nga.mil/gns/html/cntyfile/ar.zip",
+        "wikidata": "Q169222",
+        "wikipedia": "es:Tres Isletas"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-60.4313372, -26.3403492]
+      },
+      "id": "node/198430978"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/198432615",
+        "ele": "50",
+        "name": "Puerto Eva Perón",
+        "old_name": "Puerto Vélaz",
+        "place": "village",
+        "population": "609",
+        "postal_code": "H3526",
+        "source_ref": "http://earth-info.nga.mil/gns/html/cntyfile/ar.zip",
+        "wikidata": "Q972928",
+        "wikipedia": "es:Puerto Eva Perón"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-58.6333575, -26.6634275]
+      },
+      "id": "node/198432615"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/198432643",
+        "name": "Venados Grandes",
+        "place": "village",
+        "population": "303",
+        "source_ref": "http://earth-info.nga.mil/gns/html/cntyfile/ar.zip",
+        "wikidata": "Q7919537",
+        "wikipedia": "es:Venados Grandes"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-61.3859168, -27.8153318]
+      },
+      "id": "node/198432643"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/198433254",
+        "name": "Villa Ángela",
+        "place": "town",
+        "population": "41403",
+        "source:population": "Wikipedia",
+        "source_ref": "http://geoengine.nga.mil/ftpdir/archive/vpf_data/v0soa.tar.gz",
+        "wikidata": "Q1657303",
+        "wikipedia": "es:Villa Ángela"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-60.7112067, -27.5768225]
+      },
+      "id": "node/198433254"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/198433514",
+        "name": "Villa Berthet",
+        "place": "town",
+        "population": "10224",
+        "source_ref": "http://geoengine.nga.mil/ftpdir/archive/vpf_data/v0soa.tar.gz",
+        "wikidata": "Q1657333",
+        "wikipedia": "es:Villa Berthet"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-60.4115856, -27.2939767]
+      },
+      "id": "node/198433514"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/198437305",
+        "name": "Zaparinqui",
+        "place": "village",
+        "population": "700",
+        "source_ref": "http://earth-info.nga.mil/gns/html/cntyfile/ar.zip",
+        "wikidata": "Q8066377",
+        "wikipedia": "es:Zaparinqui"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-60.5614209, -26.0653724]
+      },
+      "id": "node/198437305"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/198439755",
+        "name": "Avia Terai",
+        "place": "village",
+        "population": "5446",
+        "source_ref": "http://earth-info.nga.mil/gns/html/cntyfile/ar.zip",
+        "wikidata": "Q528399",
+        "wikipedia": "es:Avia Terai"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-60.7279985, -26.6865723]
+      },
+      "id": "node/198439755"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/198440395",
+        "name": "Barranqueras",
+        "place": "town",
+        "population": "54715",
+        "postal_code": "H3503",
+        "source_ref": "http://earth-info.nga.mil/gns/html/cntyfile/ar.zip",
+        "wikidata": "Q2885504",
+        "wikipedia": "es:Barranqueras"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-58.9308766, -27.4850978]
+      },
+      "id": "node/198440395"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/198440541",
+        "name": "Basail",
+        "place": "village",
+        "population": "1929",
+        "wikidata": "Q1578997",
+        "wikipedia": "es:Basail"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-59.2816402, -27.887641]
+      },
+      "id": "node/198440541"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/198441646",
+        "name": "Campo Largo",
+        "name:ru": "Кампу-Ларгу",
+        "name:zh": "坎普拉古",
+        "place": "village",
+        "population": "9069",
+        "source_ref": "http://earth-info.nga.mil/gns/html/cntyfile/ar.zip",
+        "wikidata": "Q2257374",
+        "wikipedia": "es:Campo Largo"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-60.8390804, -26.8003613]
+      },
+      "id": "node/198441646"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/198442759",
+        "name": "Juan José Castelli",
+        "place": "town",
+        "population": "24333",
+        "source_ref": "http://earth-info.nga.mil/gns/html/cntyfile/ar.zip",
+        "wikidata": "Q568624",
+        "wikipedia": "es:Juan José Castelli (Chaco)"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-60.6200235, -25.9467092]
+      },
+      "id": "node/198442759"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/198443559",
+        "name": "Charadai",
+        "place": "village",
+        "population": "1519",
+        "source_ref": "http://earth-info.nga.mil/gns/html/cntyfile/ar.zip",
+        "wikidata": "Q1578855",
+        "wikipedia": "es:Charadai"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-59.862857, -27.6545516]
+      },
+      "id": "node/198443559"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/198443564",
+        "name": "Charata",
+        "name:ru": "Чарата",
+        "place": "town",
+        "population": "26497",
+        "source_ref": "http://geoengine.nga.mil/ftpdir/archive/vpf_data/v0soa.tar.gz",
+        "wikidata": "Q1578300",
+        "wikipedia": "es:Charata"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-61.1873712, -27.2178115]
+      },
+      "id": "node/198443564"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/198444022",
+        "name": "Chorotis",
+        "place": "village",
+        "population": "941",
+        "source_ref": "http://earth-info.nga.mil/gns/html/cntyfile/ar.zip",
+        "wikidata": "Q1579594",
+        "wikipedia": "es:Chorotis"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-61.4016058, -27.9145266]
+      },
+      "id": "node/198444022"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/198444201",
+        "name": "Ciervo Petiso",
+        "place": "village",
+        "population": "786",
+        "source_ref": "http://earth-info.nga.mil/gns/html/cntyfile/ar.zip",
+        "wikidata": "Q5119715",
+        "wikipedia": "es:Ciervo Petiso"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-59.6302486, -26.5801578]
+      },
+      "id": "node/198444201"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/198444718",
+        "name": "Colonia Aborigen Chaco",
+        "place": "village",
+        "population": "1272",
+        "source_ref": "http://earth-info.nga.mil/gns/html/cntyfile/ar.zip",
+        "wikidata": "Q5148201",
+        "wikipedia": "es:Colonia Aborigen Chaco"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-60.2026412, -26.9567733]
+      },
+      "id": "node/198444718"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/198444791",
+        "name": "Colonia Baranda",
+        "place": "village",
+        "population": "336",
+        "source_ref": "http://earth-info.nga.mil/gns/html/cntyfile/ar.zip",
+        "wikidata": "Q5148213",
+        "wikipedia": "es:Colonia Baranda"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-59.3073397, -27.5600977]
+      },
+      "id": "node/198444791"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/198444814",
+        "name": "Colonia Benítez",
+        "place": "village",
+        "population": "2212",
+        "source_ref": "http://earth-info.nga.mil/gns/html/cntyfile/ar.zip",
+        "wikidata": "Q1579162",
+        "wikipedia": "es:Colonia Benítez"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-58.9468666, -27.3320206]
+      },
+      "id": "node/198444814"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/198444937",
+        "name": "Colonia Elisa",
+        "place": "village",
+        "population": "3085",
+        "source_ref": "http://earth-info.nga.mil/gns/html/cntyfile/ar.zip",
+        "wikidata": "Q1579265",
+        "wikipedia": "es:Colonia Elisa"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-59.5187724, -26.9316293]
+      },
+      "id": "node/198444937"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/198445234",
+        "name": "Colonia Popular",
+        "place": "village",
+        "population": "191",
+        "source_ref": "http://earth-info.nga.mil/gns/html/cntyfile/ar.zip",
+        "wikidata": "Q1578978",
+        "wikipedia": "es:Colonia Popular"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-59.1514548, -27.2751277]
+      },
+      "id": "node/198445234"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/198445435",
+        "name": "Colonias Unidas",
+        "place": "village",
+        "population": "3417",
+        "source_ref": "http://earth-info.nga.mil/gns/html/cntyfile/ar.zip",
+        "wikidata": "Q1579067",
+        "wikipedia": "es:Colonias Unidas"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-59.6322289, -26.6983324]
+      },
+      "id": "node/198445435"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/198445814",
+        "ele": "105",
+        "is_in:state": "Chaco",
+        "name": "Concepción del Bermejo",
+        "place": "village",
+        "population": "4744",
+        "postal_code": "H3708",
+        "source": "http://ign.gob.ar",
+        "source_ref": "http://earth-info.nga.mil/gns/html/cntyfile/ar.zip",
+        "wikidata": "Q16492871",
+        "wikipedia": "es:Estación Concepción del Bermejo"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-60.9463769, -26.6003306]
+      },
+      "id": "node/198445814"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/198446231",
+        "name": "Coronel Du Graty",
+        "place": "village",
+        "population": "9140",
+        "source:population": "Wikipedia",
+        "source_ref": "http://geoengine.nga.mil/ftpdir/archive/vpf_data/v0soa.tar.gz",
+        "wikidata": "Q1657891",
+        "wikipedia": "es:Coronel Du Graty"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-60.9045554, -27.6821132]
+      },
+      "id": "node/198446231"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/198446522",
+        "name": "Corzuela",
+        "place": "town",
+        "population": "10335",
+        "source_ref": "http://earth-info.nga.mil/gns/html/cntyfile/ar.zip",
+        "wikidata": "Q1135953",
+        "wikipedia": "es:Corzuela (Chaco)"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-60.9702524, -26.9516511]
+      },
+      "id": "node/198446522"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/198446576",
+        "name": "Cote Lai",
+        "place": "village",
+        "population": "1323",
+        "source_ref": "http://earth-info.nga.mil/gns/html/cntyfile/ar.zip",
+        "wikidata": "Q389510",
+        "wikipedia": "es:Cote Lai"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-59.5732399, -27.5297408]
+      },
+      "id": "node/198446576"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/198448135",
+        "name": "El Espinillo",
+        "place": "village",
+        "population": "1261",
+        "source_ref": "http://earth-info.nga.mil/gns/html/cntyfile/ar.zip",
+        "wikidata": "Q5351246",
+        "wikipedia": "es:El Espinillo (Chaco)"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-60.4480202, -25.4078162]
+      },
+      "id": "node/198448135"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/198448568",
+        "name": "Wichí - El Pintado",
+        "place": "village",
+        "population": "773",
+        "source_ref": "http://earth-info.nga.mil/gns/html/cntyfile/ar.zip",
+        "wikidata": "Q7998200",
+        "wikipedia": "es:Wichí-El Pintado"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-61.4261711, -24.6902495]
+      },
+      "id": "node/198448568"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/198449750",
+        "name": "Enrique Urién",
+        "place": "village",
+        "population": "515",
+        "source_ref": "http://earth-info.nga.mil/gns/html/cntyfile/ar.zip",
+        "wikidata": "Q601084",
+        "wikipedia": "es:Enrique Urién"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-60.5268328, -27.5560285]
+      },
+      "id": "node/198449750"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/198450927",
+        "name": "Gancedo",
+        "place": "village",
+        "population": "4284",
+        "source_ref": "http://earth-info.nga.mil/gns/html/cntyfile/ar.zip",
+        "wikidata": "Q1578967",
+        "wikipedia": "es:Gancedo"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-61.6764798, -27.4907695]
+      },
+      "id": "node/198450927"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/198451385",
+        "name": "General Capdevila",
+        "place": "village",
+        "population": "405",
+        "source_ref": "http://earth-info.nga.mil/gns/html/cntyfile/ar.zip",
+        "wikidata": "Q1657825",
+        "wikipedia": "es:General Capdevila"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-61.4759619, -27.4223327]
+      },
+      "id": "node/198451385"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/198451472",
+        "name": "General José de San Martín",
+        "old_name": "El Zapallar",
+        "place": "town",
+        "population": "28124",
+        "source_ref": "http://earth-info.nga.mil/gns/html/cntyfile/ar.zip",
+        "wikidata": "Q2330916",
+        "wikipedia": "es:General José de San Martín"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-59.3414935, -26.536411]
+      },
+      "id": "node/198451472"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/198451588",
+        "name": "General Pinedo",
+        "place": "town",
+        "population": "13042",
+        "source_ref": "http://geoengine.nga.mil/ftpdir/archive/vpf_data/v0soa.tar.gz",
+        "wikidata": "Q611504",
+        "wikipedia": "es:General Pinedo"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-61.2809988, -27.3253583]
+      },
+      "id": "node/198451588"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/198451624",
+        "name": "General Vedia",
+        "place": "village",
+        "population": "1751",
+        "source_ref": "http://earth-info.nga.mil/gns/html/cntyfile/ar.zip",
+        "wikidata": "Q1656049",
+        "wikipedia": "es:General Vedia"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-58.6611935, -26.937354]
+      },
+      "id": "node/198451624"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/198452170",
+        "name": "Hermoso Campo",
+        "place": "village",
+        "population": "5011",
+        "source_ref": "http://earth-info.nga.mil/gns/html/cntyfile/ar.zip",
+        "wikidata": "Q751497",
+        "wikipedia": "es:Hermoso Campo"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-61.3442448, -27.610088]
+      },
+      "id": "node/198452170"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/198452268",
+        "name": "Horquilla",
+        "place": "village",
+        "population": "151",
+        "source:population": "Wikipedia",
+        "source_ref": "http://earth-info.nga.mil/gns/html/cntyfile/ar.zip",
+        "wikidata": "Q5904960",
+        "wikipedia": "es:Horquilla (Chaco)"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-59.9563746, -27.5415289]
+      },
+      "id": "node/198452268"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/198452596",
+        "name": "Ingeniero Barbet",
+        "place": "village",
+        "population": "277",
+        "source_ref": "http://earth-info.nga.mil/gns/html/cntyfile/ar.zip",
+        "wikidata": "Q6032194",
+        "wikipedia": "es:Ingeniero Barbet"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-59.4812818, -27.0018632]
+      },
+      "id": "node/198452596"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/198453272",
+        "name": "Itín",
+        "place": "village",
+        "population": "441",
+        "source_ref": "http://earth-info.nga.mil/gns/html/cntyfile/ar.zip",
+        "wikidata": "Q5642796",
+        "wikipedia": "es:Itín (Chaco)"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-61.3235884, -27.4867136]
+      },
+      "id": "node/198453272"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/198454956",
+        "name": "La Clotilde",
+        "place": "village",
+        "population": "3382",
+        "source_ref": "http://earth-info.nga.mil/gns/html/cntyfile/ar.zip",
+        "wikidata": "Q1656083",
+        "wikipedia": "es:La Clotilde"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-60.6325282, -27.1775027]
+      },
+      "id": "node/198454956"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/198455156",
+        "name": "La Eduvigis",
+        "place": "village",
+        "population": "392",
+        "source_ref": "http://earth-info.nga.mil/gns/html/cntyfile/ar.zip",
+        "wikidata": "Q1657326",
+        "wikipedia": "es:La Eduvigis"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-59.0623545, -26.8365469]
+      },
+      "id": "node/198455156"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/198455223",
+        "name": "La Escondida",
+        "place": "village",
+        "population": "3219",
+        "source_ref": "http://earth-info.nga.mil/gns/html/cntyfile/ar.zip",
+        "wikidata": "Q1656012",
+        "wikipedia": "es:La Escondida (Argentina)"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-59.446305, -27.1053452]
+      },
+      "id": "node/198455223"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/198455946",
+        "name": "Laguna Blanca",
+        "place": "village",
+        "population": "547",
+        "source_ref": "http://earth-info.nga.mil/gns/html/cntyfile/ar.zip",
+        "wikidata": "Q5484811",
+        "wikipedia": "es:Laguna Blanca (Chaco)"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-59.2330324, -27.2554817]
+      },
+      "id": "node/198455946"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/198456037",
+        "name": "Laguna Limpia",
+        "place": "village",
+        "population": "1207",
+        "source_ref": "http://earth-info.nga.mil/gns/html/cntyfile/ar.zip",
+        "wikidata": "Q1656138",
+        "wikipedia": "es:Laguna Limpia"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-59.6804092, -26.4958928]
+      },
+      "id": "node/198456037"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/198456384",
+        "name": "La Leonesa",
+        "place": "village",
+        "population": "8823",
+        "source_ref": "http://earth-info.nga.mil/gns/html/cntyfile/ar.zip",
+        "wikidata": "Q1657423",
+        "wikipedia": "es:La Leonesa"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-58.7063441, -27.0386332]
+      },
+      "id": "node/198456384"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/198457111",
+        "name": "Lapachito",
+        "place": "village",
+        "population": "888",
+        "source_ref": "http://earth-info.nga.mil/gns/html/cntyfile/ar.zip",
+        "wikidata": "Q1657314",
+        "wikipedia": "es:Lapachito"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-59.3854377, -27.1593809]
+      },
+      "id": "node/198457111"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/198457845",
+        "name": "La Sabana",
+        "place": "village",
+        "population": "242",
+        "source:population": "Wikipedia",
+        "source_ref": "http://earth-info.nga.mil/gns/html/cntyfile/ar.zip",
+        "wikidata": "Q6465043",
+        "wikipedia": "es:La Sabana (Argentina)"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-59.9386455, -27.8723467]
+      },
+      "id": "node/198457845"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/198457941",
+        "name": "Las Breñas",
+        "place": "town",
+        "population": "22953",
+        "source_ref": "http://earth-info.nga.mil/gns/html/cntyfile/ar.zip",
+        "wikidata": "Q1017552",
+        "wikipedia": "es:Las Breñas"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-61.0859456, -27.0863246]
+      },
+      "id": "node/198457941"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/198459358",
+        "name": "La Tigra",
+        "place": "village",
+        "population": "2866",
+        "source_ref": "http://earth-info.nga.mil/gns/html/cntyfile/ar.zip",
+        "wikidata": "Q1657168",
+        "wikipedia": "es:La Tigra (Chaco)"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-60.5878324, -27.1124743]
+      },
+      "id": "node/198459358"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/443024159",
+        "name": "Fuerte Esperanza",
+        "place": "village",
+        "population": "1376",
+        "wikidata": "Q169193",
+        "wikipedia": "es:Fuerte Esperanza"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-61.8399662, -25.1603897]
+      },
+      "id": "node/443024159"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/497172163",
+        "name": "Las Garcitas",
+        "place": "village",
+        "population": "3032",
+        "wikidata": "Q1657855",
+        "wikipedia": "es:Las Garcitas"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-59.7991928, -26.6181443]
+      },
+      "id": "node/497172163"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/497261005",
+        "name": "Capitán Solari",
+        "place": "village",
+        "population": "1888",
+        "wikidata": "Q1579019",
+        "wikipedia": "es:Capitán Solari"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-59.557308, -26.8024827]
+      },
+      "id": "node/497261005"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/499984472",
+        "name": "El Sauzalito",
+        "place": "village",
+        "population": "2615",
+        "wikidata": "Q1579107",
+        "wikipedia": "es:El Sauzalito"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-61.6841709, -24.4236389]
+      },
+      "id": "node/499984472"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/1216386495",
+        "name": "San Pedro Pescador",
+        "place": "village",
+        "population": "800",
+        "wikidata": "Q4863750",
+        "wikipedia": "es:Barrio San Pedro Pescador"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-58.8680478, -27.4608523]
+      },
+      "id": "node/1216386495"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/1224758319",
+        "name": "Fontana",
+        "place": "town",
+        "population": "31209",
+        "population:date": "2010",
+        "wikidata": "Q923414",
+        "wikipedia": "es:Fontana (Chaco)"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-59.0342223, -27.4172158]
+      },
+      "id": "node/1224758319"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/1247630116",
+        "name": "Isla del Cerrito",
+        "place": "village",
+        "population": "1758",
+        "wikidata": "Q3802539",
+        "wikipedia": "es:Isla del Cerrito (localidad)"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-58.6193884, -27.295972]
+      },
+      "id": "node/1247630116"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/1247773528",
+        "name": "Puerto Bermejo",
+        "place": "village",
+        "population": "1503",
+        "wikidata": "Q1656125",
+        "wikipedia": "es:Puerto Bermejo"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-58.5415329, -26.9079357]
+      },
+      "id": "node/1247773528"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/1348052781",
+        "name": "Pampa Landriel",
+        "place": "village",
+        "population": "333",
+        "wikidata": "Q7129385",
+        "wikipedia": "es:Pampa Landriel"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-61.103008, -27.3948107]
+      },
+      "id": "node/1348052781"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/1356733780",
+        "name": "Villa Rural El Palmar",
+        "place": "village",
+        "population": "879",
+        "wikidata": "Q2525694",
+        "wikipedia": "es:Villa Rural El Palmar"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-60.1643891, -26.4545108]
+      },
+      "id": "node/1356733780"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/1359366828",
+        "name": "Misión Nueva Pompeya",
+        "place": "village",
+        "population": "2259",
+        "wikidata": "Q1657632",
+        "wikipedia": "es:Misión Nueva Pompeya"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-61.4831902, -24.9330267]
+      },
+      "id": "node/1359366828"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/1359396417",
+        "name": "Miraflores",
+        "place": "village",
+        "population": "4737",
+        "source:population": "Censo 2010",
+        "wikidata": "Q6872561",
+        "wikipedia": "es:Miraflores (Chaco)"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-60.931061, -25.646739]
+      },
+      "id": "node/1359396417"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/1361617760",
+        "name": "Fortín Lavalle",
+        "place": "village",
+        "population": "687",
+        "wikidata": "Q8564853",
+        "wikipedia": "es:Fortín Lavalle"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-60.2007197, -25.7030792]
+      },
+      "id": "node/1361617760"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/1362740818",
+        "fixme": "Poblacion estimada. Completar si se consigue el dato y borrar este fixme",
+        "name": "Comandancia Frías",
+        "place": "village",
+        "population": "600",
+        "wikidata": "Q5150533",
+        "wikipedia": "es:Comandancia Frías"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-62.2376119, -24.5646529]
+      },
+      "id": "node/1362740818"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/1362777402",
+        "name": "El Sauzal",
+        "place": "village",
+        "population": "715",
+        "wikidata": "Q5352127",
+        "wikipedia": "es:El Sauzal (Chaco)"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-61.5316855, -24.5772514]
+      },
+      "id": "node/1362777402"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/1362777403",
+        "name": "Fortín Belgrano",
+        "place": "village",
+        "population": "100",
+        "wikidata": "Q980281",
+        "wikipedia": "es:Fortín Belgrano"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-62.3386949, -24.1234256]
+      },
+      "id": "node/1362777403"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/1363089287",
+        "fixme": "Poblacion estimada. Completar si se consigue el dato y borrar este fixme",
+        "name": "Las Piedritas",
+        "place": "village",
+        "population": "400",
+        "wikidata": "Q11142972",
+        "wikipedia": "es:Las Piedritas"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-61.5657582, -26.8236989]
+      },
+      "id": "node/1363089287"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/1363607654",
+        "name": "Fortín Las Chuñas",
+        "place": "village",
+        "population": "302",
+        "wikidata": "Q5473018",
+        "wikipedia": "es:Fortín Las Chuñas"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-60.9088961, -26.8851806]
+      },
+      "id": "node/1363607654"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/1617730500",
+        "capital": "4",
+        "name": "Resistencia",
+        "name:el": "Ρεσιστένσια",
+        "name:en": "Resistencia",
+        "name:he": "רסיסטנסיה",
+        "name:ru": "Ресистенсия",
+        "name:uk": "Ресістенсія",
+        "note": "La población es del Gran Resistencia",
+        "place": "city",
+        "population": "385726",
+        "postal_code": "3500",
+        "website": "http://www.mr.gov.ar/",
+        "wikidata": "Q44206",
+        "wikipedia": "es:Resistencia (ciudad)"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-58.9865196, -27.4511077]
+      },
+      "id": "node/1617730500"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/2018453447",
+        "name": "Margarita Belén",
+        "place": "village",
+        "population": "4591",
+        "postal_code": "3505",
+        "wikidata": "Q383019",
+        "wikipedia": "es:Margarita Belén"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-58.9704763, -27.2591096]
+      },
+      "id": "node/2018453447"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/5194874814",
+        "alt_name": "Río Bermejito",
+        "ele": "132",
+        "name": "Villa Río Bermejito",
+        "place": "village",
+        "population": "3752",
+        "postal_code": "H3703",
+        "wikidata": "Q1656034",
+        "wikipedia": "es:Villa Río Bermejito"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-60.2657176, -25.6373455]
+      },
+      "id": "node/5194874814"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/5455024178",
+        "name": "Río Muerto",
+        "place": "village",
+        "population": "1052",
+        "source": "http://ign.gob.ar",
+        "wikidata": "Q600143",
+        "wikipedia": "es:Río Muerto"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-61.6545439, -26.3081116]
+      },
+      "id": "node/5455024178"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/5455024179",
+        "name": "Los Frentones",
+        "place": "village",
+        "population": "5520",
+        "source": "http://ign.gob.ar",
+        "wikidata": "Q925007",
+        "wikipedia": "es:Los Frentones"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-61.4131341, -26.4088995]
+      },
+      "id": "node/5455024179"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/5794542379",
+        "name": "Presidencia Roca",
+        "place": "village",
+        "population": "3720",
+        "wikidata": "Q1657374",
+        "wikipedia": "es:Presidencia Roca"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-59.59656, -26.1402405]
+      },
+      "id": "node/5794542379"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/7603772490",
+        "name": "Mz 20",
+        "place": "city_block"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-59.037064, -27.4312911]
+      },
+      "id": "node/7603772490"
+    }
+  ]
+}

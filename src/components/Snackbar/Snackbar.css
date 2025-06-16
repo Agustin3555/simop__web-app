@@ -69,11 +69,11 @@
     }
 
     &.error {
-      background-color: var(--pal-color-c);
+      background-color: var(--pal-color-d);
     }
 
     &.success {
-      background-color: var(--pal-color-b);
+      background-color: var(--pal-color-c);
     }
 
     > .cmp-icon {

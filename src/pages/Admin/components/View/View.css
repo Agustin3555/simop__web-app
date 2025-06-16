@@ -1,4 +1,5 @@
 .cmp-view {
+  container: cmp-view / inline-size;
   display: none;
   flex-direction: column;
   width: 100%;

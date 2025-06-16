@@ -1,0 +1,35 @@
+.cmp-g {
+  position: relative;
+
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: var(--pal-size-m);
+  width: 100%;
+
+  > .info {
+    display: flex;
+    flex-direction: column;
+    gap: var(--pal-size-s);
+
+    overflow: auto;
+
+    > .cmp-button {
+      color: var(--pal-color-white);
+    }
+  }
+
+  > .map {
+    isolation: isolate;
+
+    border-radius: var(--pal-size-xs);
+
+    *:focus {
+      outline: none;
+    }
+  }
+
+  @container cmp-view (width <= 80rem) {
+    grid-template-columns: unset;
+    grid-template-rows: 2fr 1fr;
+  }
+}

@@ -58,9 +58,9 @@
       }
 
       .cmp-button {
-        border-color: var(--pal-color-b);
+        border-color: var(--pal-color-c);
 
-        color: var(--pal-color-b-d1);
+        color: var(--pal-color-c-d1);
       }
     }
   }

@@ -29,28 +29,26 @@
       justify-content: space-between;
       gap: var(--pal-size-2xs);
 
-      > .left {
+      > * {
         display: flex;
         flex-wrap: wrap;
         gap: var(--pal-size-2xs);
-
-        .fa-down-left-and-up-right-to-center {
-          --fa-rotate-angle: 45deg;
-        }
       }
 
-      > .cmp-value {
+      > .left .fa-down-left-and-up-right-to-center {
+        --fa-rotate-angle: 45deg;
+      }
+
+      > .center > .cmp-value {
         border-color: var(--pal-color-a-l5);
 
         color: var(--pal-color-a);
       }
 
-      > .right {
-        > .cmp-button {
-          border-color: var(--pal-color-b-l1);
+      > .right > .cmp-button {
+        border-color: var(--pal-color-c-l1);
 
-          color: var(--pal-color-b-d1);
-        }
+        color: var(--pal-color-c-d1);
       }
     }
 

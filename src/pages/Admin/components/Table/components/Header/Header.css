@@ -192,6 +192,6 @@
   }
 
   &.dragging {
-    background-color: var(--pal-color-b-l1);
+    background-color: var(--pal-color-c-l1);
   }
 }
