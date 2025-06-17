@@ -29,3 +29,4 @@ export { default as SegmentedControl } from './SegmentedControl/SegmentedControl
 export { default as Header } from './Header/Header'
 export { default as FavoriteViews } from './FavoriteViews/FavoriteViews'
 export { default as Form } from './Form/Form'
+export { default as DataDownloadBanner } from './DataDownloadBanner/DataDownloadBanner'

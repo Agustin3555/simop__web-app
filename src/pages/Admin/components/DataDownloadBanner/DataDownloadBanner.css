@@ -1,0 +1,113 @@
+.cmp-data-download-banner {
+  position: relative;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+
+  .local-views:has(&) {
+    overflow: hidden;
+  }
+
+  > .particles {
+    --function: ease;
+
+    position: absolute;
+
+    aspect-ratio: 1;
+    width: 10rem;
+
+    scale: 4;
+    rotate: 0.6turn;
+
+    transition: scale var(--pal-time-xl) var(--function),
+      rotate var(--pal-time-xl) var(--function);
+
+    > * {
+      position: absolute;
+      top: var(--y);
+      left: var(--x);
+
+      aspect-ratio: 1;
+      width: var(--size);
+
+      border-radius: var(--pill-radius);
+      background-color: var(--pal-color-a-l1);
+
+      filter: blur(0.75rem);
+
+      transition: filter var(--pal-time-xl) var(--function);
+    }
+  }
+
+  > .catalyst {
+    --cmp-icon-size: var(--pal-size-l);
+    --shadow-blur: 8rem;
+
+    position: relative;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    aspect-ratio: 1;
+    width: var(--pal-size-3xl);
+
+    color: var(--pal-color-a);
+
+    border-radius: var(--pill-radius);
+    background-color: var(--pal-color-a-l5);
+    box-shadow: 0 0 var(--shadow-blur) var(--pal-color-a);
+
+    transition: box-shadow var(--pal-time-m) ease-out;
+
+    > * {
+      position: absolute;
+
+      scale: 0;
+      opacity: 0;
+
+      transition: scale var(--pal-time-m) ease, opacity var(--pal-time-m) ease;
+    }
+
+    > .active {
+      scale: initial;
+      opacity: initial;
+    }
+  }
+
+  &:disabled {
+    cursor: default;
+  }
+
+  &:hover:not(.downloading) {
+    > .particles {
+      scale: 3;
+      rotate: 0.55turn;
+
+      > * {
+        filter: blur(0.5rem);
+      }
+    }
+
+    > .catalyst {
+      --shadow-blur: 3rem;
+    }
+  }
+
+  &.downloading {
+    > .particles {
+      scale: 0.25;
+      rotate: initial;
+
+      > * {
+        filter: blur(0.125rem);
+      }
+    }
+
+    > .catalyst {
+      --shadow-blur: 0.375rem;
+    }
+  }
+}

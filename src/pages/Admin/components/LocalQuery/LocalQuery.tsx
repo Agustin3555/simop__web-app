@@ -3,7 +3,7 @@ import { useCallback, useMemo, useRef, useState } from 'react'
 import { useQueryActionState } from '@/hooks'
 import { useEntities, useRowSelection, useMetaModel } from '../../hooks'
 import { Button } from '@/components'
-import { ReportButton, Table } from '..'
+import { DataDownloadBanner, ReportButton, Table } from '..'
 import { QuickFilters, TableProps } from '../Table/Table'
 import { DeleteButton, ReportInTable } from './components'
 import { generateTableImages } from '../../helpers'
@@ -60,33 +60,40 @@ const LocalQuery = ({ fetch, methods }: LocalQueryProps) => {
 
   return (
     <div className="cmp-local-query" ref={componentRef}>
-      <header>
-        {hasQuickFilters && (
-          <div className="filter-container">
-            {Object.values(quickFilters).map(({ title, filter }) => (
-              <div key={title} className="item">
-                <small>{title}</small>
-                {filter}
+      {data ? (
+        <>
+          <header>
+            {hasQuickFilters && (
+              <div className="filter-container">
+                {Object.values(quickFilters).map(({ title, filter }) => (
+                  <div key={title} className="item">
+                    <small>{title}</small>
+                    {filter}
+                  </div>
+                ))}
               </div>
-            ))}
-          </div>
-        )}
-        <div className="left">
-          <Button
-            title="Consultar datos"
-            faIcon={`fa-solid ${
-              data ? 'fa-arrows-rotate' : 'fa-cloud-arrow-down'
-            }`}
-            actionState={queryActionState}
-            onAction={queryHandleClick}
-          />
-        </div>
-        <div className="actions">
-          {selectedRowIds.length !== 0 && <DeleteButton />}
-          {data && <ReportButton onGenerate={handleReportGenerate} />}
-        </div>
-      </header>
-      {data && <Table {...{ data, setQuickFilters, methods }} />}
+            )}
+            <div className="left">
+              <Button
+                title="Consultar datos"
+                faIcon={`fa-solid fa-arrows-rotate`}
+                actionState={queryActionState}
+                onAction={queryHandleClick}
+              />
+            </div>
+            <div className="actions">
+              {selectedRowIds.length !== 0 && <DeleteButton />}
+              <ReportButton onGenerate={handleReportGenerate} />
+            </div>
+          </header>
+          <Table {...{ data, setQuickFilters, methods }} />
+        </>
+      ) : (
+        <DataDownloadBanner
+          actionState={queryActionState}
+          onDownload={queryHandleClick}
+        />
+      )}
     </div>
   )
 }
