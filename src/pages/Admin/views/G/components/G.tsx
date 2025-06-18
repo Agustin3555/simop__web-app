@@ -14,10 +14,10 @@ import { latLng, CircleMarker as LeafletCircleMarker } from 'leaflet'
 import { palColor } from '@/styles/palette'
 import { FeatureCollection } from 'geojson'
 import { Table } from '@/pages/Admin/components'
-import { MetaModelContext } from '@/pages/Admin/contexts'
+import { MetaModelContext, TableProvider } from '@/pages/Admin/contexts'
 import { Button } from '@/components'
 import { useQueryActionState } from '@/hooks'
-import { useEntities } from '@/pages/Admin/hooks'
+import { useEntities, useTable } from '@/pages/Admin/hooks'
 import { ObraMeta } from '@/pages/Admin/modules/obra/obra.meta'
 
 // const CiudadesEnVista = ({ setVisibles }: { setVisibles: Function }) => {
@@ -106,9 +106,10 @@ const useCityAnimation = () => {
   return { start, stop, register }
 }
 
-const G = () => {
+const ContextualizedG = () => {
   const [selectedCities, setSelectedCities] = useState<string[]>([])
   const animation = useCityAnimation()
+  const { table } = useTable() ?? {}
 
   const { query, enableQuery } = useEntities(
     [ObraMeta.key],
@@ -134,9 +135,11 @@ const G = () => {
 
         already ? animation.stop(name) : animation.start(name)
 
+        table?.getColumn('localidad')?.setFilterValue(['1'])
+
         return already ? prev.filter(n => n !== name) : [...prev, name]
       }),
-    [animation],
+    [animation, table],
   )
 
   return (
@@ -218,5 +221,11 @@ const G = () => {
     </div>
   )
 }
+
+const G = () => (
+  <TableProvider>
+    <ContextualizedG />
+  </TableProvider>
+)
 
 export default G

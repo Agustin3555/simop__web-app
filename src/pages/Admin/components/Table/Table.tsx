@@ -4,6 +4,7 @@ import {
   ReactNode,
   SetStateAction,
   useCallback,
+  useEffect,
   useMemo,
   useState,
 } from 'react'
@@ -13,6 +14,7 @@ import {
   useDerivedState,
   DerivedToState,
   StateToDerived,
+  useTable,
 } from '@/pages/Admin/hooks'
 import {
   ColumnDef,
@@ -176,19 +178,19 @@ const Table = ({ data, setQuickFilters, methods }: TableProps) => {
     data,
     columns,
     state: {
-      rowSelection,
-      columnFilters,
-      sorting,
-      columnOrder,
       columnVisibility,
+      columnFilters,
+      columnOrder,
+      rowSelection,
+      sorting,
     },
     getRowId: row => String(row.id),
 
-    onSortingChange: setSorting,
-    onColumnFiltersChange: setColumnFilters,
-    onRowSelectionChange: setRowSelection,
-    onColumnOrderChange: setColumnOrder,
     onColumnVisibilityChange: setColumnVisibility,
+    onColumnFiltersChange: setColumnFilters,
+    onColumnOrderChange: setColumnOrder,
+    onRowSelectionChange: setRowSelection,
+    onSortingChange: setSorting,
 
     getCoreRowModel: getCoreRowModel(),
     getFilteredRowModel: getFilteredRowModel(),
@@ -201,6 +203,12 @@ const Table = ({ data, setQuickFilters, methods }: TableProps) => {
     enableSortingRemoval: false,
     columnResizeMode: 'onEnd',
   })
+
+  const { setTable } = useTable() ?? {}
+
+  useEffect(() => {
+    setTable && setTable(table)
+  }, [])
 
   const exportHandleClick = useCallback(() => {
     if (!data) return
@@ -247,6 +255,7 @@ const Table = ({ data, setQuickFilters, methods }: TableProps) => {
     <div
       className={classList('cmp-table', { 'enable-filters': enableFilters })}
     >
+      {/* <pre>{JSON.stringify(columnFilters, undefined, 2)}</pre> */}
       <div className="actions">
         <div className="main-bar">
           <div className="left">
