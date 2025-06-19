@@ -12,19 +12,28 @@ export const styles = StyleSheet.create({
     fontFamily: 'Manrope Variable',
   },
   header: {
-    flexShrink: 1,
+    flexShrink: 0,
+
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    gap: palSize(Size.S),
+    padding: palSize(Size.S),
+    width: '100%',
+
+    color: palColor('AD1'),
+
+    borderRadius: palSize(Size.XS2),
+    backgroundColor: palColor('AL5'),
+  },
+  group: {
+    flexShrink: 0,
 
     display: 'flex',
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    padding: palSize(Size.S),
     width: '100%',
-
-    color: palColor('A'),
-
-    borderRadius: palSize(Size.XS2),
-    backgroundColor: '#e5e6f5',
   },
   h1: {
     fontSize: palSize(FontSize.S),
@@ -84,4 +93,21 @@ export const styles = StyleSheet.create({
     backgroundColor: palColor('AL2'),
   },
   date: {},
+  warning: {
+    paddingTop: palSize(Size.XS3),
+    paddingBottom: 3,
+    width: '100%',
+
+    fontSize: 8,
+    fontWeight: 600,
+    textAlign: 'center',
+
+    borderRadius: palSize(Size.XS3),
+    backgroundColor: palColorGS('white'),
+  },
+  content: {
+    flex: 1,
+
+    width: '100%',
+  },
 })

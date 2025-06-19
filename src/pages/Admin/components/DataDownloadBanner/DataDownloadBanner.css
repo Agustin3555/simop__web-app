@@ -34,7 +34,7 @@
       width: var(--size);
 
       border-radius: var(--pill-radius);
-      background-color: var(--pal-color-a-l3);
+      background-color: var(--bg-color);
       filter: blur(0.875rem);
 
       transition: filter var(--pal-time-xl) var(--function);
@@ -42,16 +42,19 @@
 
     &.s {
       --size: var(--pal-size-xs);
+      --bg-color: var(--pal-color-a);
       --fall-time: 3s;
     }
 
     &.m {
       --size: var(--pal-size-s);
+      --bg-color: var(--pal-color-a-l4);
       --fall-time: 6s;
     }
 
     &.l {
       --size: var(--pal-size-l);
+      --bg-color: var(--pal-color-a-l5);
       --fall-time: 9s;
     }
   }
@@ -101,7 +104,7 @@
       rotate: 0.55turn;
 
       > * {
-        filter: blur(0.25rem);
+        filter: blur(0.5rem);
       }
     }
 

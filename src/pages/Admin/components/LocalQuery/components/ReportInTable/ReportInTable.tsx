@@ -9,7 +9,12 @@ interface ReportInTableProps {
 const ReportInTable = ({ schemeTitle, imageUrls }: ReportInTableProps) => (
   <Report title={`Lista de ${schemeTitle}`} orientation="landscape">
     {imageUrls.map((src, i) => (
-      <Image key={i} {...{ src }} break={i !== 0} />
+      <Image
+        style={{ objectFit: 'contain', objectPositionX: 0 }}
+        key={i}
+        {...{ src }}
+        break={i !== 0}
+      />
     ))}
   </Report>
 )

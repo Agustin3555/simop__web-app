@@ -27,7 +27,7 @@ const DataDownloadBanner = ({
   return (
     <button
       className={classList('cmp-data-download-banner', {
-        downloading: actionState === 'loading',
+        downloading: actionState !== 'loading',
       })}
       title="Consultar datos"
       disabled={actionState !== 'ready'}

@@ -27,32 +27,38 @@ const Report = ({ title, orientation = 'portrait', children }: ReportProps) => (
   <Document>
     <Page style={styles.page} size="A4" {...{ orientation }}>
       <View style={styles.header} fixed>
-        <Text style={styles.h1}>{title}</Text>
-        <View style={styles.by}>
-          <Image
-            style={styles.logo}
-            src="/isologotipo-gobierno-ministerio.png"
-          />
-          <View style={styles.separator} />
-          <Text style={styles.subsecretaria}>
-            Subsecretaría de Obras Públicas
-          </Text>
-        </View>
-        <View style={styles.right}>
-          <Text style={styles.date}>
-            {format('', { date: 'short', time: 'short' })}
-          </Text>
-          <View style={styles.pagination}>
-            <Text
-              style={styles.pageNumber}
-              render={({ pageNumber }) => pageNumber}
+        <View style={styles.group}>
+          <Text style={styles.h1}>{title}</Text>
+          <View style={styles.by}>
+            <Image
+              style={styles.logo}
+              src="/isologotipo-gobierno-ministerio.png"
             />
-            <View style={styles.paginationSeparator} />
-            <Text render={({ totalPages }) => totalPages} />
+            <View style={styles.separator} />
+            <Text style={styles.subsecretaria}>
+              Subsecretaría de Obras Públicas
+            </Text>
+          </View>
+          <View style={styles.right}>
+            <Text style={styles.date}>
+              {format('', { date: 'short', time: 'short' })}
+            </Text>
+            <View style={styles.pagination}>
+              <Text
+                style={styles.pageNumber}
+                render={({ pageNumber }) => pageNumber}
+              />
+              <View style={styles.paginationSeparator} />
+              <Text render={({ totalPages }) => totalPages} />
+            </View>
           </View>
         </View>
+        <Text style={styles.warning}>
+          Estos datos corresponden a gestión administrativa. Por cuestiones
+          burocráticas podría diferir con el avance real de la obra.
+        </Text>
       </View>
-      {children}
+      <View style={styles.content}>{children}</View>
     </Page>
   </Document>
 )
