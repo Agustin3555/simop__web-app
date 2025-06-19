@@ -1,7 +1,14 @@
 import { GeneralEntity } from '@/models/config'
-import { ForView, GetMetaModel, MinSize, PropScheme, Required } from './utils'
-import { AutoCombobox, FetchRef } from '../components'
-import { Column } from '@tanstack/react-table'
+import {
+  ForView,
+  GetFilter,
+  GetMetaModel,
+  MinSize,
+  PropScheme,
+  Required,
+} from './utils'
+import { AutoCombobox, FetchRef, RefFilter } from '../components'
+import { AccessorFn, Column, FilterFn } from '@tanstack/react-table'
 import { isFieldEnabled } from '.'
 
 /*
@@ -65,23 +72,54 @@ export class RefListProp implements PropScheme {
     return value.map(Number)
   }
 
-  getHeader = (column: Column<GeneralEntity>) => {
-    const { title, config } = this
+  accessorFn: AccessorFn<GeneralEntity> = row => {
+    const { key, config } = this
     const { getMetaModel } = config
 
     const metaModel = getMetaModel()
     const { anchorField } = metaModel
 
-    const getFilter = () => undefined
-
-    return { title, getFilter }
+    return row[key]?.[anchorField]
   }
 
-  getValueComponent = (item: GeneralEntity) => {
+  filterFn: FilterFn<GeneralEntity> = (
+    row,
+    columnId,
+    filterValue?: string[],
+  ) => {
+    if (!filterValue?.length) return true
+
+    const entities = row.original[columnId] as undefined | GeneralEntity[]
+
+    if (!entities?.length) return false
+
+    return entities.some(entity => filterValue.includes(String(entity.id)))
+  }
+
+  getHeader = (column: Column<GeneralEntity>) => {
+    const { key, title, config } = this
+    const { getMetaModel } = config
+
+    const metaModel = getMetaModel()
+
+    const { setFilterValue } = column
+
+    const getFilter: GetFilter = ({ options, ...rest }) => (
+      <RefFilter
+        keyName={key}
+        options={options!}
+        {...{ title, setFilterValue, ...rest }}
+      />
+    )
+
+    return { title, metaModel, getFilter }
+  }
+
+  getValueComponent = (item: GeneralEntity, selectedSearchMode?: string) => {
     const { key, config } = this
     const { getMetaModel } = config ?? {}
 
-    const { service, anchorField, key: keyScheme } = getMetaModel()
+    const { key: keyScheme, service, anchorField } = getMetaModel()
     const { getOne } = service
 
     const value = item[key] as undefined | GeneralEntity[]
@@ -92,7 +130,7 @@ export class RefListProp implements PropScheme {
         <FetchRef
           key={item.id}
           id={item.id}
-          title={item[anchorField]}
+          title={item[selectedSearchMode ?? anchorField]}
           {...{ keyScheme, getOne }}
         />
       ))

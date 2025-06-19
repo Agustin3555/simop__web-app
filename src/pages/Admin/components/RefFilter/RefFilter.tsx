@@ -20,6 +20,7 @@ const RefFilter = ({
     <Combobox
       hideLabel
       reduceHeader
+      multiple
       {...{ keyName, title, options, selected, setSelected }}
     />
   )

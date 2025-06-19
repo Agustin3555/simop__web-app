@@ -80,9 +80,17 @@ const Header = ({
   const options = useMemo(() => {
     const { rows } = getFacetedRowModel()
 
-    const refs = rows
+    const rawRefs = rows
       .map(({ original }) => original[column.id])
-      .filter(Boolean) as GeneralEntity[]
+      .filter(Boolean)
+
+    if (typeof rawRefs[0] !== 'object') return
+
+    // Aplanar si son RefList
+    const isNested = Array.isArray(rawRefs[0])
+    const refs = isNested
+      ? (rawRefs as GeneralEntity[][]).flat()
+      : (rawRefs as GeneralEntity[])
 
     const uniqueRefs = new Map<number, GeneralEntity>()
 
@@ -92,14 +100,10 @@ const Header = ({
       if (!uniqueRefs.has(id)) uniqueRefs.set(id, ref)
     })
 
-    return Array.from(uniqueRefs.values()).map(ref => {
-      const { id } = ref
-
-      return {
-        id: String(id),
-        title: String(ref[selectedSearchMode!]),
-      }
-    })
+    return Array.from(uniqueRefs.values()).map(ref => ({
+      id: String(ref.id),
+      title: String(ref[selectedSearchMode!]),
+    }))
   }, [selectedSearchMode])
 
   const filterValue = getFilterValue()
@@ -128,13 +132,12 @@ const Header = ({
 
     const { rows } = getFacetedRowModel()
 
-    const firstValid = rows.find(
-      ({ original }) => original[column.id] !== undefined,
-    )
+    const values = rows.map(({ original }) => original[column.id])
 
+    const firstValid = values.find(v => v !== undefined)
     if (!firstValid) return
 
-    const keys = extractKeys([firstValid.original[column.id]])
+    const keys = extractKeys(firstValid)
 
     return keys?.map(key => ({
       value: key,
