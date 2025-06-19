@@ -11,7 +11,7 @@
     overflow: hidden;
   }
 
-  > .particles {
+  > .particle-container {
     --function: ease;
 
     position: absolute;
@@ -22,8 +22,8 @@
     scale: 4;
     rotate: 0.6turn;
 
-    transition: scale var(--pal-time-xl) var(--function),
-      rotate var(--pal-time-xl) var(--function);
+    transition: scale var(--fall-time) var(--function),
+      rotate var(--fall-time) var(--function);
 
     > * {
       position: absolute;
@@ -34,11 +34,25 @@
       width: var(--size);
 
       border-radius: var(--pill-radius);
-      background-color: var(--pal-color-a-l1);
-
-      filter: blur(0.75rem);
+      background-color: var(--pal-color-a-l3);
+      filter: blur(0.875rem);
 
       transition: filter var(--pal-time-xl) var(--function);
+    }
+
+    &.s {
+      --size: var(--pal-size-xs);
+      --fall-time: 3s;
+    }
+
+    &.m {
+      --size: var(--pal-size-s);
+      --fall-time: 6s;
+    }
+
+    &.l {
+      --size: var(--pal-size-l);
+      --fall-time: 9s;
     }
   }
 
@@ -82,12 +96,12 @@
   }
 
   &:hover:not(.downloading) {
-    > .particles {
+    > .particle-container {
       scale: 3;
       rotate: 0.55turn;
 
       > * {
-        filter: blur(0.5rem);
+        filter: blur(0.25rem);
       }
     }
 
@@ -97,7 +111,7 @@
   }
 
   &.downloading {
-    > .particles {
+    > .particle-container {
       scale: 0.25;
       rotate: initial;
 
