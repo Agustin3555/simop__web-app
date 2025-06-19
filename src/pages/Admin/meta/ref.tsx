@@ -112,13 +112,14 @@ export class RefProp implements PropScheme {
 
     const { setFilterValue } = column
 
-    const getFilter: GetFilter = ({ options, ...rest }) => (
-      <RefFilter
-        keyName={verboseKey}
-        options={options!}
-        {...{ title, setFilterValue, ...rest }}
-      />
-    )
+    const getFilter: GetFilter = ({ options, ...rest }) =>
+      options && (
+        <RefFilter
+          keyName={verboseKey}
+          options={options}
+          {...{ title, setFilterValue, ...rest }}
+        />
+      )
 
     return { title, metaModel, getFilter }
   }

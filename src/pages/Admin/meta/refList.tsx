@@ -104,13 +104,14 @@ export class RefListProp implements PropScheme {
 
     const { setFilterValue } = column
 
-    const getFilter: GetFilter = ({ options, ...rest }) => (
-      <RefFilter
-        keyName={key}
-        options={options!}
-        {...{ title, setFilterValue, ...rest }}
-      />
-    )
+    const getFilter: GetFilter = ({ options, ...rest }) =>
+      options && (
+        <RefFilter
+          keyName={key}
+          options={options}
+          {...{ title, setFilterValue, ...rest }}
+        />
+      )
 
     return { title, metaModel, getFilter }
   }
