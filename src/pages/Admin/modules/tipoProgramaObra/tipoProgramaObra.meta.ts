@@ -10,8 +10,8 @@ export const TipoProgramaObraMeta = new MetaModel<TipoProgramaObraModel.Entity>(
     key: 'tipoProgramaObra',
     service: TipoProgramaObraService,
     title: {
-      singular: 'Obra Inaugurada',
-      plural: 'Obra Inaugurada',
+      singular: 'Tipo de Programa de Obra',
+      plural: 'Tipos de Programas de Obra',
     },
     faIcon: 'fa-solid fa-shapes',
 

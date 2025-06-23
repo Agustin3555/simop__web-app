@@ -11,8 +11,7 @@ import { Method } from '@/services/config'
 import { omitBaseEntity } from '../../constants/selectors.const'
 import { ModificacionService } from './modificacion.service'
 import { ModificacionModel } from '.'
-import { DepartamentoMeta } from '../departamento/departamento.meta'
-import { DireccionMeta } from '../direccion/direccion.meta'
+import { AreaMeta } from '../area/area.meta'
 import { ObraMeta } from '../obra/obra.meta'
 import { TipoModificacionMeta } from '../tipoModificacion/tipoModificacion.meta'
 
@@ -58,11 +57,8 @@ export const ModificacionMeta = new MetaModel<ModificacionModel.Entity>({
     tipoModificacion: new RefProp({
       getMetaModel: () => TipoModificacionMeta,
     }),
-    direccion: new RefProp({
-      getMetaModel: () => DireccionMeta,
-    }),
-    departamento: new RefProp({
-      getMetaModel: () => DepartamentoMeta,
+    area: new RefProp({
+      getMetaModel: () => AreaMeta,
     }),
     observaciones: new TextLongProp('Observaciones'),
     ...COMMON_PROPS,

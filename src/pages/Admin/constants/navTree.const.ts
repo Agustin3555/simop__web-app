@@ -1,6 +1,5 @@
 import { AmpliacionMeta } from '../modules/ampliacion/ampliacion.meta'
-import { DepartamentoMeta } from '../modules/departamento/departamento.meta'
-import { DireccionMeta } from '../modules/direccion/direccion.meta'
+import { AreaMeta } from '../modules/area/area.meta'
 import { EmpresaMeta } from '../modules/empresa/empresa.meta'
 import { FojaMedicionMeta } from '../modules/fojaMedicion/fojaMedicion.meta'
 import { InspectorMeta } from '../modules/inspector/inspector.meta'
@@ -18,12 +17,14 @@ import { RepresentanteMeta } from '../modules/representante/representante.meta'
 import { RepresentanteEmpresaMeta } from '../modules/representanteEmpresa/representanteEmpresa.meta'
 import { RepresentanteObraMeta } from '../modules/representanteObra/representanteObra.meta'
 import { RescisionMeta } from '../modules/rescision/rescision.meta'
-import { SubsecretariaMeta } from '../modules/subsecretaria/subsecretaria.meta'
 import { TipoContratacionObraMeta } from '../modules/tipoContratacionObra/tipoContratacionObra.meta'
+import { TipoEnteObraMeta } from '../modules/tipoEnteObra/tipoEnteObra.meta'
 import { TipoEstadoObraMeta } from '../modules/tipoEstadoObra/tipoEstadoObra.meta'
 import { TipoFinanciamientoObraMeta } from '../modules/tipoFinanciamientoObra/tipoFinanciamientoObra.meta'
 import { TipoInspectorMeta } from '../modules/tipoInspector/tipoInspector.meta'
 import { TipoModificacionMeta } from '../modules/tipoModificacion/tipoModificacion.meta'
+import { TipoNivelAreaMeta } from '../modules/tipoNivelArea/tipoNivelArea.meta'
+import { TipoOrigenFinanciamientoObraMeta } from '../modules/tipoOrigenFinanciamientoObra/tipoOrigenFinanciamientoObra.meta'
 import { TipoParalizacionMeta } from '../modules/tipoParalizacion/tipoParalizacion.meta'
 import { TipoProfesionMeta } from '../modules/tipoProfesion/tipoProfesion.meta'
 import { TipoProgramaObraMeta } from '../modules/tipoProgramaObra/tipoProgramaObra.meta'
@@ -43,14 +44,7 @@ export const TREE: SectionNode[] = [
   {
     title: 'Administración',
     sections: [
-      {
-        title: 'Organigrama',
-        sections: [
-          { viewKey: SubsecretariaMeta.key },
-          { viewKey: DireccionMeta.key },
-          { viewKey: DepartamentoMeta.key },
-        ],
-      },
+      { viewKey: AreaMeta.key },
       {
         title: 'Ubicación Geográfica',
         sections: [
@@ -62,18 +56,21 @@ export const TREE: SectionNode[] = [
       {
         title: 'Tipos',
         sections: [
+          { viewKey: TipoNivelAreaMeta.key },
           { viewKey: TipoProfesionMeta.key },
           { viewKey: TipoRepresentanteMeta.key },
           { viewKey: TipoInspectorMeta.key },
           {
             title: 'Obras',
             sections: [
+              { viewKey: TipoEnteObraMeta.key },
               { viewKey: TipoContratacionObraMeta.key },
+              { viewKey: TipoOrigenFinanciamientoObraMeta.key },
               { viewKey: TipoFinanciamientoObraMeta.key },
-              { viewKey: TipoParalizacionMeta.key },
               { viewKey: TipoProgramaObraMeta.key },
               { viewKey: TipoTematicaObraMeta.key },
               { viewKey: TipoEstadoObraMeta.key },
+              { viewKey: TipoParalizacionMeta.key },
               { viewKey: TipoRescisionMeta.key },
               { viewKey: TipoRedeterminacionMeta.key },
               { viewKey: TipoRecepcionMeta.key },

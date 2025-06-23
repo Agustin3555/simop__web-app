@@ -11,8 +11,7 @@ import { Method } from '@/services/config'
 import { omitBaseEntity } from '../../constants/selectors.const'
 import { FojaMedicionService } from './fojaMedicion.service'
 import { FojaMedicionModel } from '.'
-import { DepartamentoMeta } from '../departamento/departamento.meta'
-import { DireccionMeta } from '../direccion/direccion.meta'
+import { AreaMeta } from '../area/area.meta'
 import { InspectorMeta } from '../inspector/inspector.meta'
 import { ObraMeta } from '../obra/obra.meta'
 
@@ -60,11 +59,8 @@ export const FojaMedicionMeta = new MetaModel<FojaMedicionModel.Entity>({
     inspector: new RefProp({
       getMetaModel: () => InspectorMeta,
     }),
-    direccion: new RefProp({
-      getMetaModel: () => DireccionMeta,
-    }),
-    departamento: new RefProp({
-      getMetaModel: () => DepartamentoMeta,
+    area: new RefProp({
+      getMetaModel: () => AreaMeta,
     }),
     observaciones: new TextLongProp('Observaciones'),
     ...COMMON_PROPS,

@@ -24,4 +24,4 @@ export type CreateEntity = OwnFields &
 
 export type UpdateEntity = Partial<CreateEntity>
 
-export type Ref = BaseRef<OwnFields, 'cuit' | 'nombre'>
+export type Ref = BaseRef<OwnFields, 'nombre'>

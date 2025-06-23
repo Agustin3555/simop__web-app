@@ -11,8 +11,7 @@ import { Method } from '@/services/config'
 import { omitBaseEntity } from '../../constants/selectors.const'
 import { PagoCertificacionService } from './pagoCertificacion.service'
 import { PagoCertificacionModel } from '.'
-import { DepartamentoMeta } from '../departamento/departamento.meta'
-import { DireccionMeta } from '../direccion/direccion.meta'
+import { AreaMeta } from '../area/area.meta'
 import { FojaMedicionMeta } from '../fojaMedicion/fojaMedicion.meta'
 import { RedeterminacionMeta } from '../redeterminacion/redeterminacion.meta'
 
@@ -53,11 +52,8 @@ export const PagoCertificacionMeta =
       redeterminacion: new RefProp({
         getMetaModel: () => RedeterminacionMeta,
       }),
-      direccion: new RefProp({
-        getMetaModel: () => DireccionMeta,
-      }),
-      departamento: new RefProp({
-        getMetaModel: () => DepartamentoMeta,
+      area: new RefProp({
+        getMetaModel: () => AreaMeta,
       }),
       observaciones: new TextLongProp('Observaciones'),
       ...COMMON_PROPS,

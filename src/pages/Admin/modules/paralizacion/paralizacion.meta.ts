@@ -11,8 +11,7 @@ import { Method } from '@/services/config'
 import { omitBaseEntity } from '../../constants/selectors.const'
 import { ParalizacionService } from './paralizacion.service'
 import { ParalizacionModel } from '.'
-import { DepartamentoMeta } from '../departamento/departamento.meta'
-import { DireccionMeta } from '../direccion/direccion.meta'
+import { AreaMeta } from '../area/area.meta'
 import { ObraMeta } from '../obra/obra.meta'
 import { TipoParalizacionMeta } from '../tipoParalizacion/tipoParalizacion.meta'
 
@@ -50,11 +49,8 @@ export const ParalizacionMeta = new MetaModel<ParalizacionModel.Entity>({
     tipoParalizacion: new RefProp({
       getMetaModel: () => TipoParalizacionMeta,
     }),
-    direccion: new RefProp({
-      getMetaModel: () => DireccionMeta,
-    }),
-    departamento: new RefProp({
-      getMetaModel: () => DepartamentoMeta,
+    area: new RefProp({
+      getMetaModel: () => AreaMeta,
     }),
     observaciones: new TextLongProp('Observaciones'),
     ...COMMON_PROPS,

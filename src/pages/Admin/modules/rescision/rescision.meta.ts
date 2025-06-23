@@ -10,8 +10,7 @@ import { Method } from '@/services/config'
 import { omitBaseEntity } from '../../constants/selectors.const'
 import { RescisionModel } from '.'
 import { RescisionService } from './rescision.service'
-import { DepartamentoMeta } from '../departamento/departamento.meta'
-import { DireccionMeta } from '../direccion/direccion.meta'
+import { AreaMeta } from '../area/area.meta'
 import { ObraMeta } from '../obra/obra.meta'
 import { TipoRescisionMeta } from '../tipoRescision/tipoRescision.meta'
 
@@ -43,11 +42,8 @@ export const RescisionMeta = new MetaModel<RescisionModel.Entity>({
     tipoRescision: new RefProp({
       getMetaModel: () => TipoRescisionMeta,
     }),
-    direccion: new RefProp({
-      getMetaModel: () => DireccionMeta,
-    }),
-    departamento: new RefProp({
-      getMetaModel: () => DepartamentoMeta,
+    area: new RefProp({
+      getMetaModel: () => AreaMeta,
     }),
     observaciones: new TextLongProp('Observaciones'),
     ...COMMON_PROPS,

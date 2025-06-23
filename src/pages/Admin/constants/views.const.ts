@@ -1,7 +1,6 @@
 import { MetaModel } from '../meta'
 import { AmpliacionMeta } from '../modules/ampliacion/ampliacion.meta'
-import { DepartamentoMeta } from '../modules/departamento/departamento.meta'
-import { DireccionMeta } from '../modules/direccion/direccion.meta'
+import { AreaMeta } from '../modules/area/area.meta'
 import { EmpresaMeta } from '../modules/empresa/empresa.meta'
 import { FojaMedicionMeta } from '../modules/fojaMedicion/fojaMedicion.meta'
 import { InspectorMeta } from '../modules/inspector/inspector.meta'
@@ -19,12 +18,14 @@ import { RepresentanteMeta } from '../modules/representante/representante.meta'
 import { RepresentanteEmpresaMeta } from '../modules/representanteEmpresa/representanteEmpresa.meta'
 import { RepresentanteObraMeta } from '../modules/representanteObra/representanteObra.meta'
 import { RescisionMeta } from '../modules/rescision/rescision.meta'
-import { SubsecretariaMeta } from '../modules/subsecretaria/subsecretaria.meta'
 import { TipoContratacionObraMeta } from '../modules/tipoContratacionObra/tipoContratacionObra.meta'
+import { TipoEnteObraMeta } from '../modules/tipoEnteObra/tipoEnteObra.meta'
 import { TipoEstadoObraMeta } from '../modules/tipoEstadoObra/tipoEstadoObra.meta'
 import { TipoFinanciamientoObraMeta } from '../modules/tipoFinanciamientoObra/tipoFinanciamientoObra.meta'
 import { TipoInspectorMeta } from '../modules/tipoInspector/tipoInspector.meta'
 import { TipoModificacionMeta } from '../modules/tipoModificacion/tipoModificacion.meta'
+import { TipoNivelAreaMeta } from '../modules/tipoNivelArea/tipoNivelArea.meta'
+import { TipoOrigenFinanciamientoObraMeta } from '../modules/tipoOrigenFinanciamientoObra/tipoOrigenFinanciamientoObra.meta'
 import { TipoParalizacionMeta } from '../modules/tipoParalizacion/tipoParalizacion.meta'
 import { TipoProfesionMeta } from '../modules/tipoProfesion/tipoProfesion.meta'
 import { TipoProgramaObraMeta } from '../modules/tipoProgramaObra/tipoProgramaObra.meta'
@@ -36,16 +37,14 @@ import { TipoTematicaObraMeta } from '../modules/tipoTematicaObra/tipoTematicaOb
 
 const VIEWS_BASE: Record<
   string,
-  { metaModel?: MetaModel; title?: string; faIcon?: string }
+  {
+    metaModel?: MetaModel
+    title?: string
+    faIcon?: string
+  }
 > = {
-  [SubsecretariaMeta.key]: {
-    metaModel: SubsecretariaMeta,
-  },
-  [DireccionMeta.key]: {
-    metaModel: DireccionMeta,
-  },
-  [DepartamentoMeta.key]: {
-    metaModel: DepartamentoMeta,
+  [AreaMeta.key]: {
+    metaModel: AreaMeta,
   },
   [PaisMeta.key]: {
     metaModel: PaisMeta,
@@ -56,6 +55,9 @@ const VIEWS_BASE: Record<
   [LocalidadMeta.key]: {
     metaModel: LocalidadMeta,
   },
+  [TipoNivelAreaMeta.key]: {
+    metaModel: TipoNivelAreaMeta,
+  },
   [TipoProfesionMeta.key]: {
     metaModel: TipoProfesionMeta,
   },
@@ -65,8 +67,14 @@ const VIEWS_BASE: Record<
   [TipoInspectorMeta.key]: {
     metaModel: TipoInspectorMeta,
   },
+  [TipoEnteObraMeta.key]: {
+    metaModel: TipoEnteObraMeta,
+  },
   [TipoContratacionObraMeta.key]: {
     metaModel: TipoContratacionObraMeta,
+  },
+  [TipoOrigenFinanciamientoObraMeta.key]: {
+    metaModel: TipoOrigenFinanciamientoObraMeta,
   },
   [TipoFinanciamientoObraMeta.key]: {
     metaModel: TipoFinanciamientoObraMeta,

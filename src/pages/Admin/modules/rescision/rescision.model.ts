@@ -1,7 +1,6 @@
 import { BaseEntity, BaseRef } from '@/models/config'
 import { TipoRescisionModel } from '../tipoRescision'
-import { DepartamentoModel } from '../departamento'
-import { DireccionModel } from '../direccion'
+import { AreaModel } from '../area'
 import { ObraModel } from '../obra'
 
 export interface OwnFields {
@@ -12,8 +11,7 @@ export interface OwnFields {
 }
 
 export interface RelationFields {
-  direccion: DireccionModel.Ref
-  departamento: DepartamentoModel.Ref
+  area: AreaModel.Ref
   obra: ObraModel.Ref
   tipoRescision: TipoRescisionModel.Ref
 }
@@ -21,10 +19,7 @@ export interface RelationFields {
 export interface Entity extends BaseEntity, OwnFields, RelationFields {}
 
 export type CreateEntity = OwnFields &
-  Record<
-    'direccionId' | 'departamentoId' | 'obraId' | ' tipoRescisionId',
-    number
-  >
+  Record<'areaId' | 'obraId' | ' tipoRescisionId', number>
 
 export type UpdateEntity = Partial<CreateEntity>
 

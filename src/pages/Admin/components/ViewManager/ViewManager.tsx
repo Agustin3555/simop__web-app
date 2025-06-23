@@ -1,8 +1,6 @@
 import './ViewManager.css'
 import { FavoriteViews } from '..'
 import Ampliacion from '../../views/Ampliacion/Ampliacion'
-import Departamento from '../../views/Departamento/Departamento'
-import Direccion from '../../views/Direccion/Direccion'
 import Empresa from '../../views/Empresa/Empresa'
 import FojaMedicion from '../../views/FojaMedicion/FojaMedicion'
 import Inspector from '../../views/Inspector/Inspector'
@@ -23,7 +21,6 @@ import Representante from '../../views/Representante/Representante'
 import RepresentanteEmpresa from '../../views/RepresentanteEmpresa/RepresentanteEmpresa'
 import RepresentanteObra from '../../views/RepresentanteObra/RepresentanteObra'
 import Rescision from '../../views/Rescision/Rescision'
-import SubSecretaria from '../../views/SubSecretaria/SubSecretaria'
 import TipoContratacionObra from '../../views/TipoContratacionObra/TipoContratacionObra'
 import TipoEstadoObra from '../../views/TipoEstadoObra/TipoEstadoObra'
 import TipoFinanciamientoObra from '../../views/TipoFinanciamientoObra/TipoFinanciamientoObra'
@@ -37,6 +34,10 @@ import TipoRedeterminacion from '../../views/TipoRedeterminacion/TipoRedetermina
 import TipoRepresentante from '../../views/TipoRepresentante/TipoRepresentante'
 import TipoRescision from '../../views/TipoRescision/TipoRescision'
 import TipoTematicaObra from '../../views/TipoTematicaObra/TipoTematicaObra'
+import Area from '../../views/Area/Area'
+import TipoNivelArea from '../../views/TipoNivelArea/TipoNivelArea'
+import TipoEnteObra from '../../views/TipoEnteObra/TipoEnteObra'
+import TipoOrigenFinanciamientoObra from '../../views/TipoOrigenFinanciamientoObra/TipoOrigenFinanciamientoObra'
 import GM from '../../views/G/GM'
 
 const ViewManager = () => (
@@ -44,16 +45,17 @@ const ViewManager = () => (
     <div className="default">
       <FavoriteViews />
     </div>
-    <SubSecretaria />
-    <Direccion />
-    <Departamento />
+    <Area />
     <Pais />
     <Provincia />
     <Localidad />
+    <TipoNivelArea />
     <TipoProfesion />
     <TipoInspector />
     <TipoRepresentante />
+    <TipoEnteObra />
     <TipoContratacionObra />
+    <TipoOrigenFinanciamientoObra />
     <TipoFinanciamientoObra />
     <TipoProgramaObra />
     <TipoTematicaObra />

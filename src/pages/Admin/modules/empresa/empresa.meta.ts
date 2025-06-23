@@ -22,9 +22,6 @@ export const EmpresaMeta = new MetaModel<EmpresaModel.Entity>({
   props: {
     cuit: new NumberProp('CUIT', {
       big: true,
-      field: {
-        required: true,
-      },
     }),
     nombre: new TextProp('Nombre', {
       field: {

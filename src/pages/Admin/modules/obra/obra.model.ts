@@ -15,16 +15,20 @@ import { TipoEstadoObraModel } from '../tipoEstadoObra'
 import { TipoFinanciamientoObraModel } from '../tipoFinanciamientoObra'
 import { TipoProgramaObraModel } from '../tipoProgramaObra'
 import { TipoTematicaObraModel } from '../tipoTematicaObra'
+import { TipoEnteObraModel } from '../tipoEnteObra'
+import { TipoOrigenFinanciamientoObraModel } from '../tipoOrigenFinanciamientoObra'
 
 export interface OwnFields {
   numero: number
   nombre: string
+  solicitante: string
+  fechaPedido: string
   numeroExpediente: number
   numeroResolucion: number
   anioResolucion: string
   numeroContratacion: number
   fechaContratacion: string
-  montoContratacion: number
+  montoContratacion: string
   fechaInicio: string
   fechaFin: string
   plazoMeses: number
@@ -43,6 +47,8 @@ export interface OwnFields {
   metrosCuadradosObraRefaccionada: number
   metrosLinealesObraRefaccionada: number
   observacionesObraRefaccionada: string
+  inaugurada: boolean
+  totalPendientePago: string
 
   avanceTotal: number
   balanceEconomico: string
@@ -64,7 +70,9 @@ export interface OwnFields {
 
 export interface RelationFields {
   empresa: EmpresaModel.Ref
+  tipoEnteObra: TipoEnteObraModel.Ref
   tipoContratacionObra: TipoContratacionObraModel.Ref
+  tipoOrigenFinanciamientoObra: TipoOrigenFinanciamientoObraModel.Ref
   tipoFinanciamientoObra: TipoFinanciamientoObraModel.Ref
   tipoProgramaObra: TipoProgramaObraModel.Ref
   tipoTematicaObra: TipoTematicaObraModel.Ref
@@ -87,7 +95,9 @@ export interface Entity extends BaseEntity, OwnFields, RelationFields {}
 export type CreateEntity = OwnFields &
   Record<
     | 'empresaId'
+    | 'tipoEnteObraId'
     | 'tipoContratacionObraId'
+    | 'tipoOrigenFinanciamientoObraId'
     | 'tipoFinanciamientoObraId'
     | 'tipoProgramaObraId'
     | 'tipoTematicaObraId'
@@ -98,4 +108,4 @@ export type CreateEntity = OwnFields &
 
 export type UpdateEntity = Partial<CreateEntity>
 
-export type Ref = BaseRef<OwnFields, 'nombre' | 'numero'>
+export type Ref = BaseRef<OwnFields, 'nombre'>

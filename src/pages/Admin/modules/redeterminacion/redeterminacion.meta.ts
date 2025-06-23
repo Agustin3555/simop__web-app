@@ -13,8 +13,7 @@ import { Method } from '@/services/config'
 import { omitBaseEntity } from '../../constants/selectors.const'
 import { RedeterminacionService } from './redeterminacion.service'
 import { RedeterminacionModel } from '.'
-import { DepartamentoMeta } from '../departamento/departamento.meta'
-import { DireccionMeta } from '../direccion/direccion.meta'
+import { AreaMeta } from '../area/area.meta'
 import { ObraMeta } from '../obra/obra.meta'
 import { TipoRedeterminacionMeta } from '../tipoRedeterminacion/tipoRedeterminacion.meta'
 
@@ -66,11 +65,8 @@ export const RedeterminacionMeta = new MetaModel<RedeterminacionModel.Entity>({
     tipoRedeterminacion: new RefProp({
       getMetaModel: () => TipoRedeterminacionMeta,
     }),
-    direccion: new RefProp({
-      getMetaModel: () => DireccionMeta,
-    }),
-    departamento: new RefProp({
-      getMetaModel: () => DepartamentoMeta,
+    area: new RefProp({
+      getMetaModel: () => AreaMeta,
     }),
     redeterminacionesHijas: new RefListProp({
       getMetaModel: () => RedeterminacionMeta,

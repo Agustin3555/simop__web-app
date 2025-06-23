@@ -30,6 +30,8 @@ import { TipoEstadoObraMeta } from '../tipoEstadoObra/tipoEstadoObra.meta'
 import { TipoFinanciamientoObraMeta } from '../tipoFinanciamientoObra/tipoFinanciamientoObra.meta'
 import { TipoProgramaObraMeta } from '../tipoProgramaObra/tipoProgramaObra.meta'
 import { TipoTematicaObraMeta } from '../tipoTematicaObra/tipoTematicaObra.meta'
+import { TipoOrigenFinanciamientoObraMeta } from '../tipoOrigenFinanciamientoObra/tipoOrigenFinanciamientoObra.meta'
+import { TipoEnteObraMeta } from '../tipoEnteObra/tipoEnteObra.meta'
 
 export const ObraMeta = new MetaModel<ObraModel.Entity>({
   key: 'obra',
@@ -45,15 +47,17 @@ export const ObraMeta = new MetaModel<ObraModel.Entity>({
   props: {
     numero: new NumberProp('Número De Obra', {
       big: true,
-      field: {
-        required: true,
-      },
     }),
     nombre: new TextProp('Nombre', {
       field: {
         required: true,
       },
     }),
+    tipoEnteObra: new RefProp({
+      getMetaModel: () => TipoEnteObraMeta,
+    }),
+    solicitante: new TextProp('Solicitante'),
+    fechaPedido: new DateProp('Fecha de Pedido'),
     empresa: new RefProp({
       getMetaModel: () => EmpresaMeta,
     }),
@@ -67,6 +71,7 @@ export const ObraMeta = new MetaModel<ObraModel.Entity>({
       decimal: true,
       sub: '%',
     }),
+    inaugurada: new BooleanProp('Inaugurada'),
     montoContratacion: new NumberProp('Monto de Contratación', {
       decimal: true,
       isMoney: true,
@@ -87,6 +92,9 @@ export const ObraMeta = new MetaModel<ObraModel.Entity>({
     numeroContratacion: new TextProp('Número de Contratación'),
     tipoContratacionObra: new RefProp({
       getMetaModel: () => TipoContratacionObraMeta,
+    }),
+    tipoOrigenFinanciamientoObra: new RefProp({
+      getMetaModel: () => TipoOrigenFinanciamientoObraMeta,
     }),
     tipoFinanciamientoObra: new RefProp({
       getMetaModel: () => TipoFinanciamientoObraMeta,
@@ -247,6 +255,14 @@ export const ObraMeta = new MetaModel<ObraModel.Entity>({
       MinSize.m,
     ),
 
+    totalPendientePago: new NumberProp('Total Pendiente de Pago de Redeterm.', {
+      decimal: true,
+      isMoney: true,
+      big: true,
+      sum: true,
+      pre: '$',
+    }),
+
     representantes: new RefListProp({
       getMetaModel: () => RepresentanteMeta,
     }),
@@ -282,6 +298,9 @@ export const ObraMeta = new MetaModel<ObraModel.Entity>({
 const BASICO: (keyof ObraModel.Entity)[] = select(ObraMeta.allFields, 'only', [
   'numero',
   'nombre',
+  'tipoEnteObra',
+  'solicitante',
+  'fechaPedido',
   'empresa',
   'numeroExpediente',
   'numeroResolucion',
@@ -290,6 +309,7 @@ const BASICO: (keyof ObraModel.Entity)[] = select(ObraMeta.allFields, 'only', [
   'fechaContratacion',
   'montoContratacion',
   'tipoContratacionObra',
+  'tipoOrigenFinanciamientoObra',
   'tipoFinanciamientoObra',
   'tipoProgramaObra',
   'tipoTematicaObra',
@@ -303,6 +323,9 @@ const BASICO: (keyof ObraModel.Entity)[] = select(ObraMeta.allFields, 'only', [
   'direccion',
   'lugar',
   'avanceTotal',
+  'inaugurada',
+  'porcentajePendienteCertificar',
+  'totalPendientePago',
   'observaciones',
 ])
 
