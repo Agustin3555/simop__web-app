@@ -4,7 +4,7 @@ import { G } from './components'
 const GM = () => (
   <View
     viewKey="gm"
-    title="Detalle de Obra Básica"
+    title="Planificación Geográfica"
     localViews={[
       {
         localViewKey: 'g',

@@ -17,14 +17,14 @@ export const styles = StyleSheet.create({
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
-    gap: palSize(Size.S),
-    padding: palSize(Size.S),
+    borderWidth: 1,
+    borderStyle: 'solid',
+    borderColor: palColor('AL5'),
     width: '100%',
 
     color: palColor('AD1'),
 
     borderRadius: palSize(Size.XS2),
-    backgroundColor: palColor('AL5'),
   },
   group: {
     flexShrink: 0,
@@ -33,7 +33,11 @@ export const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
+    padding: palSize(Size.S),
     width: '100%',
+
+    borderRadius: palSize(Size.XS2) - 1,
+    backgroundColor: palColor('AL5'),
   },
   h1: {
     fontSize: palSize(FontSize.S),

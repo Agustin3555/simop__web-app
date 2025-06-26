@@ -6,7 +6,7 @@ import { Dispatch, SetStateAction, useCallback } from 'react'
 export interface ToggleProps {
   title: string
   faIcon: string
-  size?: 's' | 'm'
+  size?: 's' | 'm' | 'l'
   asSwitch?: boolean
   value: boolean
   setValue?: Dispatch<SetStateAction<boolean>>

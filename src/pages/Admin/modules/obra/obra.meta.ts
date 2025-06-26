@@ -497,4 +497,17 @@ ObraMeta.fieldsByService = [
       },
     ],
   },
+  {
+    methods: ['planificacion-geografica'],
+    fields: select(ObraMeta.allFields, 'only', [
+      'nombre',
+      'empresa',
+      'localidad',
+      'tipoTematicaObra',
+      'avanceTotal',
+      'montoContratacion',
+      'tipoEstadoObra',
+      'tipoEnteObra',
+    ]),
+  },
 ]

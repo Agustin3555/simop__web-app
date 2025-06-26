@@ -1,5 +1,5 @@
 import './G.css'
-import { useCallback, useEffect, useRef, useState } from 'react'
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import localidadesChaco from '@/data/chaco_localidades.json'
 import chacoBorder from '@/data/chaco_border.json'
 import {
@@ -13,12 +13,25 @@ import {
 import { latLng, CircleMarker as LeafletCircleMarker } from 'leaflet'
 import { palColor } from '@/styles/palette'
 import { FeatureCollection } from 'geojson'
-import { Table } from '@/pages/Admin/components'
+import {
+  DataDownloadBanner,
+  ReportButton,
+  ReportInTable,
+  Table,
+} from '@/pages/Admin/components'
 import { MetaModelContext, TableProvider } from '@/pages/Admin/contexts'
-import { Button } from '@/components'
+import { Button, Toggle } from '@/components'
 import { useQueryActionState } from '@/hooks'
-import { useEntities, useTable } from '@/pages/Admin/hooks'
+import {
+  useCombinedQuery,
+  useEntities,
+  useMetaModel,
+  useTable,
+} from '@/pages/Admin/hooks'
 import { ObraMeta } from '@/pages/Admin/modules/obra/obra.meta'
+import { LocalidadMeta } from '@/pages/Admin/modules/localidad/localidad.meta'
+import { classList } from '@/helpers'
+import { generateTableImages } from '@/pages/Admin/helpers'
 
 // const CiudadesEnVista = ({ setVisibles }: { setVisibles: Function }) => {
 //   const map = useMap()
@@ -64,9 +77,9 @@ const useCityAnimation = () => {
   const refs = useRef<Record<string, LeafletCircleMarker>>({})
   const timers = useRef<Record<string, number>>({})
 
-  const start = useCallback((name: string) => {
-    const marker = refs.current[name]
-    if (!marker || timers.current[name]) return
+  const start = useCallback((id: number) => {
+    const marker = refs.current[id]
+    if (!marker || timers.current[id]) return
 
     let radius = 6
     let growing = true
@@ -78,47 +91,57 @@ const useCityAnimation = () => {
       if (radius <= 6) growing = true
 
       marker.setRadius(radius)
-      timers.current[name] = window.setTimeout(step, PULSE_SPEED)
+      timers.current[id] = window.setTimeout(step, PULSE_SPEED)
     }
 
-    timers.current[name] = window.setTimeout(step, PULSE_SPEED)
+    timers.current[id] = window.setTimeout(step, PULSE_SPEED)
   }, [])
 
-  const stop = useCallback((name: string) => {
-    const marker = refs.current[name]
-    const id = timers.current[name]
+  const stop = useCallback((id: number) => {
+    const marker = refs.current[id]
+    const timerId = timers.current[id]
 
-    if (id) {
-      clearTimeout(id)
-      delete timers.current[name]
+    if (timerId) {
+      clearTimeout(timerId)
+      delete timers.current[id]
     }
 
     if (marker) marker.setRadius(6)
   }, [])
 
-  const register = useCallback(
-    (name: string, el: LeafletCircleMarker | null) => {
-      if (el) refs.current[name] = el
-    },
-    [],
-  )
+  const register = useCallback((id: number, el: LeafletCircleMarker | null) => {
+    if (el) refs.current[id] = el
+  }, [])
 
   return { start, stop, register }
 }
 
 const ContextualizedG = () => {
-  const [selectedCities, setSelectedCities] = useState<string[]>([])
-  const animation = useCityAnimation()
-  const { table } = useTable() ?? {}
+  const [enableMap, setEnableMap] = useState(true)
 
-  const { query, enableQuery } = useEntities(
-    [ObraMeta.key],
-    ObraMeta.service.getAll,
-    // [ObraMeta.key, 'totales'],
-    // ObraMeta.service.getAllTotales,
+  const animation = useCityAnimation()
+
+  const { table, columnFilters } = useTable() ?? {}
+  const { getFilterValue, setFilterValue } = table?.getColumn('localidad') ?? {}
+
+  const selectedCities = useMemo(() => {
+    const cityFilter = columnFilters?.state?.find(f => f.id === 'localidad')
+    return (cityFilter?.value as string[] | undefined) ?? []
+  }, [columnFilters?.state])
+
+  const obrasQuery = useEntities([ObraMeta.key], ObraMeta.service.getAll)
+
+  const localidadesQuery = useEntities(
+    [LocalidadMeta.key],
+    LocalidadMeta.service.getAll,
   )
 
-  const { data, status, isFetching, refetch } = query
+  const { data, status, isFetching, refetch, enableQuery } = useCombinedQuery(
+    obrasQuery,
+    localidadesQuery,
+  )
+
+  const [obras, localidades] = data ?? []
 
   const queryActionState = useQueryActionState({ status, isFetching })
 
@@ -128,96 +151,159 @@ const ContextualizedG = () => {
     if (data || status === 'error') await refetch()
   }, [data, status])
 
-  const toggleCity = useCallback(
-    (name: string) =>
-      setSelectedCities(prev => {
-        const already = prev.includes(name)
+  const handleToggleCityClick = useCallback(
+    (id: number) => {
+      const prev = (getFilterValue?.() ?? []) as string[]
 
-        already ? animation.stop(name) : animation.start(name)
+      const already = prev.includes(String(id))
 
-        table?.getColumn('localidad')?.setFilterValue(['1'])
+      const updated = already
+        ? prev.filter(n => n !== String(id))
+        : [...prev, String(id)]
 
-        return already ? prev.filter(n => n !== name) : [...prev, name]
-      }),
-    [animation, table],
+      setFilterValue?.(updated)
+    },
+    [getFilterValue, setFilterValue],
   )
+
+  useEffect(() => {
+    if (!localidades) return
+
+    const selected = selectedCities.map(Number)
+
+    localidades.forEach(({ id }) => {
+      selected.includes(id) ? animation.start(id) : animation.stop(id)
+    })
+  })
+
+  const infoRef = useRef<HTMLDivElement | null>(null)
+
+  const handleReportGenerate = useCallback(async () => {
+    if (!infoRef.current) return
+
+    const infoElement = infoRef.current
+
+    const tableElement = infoElement.querySelector<HTMLElement>('.table')
+    if (!tableElement) return
+
+    const imageUrls = await generateTableImages(tableElement)
+    if (!imageUrls) return
+
+    return <ReportInTable schemeTitle="Obras" {...{ imageUrls }} />
+  }, [])
 
   return (
     <div className="cmp-g">
-      <div className="info">
-        <h1>{selectedCities.join(', ')}</h1>
-
-        <div>
-          <Button
-            title="Consultar datos"
-            faIcon={`fa-solid ${
-              data ? 'fa-arrows-rotate' : 'fa-cloud-arrow-down'
-            }`}
-            actionState={queryActionState}
-            onAction={queryHandleClick}
-          />
-        </div>
-        <MetaModelContext.Provider value={{ metaModel: ObraMeta }}>
-          {data && <Table {...{ data }} />}
-        </MetaModelContext.Provider>
-      </div>
-      <MapContainer
-        className="map"
-        center={[-26.1, -60.7]}
-        zoom={8}
-        zoomControl={false}
-      >
-        <FixMapResize />
-        {/* <CiudadesEnVista setVisibles={setLocalidadesVisibles} /> */}
-        <TileLayer
-          url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-          attribution="&copy; OpenStreetMap"
-        />
-        <GeoJSON
-          data={chacoBorder as FeatureCollection}
-          interactive={false}
-          style={{
-            weight: 2,
-            color: palColor('B'),
-            fillOpacity: 0,
-            opacity: 0.625,
-          }}
-        />
-        {localidadesChaco.features.map(({ geometry, properties }) => {
-          const { type, coordinates } = geometry
-
-          if (type !== 'Point') return
-
-          const [lng, lat] = coordinates
-          const { name, population } = properties
-          const isSelected = selectedCities.includes(name)
-
-          return (
-            <CircleMarker
-              key={name}
-              ref={el => animation.register(name, el)}
-              center={[lat, lng]}
-              radius={6}
-              pathOptions={{
-                weight: 1.5,
-                color: palColor(isSelected ? 'BD1' : 'AD1'),
-                fillColor: palColor(isSelected ? 'B' : 'A'),
-                fillOpacity: 0.8,
-              }}
-              eventHandlers={{ click: () => toggleCity(name) }}
+      {data ? (
+        <>
+          <div className="info" ref={infoRef}>
+            <div className="actions">
+              <Button
+                title="Consultar datos"
+                faIcon="fa-solid fa-arrows-rotate"
+                actionState={queryActionState}
+                onAction={queryHandleClick}
+              />
+              <div className="right">
+                <ReportButton onGenerate={handleReportGenerate} />
+                <Toggle
+                  title="Mostrar mapa"
+                  faIcon="fa-solid fa-map"
+                  size="l"
+                  value={enableMap}
+                  setValue={setEnableMap}
+                />
+              </div>
+            </div>
+            <MetaModelContext.Provider value={{ metaModel: ObraMeta }}>
+              <Table
+                data={obras!}
+                methods={{ forGetAll: 'planificacion-geografica' }}
+              />
+            </MetaModelContext.Provider>
+          </div>
+          <div className={classList('map-container', { active: enableMap })}>
+            <MapContainer
+              className="map"
+              center={[-26.1, -60.7]}
+              zoom={8}
+              zoomControl={false}
             >
-              <Tooltip
-                direction="top"
-                offset={[0, -8]}
-                permanent={Number(population) > 20000}
-                opacity={0.9}
-              >
-                {name}
-              </Tooltip>
-            </CircleMarker>
-          )
-        })}
-      </MapContainer>
+              <FixMapResize />
+              {/* <CiudadesEnVista setVisibles={setLocalidadesVisibles} /> */}
+              <TileLayer
+                url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                attribution="&copy; OpenStreetMap"
+              />
+              <GeoJSON
+                data={chacoBorder as FeatureCollection}
+                interactive={false}
+                style={{
+                  weight: 2,
+                  color: palColor('B'),
+                  fillOpacity: 0,
+                  opacity: 0.625,
+                }}
+              />
+              {localidadesChaco.features.map(
+                ({ id: osmIdStr, geometry, properties }) => {
+                  const { type, coordinates } = geometry
+
+                  if (type !== 'Point') return
+
+                  const { id } =
+                    localidades?.find(l => {
+                      if (l.osmId === undefined) return
+
+                      const osmId = Number(osmIdStr.match(/(\d+)$/)?.[1])
+
+                      return l.osmId === osmId
+                    }) ?? {}
+
+                  if (id === undefined) return
+
+                  const [lng, lat] = coordinates
+                  const { name, population } = properties
+
+                  const isSelected = selectedCities
+                    ? selectedCities.includes(String(id))
+                    : false
+
+                  return (
+                    <CircleMarker
+                      key={id}
+                      ref={el => animation.register(id, el)}
+                      center={[lat, lng]}
+                      radius={6}
+                      pathOptions={{
+                        weight: 1.5,
+                        color: palColor(isSelected ? 'BD1' : 'AD1'),
+                        fillColor: palColor(isSelected ? 'B' : 'A'),
+                        fillOpacity: 0.8,
+                      }}
+                      eventHandlers={{ click: () => handleToggleCityClick(id) }}
+                    >
+                      <Tooltip
+                        direction="top"
+                        offset={[0, -8]}
+                        permanent={Number(population) > 20000}
+                        opacity={0.9}
+                      >
+                        {name}
+                      </Tooltip>
+                    </CircleMarker>
+                  )
+                },
+              )}
+            </MapContainer>
+          </div>
+        </>
+      ) : (
+        <DataDownloadBanner
+          actionState={queryActionState}
+          onDownload={queryHandleClick}
+        />
+      )}
     </div>
   )
 }

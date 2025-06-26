@@ -67,7 +67,8 @@ const Table = ({ data, setQuickFilters, methods }: TableProps) => {
   const [enableStickHead, setEnableStickHead] = useState(false)
   const [enableStickFoot, setEnableStickFoot] = useState(false)
   const [sorting, setSorting] = useState<SortingState>([])
-  const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([])
+
+  const { setTable, columnFilters } = useTable() ?? {}
 
   const { rowSelection, setRowSelection, selectedRowIds } =
     useRowSelection() ?? {}
@@ -179,7 +180,7 @@ const Table = ({ data, setQuickFilters, methods }: TableProps) => {
     columns,
     state: {
       columnVisibility,
-      columnFilters,
+      columnFilters: columnFilters?.state ?? undefined,
       columnOrder,
       rowSelection,
       sorting,
@@ -187,7 +188,7 @@ const Table = ({ data, setQuickFilters, methods }: TableProps) => {
     getRowId: row => String(row.id),
 
     onColumnVisibilityChange: setColumnVisibility,
-    onColumnFiltersChange: setColumnFilters,
+    onColumnFiltersChange: columnFilters?.setState ?? undefined,
     onColumnOrderChange: setColumnOrder,
     onRowSelectionChange: setRowSelection,
     onSortingChange: setSorting,
@@ -203,8 +204,6 @@ const Table = ({ data, setQuickFilters, methods }: TableProps) => {
     enableSortingRemoval: false,
     columnResizeMode: 'onEnd',
   })
-
-  const { setTable } = useTable() ?? {}
 
   useEffect(() => {
     setTable && setTable(table)

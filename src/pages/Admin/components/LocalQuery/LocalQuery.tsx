@@ -3,9 +3,9 @@ import { useCallback, useMemo, useRef, useState } from 'react'
 import { useQueryActionState } from '@/hooks'
 import { useEntities, useRowSelection, useMetaModel } from '../../hooks'
 import { Button } from '@/components'
-import { DataDownloadBanner, ReportButton, Table } from '..'
+import { DataDownloadBanner, ReportButton, ReportInTable, Table } from '..'
 import { QuickFilters, TableProps } from '../Table/Table'
-import { DeleteButton, ReportInTable } from './components'
+import { DeleteButton } from './components'
 import { generateTableImages } from '../../helpers'
 
 export interface LocalQueryProps extends Pick<TableProps, 'methods'> {

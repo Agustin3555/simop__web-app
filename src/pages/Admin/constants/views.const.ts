@@ -159,8 +159,8 @@ const VIEWS_BASE: Record<
     title: 'Detalle de Obra Básica',
   },
   gm: {
-    title: 'GM',
-    faIcon: 'G',
+    title: 'Planificación Geográfica',
+    faIcon: 'fa-solid fa-map-location-dot',
   },
 }
 

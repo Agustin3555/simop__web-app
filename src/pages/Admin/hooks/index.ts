@@ -1,5 +1,6 @@
 export * from './useAddFieldReset.hook'
 export * from './useChangeHandler.hook'
+export * from './useCombineQuery.hook'
 export * from './useDerivedState.hook'
 export * from './useEntities.hook'
 export * from './useFavoriteViews.hook'
