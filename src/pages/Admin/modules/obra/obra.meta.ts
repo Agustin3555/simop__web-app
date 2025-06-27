@@ -508,6 +508,7 @@ ObraMeta.fieldsByService = [
       'montoContratacion',
       'tipoEstadoObra',
       'tipoEnteObra',
+      'inaugurada',
     ]),
   },
 ]

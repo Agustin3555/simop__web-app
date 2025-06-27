@@ -7,6 +7,7 @@ import { DataDownloadBanner, ReportButton, ReportInTable, Table } from '..'
 import { QuickFilters, TableProps } from '../Table/Table'
 import { DeleteButton } from './components'
 import { generateTableImages } from '../../helpers'
+import { TableProvider } from '../../contexts'
 
 export interface LocalQueryProps extends Pick<TableProps, 'methods'> {
   fetch?: {
@@ -86,7 +87,9 @@ const LocalQuery = ({ fetch, methods }: LocalQueryProps) => {
               <ReportButton onGenerate={handleReportGenerate} />
             </div>
           </header>
-          <Table {...{ data, setQuickFilters, methods }} />
+          <TableProvider>
+            <Table {...{ data, setQuickFilters, methods }} />
+          </TableProvider>
         </>
       ) : (
         <DataDownloadBanner
