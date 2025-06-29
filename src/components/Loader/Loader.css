@@ -1,16 +1,15 @@
 .cmp-loader {
   position: relative;
 
+  aspect-ratio: 1;
   width: 1.12em;
-  height: 1.12em;
 
-  font-size: var(--cmp-loader-size, var(--pal-size-s));
+  font-size: var(--cmp-loader-size, var(--pal-size-m));
 
   border-radius: 50%;
+  transform: translateZ(0);
 
   animation: mltShdSpin 2s infinite ease, round 2s infinite ease;
-
-  transform: translateZ(0);
 }
 
 @keyframes mltShdSpin {

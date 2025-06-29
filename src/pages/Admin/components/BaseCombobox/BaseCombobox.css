@@ -141,24 +141,26 @@
 
         position: relative;
 
+        display: flex;
+        align-items: center;
+        gap: var(--pal-size-xs);
+        border-width: 0;
+        border-style: solid;
+        border-color: var(--pal-color-a-l2);
+        border-bottom-width: var(--line-thickness);
+        padding-left: var(--control-padding-inline);
+        padding-right: var(--pal-size-xs);
+
         > .input {
           border-width: 0;
-          border-bottom-width: var(--line-thickness);
-          padding-right: calc(
-            var(--control-padding-inline) + var(--button-size) +
-              var(--button-gap)
-          );
-          padding-left: var(--control-padding-inline);
+          padding: 0;
 
           border-radius: 0;
+          background-color: transparent; /* TODO: no se debería establecer */
         }
 
         > .cmp-button {
-          --cmp-button-bg-color: transparent;
-
-          position: absolute;
-          top: 0;
-          right: 0;
+          border-color: var(--pal-color-a-l2);
 
           color: var(--pal-color-a-l1);
         }

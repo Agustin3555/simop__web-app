@@ -60,6 +60,7 @@
   }
 
   > .catalyst {
+    --cmp-loader-size: var(--pal-size-m);
     --cmp-icon-size: var(--pal-size-l);
     --shadow-blur: 8rem;
 

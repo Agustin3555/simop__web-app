@@ -3,6 +3,7 @@
 }
 
 .cmp-button {
+  --cmp-loader-size: var(--ui-loader-size);
   --cmp-icon-size: var(--ui-icon-size);
   --interact-color: var(--cmp-button-bg-color);
 

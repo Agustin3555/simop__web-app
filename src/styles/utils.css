@@ -200,6 +200,7 @@
   --ui-height: var(--pal-size-2xl);
   --ui-font-size: var(--pal-size-font-s);
   --ui-icon-size: var(--pal-size-m);
+  --ui-loader-size: var(--pal-size-m);
   --ui-border-radius: 0.375rem;
 }
 
@@ -209,6 +210,7 @@
   --ui-height: var(--pal-size-xl);
   --ui-font-size: var(--pal-size-font-xs);
   --ui-icon-size: var(--pal-size-s);
+  --ui-loader-size: var(--pal-size-s);
   --ui-border-radius: var(--pal-size-2xs);
 }
 
@@ -218,6 +220,7 @@
   --ui-height: var(--pal-size-l);
   --ui-font-size: var(--pal-size-font-2xs);
   --ui-icon-size: var(--pal-size-s);
+  --ui-loader-size: var(--pal-size-xs);
   --ui-border-radius: var(--pal-size-2xs);
 }
 

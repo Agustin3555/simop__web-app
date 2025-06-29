@@ -72,6 +72,12 @@ span {
 input,
 textarea {
   outline: none;
+
+  &::placeholder {
+    color: var(--pal-color-a-d3);
+
+    opacity: 0.5;
+  }
 }
 
 button {

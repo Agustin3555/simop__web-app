@@ -1,6 +1,5 @@
 import './BaseCombobox.css'
 import {
-  ChangeEventHandler,
   Dispatch,
   MouseEventHandler,
   ReactNode,
@@ -14,7 +13,7 @@ import {
 import { useControl } from '@/hooks'
 import { useInputHandler } from '../../hooks'
 import { Control } from '@/types'
-import { Button, ControlLabel, Icon } from '@/components'
+import { Button, ControlLabel, Icon, Toggle } from '@/components'
 import { Option } from './components'
 import { OptionProps } from './components/Option/Option'
 import { classList } from '@/helpers'
@@ -70,6 +69,11 @@ const BaseCombobox = ({
 
   const isVoid = useMemo(() => !fullSelection?.length, [fullSelection])
 
+  const isFullSelection = useMemo(
+    () => sortedOptions.length === selected.length,
+    [selected.length, sortedOptions.length],
+  )
+
   const toggleItem = useCallback(
     (id: string) => {
       setSelected(prev => {
@@ -105,9 +109,10 @@ const BaseCombobox = ({
     toggleItem(event.currentTarget.name)
   }, [])
 
-  const handleCheckAllChange = useCallback<
-    ChangeEventHandler<HTMLInputElement>
-  >(event => setSelected(event.target.checked ? [] : fullSelection!), [])
+  const handleCheckAllChange = useCallback(
+    () => setSelected(isFullSelection ? [] : fullSelection!),
+    [isFullSelection],
+  )
 
   const handleResetClick = useCallback(() => {
     editMode && handleReset ? handleReset() : setSelected([])
@@ -154,7 +159,6 @@ const BaseCombobox = ({
         {...(editMode && { disabled })}
         onClick={handleHeaderClick}
       >
-        {/* TODO: seleccionador global, renderizar solo si existe fullSelection */}
         <div className="selected-items">
           {selected.map(id => (
             <div key={id} className="item">
@@ -184,6 +188,14 @@ const BaseCombobox = ({
               placeholder="Buscar..."
               onChange={handleSearchChange}
             />
+            {multiple && (
+              <Toggle
+                title="Seleccionador global"
+                style="checkbox"
+                value={isFullSelection}
+                onChange={handleCheckAllChange}
+              />
+            )}
             {searchSlot}
           </div>
         </header>

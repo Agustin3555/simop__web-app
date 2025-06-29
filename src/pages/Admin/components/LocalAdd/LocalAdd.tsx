@@ -65,7 +65,7 @@ const ContextualizedLocalAdd = () => {
       <Toggle
         title="Limpiar después de crear"
         faIcon="fa-solid fa-eraser"
-        asSwitch
+        style="switch"
         value={resetOnCompletion}
         setValue={setResetOnCompletion}
       />

@@ -148,6 +148,8 @@ const AutoCombobox = ({
         <Button
           title="Actualizar opciones"
           faIcon="fa-solid fa-rotate"
+          size="s"
+          type="secondary"
           onAction={handleAction}
           {...{ actionState }}
         />

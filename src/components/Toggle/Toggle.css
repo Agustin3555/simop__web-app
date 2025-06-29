@@ -10,6 +10,65 @@
     display: none;
   }
 
+  > * {
+    border-radius: var(--border-radius);
+  }
+
+  > .toggle {
+    align-content: center;
+    border-width: var(--line-thickness);
+    border-style: solid;
+    border-color: var(--pal-color-a-l4);
+    aspect-ratio: 1;
+    width: var(--ui-height);
+
+    transition: border-color var(--pal-time-xs) ease-out,
+      color var(--pal-time-xs) ease-out,
+      background-color var(--pal-time-xs) ease-out;
+
+    > * {
+      margin-inline: auto;
+    }
+
+    .cmp-toggle:has(input:checked) > & {
+      border-color: var(--pal-color-a-l2);
+
+      color: var(--pal-color-white);
+
+      background-color: var(--pal-color-a-l2);
+    }
+  }
+
+  > .checkbox {
+    align-content: center;
+    border-width: var(--line-thickness);
+    border-style: solid;
+    border-color: var(--pal-color-a-l2);
+    aspect-ratio: 1;
+    width: var(--ui-height);
+
+    transition: background-color var(--pal-time-xs) ease-out;
+
+    > .cmp-icon {
+      margin-inline: auto;
+
+      color: var(--pal-color-white);
+      scale: 0;
+
+      transition: scale var(--pal-time-s) ease;
+    }
+
+    .cmp-toggle:has(input:checked) > & {
+      border: none;
+
+      background-color: var(--pal-color-a);
+
+      > .cmp-icon {
+        scale: initial;
+      }
+    }
+  }
+
   > .switch {
     --height: var(--ui-height);
     --width: var(--pal-size-2xl);
@@ -22,7 +81,6 @@
     width: var(--width);
     height: var(--height);
 
-    border-radius: var(--border-radius);
     background: linear-gradient(
       90deg,
       var(--pal-color-a-l1) 0%,
@@ -52,29 +110,8 @@
         margin-inline: auto;
       }
     }
-  }
 
-  > .toggle {
-    align-content: center;
-    border-width: var(--line-thickness);
-    border-style: solid;
-    border-color: var(--pal-color-a-l4);
-    aspect-ratio: 1;
-    width: var(--ui-height);
-
-    border-radius: var(--border-radius);
-
-    transition: border-color var(--pal-time-xs) ease-out,
-      color var(--pal-time-xs) ease-out,
-      background-color var(--pal-time-xs) ease-out;
-
-    > * {
-      margin-inline: auto;
-    }
-  }
-
-  &:has(input:checked) {
-    > .switch {
+    .cmp-toggle:has(input:checked) > & {
       color: var(--pal-color-a);
 
       border-color: var(--pal-color-a-l1);
@@ -82,14 +119,6 @@
       > .lever {
         left: calc(var(--width) - var(--height));
       }
-    }
-
-    > .toggle {
-      border-color: var(--pal-color-a-l2);
-
-      color: var(--pal-color-white);
-
-      background-color: var(--pal-color-a-l2);
     }
   }
 }
