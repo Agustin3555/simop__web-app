@@ -29,7 +29,9 @@ export const LocalidadMeta = new MetaModel<LocalidadModel.Entity>({
         required: true,
       },
     }),
-    osmId: new NumberProp('OSM ID'),
+    osmId: new NumberProp('OSM ID', {
+      big: true,
+    }),
     ...COMMON_PROPS,
   },
 })

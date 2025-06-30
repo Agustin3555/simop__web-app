@@ -200,7 +200,7 @@
   --ui-height: var(--pal-size-2xl);
   --ui-font-size: var(--pal-size-font-s);
   --ui-icon-size: var(--pal-size-m);
-  --ui-loader-size: var(--pal-size-m);
+  --ui-loader-size: var(--pal-size-s);
   --ui-border-radius: 0.375rem;
 }
 

@@ -246,7 +246,7 @@ const ContextualizedG = () => {
                 }}
               />
               {localidadesChaco.features.map(
-                ({ id: osmIdStr, geometry, properties }) => {
+                ({ id: fullOsmId, geometry, properties }) => {
                   const { type, coordinates } = geometry
 
                   if (type !== 'Point') return
@@ -255,7 +255,7 @@ const ContextualizedG = () => {
                     localidades?.find(l => {
                       if (l.osmId === undefined) return
 
-                      const osmId = Number(osmIdStr.match(/(\d+)$/)?.[1])
+                      const osmId = fullOsmId.match(/(\d+)$/)?.[1]
 
                       return l.osmId === osmId
                     }) ?? {}

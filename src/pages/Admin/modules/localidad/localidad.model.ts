@@ -3,7 +3,7 @@ import { ProvinciaModel } from '../provincia'
 
 export interface OwnFields {
   nombre: string
-  osmId: number
+  osmId: string
 }
 
 export interface RelationFields {
