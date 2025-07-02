@@ -506,6 +506,7 @@ ObraMeta.fieldsByService = [
       'tipoTematicaObra',
       'avanceTotal',
       'montoContratacion',
+      'fechaContratacion',
       'tipoEstadoObra',
       'tipoEnteObra',
       'inaugurada',
