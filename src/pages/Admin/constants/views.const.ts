@@ -1,6 +1,8 @@
 import { MetaModel } from '../meta'
 import { AmpliacionMeta } from '../modules/ampliacion/ampliacion.meta'
+import { APGMeta } from '../modules/apg/apg.meta'
 import { AreaMeta } from '../modules/area/area.meta'
+import { DepartamentoMeta } from '../modules/departamento/departamento.meta'
 import { EmpresaMeta } from '../modules/empresa/empresa.meta'
 import { FojaMedicionMeta } from '../modules/fojaMedicion/fojaMedicion.meta'
 import { InspectorMeta } from '../modules/inspector/inspector.meta'
@@ -51,6 +53,12 @@ const VIEWS_BASE: Record<
   },
   [ProvinciaMeta.key]: {
     metaModel: ProvinciaMeta,
+  },
+  [APGMeta.key]: {
+    metaModel: APGMeta,
+  },
+  [DepartamentoMeta.key]: {
+    metaModel: DepartamentoMeta,
   },
   [LocalidadMeta.key]: {
     metaModel: LocalidadMeta,

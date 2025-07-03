@@ -1,5 +1,7 @@
 import { AmpliacionMeta } from '../modules/ampliacion/ampliacion.meta'
+import { APGMeta } from '../modules/apg/apg.meta'
 import { AreaMeta } from '../modules/area/area.meta'
+import { DepartamentoMeta } from '../modules/departamento/departamento.meta'
 import { EmpresaMeta } from '../modules/empresa/empresa.meta'
 import { FojaMedicionMeta } from '../modules/fojaMedicion/fojaMedicion.meta'
 import { InspectorMeta } from '../modules/inspector/inspector.meta'
@@ -50,6 +52,8 @@ export const TREE: SectionNode[] = [
         sections: [
           { viewKey: PaisMeta.key },
           { viewKey: ProvinciaMeta.key },
+          { viewKey: APGMeta.key },
+          { viewKey: DepartamentoMeta.key },
           { viewKey: LocalidadMeta.key },
         ],
       },

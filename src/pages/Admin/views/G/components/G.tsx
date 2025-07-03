@@ -1,7 +1,5 @@
 import './G.css'
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
-import localidadesChaco from '@/data/chaco_localidades.json'
-import chacoBorder from '@/data/chaco_border.json'
 import {
   GeoJSON,
   MapContainer,
@@ -11,7 +9,7 @@ import {
   Tooltip,
 } from 'react-leaflet'
 import { latLng, CircleMarker as LeafletCircleMarker } from 'leaflet'
-import { palColor } from '@/styles/palette'
+import { palColor, palColorGS } from '@/styles/palette'
 import { FeatureCollection } from 'geojson'
 import {
   DataDownloadBanner,
@@ -32,6 +30,9 @@ import { ObraMeta } from '@/pages/Admin/modules/obra/obra.meta'
 import { LocalidadMeta } from '@/pages/Admin/modules/localidad/localidad.meta'
 import { classList } from '@/helpers'
 import { generateTableImages } from '@/pages/Admin/helpers'
+import geoLocalidades from '@/data/chaco_localidades.json'
+import geoBorder from '@/data/chaco_border.json'
+import geoDepartamentosBorder from '@/data/chaco_departamentos_border.json'
 
 // const CiudadesEnVista = ({ setVisibles }: { setVisibles: Function }) => {
 //   const map = useMap()
@@ -58,6 +59,18 @@ import { generateTableImages } from '@/pages/Admin/helpers'
 
 //   return null
 // }
+
+const colors = {
+  1: '#00203a',
+  2: '#5059bc',
+  3: '#e5007f',
+  4: '#063565',
+  5: '#859546',
+  6: '#f26df9',
+  7: '#c8d29c',
+}
+
+const matcher = (id?: string) => colors[Number(id?.at(-1) ?? 2)]
 
 const FixMapResize = () => {
   const map = useMap()
@@ -235,17 +248,26 @@ const ContextualizedG = () => {
                 url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                 attribution="&copy; OpenStreetMap"
               />
-              <GeoJSON
-                data={chacoBorder as FeatureCollection}
+              {/* <GeoJSON
+                data={geoBorder as FeatureCollection}
                 interactive={false}
                 style={{
-                  weight: 2,
+                  weight: 1.75,
                   color: palColor('B'),
                   fillOpacity: 0,
                   opacity: 0.625,
                 }}
+              /> */}
+              <GeoJSON
+                data={geoDepartamentosBorder as FeatureCollection}
+                style={feature => ({
+                  color: palColorGS('black'),
+                  weight: 0.125,
+                  fillColor: matcher(feature?.id as string),
+                  fillOpacity: 0.125,
+                })}
               />
-              {localidadesChaco.features.map(
+              {geoLocalidades.features.map(
                 ({ id: fullOsmId, geometry, properties }) => {
                   const { type, coordinates } = geometry
 

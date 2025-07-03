@@ -39,6 +39,8 @@ import TipoNivelArea from '../../views/TipoNivelArea/TipoNivelArea'
 import TipoEnteObra from '../../views/TipoEnteObra/TipoEnteObra'
 import TipoOrigenFinanciamientoObra from '../../views/TipoOrigenFinanciamientoObra/TipoOrigenFinanciamientoObra'
 import GM from '../../views/G/GM'
+import APG from '../../views/APG/APG'
+import Departamento from '../../views/Departamento/Departamento'
 
 const ViewManager = () => (
   <div className="cmp-view-manager">
@@ -48,6 +50,8 @@ const ViewManager = () => (
     <Area />
     <Pais />
     <Provincia />
+    <APG />
+    <Departamento />
     <Localidad />
     <TipoNivelArea />
     <TipoProfesion />
