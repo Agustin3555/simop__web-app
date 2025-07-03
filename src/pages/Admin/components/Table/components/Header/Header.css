@@ -35,7 +35,7 @@
 
     > .main {
       --cmp-option-selectors-color: var(--pal-color-a-l2);
-      --cmp-option-selectors-bg-color: var(--pal-color-a-l3);
+      --cmp-option-selectors-bg-color: var(--pal-color-a-l4);
       --cmp-option-selectors-color-active: var(--pal-color-a-d1);
 
       flex-grow: 1;

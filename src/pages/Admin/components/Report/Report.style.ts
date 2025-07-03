@@ -6,8 +6,8 @@ export const styles = StyleSheet.create({
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'flex-start',
-    gap: palSize(Size.S),
-    padding: palSize(Size.S),
+    gap: palSize(Size.M),
+    padding: palSize(Size.XS),
 
     fontFamily: 'Manrope Variable',
   },
@@ -25,6 +25,7 @@ export const styles = StyleSheet.create({
     color: palColor('AD1'),
 
     borderRadius: palSize(Size.XS2),
+    overflow: 'hidden',
   },
   group: {
     flexShrink: 0,
@@ -33,15 +34,15 @@ export const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    padding: palSize(Size.S),
+    padding: palSize(Size.XS),
+    paddingLeft: palSize(Size.S),
     width: '100%',
 
-    borderRadius: palSize(Size.XS2) - 1,
     backgroundColor: palColor('AL5'),
   },
   h1: {
-    fontSize: palSize(FontSize.S),
-    fontWeight: 700,
+    fontSize: palSize(FontSize.XS),
+    fontWeight: 850,
   },
   by: {
     display: 'flex',
@@ -65,7 +66,7 @@ export const styles = StyleSheet.create({
 
     fontSize: 8,
     lineHeight: 1.2,
-    fontWeight: 600,
+    fontWeight: 650,
   },
   right: {
     display: 'flex',
@@ -88,7 +89,7 @@ export const styles = StyleSheet.create({
     backgroundColor: palColorGS('white'),
   },
   pageNumber: {
-    fontWeight: 700,
+    fontWeight: 850,
   },
   paginationSeparator: {
     width: 0.5,
@@ -98,13 +99,13 @@ export const styles = StyleSheet.create({
   },
   date: {},
   warning: {
-    paddingTop: palSize(Size.XS3),
-    paddingBottom: 3,
+    paddingVertical: palSize(Size.XS2),
     width: '100%',
 
     fontSize: 8,
-    fontWeight: 600,
+    fontWeight: 650,
     textAlign: 'center',
+    textTransform: 'uppercase',
 
     borderRadius: palSize(Size.XS3),
     backgroundColor: palColorGS('white'),
