@@ -19,7 +19,7 @@ const TextFilter = ({
     hideLabel
     handleChange={value => setFilterValue(value)}
     inputHTMLAttrs={{
-      placeholder: `Buscar... (${getFacetedUniqueValues().size})`,
+      placeholder: 'Buscar...',
     }}
   />
 )

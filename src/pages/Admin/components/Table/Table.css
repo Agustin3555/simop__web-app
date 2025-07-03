@@ -22,6 +22,9 @@
     display: flex;
     flex-direction: column;
     gap: var(--pal-size-2xs);
+    border-bottom-width: var(--line-thickness);
+    border-bottom-style: solid;
+    border-bottom-color: var(--pal-color-a-l4);
     padding: var(--pal-size-2xs);
 
     > .main-bar {
@@ -63,12 +66,11 @@
 }
 
 .table {
-  --cell-padding-inline: var(--pal-size-m);
+  --cell-padding-inline: var(--pal-size-s);
   --table-border-radius: var(--pal-size-xs);
 
   width: max-content;
 
-  border-radius: var(--table-border-radius);
   overflow: auto;
 
   .row {
@@ -76,12 +78,16 @@
   }
 
   > .head {
-    background-color: var(--pal-color-a-l3);
+    border-bottom-width: var(--line-thickness);
+    border-bottom-style: solid;
+    border-bottom-color: var(--pal-color-a-l4);
+
+    background-color: var(--pal-color-a-l5);
 
     > .row > * {
       border-right-width: var(--line-thickness);
       border-right-style: solid;
-      border-right-color: var(--pal-color-white);
+      border-right-color: var(--pal-color-a-l4);
 
       &:last-child {
         border: none;
@@ -108,10 +114,6 @@
     display: flex;
     flex-direction: column;
 
-    border-block-width: var(--line-thickness);
-    border-block-style: solid;
-    border-block-color: var(--pal-color-white);
-
     > .row {
       border-bottom-width: var(--line-thickness);
       border-bottom-style: solid;
@@ -128,6 +130,10 @@
   }
 
   > .foot {
+    border-top-width: var(--line-thickness);
+    border-top-style: solid;
+    border-top-color: var(--pal-color-a-l4);
+
     background-color: var(--pal-color-a-l5);
 
     &.enable-stick {
@@ -138,6 +144,6 @@
 
   > :is(.body, .foot) > .row {
     align-items: center;
-    padding-block: var(--pal-size-s);
+    padding-block: var(--pal-size-xs);
   }
 }

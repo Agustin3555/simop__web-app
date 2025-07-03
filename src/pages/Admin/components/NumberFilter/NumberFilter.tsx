@@ -52,7 +52,7 @@ const NumberFilter = ({
         value={minValue}
         hideLabel
         inputHTMLAttrs={{
-          placeholder: minFaceted === undefined ? '' : `Min (${minFaceted})`,
+          placeholder: minFaceted === undefined ? '' : 'Min...',
           ...commonInputHTMLAttrs,
         }}
         handleChange={handleMinChange}
@@ -61,7 +61,7 @@ const NumberFilter = ({
         value={maxValue}
         hideLabel
         inputHTMLAttrs={{
-          placeholder: maxFaceted === undefined ? '' : `Max (${maxFaceted})`,
+          placeholder: maxFaceted === undefined ? '' : 'Max...',
           ...commonInputHTMLAttrs,
         }}
         handleChange={handleMaxChange}

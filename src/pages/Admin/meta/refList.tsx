@@ -25,7 +25,7 @@ export class RefListProp implements PropScheme {
       field?: ForView & Required
     },
 
-    public minSize = MinSize.l,
+    public minSize = MinSize.s,
   ) {}
 
   public get title() {

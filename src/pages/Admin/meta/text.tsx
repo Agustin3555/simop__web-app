@@ -15,7 +15,7 @@ export class TextProp implements PropScheme {
       field?: ForView & Required
     },
 
-    public minSize = MinSize.l,
+    public minSize = MinSize.m,
   ) {}
 
   getFieldComponent = (value?: string, editMode = false) => {
