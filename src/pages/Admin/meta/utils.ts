@@ -46,6 +46,10 @@ export interface PropScheme<E = GeneralEntity> {
   key: string
   verboseKey?: string
   title: string
+  // title: {
+  //   long: string
+  //   short?: string
+  // }
   minSize: MinSize
   config?: unknown
 

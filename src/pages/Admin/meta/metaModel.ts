@@ -12,6 +12,14 @@ interface MetaModelArgs<T = GeneralEntity> {
   title: {
     singular: string
     plural: string
+    // singular: {
+    //   long: string
+    //   short?: string
+    // }
+    // plural: {
+    //   long: string
+    //   short?: string
+    // }
   }
   faIcon?: string
 

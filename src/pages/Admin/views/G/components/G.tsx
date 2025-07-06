@@ -248,7 +248,7 @@ const ContextualizedG = () => {
                 url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                 attribution="&copy; OpenStreetMap"
               />
-              {/* <GeoJSON
+              <GeoJSON
                 data={geoBorder as FeatureCollection}
                 interactive={false}
                 style={{
@@ -257,8 +257,8 @@ const ContextualizedG = () => {
                   fillOpacity: 0,
                   opacity: 0.625,
                 }}
-              /> */}
-              <GeoJSON
+              />
+              {/* <GeoJSON
                 data={geoDepartamentosBorder as FeatureCollection}
                 style={feature => ({
                   color: palColorGS('black'),
@@ -266,7 +266,7 @@ const ContextualizedG = () => {
                   fillColor: matcher(feature?.id as string),
                   fillOpacity: 0.125,
                 })}
-              />
+              /> */}
               {geoLocalidades.features.map(
                 ({ id: fullOsmId, geometry, properties }) => {
                   const { type, coordinates } = geometry

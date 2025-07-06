@@ -80,8 +80,15 @@
     > .filter-container {
       display: flex;
       flex-direction: column;
-      gap: var(--gap);
-      padding-top: 0;
+
+      .cmp-base-combobox:has(.item),
+      .cmp-input
+        input:not([type='date'], [type='datetime-local']):not(
+          :placeholder-shown
+        ),
+      .cmp-input input.filled {
+        background-color: var(--pal-color-b-l4);
+      }
 
       .input {
         padding-inline: var(--cell-padding-inline);
@@ -94,7 +101,6 @@
         border-color: var(--pal-color-a-l4);
 
         border-radius: unset;
-        /* background-color: var(--pal-color-white); */
       }
     }
   }

@@ -1,6 +1,6 @@
 import { GeneralEntity } from '@/models/config'
 import { ForView, GetFilter, MinSize, PropScheme, Required } from './utils'
-import { Column } from '@tanstack/react-table'
+import { BuiltInFilterFn, Column } from '@tanstack/react-table'
 import { InputArea, TextFilter } from '../components'
 
 export class TextLongProp implements PropScheme {
@@ -35,7 +35,7 @@ export class TextLongProp implements PropScheme {
 
   getFieldValue = (
     formData: FormData,
-    form: HTMLFormElement,
+    _: HTMLFormElement,
     editMode = false,
   ) => {
     const { key } = this
@@ -45,8 +45,10 @@ export class TextLongProp implements PropScheme {
     if (value === null) return
     if (value === '') return editMode ? null : undefined
 
-    return value as string
+    return (value as string).trim()
   }
+
+  filterFn: BuiltInFilterFn = 'includesString'
 
   getHeader = (column: Column<GeneralEntity>) => {
     const { title } = this

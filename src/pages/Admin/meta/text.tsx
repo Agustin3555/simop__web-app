@@ -1,7 +1,7 @@
 import { GeneralEntity } from '@/models/config'
 import { ForView, GetFilter, MinSize, PropScheme, Required } from './utils'
 import { Input } from '@/components'
-import { Column } from '@tanstack/react-table'
+import { BuiltInFilterFn, Column } from '@tanstack/react-table'
 import { TextFilter } from '../components'
 
 export class TextProp implements PropScheme {
@@ -48,6 +48,8 @@ export class TextProp implements PropScheme {
 
     return (value as string).trim()
   }
+
+  filterFn: BuiltInFilterFn = 'includesString'
 
   getHeader = (column: Column<GeneralEntity>) => {
     const { title } = this

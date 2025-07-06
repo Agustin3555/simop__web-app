@@ -18,7 +18,6 @@ import {
 } from '@/pages/Admin/hooks'
 import {
   ColumnDef,
-  ColumnFiltersState,
   getCoreRowModel,
   getFacetedMinMaxValues,
   getFacetedUniqueValues,

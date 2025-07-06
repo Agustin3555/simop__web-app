@@ -41,7 +41,7 @@ export class BooleanProp implements PropScheme {
 
   getFieldValue = (
     formData: FormData,
-    form: HTMLFormElement,
+    _: HTMLFormElement,
     editMode = false,
   ) => {
     const { key } = this

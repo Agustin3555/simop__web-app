@@ -25,6 +25,11 @@ const DateTimeFilter = ({
 
   const commonInputHTMLAttrs: Partial<DebouncedInputProps['inputHTMLAttrs']> = {
     type: notTime ? 'date' : 'datetime-local',
+    onBlur: e => {
+      const input = e.currentTarget
+
+      input.classList.toggle('filled', input.value !== '')
+    },
   }
 
   const handleChange = useCallback<
