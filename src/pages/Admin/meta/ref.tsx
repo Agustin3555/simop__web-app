@@ -27,7 +27,7 @@ export class RefProp implements PropScheme {
       field?: ForView & Required
     },
 
-    public minSize = MinSize.s,
+    public minSize: MinSize | number = MinSize.s,
   ) {}
 
   public get key() {

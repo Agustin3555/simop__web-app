@@ -26,7 +26,7 @@ export class NumberProp implements PropScheme {
         }
     },
 
-    public minSize = MinSize.xs,
+    public minSize: MinSize | number = MinSize.xs,
   ) {}
 
   getFieldComponent = (value?: number | string, editMode = false) => {

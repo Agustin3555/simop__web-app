@@ -53,20 +53,32 @@ export const ObraMeta = new MetaModel<ObraModel.Entity>({
         required: true,
       },
     }),
-    tipoEnteObra: new RefProp({
-      getMetaModel: () => TipoEnteObraMeta,
-    }),
+    tipoEnteObra: new RefProp(
+      {
+        getMetaModel: () => TipoEnteObraMeta,
+      },
+      6,
+    ),
     solicitante: new TextProp('Solicitante'),
     fechaPedido: new DateProp('Fecha de Pedido'),
-    empresa: new RefProp({
-      getMetaModel: () => EmpresaMeta,
-    }),
-    localidad: new RefProp({
-      getMetaModel: () => LocalidadMeta,
-    }),
-    tipoEstadoObra: new RefProp({
-      getMetaModel: () => TipoEstadoObraMeta,
-    }),
+    empresa: new RefProp(
+      {
+        getMetaModel: () => EmpresaMeta,
+      },
+      7,
+    ),
+    localidad: new RefProp(
+      {
+        getMetaModel: () => LocalidadMeta,
+      },
+      6,
+    ),
+    tipoEstadoObra: new RefProp(
+      {
+        getMetaModel: () => TipoEstadoObraMeta,
+      },
+      6,
+    ),
     avanceTotal: new NumberProp('Avance Acumulado', {
       decimal: true,
       sub: '%',
@@ -80,9 +92,12 @@ export const ObraMeta = new MetaModel<ObraModel.Entity>({
       pre: '$',
     }),
     fechaContratacion: new DateProp('Fecha de Contratación'),
-    tipoTematicaObra: new RefProp({
-      getMetaModel: () => TipoTematicaObraMeta,
-    }),
+    tipoTematicaObra: new RefProp(
+      {
+        getMetaModel: () => TipoTematicaObraMeta,
+      },
+      7,
+    ),
     tipoProgramaObra: new RefProp({
       getMetaModel: () => TipoProgramaObraMeta,
     }),

@@ -16,7 +16,7 @@ export class DateTimeProp implements PropScheme {
       field?: ForView & Required
     },
 
-    public minSize = MinSize.s,
+    public minSize: MinSize | number = MinSize.s,
   ) {}
 
   getFieldComponent = (value?: string, editMode = false) => {

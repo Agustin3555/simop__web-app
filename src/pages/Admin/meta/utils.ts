@@ -50,7 +50,7 @@ export interface PropScheme<E = GeneralEntity> {
   //   long: string
   //   short?: string
   // }
-  minSize: MinSize
+  minSize: MinSize | number
   config?: unknown
 
   getFieldComponent: (value?: any, editMode?: boolean) => ReactNode

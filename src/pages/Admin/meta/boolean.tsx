@@ -21,7 +21,7 @@ export class BooleanProp implements PropScheme {
       field?: ForView
     },
 
-    public minSize = MinSize.xs,
+    public minSize: MinSize | number = MinSize.xs,
   ) {}
 
   getFieldComponent = (value?: boolean, editMode = false) => {

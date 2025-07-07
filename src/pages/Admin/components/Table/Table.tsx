@@ -159,16 +159,20 @@ const Table = ({ data, setQuickFilters, methods }: TableProps) => {
     () => [
       { id: SELECT_COLUMN },
       ...getAllProps.map<ColumnDef<GeneralEntity>>(
-        ({ key, minSize, accessorFn, filterFn, footer }) => ({
-          id: key,
-          accessorKey: key,
-          header: key,
-          minSize: MinSize.xs * STEP_WIDTH,
-          size: minSize * STEP_WIDTH,
-          ...(accessorFn && { accessorFn }),
-          ...(filterFn && { filterFn }),
-          ...(footer && { footer }),
-        }),
+        ({ key, minSize, accessorFn, filterFn, footer }) => {
+          const size = minSize * STEP_WIDTH
+
+          return {
+            id: key,
+            accessorKey: key,
+            header: key,
+            minSize: size,
+            size,
+            ...(accessorFn && { accessorFn }),
+            ...(filterFn && { filterFn }),
+            ...(footer && { footer }),
+          }
+        },
       ),
     ],
     [],

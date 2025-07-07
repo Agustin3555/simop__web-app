@@ -14,7 +14,7 @@ export class TextLongProp implements PropScheme {
       field?: ForView & Required
     },
 
-    public minSize = MinSize.xl,
+    public minSize: MinSize | number = MinSize.xl,
   ) {}
 
   getFieldComponent = (value?: string, editMode = false) => {
