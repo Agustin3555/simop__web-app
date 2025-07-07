@@ -59,6 +59,10 @@ const Report = ({ title, orientation = 'portrait', children }: ReportProps) => (
         </Text>
       </View>
       <View style={styles.content}>{children}</View>
+      <Text style={styles.warning} fixed>
+        Las obras con expedientes electrónicos están confirmadas. Y las obras
+        con expedientes en papel están sujetas a revisión.
+      </Text>
     </Page>
   </Document>
 )

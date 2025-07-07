@@ -10,6 +10,7 @@ export const styles = StyleSheet.create({
     padding: palSize(Size.XS),
 
     fontFamily: 'Manrope Variable',
+    color: palColor('AD1'),
   },
   header: {
     flexShrink: 0,
@@ -21,8 +22,6 @@ export const styles = StyleSheet.create({
     borderStyle: 'solid',
     borderColor: palColor('AL5'),
     width: '100%',
-
-    color: palColor('AD1'),
 
     borderRadius: palSize(Size.XS2),
     overflow: 'hidden',
