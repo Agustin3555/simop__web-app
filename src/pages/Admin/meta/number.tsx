@@ -43,7 +43,7 @@ export class NumberProp implements PropScheme {
         {...{ title, value, editMode }}
         inputHTMLAttrs={{
           type: 'number',
-          step: decimal ? '0.0001' : undefined,
+          step: decimal ? '0.000001' : undefined,
         }}
       />
     )

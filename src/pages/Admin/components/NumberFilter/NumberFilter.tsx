@@ -33,7 +33,7 @@ const NumberFilter = ({
     type: 'number',
     min: minFaceted,
     max: maxFaceted,
-    step: decimal ? '0.0001' : '',
+    step: decimal ? '0.000001' : '',
   }
 
   const handleMinChange = useCallback<DebouncedInputProps['handleChange']>(
