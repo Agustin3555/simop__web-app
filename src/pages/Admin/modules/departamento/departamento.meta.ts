@@ -1,4 +1,4 @@
-import { MetaModel, RefProp, TextProp } from '../../meta'
+import { MetaModel, NumberProp, RefProp, TextProp } from '../../meta'
 import { COMMON_PROPS } from '../../constants/commonProps.const'
 import { Method } from '@/services/config'
 import { omitBaseEntity } from '../../constants/selectors.const'
@@ -23,6 +23,9 @@ export const DepartamentoMeta = new MetaModel<DepartamentoModel.Entity>({
       field: {
         required: true,
       },
+    }),
+    osmId: new NumberProp('OSM ID', {
+      big: true,
     }),
     provincia: new RefProp({
       getMetaModel: () => ProvinciaMeta,

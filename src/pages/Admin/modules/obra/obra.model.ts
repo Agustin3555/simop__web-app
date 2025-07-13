@@ -77,8 +77,8 @@ export interface RelationFields {
   tipoProgramaObra: TipoProgramaObraModel.Ref
   tipoTematicaObra: TipoTematicaObraModel.Ref
   tipoEstadoObra: TipoEstadoObraModel.Ref
-  localidad: LocalidadModel.Ref
 
+  localidades: LocalidadModel.Ref[]
   representantes: RepresentanteModel.Ref[]
   inspectores: InspectorModel.Ref[]
   fojasMedicion: FojaMedicionModel.Ref[]
@@ -92,8 +92,9 @@ export interface RelationFields {
 
 export interface Entity extends BaseEntity, OwnFields, RelationFields {}
 
-export type CreateEntity = OwnFields &
-  Record<
+export type CreateEntity = OwnFields & {
+  localidades: number[]
+} & Record<
     | 'empresaId'
     | 'tipoEnteObraId'
     | 'tipoContratacionObraId'
@@ -101,8 +102,7 @@ export type CreateEntity = OwnFields &
     | 'tipoFinanciamientoObraId'
     | 'tipoProgramaObraId'
     | 'tipoTematicaObraId'
-    | 'tipoEstadoObraId'
-    | 'localidadId',
+    | 'tipoEstadoObraId',
     number
   >
 

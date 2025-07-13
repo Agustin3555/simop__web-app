@@ -67,7 +67,7 @@ export const ObraMeta = new MetaModel<ObraModel.Entity>({
       },
       7,
     ),
-    localidad: new RefProp(
+    localidades: new RefListProp(
       {
         getMetaModel: () => LocalidadMeta,
       },
@@ -334,7 +334,7 @@ const BASICO: (keyof ObraModel.Entity)[] = select(ObraMeta.allFields, 'only', [
   'plazoMeses',
   'plazoDias',
   'nomenclaturaCatastral',
-  'localidad',
+  'localidades',
   'direccion',
   'lugar',
   'avanceTotal',
@@ -384,7 +384,7 @@ const QUICK_FILTERS: (keyof ObraModel.Entity)[] = select(
   [
     'empresa',
     'fechaInicio',
-    'localidad',
+    'localidades',
     'tipoEstadoObra',
     'tipoProgramaObra',
     'tipoTematicaObra',
@@ -438,7 +438,7 @@ ObraMeta.fieldsByService = [
       'tipoTematicaObra',
       'tipoEstadoObra',
       'fechaInicio',
-      'localidad',
+      'localidades',
       'avanceTotal',
     ]),
   },
@@ -452,7 +452,7 @@ ObraMeta.fieldsByService = [
       ...select(ObraMeta.allFields, 'only', [
         'empresa',
         'nombre',
-        'localidad',
+        'localidades',
         'tipoEstadoObra',
         'avanceTotal',
         'montoContratacion',
@@ -477,7 +477,7 @@ ObraMeta.fieldsByService = [
           'numero',
           'nombre',
           'empresa',
-          'localidad',
+          'localidades',
           'tipoTematicaObra',
           'tipoProgramaObra',
           'avanceTotal',
@@ -517,7 +517,7 @@ ObraMeta.fieldsByService = [
     fields: select(ObraMeta.allFields, 'only', [
       'nombre',
       'empresa',
-      'localidad',
+      'localidades',
       'tipoTematicaObra',
       'avanceTotal',
       'montoContratacion',

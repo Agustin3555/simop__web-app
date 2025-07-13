@@ -14,7 +14,7 @@
     color: var(--pal-color-a-d1);
 
     > span {
-      color: var(--pal-color-a);
+      color: var(--pal-color-b);
     }
   }
 

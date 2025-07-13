@@ -1,4 +1,4 @@
-import { MetaModel, TextProp } from '../../meta'
+import { MetaModel, NumberProp, TextProp } from '../../meta'
 import { COMMON_PROPS } from '../../constants/commonProps.const'
 import { Method } from '@/services/config'
 import { omitBaseEntity } from '../../constants/selectors.const'
@@ -15,9 +15,9 @@ export const APGMeta = new MetaModel<APGModel.Entity>({
   },
   faIcon: 'fa-solid fa-vector-square',
 
-  anchorField: 'nombre',
+  anchorField: 'numero',
   props: {
-    nombre: new TextProp('Nombre', {
+    numero: new NumberProp('Número', {
       field: {
         required: true,
       },

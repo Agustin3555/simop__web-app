@@ -4,6 +4,7 @@ import { APGModel } from '../apg'
 
 export interface OwnFields {
   nombre: string
+  osmId: string
 }
 
 export interface RelationFields {

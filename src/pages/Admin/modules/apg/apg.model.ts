@@ -1,7 +1,7 @@
 import { BaseEntity, BaseRef } from '@/models/config'
 
 export interface OwnFields {
-  nombre: string
+  numero: number
   color: string
 }
 
@@ -13,4 +13,4 @@ export type CreateEntity = OwnFields
 
 export type UpdateEntity = Partial<CreateEntity>
 
-export type Ref = BaseRef<OwnFields, 'nombre'>
+export type Ref = BaseRef<OwnFields, 'numero'>
