@@ -33,6 +33,8 @@ import { generateTableImages } from '@/pages/Admin/helpers'
 import geoLocalidades from '@/data/chaco_localidades.json'
 import geoBorder from '@/data/chaco_border.json'
 import geoDepartamentosBorder from '@/data/chaco_departamentos_border.json'
+import { APGMeta } from '@/pages/Admin/modules/apg/apg.meta'
+import { DepartamentoMeta } from '@/pages/Admin/modules/departamento/departamento.meta'
 
 // const CiudadesEnVista = ({ setVisibles }: { setVisibles: Function }) => {
 //   const map = useMap()
@@ -59,18 +61,6 @@ import geoDepartamentosBorder from '@/data/chaco_departamentos_border.json'
 
 //   return null
 // }
-
-const colors = {
-  1: '#00203a',
-  2: '#5059bc',
-  3: '#e5007f',
-  4: '#063565',
-  5: '#859546',
-  6: '#f26df9',
-  7: '#c8d29c',
-}
-
-const matcher = (id?: string) => colors[Number(id?.at(-1) ?? 2)]
 
 const FixMapResize = () => {
   const map = useMap()
@@ -129,32 +119,97 @@ const useCityAnimation = () => {
   return { start, stop, register }
 }
 
+const DepartamentoLayer = ({
+  data,
+  getColor,
+}: {
+  data: FeatureCollection
+  getColor: (id?: string) => string | undefined
+}) => {
+  const map = useMap()
+  const [zoom, setZoom] = useState(map.getZoom())
+
+  useEffect(() => {
+    const handleZoom = () => setZoom(map.getZoom())
+    map.on('zoomend', handleZoom)
+
+    return () => {
+      map.off('zoomend', handleZoom)
+    }
+  }, [map])
+
+  const getOpacity = () => {
+    const opacityMin = 0
+    const opacityMax = 1
+
+    const zoomMin = 0
+    const zoomMax = 12
+
+    const clampedZoom = Math.max(zoomMin, Math.min(zoom, zoomMax))
+    const t = (clampedZoom - zoomMin) / (zoomMax - zoomMin)
+
+    return opacityMax - t * (opacityMax - opacityMin)
+  }
+
+  return (
+    <GeoJSON
+      data={data}
+      interactive={false}
+      style={feature => ({
+        color: palColorGS('black'),
+        weight: 0.25,
+        fillColor: getColor(feature?.id as string) ?? '#fff',
+        fillOpacity: getOpacity(),
+      })}
+      // onEachFeature={(feature, layer) => {
+      //   const nombre = feature.properties?.name ?? 'Departamento'
+
+      //   layer.bindTooltip(nombre, {
+      //     sticky: true,
+      //     direction: 'right',
+      //     opacity: 0.8,
+      //   })
+      // }}
+    />
+  )
+}
+
 const ContextualizedG = () => {
   const [enableMap, setEnableMap] = useState(true)
 
   const animation = useCityAnimation()
 
   const { table, columnFilters } = useTable() ?? {}
-  const { getFilterValue, setFilterValue } = table?.getColumn('localidad') ?? {}
+  const { getFilterValue, setFilterValue } =
+    table?.getColumn('localidades') ?? {}
 
   const selectedCities = useMemo(() => {
-    const cityFilter = columnFilters?.state?.find(f => f.id === 'localidad')
+    const cityFilter = columnFilters?.state?.find(f => f.id === 'localidades')
     return (cityFilter?.value as string[] | undefined) ?? []
   }, [columnFilters?.state])
 
-  const obrasQuery = useEntities([ObraMeta.key], ObraMeta.service.getAll)
+  const apgsQuery = useEntities([APGMeta.key], APGMeta.service.getAll)
+
+  const departamentosQuery = useEntities(
+    [DepartamentoMeta.key],
+    DepartamentoMeta.service.getAll,
+  )
 
   const localidadesQuery = useEntities(
     [LocalidadMeta.key],
     LocalidadMeta.service.getAll,
   )
 
+  const obrasQuery = useEntities([ObraMeta.key], ObraMeta.service.getAll)
+
   const { data, status, isFetching, refetch, enableQuery } = useCombinedQuery(
-    obrasQuery,
+    apgsQuery,
+    departamentosQuery,
     localidadesQuery,
+    obrasQuery,
   )
 
-  const [obras, localidades] = data ?? []
+  const [apgs, departamentos, localidades, obras] = data ?? []
 
   const queryActionState = useQueryActionState({ status, isFetching })
 
@@ -166,6 +221,8 @@ const ContextualizedG = () => {
 
   const handleToggleCityClick = useCallback(
     (id: number) => {
+      console.log(id)
+
       const prev = (getFilterValue?.() ?? []) as string[]
 
       const already = prev.includes(String(id))
@@ -204,6 +261,25 @@ const ContextualizedG = () => {
 
     return <ReportInTable schemeTitle="Obras" {...{ imageUrls }} />
   }, [])
+
+  const getDepartamentoColor = useCallback(
+    (findId?: string) => {
+      if (!findId) return
+
+      const departamento = departamentos?.find(({ osmId }) => {
+        if (osmId === undefined) return
+
+        const findOsmId = findId.match(/(\d+)$/)?.[1]
+
+        return osmId === findOsmId
+      })
+
+      if (!departamento) return
+
+      return apgs?.find(({ id }) => id === departamento.apg.id)?.color
+    },
+    [apgs, departamentos],
+  )
 
   return (
     <div className="cmp-g">
@@ -248,7 +324,7 @@ const ContextualizedG = () => {
                 url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                 attribution="&copy; OpenStreetMap"
               />
-              <GeoJSON
+              {/* <GeoJSON
                 data={geoBorder as FeatureCollection}
                 interactive={false}
                 style={{
@@ -257,16 +333,11 @@ const ContextualizedG = () => {
                   fillOpacity: 0,
                   opacity: 0.625,
                 }}
-              />
-              {/* <GeoJSON
-                data={geoDepartamentosBorder as FeatureCollection}
-                style={feature => ({
-                  color: palColorGS('black'),
-                  weight: 0.125,
-                  fillColor: matcher(feature?.id as string),
-                  fillOpacity: 0.125,
-                })}
               /> */}
+              <DepartamentoLayer
+                data={geoDepartamentosBorder as FeatureCollection}
+                getColor={getDepartamentoColor}
+              />
               {geoLocalidades.features.map(
                 ({ id: fullOsmId, geometry, properties }) => {
                   const { type, coordinates } = geometry
