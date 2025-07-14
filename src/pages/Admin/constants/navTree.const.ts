@@ -44,73 +44,6 @@ export interface SectionNode {
 
 export const TREE: SectionNode[] = [
   {
-    title: 'Administración',
-    sections: [
-      { viewKey: AreaMeta.key },
-      {
-        title: 'Ubicación Geográfica',
-        sections: [
-          { viewKey: PaisMeta.key },
-          { viewKey: ProvinciaMeta.key },
-          { viewKey: APGMeta.key },
-          { viewKey: DepartamentoMeta.key },
-          { viewKey: LocalidadMeta.key },
-        ],
-      },
-      {
-        title: 'Tipos',
-        sections: [
-          { viewKey: TipoNivelAreaMeta.key },
-          { viewKey: TipoProfesionMeta.key },
-          { viewKey: TipoRepresentanteMeta.key },
-          { viewKey: TipoInspectorMeta.key },
-          {
-            title: 'Obras',
-            sections: [
-              { viewKey: TipoEnteObraMeta.key },
-              { viewKey: TipoContratacionObraMeta.key },
-              { viewKey: TipoOrigenFinanciamientoObraMeta.key },
-              { viewKey: TipoFinanciamientoObraMeta.key },
-              { viewKey: TipoProgramaObraMeta.key },
-              { viewKey: TipoTematicaObraMeta.key },
-              { viewKey: TipoEstadoObraMeta.key },
-              { viewKey: TipoParalizacionMeta.key },
-              { viewKey: TipoRescisionMeta.key },
-              { viewKey: TipoRedeterminacionMeta.key },
-              { viewKey: TipoRecepcionMeta.key },
-              { viewKey: TipoModificacionMeta.key },
-            ],
-          },
-        ],
-      },
-      { viewKey: InspectorMeta.key },
-      { viewKey: RepresentanteMeta.key },
-    ],
-  },
-  {
-    title: 'Empresas',
-    sections: [
-      { viewKey: EmpresaMeta.key },
-      { viewKey: RepresentanteEmpresaMeta.key },
-    ],
-  },
-  {
-    title: 'Obras',
-    sections: [
-      { viewKey: ObraMeta.key },
-      { viewKey: RepresentanteObraMeta.key },
-      { viewKey: InspectorObraMeta.key },
-      { viewKey: FojaMedicionMeta.key },
-      { viewKey: PagoCertificacionMeta.key },
-      { viewKey: RedeterminacionMeta.key },
-      { viewKey: AmpliacionMeta.key },
-      { viewKey: ModificacionMeta.key },
-      { viewKey: ParalizacionMeta.key },
-      { viewKey: RescisionMeta.key },
-      { viewKey: RecepcionMeta.key },
-    ],
-  },
-  {
     title: 'Tablero de Gestión',
     sections: [
       { viewKey: 'obraGeneral' },
@@ -119,4 +52,81 @@ export const TREE: SectionNode[] = [
       { viewKey: 'gm' },
     ],
   },
+  {
+    title: 'Sobre Obras',
+    sections: [
+      { viewKey: ObraMeta.key },
+      {
+        title: 'Eventos',
+        sections: [
+          { viewKey: FojaMedicionMeta.key },
+          { viewKey: PagoCertificacionMeta.key },
+          { viewKey: RedeterminacionMeta.key },
+          { viewKey: AmpliacionMeta.key },
+          { viewKey: ModificacionMeta.key },
+          { viewKey: ParalizacionMeta.key },
+          { viewKey: RescisionMeta.key },
+          { viewKey: RecepcionMeta.key },
+        ],
+      },
+      {
+        title: 'Actores',
+        sections: [
+          { viewKey: RepresentanteObraMeta.key },
+          { viewKey: InspectorObraMeta.key },
+        ],
+      },
+    ],
+  },
+  {
+    title: 'Sobre Empresas',
+    sections: [
+      { viewKey: EmpresaMeta.key },
+      {
+        title: 'Actores',
+        sections: [{ viewKey: RepresentanteEmpresaMeta.key }],
+      },
+    ],
+  },
+  {
+    title: 'Ubicación',
+    sections: [
+      { viewKey: PaisMeta.key },
+      { viewKey: ProvinciaMeta.key },
+      { viewKey: APGMeta.key },
+      { viewKey: DepartamentoMeta.key },
+      { viewKey: LocalidadMeta.key },
+    ],
+  },
+  {
+    title: 'Actores',
+    sections: [
+      { viewKey: InspectorMeta.key },
+      { viewKey: RepresentanteMeta.key },
+    ],
+  },
+  {
+    title: 'Tipos',
+    sections: [
+      { viewKey: TipoNivelAreaMeta.key },
+      { viewKey: TipoProfesionMeta.key },
+      { viewKey: TipoRepresentanteMeta.key },
+      { viewKey: TipoInspectorMeta.key },
+
+      { viewKey: TipoEnteObraMeta.key },
+      { viewKey: TipoContratacionObraMeta.key },
+      { viewKey: TipoOrigenFinanciamientoObraMeta.key },
+      { viewKey: TipoFinanciamientoObraMeta.key },
+      { viewKey: TipoProgramaObraMeta.key },
+      { viewKey: TipoTematicaObraMeta.key },
+      { viewKey: TipoEstadoObraMeta.key },
+
+      { viewKey: TipoParalizacionMeta.key },
+      { viewKey: TipoRescisionMeta.key },
+      { viewKey: TipoRedeterminacionMeta.key },
+      { viewKey: TipoRecepcionMeta.key },
+      { viewKey: TipoModificacionMeta.key },
+    ],
+  },
+  { viewKey: AreaMeta.key },
 ]

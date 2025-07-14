@@ -125,7 +125,6 @@ const VIEWS_BASE: Record<
   },
   [ObraMeta.key]: {
     metaModel: ObraMeta,
-    title: 'Obra Básica',
   },
   [RepresentanteObraMeta.key]: {
     metaModel: RepresentanteObraMeta,
