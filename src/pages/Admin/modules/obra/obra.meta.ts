@@ -32,6 +32,7 @@ import { TipoProgramaObraMeta } from '../tipoProgramaObra/tipoProgramaObra.meta'
 import { TipoTematicaObraMeta } from '../tipoTematicaObra/tipoTematicaObra.meta'
 import { TipoOrigenFinanciamientoObraMeta } from '../tipoOrigenFinanciamientoObra/tipoOrigenFinanciamientoObra.meta'
 import { TipoEnteObraMeta } from '../tipoEnteObra/tipoEnteObra.meta'
+import { APGMeta } from '../apg/apg.meta'
 
 export const ObraMeta = new MetaModel<ObraModel.Entity>({
   key: 'obra',
@@ -70,6 +71,12 @@ export const ObraMeta = new MetaModel<ObraModel.Entity>({
     localidades: new RefListProp(
       {
         getMetaModel: () => LocalidadMeta,
+      },
+      6,
+    ),
+    apgs: new RefListProp(
+      {
+        getMetaModel: () => APGMeta,
       },
       6,
     ),
@@ -518,6 +525,7 @@ ObraMeta.fieldsByService = [
       'nombre',
       'empresa',
       'localidades',
+      'apgs',
       'tipoTematicaObra',
       'avanceTotal',
       'montoContratacion',

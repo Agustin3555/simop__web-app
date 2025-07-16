@@ -1,5 +1,5 @@
 import { BaseEntity, BaseRef } from '@/models/config'
-import { ProvinciaModel } from '../provincia'
+import { DepartamentoModel } from '../departamento'
 
 export interface OwnFields {
   nombre: string
@@ -7,12 +7,12 @@ export interface OwnFields {
 }
 
 export interface RelationFields {
-  provincia: ProvinciaModel.Ref
+  departamento: DepartamentoModel.Ref
 }
 
 export interface Entity extends BaseEntity, OwnFields, RelationFields {}
 
-export type CreateEntity = OwnFields & Record<'provinciaId', number>
+export type CreateEntity = OwnFields & Record<'departamentoId', number>
 
 export type UpdateEntity = Partial<CreateEntity>
 

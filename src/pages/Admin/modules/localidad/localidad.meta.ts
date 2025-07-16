@@ -4,7 +4,7 @@ import { Method } from '@/services/config'
 import { omitBaseEntity } from '../../constants/selectors.const'
 import { LocalidadService } from './localidad.service'
 import { LocalidadModel } from '.'
-import { ProvinciaMeta } from '../provincia/provincia.meta'
+import { DepartamentoMeta } from '../departamento/departamento.meta'
 
 export const LocalidadMeta = new MetaModel<LocalidadModel.Entity>({
   key: 'localidad',
@@ -23,11 +23,8 @@ export const LocalidadMeta = new MetaModel<LocalidadModel.Entity>({
         required: true,
       },
     }),
-    provincia: new RefProp({
-      getMetaModel: () => ProvinciaMeta,
-      field: {
-        required: true,
-      },
+    departamento: new RefProp({
+      getMetaModel: () => DepartamentoMeta,
     }),
     osmId: new NumberProp('OSM ID', {
       big: true,
