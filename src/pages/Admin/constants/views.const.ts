@@ -165,7 +165,7 @@ const VIEWS_BASE: Record<
   obraDetalle: {
     title: 'Detalle de Obra Básica',
   },
-  gm: {
+  planificacionGeografica: {
     title: 'Planificación Geográfica',
     faIcon: 'fa-solid fa-map-location-dot',
   },

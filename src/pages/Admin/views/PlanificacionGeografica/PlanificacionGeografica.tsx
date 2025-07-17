@@ -1,19 +1,19 @@
 import { View } from '../../components'
-import { G } from './components'
+import { This } from './components'
 
-const GM = () => (
+const PlanificacionGeografica = () => (
   <View
-    viewKey="gm"
+    viewKey="planificacionGeografica"
     title="Planificación Geográfica"
     localViews={[
       {
         localViewKey: 'g',
         title: 'Consultar',
         faIcon: 'fa-solid fa-search',
-        component: <G />,
+        component: <This />,
       },
     ]}
   />
 )
 
-export default GM
+export default PlanificacionGeografica

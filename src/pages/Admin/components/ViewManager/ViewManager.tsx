@@ -38,7 +38,7 @@ import Area from '../../views/Area/Area'
 import TipoNivelArea from '../../views/TipoNivelArea/TipoNivelArea'
 import TipoEnteObra from '../../views/TipoEnteObra/TipoEnteObra'
 import TipoOrigenFinanciamientoObra from '../../views/TipoOrigenFinanciamientoObra/TipoOrigenFinanciamientoObra'
-import GM from '../../views/G/GM'
+import PlanificacionGeografica from '../../views/PlanificacionGeografica/PlanificacionGeografica'
 import APG from '../../views/APG/APG'
 import Departamento from '../../views/Departamento/Departamento'
 
@@ -87,7 +87,7 @@ const ViewManager = () => (
     <ObraGeneral />
     <ObraTotales />
     <ObraDetalle />
-    <GM />
+    <PlanificacionGeografica />
   </div>
 )
 
