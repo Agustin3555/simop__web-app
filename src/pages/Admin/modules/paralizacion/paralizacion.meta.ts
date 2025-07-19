@@ -64,6 +64,6 @@ ParalizacionMeta.fieldsByService = [
   },
   {
     methods: [Method.Create, Method.UpdateOne],
-    groups: [{ key: '', fields: omitBaseEntity(ParalizacionMeta.allFields) }],
+    groups: [{ fields: omitBaseEntity(ParalizacionMeta.allFields) }],
   },
 ]

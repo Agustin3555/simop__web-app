@@ -28,8 +28,6 @@ TipoContratacionObraMeta.fieldsByService = [
   },
   {
     methods: [Method.Create, Method.UpdateOne],
-    groups: [
-      { key: '', fields: omitBaseEntity(TipoContratacionObraMeta.allFields) },
-    ],
+    groups: [{ fields: omitBaseEntity(TipoContratacionObraMeta.allFields) }],
   },
 ]

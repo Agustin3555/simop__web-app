@@ -27,6 +27,6 @@ TipoNivelAreaMeta.fieldsByService = [
   },
   {
     methods: [Method.Create, Method.UpdateOne],
-    groups: [{ key: '', fields: omitBaseEntity(TipoNivelAreaMeta.allFields) }],
+    groups: [{ fields: omitBaseEntity(TipoNivelAreaMeta.allFields) }],
   },
 ]

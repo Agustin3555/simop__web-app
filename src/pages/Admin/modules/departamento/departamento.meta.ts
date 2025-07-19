@@ -44,6 +44,6 @@ DepartamentoMeta.fieldsByService = [
   },
   {
     methods: [Method.Create, Method.UpdateOne],
-    groups: [{ key: '', fields: omitBaseEntity(DepartamentoMeta.allFields) }],
+    groups: [{ fields: omitBaseEntity(DepartamentoMeta.allFields) }],
   },
 ]

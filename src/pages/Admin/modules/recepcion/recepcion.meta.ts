@@ -56,6 +56,6 @@ RecepcionMeta.fieldsByService = [
   },
   {
     methods: [Method.Create, Method.UpdateOne],
-    groups: [{ key: '', fields: omitBaseEntity(RecepcionMeta.allFields) }],
+    groups: [{ fields: omitBaseEntity(RecepcionMeta.allFields) }],
   },
 ]

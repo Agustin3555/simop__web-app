@@ -29,8 +29,6 @@ TipoParalizacionMeta.fieldsByService = [
   },
   {
     methods: [Method.Create, Method.UpdateOne],
-    groups: [
-      { key: '', fields: omitBaseEntity(TipoParalizacionMeta.allFields) },
-    ],
+    groups: [{ fields: omitBaseEntity(TipoParalizacionMeta.allFields) }],
   },
 ]

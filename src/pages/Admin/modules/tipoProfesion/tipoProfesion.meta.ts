@@ -27,6 +27,6 @@ TipoProfesionMeta.fieldsByService = [
   },
   {
     methods: [Method.Create, Method.UpdateOne],
-    groups: [{ key: '', fields: omitBaseEntity(TipoProfesionMeta.allFields) }],
+    groups: [{ fields: omitBaseEntity(TipoProfesionMeta.allFields) }],
   },
 ]

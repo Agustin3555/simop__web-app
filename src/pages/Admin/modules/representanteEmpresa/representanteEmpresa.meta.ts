@@ -46,8 +46,6 @@ RepresentanteEmpresaMeta.fieldsByService = [
   },
   {
     methods: [Method.Create, Method.UpdateOne],
-    groups: [
-      { key: '', fields: omitBaseEntity(RepresentanteEmpresaMeta.allFields) },
-    ],
+    groups: [{ fields: omitBaseEntity(RepresentanteEmpresaMeta.allFields) }],
   },
 ]

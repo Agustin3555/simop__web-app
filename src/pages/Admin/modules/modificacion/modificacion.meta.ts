@@ -72,6 +72,6 @@ ModificacionMeta.fieldsByService = [
   },
   {
     methods: [Method.Create, Method.UpdateOne],
-    groups: [{ key: '', fields: omitBaseEntity(ModificacionMeta.allFields) }],
+    groups: [{ fields: omitBaseEntity(ModificacionMeta.allFields) }],
   },
 ]

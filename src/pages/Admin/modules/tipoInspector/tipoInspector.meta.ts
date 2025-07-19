@@ -27,6 +27,6 @@ TipoInspectorMeta.fieldsByService = [
   },
   {
     methods: [Method.Create, Method.UpdateOne],
-    groups: [{ key: '', fields: omitBaseEntity(TipoInspectorMeta.allFields) }],
+    groups: [{ fields: omitBaseEntity(TipoInspectorMeta.allFields) }],
   },
 ]

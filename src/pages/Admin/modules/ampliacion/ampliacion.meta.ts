@@ -60,6 +60,6 @@ AmpliacionMeta.fieldsByService = [
   },
   {
     methods: [Method.Create, Method.UpdateOne],
-    groups: [{ key: '', fields: omitBaseEntity(AmpliacionMeta.allFields) }],
+    groups: [{ fields: omitBaseEntity(AmpliacionMeta.allFields) }],
   },
 ]

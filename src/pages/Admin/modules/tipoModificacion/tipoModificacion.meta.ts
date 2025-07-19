@@ -29,8 +29,6 @@ TipoModificacionMeta.fieldsByService = [
   },
   {
     methods: [Method.Create, Method.UpdateOne],
-    groups: [
-      { key: '', fields: omitBaseEntity(TipoModificacionMeta.allFields) },
-    ],
+    groups: [{ fields: omitBaseEntity(TipoModificacionMeta.allFields) }],
   },
 ]

@@ -410,7 +410,6 @@ ObraMeta.fieldsByService = [
     methods: [Method.Create, Method.UpdateOne],
     groups: [
       {
-        key: '',
         fields: BASICO,
       },
       {
@@ -478,7 +477,6 @@ ObraMeta.fieldsByService = [
     methods: ['detalle'],
     groups: [
       {
-        key: '',
         title: '',
         fields: select(ObraMeta.allFields, 'only', [
           'numero',

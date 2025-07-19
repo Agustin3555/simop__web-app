@@ -55,6 +55,6 @@ InspectorObraMeta.fieldsByService = [
   },
   {
     methods: [Method.Create, Method.UpdateOne],
-    groups: [{ key: '', fields: omitBaseEntity(InspectorObraMeta.allFields) }],
+    groups: [{ fields: omitBaseEntity(InspectorObraMeta.allFields) }],
   },
 ]

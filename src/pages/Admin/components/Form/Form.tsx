@@ -9,9 +9,10 @@ import { useSubmitAction } from '@/hooks'
 import { Button } from '@/components'
 
 interface FormProps extends ReturnType<typeof useSubmitAction> {
+  // TODO: deprecado
   formRef?: MutableRefObject<HTMLFormElement | null>
   fieldGroups?: {
-    key: string
+    key?: string
     title?: string
     fields: ReactNode[]
   }[]
@@ -36,8 +37,8 @@ const Form = ({
       onKeyDown={handleKeyDown}
     >
       <div className="field-groups">
-        {fieldGroups?.map(({ key, title, fields }) => (
-          <div key={key} className="section">
+        {fieldGroups?.map(({ key, title, fields }, i) => (
+          <div key={key ?? i} className="section">
             {title && <small>{title}</small>}
             <div className="fields">{fields}</div>
           </div>

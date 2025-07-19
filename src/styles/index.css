@@ -4,3 +4,52 @@
 @import 'palette.css' layer(palette);
 @import 'global.css' layer(global);
 @import 'utils.css' layer(utils);
+
+@font-face {
+  font-family: 'Manrope Variable';
+  src: url('@/assets/fonts/manrope_5.2.5/ttf/manrope-latin-200-normal.ttf')
+    format('truetype');
+  font-weight: 200;
+}
+
+@font-face {
+  font-family: 'Manrope Variable';
+  src: url('@/assets/fonts/manrope_5.2.5/ttf/manrope-latin-300-normal.ttf')
+    format('truetype');
+  font-weight: 300;
+}
+
+@font-face {
+  font-family: 'Manrope Variable';
+  src: url('@/assets/fonts/manrope_5.2.5/ttf/manrope-latin-400-normal.ttf')
+    format('truetype');
+  font-weight: 400;
+}
+
+@font-face {
+  font-family: 'Manrope Variable';
+  src: url('@/assets/fonts/manrope_5.2.5/ttf/manrope-latin-500-normal.ttf')
+    format('truetype');
+  font-weight: 500;
+}
+
+@font-face {
+  font-family: 'Manrope Variable';
+  src: url('@/assets/fonts/manrope_5.2.5/ttf/manrope-latin-600-normal.ttf')
+    format('truetype');
+  font-weight: 600;
+}
+
+@font-face {
+  font-family: 'Manrope Variable';
+  src: url('@/assets/fonts/manrope_5.2.5/ttf/manrope-latin-700-normal.ttf')
+    format('truetype');
+  font-weight: 700;
+}
+
+@font-face {
+  font-family: 'Manrope Variable';
+  src: url('@/assets/fonts/manrope_5.2.5/ttf/manrope-latin-800-normal.ttf')
+    format('truetype');
+  font-weight: 800;
+}

@@ -57,6 +57,6 @@ RescisionMeta.fieldsByService = [
   },
   {
     methods: [Method.Create, Method.UpdateOne],
-    groups: [{ key: '', fields: omitBaseEntity(RescisionMeta.allFields) }],
+    groups: [{ fields: omitBaseEntity(RescisionMeta.allFields) }],
   },
 ]

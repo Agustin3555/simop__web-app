@@ -38,6 +38,6 @@ APGMeta.fieldsByService = [
   },
   {
     methods: [Method.Create, Method.UpdateOne],
-    groups: [{ key: '', fields: omitBaseEntity(APGMeta.allFields) }],
+    groups: [{ fields: omitBaseEntity(APGMeta.allFields) }],
   },
 ]

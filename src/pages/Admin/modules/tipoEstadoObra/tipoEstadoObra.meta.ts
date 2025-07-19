@@ -27,6 +27,6 @@ TipoEstadoObraMeta.fieldsByService = [
   },
   {
     methods: [Method.Create, Method.UpdateOne],
-    groups: [{ key: '', fields: omitBaseEntity(TipoEstadoObraMeta.allFields) }],
+    groups: [{ fields: omitBaseEntity(TipoEstadoObraMeta.allFields) }],
   },
 ]

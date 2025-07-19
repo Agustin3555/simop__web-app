@@ -67,8 +67,6 @@ PagoCertificacionMeta.fieldsByService = [
   },
   {
     methods: [Method.Create, Method.UpdateOne],
-    groups: [
-      { key: '', fields: omitBaseEntity(PagoCertificacionMeta.allFields) },
-    ],
+    groups: [{ fields: omitBaseEntity(PagoCertificacionMeta.allFields) }],
   },
 ]

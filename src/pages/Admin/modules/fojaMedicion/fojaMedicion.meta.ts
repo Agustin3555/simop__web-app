@@ -74,6 +74,6 @@ FojaMedicionMeta.fieldsByService = [
   },
   {
     methods: [Method.Create, Method.UpdateOne],
-    groups: [{ key: '', fields: omitBaseEntity(FojaMedicionMeta.allFields) }],
+    groups: [{ fields: omitBaseEntity(FojaMedicionMeta.allFields) }],
   },
 ]

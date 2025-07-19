@@ -39,6 +39,6 @@ AreaMeta.fieldsByService = [
   },
   {
     methods: [Method.Create, Method.UpdateOne],
-    groups: [{ key: '', fields: omitBaseEntity(AreaMeta.allFields) }],
+    groups: [{ fields: omitBaseEntity(AreaMeta.allFields) }],
   },
 ]

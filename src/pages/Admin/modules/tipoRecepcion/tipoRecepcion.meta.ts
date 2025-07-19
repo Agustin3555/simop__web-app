@@ -27,6 +27,6 @@ TipoRecepcionMeta.fieldsByService = [
   },
   {
     methods: [Method.Create, Method.UpdateOne],
-    groups: [{ key: '', fields: omitBaseEntity(TipoRecepcionMeta.allFields) }],
+    groups: [{ fields: omitBaseEntity(TipoRecepcionMeta.allFields) }],
   },
 ]

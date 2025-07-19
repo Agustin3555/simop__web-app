@@ -28,8 +28,6 @@ TipoFinanciamientoObraMeta.fieldsByService = [
   },
   {
     methods: [Method.Create, Method.UpdateOne],
-    groups: [
-      { key: '', fields: omitBaseEntity(TipoFinanciamientoObraMeta.allFields) },
-    ],
+    groups: [{ fields: omitBaseEntity(TipoFinanciamientoObraMeta.allFields) }],
   },
 ]

@@ -23,7 +23,7 @@ const Input = ({
   const { inputTitle, disabledState } = useControl({ title, required })
   const { disabled } = disabledState
 
-  const { renderKey, resetHandleClick } = useResetByRender()
+  const { renderKey, resetHandleClick } = useResetByRender(keyName)
 
   return (
     <div className={classList('cmp-input', 'control', long)}>

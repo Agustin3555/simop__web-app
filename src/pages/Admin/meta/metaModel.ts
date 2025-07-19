@@ -31,7 +31,7 @@ type FieldsByService<T> = {
   methods: (Method | string)[]
   fields?: (keyof T)[]
   groups?: {
-    key: string
+    key?: string
     title?: string
     fields: (keyof T)[]
   }[]

@@ -53,6 +53,6 @@ EmpresaMeta.fieldsByService = [
   },
   {
     methods: [Method.Create, Method.UpdateOne],
-    groups: [{ key: '', fields: omitBaseEntity(EmpresaMeta.allFields) }],
+    groups: [{ fields: omitBaseEntity(EmpresaMeta.allFields) }],
   },
 ]

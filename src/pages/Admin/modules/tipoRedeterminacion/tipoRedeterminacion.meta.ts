@@ -28,8 +28,6 @@ TipoRedeterminacionMeta.fieldsByService = [
   },
   {
     methods: [Method.Create, Method.UpdateOne],
-    groups: [
-      { key: '', fields: omitBaseEntity(TipoRedeterminacionMeta.allFields) },
-    ],
+    groups: [{ fields: omitBaseEntity(TipoRedeterminacionMeta.allFields) }],
   },
 ]

@@ -80,7 +80,7 @@ const DepartamentoLayer = ({ apgs, departamentos }: DepartamentoLayerProps) => {
         sticky: true,
         direction: 'right',
         opacity: 0.8,
-        offset: [10, 0],
+        offset: [8, 0],
       })
     },
     [getAPGThroughDepartamento],

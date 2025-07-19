@@ -40,6 +40,6 @@ LocalidadMeta.fieldsByService = [
   },
   {
     methods: [Method.Create, Method.UpdateOne],
-    groups: [{ key: '', fields: omitBaseEntity(LocalidadMeta.allFields) }],
+    groups: [{ fields: omitBaseEntity(LocalidadMeta.allFields) }],
   },
 ]

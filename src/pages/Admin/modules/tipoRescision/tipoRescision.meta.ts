@@ -27,6 +27,6 @@ TipoRescisionMeta.fieldsByService = [
   },
   {
     methods: [Method.Create, Method.UpdateOne],
-    groups: [{ key: '', fields: omitBaseEntity(TipoRescisionMeta.allFields) }],
+    groups: [{ fields: omitBaseEntity(TipoRescisionMeta.allFields) }],
   },
 ]

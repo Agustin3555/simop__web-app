@@ -28,8 +28,6 @@ TipoRepresentanteMeta.fieldsByService = [
   },
   {
     methods: [Method.Create, Method.UpdateOne],
-    groups: [
-      { key: '', fields: omitBaseEntity(TipoRepresentanteMeta.allFields) },
-    ],
+    groups: [{ fields: omitBaseEntity(TipoRepresentanteMeta.allFields) }],
   },
 ]

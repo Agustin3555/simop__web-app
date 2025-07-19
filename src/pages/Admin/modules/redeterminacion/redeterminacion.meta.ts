@@ -83,8 +83,6 @@ RedeterminacionMeta.fieldsByService = [
   },
   {
     methods: [Method.Create, Method.UpdateOne],
-    groups: [
-      { key: '', fields: omitBaseEntity(RedeterminacionMeta.allFields) },
-    ],
+    groups: [{ fields: omitBaseEntity(RedeterminacionMeta.allFields) }],
   },
 ]
