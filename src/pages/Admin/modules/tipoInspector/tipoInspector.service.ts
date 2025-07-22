@@ -6,7 +6,7 @@ import { TipoInspectorAdapter } from './tipoInspector.adapter'
 
 const collection = buildPath('tipos-inspectores')
 
-export const TipoInspectorService: Service<TipoInspectorModel.Entity> = {
+export const TipoInspectorService = {
   getAll: async () => {
     const response = await publicInstance.get(collection())
 
@@ -42,4 +42,4 @@ export const TipoInspectorService: Service<TipoInspectorModel.Entity> = {
   },
 
   deleteMany: async ids => await deleteManyHandler(collection, ids),
-}
+} satisfies Service<TipoInspectorModel.Entity>

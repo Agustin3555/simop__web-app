@@ -6,7 +6,7 @@ import { RedeterminacionAdapter } from './redeterminacion.adapter'
 
 const collection = buildPath('redeterminaciones')
 
-export const RedeterminacionService: Service<RedeterminacionModel.Entity> = {
+export const RedeterminacionService = {
   getAll: async () => {
     const response = await publicInstance.get(collection())
 
@@ -42,4 +42,4 @@ export const RedeterminacionService: Service<RedeterminacionModel.Entity> = {
   },
 
   deleteMany: async ids => await deleteManyHandler(collection, ids),
-}
+} satisfies Service<RedeterminacionModel.Entity>

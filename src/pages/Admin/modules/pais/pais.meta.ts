@@ -1,37 +1,39 @@
-import { MetaModel, TextProp } from '../../meta'
+import { TextProp, defineProps, buildMetaModel } from '../../meta'
 import { COMMON_PROPS } from '../../constants/commonProps.const'
 import { Method } from '@/services/config'
 import { omitBaseEntity } from '../../constants/selectors.const'
 import { PaisService } from './pais.service'
 import { PaisModel } from '.'
 
-export const PaisMeta = new MetaModel<PaisModel.Entity>({
-  key: 'pais',
-  service: PaisService,
-  title: {
-    singular: 'País',
-    plural: 'Países',
-  },
-  faIcon: 'fa-solid fa-earth-americas',
-
-  anchorField: 'nombre',
-  props: {
-    nombre: new TextProp('Nombre', {
-      field: {
-        required: true,
-      },
-    }),
-    ...COMMON_PROPS,
-  },
+const { props, allFields } = defineProps<PaisModel.Entity>({
+  nombre: new TextProp('Nombre', {
+    field: {
+      required: true,
+    },
+  }),
+  ...COMMON_PROPS,
 })
 
-PaisMeta.fieldsByService = [
+export const PaisMeta = buildMetaModel(
   {
-    methods: [Method.GetAll, Method.GetOne],
-    fields: PaisMeta.allFields,
+    key: 'pais',
+    service: PaisService,
+    title: {
+      singular: 'País',
+      plural: 'Países',
+    },
+    faIcon: 'fa-solid fa-earth-americas',
+    anchorField: 'nombre',
+    props,
   },
-  {
-    methods: [Method.Create, Method.UpdateOne],
-    groups: [{ fields: omitBaseEntity(PaisMeta.allFields) }],
-  },
-]
+  [
+    {
+      methods: [Method.GetAll, Method.GetOne],
+      fields: allFields,
+    },
+    {
+      methods: [Method.Create, Method.UpdateOne],
+      groups: [{ fields: omitBaseEntity(allFields) }],
+    },
+  ],
+)

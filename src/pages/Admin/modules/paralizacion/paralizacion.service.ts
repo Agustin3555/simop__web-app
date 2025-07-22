@@ -6,7 +6,7 @@ import { ParalizacionAdapter } from './paralizacion.adapter'
 
 const collection = buildPath('paralizaciones')
 
-export const ParalizacionService: Service<ParalizacionModel.Entity> = {
+export const ParalizacionService = {
   getAll: async () => {
     const response = await publicInstance.get(collection())
 
@@ -42,4 +42,4 @@ export const ParalizacionService: Service<ParalizacionModel.Entity> = {
   },
 
   deleteMany: async ids => await deleteManyHandler(collection, ids),
-}
+} satisfies Service<ParalizacionModel.Entity>

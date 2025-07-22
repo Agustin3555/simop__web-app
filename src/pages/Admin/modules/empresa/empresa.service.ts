@@ -6,7 +6,7 @@ import { EmpresaAdapter } from './empresa.adapter'
 
 const collection = buildPath('empresas')
 
-export const EmpresaService: Service<EmpresaModel.Entity> = {
+export const EmpresaService = {
   getAll: async () => {
     const response = await publicInstance.get(collection())
 
@@ -42,4 +42,4 @@ export const EmpresaService: Service<EmpresaModel.Entity> = {
   },
 
   deleteMany: async ids => await deleteManyHandler(collection, ids),
-}
+} satisfies Service<EmpresaModel.Entity>

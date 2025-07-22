@@ -1,8 +1,13 @@
 import { useCallback, useState } from 'react'
-import { useQuery } from '@tanstack/react-query'
+import { useQuery, UseQueryResult } from '@tanstack/react-query'
 import { Service } from '@/services/config'
 
-export const useEntities = (queryKey: string[], queryFn: Service['getAll']) => {
+type AnyFn = (...args: any[]) => Promise<any>
+
+export const useEntities = <F extends AnyFn>(
+  queryKey: string[],
+  queryFn: F,
+) => {
   const [enabled, setEnabled] = useState(false)
 
   const enableQuery = useCallback(() => {
@@ -14,11 +19,17 @@ export const useEntities = (queryKey: string[], queryFn: Service['getAll']) => {
     queryFn,
     retry: false,
     enabled,
-  })
+  }) as UseQueryResult<Awaited<ReturnType<F>>, Error>
 
   return { query, enableQuery }
 }
 
-export type UseEntitiesData = NonNullable<
-  ReturnType<typeof useEntities>['query']['data']
+export type UseEntitiesResult<T extends AnyFn> = ReturnType<
+  typeof useEntities<T>
 >
+
+export type UseEntitiesData<T = Service['getAll']> = T extends (
+  ...args: any
+) => Promise<infer R>
+  ? R
+  : never

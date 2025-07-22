@@ -6,7 +6,7 @@ import {
   FilterFn,
   HeaderContext,
 } from '@tanstack/react-table'
-import { GeneralEntity } from '@/models/config'
+import { LooseEntity } from '@/models/config'
 import { ComboboxProps } from '../components/Combobox/Combobox'
 import { MetaModel } from '.'
 
@@ -38,11 +38,11 @@ export interface GetMetaModel {
 }
 
 export type GetFilter = (
-  props: Pick<Column<GeneralEntity>, 'getFilterValue'> &
+  props: Pick<Column<LooseEntity>, 'getFilterValue'> &
     Partial<Pick<ComboboxProps, 'options'>>,
 ) => ReactNode
 
-export interface PropScheme<E = GeneralEntity> {
+export interface PropScheme<E = LooseEntity> {
   key: string
   verboseKey?: string
   title: string

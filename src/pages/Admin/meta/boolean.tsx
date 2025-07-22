@@ -1,4 +1,4 @@
-import { GeneralEntity } from '@/models/config'
+import { LooseEntity } from '@/models/config'
 import { Color, ForView, GetFilter, MinSize, PropScheme } from './utils'
 import { BooleanFilter, Checkbox } from '../components'
 import { Column } from '@tanstack/react-table'
@@ -53,7 +53,7 @@ export class BooleanProp implements PropScheme {
     return value === 'on'
   }
 
-  getHeader = (column: Column<GeneralEntity>) => {
+  getHeader = (column: Column<LooseEntity>) => {
     const { key, title, config } = this
     const { falseText = 'No', trueText = 'Si' } = config ?? {}
 
@@ -69,7 +69,7 @@ export class BooleanProp implements PropScheme {
     return { title, getFilter }
   }
 
-  getValueComponent = (item: GeneralEntity) => {
+  getValueComponent = (item: LooseEntity) => {
     const { key, config } = this
     const { falseText = 'No', trueText = 'Si', column } = config ?? {}
     const { falseColor = 'grey', trueColor = 'green' } = column ?? {}
@@ -85,7 +85,7 @@ export class BooleanProp implements PropScheme {
     )
   }
 
-  getExcelValue = (item: GeneralEntity) => {
+  getExcelValue = (item: LooseEntity) => {
     const { key, config } = this
     const { falseText = 'No', trueText = 'Sí' } = config ?? {}
 

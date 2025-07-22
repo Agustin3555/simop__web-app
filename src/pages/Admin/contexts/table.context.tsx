@@ -14,11 +14,11 @@ import {
   SortingState,
   Table,
 } from '@tanstack/react-table'
-import { GeneralEntity } from '@/models/config'
+import { LooseEntity } from '@/models/config'
 
 interface TableContextProps {
-  table?: Table<GeneralEntity>
-  setTable: (table: Table<GeneralEntity>) => void
+  table?: Table<LooseEntity>
+  setTable: (table: Table<LooseEntity>) => void
 
   columnVisibility: {
     state: VisibilityState

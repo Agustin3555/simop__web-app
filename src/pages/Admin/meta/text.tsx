@@ -1,4 +1,4 @@
-import { GeneralEntity } from '@/models/config'
+import { LooseEntity } from '@/models/config'
 import { ForView, GetFilter, MinSize, PropScheme, Required } from './utils'
 import { Input } from '@/components'
 import { BuiltInFilterFn, Column } from '@tanstack/react-table'
@@ -51,7 +51,7 @@ export class TextProp implements PropScheme {
 
   filterFn: BuiltInFilterFn = 'includesString'
 
-  getHeader = (column: Column<GeneralEntity>) => {
+  getHeader = (column: Column<LooseEntity>) => {
     const { title } = this
 
     const { getFacetedUniqueValues, setFilterValue } = column
@@ -66,7 +66,7 @@ export class TextProp implements PropScheme {
     return { title, getFilter }
   }
 
-  getValueComponent = (item: GeneralEntity) => {
+  getValueComponent = (item: LooseEntity) => {
     const { key } = this
 
     const value = item[key] as undefined | string
@@ -74,7 +74,7 @@ export class TextProp implements PropScheme {
     return value && <p className="text">{value}</p>
   }
 
-  getExcelValue = (item: GeneralEntity) => {
+  getExcelValue = (item: LooseEntity) => {
     const { key } = this
 
     const value = item[key] as string

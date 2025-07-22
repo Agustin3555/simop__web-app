@@ -6,7 +6,7 @@ import { AreaAdapter } from './area.adapter'
 
 const collection = buildPath('areas')
 
-export const AreaService: Service<AreaModel.Entity> = {
+export const AreaService = {
   getAll: async () => {
     const response = await publicInstance.get(collection())
 
@@ -42,4 +42,4 @@ export const AreaService: Service<AreaModel.Entity> = {
   },
 
   deleteMany: async ids => await deleteManyHandler(collection, ids),
-}
+} satisfies Service<AreaModel.Entity>

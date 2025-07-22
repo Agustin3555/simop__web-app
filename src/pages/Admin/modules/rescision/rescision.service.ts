@@ -6,7 +6,7 @@ import { RescisionAdapter } from './rescision.adapter'
 
 const collection = buildPath('rescisiones')
 
-export const RescisionService: Service<RescisionModel.Entity> = {
+export const RescisionService = {
   getAll: async () => {
     const response = await publicInstance.get(collection())
 
@@ -42,4 +42,4 @@ export const RescisionService: Service<RescisionModel.Entity> = {
   },
 
   deleteMany: async ids => await deleteManyHandler(collection, ids),
-}
+} satisfies Service<RescisionModel.Entity>

@@ -1,4 +1,4 @@
-import { BaseEntity, BaseRef } from '@/models/config'
+import { TimestampedEntity, EntityRef } from '@/models/config'
 import { AreaModel } from '../area'
 import { TipoRecepcionModel } from '../tipoRecepcion'
 import { ObraModel } from '../obra'
@@ -15,11 +15,11 @@ export interface RelationFields {
   tipoRecepcion: TipoRecepcionModel.Ref
 }
 
-export interface Entity extends BaseEntity, OwnFields, RelationFields {}
+export interface Entity extends TimestampedEntity, OwnFields, RelationFields {}
 
 export type CreateEntity = OwnFields &
   Record<'areaId' | 'obraId' | ' tipoRecepcionId', number>
 
 export type UpdateEntity = Partial<CreateEntity>
 
-export type Ref = BaseRef<OwnFields, 'numeroActa'>
+export type Ref = EntityRef<OwnFields, 'numeroActa'>

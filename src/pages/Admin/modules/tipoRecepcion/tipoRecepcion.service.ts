@@ -6,7 +6,7 @@ import { TipoRecepcionAdapter } from './tipoRecepcion.adapter'
 
 const collection = buildPath('tipos-recepciones')
 
-export const TipoRecepcionService: Service<TipoRecepcionModel.Entity> = {
+export const TipoRecepcionService = {
   getAll: async () => {
     const response = await publicInstance.get(collection())
 
@@ -42,4 +42,4 @@ export const TipoRecepcionService: Service<TipoRecepcionModel.Entity> = {
   },
 
   deleteMany: async ids => await deleteManyHandler(collection, ids),
-}
+} satisfies Service<TipoRecepcionModel.Entity>

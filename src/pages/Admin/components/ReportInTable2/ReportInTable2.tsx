@@ -1,10 +1,10 @@
-import { GeneralEntity } from '@/models/config'
+import { LooseEntity } from '@/models/config'
 import { Report } from '@/pages/Admin/components'
 import { Text, View } from '@react-pdf/renderer'
 import { styles } from './ReportInTable2.style'
 
 interface ReportInTableProps {
-  data: GeneralEntity[]
+  data: LooseEntity[]
   schemeTitle: string
 }
 

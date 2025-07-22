@@ -6,7 +6,7 @@ import { TipoRescisionAdapter } from './tipoRescision.adapter'
 
 const collection = buildPath('tipos-rescisiones')
 
-export const TipoRescisionService: Service<TipoRescisionModel.Entity> = {
+export const TipoRescisionService = {
   getAll: async () => {
     const response = await publicInstance.get(collection())
 
@@ -42,4 +42,4 @@ export const TipoRescisionService: Service<TipoRescisionModel.Entity> = {
   },
 
   deleteMany: async ids => await deleteManyHandler(collection, ids),
-}
+} satisfies Service<TipoRescisionModel.Entity>

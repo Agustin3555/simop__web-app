@@ -104,7 +104,7 @@ const ContextualizedThis = () => {
                 />
               </div>
             </div>
-            <MetaModelContext.Provider value={{ metaModel: ObraMeta }}>
+            <MetaModelContext.Provider value={ObraMeta}>
               <Table
                 data={obras}
                 methods={{ forGetAll: 'planificacion-geografica' }}

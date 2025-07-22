@@ -6,7 +6,7 @@ import { TipoEnteObraAdapter } from './tipoEnteObra.adapter'
 
 const collection = buildPath('tipos-entes-obra')
 
-export const TipoEnteObraService: Service<TipoEnteObraModel.Entity> = {
+export const TipoEnteObraService = {
   getAll: async () => {
     const response = await publicInstance.get(collection())
 
@@ -42,4 +42,4 @@ export const TipoEnteObraService: Service<TipoEnteObraModel.Entity> = {
   },
 
   deleteMany: async ids => await deleteManyHandler(collection, ids),
-}
+} satisfies Service<TipoEnteObraModel.Entity>

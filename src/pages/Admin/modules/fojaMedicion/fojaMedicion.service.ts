@@ -6,7 +6,7 @@ import { FojaMedicionAdapter } from './fojaMedicion.adapter'
 
 const collection = buildPath('fojas-mediciones')
 
-export const FojaMedicionService: Service<FojaMedicionModel.Entity> = {
+export const FojaMedicionService = {
   getAll: async () => {
     const response = await publicInstance.get(collection())
 
@@ -42,4 +42,4 @@ export const FojaMedicionService: Service<FojaMedicionModel.Entity> = {
   },
 
   deleteMany: async ids => await deleteManyHandler(collection, ids),
-}
+} satisfies Service<FojaMedicionModel.Entity>

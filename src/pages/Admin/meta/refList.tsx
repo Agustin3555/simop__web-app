@@ -1,4 +1,4 @@
-import { GeneralEntity } from '@/models/config'
+import { LooseEntity } from '@/models/config'
 import {
   ForView,
   GetFilter,
@@ -34,7 +34,7 @@ export class RefListProp implements PropScheme {
     return metaModel.title.plural
   }
 
-  getFieldComponent = (value?: GeneralEntity[], editMode = false) => {
+  getFieldComponent = (value?: LooseEntity[], editMode = false) => {
     const { key, config } = this
     const { getMetaModel, field } = config
     const { hidden, required } = field ?? {}
@@ -72,7 +72,7 @@ export class RefListProp implements PropScheme {
     return value.map(Number)
   }
 
-  accessorFn: AccessorFn<GeneralEntity> = row => {
+  accessorFn: AccessorFn<LooseEntity> = row => {
     const { key, config } = this
     const { getMetaModel } = config
 
@@ -82,21 +82,17 @@ export class RefListProp implements PropScheme {
     return row[key]?.[anchorField]
   }
 
-  filterFn: FilterFn<GeneralEntity> = (
-    row,
-    columnId,
-    filterValue?: string[],
-  ) => {
+  filterFn: FilterFn<LooseEntity> = (row, columnId, filterValue?: string[]) => {
     if (!filterValue?.length) return true
 
-    const entities = row.original[columnId] as undefined | GeneralEntity[]
+    const entities = row.original[columnId] as undefined | LooseEntity[]
 
     if (!entities?.length) return false
 
     return entities.some(entity => filterValue.includes(String(entity.id)))
   }
 
-  getHeader = (column: Column<GeneralEntity>) => {
+  getHeader = (column: Column<LooseEntity>) => {
     const { key, title, config } = this
     const { getMetaModel } = config
 
@@ -116,14 +112,14 @@ export class RefListProp implements PropScheme {
     return { title, metaModel, getFilter }
   }
 
-  getValueComponent = (item: GeneralEntity, selectedSearchMode?: string) => {
+  getValueComponent = (item: LooseEntity, selectedSearchMode?: string) => {
     const { key, config } = this
     const { getMetaModel } = config ?? {}
 
     const { key: keyScheme, service, anchorField } = getMetaModel()
     const { getOne } = service
 
-    const value = item[key] as undefined | GeneralEntity[]
+    const value = item[key] as undefined | LooseEntity[]
 
     return (
       value &&
@@ -138,13 +134,13 @@ export class RefListProp implements PropScheme {
     )
   }
 
-  getExcelValue = (item: GeneralEntity) => {
+  getExcelValue = (item: LooseEntity) => {
     const { key, config } = this
     const { getMetaModel } = config
 
     const { anchorField } = getMetaModel()
 
-    const values = item[key] as undefined | GeneralEntity[]
+    const values = item[key] as undefined | LooseEntity[]
 
     if (!values || values.length === 0) return
 

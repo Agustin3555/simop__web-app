@@ -1,13 +1,13 @@
 import { ColumnFiltersColumn } from '@tanstack/react-table'
 import Combobox, { ComboboxProps } from '../Combobox/Combobox'
-import { GeneralEntity } from '@/models/config'
+import { LooseEntity } from '@/models/config'
 import { DerivedToState, StateToDerived, useDerivedState } from '../../hooks'
 import { useCallback } from 'react'
 
 interface BooleanFilterProps
   extends Pick<ComboboxProps, 'keyName' | 'title'>,
     Pick<
-      ColumnFiltersColumn<GeneralEntity>,
+      ColumnFiltersColumn<LooseEntity>,
       'getFilterValue' | 'setFilterValue'
     > {
   falseText: string

@@ -6,7 +6,7 @@ import { TipoProfesionAdapter } from './tipoProfesion.adapter'
 
 const collection = buildPath('tipos-profesiones')
 
-export const TipoProfesionService: Service<TipoProfesionModel.Entity> = {
+export const TipoProfesionService = {
   getAll: async () => {
     const response = await publicInstance.get(collection())
 
@@ -42,4 +42,4 @@ export const TipoProfesionService: Service<TipoProfesionModel.Entity> = {
   },
 
   deleteMany: async ids => await deleteManyHandler(collection, ids),
-}
+} satisfies Service<TipoProfesionModel.Entity>

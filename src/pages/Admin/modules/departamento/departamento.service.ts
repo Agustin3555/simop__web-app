@@ -6,7 +6,7 @@ import { DepartamentoAdapter } from './departamento.adapter'
 
 const collection = buildPath('departamentos')
 
-export const DepartamentoService: Service<DepartamentoModel.Entity> = {
+export const DepartamentoService = {
   getAll: async () => {
     const response = await publicInstance.get(collection())
 
@@ -42,4 +42,4 @@ export const DepartamentoService: Service<DepartamentoModel.Entity> = {
   },
 
   deleteMany: async ids => await deleteManyHandler(collection, ids),
-}
+} satisfies Service<DepartamentoModel.Entity>

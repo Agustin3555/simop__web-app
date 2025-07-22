@@ -3,7 +3,7 @@ import { useQueryActionState } from '@/hooks'
 import { useAddFieldReset } from '../../hooks'
 import { useQuery } from '@tanstack/react-query'
 import { Control } from '@/types'
-import { GeneralEntity } from '@/models/config'
+import { LooseEntity } from '@/models/config'
 import { MetaModel } from '../../meta'
 import { REFETCH_INTERVALS } from '../../constants/refetchIntervals.const'
 import { Button } from '@/components'
@@ -16,7 +16,7 @@ export interface AutoComboboxProps
     Pick<BaseComboboxProps, 'multiple'> {
   metaModel: MetaModel
   initSelected?: string[]
-  initOptions?: GeneralEntity[]
+  initOptions?: LooseEntity[]
 }
 
 const AutoCombobox = ({

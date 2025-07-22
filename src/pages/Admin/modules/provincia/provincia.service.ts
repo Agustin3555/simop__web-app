@@ -6,7 +6,7 @@ import { ProvinciaAdapter } from './provincia.adapter'
 
 const collection = buildPath('provincias')
 
-export const ProvinciaService: Service<ProvinciaModel.Entity> = {
+export const ProvinciaService = {
   getAll: async () => {
     const response = await publicInstance.get(collection())
 
@@ -42,4 +42,4 @@ export const ProvinciaService: Service<ProvinciaModel.Entity> = {
   },
 
   deleteMany: async ids => await deleteManyHandler(collection, ids),
-}
+} satisfies Service<ProvinciaModel.Entity>

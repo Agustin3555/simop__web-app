@@ -6,7 +6,7 @@ import { ObraAdapter } from './obra.adapter'
 
 const collection = buildPath('obras')
 
-export const ObraService: Service<ObraModel.Entity> = {
+export const ObraService = {
   getAll: async () => {
     const response = await publicInstance.get(collection())
 
@@ -54,4 +54,4 @@ export const ObraService: Service<ObraModel.Entity> = {
   },
 
   deleteMany: async ids => await deleteManyHandler(collection, ids),
-}
+} satisfies Service<ObraModel.Entity>

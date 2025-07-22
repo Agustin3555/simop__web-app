@@ -1,45 +1,54 @@
-import { RefProp, MetaModel, TextProp, NumberProp } from '../../meta'
+import {
+  RefProp,
+  TextProp,
+  NumberProp,
+  defineProps,
+  buildMetaModel,
+} from '../../meta'
 import { COMMON_PROPS } from '../../constants/commonProps.const'
 import { Method } from '@/services/config'
 import { omitBaseEntity } from '../../constants/selectors.const'
 import { LocalidadService } from './localidad.service'
-import { LocalidadModel } from '.'
 import { DepartamentoMeta } from '../departamento/departamento.meta'
+import { LocalidadModel } from '.'
 
-export const LocalidadMeta = new MetaModel<LocalidadModel.Entity>({
-  key: 'localidad',
-  service: LocalidadService,
-  refreshRate: 'low',
-  title: {
-    singular: 'Localidad',
-    plural: 'Localidades',
-  },
-  faIcon: 'fa-solid fa-location-dot',
-
-  anchorField: 'nombre',
-  props: {
-    nombre: new TextProp('Nombre', {
-      field: {
-        required: true,
-      },
-    }),
-    departamento: new RefProp({
-      getMetaModel: () => DepartamentoMeta,
-    }),
-    osmId: new NumberProp('OSM ID', {
-      big: true,
-    }),
-    ...COMMON_PROPS,
-  },
+const { props, allFields } = defineProps<LocalidadModel.Entity>({
+  nombre: new TextProp('Nombre', {
+    field: {
+      required: true,
+    },
+  }),
+  departamento: new RefProp({
+    getMetaModel: () => DepartamentoMeta,
+  }),
+  osmId: new NumberProp('OSM ID', {
+    big: true,
+  }),
+  ...COMMON_PROPS,
 })
 
-LocalidadMeta.fieldsByService = [
+export const LocalidadMeta = buildMetaModel(
   {
-    methods: [Method.GetAll, Method.GetOne],
-    fields: LocalidadMeta.allFields,
+    key: 'localidad',
+    title: {
+      singular: 'Localidad',
+      plural: 'Localidades',
+    },
+    faIcon: 'fa-solid fa-location-dot',
+
+    service: LocalidadService,
+    refreshRate: 'low',
+    anchorField: 'nombre',
+    props,
   },
-  {
-    methods: [Method.Create, Method.UpdateOne],
-    groups: [{ fields: omitBaseEntity(LocalidadMeta.allFields) }],
-  },
-]
+  [
+    {
+      methods: [Method.GetAll, Method.GetOne],
+      fields: allFields,
+    },
+    {
+      methods: [Method.Create, Method.UpdateOne],
+      groups: [{ fields: omitBaseEntity(allFields) }],
+    },
+  ],
+)

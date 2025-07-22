@@ -6,7 +6,7 @@ import { InspectorObraAdapter } from './inspectorObra.adapter'
 
 const collection = buildPath('inspectores-obras')
 
-export const InspectorObraService: Service<InspectorObraModel.Entity> = {
+export const InspectorObraService = {
   getAll: async () => {
     const response = await publicInstance.get(collection())
 
@@ -36,4 +36,4 @@ export const InspectorObraService: Service<InspectorObraModel.Entity> = {
   },
 
   deleteMany: async ids => await deleteManyHandler(collection, ids),
-}
+} satisfies Service<InspectorObraModel.Entity>

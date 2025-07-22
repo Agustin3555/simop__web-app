@@ -6,7 +6,7 @@ import { TipoNivelAreaAdapter } from './tipoNivelArea.adapter'
 
 const collection = buildPath('tipos-niveles-area')
 
-export const TipoNivelAreaService: Service<TipoNivelAreaModel.Entity> = {
+export const TipoNivelAreaService = {
   getAll: async () => {
     const response = await publicInstance.get(collection())
 
@@ -42,4 +42,4 @@ export const TipoNivelAreaService: Service<TipoNivelAreaModel.Entity> = {
   },
 
   deleteMany: async ids => await deleteManyHandler(collection, ids),
-}
+} satisfies Service<TipoNivelAreaModel.Entity>

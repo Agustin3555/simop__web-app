@@ -6,7 +6,7 @@ import { PaisAdapter } from './pais.adapter'
 
 const collection = buildPath('paises')
 
-export const PaisService: Service<PaisModel.Entity> = {
+export const PaisService = {
   getAll: async () => {
     const response = await publicInstance.get(collection())
 
@@ -42,4 +42,4 @@ export const PaisService: Service<PaisModel.Entity> = {
   },
 
   deleteMany: async ids => await deleteManyHandler(collection, ids),
-}
+} satisfies Service<PaisModel.Entity>

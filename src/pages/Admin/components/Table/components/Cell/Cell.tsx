@@ -1,6 +1,6 @@
 import './Cell.css'
 import { Cell as TsCell } from '@tanstack/react-table'
-import { GeneralEntity } from '@/models/config'
+import { LooseEntity } from '@/models/config'
 import { useMemo } from 'react'
 import { steppedSizes } from '../../helpers'
 import { AccessorKeys } from '../../Table'
@@ -13,8 +13,8 @@ import { PropScheme } from '@/pages/Admin/meta'
 */
 
 interface Props {
-  getAllPropsRecord: Record<string, PropScheme<GeneralEntity>>
-  cell: TsCell<GeneralEntity, unknown>
+  getAllPropsRecord: Record<string, PropScheme<LooseEntity>>
+  cell: TsCell<LooseEntity, unknown>
   accessorKeys: AccessorKeys
 }
 

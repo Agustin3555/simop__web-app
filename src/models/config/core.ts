@@ -1,14 +1,12 @@
-export type EntityKey = string
-
-export interface Identificable {
+export interface BaseEntity {
   id: number
 }
 
-export interface BaseEntity extends Identificable {
+export interface TimestampedEntity extends BaseEntity {
   creado: string
   modificado: string
 }
 
-export type BaseRef<T, K extends keyof T> = Identificable & Pick<T, K>
+export type LooseEntity = TimestampedEntity & Record<string, any>
 
-export type GeneralEntity = BaseEntity & Record<EntityKey, any>
+export type EntityRef<T, K extends keyof T> = BaseEntity & Pick<T, K>

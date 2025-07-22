@@ -64,7 +64,7 @@ const SchemeView = ({
   const deselectRows = useCallback(() => setRowSelection({}), [])
 
   return (
-    <MetaModelContext.Provider value={{ metaModel }}>
+    <MetaModelContext.Provider value={metaModel}>
       <RowSelectionContext.Provider
         value={{ rowSelection, setRowSelection, selectedRowIds, deselectRows }}
       >

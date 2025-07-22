@@ -6,7 +6,7 @@ import { TipoModificacionAdapter } from './tipoModificacion.adapter'
 
 const collection = buildPath('tipos-modificaciones')
 
-export const TipoModificacionService: Service<TipoModificacionModel.Entity> = {
+export const TipoModificacionService = {
   getAll: async () => {
     const response = await publicInstance.get(collection())
 
@@ -42,4 +42,4 @@ export const TipoModificacionService: Service<TipoModificacionModel.Entity> = {
   },
 
   deleteMany: async ids => await deleteManyHandler(collection, ids),
-}
+} satisfies Service<TipoModificacionModel.Entity>

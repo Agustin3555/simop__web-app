@@ -6,7 +6,7 @@ import { AmpliacionModel } from '.'
 
 const collection = buildPath('ampliaciones')
 
-export const AmpliacionService: Service<AmpliacionModel.Entity> = {
+export const AmpliacionService = {
   getAll: async () => {
     const response = await publicInstance.get(collection())
 
@@ -42,4 +42,4 @@ export const AmpliacionService: Service<AmpliacionModel.Entity> = {
   },
 
   deleteMany: async ids => await deleteManyHandler(collection, ids),
-}
+} satisfies Service<AmpliacionModel.Entity>

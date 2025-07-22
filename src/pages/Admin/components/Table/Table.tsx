@@ -31,7 +31,7 @@ import {
 import { Button, Toggle } from '@/components'
 import { Cell, Footer, Header, RowSelectorCell } from './components'
 import { Combobox, Value } from '..'
-import { GeneralEntity } from '@/models/config'
+import { LooseEntity } from '@/models/config'
 import { classList } from '@/helpers'
 import { format } from '@formkit/tempo'
 import { utils, writeFile } from 'xlsx'
@@ -40,7 +40,7 @@ import { Method } from '@/services/config'
 export type QuickFilters = Record<string, { title: string; filter: ReactNode }>
 
 export interface TableProps {
-  data: GeneralEntity[]
+  data: LooseEntity[]
   setQuickFilters?: Dispatch<SetStateAction<QuickFilters>>
   methods?: {
     forGetAll?: string
@@ -157,7 +157,7 @@ const Table = ({ data, setQuickFilters, methods }: TableProps) => {
   const columns = useMemo(
     () => [
       { id: SELECT_COLUMN },
-      ...getAllProps.map<ColumnDef<GeneralEntity>>(
+      ...getAllProps.map<ColumnDef<LooseEntity>>(
         ({ key, minSize, accessorFn, filterFn, footer }) => {
           const size = minSize * STEP_WIDTH
 

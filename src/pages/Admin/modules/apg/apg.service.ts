@@ -6,7 +6,7 @@ import { APGAdapter } from './apg.adapter'
 
 const collection = buildPath('apgs')
 
-export const APGService: Service<APGModel.Entity> = {
+export const APGService = {
   getAll: async () => {
     const response = await publicInstance.get(collection())
 
@@ -42,4 +42,4 @@ export const APGService: Service<APGModel.Entity> = {
   },
 
   deleteMany: async ids => await deleteManyHandler(collection, ids),
-}
+} satisfies Service<APGModel.Entity>

@@ -1,12 +1,27 @@
-import { useEntities } from './useEntities.hook'
+import { useCallback } from 'react'
+import { UseEntitiesResult } from './useEntities.hook'
 
 type CombinedStatus = 'pending' | 'success' | 'error'
 
-export const useCombinedQuery = (
-  ...queries: NonNullable<ReturnType<typeof useEntities>>[]
+// Extrae el tipo del data de cada query
+type ExtractEntity<T> = T extends UseEntitiesResult<() => Promise<infer R>>
+  ? R
+  : never
+
+export const useCombinedQuery = <
+  T extends UseEntitiesResult<() => Promise<any>>[],
+>(
+  ...queries: [...T]
 ) => {
-  const allData = queries.map(q => q.query.data)
-  const data = allData.some(d => d === undefined) ? undefined : allData
+  const allData = queries.map(q => q.query.data) as {
+    [K in keyof T]: ExtractEntity<T[K]>
+  }
+
+  const data = allData.some(d => d === undefined)
+    ? undefined
+    : (allData as {
+        [K in keyof T]: ExtractEntity<T[K]>
+      })
 
   const isFetching = queries.some(q => q.query.isFetching)
 
@@ -16,15 +31,15 @@ export const useCombinedQuery = (
     ? 'success'
     : 'pending'
 
-  const refetch = () => Promise.all(queries.map(q => q.query.refetch()))
+  const refetch = useCallback(
+    () => Promise.all(queries.map(q => q.query.refetch())),
+    [],
+  )
 
-  const enableQuery = () => queries.forEach(q => q.enableQuery?.())
+  const enableQuery = useCallback(
+    () => queries.forEach(q => q.enableQuery()),
+    [],
+  )
 
-  return {
-    data,
-    status,
-    isFetching,
-    refetch,
-    enableQuery,
-  }
+  return { data, status, isFetching, refetch, enableQuery }
 }

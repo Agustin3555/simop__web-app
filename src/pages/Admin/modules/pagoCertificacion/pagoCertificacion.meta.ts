@@ -1,11 +1,12 @@
 import { COMMON_PROPS } from '../../constants/commonProps.const'
 import {
-  MetaModel,
   NumberProp,
   RefProp,
   DateProp,
   TextLongProp,
   TextProp,
+  defineProps,
+  buildMetaModel,
 } from '../../meta'
 import { Method } from '@/services/config'
 import { omitBaseEntity } from '../../constants/selectors.const'
@@ -15,8 +16,40 @@ import { AreaMeta } from '../area/area.meta'
 import { FojaMedicionMeta } from '../fojaMedicion/fojaMedicion.meta'
 import { RedeterminacionMeta } from '../redeterminacion/redeterminacion.meta'
 
-export const PagoCertificacionMeta =
-  new MetaModel<PagoCertificacionModel.Entity>({
+const { props, allFields } = defineProps<PagoCertificacionModel.Entity>({
+  numero: new NumberProp('Número de Pago', {
+    field: {
+      required: true,
+    },
+  }),
+  ordenPago: new TextProp('Orden de pago', {
+    field: {
+      required: true,
+    },
+  }),
+  fecha: new DateProp('Fecha de Pago'),
+  monto: new NumberProp('Monto orden de pago', {
+    decimal: true,
+    isMoney: true,
+    big: true,
+    sum: true,
+    pre: '$',
+  }),
+  fojaMedicion: new RefProp({
+    getMetaModel: () => FojaMedicionMeta,
+  }),
+  redeterminacion: new RefProp({
+    getMetaModel: () => RedeterminacionMeta,
+  }),
+  area: new RefProp({
+    getMetaModel: () => AreaMeta,
+  }),
+  observaciones: new TextLongProp('Observaciones'),
+  ...COMMON_PROPS,
+})
+
+export const PagoCertificacionMeta = buildMetaModel(
+  {
     key: 'pagoCertificacion',
     service: PagoCertificacionService,
     refreshRate: 'medium',
@@ -25,48 +58,17 @@ export const PagoCertificacionMeta =
       plural: 'Pagos de Certificación',
     },
     faIcon: 'fa-solid fa-file-invoice-dollar',
-
     anchorField: 'numero',
-    props: {
-      numero: new NumberProp('Número de Pago', {
-        field: {
-          required: true,
-        },
-      }),
-      ordenPago: new TextProp('Orden de pago', {
-        field: {
-          required: true,
-        },
-      }),
-      fecha: new DateProp('Fecha de Pago'),
-      monto: new NumberProp('Monto orden de pago', {
-        decimal: true,
-        isMoney: true,
-        big: true,
-        sum: true,
-        pre: '$',
-      }),
-      fojaMedicion: new RefProp({
-        getMetaModel: () => FojaMedicionMeta,
-      }),
-      redeterminacion: new RefProp({
-        getMetaModel: () => RedeterminacionMeta,
-      }),
-      area: new RefProp({
-        getMetaModel: () => AreaMeta,
-      }),
-      observaciones: new TextLongProp('Observaciones'),
-      ...COMMON_PROPS,
+    props,
+  },
+  [
+    {
+      methods: [Method.GetAll, Method.GetOne],
+      fields: allFields,
     },
-  })
-
-PagoCertificacionMeta.fieldsByService = [
-  {
-    methods: [Method.GetAll, Method.GetOne],
-    fields: PagoCertificacionMeta.allFields,
-  },
-  {
-    methods: [Method.Create, Method.UpdateOne],
-    groups: [{ fields: omitBaseEntity(PagoCertificacionMeta.allFields) }],
-  },
-]
+    {
+      methods: [Method.Create, Method.UpdateOne],
+      groups: [{ fields: omitBaseEntity(allFields) }],
+    },
+  ],
+)

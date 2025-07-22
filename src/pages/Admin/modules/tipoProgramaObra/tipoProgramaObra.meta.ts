@@ -1,34 +1,33 @@
-import { MetaModel } from '../../meta'
+import { defineProps, buildMetaModel } from '../../meta'
 import { TIPO_PROPS } from '../../constants/commonProps.const'
 import { Method } from '@/services/config'
 import { omitBaseEntity } from '../../constants/selectors.const'
 import { TipoProgramaObraService } from './tipoProgramaObra.service'
 import { TipoProgramaObraModel } from '.'
 
-export const TipoProgramaObraMeta = new MetaModel<TipoProgramaObraModel.Entity>(
+const { props, allFields } =
+  defineProps<TipoProgramaObraModel.Entity>(TIPO_PROPS)
+
+export const TipoProgramaObraMeta = buildMetaModel(
   {
     key: 'tipoProgramaObra',
     service: TipoProgramaObraService,
     title: {
-      singular: 'Tipo de Programa de Obra',
-      plural: 'Tipos de Programas de Obra',
+      singular: 'Programa de Obra',
+      plural: 'Programas de Obra',
     },
     faIcon: 'fa-solid fa-shapes',
-
     anchorField: 'nombre',
-    props: {
-      ...TIPO_PROPS,
+    props,
+  },
+  [
+    {
+      methods: [Method.GetAll, Method.GetOne],
+      fields: allFields,
     },
-  },
+    {
+      methods: [Method.Create, Method.UpdateOne],
+      groups: [{ fields: omitBaseEntity(allFields) }],
+    },
+  ],
 )
-
-TipoProgramaObraMeta.fieldsByService = [
-  {
-    methods: [Method.GetAll, Method.GetOne],
-    fields: TipoProgramaObraMeta.allFields,
-  },
-  {
-    methods: [Method.Create, Method.UpdateOne],
-    groups: [{ fields: omitBaseEntity(TipoProgramaObraMeta.allFields) }],
-  },
-]

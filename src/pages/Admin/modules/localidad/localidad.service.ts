@@ -6,7 +6,7 @@ import { LocalidadAdapter } from './localidad.adapter'
 
 const collection = buildPath('localidades')
 
-export const LocalidadService: Service<LocalidadModel.Entity> = {
+export const LocalidadService = {
   getAll: async () => {
     const response = await publicInstance.get(collection())
 
@@ -42,4 +42,4 @@ export const LocalidadService: Service<LocalidadModel.Entity> = {
   },
 
   deleteMany: async ids => await deleteManyHandler(collection, ids),
-}
+} satisfies Service<LocalidadModel.Entity>

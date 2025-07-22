@@ -6,7 +6,7 @@ import { TipoTematicaObraAdapter } from './tipoTematicaObra.adapter'
 
 const collection = buildPath('tipos-tematicas-obra')
 
-export const TipoTematicaObraService: Service<TipoTematicaObraModel.Entity> = {
+export const TipoTematicaObraService = {
   getAll: async () => {
     const response = await publicInstance.get(collection())
 
@@ -42,4 +42,4 @@ export const TipoTematicaObraService: Service<TipoTematicaObraModel.Entity> = {
   },
 
   deleteMany: async ids => await deleteManyHandler(collection, ids),
-}
+} satisfies Service<TipoTematicaObraModel.Entity>

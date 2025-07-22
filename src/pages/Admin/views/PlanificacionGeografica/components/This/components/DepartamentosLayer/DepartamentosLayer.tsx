@@ -2,13 +2,14 @@ import { useCallback, useEffect, useState } from 'react'
 import { GeoJSON, useMap } from 'react-leaflet'
 import { palColorGS } from '@/styles/palette'
 import { FeatureCollection, Geometry } from 'geojson'
-import { GeneralEntity } from '@/models/config'
 import { GeoJSONOptions, StyleFunction } from 'leaflet'
+import { APGModel } from '@/pages/Admin/modules/apg'
+import { DepartamentoModel } from '@/pages/Admin/modules/departamento'
 import geoDepartamentosBorder from '@/data/chaco_departamentos_border.json'
 
 interface DepartamentoLayerProps {
-  apgs: GeneralEntity[]
-  departamentos: GeneralEntity[]
+  apgs: APGModel.Entity[]
+  departamentos: DepartamentoModel.Entity[]
 }
 
 const DepartamentoLayer = ({ apgs, departamentos }: DepartamentoLayerProps) => {

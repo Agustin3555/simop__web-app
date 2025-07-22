@@ -1,4 +1,4 @@
-import { BaseEntity, BaseRef } from '@/models/config'
+import { TimestampedEntity, EntityRef } from '@/models/config'
 import { TipoProfesionModel } from '../tipoProfesion'
 
 export interface OwnFields {
@@ -11,10 +11,10 @@ interface RelationFields {
   profesiones: TipoProfesionModel.Ref[]
 }
 
-export interface Entity extends BaseEntity, OwnFields, RelationFields {}
+export interface Entity extends TimestampedEntity, OwnFields, RelationFields {}
 
 export type CreateEntity = OwnFields & { profesiones: number[] }
 
 export type UpdateEntity = Partial<CreateEntity>
 
-export type Ref = BaseRef<OwnFields, 'cuil' | 'apellido' | 'nombre'>
+export type Ref = EntityRef<OwnFields, 'cuil' | 'apellido' | 'nombre'>

@@ -6,7 +6,7 @@ import { InspectorAdapter } from './inspector.adapter'
 
 const collection = buildPath('inspectores')
 
-export const InspectorService: Service<InspectorModel.Entity> = {
+export const InspectorService = {
   getAll: async () => {
     const response = await publicInstance.get(collection())
 
@@ -42,4 +42,4 @@ export const InspectorService: Service<InspectorModel.Entity> = {
   },
 
   deleteMany: async ids => await deleteManyHandler(collection, ids),
-}
+} satisfies Service<InspectorModel.Entity>

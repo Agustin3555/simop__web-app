@@ -14,14 +14,14 @@ import {
   FloatingArrow,
 } from '@floating-ui/react'
 import { useQueryActionState } from '@/hooks'
-import { Identificable } from '@/models/config'
+import { BaseEntity } from '@/models/config'
 import { Button } from '@/components'
 import { palColorGS, palSize, Size } from '@/styles/palette'
 import { GetOneProvider } from '@/services/config'
 
 const ARROW_HEIGHT = palSize(Size.XS)
 
-interface FetchRefProps extends GetOneProvider, Identificable {
+interface FetchRefProps extends GetOneProvider, BaseEntity {
   title: string
   keyScheme: string
 }

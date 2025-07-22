@@ -1,33 +1,33 @@
-import { MetaModel } from '../../meta'
+import { defineProps, buildMetaModel } from '../../meta'
 import { TIPO_PROPS } from '../../constants/commonProps.const'
 import { Method } from '@/services/config'
 import { omitBaseEntity } from '../../constants/selectors.const'
 import { TipoRepresentanteService } from './tipoRepresentante.service'
 import { TipoRepresentanteModel } from '.'
 
-export const TipoRepresentanteMeta =
-  new MetaModel<TipoRepresentanteModel.Entity>({
+const { props, allFields } =
+  defineProps<TipoRepresentanteModel.Entity>(TIPO_PROPS)
+
+export const TipoRepresentanteMeta = buildMetaModel(
+  {
     key: 'tipoRepresentante',
     service: TipoRepresentanteService,
     title: {
       singular: 'Tipo de Representante',
       plural: 'Tipos de Representantes',
     },
-    faIcon: 'fa-solid fa-shapes',
-
+    faIcon: 'fa-solid fa-user-tie',
     anchorField: 'nombre',
-    props: {
-      ...TIPO_PROPS,
+    props,
+  },
+  [
+    {
+      methods: [Method.GetAll, Method.GetOne],
+      fields: allFields,
     },
-  })
-
-TipoRepresentanteMeta.fieldsByService = [
-  {
-    methods: [Method.GetAll, Method.GetOne],
-    fields: TipoRepresentanteMeta.allFields,
-  },
-  {
-    methods: [Method.Create, Method.UpdateOne],
-    groups: [{ fields: omitBaseEntity(TipoRepresentanteMeta.allFields) }],
-  },
-]
+    {
+      methods: [Method.Create, Method.UpdateOne],
+      groups: [{ fields: omitBaseEntity(allFields) }],
+    },
+  ],
+)

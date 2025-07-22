@@ -1,17 +1,27 @@
-import { GeneralEntity } from '@/models/config'
 import { Method, Service } from '@/services/config'
 import { PropScheme } from './utils'
-import { TrustedProps } from '../types'
+import { LooseEntity } from '@/models/config'
 
 export type RefreshRate = 'high' | 'medium' | 'low'
 
-interface MetaModelArgs<T = GeneralEntity> {
+type FieldsByService<E> = {
+  methods: (Method | string)[]
+  fields?: (keyof E)[]
+  groups?: {
+    key?: string
+    title?: string
+    fields: (keyof E)[]
+  }[]
+}[]
+
+type Props<E> = Record<keyof E, PropScheme>
+
+interface Config<E> {
   key: string
-  service: Service
-  refreshRate?: RefreshRate
   title: {
     singular: string
     plural: string
+
     // singular: {
     //   long: string
     //   short?: string
@@ -23,98 +33,76 @@ interface MetaModelArgs<T = GeneralEntity> {
   }
   faIcon?: string
 
-  anchorField: keyof T
-  props: Record<keyof T, PropScheme>
+  service: Service<E>
+  refreshRate?: RefreshRate
+  anchorField: keyof E
+  props: Props<E>
 }
 
-type FieldsByService<T> = {
-  methods: (Method | string)[]
-  fields?: (keyof T)[]
-  groups?: {
-    key?: string
-    title?: string
-    fields: (keyof T)[]
-  }[]
-}[]
+export const defineProps = <E>(props: Props<E>) => {
+  // Inicializa la clave de las propiedades
+  Object.entries(props).forEach(
+    ([key, prop]) => ((prop as PropScheme).key = key),
+  )
 
-export class MetaModel<T = any> extends (Object as unknown as TrustedProps<
-  MetaModelArgs<GeneralEntity>
->) {
-  fieldsByService?: FieldsByService<T>
-  allFields: (keyof T)[]
+  const allFields = Object.keys(props) as (keyof E)[]
 
-  constructor(args: MetaModelArgs<T>) {
-    super()
+  return { props, allFields }
+}
 
-    // Inicializa la clave de las propiedades
-    Object.entries(args.props).forEach(
-      ([key, prop]) => ((prop as PropScheme).key = key),
-    )
+export type MetaModel<E = LooseEntity> = ReturnType<typeof buildMetaModel<E>>
 
-    Object.assign(this, args)
-    this.allFields = Object.keys(args.props) as (keyof T)[]
-  }
+export const buildMetaModel = <E = LooseEntity>(
+  config: Config<E>,
+  fieldsByService: FieldsByService<E>,
+) => {
+  const { props } = config
 
-  getFields = (method: Method | string) => {
-    const { fieldsByService } = this
+  const findServiceEntry = (method: Method | string) =>
+    fieldsByService?.find(({ methods }) => methods.includes(method))
 
-    const { fields } =
-      fieldsByService?.find(({ methods }) => methods.includes(method)) ?? {}
+  const getFields = (method: Method | string) =>
+    findServiceEntry(method)?.fields as (keyof E)[] | undefined
 
-    return fields as string[] | undefined
-  }
-
-  getPropFields = (method: Method | string) => {
-    const { props, getFields } = this
-
+  const getPropFields = (method: Method | string) => {
     const fields = getFields(method)
-
-    return fields?.map(key => props[key as string])
+    return fields?.map(key => props[key])
   }
 
-  getPropFieldsRecord = (method: Method | string) => {
-    const { props, getFields } = this
-
+  const getPropFieldsRecord = (method: Method | string) => {
     const fields = getFields(method)
-
     const acc: Record<string, PropScheme> = {}
-
-    fields?.forEach(key => (acc[key as string] = props[key as string]))
-
+    fields?.forEach(key => (acc[key as string] = props[key]))
     return acc
   }
 
-  getGroups = (method: Method | string) => {
-    const { fieldsByService } = this
+  const getGroups = (method: Method | string) =>
+    findServiceEntry(method)?.groups
 
-    const { groups } =
-      fieldsByService?.find(({ methods }) => methods.includes(method)) ?? {}
-
-    return groups
-  }
-
-  getPropGroups = (method: Method | string) => {
-    const { props, getGroups } = this
-
+  const getPropGroups = (method: Method | string) => {
     const groups = getGroups(method)
-
     return groups?.map(({ fields, ...rest }) => ({
-      props: fields.map(key => props[key as string]),
+      props: fields.map(key => props[key]),
       ...rest,
     }))
   }
 
-  getPropGroupsRecord = (method: Method | string) => {
-    const { props, getGroups } = this
-
+  const getPropGroupsRecord = (method: Method | string) => {
     const groups = getGroups(method)
-
     return groups?.map(({ fields, ...rest }) => {
       const acc: Record<string, PropScheme> = {}
-
-      fields.forEach(key => (acc[key as string] = props[key as string]))
-
+      fields.forEach(key => (acc[key as string] = props[key]))
       return { props: acc, ...rest }
     })
+  }
+
+  return {
+    ...config,
+    getFields,
+    getPropFields,
+    getPropFieldsRecord,
+    getGroups,
+    getPropGroups,
+    getPropGroupsRecord,
   }
 }

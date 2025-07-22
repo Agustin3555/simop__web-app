@@ -1,4 +1,4 @@
-import { BaseEntity, BaseRef } from '@/models/config'
+import { TimestampedEntity, EntityRef } from '@/models/config'
 import { InspectorModel } from '../inspector'
 import { TipoInspectorModel } from '../tipoInspector'
 import { TipoProfesionModel } from '../tipoProfesion'
@@ -16,7 +16,7 @@ export interface RelationFields {
   tipoProfesion: TipoProfesionModel.Ref
 }
 
-export interface Entity extends BaseEntity, OwnFields, RelationFields {}
+export interface Entity extends TimestampedEntity, OwnFields, RelationFields {}
 
 export type CreateEntity = OwnFields &
   Record<
@@ -26,4 +26,4 @@ export type CreateEntity = OwnFields &
 
 export type UpdateEntity = Partial<CreateEntity>
 
-export type Ref = BaseRef<OwnFields, 'fecha'>
+export type Ref = EntityRef<OwnFields, 'fecha'>

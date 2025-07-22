@@ -1,4 +1,4 @@
-import { GeneralEntity } from '@/models/config'
+import { LooseEntity } from '@/models/config'
 import { ForView, GetFilter, MinSize, PropScheme, Required } from './utils'
 import { Input } from '@/components'
 import { BuiltInFilterFn, Column, HeaderContext } from '@tanstack/react-table'
@@ -67,7 +67,7 @@ export class NumberProp implements PropScheme {
 
   filterFn: BuiltInFilterFn = 'inNumberRange'
 
-  footer = (info: HeaderContext<GeneralEntity, unknown>) => {
+  footer = (info: HeaderContext<LooseEntity, unknown>) => {
     const { key, config } = this
     const { isMoney = false, sum = false, pre, sub } = config ?? {}
 
@@ -86,7 +86,7 @@ export class NumberProp implements PropScheme {
     return <StylizedNumber value={total} {...{ isMoney, pre, sub }} />
   }
 
-  getHeader = (column: Column<GeneralEntity>) => {
+  getHeader = (column: Column<LooseEntity>) => {
     const { title, config } = this
     const { decimal = false } = config ?? {}
     const { setFilterValue, getFacetedMinMaxValues } = column
@@ -100,7 +100,7 @@ export class NumberProp implements PropScheme {
     return { title, getFilter }
   }
 
-  getValueComponent = (item: GeneralEntity) => {
+  getValueComponent = (item: LooseEntity) => {
     const { key, config } = this
     const { isMoney = false, pre, sub } = config ?? {}
 
@@ -111,7 +111,7 @@ export class NumberProp implements PropScheme {
     return <StylizedNumber {...{ value, isMoney, pre, sub }} />
   }
 
-  getExcelValue = (item: GeneralEntity) => {
+  getExcelValue = (item: LooseEntity) => {
     const { key, config } = this
     const { isMoney = false, pre = '', sub = '' } = config ?? {}
 

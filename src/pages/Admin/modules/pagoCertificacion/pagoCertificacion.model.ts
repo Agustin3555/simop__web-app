@@ -1,4 +1,4 @@
-import { BaseEntity, BaseRef } from '@/models/config'
+import { TimestampedEntity, EntityRef } from '@/models/config'
 import { AreaModel } from '../area'
 import { FojaMedicionModel } from '../fojaMedicion'
 import { RedeterminacionModel } from '../redeterminacion'
@@ -17,11 +17,11 @@ export interface RelationFields {
   fojaMedicion: FojaMedicionModel.Ref
 }
 
-export interface Entity extends BaseEntity, OwnFields, RelationFields {}
+export interface Entity extends TimestampedEntity, OwnFields, RelationFields {}
 
 export type CreateEntity = OwnFields &
   Record<'areaId' | 'redeterminacionId' | 'fojaMedicionId', number>
 
 export type UpdateEntity = Partial<CreateEntity>
 
-export type Ref = BaseRef<OwnFields, 'numero'>
+export type Ref = EntityRef<OwnFields, 'numero'>

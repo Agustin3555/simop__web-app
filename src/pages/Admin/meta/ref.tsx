@@ -1,4 +1,4 @@
-import { GeneralEntity } from '@/models/config'
+import { LooseEntity } from '@/models/config'
 import {
   GetFilter,
   ForView,
@@ -45,7 +45,7 @@ export class RefProp implements PropScheme {
     return metaModel.title.singular
   }
 
-  getFieldComponent = (value?: GeneralEntity, editMode = false) => {
+  getFieldComponent = (value?: LooseEntity, editMode = false) => {
     const { verboseKey, title, config } = this
     const { getMetaModel, field } = config
     const { hidden, required } = field ?? {}
@@ -80,7 +80,7 @@ export class RefProp implements PropScheme {
     return Number(value)
   }
 
-  accessorFn: AccessorFn<GeneralEntity> = row => {
+  accessorFn: AccessorFn<LooseEntity> = row => {
     const { key, config } = this
     const { getMetaModel } = config
 
@@ -90,21 +90,17 @@ export class RefProp implements PropScheme {
     return row[key]?.[anchorField]
   }
 
-  filterFn: FilterFn<GeneralEntity> = (
-    row,
-    columnId,
-    filterValue?: string[],
-  ) => {
+  filterFn: FilterFn<LooseEntity> = (row, columnId, filterValue?: string[]) => {
     if (!filterValue?.length) return true
 
-    const entity = row.original[columnId] as undefined | GeneralEntity
+    const entity = row.original[columnId] as undefined | LooseEntity
 
     if (entity === undefined) return false
 
     return filterValue.includes(String(entity.id))
   }
 
-  getHeader = (column: Column<GeneralEntity>) => {
+  getHeader = (column: Column<LooseEntity>) => {
     const { verboseKey, title, config } = this
     const { getMetaModel } = config
 
@@ -124,14 +120,14 @@ export class RefProp implements PropScheme {
     return { title, metaModel, getFilter }
   }
 
-  getValueComponent = (item: GeneralEntity, selectedSearchMode?: string) => {
+  getValueComponent = (item: LooseEntity, selectedSearchMode?: string) => {
     const { key, config } = this
     const { getMetaModel } = config ?? {}
 
     const { key: keyScheme, service, anchorField } = getMetaModel()
     const { getOne } = service
 
-    const value = item[key] as undefined | GeneralEntity
+    const value = item[key] as undefined | LooseEntity
 
     return (
       value && (
@@ -144,13 +140,13 @@ export class RefProp implements PropScheme {
     )
   }
 
-  getExcelValue = (item: GeneralEntity) => {
+  getExcelValue = (item: LooseEntity) => {
     const { key, config } = this
     const { getMetaModel } = config
 
     const { anchorField } = getMetaModel()
 
-    const value = item[key] as undefined | Partial<GeneralEntity>
+    const value = item[key] as undefined | Partial<LooseEntity>
 
     if (value === undefined) return
 

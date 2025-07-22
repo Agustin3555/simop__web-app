@@ -6,7 +6,7 @@ import { RepresentanteAdapter } from './representante.adapter'
 
 const collection = buildPath('representantes')
 
-export const RepresentanteService: Service<RepresentanteModel.Entity> = {
+export const RepresentanteService = {
   getAll: async () => {
     const response = await publicInstance.get(collection())
 
@@ -42,4 +42,4 @@ export const RepresentanteService: Service<RepresentanteModel.Entity> = {
   },
 
   deleteMany: async ids => await deleteManyHandler(collection, ids),
-}
+} satisfies Service<RepresentanteModel.Entity>

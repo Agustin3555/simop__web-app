@@ -6,7 +6,7 @@ import { ModificacionAdapter } from './modificacion.adapter'
 
 const collection = buildPath('modificaciones')
 
-export const ModificacionService: Service<ModificacionModel.Entity> = {
+export const ModificacionService = {
   getAll: async () => {
     const response = await publicInstance.get(collection())
 
@@ -42,4 +42,4 @@ export const ModificacionService: Service<ModificacionModel.Entity> = {
   },
 
   deleteMany: async ids => await deleteManyHandler(collection, ids),
-}
+} satisfies Service<ModificacionModel.Entity>

@@ -6,7 +6,7 @@ import { TipoParalizacionAdapter } from './tipoParalizacion.adapter'
 
 const collection = buildPath('tipos-paralizaciones')
 
-export const TipoParalizacionService: Service<TipoParalizacionModel.Entity> = {
+export const TipoParalizacionService = {
   getAll: async () => {
     const response = await publicInstance.get(collection())
 
@@ -42,4 +42,4 @@ export const TipoParalizacionService: Service<TipoParalizacionModel.Entity> = {
   },
 
   deleteMany: async ids => await deleteManyHandler(collection, ids),
-}
+} satisfies Service<TipoParalizacionModel.Entity>

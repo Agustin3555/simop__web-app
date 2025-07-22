@@ -1,4 +1,4 @@
-import { BaseEntity, BaseRef } from '@/models/config'
+import { TimestampedEntity, EntityRef } from '@/models/config'
 import { ProvinciaModel } from '../provincia'
 import { APGModel } from '../apg'
 
@@ -12,10 +12,10 @@ export interface RelationFields {
   apg: APGModel.Ref
 }
 
-export interface Entity extends BaseEntity, OwnFields, RelationFields {}
+export interface Entity extends TimestampedEntity, OwnFields, RelationFields {}
 
 export type CreateEntity = OwnFields & Record<'provinciaId' | 'apgId', number>
 
 export type UpdateEntity = Partial<CreateEntity>
 
-export type Ref = BaseRef<OwnFields, 'nombre'>
+export type Ref = EntityRef<OwnFields, 'nombre'>

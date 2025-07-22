@@ -15,7 +15,7 @@ import {
   SortingState,
   Header as TsHeader,
 } from '@tanstack/react-table'
-import { GeneralEntity } from '@/models/config'
+import { LooseEntity } from '@/models/config'
 import { classList } from '@/helpers'
 import { steppedSizes } from '../../helpers'
 import { OptionSelectors } from '@/pages/Admin/components'
@@ -30,8 +30,8 @@ const SORT_ICON_MATCHER: Record<SortDirection, string> = {
 }
 
 interface Props {
-  getAllPropsRecord: Record<string, PropScheme<GeneralEntity>>
-  header: TsHeader<GeneralEntity, unknown>
+  getAllPropsRecord: Record<string, PropScheme<LooseEntity>>
+  header: TsHeader<LooseEntity, unknown>
   sorting: SortingState
   setSorting: Dispatch<SetStateAction<SortingState>>
   columnOrder: ColumnOrderState
@@ -89,10 +89,10 @@ const Header = ({
     // Aplanar si son RefList
     const isNested = Array.isArray(rawRefs[0])
     const refs = isNested
-      ? (rawRefs as GeneralEntity[][]).flat()
-      : (rawRefs as GeneralEntity[])
+      ? (rawRefs as LooseEntity[][]).flat()
+      : (rawRefs as LooseEntity[])
 
-    const uniqueRefs = new Map<number, GeneralEntity>()
+    const uniqueRefs = new Map<number, LooseEntity>()
 
     refs.forEach(ref => {
       const { id } = ref

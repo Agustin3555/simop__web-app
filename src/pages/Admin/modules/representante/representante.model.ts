@@ -1,4 +1,4 @@
-import { BaseEntity, BaseRef } from '@/models/config'
+import { TimestampedEntity, EntityRef } from '@/models/config'
 import { PaisModel } from '../pais'
 import { ProvinciaModel } from '../provincia'
 import { LocalidadModel } from '../localidad'
@@ -17,11 +17,11 @@ export interface RelationFields {
   localidad: LocalidadModel.Ref
 }
 
-export interface Entity extends BaseEntity, OwnFields, RelationFields {}
+export interface Entity extends TimestampedEntity, OwnFields, RelationFields {}
 
 export type CreateEntity = OwnFields &
   Record<'paisId' | 'provinciaId' | 'localidadId', number>
 
 export type UpdateEntity = Partial<CreateEntity>
 
-export type Ref = BaseRef<OwnFields, 'cuil' | 'nombre' | 'apellido'>
+export type Ref = EntityRef<OwnFields, 'cuil' | 'nombre' | 'apellido'>

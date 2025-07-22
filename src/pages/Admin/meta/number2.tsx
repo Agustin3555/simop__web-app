@@ -1,4 +1,4 @@
-import { GeneralEntity } from '@/models/config'
+import { LooseEntity } from '@/models/config'
 import { MinSize, PropScheme } from './utils'
 import { Input } from '@/components'
 import {
@@ -117,7 +117,7 @@ export class NumberProp implements PropScheme {
 
   filterFn: BuiltInFilterFn = 'inNumberRange'
 
-  footer = (info: HeaderContext<GeneralEntity, unknown>) => {
+  footer = (info: HeaderContext<LooseEntity, unknown>) => {
     const { key, global, column } = this
     const { isMoney, pre, sub } = global
     const { calculate } = column
@@ -137,7 +137,7 @@ export class NumberProp implements PropScheme {
     }
   }
 
-  getHeader = (column: TsColumn<GeneralEntity>) => {
+  getHeader = (column: TsColumn<LooseEntity>) => {
     const { title, global } = this
     const { isDecimal } = global
     const { getFilterValue, setFilterValue, getFacetedMinMaxValues } = column
@@ -152,7 +152,7 @@ export class NumberProp implements PropScheme {
     return { title: title.short ?? title.long, filter }
   }
 
-  getValueComponent = (row: Row<GeneralEntity>) => {
+  getValueComponent = (row: Row<LooseEntity>) => {
     const { key, global } = this
     const { isMoney, pre, sub } = global
 
@@ -167,7 +167,7 @@ export class NumberProp implements PropScheme {
     )
   }
 
-  getExcelValue = (item: GeneralEntity) => {
+  getExcelValue = (item: LooseEntity) => {
     const { key, global } = this
     const { isMoney, pre = '', sub = '' } = global
 

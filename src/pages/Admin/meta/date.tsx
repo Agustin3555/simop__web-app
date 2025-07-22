@@ -1,4 +1,4 @@
-import { GeneralEntity } from '@/models/config'
+import { LooseEntity } from '@/models/config'
 import { ForView, GetFilter, MinSize, PropScheme, Required } from './utils'
 import { Input } from '@/components'
 import { Column, FilterFn } from '@tanstack/react-table'
@@ -54,7 +54,7 @@ export class DateProp implements PropScheme {
     return value + 'T00:00:00Z'
   }
 
-  filterFn: FilterFn<GeneralEntity> = (row, columnId, filterValue) => {
+  filterFn: FilterFn<LooseEntity> = (row, columnId, filterValue) => {
     if (!filterValue) return true // No hay filtro, muestra todo
 
     const { min, max } = filterValue
@@ -66,7 +66,7 @@ export class DateProp implements PropScheme {
     return isAfterMin && isBeforeMax
   }
 
-  getHeader = (column: Column<GeneralEntity>) => {
+  getHeader = (column: Column<LooseEntity>) => {
     const { title } = this
 
     const { setFilterValue } = column
@@ -78,7 +78,7 @@ export class DateProp implements PropScheme {
     return { title, getFilter }
   }
 
-  getValueComponent = (item: GeneralEntity) => {
+  getValueComponent = (item: LooseEntity) => {
     const { key } = this
 
     const value = item[key] as undefined | string
@@ -86,7 +86,7 @@ export class DateProp implements PropScheme {
     return value && <p>{format(value.slice(0, 10), { date: 'short' })}</p>
   }
 
-  getExcelValue = (item: GeneralEntity) => {
+  getExcelValue = (item: LooseEntity) => {
     const { key } = this
 
     const value = item[key] as string | undefined
