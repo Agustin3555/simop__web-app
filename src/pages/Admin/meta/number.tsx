@@ -29,7 +29,7 @@ export class NumberProp implements PropScheme {
     public minSize: MinSize | number = MinSize.xs,
   ) {}
 
-  getFieldComponent = (value?: number | string, editMode = false) => {
+  getFormField = (value?: number | string, editMode = false) => {
     const { key, title, config } = this
     const { field, decimal = false } = config ?? {}
     const { hidden, required } = field ?? {}
@@ -49,7 +49,7 @@ export class NumberProp implements PropScheme {
     )
   }
 
-  getFieldValue = (
+  getFormFieldValue = (
     formData: FormData,
     _: HTMLFormElement,
     editMode = false,
@@ -86,7 +86,7 @@ export class NumberProp implements PropScheme {
     return <StylizedNumber value={total} {...{ isMoney, pre, sub }} />
   }
 
-  getHeader = (column: Column<LooseEntity>) => {
+  getTableHeader = (column: Column<LooseEntity>) => {
     const { title, config } = this
     const { decimal = false } = config ?? {}
     const { setFilterValue, getFacetedMinMaxValues } = column
@@ -100,7 +100,7 @@ export class NumberProp implements PropScheme {
     return { title, getFilter }
   }
 
-  getValueComponent = (item: LooseEntity) => {
+  getTableCell = (item: LooseEntity) => {
     const { key, config } = this
     const { isMoney = false, pre, sub } = config ?? {}
 
@@ -111,7 +111,7 @@ export class NumberProp implements PropScheme {
     return <StylizedNumber {...{ value, isMoney, pre, sub }} />
   }
 
-  getExcelValue = (item: LooseEntity) => {
+  getExcelTableCell = (item: LooseEntity) => {
     const { key, config } = this
     const { isMoney = false, pre = '', sub = '' } = config ?? {}
 

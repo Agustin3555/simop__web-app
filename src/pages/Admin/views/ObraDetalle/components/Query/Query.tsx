@@ -58,13 +58,16 @@ const Query = () => {
     const detallePropGroups = ObraMeta.getPropGroups('detalle')
 
     return detallePropGroups?.map(({ props, ...rest }) => ({
-      components: props.map(({ key, title, getValueComponent, config }) => {
-        let metaModel: MetaModel | undefined
+      components: props.map(
+        ({ key, title, getTableCell: getValueComponent, config }) => {
+          let metaModel: MetaModel | undefined
 
-        if (config?.getMetaModel) metaModel = config.getMetaModel() as MetaModel
+          if (config?.getMetaModel)
+            metaModel = config.getMetaModel() as MetaModel
 
-        return { key, title, component: getValueComponent(data), metaModel }
-      }),
+          return { key, title, component: getValueComponent(data), metaModel }
+        },
+      ),
       ...rest,
     }))
   }, [data])

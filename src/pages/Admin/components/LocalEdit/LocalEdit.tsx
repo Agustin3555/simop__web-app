@@ -42,7 +42,7 @@ const LocalEdit = () => {
     if (!isEditing) return
 
     return editPropGroups?.map(({ props, ...rest }) => ({
-      fields: props.map(({ key, getFieldComponent }) =>
+      fields: props.map(({ key, getFormField: getFieldComponent }) =>
         getFieldComponent(selectedEntity![key], true),
       ),
       ...rest,
@@ -57,11 +57,13 @@ const LocalEdit = () => {
       const updateData: Record<string, unknown> = {}
 
       editPropGroups?.forEach(({ props }) =>
-        Object.values(props).forEach(({ key, verboseKey, getFieldValue }) => {
-          const value = getFieldValue(formData, form, true)
+        Object.values(props).forEach(
+          ({ key, verboseKey, getFormFieldValue: getFieldValue }) => {
+            const value = getFieldValue(formData, form, true)
 
-          if (value !== undefined) updateData[verboseKey || key] = value
-        }),
+            if (value !== undefined) updateData[verboseKey || key] = value
+          },
+        ),
       )
 
       const editEntity = await service.updateOne!(id, updateData)

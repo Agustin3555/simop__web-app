@@ -23,8 +23,8 @@ const ContextualizedLocalAdd = () => {
   const fieldGroups = useMemo(
     () =>
       createPropGroups?.map(({ props, ...rest }) => ({
-        fields: Object.values(props).map(({ getFieldComponent }) =>
-          getFieldComponent(),
+        fields: Object.values(props).map(
+          ({ getFormField: getFieldComponent }) => getFieldComponent(),
         ),
         ...rest,
       })),
@@ -37,11 +37,13 @@ const ContextualizedLocalAdd = () => {
         const createData: Record<string, unknown> = {}
 
         createPropGroups?.forEach(({ props }) =>
-          Object.values(props).forEach(({ key, verboseKey, getFieldValue }) => {
-            const value = getFieldValue(formData, form)
+          Object.values(props).forEach(
+            ({ key, verboseKey, getFormFieldValue: getFieldValue }) => {
+              const value = getFieldValue(formData, form)
 
-            if (value !== undefined) createData[verboseKey || key] = value
-          }),
+              if (value !== undefined) createData[verboseKey || key] = value
+            },
+          ),
         )
 
         const newEntity = await service.create!(createData)

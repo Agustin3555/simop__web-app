@@ -19,7 +19,7 @@ export class DateTimeProp implements PropScheme {
     public minSize: MinSize | number = MinSize.s,
   ) {}
 
-  getFieldComponent = (value?: string, editMode = false) => {
+  getFormField = (value?: string, editMode = false) => {
     const { key, title, config } = this
     const { field } = config ?? {}
     const { hidden, required } = field ?? {}
@@ -39,7 +39,7 @@ export class DateTimeProp implements PropScheme {
     )
   }
 
-  getFieldValue = (
+  getFormFieldValue = (
     formData: FormData,
     _: HTMLFormElement,
     editMode = false,
@@ -66,7 +66,7 @@ export class DateTimeProp implements PropScheme {
     return isAfterMin && isBeforeMax
   }
 
-  getHeader = (column: Column<LooseEntity>) => {
+  getTableHeader = (column: Column<LooseEntity>) => {
     const { title } = this
 
     const { setFilterValue } = column
@@ -78,7 +78,7 @@ export class DateTimeProp implements PropScheme {
     return { title, getFilter }
   }
 
-  getValueComponent = (item: LooseEntity) => {
+  getTableCell = (item: LooseEntity) => {
     const { key } = this
 
     const value = item[key] as undefined | string
@@ -86,7 +86,7 @@ export class DateTimeProp implements PropScheme {
     return value && <p>{format(value, { date: 'short', time: 'short' })}</p>
   }
 
-  getExcelValue = (item: LooseEntity) => {
+  getExcelTableCell = (item: LooseEntity) => {
     const { key } = this
 
     const value = item[key] as string | undefined

@@ -24,7 +24,7 @@ export class BooleanProp implements PropScheme {
     public minSize: MinSize | number = MinSize.xs,
   ) {}
 
-  getFieldComponent = (value?: boolean, editMode = false) => {
+  getFormField = (value?: boolean, editMode = false) => {
     const { key, title, config } = this
     const { falseText, trueText, field } = config ?? {}
     const { hidden } = field ?? {}
@@ -39,7 +39,7 @@ export class BooleanProp implements PropScheme {
     )
   }
 
-  getFieldValue = (
+  getFormFieldValue = (
     formData: FormData,
     _: HTMLFormElement,
     editMode = false,
@@ -53,7 +53,7 @@ export class BooleanProp implements PropScheme {
     return value === 'on'
   }
 
-  getHeader = (column: Column<LooseEntity>) => {
+  getTableHeader = (column: Column<LooseEntity>) => {
     const { key, title, config } = this
     const { falseText = 'No', trueText = 'Si' } = config ?? {}
 
@@ -69,7 +69,7 @@ export class BooleanProp implements PropScheme {
     return { title, getFilter }
   }
 
-  getValueComponent = (item: LooseEntity) => {
+  getTableCell = (item: LooseEntity) => {
     const { key, config } = this
     const { falseText = 'No', trueText = 'Si', column } = config ?? {}
     const { falseColor = 'grey', trueColor = 'green' } = column ?? {}
@@ -85,7 +85,7 @@ export class BooleanProp implements PropScheme {
     )
   }
 
-  getExcelValue = (item: LooseEntity) => {
+  getExcelTableCell = (item: LooseEntity) => {
     const { key, config } = this
     const { falseText = 'No', trueText = 'Sí' } = config ?? {}
 

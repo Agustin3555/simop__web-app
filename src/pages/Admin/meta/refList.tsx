@@ -34,7 +34,7 @@ export class RefListProp implements PropScheme {
     return metaModel.title.plural
   }
 
-  getFieldComponent = (value?: LooseEntity[], editMode = false) => {
+  getFormField = (value?: LooseEntity[], editMode = false) => {
     const { key, config } = this
     const { getMetaModel, field } = config
     const { hidden, required } = field ?? {}
@@ -55,7 +55,7 @@ export class RefListProp implements PropScheme {
     )
   }
 
-  getFieldValue = (
+  getFormFieldValue = (
     formData: FormData,
     form: HTMLFormElement,
     editMode = false,
@@ -92,7 +92,7 @@ export class RefListProp implements PropScheme {
     return entities.some(entity => filterValue.includes(String(entity.id)))
   }
 
-  getHeader = (column: Column<LooseEntity>) => {
+  getTableHeader = (column: Column<LooseEntity>) => {
     const { key, title, config } = this
     const { getMetaModel } = config
 
@@ -112,7 +112,7 @@ export class RefListProp implements PropScheme {
     return { title, metaModel, getFilter }
   }
 
-  getValueComponent = (item: LooseEntity, selectedSearchMode?: string) => {
+  getTableCell = (item: LooseEntity, selectedSearchMode?: string) => {
     const { key, config } = this
     const { getMetaModel } = config ?? {}
 
@@ -134,7 +134,7 @@ export class RefListProp implements PropScheme {
     )
   }
 
-  getExcelValue = (item: LooseEntity) => {
+  getExcelTableCell = (item: LooseEntity) => {
     const { key, config } = this
     const { getMetaModel } = config
 

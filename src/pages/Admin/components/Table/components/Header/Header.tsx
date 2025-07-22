@@ -63,7 +63,7 @@ const Header = ({
     getFacetedRowModel,
   } = column
 
-  const { getHeader } = getAllPropsRecord[column.id] ?? {}
+  const { getTableHeader: getHeader } = getAllPropsRecord[column.id] ?? {}
 
   const { title, metaModel, getFilter } = useMemo(() => getHeader(column), [])
 

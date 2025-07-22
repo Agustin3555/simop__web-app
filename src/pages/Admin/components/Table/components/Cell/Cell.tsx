@@ -24,7 +24,7 @@ const Cell = ({ getAllPropsRecord, cell, accessorKeys }: Props) => {
   const { id, columnDef, getSize } = column
 
   const component = useMemo(
-    () => getAllPropsRecord[id].getValueComponent(original, accessorKeys[id]),
+    () => getAllPropsRecord[id].getTableCell(original, accessorKeys[id]),
     [original, accessorKeys],
   )
 

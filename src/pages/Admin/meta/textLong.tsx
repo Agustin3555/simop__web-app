@@ -17,7 +17,7 @@ export class TextLongProp implements PropScheme {
     public minSize: MinSize | number = MinSize.xl,
   ) {}
 
-  getFieldComponent = (value?: string, editMode = false) => {
+  getFormField = (value?: string, editMode = false) => {
     const { key, title, config } = this
     const { field } = config ?? {}
     const { hidden, required } = field ?? {}
@@ -33,7 +33,7 @@ export class TextLongProp implements PropScheme {
     )
   }
 
-  getFieldValue = (
+  getFormFieldValue = (
     formData: FormData,
     _: HTMLFormElement,
     editMode = false,
@@ -50,7 +50,7 @@ export class TextLongProp implements PropScheme {
 
   filterFn: BuiltInFilterFn = 'includesString'
 
-  getHeader = (column: Column<LooseEntity>) => {
+  getTableHeader = (column: Column<LooseEntity>) => {
     const { title } = this
 
     const { getFacetedUniqueValues, setFilterValue } = column
@@ -65,7 +65,7 @@ export class TextLongProp implements PropScheme {
     return { title, getFilter }
   }
 
-  getValueComponent = (item: LooseEntity) => {
+  getTableCell = (item: LooseEntity) => {
     const { key } = this
 
     const value = item[key] as undefined | string
@@ -73,7 +73,7 @@ export class TextLongProp implements PropScheme {
     return value && <p className="text">{value}</p>
   }
 
-  getExcelValue = (item: LooseEntity) => {
+  getExcelTableCell = (item: LooseEntity) => {
     const { key } = this
 
     const value = item[key] as string | undefined

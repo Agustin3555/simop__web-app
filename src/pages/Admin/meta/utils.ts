@@ -53,22 +53,27 @@ export interface PropScheme<E = LooseEntity> {
   minSize: MinSize | number
   config?: unknown
 
-  getFieldComponent: (value?: any, editMode?: boolean) => ReactNode
-  getFieldValue: (
+  // Para @tanstack/react-table
+  accessorFn?: AccessorFn<E>
+  filterFn?: FilterFn<E> | BuiltInFilterFn
+  footer?: (info: HeaderContext<E, unknown>) => ReactNode
+
+  getFormField: (value?: any, editMode?: boolean) => ReactNode
+  getFormFieldValue: (
     formData: FormData,
     form: HTMLFormElement,
     editMode?: boolean,
   ) => undefined | unknown
 
-  accessorFn?: AccessorFn<E>
-  filterFn?: FilterFn<E> | BuiltInFilterFn
-  footer?: (info: HeaderContext<E, unknown>) => ReactNode
-  getHeader: (column: Column<E>) => {
+  getTableHeader: (column: Column<E>) => {
     title: string
     metaModel?: MetaModel
     getFilter: GetFilter
   }
-  getValueComponent: (item: E, selectedSearchMode?: string) => ReactNode
+  getTableCell: (item: E, selectedSearchMode?: string) => ReactNode
 
-  getExcelValue: (item: E, selectedSearchMode?: string) => unknown
+  // getReportTableHeader:
+  // getReportTableCell:
+
+  getExcelTableCell: (item: E, selectedSearchMode?: string) => unknown
 }

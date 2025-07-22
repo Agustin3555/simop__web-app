@@ -221,7 +221,7 @@ const Table = ({ data, setQuickFilters, methods }: TableProps) => {
 
     const convertedData = selectedData.map(row =>
       Object.fromEntries(
-        getAllProps.map(({ title, getExcelValue }) => [
+        getAllProps.map(({ title, getExcelTableCell: getExcelValue }) => [
           title,
           getExcelValue(row),
         ]),

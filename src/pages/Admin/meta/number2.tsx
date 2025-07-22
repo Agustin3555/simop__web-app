@@ -78,7 +78,7 @@ export class NumberProp implements PropScheme {
     }
   }
 
-  getFieldComponent = (value?: number | string, editMode = false) => {
+  getFormField = (value?: number | string, editMode = false) => {
     const { key, title, global, field } = this
     const { isDecimal } = global
     const { hidden, required } = field
@@ -99,7 +99,7 @@ export class NumberProp implements PropScheme {
     )
   }
 
-  getFieldValue = (
+  getFormFieldValue = (
     formData: FormData,
     form: HTMLFormElement,
     editMode = false,
@@ -137,7 +137,7 @@ export class NumberProp implements PropScheme {
     }
   }
 
-  getHeader = (column: TsColumn<LooseEntity>) => {
+  getTableHeader = (column: TsColumn<LooseEntity>) => {
     const { title, global } = this
     const { isDecimal } = global
     const { getFilterValue, setFilterValue, getFacetedMinMaxValues } = column
@@ -152,7 +152,7 @@ export class NumberProp implements PropScheme {
     return { title: title.short ?? title.long, filter }
   }
 
-  getValueComponent = (row: Row<LooseEntity>) => {
+  getTableCell = (row: Row<LooseEntity>) => {
     const { key, global } = this
     const { isMoney, pre, sub } = global
 
@@ -167,7 +167,7 @@ export class NumberProp implements PropScheme {
     )
   }
 
-  getExcelValue = (item: LooseEntity) => {
+  getExcelTableCell = (item: LooseEntity) => {
     const { key, global } = this
     const { isMoney, pre = '', sub = '' } = global
 
