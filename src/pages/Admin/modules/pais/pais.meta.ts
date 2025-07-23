@@ -1,4 +1,4 @@
-import { TextProp, defineProps, buildMetaModel } from '../../meta'
+import { defineProps, buildMetaModel, createTextProp } from '../../meta'
 import { COMMON_PROPS } from '../../constants/commonProps.const'
 import { Method } from '@/services/config'
 import { omitBaseEntity } from '../../constants/selectors.const'
@@ -6,9 +6,12 @@ import { PaisService } from './pais.service'
 import { PaisModel } from '.'
 
 const { props, allFields } = defineProps<PaisModel.Entity>({
-  nombre: new TextProp('Nombre', {
-    field: {
-      required: true,
+  nombre: createTextProp({
+    title: 'Nombre',
+    config: {
+      field: {
+        required: true,
+      },
     },
   }),
   ...COMMON_PROPS,

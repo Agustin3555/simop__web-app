@@ -1,14 +1,12 @@
 import {
-  BooleanProp,
-  DateProp,
-  NumberProp,
-  RefProp,
-  TextLongProp,
-  TextProp,
-  RefListProp,
-  MinSize,
   defineProps,
   buildMetaModel,
+  createBooleanProp,
+  createDateProp,
+  createTextProp,
+  createRefListProp,
+  createRefProp,
+  createNumberProp,
 } from '../../meta'
 import { COMMON_PROPS } from '../../constants/commonProps.const'
 import { Method } from '@/services/config'
@@ -36,267 +34,344 @@ import { TipoEnteObraMeta } from '../tipoEnteObra/tipoEnteObra.meta'
 import { APGMeta } from '../apg/apg.meta'
 
 const { props, allFields } = defineProps<ObraModel.Entity>({
-  numero: new NumberProp('Número De Obra', {
-    big: true,
-  }),
-  nombre: new TextProp('Nombre', {
-    field: {
-      required: true,
+  numero: createNumberProp({
+    title: 'Número De Obra',
+    config: {
+      isBig: true,
     },
   }),
-  tipoEnteObra: new RefProp(
-    {
-      getMetaModel: () => TipoEnteObraMeta,
+  nombre: createTextProp({
+    title: 'Nombre',
+    config: {
+      field: {
+        required: true,
+      },
     },
-    6,
-  ),
-  solicitante: new TextProp('Solicitante'),
-  fechaPedido: new DateProp('Fecha de Pedido'),
-  empresa: new RefProp(
-    {
-      getMetaModel: () => EmpresaMeta,
-    },
-    7,
-  ),
-  localidades: new RefListProp(
-    {
-      getMetaModel: () => LocalidadMeta,
-    },
-    6,
-  ),
-  apgs: new RefListProp(
-    {
-      getMetaModel: () => APGMeta,
-    },
-    6,
-  ),
-  tipoEstadoObra: new RefProp(
-    {
-      getMetaModel: () => TipoEstadoObraMeta,
-    },
-    6,
-  ),
-  avanceTotal: new NumberProp('Avance Acumulado', {
-    decimal: true,
-    sub: '%',
   }),
-  inaugurada: new BooleanProp('Inaugurada'),
-  montoContratacion: new NumberProp('Monto de Contratación', {
-    decimal: true,
-    isMoney: true,
-    big: true,
-    sum: true,
-    pre: '$',
+  tipoEnteObra: createRefProp({
+    getMetaModel: () => TipoEnteObraMeta,
+    minSize: 6,
   }),
-  fechaContratacion: new DateProp('Fecha de Contratación'),
-  tipoTematicaObra: new RefProp(
-    {
-      getMetaModel: () => TipoTematicaObraMeta,
+  solicitante: createTextProp({
+    title: 'Solicitante',
+  }),
+  fechaPedido: createDateProp({
+    title: 'Fecha de Pedido',
+  }),
+  empresa: createRefProp({
+    getMetaModel: () => EmpresaMeta,
+    minSize: 7,
+  }),
+  localidades: createRefListProp({
+    getMetaModel: () => LocalidadMeta,
+    minSize: 6,
+  }),
+  apgs: createRefListProp({
+    getMetaModel: () => APGMeta,
+    minSize: 6,
+  }),
+  tipoEstadoObra: createRefProp({
+    getMetaModel: () => TipoEstadoObraMeta,
+    minSize: 6,
+  }),
+  avanceTotal: createNumberProp({
+    title: 'Avance Acumulado',
+    config: {
+      sub: '%',
+      isDecimal: true,
     },
-    7,
-  ),
-  tipoProgramaObra: new RefProp({
+  }),
+  inaugurada: createBooleanProp({
+    title: 'Inaugurada',
+  }),
+  montoContratacion: createNumberProp({
+    title: 'Monto de Contratación',
+    config: {
+      pre: '$',
+      isDecimal: true,
+      isMoney: true,
+      isBig: true,
+      calculate: 'sum',
+    },
+  }),
+  fechaContratacion: createDateProp({
+    title: 'Fecha de Contratación',
+  }),
+  tipoTematicaObra: createRefProp({
+    getMetaModel: () => TipoTematicaObraMeta,
+    minSize: 7,
+  }),
+  tipoProgramaObra: createRefProp({
     getMetaModel: () => TipoProgramaObraMeta,
   }),
-  numeroExpediente: new TextProp('Número de Expediente de Contrato'),
-  numeroResolucion: new TextProp('Número de Resolución'),
-  anioResolucion: new NumberProp('Año de Resolución'),
-  numeroContratacion: new TextProp('Número de Contratación'),
-  tipoContratacionObra: new RefProp({
+  numeroExpediente: createTextProp({
+    title: 'Número de Expediente de Contrato',
+  }),
+  numeroResolucion: createTextProp({
+    title: 'Número de Resolución',
+  }),
+  anioResolucion: createNumberProp({
+    title: 'Año de Resolución',
+  }),
+  numeroContratacion: createTextProp({
+    title: 'Número de Contratación',
+  }),
+  tipoContratacionObra: createRefProp({
     getMetaModel: () => TipoContratacionObraMeta,
   }),
-  tipoOrigenFinanciamientoObra: new RefProp({
+  tipoOrigenFinanciamientoObra: createRefProp({
     getMetaModel: () => TipoOrigenFinanciamientoObraMeta,
   }),
-  tipoFinanciamientoObra: new RefProp({
+  tipoFinanciamientoObra: createRefProp({
     getMetaModel: () => TipoFinanciamientoObraMeta,
   }),
-  fechaInicio: new DateProp('Fecha de Inicio'),
-  fechaFin: new DateProp('Fecha de Fin'),
-  plazoMeses: new NumberProp('Plazo en Meses'),
-  plazoDias: new NumberProp('Plazo en Días'),
-  nomenclaturaCatastral: new TextProp('Nomenclatura Catastral'),
-  direccion: new TextProp('Dirección'),
-  lugar: new TextLongProp('Lugar'),
-  observaciones: new TextLongProp('Observaciones generales'),
-
-  obraNueva: new BooleanProp('Obra nueva'),
-  porcentajeObraNueva: new NumberProp('Porcentaje de obra nueva', {
-    decimal: true,
-    sub: '%',
+  fechaInicio: createDateProp({
+    title: 'Fecha de Inicio',
   }),
-  metrosCuadradosObraNueva: new NumberProp(
-    'm² (metros cuadrados) de obra nueva',
-    {
-      decimal: true,
-      sub: 'm²',
+  fechaFin: createDateProp({
+    title: 'Fecha de Fin',
+  }),
+  plazoMeses: createNumberProp({
+    title: 'Plazo en Meses',
+  }),
+  plazoDias: createNumberProp({
+    title: 'Plazo en Días',
+  }),
+  nomenclaturaCatastral: createTextProp({
+    title: 'Nomenclatura Catastral',
+  }),
+  direccion: createTextProp({
+    title: 'Dirección',
+  }),
+  lugar: createTextProp({
+    title: 'Lugar',
+    config: {
+      isLong: true,
     },
-  ),
-  metrosLinealesObraNueva: new NumberProp('m (metros lineales) de obra nueva', {
-    decimal: true,
-    sub: 'm',
   }),
-  observacionesObraNueva: new TextLongProp('Observaciones de obra nueva'),
-  obraRefaccionada: new BooleanProp('Obra refaccionada'),
-  porcentajeObraRefaccionada: new NumberProp(
-    'Porcentaje de obra refaccionada',
-    {
-      decimal: true,
+  observaciones: createTextProp({
+    title: 'Observaciones generales',
+    config: {
+      isLong: true,
+    },
+  }),
+
+  obraNueva: createBooleanProp({
+    title: 'Obra nueva',
+  }),
+  porcentajeObraNueva: createNumberProp({
+    title: 'Porcentaje de obra nueva',
+    config: {
+      isDecimal: true,
       sub: '%',
     },
-  ),
-  metrosCuadradosObraRefaccionada: new NumberProp(
-    'm² (metros cuadrados) de obra refaccionada',
-    {
-      decimal: true,
+  }),
+  metrosCuadradosObraNueva: createNumberProp({
+    title: 'm² (metros cuadrados) de obra nueva',
+    config: {
+      isDecimal: true,
       sub: 'm²',
     },
-  ),
-  metrosLinealesObraRefaccionada: new NumberProp(
-    'm (metros lineales) de obra refaccionada',
-    {
-      decimal: true,
+  }),
+  metrosLinealesObraNueva: createNumberProp({
+    title: 'm (metros lineales) de obra nueva',
+    config: {
+      isDecimal: true,
       sub: 'm',
     },
-  ),
-  observacionesObraRefaccionada: new TextLongProp(
-    'Observaciones de obra refaccionada',
-  ),
-
-  balanceEconomico: new NumberProp('Balance Económico', {
-    decimal: true,
-    isMoney: true,
-    big: true,
-    sum: true,
-    pre: '$',
   }),
-  nuevoMonto: new NumberProp('Nuevo Monto', {
-    decimal: true,
-    isMoney: true,
-    big: true,
-    sum: true,
-    pre: '$',
-  }),
-  totalCertificadoFojaMedicion: new NumberProp('Total Certificado de Fojas', {
-    decimal: true,
-    isMoney: true,
-    big: true,
-    sum: true,
-    pre: '$',
-  }),
-  totalOrdenPagoFojaMedicion: new NumberProp('Total Orden de Pago de Fojas', {
-    decimal: true,
-    isMoney: true,
-    big: true,
-    sum: true,
-    pre: '$',
-  }),
-  totalPagadoFojaMedicion: new NumberProp('Total Pagado de Fojas', {
-    decimal: true,
-    isMoney: true,
-    big: true,
-    sum: true,
-    pre: '$',
-  }),
-  totalPendientePagoFojaMedicion: new NumberProp(
-    'Total Pendiente de Pago de Fojas',
-    {
-      decimal: true,
-      isMoney: true,
-      big: true,
-      sum: true,
-      pre: '$',
+  observacionesObraNueva: createTextProp({
+    title: 'Observaciones de obra nueva',
+    config: {
+      isLong: true,
     },
-  ),
-  totalCertificadoRedeterminacion: new NumberProp(
-    'Total Certificado de Redeterm.',
-    {
-      decimal: true,
-      isMoney: true,
-      big: true,
-      sum: true,
-      pre: '$',
-    },
-  ),
-  totalOrdenPagoRedeterminacion: new NumberProp(
-    'Total Orden de Pago de Redeterm.',
-    {
-      decimal: true,
-      isMoney: true,
-      big: true,
-      sum: true,
-      pre: '$',
-    },
-  ),
-  totalPagadoRedeterminacion: new NumberProp('Total Pagado de Redeterm.', {
-    decimal: true,
-    isMoney: true,
-    big: true,
-    sum: true,
-    pre: '$',
   }),
-  totalPendientePagoRedeterminacion: new NumberProp(
-    'Total Pendiente de Pago de Redeterm.',
-    {
-      decimal: true,
-      isMoney: true,
-      big: true,
-      sum: true,
-      pre: '$',
-    },
-  ),
-  porcentajePendienteCertificar: new NumberProp(
-    'Porcentaje Pendiente a Certificar',
-    {
-      decimal: true,
+  obraRefaccionada: createBooleanProp({
+    title: 'Obra refaccionada',
+  }),
+  porcentajeObraRefaccionada: createNumberProp({
+    title: 'Porcentaje de obra refaccionada',
+    config: {
       sub: '%',
+      isDecimal: true,
     },
-  ),
-  montoPendienteCertificar: new NumberProp(
-    'Monto Pendiente a Certificar',
-    {
-      decimal: true,
-      isMoney: true,
-      big: true,
-      sum: true,
-      pre: '$',
+  }),
+  metrosCuadradosObraRefaccionada: createNumberProp({
+    title: 'm² (metros cuadrados) de obra refaccionada',
+    config: {
+      sub: 'm²',
+      isDecimal: true,
     },
-    MinSize.m,
-  ),
-
-  totalPendientePago: new NumberProp('Total Pendiente de Pago de Redeterm.', {
-    decimal: true,
-    isMoney: true,
-    big: true,
-    sum: true,
-    pre: '$',
+  }),
+  metrosLinealesObraRefaccionada: createNumberProp({
+    title: 'm (metros lineales) de obra refaccionada',
+    config: {
+      sub: 'm',
+      isDecimal: true,
+    },
+  }),
+  observacionesObraRefaccionada: createTextProp({
+    title: 'Observaciones de obra refaccionada',
+    config: {
+      isLong: true,
+    },
   }),
 
-  representantes: new RefListProp({
+  balanceEconomico: createNumberProp({
+    title: 'Balance Económico',
+    config: {
+      pre: '$',
+      isDecimal: true,
+      isMoney: true,
+      isBig: true,
+      calculate: 'sum',
+    },
+  }),
+  nuevoMonto: createNumberProp({
+    title: 'Nuevo Monto',
+    config: {
+      pre: '$',
+      isDecimal: true,
+      isMoney: true,
+      isBig: true,
+      calculate: 'sum',
+    },
+  }),
+  totalCertificadoFojaMedicion: createNumberProp({
+    title: 'Total Certificado de Fojas',
+    config: {
+      pre: '$',
+      isDecimal: true,
+      isMoney: true,
+      isBig: true,
+      calculate: 'sum',
+    },
+  }),
+  totalOrdenPagoFojaMedicion: createNumberProp({
+    title: 'Total Orden de Pago de Fojas',
+    config: {
+      pre: '$',
+      isDecimal: true,
+      isMoney: true,
+      isBig: true,
+      calculate: 'sum',
+    },
+  }),
+  totalPagadoFojaMedicion: createNumberProp({
+    title: 'Total Pagado de Fojas',
+    config: {
+      pre: '$',
+      isDecimal: true,
+      isMoney: true,
+      isBig: true,
+      calculate: 'sum',
+    },
+  }),
+  totalPendientePagoFojaMedicion: createNumberProp({
+    title: 'Total Pendiente de Pago de Fojas',
+    config: {
+      pre: '$',
+      isDecimal: true,
+      isMoney: true,
+      isBig: true,
+      calculate: 'sum',
+    },
+  }),
+  totalCertificadoRedeterminacion: createNumberProp({
+    title: 'Total Certificado de Redeterm.',
+    config: {
+      pre: '$',
+      isDecimal: true,
+      isMoney: true,
+      isBig: true,
+      calculate: 'sum',
+    },
+  }),
+  totalOrdenPagoRedeterminacion: createNumberProp({
+    title: 'Total Orden de Pago de Redeterm.',
+    config: {
+      pre: '$',
+      isDecimal: true,
+      isMoney: true,
+      isBig: true,
+      calculate: 'sum',
+    },
+  }),
+  totalPagadoRedeterminacion: createNumberProp({
+    title: 'Total Pagado de Redeterm.',
+    config: {
+      pre: '$',
+      isDecimal: true,
+      isMoney: true,
+      isBig: true,
+      calculate: 'sum',
+    },
+  }),
+  totalPendientePagoRedeterminacion: createNumberProp({
+    title: 'Total Pendiente de Pago de Redeterm.',
+    config: {
+      pre: '$',
+      isDecimal: true,
+      isMoney: true,
+      isBig: true,
+      calculate: 'sum',
+    },
+  }),
+  porcentajePendienteCertificar: createNumberProp({
+    title: 'Porcentaje Pendiente a Certificar',
+    config: {
+      sub: '%',
+      isDecimal: true,
+    },
+  }),
+  montoPendienteCertificar: createNumberProp({
+    title: 'Monto Pendiente a Certificar',
+    minSize: MinSize.m,
+    config: {
+      pre: '$',
+      isDecimal: true,
+      isMoney: true,
+      isBig: true,
+      calculate: 'sum',
+    },
+  }),
+
+  totalPendientePago: createNumberProp({
+    title: 'Total Pendiente de Pago de Redeterm.',
+    config: {
+      pre: '$',
+      isDecimal: true,
+      isMoney: true,
+      isBig: true,
+      calculate: 'sum',
+    },
+  }),
+
+  representantes: createRefListProp({
     getMetaModel: () => RepresentanteMeta,
   }),
-  inspectores: new RefListProp({
+  inspectores: createRefListProp({
     getMetaModel: () => InspectorMeta,
   }),
-  fojasMedicion: new RefListProp({
+  fojasMedicion: createRefListProp({
     getMetaModel: () => FojaMedicionMeta,
   }),
-  redeterminaciones: new RefListProp({
+  redeterminaciones: createRefListProp({
     getMetaModel: () => RedeterminacionMeta,
   }),
-  ampliaciones: new RefListProp({
+  ampliaciones: createRefListProp({
     getMetaModel: () => AmpliacionMeta,
   }),
-  modificaciones: new RefListProp({
+  modificaciones: createRefListProp({
     getMetaModel: () => ModificacionMeta,
   }),
-  paralizaciones: new RefListProp({
+  paralizaciones: createRefListProp({
     getMetaModel: () => ParalizacionMeta,
   }),
-  rescisiones: new RefListProp({
+  rescisiones: createRefListProp({
     getMetaModel: () => RescisionMeta,
   }),
-  recepciones: new RefListProp({
+  recepciones: createRefListProp({
     getMetaModel: () => RecepcionMeta,
   }),
 

@@ -22,7 +22,7 @@ import { OptionSelectors } from '@/pages/Admin/components'
 import { extractKeys } from '@/pages/Admin/helpers'
 import { AccessorKeys, QuickFilters } from '../../Table'
 import { Method } from '@/services/config'
-import { PropScheme } from '@/pages/Admin/meta'
+import { Prop } from '@/pages/Admin/meta'
 
 const SORT_ICON_MATCHER: Record<SortDirection, string> = {
   asc: 'fa-solid fa-arrow-up-wide-short',
@@ -30,7 +30,7 @@ const SORT_ICON_MATCHER: Record<SortDirection, string> = {
 }
 
 interface Props {
-  getAllPropsRecord: Record<string, PropScheme<LooseEntity>>
+  getAllPropsRecord: Record<string, Prop<LooseEntity>>
   header: TsHeader<LooseEntity, unknown>
   sorting: SortingState
   setSorting: Dispatch<SetStateAction<SortingState>>

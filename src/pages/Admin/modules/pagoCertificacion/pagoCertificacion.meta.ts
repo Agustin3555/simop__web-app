@@ -1,12 +1,11 @@
 import { COMMON_PROPS } from '../../constants/commonProps.const'
 import {
-  NumberProp,
-  RefProp,
-  DateProp,
-  TextLongProp,
-  TextProp,
   defineProps,
   buildMetaModel,
+  createDateProp,
+  createTextProp,
+  createRefProp,
+  createNumberProp,
 } from '../../meta'
 import { Method } from '@/services/config'
 import { omitBaseEntity } from '../../constants/selectors.const'
@@ -17,34 +16,50 @@ import { FojaMedicionMeta } from '../fojaMedicion/fojaMedicion.meta'
 import { RedeterminacionMeta } from '../redeterminacion/redeterminacion.meta'
 
 const { props, allFields } = defineProps<PagoCertificacionModel.Entity>({
-  numero: new NumberProp('Número de Pago', {
-    field: {
-      required: true,
+  numero: createNumberProp({
+    title: 'Número de Pago',
+    config: {
+      field: {
+        required: true,
+      },
     },
   }),
-  ordenPago: new TextProp('Orden de pago', {
-    field: {
-      required: true,
+  ordenPago: createTextProp({
+    title: 'Orden de pago',
+    config: {
+      field: {
+        required: true,
+      },
     },
   }),
-  fecha: new DateProp('Fecha de Pago'),
-  monto: new NumberProp('Monto orden de pago', {
-    decimal: true,
-    isMoney: true,
-    big: true,
-    sum: true,
-    pre: '$',
+  fecha: createDateProp({
+    title: 'Fecha de Pago',
   }),
-  fojaMedicion: new RefProp({
+  monto: createNumberProp({
+    title: 'Monto orden de pago',
+    config: {
+      pre: '$',
+      isDecimal: true,
+      isMoney: true,
+      isBig: true,
+      calculate: 'sum',
+    },
+  }),
+  fojaMedicion: createRefProp({
     getMetaModel: () => FojaMedicionMeta,
   }),
-  redeterminacion: new RefProp({
+  redeterminacion: createRefProp({
     getMetaModel: () => RedeterminacionMeta,
   }),
-  area: new RefProp({
+  area: createRefProp({
     getMetaModel: () => AreaMeta,
   }),
-  observaciones: new TextLongProp('Observaciones'),
+  observaciones: createTextProp({
+    title: 'Observaciones',
+    config: {
+      isLong: true,
+    },
+  }),
   ...COMMON_PROPS,
 })
 

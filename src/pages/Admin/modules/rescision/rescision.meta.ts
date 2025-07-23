@@ -1,10 +1,9 @@
 import {
-  DateProp,
-  TextLongProp,
-  RefProp,
-  TextProp,
   defineProps,
   buildMetaModel,
+  createDateProp,
+  createTextProp,
+  createRefProp,
 } from '../../meta'
 import { COMMON_PROPS } from '../../constants/commonProps.const'
 import { Method } from '@/services/config'
@@ -16,26 +15,40 @@ import { ObraMeta } from '../obra/obra.meta'
 import { TipoRescisionMeta } from '../tipoRescision/tipoRescision.meta'
 
 const { props, allFields } = defineProps<RescisionModel.Entity>({
-  obra: new RefProp({
+  obra: createRefProp({
     getMetaModel: () => ObraMeta,
-    field: {
-      required: true,
+    config: {
+      field: {
+        required: true,
+      },
     },
   }),
-  numeroExpediente: new TextProp('Número De Expediente', {
-    field: {
-      required: true,
+  numeroExpediente: createTextProp({
+    title: 'Número De Expediente',
+    config: {
+      field: {
+        required: true,
+      },
     },
   }),
-  numeroResolucion: new TextProp('Número De Resolución'),
-  fecha: new DateProp('Fecha'),
-  tipoRescision: new RefProp({
+  numeroResolucion: createTextProp({
+    title: 'Número De Resolución',
+  }),
+  fecha: createDateProp({
+    title: 'Fecha',
+  }),
+  tipoRescision: createRefProp({
     getMetaModel: () => TipoRescisionMeta,
   }),
-  area: new RefProp({
+  area: createRefProp({
     getMetaModel: () => AreaMeta,
   }),
-  observaciones: new TextLongProp('Observaciones'),
+  observaciones: createTextProp({
+    title: 'Observaciones',
+    config: {
+      isLong: true,
+    },
+  }),
   ...COMMON_PROPS,
 })
 

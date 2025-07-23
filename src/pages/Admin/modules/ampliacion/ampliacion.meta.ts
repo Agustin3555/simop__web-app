@@ -1,11 +1,10 @@
 import {
-  DateProp,
-  NumberProp,
-  TextLongProp,
-  RefProp,
-  TextProp,
   buildMetaModel,
   defineProps,
+  createDateProp,
+  createTextProp,
+  createRefProp,
+  createNumberProp,
 } from '../../meta'
 import { COMMON_PROPS } from '../../constants/commonProps.const'
 import { Method } from '@/services/config'
@@ -16,25 +15,47 @@ import { ObraMeta } from '../obra/obra.meta'
 import { AreaMeta } from '../area/area.meta'
 
 const { props, allFields } = defineProps<AmpliacionModel.Entity>({
-  obra: new RefProp({
+  obra: createRefProp({
     getMetaModel: () => ObraMeta,
-    field: {
-      required: true,
+    config: {
+      field: {
+        required: true,
+      },
     },
   }),
-  numero: new NumberProp('Número De Ampliación', {
-    field: {
-      required: true,
+  numero: createNumberProp({
+    title: 'Número De Ampliación',
+    config: {
+      field: {
+        required: true,
+      },
     },
   }),
-  numeroResolucion: new TextProp('Número De Resolución'),
-  numeroExpedienteSolicitud: new TextProp('Número de Expediente de Solicitud'),
-  plazoMesesSolicitado: new NumberProp('Plazo de Meses Solicitado '),
-  plazoMesesOtorgado: new NumberProp('Plazo de Meses Otorgado'),
-  nuevaFechaFinObra: new DateProp('Nueva Fecha Fin De Obra'),
-  fecha: new DateProp('Fecha'),
-  observaciones: new TextLongProp('Observaciones'),
-  area: new RefProp({
+  numeroResolucion: createTextProp({
+    title: 'Número De Resolución',
+  }),
+  numeroExpedienteSolicitud: createTextProp({
+    title: 'Número de Expediente de Solicitud',
+  }),
+  plazoMesesSolicitado: createNumberProp({
+    title: 'Plazo de Meses Solicitado',
+  }),
+  plazoMesesOtorgado: createNumberProp({
+    title: 'Plazo de Meses Otorgado',
+  }),
+  nuevaFechaFinObra: createDateProp({
+    title: 'Nueva Fecha Fin De Obra',
+  }),
+  fecha: createDateProp({
+    title: 'Fecha',
+  }),
+  observaciones: createTextProp({
+    title: 'Observaciones',
+    config: {
+      isLong: true,
+    },
+  }),
+  area: createRefProp({
     getMetaModel: () => AreaMeta,
   }),
   ...COMMON_PROPS,

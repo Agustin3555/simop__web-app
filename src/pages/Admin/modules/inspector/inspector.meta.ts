@@ -1,9 +1,9 @@
 import {
-  NumberProp,
-  RefListProp,
-  TextProp,
   defineProps,
   buildMetaModel,
+  createRefListProp,
+  createTextProp,
+  createNumberProp,
 } from '../../meta'
 import { COMMON_PROPS } from '../../constants/commonProps.const'
 import { Method } from '@/services/config'
@@ -13,19 +13,27 @@ import { InspectorModel } from '.'
 import { TipoProfesionMeta } from '../tipoProfesion/tipoProfesion.meta'
 
 const { props, allFields } = defineProps<InspectorModel.Entity>({
-  cuil: new NumberProp('CUIL', {
-    big: true,
-    field: {
-      required: true,
+  cuil: createNumberProp({
+    title: 'CUIL',
+    config: {
+      isBig: true,
+      field: {
+        required: true,
+      },
     },
   }),
-  apellido: new TextProp('Apellido', {
-    field: {
-      required: true,
+  apellido: createTextProp({
+    title: 'Apellido',
+    config: {
+      field: {
+        required: true,
+      },
     },
   }),
-  nombre: new TextProp('Nombre'),
-  profesiones: new RefListProp({
+  nombre: createTextProp({
+    title: 'Nombre',
+  }),
+  profesiones: createRefListProp({
     getMetaModel: () => TipoProfesionMeta,
   }),
   ...COMMON_PROPS,

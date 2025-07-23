@@ -1,4 +1,9 @@
-import { RefProp, TextProp, defineProps, buildMetaModel } from '../../meta'
+import {
+  defineProps,
+  buildMetaModel,
+  createTextProp,
+  createRefProp,
+} from '../../meta'
 import { COMMON_PROPS } from '../../constants/commonProps.const'
 import { Method } from '@/services/config'
 import { omitBaseEntity } from '../../constants/selectors.const'
@@ -7,15 +12,20 @@ import { ProvinciaModel } from '.'
 import { PaisMeta } from '../pais/pais.meta'
 
 const { props, allFields } = defineProps<ProvinciaModel.Entity>({
-  nombre: new TextProp('Nombre', {
-    field: {
-      required: true,
+  nombre: createTextProp({
+    title: 'Nombre',
+    config: {
+      field: {
+        required: true,
+      },
     },
   }),
-  pais: new RefProp({
+  pais: createRefProp({
     getMetaModel: () => PaisMeta,
-    field: {
-      required: true,
+    config: {
+      field: {
+        required: true,
+      },
     },
   }),
   ...COMMON_PROPS,

@@ -1,9 +1,9 @@
 import {
-  NumberProp,
-  RefProp,
-  TextProp,
   defineProps,
   buildMetaModel,
+  createTextProp,
+  createRefProp,
+  createNumberProp,
 } from '../../meta'
 import { COMMON_PROPS } from '../../constants/commonProps.const'
 import { Method } from '@/services/config'
@@ -14,18 +14,24 @@ import { ProvinciaMeta } from '../provincia/provincia.meta'
 import { APGMeta } from '../apg/apg.meta'
 
 const { props, allFields } = defineProps<DepartamentoModel.Entity>({
-  nombre: new TextProp('Nombre', {
-    field: {
-      required: true,
+  nombre: createTextProp({
+    title: 'Nombre',
+    config: {
+      field: {
+        required: true,
+      },
     },
   }),
-  osmId: new NumberProp('OSM ID', {
-    big: true,
+  osmId: createNumberProp({
+    title: 'OSM ID',
+    config: {
+      isBig: true,
+    },
   }),
-  provincia: new RefProp({
+  provincia: createRefProp({
     getMetaModel: () => ProvinciaMeta,
   }),
-  apg: new RefProp({
+  apg: createRefProp({
     getMetaModel: () => APGMeta,
   }),
   ...COMMON_PROPS,

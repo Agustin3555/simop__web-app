@@ -1,13 +1,12 @@
 import {
-  DateProp,
-  NumberProp,
-  TextLongProp,
-  RefProp,
-  TextProp,
-  BooleanProp,
-  RefListProp,
   defineProps,
   buildMetaModel,
+  createBooleanProp,
+  createDateProp,
+  createTextProp,
+  createRefListProp,
+  createRefProp,
+  createNumberProp,
 } from '../../meta'
 import { COMMON_PROPS } from '../../constants/commonProps.const'
 import { Method } from '@/services/config'
@@ -19,42 +18,72 @@ import { ObraMeta } from '../obra/obra.meta'
 import { TipoRedeterminacionMeta } from '../tipoRedeterminacion/tipoRedeterminacion.meta'
 
 const { props, allFields } = defineProps<RedeterminacionModel.Entity>({
-  obra: new RefProp({
+  obra: createRefProp({
     getMetaModel: () => ObraMeta,
-    field: { required: true },
+    config: {
+      field: {
+        required: true,
+      },
+    },
   }),
-  numeroExpedienteSolicitud: new TextProp('Número de Expediente de Solicitud', {
-    field: { required: true },
+  numeroExpedienteSolicitud: createTextProp({
+    title: 'Número de Expediente de Solicitud',
+    config: {
+      field: {
+        required: true,
+      },
+    },
   }),
-  numeroExpediente: new TextProp('Número De Expediente de Redeterminación'),
-  numeroResolucion: new TextProp('Número De Resolución'),
-  montoTotal: new NumberProp('Monto Total', {
-    decimal: true,
-    isMoney: true,
-    big: true,
-    sum: true,
-    pre: '$',
+  numeroExpediente: createTextProp({
+    title: 'Número De Expediente de Redeterminación',
   }),
-  nuevoMontoObra: new NumberProp('Nuevo Monto', {
-    decimal: true,
-    isMoney: true,
-    big: true,
-    sum: true,
-    pre: '$',
+  numeroResolucion: createTextProp({
+    title: 'Número De Resolución',
   }),
-  fechaRedeterminacion: new DateProp('Fecha de Solicitud'),
-  fechaCertificacion: new DateProp('Fecha Certificación'),
-  tieneHijas: new BooleanProp('AE Acum.'),
-  tipoRedeterminacion: new RefProp({
+  montoTotal: createNumberProp({
+    title: 'Monto Total',
+    config: {
+      pre: '$',
+      isDecimal: true,
+      isMoney: true,
+      isBig: true,
+      calculate: 'sum',
+    },
+  }),
+  nuevoMontoObra: createNumberProp({
+    title: 'Nuevo Monto',
+    config: {
+      pre: '$',
+      isDecimal: true,
+      isMoney: true,
+      isBig: true,
+      calculate: 'sum',
+    },
+  }),
+  fechaRedeterminacion: createDateProp({
+    title: 'Fecha de Solicitud',
+  }),
+  fechaCertificacion: createDateProp({
+    title: 'Fecha Certificación',
+  }),
+  tieneHijas: createBooleanProp({
+    title: 'AE Acum.',
+  }),
+  tipoRedeterminacion: createRefProp({
     getMetaModel: () => TipoRedeterminacionMeta,
   }),
-  area: new RefProp({
+  area: createRefProp({
     getMetaModel: () => AreaMeta,
   }),
-  redeterminacionesHijas: new RefListProp({
+  redeterminacionesHijas: createRefListProp({
     getMetaModel: () => RedeterminacionMeta,
   }),
-  observaciones: new TextLongProp('Observaciones'),
+  observaciones: createTextProp({
+    title: 'Observaciones',
+    config: {
+      isLong: true,
+    },
+  }),
   ...COMMON_PROPS,
 })
 

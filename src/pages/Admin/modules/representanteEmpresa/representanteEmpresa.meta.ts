@@ -1,9 +1,9 @@
 import {
-  BooleanProp,
-  RefProp,
-  DateProp,
   defineProps,
   buildMetaModel,
+  createBooleanProp,
+  createDateProp,
+  createRefProp,
 } from '../../meta'
 import { COMMON_PROPS } from '../../constants/commonProps.const'
 import { Method } from '@/services/config'
@@ -15,20 +15,25 @@ import { TipoRepresentanteMeta } from '../tipoRepresentante/tipoRepresentante.me
 import { EmpresaMeta } from '../empresa/empresa.meta'
 
 const { props, allFields } = defineProps<RepresentanteEmpresaModel.Entity>({
-  empresa: new RefProp({
+  empresa: createRefProp({
     getMetaModel: () => EmpresaMeta,
   }),
-  representante: new RefProp({
+  representante: createRefProp({
     getMetaModel: () => RepresentanteMeta,
   }),
-  tipoRepresentante: new RefProp({
+  tipoRepresentante: createRefProp({
     getMetaModel: () => TipoRepresentanteMeta,
   }),
-  vigencia: new BooleanProp('Vigencia', {
-    falseText: 'No Vigente',
-    trueText: 'Vigente',
+  vigencia: createBooleanProp({
+    title: 'Vigencia',
+    config: {
+      falseText: 'No Vigente',
+      trueText: 'Vigente',
+    },
   }),
-  fecha: new DateProp('Fecha'),
+  fecha: createDateProp({
+    title: 'Fecha',
+  }),
   ...COMMON_PROPS,
 })
 

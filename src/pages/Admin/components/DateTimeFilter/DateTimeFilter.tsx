@@ -11,20 +11,20 @@ interface Props
     ColumnFiltersColumn<LooseEntity>,
     'getFilterValue' | 'setFilterValue'
   > {
-  notTime?: boolean
+  withTime?: boolean
 }
 
 // BUG
 
 const DateTimeFilter = ({
-  notTime = false,
+  withTime = false,
   getFilterValue,
   setFilterValue,
 }: Props) => {
   const { min = '', max = '' } = (getFilterValue() as FilterValuePair) ?? {}
 
   const commonInputHTMLAttrs: Partial<DebouncedInputProps['inputHTMLAttrs']> = {
-    type: notTime ? 'date' : 'datetime-local',
+    type: withTime ? 'datetime-local' : 'date',
     onBlur: e => {
       const input = e.currentTarget
 

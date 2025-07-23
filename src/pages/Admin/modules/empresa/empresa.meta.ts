@@ -1,9 +1,9 @@
 import {
-  NumberProp,
-  RefProp,
-  TextProp,
   defineProps,
   buildMetaModel,
+  createTextProp,
+  createRefProp,
+  createNumberProp,
 } from '../../meta'
 import { COMMON_PROPS } from '../../constants/commonProps.const'
 import { Method } from '@/services/config'
@@ -15,26 +15,39 @@ import { PaisMeta } from '../pais/pais.meta'
 import { ProvinciaMeta } from '../provincia/provincia.meta'
 
 const { props, allFields } = defineProps<EmpresaModel.Entity>({
-  cuit: new NumberProp('CUIT', {
-    big: true,
-  }),
-  nombre: new TextProp('Nombre', {
-    field: {
-      required: true,
+  cuit: createNumberProp({
+    title: 'CUIT',
+    config: {
+      isBig: true,
     },
   }),
-  direccion: new TextProp('Dirección declarada'),
-  numeroContacto: new NumberProp('Número de contacto', {
-    big: true,
+  nombre: createTextProp({
+    title: 'Nombre',
+    config: {
+      field: {
+        required: true,
+      },
+    },
   }),
-  email: new TextProp('Email'),
-  pais: new RefProp({
+  direccion: createTextProp({
+    title: 'Dirección declarada',
+  }),
+  numeroContacto: createNumberProp({
+    title: 'Número de contacto',
+    config: {
+      isBig: true,
+    },
+  }),
+  email: createTextProp({
+    title: 'Email',
+  }),
+  pais: createRefProp({
     getMetaModel: () => PaisMeta,
   }),
-  provincia: new RefProp({
+  provincia: createRefProp({
     getMetaModel: () => ProvinciaMeta,
   }),
-  localidad: new RefProp({
+  localidad: createRefProp({
     getMetaModel: () => LocalidadMeta,
   }),
   ...COMMON_PROPS,

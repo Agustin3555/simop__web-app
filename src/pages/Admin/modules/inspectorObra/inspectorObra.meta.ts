@@ -1,9 +1,9 @@
 import {
-  RefProp,
-  BooleanProp,
-  DateProp,
   defineProps,
   buildMetaModel,
+  createBooleanProp,
+  createDateProp,
+  createRefProp,
 } from '../../meta'
 import { COMMON_PROPS } from '../../constants/commonProps.const'
 import { Method } from '@/services/config'
@@ -16,29 +16,38 @@ import { TipoInspectorMeta } from '../tipoInspector/tipoInspector.meta'
 import { TipoProfesionMeta } from '../tipoProfesion/tipoProfesion.meta'
 
 const { props, allFields } = defineProps<InspectorObraModel.Entity>({
-  obra: new RefProp({
+  obra: createRefProp({
     getMetaModel: () => ObraMeta,
-    field: {
-      required: true,
+    config: {
+      field: {
+        required: true,
+      },
     },
   }),
-  inspector: new RefProp({
+  inspector: createRefProp({
     getMetaModel: () => InspectorMeta,
-    field: {
-      required: true,
+    config: {
+      field: {
+        required: true,
+      },
     },
   }),
-  tipoInspector: new RefProp({
+  tipoInspector: createRefProp({
     getMetaModel: () => TipoInspectorMeta,
   }),
-  tipoProfesion: new RefProp({
+  tipoProfesion: createRefProp({
     getMetaModel: () => TipoProfesionMeta,
   }),
-  vigencia: new BooleanProp('Vigencia', {
-    falseText: 'No Vigente',
-    trueText: 'Vigente',
+  vigencia: createBooleanProp({
+    title: 'Vigencia',
+    config: {
+      falseText: 'No Vigente',
+      trueText: 'Vigente',
+    },
   }),
-  fecha: new DateProp('Fecha'),
+  fecha: createDateProp({
+    title: 'Fecha',
+  }),
   ...COMMON_PROPS,
 })
 

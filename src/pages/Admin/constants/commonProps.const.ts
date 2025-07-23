@@ -1,9 +1,11 @@
-import { DateTimeProp } from '../meta/dateTime'
-import { NumberProp } from '../meta/number'
-import { TextProp } from '../meta/text'
-import { PropScheme } from '../meta/utils'
+import {
+  createDateProp,
+  createNumberProp,
+  createTextProp,
+  PropFactory,
+} from '../meta'
 
-type ScalarProps<T> = Record<keyof T, PropScheme>
+type ScalarProps<T> = Record<keyof T, PropFactory>
 
 export interface CommonFields {
   id: unknown
@@ -12,19 +14,30 @@ export interface CommonFields {
 }
 
 export const COMMON_PROPS: ScalarProps<CommonFields> = {
-  id: new NumberProp('ID', {
-    field: {
-      hidden: true,
+  id: createNumberProp({
+    title: 'ID',
+    config: {
+      field: {
+        hidden: true,
+      },
     },
   }),
-  creado: new DateTimeProp('Creación del recurso', {
-    field: {
-      hidden: true,
+  creado: createDateProp({
+    title: 'Creación del recurso',
+    config: {
+      withTime: true,
+      field: {
+        hidden: true,
+      },
     },
   }),
-  modificado: new DateTimeProp('Modificación del recurso', {
-    field: {
-      hidden: true,
+  modificado: createDateProp({
+    title: 'Modificación del recurso',
+    config: {
+      withTime: true,
+      field: {
+        hidden: true,
+      },
     },
   }),
 }
@@ -34,9 +47,12 @@ interface TipoFields extends CommonFields {
 }
 
 export const TIPO_PROPS: ScalarProps<TipoFields> = {
-  nombre: new TextProp('Nombre', {
-    field: {
-      required: true,
+  nombre: createTextProp({
+    title: 'Nombre',
+    config: {
+      field: {
+        required: true,
+      },
     },
   }),
   ...COMMON_PROPS,

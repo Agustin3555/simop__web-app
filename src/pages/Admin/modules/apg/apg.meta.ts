@@ -1,4 +1,9 @@
-import { NumberProp, TextProp, defineProps, buildMetaModel } from '../../meta'
+import {
+  defineProps,
+  buildMetaModel,
+  createTextProp,
+  createNumberProp,
+} from '../../meta'
 import { COMMON_PROPS } from '../../constants/commonProps.const'
 import { Method } from '@/services/config'
 import { omitBaseEntity } from '../../constants/selectors.const'
@@ -6,14 +11,20 @@ import { APGService } from './apg.service'
 import { APGModel } from '.'
 
 const { props, allFields } = defineProps<APGModel.Entity>({
-  numero: new NumberProp('Número', {
-    field: {
-      required: true,
+  numero: createNumberProp({
+    title: 'Número',
+    config: {
+      field: {
+        required: true,
+      },
     },
   }),
-  color: new TextProp('Color', {
-    field: {
-      required: true,
+  color: createTextProp({
+    title: 'Color',
+    config: {
+      field: {
+        required: true,
+      },
     },
   }),
   ...COMMON_PROPS,

@@ -1,9 +1,9 @@
 import {
-  NumberProp,
-  RefProp,
-  TextProp,
   defineProps,
   buildMetaModel,
+  createTextProp,
+  createRefProp,
+  createNumberProp,
 } from '../../meta'
 import { COMMON_PROPS } from '../../constants/commonProps.const'
 import { Method } from '@/services/config'
@@ -15,23 +15,37 @@ import { PaisMeta } from '../pais/pais.meta'
 import { ProvinciaMeta } from '../provincia/provincia.meta'
 
 const { props, allFields } = defineProps<RepresentanteModel.Entity>({
-  cuil: new NumberProp('CUIL', {
-    big: true,
-    field: { required: true },
+  cuil: createNumberProp({
+    title: 'CUIL',
+    config: {
+      isBig: true,
+      field: {
+        required: true,
+      },
+    },
   }),
-  apellido: new TextProp('Apellido', {
-    field: { required: true },
+  apellido: createTextProp({
+    title: 'Apellido',
+    config: {
+      field: { required: true },
+    },
   }),
-  nombre: new TextProp('Nombre'),
-  direccion: new TextProp('Dirección'),
-  numeroMatricula: new TextProp('Número de Matricula'),
-  pais: new RefProp({
+  nombre: createTextProp({
+    title: 'Nombre',
+  }),
+  direccion: createTextProp({
+    title: 'Dirección',
+  }),
+  numeroMatricula: createTextProp({
+    title: 'Número de Matricula',
+  }),
+  pais: createRefProp({
     getMetaModel: () => PaisMeta,
   }),
-  provincia: new RefProp({
+  provincia: createRefProp({
     getMetaModel: () => ProvinciaMeta,
   }),
-  localidad: new RefProp({
+  localidad: createRefProp({
     getMetaModel: () => LocalidadMeta,
   }),
   ...COMMON_PROPS,

@@ -4,7 +4,7 @@ import { LooseEntity } from '@/models/config'
 import { useMemo } from 'react'
 import { steppedSizes } from '../../helpers'
 import { AccessorKeys } from '../../Table'
-import { PropScheme } from '@/pages/Admin/meta'
+import { Prop } from '@/pages/Admin/meta'
 
 /*
   No se usa 'getValue' porque se necesita tener el valor original. 'getValue'
@@ -13,7 +13,7 @@ import { PropScheme } from '@/pages/Admin/meta'
 */
 
 interface Props {
-  getAllPropsRecord: Record<string, PropScheme<LooseEntity>>
+  getAllPropsRecord: Record<string, Prop<LooseEntity>>
   cell: TsCell<LooseEntity, unknown>
   accessorKeys: AccessorKeys
 }

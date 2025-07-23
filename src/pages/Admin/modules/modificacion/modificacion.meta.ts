@@ -1,11 +1,10 @@
 import {
-  DateProp,
-  NumberProp,
-  TextLongProp,
-  RefProp,
-  TextProp,
   defineProps,
   buildMetaModel,
+  createDateProp,
+  createTextProp,
+  createRefProp,
+  createNumberProp,
 } from '../../meta'
 import { COMMON_PROPS } from '../../constants/commonProps.const'
 import { Method } from '@/services/config'
@@ -17,40 +16,60 @@ import { ObraMeta } from '../obra/obra.meta'
 import { TipoModificacionMeta } from '../tipoModificacion/tipoModificacion.meta'
 
 const { props, allFields } = defineProps<ModificacionModel.Entity>({
-  obra: new RefProp({
+  obra: createRefProp({
     getMetaModel: () => ObraMeta,
-    field: {
-      required: true,
+    config: {
+      field: {
+        required: true,
+      },
     },
   }),
-  numeroExpediente: new TextProp('Número De Expediente', {
-    field: {
-      required: true,
+  numeroExpediente: createTextProp({
+    title: 'Número De Expediente',
+    config: {
+      field: {
+        required: true,
+      },
     },
   }),
-  numeroResolucion: new TextProp('Número De Resolución'),
-  monto: new NumberProp('Monto', {
-    decimal: true,
-    isMoney: true,
-    big: true,
-    sum: true,
-    pre: '$',
+  numeroResolucion: createTextProp({
+    title: 'Número De Resolución',
   }),
-  nuevoMontoObra: new NumberProp('Nuevo Monto', {
-    decimal: true,
-    isMoney: true,
-    big: true,
-    sum: true,
-    pre: '$',
+  monto: createNumberProp({
+    title: 'Monto',
+    config: {
+      pre: '$',
+      isDecimal: true,
+      isMoney: true,
+      isBig: true,
+      calculate: 'sum',
+    },
   }),
-  fecha: new DateProp('Fecha'),
-  tipoModificacion: new RefProp({
+  nuevoMontoObra: createNumberProp({
+    title: 'Nuevo Monto',
+    config: {
+      pre: '$',
+      isDecimal: true,
+      isMoney: true,
+      isBig: true,
+      calculate: 'sum',
+    },
+  }),
+  fecha: createDateProp({
+    title: 'Fecha',
+  }),
+  tipoModificacion: createRefProp({
     getMetaModel: () => TipoModificacionMeta,
   }),
-  area: new RefProp({
+  area: createRefProp({
     getMetaModel: () => AreaMeta,
   }),
-  observaciones: new TextLongProp('Observaciones'),
+  observaciones: createTextProp({
+    title: 'Observaciones',
+    config: {
+      isLong: true,
+    },
+  }),
   ...COMMON_PROPS,
 })
 

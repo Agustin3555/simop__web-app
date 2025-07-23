@@ -1,10 +1,10 @@
 import {
-  DateProp,
-  TextLongProp,
-  RefProp,
-  NumberProp,
   defineProps,
   buildMetaModel,
+  createDateProp,
+  createTextProp,
+  createRefProp,
+  createNumberProp,
 } from '../../meta'
 import { COMMON_PROPS } from '../../constants/commonProps.const'
 import { Method } from '@/services/config'
@@ -16,21 +16,37 @@ import { ObraMeta } from '../obra/obra.meta'
 import { TipoRecepcionMeta } from '../tipoRecepcion/tipoRecepcion.meta'
 
 const { props, allFields } = defineProps<RecepcionModel.Entity>({
-  obra: new RefProp({
+  obra: createRefProp({
     getMetaModel: () => ObraMeta,
-    field: { required: true },
+    config: {
+      field: {
+        required: true,
+      },
+    },
   }),
-  numeroActa: new NumberProp('Número De Acta', {
-    field: { required: true },
+  numeroActa: createNumberProp({
+    title: 'Número De Acta',
+    config: {
+      field: {
+        required: true,
+      },
+    },
   }),
-  fecha: new DateProp('Fecha'),
-  tipoRecepcion: new RefProp({
+  fecha: createDateProp({
+    title: 'Fecha',
+  }),
+  tipoRecepcion: createRefProp({
     getMetaModel: () => TipoRecepcionMeta,
   }),
-  area: new RefProp({
+  area: createRefProp({
     getMetaModel: () => AreaMeta,
   }),
-  observaciones: new TextLongProp('Observaciones'),
+  observaciones: createTextProp({
+    title: 'Observaciones',
+    config: {
+      isLong: true,
+    },
+  }),
   ...COMMON_PROPS,
 })
 

@@ -1,11 +1,10 @@
 import {
-  DateProp,
-  NumberProp,
-  TextLongProp,
-  RefProp,
-  TextProp,
   defineProps,
   buildMetaModel,
+  createDateProp,
+  createTextProp,
+  createRefProp,
+  createNumberProp,
 } from '../../meta'
 import { COMMON_PROPS } from '../../constants/commonProps.const'
 import { Method } from '@/services/config'
@@ -17,32 +16,51 @@ import { ObraMeta } from '../obra/obra.meta'
 import { TipoParalizacionMeta } from '../tipoParalizacion/tipoParalizacion.meta'
 
 const { props, allFields } = defineProps<ParalizacionModel.Entity>({
-  obra: new RefProp({
+  obra: createRefProp({
     getMetaModel: () => ObraMeta,
-    field: {
-      required: true,
+    config: {
+      field: {
+        required: true,
+      },
     },
   }),
-  numero: new NumberProp('Número de Paralización', {
-    field: {
-      required: true,
+  numero: createNumberProp({
+    title: 'Número de Paralización',
+    config: {
+      field: {
+        required: true,
+      },
     },
   }),
-  numeroExpediente: new TextProp('Número De Expediente', {
-    field: {
-      required: true,
+  numeroExpediente: createTextProp({
+    title: 'Número De Expediente',
+    config: {
+      field: {
+        required: true,
+      },
     },
   }),
-  fechaReinicio: new DateProp('Fecha Reinicio'),
-  nuevaFechaFinObra: new DateProp('Nueva Fecha Fin de Obra'),
-  fecha: new DateProp('Fecha'),
-  tipoParalizacion: new RefProp({
+  fechaReinicio: createDateProp({
+    title: 'Fecha Reinicio',
+  }),
+  nuevaFechaFinObra: createDateProp({
+    title: 'Nueva Fecha Fin de Obra',
+  }),
+  fecha: createDateProp({
+    title: 'Fecha',
+  }),
+  tipoParalizacion: createRefProp({
     getMetaModel: () => TipoParalizacionMeta,
   }),
-  area: new RefProp({
+  area: createRefProp({
     getMetaModel: () => AreaMeta,
   }),
-  observaciones: new TextLongProp('Observaciones'),
+  observaciones: createTextProp({
+    title: 'Observaciones',
+    config: {
+      isLong: true,
+    },
+  }),
   ...COMMON_PROPS,
 })
 

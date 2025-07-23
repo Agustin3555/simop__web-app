@@ -1,4 +1,9 @@
-import { RefProp, TextProp, defineProps, buildMetaModel } from '../../meta'
+import {
+  defineProps,
+  buildMetaModel,
+  createTextProp,
+  createRefProp,
+} from '../../meta'
 import { Method } from '@/services/config'
 import { omitBaseEntity } from '../../constants/selectors.const'
 import { COMMON_PROPS } from '../../constants/commonProps.const'
@@ -7,15 +12,18 @@ import { AreaModel } from '.'
 import { TipoNivelAreaMeta } from '../tipoNivelArea/tipoNivelArea.meta'
 
 const { props, allFields } = defineProps<AreaModel.Entity>({
-  nombre: new TextProp('Nombre', {
-    field: {
-      required: true,
+  nombre: createTextProp({
+    title: 'Nombre',
+    config: {
+      field: {
+        required: true,
+      },
     },
   }),
-  tipoNivelArea: new RefProp({
+  tipoNivelArea: createRefProp({
     getMetaModel: () => TipoNivelAreaMeta,
   }),
-  area: new RefProp({
+  area: createRefProp({
     getMetaModel: () => AreaMeta,
   }),
   ...COMMON_PROPS,

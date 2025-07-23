@@ -25,35 +25,26 @@ export interface ForView {
   title?: string
 }
 
-export interface Required {
+export interface IRequired {
   required?: boolean
 }
 
-/*
-  El scheme se debe obtener desde un método para evitar el problema de referencias
-  circulares.
-*/
 export interface GetMetaModel {
   getMetaModel: () => MetaModel
 }
 
-export type GetFilter = (
-  props: Pick<Column<LooseEntity>, 'getFilterValue'> &
-    Partial<Pick<ComboboxProps, 'options'>>,
-) => ReactNode
+export interface BaseProp {
+  title: string
+  minSize?: MinSize | number
+}
 
-export interface PropScheme<E = LooseEntity> {
+export interface Prop<E = LooseEntity> {
   key: string
   verboseKey?: string
   title: string
-  // title: {
-  //   long: string
-  //   short?: string
-  // }
-  minSize: MinSize | number
-  config?: unknown
 
-  // Para @tanstack/react-table
+  // Para inicializar las columnas de @tanstack/react-table
+  minSize: MinSize | number
   accessorFn?: AccessorFn<E>
   filterFn?: FilterFn<E> | BuiltInFilterFn
   footer?: (info: HeaderContext<E, unknown>) => ReactNode
@@ -68,7 +59,10 @@ export interface PropScheme<E = LooseEntity> {
   getTableHeader: (column: Column<E>) => {
     title: string
     metaModel?: MetaModel
-    getFilter: GetFilter
+    getFilter: (
+      props: Pick<Column<LooseEntity>, 'getFilterValue'> &
+        Partial<Pick<ComboboxProps, 'options'>>,
+    ) => ReactNode
   }
   getTableCell: (item: E, selectedSearchMode?: string) => ReactNode
 
@@ -77,3 +71,5 @@ export interface PropScheme<E = LooseEntity> {
 
   getExcelTableCell: (item: E, selectedSearchMode?: string) => unknown
 }
+
+export type PropFactory = (key: string) => Prop

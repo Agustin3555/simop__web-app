@@ -1,11 +1,10 @@
 import {
-  NumberProp,
-  RefProp,
-  TextProp,
-  TextLongProp,
-  DateProp,
   defineProps,
   buildMetaModel,
+  createDateProp,
+  createTextProp,
+  createRefProp,
+  createNumberProp,
 } from '../../meta'
 import { COMMON_PROPS } from '../../constants/commonProps.const'
 import { Method } from '@/services/config'
@@ -17,42 +16,65 @@ import { InspectorMeta } from '../inspector/inspector.meta'
 import { ObraMeta } from '../obra/obra.meta'
 
 const { props, allFields } = defineProps<FojaMedicionModel.Entity>({
-  obra: new RefProp({
+  obra: createRefProp({
     getMetaModel: () => ObraMeta,
-    field: {
-      required: true,
+    config: {
+      field: {
+        required: true,
+      },
     },
   }),
-  numeroExpediente: new TextProp('Numero de Expediente de Foja', {
-    field: {
-      required: true,
+  numeroExpediente: createTextProp({
+    title: 'Numero de Expediente de Foja',
+    config: {
+      field: {
+        required: true,
+      },
     },
   }),
-  numero: new NumberProp('Número de foja', {
-    field: {
-      required: true,
+  numero: createNumberProp({
+    title: 'Número de foja',
+    config: {
+      field: {
+        required: true,
+      },
     },
   }),
-  avance: new NumberProp('Porcentaje de avance', {
-    decimal: true,
-    sub: '%',
+  avance: createNumberProp({
+    title: 'Porcentaje de avance',
+    config: {
+      sub: '%',
+      isDecimal: true,
+    },
   }),
-  fechaFoja: new DateProp('Fecha de Solicitud'),
-  fechaCertificacion: new DateProp('Fecha Certificación'),
-  montoTotal: new NumberProp('Monto Total', {
-    decimal: true,
-    isMoney: true,
-    big: true,
-    sum: true,
-    pre: '$',
+  fechaFoja: createDateProp({
+    title: 'Fecha de Solicitud',
   }),
-  inspector: new RefProp({
+  fechaCertificacion: createDateProp({
+    title: 'Fecha Certificación',
+  }),
+  montoTotal: createNumberProp({
+    title: 'Monto Total',
+    config: {
+      pre: '$',
+      isDecimal: true,
+      isMoney: true,
+      isBig: true,
+      calculate: 'sum',
+    },
+  }),
+  inspector: createRefProp({
     getMetaModel: () => InspectorMeta,
   }),
-  area: new RefProp({
+  area: createRefProp({
     getMetaModel: () => AreaMeta,
   }),
-  observaciones: new TextLongProp('Observaciones'),
+  observaciones: createTextProp({
+    title: 'Observaciones',
+    config: {
+      isLong: true,
+    },
+  }),
   ...COMMON_PROPS,
 })
 
