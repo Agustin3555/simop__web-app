@@ -17,7 +17,7 @@ import { ObraMeta } from '../obra/obra.meta'
 
 const { props, allFields } = defineProps<FojaMedicionModel.Entity>({
   obra: createRefProp({
-    getMetaModel: () => ObraMeta,
+    metaModelKey: () => ObraMeta,
     config: {
       field: {
         required: true,
@@ -64,10 +64,10 @@ const { props, allFields } = defineProps<FojaMedicionModel.Entity>({
     },
   }),
   inspector: createRefProp({
-    getMetaModel: () => InspectorMeta,
+    metaModelKey: () => InspectorMeta,
   }),
   area: createRefProp({
-    getMetaModel: () => AreaMeta,
+    metaModelKey: () => AreaMeta,
   }),
   observaciones: createTextProp({
     title: 'Observaciones',

@@ -49,7 +49,7 @@ const { props, allFields } = defineProps<ObraModel.Entity>({
     },
   }),
   tipoEnteObra: createRefProp({
-    getMetaModel: () => TipoEnteObraMeta,
+    metaModelKey: () => TipoEnteObraMeta,
     minSize: 6,
   }),
   solicitante: createTextProp({
@@ -59,19 +59,19 @@ const { props, allFields } = defineProps<ObraModel.Entity>({
     title: 'Fecha de Pedido',
   }),
   empresa: createRefProp({
-    getMetaModel: () => EmpresaMeta,
+    metaModelKey: () => EmpresaMeta,
     minSize: 7,
   }),
   localidades: createRefListProp({
-    getMetaModel: () => LocalidadMeta,
+    metaModelKey: () => LocalidadMeta,
     minSize: 6,
   }),
   apgs: createRefListProp({
-    getMetaModel: () => APGMeta,
+    metaModelKey: () => APGMeta,
     minSize: 6,
   }),
   tipoEstadoObra: createRefProp({
-    getMetaModel: () => TipoEstadoObraMeta,
+    metaModelKey: () => TipoEstadoObraMeta,
     minSize: 6,
   }),
   avanceTotal: createNumberProp({
@@ -98,11 +98,11 @@ const { props, allFields } = defineProps<ObraModel.Entity>({
     title: 'Fecha de Contratación',
   }),
   tipoTematicaObra: createRefProp({
-    getMetaModel: () => TipoTematicaObraMeta,
+    metaModelKey: () => TipoTematicaObraMeta,
     minSize: 7,
   }),
   tipoProgramaObra: createRefProp({
-    getMetaModel: () => TipoProgramaObraMeta,
+    metaModelKey: () => TipoProgramaObraMeta,
   }),
   numeroExpediente: createTextProp({
     title: 'Número de Expediente de Contrato',
@@ -117,13 +117,13 @@ const { props, allFields } = defineProps<ObraModel.Entity>({
     title: 'Número de Contratación',
   }),
   tipoContratacionObra: createRefProp({
-    getMetaModel: () => TipoContratacionObraMeta,
+    metaModelKey: () => TipoContratacionObraMeta,
   }),
   tipoOrigenFinanciamientoObra: createRefProp({
-    getMetaModel: () => TipoOrigenFinanciamientoObraMeta,
+    metaModelKey: () => TipoOrigenFinanciamientoObraMeta,
   }),
   tipoFinanciamientoObra: createRefProp({
-    getMetaModel: () => TipoFinanciamientoObraMeta,
+    metaModelKey: () => TipoFinanciamientoObraMeta,
   }),
   fechaInicio: createDateProp({
     title: 'Fecha de Inicio',
@@ -348,31 +348,31 @@ const { props, allFields } = defineProps<ObraModel.Entity>({
   }),
 
   representantes: createRefListProp({
-    getMetaModel: () => RepresentanteMeta,
+    metaModelKey: () => RepresentanteMeta,
   }),
   inspectores: createRefListProp({
-    getMetaModel: () => InspectorMeta,
+    metaModelKey: () => InspectorMeta,
   }),
   fojasMedicion: createRefListProp({
-    getMetaModel: () => FojaMedicionMeta,
+    metaModelKey: () => FojaMedicionMeta,
   }),
   redeterminaciones: createRefListProp({
-    getMetaModel: () => RedeterminacionMeta,
+    metaModelKey: () => RedeterminacionMeta,
   }),
   ampliaciones: createRefListProp({
-    getMetaModel: () => AmpliacionMeta,
+    metaModelKey: () => AmpliacionMeta,
   }),
   modificaciones: createRefListProp({
-    getMetaModel: () => ModificacionMeta,
+    metaModelKey: () => ModificacionMeta,
   }),
   paralizaciones: createRefListProp({
-    getMetaModel: () => ParalizacionMeta,
+    metaModelKey: () => ParalizacionMeta,
   }),
   rescisiones: createRefListProp({
-    getMetaModel: () => RescisionMeta,
+    metaModelKey: () => RescisionMeta,
   }),
   recepciones: createRefListProp({
-    getMetaModel: () => RecepcionMeta,
+    metaModelKey: () => RecepcionMeta,
   }),
 
   ...COMMON_PROPS,

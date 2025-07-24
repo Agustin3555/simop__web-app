@@ -29,10 +29,6 @@ export interface IRequired {
   required?: boolean
 }
 
-export interface GetMetaModel {
-  getMetaModel: () => MetaModel
-}
-
 export interface BaseProp {
   title: string
   minSize?: MinSize | number

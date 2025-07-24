@@ -40,13 +40,13 @@ const { props, allFields } = defineProps<RepresentanteModel.Entity>({
     title: 'Número de Matricula',
   }),
   pais: createRefProp({
-    getMetaModel: () => PaisMeta,
+    metaModelKey: () => PaisMeta,
   }),
   provincia: createRefProp({
-    getMetaModel: () => ProvinciaMeta,
+    metaModelKey: () => ProvinciaMeta,
   }),
   localidad: createRefProp({
-    getMetaModel: () => LocalidadMeta,
+    metaModelKey: () => LocalidadMeta,
   }),
   ...COMMON_PROPS,
 })

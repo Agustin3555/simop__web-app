@@ -7,7 +7,7 @@ import { LocalAdd, LocalEdit, LocalQuery, View } from '..'
 import { LocalView, ViewProps } from '../View/View'
 import { LocalQueryProps } from '../LocalQuery/LocalQuery'
 
-interface SchemeViewProps {
+interface ModuleViewProps {
   view?: Partial<ViewProps>
   metaModel: MetaModel
   query?: boolean | LocalQueryProps
@@ -15,13 +15,13 @@ interface SchemeViewProps {
   edit?: boolean
 }
 
-const SchemeView = ({
+const ModuleView = ({
   view,
   metaModel,
   query = true,
   add = true,
   edit = true,
-}: SchemeViewProps) => {
+}: ModuleViewProps) => {
   const { key, title } = metaModel
 
   const localViews = useMemo(
@@ -78,4 +78,4 @@ const SchemeView = ({
   )
 }
 
-export default SchemeView
+export default ModuleView

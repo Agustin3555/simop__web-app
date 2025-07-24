@@ -1,6 +1,6 @@
-import { SchemeView } from '../../components'
+import { ModuleView } from '../../components'
 import { APGMeta } from '../../modules/apg/apg.meta'
 
-const APG = () => <SchemeView metaModel={APGMeta} />
+const APG = () => <ModuleView metaModel={APGMeta} />
 
 export default APG

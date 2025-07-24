@@ -1,6 +1,6 @@
-import { SchemeView } from '../../components'
+import { ModuleView } from '../../components'
 import { ObraMeta } from '../../modules/obra/obra.meta'
 
-const Obra = () => <SchemeView metaModel={ObraMeta} />
+const Obra = () => <ModuleView metaModel={ObraMeta} />
 
 export default Obra

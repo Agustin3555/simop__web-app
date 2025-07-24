@@ -1,8 +1,8 @@
-import { SchemeView } from '../../components'
+import { ModuleView } from '../../components'
 import { ObraMeta } from '../../modules/obra/obra.meta'
 
 const ObraTotales = () => (
-  <SchemeView
+  <ModuleView
     view={{
       viewKey: 'obraTotales',
       title: 'Totales de Obra',

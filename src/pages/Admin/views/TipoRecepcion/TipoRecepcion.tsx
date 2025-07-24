@@ -1,6 +1,6 @@
-import { SchemeView } from '../../components'
+import { ModuleView } from '../../components'
 import { TipoRecepcionMeta } from '../../modules/tipoRecepcion/tipoRecepcion.meta'
 
-const TipoRecepcion = () => <SchemeView metaModel={TipoRecepcionMeta} />
+const TipoRecepcion = () => <ModuleView metaModel={TipoRecepcionMeta} />
 
 export default TipoRecepcion

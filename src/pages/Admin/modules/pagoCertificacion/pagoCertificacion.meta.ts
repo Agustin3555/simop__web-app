@@ -46,13 +46,13 @@ const { props, allFields } = defineProps<PagoCertificacionModel.Entity>({
     },
   }),
   fojaMedicion: createRefProp({
-    getMetaModel: () => FojaMedicionMeta,
+    metaModelKey: () => FojaMedicionMeta,
   }),
   redeterminacion: createRefProp({
-    getMetaModel: () => RedeterminacionMeta,
+    metaModelKey: () => RedeterminacionMeta,
   }),
   area: createRefProp({
-    getMetaModel: () => AreaMeta,
+    metaModelKey: () => AreaMeta,
   }),
   observaciones: createTextProp({
     title: 'Observaciones',

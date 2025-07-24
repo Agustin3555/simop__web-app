@@ -1,6 +1,6 @@
-import { SchemeView } from '../../components'
+import { ModuleView } from '../../components'
 import { RepresentanteObraMeta } from '../../modules/representanteObra/representanteObra.meta'
 
-const RepresentanteObra = () => <SchemeView metaModel={RepresentanteObraMeta} />
+const RepresentanteObra = () => <ModuleView metaModel={RepresentanteObraMeta} />
 
 export default RepresentanteObra

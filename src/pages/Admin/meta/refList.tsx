@@ -1,14 +1,8 @@
 import { LooseEntity } from '@/models/config'
-import {
-  ForView,
-  GetMetaModel,
-  MinSize,
-  PropFactory,
-  IRequired,
-  BaseProp,
-} from './utils'
+import { ForView, MinSize, PropFactory, IRequired, BaseProp } from './utils'
 import { AutoCombobox, FetchRef, RefFilter } from '../components'
 import { isFieldEnabled } from '.'
+import { META_MODELS, MetaModelKey } from '../constants/metaModels.const'
 
 /*
   Solamente para controlar los vínculos de uno a muchos que no tengan atributos
@@ -16,16 +10,17 @@ import { isFieldEnabled } from '.'
   en un modulo específico.
 */
 
-interface RefListProp extends GetMetaModel, Pick<BaseProp, 'minSize'> {
+interface RefListProp extends Pick<BaseProp, 'minSize'> {
+  metaModelKey: MetaModelKey
   config?: {
     field?: ForView & IRequired
   }
 }
 
 export const createRefListProp =
-  ({ getMetaModel, minSize = MinSize.s, config }: RefListProp): PropFactory =>
+  ({ metaModelKey, minSize = MinSize.s, config }: RefListProp): PropFactory =>
   key => {
-    const metaModel = getMetaModel()
+    const metaModel = META_MODELS[metaModelKey]
 
     const { field } = config ?? {}
     const { hidden, required } = field ?? {}
@@ -40,16 +35,12 @@ export const createRefListProp =
       getFormField: (value: LooseEntity[], editMode = false) => {
         if (hidden === true) return
 
-        const metaModel = getMetaModel()
-        const { title } = metaModel
-
         return (
           <AutoCombobox
             keyName={key}
-            title={title.plural}
             multiple
             initOptions={value}
-            {...{ required, editMode, metaModel }}
+            {...{ title, required, editMode, metaModel }}
           />
         )
       },

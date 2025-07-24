@@ -1,6 +1,6 @@
-import { SchemeView } from '../../components'
+import { ModuleView } from '../../components'
 import { PaisMeta } from '../../modules/pais/pais.meta'
 
-const Pais = () => <SchemeView metaModel={PaisMeta} />
+const Pais = () => <ModuleView metaModel={PaisMeta} />
 
 export default Pais

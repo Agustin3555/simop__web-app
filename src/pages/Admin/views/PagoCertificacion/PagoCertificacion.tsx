@@ -1,6 +1,6 @@
-import { SchemeView } from '../../components'
+import { ModuleView } from '../../components'
 import { PagoCertificacionMeta } from '../../modules/pagoCertificacion/pagoCertificacion.meta'
 
-const PagoCertificacion = () => <SchemeView metaModel={PagoCertificacionMeta} />
+const PagoCertificacion = () => <ModuleView metaModel={PagoCertificacionMeta} />
 
 export default PagoCertificacion

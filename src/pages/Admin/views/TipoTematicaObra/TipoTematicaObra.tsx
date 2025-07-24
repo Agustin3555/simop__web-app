@@ -1,6 +1,6 @@
-import { SchemeView } from '../../components'
+import { ModuleView } from '../../components'
 import { TipoTematicaObraMeta } from '../../modules/tipoTematicaObra/tipoTematicaObra.meta'
 
-const TipoTematicaObra = () => <SchemeView metaModel={TipoTematicaObraMeta} />
+const TipoTematicaObra = () => <ModuleView metaModel={TipoTematicaObraMeta} />
 
 export default TipoTematicaObra

@@ -17,7 +17,7 @@ import { TipoRecepcionMeta } from '../tipoRecepcion/tipoRecepcion.meta'
 
 const { props, allFields } = defineProps<RecepcionModel.Entity>({
   obra: createRefProp({
-    getMetaModel: () => ObraMeta,
+    metaModelKey: () => ObraMeta,
     config: {
       field: {
         required: true,
@@ -36,10 +36,10 @@ const { props, allFields } = defineProps<RecepcionModel.Entity>({
     title: 'Fecha',
   }),
   tipoRecepcion: createRefProp({
-    getMetaModel: () => TipoRecepcionMeta,
+    metaModelKey: () => TipoRecepcionMeta,
   }),
   area: createRefProp({
-    getMetaModel: () => AreaMeta,
+    metaModelKey: () => AreaMeta,
   }),
   observaciones: createTextProp({
     title: 'Observaciones',

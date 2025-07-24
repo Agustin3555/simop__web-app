@@ -1,6 +1,6 @@
-import { SchemeView } from '../../components'
+import { ModuleView } from '../../components'
 import { TipoRescisionMeta } from '../../modules/tipoRescision/tipoRescision.meta'
 
-const TipoRescision = () => <SchemeView metaModel={TipoRescisionMeta} />
+const TipoRescision = () => <ModuleView metaModel={TipoRescisionMeta} />
 
 export default TipoRescision

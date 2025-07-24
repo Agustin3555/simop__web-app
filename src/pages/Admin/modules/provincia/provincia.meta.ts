@@ -21,7 +21,7 @@ const { props, allFields } = defineProps<ProvinciaModel.Entity>({
     },
   }),
   pais: createRefProp({
-    getMetaModel: () => PaisMeta,
+    metaModelKey: () => PaisMeta,
     config: {
       field: {
         required: true,

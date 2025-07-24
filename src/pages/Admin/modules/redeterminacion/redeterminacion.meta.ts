@@ -19,7 +19,7 @@ import { TipoRedeterminacionMeta } from '../tipoRedeterminacion/tipoRedeterminac
 
 const { props, allFields } = defineProps<RedeterminacionModel.Entity>({
   obra: createRefProp({
-    getMetaModel: () => ObraMeta,
+    metaModelKey: () => ObraMeta,
     config: {
       field: {
         required: true,
@@ -70,13 +70,13 @@ const { props, allFields } = defineProps<RedeterminacionModel.Entity>({
     title: 'AE Acum.',
   }),
   tipoRedeterminacion: createRefProp({
-    getMetaModel: () => TipoRedeterminacionMeta,
+    metaModelKey: () => TipoRedeterminacionMeta,
   }),
   area: createRefProp({
-    getMetaModel: () => AreaMeta,
+    metaModelKey: () => AreaMeta,
   }),
   redeterminacionesHijas: createRefListProp({
-    getMetaModel: () => RedeterminacionMeta,
+    metaModelKey: () => RedeterminacionMeta,
   }),
   observaciones: createTextProp({
     title: 'Observaciones',

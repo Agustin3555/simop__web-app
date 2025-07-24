@@ -17,7 +17,7 @@ import { TipoModificacionMeta } from '../tipoModificacion/tipoModificacion.meta'
 
 const { props, allFields } = defineProps<ModificacionModel.Entity>({
   obra: createRefProp({
-    getMetaModel: () => ObraMeta,
+    metaModelKey: () => ObraMeta,
     config: {
       field: {
         required: true,
@@ -59,10 +59,10 @@ const { props, allFields } = defineProps<ModificacionModel.Entity>({
     title: 'Fecha',
   }),
   tipoModificacion: createRefProp({
-    getMetaModel: () => TipoModificacionMeta,
+    metaModelKey: () => TipoModificacionMeta,
   }),
   area: createRefProp({
-    getMetaModel: () => AreaMeta,
+    metaModelKey: () => AreaMeta,
   }),
   observaciones: createTextProp({
     title: 'Observaciones',

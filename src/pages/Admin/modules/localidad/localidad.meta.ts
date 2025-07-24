@@ -22,7 +22,7 @@ const { props, allFields } = defineProps<LocalidadModel.Entity>({
     },
   }),
   departamento: createRefProp({
-    getMetaModel: () => DepartamentoMeta,
+    metaModelKey: () => DepartamentoMeta,
   }),
   osmId: createNumberProp({
     title: 'OSM ID',

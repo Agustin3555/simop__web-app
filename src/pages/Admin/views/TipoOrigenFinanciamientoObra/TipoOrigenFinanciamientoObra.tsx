@@ -1,8 +1,8 @@
-import { SchemeView } from '../../components'
+import { ModuleView } from '../../components'
 import { TipoOrigenFinanciamientoObraMeta } from '../../modules/tipoOrigenFinanciamientoObra/tipoOrigenFinanciamientoObra.meta'
 
 const TipoOrigenFinanciamientoObra = () => (
-  <SchemeView metaModel={TipoOrigenFinanciamientoObraMeta} />
+  <ModuleView metaModel={TipoOrigenFinanciamientoObraMeta} />
 )
 
 export default TipoOrigenFinanciamientoObra

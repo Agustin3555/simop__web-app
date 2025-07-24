@@ -17,7 +17,7 @@ import { TipoParalizacionMeta } from '../tipoParalizacion/tipoParalizacion.meta'
 
 const { props, allFields } = defineProps<ParalizacionModel.Entity>({
   obra: createRefProp({
-    getMetaModel: () => ObraMeta,
+    metaModelKey: () => ObraMeta,
     config: {
       field: {
         required: true,
@@ -50,10 +50,10 @@ const { props, allFields } = defineProps<ParalizacionModel.Entity>({
     title: 'Fecha',
   }),
   tipoParalizacion: createRefProp({
-    getMetaModel: () => TipoParalizacionMeta,
+    metaModelKey: () => TipoParalizacionMeta,
   }),
   area: createRefProp({
-    getMetaModel: () => AreaMeta,
+    metaModelKey: () => AreaMeta,
   }),
   observaciones: createTextProp({
     title: 'Observaciones',

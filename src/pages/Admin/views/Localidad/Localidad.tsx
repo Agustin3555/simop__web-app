@@ -1,6 +1,6 @@
-import { SchemeView } from '../../components'
+import { ModuleView } from '../../components'
 import { LocalidadMeta } from '../../modules/localidad/localidad.meta'
 
-const Localidad = () => <SchemeView metaModel={LocalidadMeta} />
+const Localidad = () => <ModuleView metaModel={LocalidadMeta} />
 
 export default Localidad

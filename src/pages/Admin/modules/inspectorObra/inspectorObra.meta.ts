@@ -17,7 +17,7 @@ import { TipoProfesionMeta } from '../tipoProfesion/tipoProfesion.meta'
 
 const { props, allFields } = defineProps<InspectorObraModel.Entity>({
   obra: createRefProp({
-    getMetaModel: () => ObraMeta,
+    metaModelKey: () => ObraMeta,
     config: {
       field: {
         required: true,
@@ -25,7 +25,7 @@ const { props, allFields } = defineProps<InspectorObraModel.Entity>({
     },
   }),
   inspector: createRefProp({
-    getMetaModel: () => InspectorMeta,
+    metaModelKey: () => InspectorMeta,
     config: {
       field: {
         required: true,
@@ -33,10 +33,10 @@ const { props, allFields } = defineProps<InspectorObraModel.Entity>({
     },
   }),
   tipoInspector: createRefProp({
-    getMetaModel: () => TipoInspectorMeta,
+    metaModelKey: () => TipoInspectorMeta,
   }),
   tipoProfesion: createRefProp({
-    getMetaModel: () => TipoProfesionMeta,
+    metaModelKey: () => TipoProfesionMeta,
   }),
   vigencia: createBooleanProp({
     title: 'Vigencia',

@@ -16,13 +16,13 @@ import { EmpresaMeta } from '../empresa/empresa.meta'
 
 const { props, allFields } = defineProps<RepresentanteEmpresaModel.Entity>({
   empresa: createRefProp({
-    getMetaModel: () => EmpresaMeta,
+    metaModelKey: () => EmpresaMeta,
   }),
   representante: createRefProp({
-    getMetaModel: () => RepresentanteMeta,
+    metaModelKey: () => RepresentanteMeta,
   }),
   tipoRepresentante: createRefProp({
-    getMetaModel: () => TipoRepresentanteMeta,
+    metaModelKey: () => TipoRepresentanteMeta,
   }),
   vigencia: createBooleanProp({
     title: 'Vigencia',

@@ -34,7 +34,7 @@ const { props, allFields } = defineProps<InspectorModel.Entity>({
     title: 'Nombre',
   }),
   profesiones: createRefListProp({
-    getMetaModel: () => TipoProfesionMeta,
+    metaModelKey: () => TipoProfesionMeta,
   }),
   ...COMMON_PROPS,
 })

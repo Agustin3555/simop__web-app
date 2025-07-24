@@ -16,7 +16,7 @@ import { TipoRescisionMeta } from '../tipoRescision/tipoRescision.meta'
 
 const { props, allFields } = defineProps<RescisionModel.Entity>({
   obra: createRefProp({
-    getMetaModel: () => ObraMeta,
+    metaModelKey: () => ObraMeta,
     config: {
       field: {
         required: true,
@@ -38,10 +38,10 @@ const { props, allFields } = defineProps<RescisionModel.Entity>({
     title: 'Fecha',
   }),
   tipoRescision: createRefProp({
-    getMetaModel: () => TipoRescisionMeta,
+    metaModelKey: () => TipoRescisionMeta,
   }),
   area: createRefProp({
-    getMetaModel: () => AreaMeta,
+    metaModelKey: () => AreaMeta,
   }),
   observaciones: createTextProp({
     title: 'Observaciones',

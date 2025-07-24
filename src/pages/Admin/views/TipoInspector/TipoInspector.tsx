@@ -1,6 +1,6 @@
-import { SchemeView } from '../../components'
+import { ModuleView } from '../../components'
 import { TipoInspectorMeta } from '../../modules/tipoInspector/tipoInspector.meta'
 
-const TipoInspector = () => <SchemeView metaModel={TipoInspectorMeta} />
+const TipoInspector = () => <ModuleView metaModel={TipoInspectorMeta} />
 
 export default TipoInspector

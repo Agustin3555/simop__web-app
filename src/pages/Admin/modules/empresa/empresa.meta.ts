@@ -42,13 +42,13 @@ const { props, allFields } = defineProps<EmpresaModel.Entity>({
     title: 'Email',
   }),
   pais: createRefProp({
-    getMetaModel: () => PaisMeta,
+    metaModelKey: () => PaisMeta,
   }),
   provincia: createRefProp({
-    getMetaModel: () => ProvinciaMeta,
+    metaModelKey: () => ProvinciaMeta,
   }),
   localidad: createRefProp({
-    getMetaModel: () => LocalidadMeta,
+    metaModelKey: () => LocalidadMeta,
   }),
   ...COMMON_PROPS,
 })

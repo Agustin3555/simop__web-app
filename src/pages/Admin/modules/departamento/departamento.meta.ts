@@ -29,10 +29,10 @@ const { props, allFields } = defineProps<DepartamentoModel.Entity>({
     },
   }),
   provincia: createRefProp({
-    getMetaModel: () => ProvinciaMeta,
+    metaModelKey: () => ProvinciaMeta,
   }),
   apg: createRefProp({
-    getMetaModel: () => APGMeta,
+    metaModelKey: () => APGMeta,
   }),
   ...COMMON_PROPS,
 })

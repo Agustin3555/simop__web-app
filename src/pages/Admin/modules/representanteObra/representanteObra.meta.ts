@@ -16,7 +16,7 @@ import { TipoRepresentanteMeta } from '../tipoRepresentante/tipoRepresentante.me
 
 const { props, allFields } = defineProps<RepresentanteObraModel.Entity>({
   obra: createRefProp({
-    getMetaModel: () => ObraMeta,
+    metaModelKey: () => ObraMeta,
     config: {
       field: {
         required: true,
@@ -24,10 +24,10 @@ const { props, allFields } = defineProps<RepresentanteObraModel.Entity>({
     },
   }),
   representante: createRefProp({
-    getMetaModel: () => RepresentanteMeta,
+    metaModelKey: () => RepresentanteMeta,
   }),
   tipoRepresentante: createRefProp({
-    getMetaModel: () => TipoRepresentanteMeta,
+    metaModelKey: () => TipoRepresentanteMeta,
   }),
   vigencia: createBooleanProp({
     title: 'Vigencia',
