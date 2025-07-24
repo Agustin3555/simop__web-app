@@ -1,40 +1,4 @@
-import { AmpliacionMeta } from '../modules/ampliacion/ampliacion.meta'
-import { APGMeta } from '../modules/apg/apg.meta'
-import { AreaMeta } from '../modules/area/area.meta'
-import { DepartamentoMeta } from '../modules/departamento/departamento.meta'
-import { EmpresaMeta } from '../modules/empresa/empresa.meta'
-import { FojaMedicionMeta } from '../modules/fojaMedicion/fojaMedicion.meta'
-import { InspectorMeta } from '../modules/inspector/inspector.meta'
-import { InspectorObraMeta } from '../modules/inspectorObra/inspectorObra.meta'
-import { LocalidadMeta } from '../modules/localidad/localidad.meta'
-import { ModificacionMeta } from '../modules/modificacion/modificacion.meta'
-import { ObraMeta } from '../modules/obra/obra.meta'
-import { PagoCertificacionMeta } from '../modules/pagoCertificacion/pagoCertificacion.meta'
-import { PaisMeta } from '../modules/pais/pais.meta'
-import { ParalizacionMeta } from '../modules/paralizacion/paralizacion.meta'
-import { ProvinciaMeta } from '../modules/provincia/provincia.meta'
-import { RecepcionMeta } from '../modules/recepcion/recepcion.meta'
-import { RedeterminacionMeta } from '../modules/redeterminacion/redeterminacion.meta'
-import { RepresentanteMeta } from '../modules/representante/representante.meta'
-import { RepresentanteEmpresaMeta } from '../modules/representanteEmpresa/representanteEmpresa.meta'
-import { RepresentanteObraMeta } from '../modules/representanteObra/representanteObra.meta'
-import { RescisionMeta } from '../modules/rescision/rescision.meta'
-import { TipoContratacionObraMeta } from '../modules/tipoContratacionObra/tipoContratacionObra.meta'
-import { TipoEnteObraMeta } from '../modules/tipoEnteObra/tipoEnteObra.meta'
-import { TipoEstadoObraMeta } from '../modules/tipoEstadoObra/tipoEstadoObra.meta'
-import { TipoFinanciamientoObraMeta } from '../modules/tipoFinanciamientoObra/tipoFinanciamientoObra.meta'
-import { TipoInspectorMeta } from '../modules/tipoInspector/tipoInspector.meta'
-import { TipoModificacionMeta } from '../modules/tipoModificacion/tipoModificacion.meta'
-import { TipoNivelAreaMeta } from '../modules/tipoNivelArea/tipoNivelArea.meta'
-import { TipoOrigenFinanciamientoObraMeta } from '../modules/tipoOrigenFinanciamientoObra/tipoOrigenFinanciamientoObra.meta'
-import { TipoParalizacionMeta } from '../modules/tipoParalizacion/tipoParalizacion.meta'
-import { TipoProfesionMeta } from '../modules/tipoProfesion/tipoProfesion.meta'
-import { TipoProgramaObraMeta } from '../modules/tipoProgramaObra/tipoProgramaObra.meta'
-import { TipoRecepcionMeta } from '../modules/tipoRecepcion/tipoRecepcion.meta'
-import { TipoRedeterminacionMeta } from '../modules/tipoRedeterminacion/tipoRedeterminacion.meta'
-import { TipoRepresentanteMeta } from '../modules/tipoRepresentante/tipoRepresentante.meta'
-import { TipoRescisionMeta } from '../modules/tipoRescision/tipoRescision.meta'
-import { TipoTematicaObraMeta } from '../modules/tipoTematicaObra/tipoTematicaObra.meta'
+import { asAuxView, asModuleView } from './views.const'
 
 export interface SectionNode {
   viewKey?: string
@@ -46,34 +10,34 @@ export const TREE: SectionNode[] = [
   {
     title: 'Tablero de Gestión',
     sections: [
-      { viewKey: 'obraGeneral' },
-      { viewKey: 'obraTotales' },
-      { viewKey: 'obraDetalle' },
-      { viewKey: 'planificacionGeografica' },
+      { viewKey: asAuxView('planificacionGeografica') },
+      { viewKey: asAuxView('obraTotales') },
+      { viewKey: asAuxView('obraDetalle') },
+      { viewKey: asAuxView('obraGeneral') },
     ],
   },
   {
     title: 'Sobre Obras',
     sections: [
-      { viewKey: ObraMeta.key },
+      { viewKey: asModuleView('obra') },
       {
         title: 'Eventos',
         sections: [
-          { viewKey: FojaMedicionMeta.key },
-          { viewKey: PagoCertificacionMeta.key },
-          { viewKey: RedeterminacionMeta.key },
-          { viewKey: AmpliacionMeta.key },
-          { viewKey: ModificacionMeta.key },
-          { viewKey: ParalizacionMeta.key },
-          { viewKey: RescisionMeta.key },
-          { viewKey: RecepcionMeta.key },
+          { viewKey: asModuleView('fojaMedicion') },
+          { viewKey: asModuleView('pagoCertificacion') },
+          { viewKey: asModuleView('redeterminacion') },
+          { viewKey: asModuleView('ampliacion') },
+          { viewKey: asModuleView('modificacion') },
+          { viewKey: asModuleView('paralizacion') },
+          { viewKey: asModuleView('rescision') },
+          { viewKey: asModuleView('recepcion') },
         ],
       },
       {
         title: 'Actores',
         sections: [
-          { viewKey: RepresentanteObraMeta.key },
-          { viewKey: InspectorObraMeta.key },
+          { viewKey: asModuleView('representanteObra') },
+          { viewKey: asModuleView('inspectorObra') },
         ],
       },
     ],
@@ -81,52 +45,52 @@ export const TREE: SectionNode[] = [
   {
     title: 'Sobre Empresas',
     sections: [
-      { viewKey: EmpresaMeta.key },
+      { viewKey: asModuleView('empresa') },
       {
         title: 'Actores',
-        sections: [{ viewKey: RepresentanteEmpresaMeta.key }],
+        sections: [{ viewKey: asModuleView('representanteEmpresa') }],
       },
     ],
   },
   {
     title: 'Ubicación',
     sections: [
-      { viewKey: PaisMeta.key },
-      { viewKey: ProvinciaMeta.key },
-      { viewKey: APGMeta.key },
-      { viewKey: DepartamentoMeta.key },
-      { viewKey: LocalidadMeta.key },
+      { viewKey: asModuleView('pais') },
+      { viewKey: asModuleView('provincia') },
+      { viewKey: asModuleView('apg') },
+      { viewKey: asModuleView('departamento') },
+      { viewKey: asModuleView('localidad') },
     ],
   },
   {
     title: 'Actores',
     sections: [
-      { viewKey: InspectorMeta.key },
-      { viewKey: RepresentanteMeta.key },
+      { viewKey: asModuleView('representante') },
+      { viewKey: asModuleView('inspector') },
     ],
   },
   {
     title: 'Tipos',
     sections: [
-      { viewKey: TipoNivelAreaMeta.key },
-      { viewKey: TipoProfesionMeta.key },
-      { viewKey: TipoRepresentanteMeta.key },
-      { viewKey: TipoInspectorMeta.key },
+      { viewKey: asModuleView('tipoNivelArea') },
+      { viewKey: asModuleView('tipoProfesion') },
+      { viewKey: asModuleView('tipoRepresentante') },
+      { viewKey: asModuleView('tipoInspector') },
 
-      { viewKey: TipoEnteObraMeta.key },
-      { viewKey: TipoContratacionObraMeta.key },
-      { viewKey: TipoOrigenFinanciamientoObraMeta.key },
-      { viewKey: TipoFinanciamientoObraMeta.key },
-      { viewKey: TipoProgramaObraMeta.key },
-      { viewKey: TipoTematicaObraMeta.key },
-      { viewKey: TipoEstadoObraMeta.key },
+      { viewKey: asModuleView('tipoEnteObra') },
+      { viewKey: asModuleView('tipoContratacionObra') },
+      { viewKey: asModuleView('tipoOrigenFinanciamientoObra') },
+      { viewKey: asModuleView('tipoFinanciamientoObra') },
+      { viewKey: asModuleView('tipoProgramaObra') },
+      { viewKey: asModuleView('tipoTematicaObra') },
+      { viewKey: asModuleView('tipoEstadoObra') },
 
-      { viewKey: TipoParalizacionMeta.key },
-      { viewKey: TipoRescisionMeta.key },
-      { viewKey: TipoRedeterminacionMeta.key },
-      { viewKey: TipoRecepcionMeta.key },
-      { viewKey: TipoModificacionMeta.key },
+      { viewKey: asModuleView('tipoParalizacion') },
+      { viewKey: asModuleView('tipoRescision') },
+      { viewKey: asModuleView('tipoRedeterminacion') },
+      { viewKey: asModuleView('tipoRecepcion') },
+      { viewKey: asModuleView('tipoModificacion') },
     ],
   },
-  { viewKey: AreaMeta.key },
+  { viewKey: asModuleView('area') },
 ]
