@@ -1,1 +1,1 @@
-export { default as Section } from './Section/Section'
+export { default as Node } from './Node/Node'

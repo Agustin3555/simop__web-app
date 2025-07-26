@@ -1,32 +1,34 @@
-import { defineProps, buildMetaModel } from '../../meta'
-import { TIPO_PROPS } from '../../constants/commonProps.const'
 import { Method } from '@/services/config'
 import { omitBaseEntity } from '../../constants/selectors.const'
 import { TipoInspectorService } from './tipoInspector.service'
+import { TipoInspectorProps } from './tipoInspector.props'
 import { TipoInspectorModel } from '.'
+import { MetaModelDefinition } from '../../meta/metaModel'
 
-const { props, allFields } = defineProps<TipoInspectorModel.Entity>(TIPO_PROPS)
+const { propFactories, allFields } = TipoInspectorProps
 
-export const TipoInspectorMeta = buildMetaModel(
+export const TipoInspectorMeta: MetaModelDefinition<TipoInspectorModel.Entity> =
   {
-    key: 'tipoInspector',
-    service: TipoInspectorService,
-    title: {
-      singular: 'Tipo de Inspector',
-      plural: 'Tipos de Inspectores',
+    config: {
+      key: 'tipoInspector',
+      service: TipoInspectorService,
+      title: {
+        singular: 'Tipo de Inspector',
+        plural: 'Tipos de Inspectores',
+      },
+      faIcon: 'fa-solid fa-shapes',
+      anchorField: 'nombre',
+      propFactories,
     },
-    faIcon: 'fa-solid fa-shapes',
-    anchorField: 'nombre',
-    props,
-  },
-  [
-    {
-      methods: [Method.GetAll, Method.GetOne],
-      fields: allFields,
-    },
-    {
-      methods: [Method.Create, Method.UpdateOne],
-      groups: [{ fields: omitBaseEntity(allFields) }],
-    },
-  ],
-)
+
+    fieldsByService: [
+      {
+        methods: [Method.GetAll, Method.GetOne],
+        fields: allFields,
+      },
+      {
+        methods: [Method.Create, Method.UpdateOne],
+        groups: [{ fields: omitBaseEntity(allFields) }],
+      },
+    ],
+  }

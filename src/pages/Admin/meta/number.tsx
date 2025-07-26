@@ -2,7 +2,7 @@ import { ForView, MinSize, PropFactory, IRequired, BaseProp } from './utils'
 import { Input } from '@/components'
 import { NumberFilter, StylizedNumber } from '../components'
 
-interface NumberProp extends BaseProp {
+export interface NumberProp extends BaseProp {
   config?: {
     pre?: string
     sub?: string

@@ -1,6 +1,5 @@
 import { ModuleView } from '../../components'
-import { AreaMeta } from '../../modules/area/area.meta'
 
-const Area = () => <ModuleView metaModel={AreaMeta} />
+const Area = () => <ModuleView metaModelKey={'area'} />
 
 export default Area

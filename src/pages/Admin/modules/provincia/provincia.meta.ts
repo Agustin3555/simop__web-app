@@ -1,38 +1,14 @@
-import {
-  defineProps,
-  buildMetaModel,
-  createTextProp,
-  createRefProp,
-} from '../../meta'
-import { COMMON_PROPS } from '../../constants/commonProps.const'
 import { Method } from '@/services/config'
 import { omitBaseEntity } from '../../constants/selectors.const'
 import { ProvinciaService } from './provincia.service'
 import { ProvinciaModel } from '.'
-import { PaisMeta } from '../pais/pais.meta'
+import { MetaModelDefinition } from '../../meta/metaModel'
+import { ProvinciaProps } from './provincia.props'
 
-const { props, allFields } = defineProps<ProvinciaModel.Entity>({
-  nombre: createTextProp({
-    title: 'Nombre',
-    config: {
-      field: {
-        required: true,
-      },
-    },
-  }),
-  pais: createRefProp({
-    metaModelKey: () => PaisMeta,
-    config: {
-      field: {
-        required: true,
-      },
-    },
-  }),
-  ...COMMON_PROPS,
-})
+const { propFactories, allFields } = ProvinciaProps
 
-export const ProvinciaMeta = buildMetaModel(
-  {
+export const ProvinciaMeta: MetaModelDefinition<ProvinciaModel.Entity> = {
+  config: {
     key: 'provincia',
     service: ProvinciaService,
     refreshRate: 'low',
@@ -42,9 +18,10 @@ export const ProvinciaMeta = buildMetaModel(
     },
     faIcon: 'fa-solid fa-vector-square',
     anchorField: 'nombre',
-    props,
+    propFactories,
   },
-  [
+
+  fieldsByService: [
     {
       methods: [Method.GetAll, Method.GetOne],
       fields: allFields,
@@ -54,4 +31,4 @@ export const ProvinciaMeta = buildMetaModel(
       groups: [{ fields: omitBaseEntity(allFields) }],
     },
   ],
-)
+}

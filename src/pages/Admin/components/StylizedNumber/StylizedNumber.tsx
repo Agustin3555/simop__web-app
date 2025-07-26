@@ -1,5 +1,5 @@
 import './StylizedNumber.css'
-import { NumberProp } from '../../meta'
+import { NumberProp } from '../../meta/number'
 
 interface StylizedNumberProps
   extends Pick<NonNullable<NumberProp['config']>, 'isMoney' | 'pre' | 'sub'> {

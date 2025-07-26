@@ -1,44 +1,14 @@
-import {
-  defineProps,
-  buildMetaModel,
-  createTextProp,
-  createRefProp,
-  createNumberProp,
-} from '../../meta'
-import { COMMON_PROPS } from '../../constants/commonProps.const'
 import { Method } from '@/services/config'
 import { omitBaseEntity } from '../../constants/selectors.const'
 import { DepartamentoService } from './departamento.service'
+import { MetaModelDefinition } from '../../meta/metaModel'
 import { DepartamentoModel } from '.'
-import { ProvinciaMeta } from '../provincia/provincia.meta'
-import { APGMeta } from '../apg/apg.meta'
+import { DepartamentoProps } from './departamento.props'
 
-const { props, allFields } = defineProps<DepartamentoModel.Entity>({
-  nombre: createTextProp({
-    title: 'Nombre',
-    config: {
-      field: {
-        required: true,
-      },
-    },
-  }),
-  osmId: createNumberProp({
-    title: 'OSM ID',
-    config: {
-      isBig: true,
-    },
-  }),
-  provincia: createRefProp({
-    metaModelKey: () => ProvinciaMeta,
-  }),
-  apg: createRefProp({
-    metaModelKey: () => APGMeta,
-  }),
-  ...COMMON_PROPS,
-})
+const { propFactories, allFields } = DepartamentoProps
 
-export const DepartamentoMeta = buildMetaModel(
-  {
+export const DepartamentoMeta: MetaModelDefinition<DepartamentoModel.Entity> = {
+  config: {
     key: 'departamento',
     service: DepartamentoService,
     refreshRate: 'low',
@@ -48,9 +18,10 @@ export const DepartamentoMeta = buildMetaModel(
     },
     faIcon: 'fa-solid fa-vector-square',
     anchorField: 'nombre',
-    props,
+    propFactories,
   },
-  [
+
+  fieldsByService: [
     {
       methods: [Method.GetAll, Method.GetOne],
       fields: allFields,
@@ -60,4 +31,4 @@ export const DepartamentoMeta = buildMetaModel(
       groups: [{ fields: omitBaseEntity(allFields) }],
     },
   ],
-)
+}

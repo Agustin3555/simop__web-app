@@ -1,32 +1,34 @@
-import { defineProps, buildMetaModel } from '../../meta'
-import { TIPO_PROPS } from '../../constants/commonProps.const'
 import { Method } from '@/services/config'
 import { omitBaseEntity } from '../../constants/selectors.const'
 import { TipoProfesionService } from './tipoProfesion.service'
+import { TipoProfesionProps } from './tipoProfesion.props'
 import { TipoProfesionModel } from '.'
+import { MetaModelDefinition } from '../../meta/metaModel'
 
-const { props, allFields } = defineProps<TipoProfesionModel.Entity>(TIPO_PROPS)
+const { propFactories, allFields } = TipoProfesionProps
 
-export const TipoProfesionMeta = buildMetaModel(
+export const TipoProfesionMeta: MetaModelDefinition<TipoProfesionModel.Entity> =
   {
-    key: 'tipoProfesion',
-    service: TipoProfesionService,
-    title: {
-      singular: 'Profesión',
-      plural: 'Profesiones',
+    config: {
+      key: 'tipoProfesion',
+      service: TipoProfesionService,
+      title: {
+        singular: 'Profesión',
+        plural: 'Profesiones',
+      },
+      faIcon: 'fa-solid fa-shapes',
+      anchorField: 'nombre',
+      propFactories,
     },
-    faIcon: 'fa-solid fa-shapes',
-    anchorField: 'nombre',
-    props,
-  },
-  [
-    {
-      methods: [Method.GetAll, Method.GetOne],
-      fields: allFields,
-    },
-    {
-      methods: [Method.Create, Method.UpdateOne],
-      groups: [{ fields: omitBaseEntity(allFields) }],
-    },
-  ],
-)
+
+    fieldsByService: [
+      {
+        methods: [Method.GetAll, Method.GetOne],
+        fields: allFields,
+      },
+      {
+        methods: [Method.Create, Method.UpdateOne],
+        groups: [{ fields: omitBaseEntity(allFields) }],
+      },
+    ],
+  }

@@ -1,8 +1,8 @@
 import { LooseEntity } from '@/models/config'
 import { ForView, MinSize, PropFactory, IRequired, BaseProp } from './utils'
 import { AutoCombobox, FetchRef, RefFilter } from '../components'
-import { isFieldEnabled } from '.'
-import { META_MODELS, MetaModelKey } from '../constants/metaModels.const'
+import { MetaModelKey } from '../constants/metaModelKey.const'
+import { isFieldEnabled } from './ref'
 
 /*
   Solamente para controlar los vínculos de uno a muchos que no tengan atributos
@@ -19,8 +19,10 @@ interface RefListProp extends Pick<BaseProp, 'minSize'> {
 
 export const createRefListProp =
   ({ metaModelKey, minSize = MinSize.s, config }: RefListProp): PropFactory =>
-  key => {
-    const metaModel = META_MODELS[metaModelKey]
+  (key, getMetaModel) => {
+    const metaModel = getMetaModel(metaModelKey)
+
+    if (!metaModel) throw new Error()
 
     const { field } = config ?? {}
     const { hidden, required } = field ?? {}

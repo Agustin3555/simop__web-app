@@ -8,7 +8,8 @@ import {
 } from '@tanstack/react-table'
 import { LooseEntity } from '@/models/config'
 import { ComboboxProps } from '../components/Combobox/Combobox'
-import { MetaModel } from '.'
+import { MetaModel } from './metaModel'
+import { MetaModelsContextProps } from '../contexts'
 
 export type Color = 'blue' | 'green' | 'yellow' | 'red' | 'grey'
 
@@ -68,4 +69,7 @@ export interface Prop<E = LooseEntity> {
   getExcelTableCell: (item: E, selectedSearchMode?: string) => unknown
 }
 
-export type PropFactory = (key: string) => Prop
+export type PropFactory = (
+  key: string,
+  getMetaModel: MetaModelsContextProps['getMetaModel'],
+) => Prop

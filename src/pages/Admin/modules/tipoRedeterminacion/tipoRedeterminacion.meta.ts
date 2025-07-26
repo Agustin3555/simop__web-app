@@ -1,33 +1,34 @@
-import { defineProps, buildMetaModel } from '../../meta'
-import { TIPO_PROPS } from '../../constants/commonProps.const'
 import { Method } from '@/services/config'
 import { omitBaseEntity } from '../../constants/selectors.const'
 import { TipoRedeterminacionService } from './tipoRedeterminacion.service'
+import { TipoRedeterminacionProps } from './tipoRedeterminacion.props'
 import { TipoRedeterminacionModel } from '.'
+import { MetaModelDefinition } from '../../meta/metaModel'
 
-const { props, allFields } =
-  defineProps<TipoRedeterminacionModel.Entity>(TIPO_PROPS)
+const { propFactories, allFields } = TipoRedeterminacionProps
 
-export const TipoRedeterminacionMeta = buildMetaModel(
+export const TipoRedeterminacionMeta: MetaModelDefinition<TipoRedeterminacionModel.Entity> =
   {
-    key: 'tipoRedeterminacion',
-    service: TipoRedeterminacionService,
-    title: {
-      singular: 'Redeterminación',
-      plural: 'Tipos de Redeterminación',
+    config: {
+      key: 'tipoRedeterminacion',
+      service: TipoRedeterminacionService,
+      title: {
+        singular: 'Redeterminación',
+        plural: 'Tipos de Redeterminación',
+      },
+      faIcon: 'fa-solid fa-shapes',
+      anchorField: 'nombre',
+      propFactories,
     },
-    faIcon: 'fa-solid fa-shapes',
-    anchorField: 'nombre',
-    props,
-  },
-  [
-    {
-      methods: [Method.GetAll, Method.GetOne],
-      fields: allFields,
-    },
-    {
-      methods: [Method.Create, Method.UpdateOne],
-      groups: [{ fields: omitBaseEntity(allFields) }],
-    },
-  ],
-)
+
+    fieldsByService: [
+      {
+        methods: [Method.GetAll, Method.GetOne],
+        fields: allFields,
+      },
+      {
+        methods: [Method.Create, Method.UpdateOne],
+        groups: [{ fields: omitBaseEntity(allFields) }],
+      },
+    ],
+  }

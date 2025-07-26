@@ -1,6 +1,5 @@
 import { ModuleView } from '../../components'
-import { InspectorObraMeta } from '../../modules/inspectorObra/inspectorObra.meta'
 
-const InspectorObra = () => <ModuleView metaModel={InspectorObraMeta} />
+const InspectorObra = () => <ModuleView metaModelKey={'inspectorObra'} />
 
 export default InspectorObra

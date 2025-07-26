@@ -1,71 +1,14 @@
-import {
-  defineProps,
-  buildMetaModel,
-  createDateProp,
-  createTextProp,
-  createRefProp,
-  createNumberProp,
-} from '../../meta'
-import { COMMON_PROPS } from '../../constants/commonProps.const'
 import { Method } from '@/services/config'
 import { omitBaseEntity } from '../../constants/selectors.const'
 import { ParalizacionService } from './paralizacion.service'
+import { ParalizacionProps } from './paralizacion.props'
 import { ParalizacionModel } from '.'
-import { AreaMeta } from '../area/area.meta'
-import { ObraMeta } from '../obra/obra.meta'
-import { TipoParalizacionMeta } from '../tipoParalizacion/tipoParalizacion.meta'
+import { MetaModelDefinition } from '../../meta/metaModel'
 
-const { props, allFields } = defineProps<ParalizacionModel.Entity>({
-  obra: createRefProp({
-    metaModelKey: () => ObraMeta,
-    config: {
-      field: {
-        required: true,
-      },
-    },
-  }),
-  numero: createNumberProp({
-    title: 'Número de Paralización',
-    config: {
-      field: {
-        required: true,
-      },
-    },
-  }),
-  numeroExpediente: createTextProp({
-    title: 'Número De Expediente',
-    config: {
-      field: {
-        required: true,
-      },
-    },
-  }),
-  fechaReinicio: createDateProp({
-    title: 'Fecha Reinicio',
-  }),
-  nuevaFechaFinObra: createDateProp({
-    title: 'Nueva Fecha Fin de Obra',
-  }),
-  fecha: createDateProp({
-    title: 'Fecha',
-  }),
-  tipoParalizacion: createRefProp({
-    metaModelKey: () => TipoParalizacionMeta,
-  }),
-  area: createRefProp({
-    metaModelKey: () => AreaMeta,
-  }),
-  observaciones: createTextProp({
-    title: 'Observaciones',
-    config: {
-      isLong: true,
-    },
-  }),
-  ...COMMON_PROPS,
-})
+const { propFactories, allFields } = ParalizacionProps
 
-export const ParalizacionMeta = buildMetaModel(
-  {
+export const ParalizacionMeta: MetaModelDefinition<ParalizacionModel.Entity> = {
+  config: {
     key: 'paralizacion',
     service: ParalizacionService,
     refreshRate: 'medium',
@@ -75,9 +18,10 @@ export const ParalizacionMeta = buildMetaModel(
     },
     faIcon: 'fa-solid fa-circle-stop',
     anchorField: 'numeroExpediente',
-    props,
+    propFactories,
   },
-  [
+
+  fieldsByService: [
     {
       methods: [Method.GetAll, Method.GetOne],
       fields: allFields,
@@ -87,4 +31,4 @@ export const ParalizacionMeta = buildMetaModel(
       groups: [{ fields: omitBaseEntity(allFields) }],
     },
   ],
-)
+}

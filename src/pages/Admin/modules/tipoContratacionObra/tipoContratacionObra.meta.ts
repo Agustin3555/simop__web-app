@@ -1,33 +1,34 @@
-import { defineProps, buildMetaModel } from '../../meta'
-import { TIPO_PROPS } from '../../constants/commonProps.const'
 import { Method } from '@/services/config'
 import { omitBaseEntity } from '../../constants/selectors.const'
 import { TipoContratacionObraService } from './tipoContratacionObra.service'
+import { TipoContratacionObraProps } from './tipoContratacionObra.props'
 import { TipoContratacionObraModel } from '.'
+import { MetaModelDefinition } from '../../meta/metaModel'
 
-const { props, allFields } =
-  defineProps<TipoContratacionObraModel.Entity>(TIPO_PROPS)
+const { propFactories, allFields } = TipoContratacionObraProps
 
-export const TipoContratacionObraMeta = buildMetaModel(
+export const TipoContratacionObraMeta: MetaModelDefinition<TipoContratacionObraModel.Entity> =
   {
-    key: 'tipoContratacionObra',
-    service: TipoContratacionObraService,
-    title: {
-      singular: 'Tipo de Contratación de Obra',
-      plural: 'Tipos de Contrataciones de Obra',
+    config: {
+      key: 'tipoContratacionObra',
+      service: TipoContratacionObraService,
+      title: {
+        singular: 'Tipo de Contratación de Obra',
+        plural: 'Tipos de Contrataciones de Obra',
+      },
+      faIcon: 'fa-solid fa-shapes',
+      anchorField: 'nombre',
+      propFactories,
     },
-    faIcon: 'fa-solid fa-shapes',
-    anchorField: 'nombre',
-    props,
-  },
-  [
-    {
-      methods: [Method.GetAll, Method.GetOne],
-      fields: allFields,
-    },
-    {
-      methods: [Method.Create, Method.UpdateOne],
-      groups: [{ fields: omitBaseEntity(allFields) }],
-    },
-  ],
-)
+
+    fieldsByService: [
+      {
+        methods: [Method.GetAll, Method.GetOne],
+        fields: allFields,
+      },
+      {
+        methods: [Method.Create, Method.UpdateOne],
+        groups: [{ fields: omitBaseEntity(allFields) }],
+      },
+    ],
+  }

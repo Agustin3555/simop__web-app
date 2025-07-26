@@ -1,59 +1,14 @@
-import {
-  defineProps,
-  buildMetaModel,
-  createDateProp,
-  createTextProp,
-  createRefProp,
-} from '../../meta'
-import { COMMON_PROPS } from '../../constants/commonProps.const'
 import { Method } from '@/services/config'
 import { omitBaseEntity } from '../../constants/selectors.const'
-import { RescisionModel } from '.'
 import { RescisionService } from './rescision.service'
-import { AreaMeta } from '../area/area.meta'
-import { ObraMeta } from '../obra/obra.meta'
-import { TipoRescisionMeta } from '../tipoRescision/tipoRescision.meta'
+import { RescisionProps } from './rescision.props'
+import { RescisionModel } from '.'
+import { MetaModelDefinition } from '../../meta/metaModel'
 
-const { props, allFields } = defineProps<RescisionModel.Entity>({
-  obra: createRefProp({
-    metaModelKey: () => ObraMeta,
-    config: {
-      field: {
-        required: true,
-      },
-    },
-  }),
-  numeroExpediente: createTextProp({
-    title: 'Número De Expediente',
-    config: {
-      field: {
-        required: true,
-      },
-    },
-  }),
-  numeroResolucion: createTextProp({
-    title: 'Número De Resolución',
-  }),
-  fecha: createDateProp({
-    title: 'Fecha',
-  }),
-  tipoRescision: createRefProp({
-    metaModelKey: () => TipoRescisionMeta,
-  }),
-  area: createRefProp({
-    metaModelKey: () => AreaMeta,
-  }),
-  observaciones: createTextProp({
-    title: 'Observaciones',
-    config: {
-      isLong: true,
-    },
-  }),
-  ...COMMON_PROPS,
-})
+const { propFactories, allFields } = RescisionProps
 
-export const RescisionMeta = buildMetaModel(
-  {
+export const RescisionMeta: MetaModelDefinition<RescisionModel.Entity> = {
+  config: {
     key: 'rescision',
     service: RescisionService,
     refreshRate: 'medium',
@@ -63,9 +18,10 @@ export const RescisionMeta = buildMetaModel(
     },
     faIcon: 'fa-solid fa-ban',
     anchorField: 'numeroExpediente',
-    props,
+    propFactories,
   },
-  [
+
+  fieldsByService: [
     {
       methods: [Method.GetAll, Method.GetOne],
       fields: allFields,
@@ -75,4 +31,4 @@ export const RescisionMeta = buildMetaModel(
       groups: [{ fields: omitBaseEntity(allFields) }],
     },
   ],
-)
+}

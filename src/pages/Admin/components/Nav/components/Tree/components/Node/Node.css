@@ -1,4 +1,4 @@
-.cmp-section {
+.cmp-node {
   display: flex;
   flex-direction: column;
   gap: var(--items-gap);
@@ -9,7 +9,7 @@
   transition: height var(--pal-time-s) ease;
   interpolate-size: allow-keywords;
 
-  > .node {
+  > .content {
     --cmp-icon-size: var(--ui-icon-size);
 
     flex-shrink: 0;
@@ -105,7 +105,7 @@
   &.open {
     height: auto;
 
-    > .node > .cmp-icon {
+    > .content > .cmp-icon {
       rotate: 0.25turn;
     }
   }

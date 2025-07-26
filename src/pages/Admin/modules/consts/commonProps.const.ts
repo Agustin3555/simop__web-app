@@ -1,19 +1,8 @@
-import {
-  createDateProp,
-  createNumberProp,
-  createTextProp,
-  PropFactory,
-} from '../meta'
+import { createDateProp } from '../../meta/date'
+import { createNumberProp } from '../../meta/number'
+import { createTextProp } from '../../meta/text'
 
-type ScalarProps<T> = Record<keyof T, PropFactory>
-
-export interface CommonFields {
-  id: unknown
-  creado: unknown
-  modificado: unknown
-}
-
-export const COMMON_PROPS: ScalarProps<CommonFields> = {
+export const COMMON_PROPS = {
   id: createNumberProp({
     title: 'ID',
     config: {
@@ -42,11 +31,7 @@ export const COMMON_PROPS: ScalarProps<CommonFields> = {
   }),
 }
 
-interface TipoFields extends CommonFields {
-  nombre: unknown
-}
-
-export const TIPO_PROPS: ScalarProps<TipoFields> = {
+export const TIPO_PROPS = {
   nombre: createTextProp({
     title: 'Nombre',
     config: {

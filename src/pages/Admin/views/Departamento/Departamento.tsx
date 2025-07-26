@@ -1,6 +1,5 @@
 import { ModuleView } from '../../components'
-import { DepartamentoMeta } from '../../modules/departamento/departamento.meta'
 
-const Departamento = () => <ModuleView metaModel={DepartamentoMeta} />
+const Departamento = () => <ModuleView metaModelKey={'departamento'} />
 
 export default Departamento

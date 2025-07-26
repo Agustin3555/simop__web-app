@@ -1,85 +1,14 @@
-import {
-  defineProps,
-  buildMetaModel,
-  createDateProp,
-  createTextProp,
-  createRefProp,
-  createNumberProp,
-} from '../../meta'
-import { COMMON_PROPS } from '../../constants/commonProps.const'
 import { Method } from '@/services/config'
 import { omitBaseEntity } from '../../constants/selectors.const'
 import { FojaMedicionService } from './fojaMedicion.service'
 import { FojaMedicionModel } from '.'
-import { AreaMeta } from '../area/area.meta'
-import { InspectorMeta } from '../inspector/inspector.meta'
-import { ObraMeta } from '../obra/obra.meta'
+import { MetaModelDefinition } from '../../meta/metaModel'
+import { FojaMedicionProps } from './fojaMedicion.props'
 
-const { props, allFields } = defineProps<FojaMedicionModel.Entity>({
-  obra: createRefProp({
-    metaModelKey: () => ObraMeta,
-    config: {
-      field: {
-        required: true,
-      },
-    },
-  }),
-  numeroExpediente: createTextProp({
-    title: 'Numero de Expediente de Foja',
-    config: {
-      field: {
-        required: true,
-      },
-    },
-  }),
-  numero: createNumberProp({
-    title: 'Número de foja',
-    config: {
-      field: {
-        required: true,
-      },
-    },
-  }),
-  avance: createNumberProp({
-    title: 'Porcentaje de avance',
-    config: {
-      sub: '%',
-      isDecimal: true,
-    },
-  }),
-  fechaFoja: createDateProp({
-    title: 'Fecha de Solicitud',
-  }),
-  fechaCertificacion: createDateProp({
-    title: 'Fecha Certificación',
-  }),
-  montoTotal: createNumberProp({
-    title: 'Monto Total',
-    config: {
-      pre: '$',
-      isDecimal: true,
-      isMoney: true,
-      isBig: true,
-      calculate: 'sum',
-    },
-  }),
-  inspector: createRefProp({
-    metaModelKey: () => InspectorMeta,
-  }),
-  area: createRefProp({
-    metaModelKey: () => AreaMeta,
-  }),
-  observaciones: createTextProp({
-    title: 'Observaciones',
-    config: {
-      isLong: true,
-    },
-  }),
-  ...COMMON_PROPS,
-})
+const { propFactories, allFields } = FojaMedicionProps
 
-export const FojaMedicionMeta = buildMetaModel(
-  {
+export const FojaMedicionMeta: MetaModelDefinition<FojaMedicionModel.Entity> = {
+  config: {
     key: 'fojaMedicion',
     service: FojaMedicionService,
     refreshRate: 'medium',
@@ -89,9 +18,10 @@ export const FojaMedicionMeta = buildMetaModel(
     },
     faIcon: 'fa-solid fa-clipboard-list',
     anchorField: 'numeroExpediente',
-    props,
+    propFactories,
   },
-  [
+
+  fieldsByService: [
     {
       methods: [Method.GetAll, Method.GetOne],
       fields: allFields,
@@ -101,4 +31,4 @@ export const FojaMedicionMeta = buildMetaModel(
       groups: [{ fields: omitBaseEntity(allFields) }],
     },
   ],
-)
+}

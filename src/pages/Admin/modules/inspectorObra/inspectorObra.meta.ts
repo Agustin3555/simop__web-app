@@ -1,77 +1,35 @@
-import {
-  defineProps,
-  buildMetaModel,
-  createBooleanProp,
-  createDateProp,
-  createRefProp,
-} from '../../meta'
-import { COMMON_PROPS } from '../../constants/commonProps.const'
 import { Method } from '@/services/config'
 import { omitBaseEntity } from '../../constants/selectors.const'
 import { InspectorObraService } from './inspectorObra.service'
 import { InspectorObraModel } from '.'
-import { InspectorMeta } from '../inspector/inspector.meta'
-import { ObraMeta } from '../obra/obra.meta'
-import { TipoInspectorMeta } from '../tipoInspector/tipoInspector.meta'
-import { TipoProfesionMeta } from '../tipoProfesion/tipoProfesion.meta'
+import { MetaModelDefinition } from '../../meta/metaModel'
+import { InspectorObraProps } from './inspectorObra.props'
 
-const { props, allFields } = defineProps<InspectorObraModel.Entity>({
-  obra: createRefProp({
-    metaModelKey: () => ObraMeta,
-    config: {
-      field: {
-        required: true,
-      },
-    },
-  }),
-  inspector: createRefProp({
-    metaModelKey: () => InspectorMeta,
-    config: {
-      field: {
-        required: true,
-      },
-    },
-  }),
-  tipoInspector: createRefProp({
-    metaModelKey: () => TipoInspectorMeta,
-  }),
-  tipoProfesion: createRefProp({
-    metaModelKey: () => TipoProfesionMeta,
-  }),
-  vigencia: createBooleanProp({
-    title: 'Vigencia',
-    config: {
-      falseText: 'No Vigente',
-      trueText: 'Vigente',
-    },
-  }),
-  fecha: createDateProp({
-    title: 'Fecha',
-  }),
-  ...COMMON_PROPS,
-})
+const { propFactories, allFields } = InspectorObraProps
 
-export const InspectorObraMeta = buildMetaModel(
+export const InspectorObraMeta: MetaModelDefinition<InspectorObraModel.Entity> =
   {
-    key: 'inspectorObra',
-    service: InspectorObraService,
-    refreshRate: 'medium',
-    title: {
-      singular: 'Inspector de Obra',
-      plural: 'Inspectores de Obra',
+    config: {
+      key: 'inspectorObra',
+      service: InspectorObraService,
+      refreshRate: 'medium',
+      title: {
+        singular: 'Inspector de Obra',
+        plural: 'Inspectores de Obra',
+      },
+      faIcon: 'fa-solid fa-helmet-safety',
+      anchorField: 'id',
+      propFactories,
     },
-    faIcon: 'fa-solid fa-helmet-safety',
-    anchorField: 'id',
-    props,
-  },
-  [
-    {
-      methods: [Method.GetAll, Method.GetOne],
-      fields: allFields,
-    },
-    {
-      methods: [Method.Create, Method.UpdateOne],
-      groups: [{ fields: omitBaseEntity(allFields) }],
-    },
-  ],
-)
+
+    fieldsByService: [
+      {
+        methods: [Method.GetAll, Method.GetOne],
+        fields: allFields,
+      },
+      {
+        methods: [Method.Create, Method.UpdateOne],
+        groups: [{ fields: omitBaseEntity(allFields) }],
+      },
+    ],
+  }

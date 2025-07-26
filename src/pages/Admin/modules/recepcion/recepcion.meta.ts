@@ -1,57 +1,14 @@
-import {
-  defineProps,
-  buildMetaModel,
-  createDateProp,
-  createTextProp,
-  createRefProp,
-  createNumberProp,
-} from '../../meta'
-import { COMMON_PROPS } from '../../constants/commonProps.const'
 import { Method } from '@/services/config'
 import { omitBaseEntity } from '../../constants/selectors.const'
 import { RecepcionService } from './recepcion.service'
+import { RecepcionProps } from './recepcion.props'
 import { RecepcionModel } from '.'
-import { AreaMeta } from '../area/area.meta'
-import { ObraMeta } from '../obra/obra.meta'
-import { TipoRecepcionMeta } from '../tipoRecepcion/tipoRecepcion.meta'
+import { MetaModelDefinition } from '../../meta/metaModel'
 
-const { props, allFields } = defineProps<RecepcionModel.Entity>({
-  obra: createRefProp({
-    metaModelKey: () => ObraMeta,
-    config: {
-      field: {
-        required: true,
-      },
-    },
-  }),
-  numeroActa: createNumberProp({
-    title: 'Número De Acta',
-    config: {
-      field: {
-        required: true,
-      },
-    },
-  }),
-  fecha: createDateProp({
-    title: 'Fecha',
-  }),
-  tipoRecepcion: createRefProp({
-    metaModelKey: () => TipoRecepcionMeta,
-  }),
-  area: createRefProp({
-    metaModelKey: () => AreaMeta,
-  }),
-  observaciones: createTextProp({
-    title: 'Observaciones',
-    config: {
-      isLong: true,
-    },
-  }),
-  ...COMMON_PROPS,
-})
+const { propFactories, allFields } = RecepcionProps
 
-export const RecepcionMeta = buildMetaModel(
-  {
+export const RecepcionMeta: MetaModelDefinition<RecepcionModel.Entity> = {
+  config: {
     key: 'recepcion',
     service: RecepcionService,
     refreshRate: 'medium',
@@ -61,9 +18,10 @@ export const RecepcionMeta = buildMetaModel(
     },
     faIcon: 'fa-solid fa-handshake',
     anchorField: 'numeroActa',
-    props,
+    propFactories,
   },
-  [
+
+  fieldsByService: [
     {
       methods: [Method.GetAll, Method.GetOne],
       fields: allFields,
@@ -73,4 +31,4 @@ export const RecepcionMeta = buildMetaModel(
       groups: [{ fields: omitBaseEntity(allFields) }],
     },
   ],
-)
+}

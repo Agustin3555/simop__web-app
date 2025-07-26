@@ -1,8 +1,7 @@
 import { ModuleView } from '../../components'
-import { TipoOrigenFinanciamientoObraMeta } from '../../modules/tipoOrigenFinanciamientoObra/tipoOrigenFinanciamientoObra.meta'
 
 const TipoOrigenFinanciamientoObra = () => (
-  <ModuleView metaModel={TipoOrigenFinanciamientoObraMeta} />
+  <ModuleView metaModelKey={'tipoOrigenFinanciamientoObra'} />
 )
 
 export default TipoOrigenFinanciamientoObra

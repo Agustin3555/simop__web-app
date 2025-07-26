@@ -1,6 +1,5 @@
 import { ModuleView } from '../../components'
-import { TipoModificacionMeta } from '../../modules/tipoModificacion/tipoModificacion.meta'
 
-const TipoModificacion = () => <ModuleView metaModel={TipoModificacionMeta} />
+const TipoModificacion = () => <ModuleView metaModelKey={'tipoModificacion'} />
 
 export default TipoModificacion

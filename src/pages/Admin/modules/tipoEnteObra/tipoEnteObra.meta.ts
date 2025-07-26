@@ -1,14 +1,14 @@
-import { defineProps, buildMetaModel } from '../../meta'
-import { TIPO_PROPS } from '../../constants/commonProps.const'
 import { Method } from '@/services/config'
 import { omitBaseEntity } from '../../constants/selectors.const'
 import { TipoEnteObraService } from './tipoEnteObra.service'
+import { TipoEnteObraProps } from './tipoEnteObra.props'
 import { TipoEnteObraModel } from '.'
+import { MetaModelDefinition } from '../../meta/metaModel'
 
-const { props, allFields } = defineProps<TipoEnteObraModel.Entity>(TIPO_PROPS)
+const { propFactories, allFields } = TipoEnteObraProps
 
-export const TipoEnteObraMeta = buildMetaModel(
-  {
+export const TipoEnteObraMeta: MetaModelDefinition<TipoEnteObraModel.Entity> = {
+  config: {
     key: 'tipoEnteObra',
     service: TipoEnteObraService,
     title: {
@@ -17,9 +17,10 @@ export const TipoEnteObraMeta = buildMetaModel(
     },
     faIcon: 'fa-solid fa-shapes',
     anchorField: 'nombre',
-    props,
+    propFactories,
   },
-  [
+
+  fieldsByService: [
     {
       methods: [Method.GetAll, Method.GetOne],
       fields: allFields,
@@ -29,4 +30,4 @@ export const TipoEnteObraMeta = buildMetaModel(
       groups: [{ fields: omitBaseEntity(allFields) }],
     },
   ],
-)
+}

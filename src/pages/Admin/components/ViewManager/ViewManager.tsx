@@ -1,6 +1,11 @@
+console.log('ViewManager')
+
 import './ViewManager.css'
-import { FavoriteViews } from '..'
+import FavoriteViews from '../FavoriteViews/FavoriteViews'
 import Ampliacion from '../../views/Ampliacion/Ampliacion'
+import APG from '../../views/APG/APG'
+import Area from '../../views/Area/Area'
+import Departamento from '../../views/Departamento/Departamento'
 import Empresa from '../../views/Empresa/Empresa'
 import FojaMedicion from '../../views/FojaMedicion/FojaMedicion'
 import Inspector from '../../views/Inspector/Inspector'
@@ -14,6 +19,7 @@ import ObraTotales from '../../views/ObraTotales/ObraTotales'
 import PagoCertificacion from '../../views/PagoCertificacion/PagoCertificacion'
 import Pais from '../../views/Pais/Pais'
 import Paralizacion from '../../views/Paralizacion/Paralizacion'
+import PlanificacionGeografica from '../../views/PlanificacionGeografica/PlanificacionGeografica'
 import Provincia from '../../views/Provincia/Provincia'
 import Recepcion from '../../views/Recepcion/Recepcion'
 import Redeterminacion from '../../views/Redeterminacion/Redeterminacion'
@@ -22,10 +28,13 @@ import RepresentanteEmpresa from '../../views/RepresentanteEmpresa/Representante
 import RepresentanteObra from '../../views/RepresentanteObra/RepresentanteObra'
 import Rescision from '../../views/Rescision/Rescision'
 import TipoContratacionObra from '../../views/TipoContratacionObra/TipoContratacionObra'
+import TipoEnteObra from '../../views/TipoEnteObra/TipoEnteObra'
 import TipoEstadoObra from '../../views/TipoEstadoObra/TipoEstadoObra'
 import TipoFinanciamientoObra from '../../views/TipoFinanciamientoObra/TipoFinanciamientoObra'
 import TipoInspector from '../../views/TipoInspector/TipoInspector'
 import TipoModificacion from '../../views/TipoModificacion/TipoModificacion'
+import TipoNivelArea from '../../views/TipoNivelArea/TipoNivelArea'
+import TipoOrigenFinanciamientoObra from '../../views/TipoOrigenFinanciamientoObra/TipoOrigenFinanciamientoObra'
 import TipoParalizacion from '../../views/TipoParalizacion/TipoParalizacion'
 import TipoProfesion from '../../views/TipoProfesion/TipoProfesion'
 import TipoProgramaObra from '../../views/TipoProgramaObra/TipoProgramaObra'
@@ -34,60 +43,53 @@ import TipoRedeterminacion from '../../views/TipoRedeterminacion/TipoRedetermina
 import TipoRepresentante from '../../views/TipoRepresentante/TipoRepresentante'
 import TipoRescision from '../../views/TipoRescision/TipoRescision'
 import TipoTematicaObra from '../../views/TipoTematicaObra/TipoTematicaObra'
-import Area from '../../views/Area/Area'
-import TipoNivelArea from '../../views/TipoNivelArea/TipoNivelArea'
-import TipoEnteObra from '../../views/TipoEnteObra/TipoEnteObra'
-import TipoOrigenFinanciamientoObra from '../../views/TipoOrigenFinanciamientoObra/TipoOrigenFinanciamientoObra'
-import PlanificacionGeografica from '../../views/PlanificacionGeografica/PlanificacionGeografica'
-import APG from '../../views/APG/APG'
-import Departamento from '../../views/Departamento/Departamento'
 
 const ViewManager = () => (
   <div className="cmp-view-manager">
     <div className="default">
       <FavoriteViews />
     </div>
-    <Area />
-    <Pais />
-    <Provincia />
-    <APG />
-    <Departamento />
-    <Localidad />
-    <TipoNivelArea />
-    <TipoProfesion />
-    <TipoInspector />
-    <TipoRepresentante />
-    <TipoEnteObra />
-    <TipoContratacionObra />
-    <TipoOrigenFinanciamientoObra />
-    <TipoFinanciamientoObra />
-    <TipoProgramaObra />
-    <TipoTematicaObra />
-    <TipoEstadoObra />
-    <TipoRedeterminacion />
-    <TipoModificacion />
-    <TipoParalizacion />
-    <TipoRescision />
-    <TipoRecepcion />
-    <Inspector />
-    <Representante />
-    <Empresa />
-    <RepresentanteEmpresa />
-    <Obra />
-    <RepresentanteObra />
-    <InspectorObra />
-    <FojaMedicion />
-    <PagoCertificacion />
-    <Redeterminacion />
     <Ampliacion />
+    <APG />
+    <Area />
+    <Departamento />
+    <Empresa />
+    <FojaMedicion />
+    <Inspector />
+    <InspectorObra />
+    <Localidad />
     <Modificacion />
-    <Paralizacion />
-    <Rescision />
-    <Recepcion />
+    <Obra />
+    <ObraDetalle />
     <ObraGeneral />
     <ObraTotales />
-    <ObraDetalle />
+    <PagoCertificacion />
+    <Pais />
+    <Paralizacion />
     <PlanificacionGeografica />
+    <Provincia />
+    <Recepcion />
+    <Redeterminacion />
+    <Representante />
+    <RepresentanteEmpresa />
+    <RepresentanteObra />
+    <Rescision />
+    <TipoContratacionObra />
+    <TipoEnteObra />
+    <TipoEstadoObra />
+    <TipoFinanciamientoObra />
+    <TipoInspector />
+    <TipoModificacion />
+    <TipoNivelArea />
+    <TipoOrigenFinanciamientoObra />
+    <TipoParalizacion />
+    <TipoProfesion />
+    <TipoProgramaObra />
+    <TipoRecepcion />
+    <TipoRedeterminacion />
+    <TipoRepresentante />
+    <TipoRescision />
+    <TipoTematicaObra />
   </div>
 )
 

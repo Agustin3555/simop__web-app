@@ -1,68 +1,14 @@
-import {
-  buildMetaModel,
-  defineProps,
-  createDateProp,
-  createTextProp,
-  createRefProp,
-  createNumberProp,
-} from '../../meta'
-import { COMMON_PROPS } from '../../constants/commonProps.const'
 import { Method } from '@/services/config'
 import { omitBaseEntity } from '../../constants/selectors.const'
 import { AmpliacionService } from './ampliacion.service'
+import { MetaModelDefinition } from '../../meta/metaModel'
+import { AmpliacionProps } from './ampliacion.props'
 import { AmpliacionModel } from '.'
-import { ObraMeta } from '../obra/obra.meta'
-import { AreaMeta } from '../area/area.meta'
 
-const { props, allFields } = defineProps<AmpliacionModel.Entity>({
-  obra: createRefProp({
-    getMetaModel: () => ObraMeta,
-    config: {
-      field: {
-        required: true,
-      },
-    },
-  }),
-  numero: createNumberProp({
-    title: 'Número De Ampliación',
-    config: {
-      field: {
-        required: true,
-      },
-    },
-  }),
-  numeroResolucion: createTextProp({
-    title: 'Número De Resolución',
-  }),
-  numeroExpedienteSolicitud: createTextProp({
-    title: 'Número de Expediente de Solicitud',
-  }),
-  plazoMesesSolicitado: createNumberProp({
-    title: 'Plazo de Meses Solicitado',
-  }),
-  plazoMesesOtorgado: createNumberProp({
-    title: 'Plazo de Meses Otorgado',
-  }),
-  nuevaFechaFinObra: createDateProp({
-    title: 'Nueva Fecha Fin De Obra',
-  }),
-  fecha: createDateProp({
-    title: 'Fecha',
-  }),
-  observaciones: createTextProp({
-    title: 'Observaciones',
-    config: {
-      isLong: true,
-    },
-  }),
-  area: createRefProp({
-    getMetaModel: () => AreaMeta,
-  }),
-  ...COMMON_PROPS,
-})
+const { propFactories, allFields } = AmpliacionProps
 
-export const AmpliacionMeta = buildMetaModel(
-  {
+export const AmpliacionMeta: MetaModelDefinition<AmpliacionModel.Entity> = {
+  config: {
     key: 'ampliacion',
     service: AmpliacionService,
     refreshRate: 'medium',
@@ -73,9 +19,10 @@ export const AmpliacionMeta = buildMetaModel(
     faIcon: 'fa-solid fa-expand',
 
     anchorField: 'numeroExpedienteSolicitud',
-    props,
+    propFactories,
   },
-  [
+
+  fieldsByService: [
     {
       methods: [Method.GetAll, Method.GetOne],
       fields: allFields,
@@ -85,4 +32,4 @@ export const AmpliacionMeta = buildMetaModel(
       groups: [{ fields: omitBaseEntity(allFields) }],
     },
   ],
-)
+}

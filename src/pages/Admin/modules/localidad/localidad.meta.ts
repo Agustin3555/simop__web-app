@@ -1,40 +1,14 @@
-import {
-  defineProps,
-  buildMetaModel,
-  createTextProp,
-  createRefProp,
-  createNumberProp,
-} from '../../meta'
-import { COMMON_PROPS } from '../../constants/commonProps.const'
 import { Method } from '@/services/config'
 import { omitBaseEntity } from '../../constants/selectors.const'
 import { LocalidadService } from './localidad.service'
-import { DepartamentoMeta } from '../departamento/departamento.meta'
 import { LocalidadModel } from '.'
+import { LocalidadProps } from './localidad.props'
+import { MetaModelDefinition } from '../../meta/metaModel'
 
-const { props, allFields } = defineProps<LocalidadModel.Entity>({
-  nombre: createTextProp({
-    title: 'Nombre',
-    config: {
-      field: {
-        required: true,
-      },
-    },
-  }),
-  departamento: createRefProp({
-    metaModelKey: () => DepartamentoMeta,
-  }),
-  osmId: createNumberProp({
-    title: 'OSM ID',
-    config: {
-      isBig: true,
-    },
-  }),
-  ...COMMON_PROPS,
-})
+const { propFactories, allFields } = LocalidadProps
 
-export const LocalidadMeta = buildMetaModel(
-  {
+export const LocalidadMeta: MetaModelDefinition<LocalidadModel.Entity> = {
+  config: {
     key: 'localidad',
     title: {
       singular: 'Localidad',
@@ -45,9 +19,10 @@ export const LocalidadMeta = buildMetaModel(
     service: LocalidadService,
     refreshRate: 'low',
     anchorField: 'nombre',
-    props,
+    propFactories,
   },
-  [
+
+  fieldsByService: [
     {
       methods: [Method.GetAll, Method.GetOne],
       fields: allFields,
@@ -57,4 +32,4 @@ export const LocalidadMeta = buildMetaModel(
       groups: [{ fields: omitBaseEntity(allFields) }],
     },
   ],
-)
+}

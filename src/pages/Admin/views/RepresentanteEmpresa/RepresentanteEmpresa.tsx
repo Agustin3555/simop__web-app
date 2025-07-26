@@ -1,8 +1,7 @@
 import { ModuleView } from '../../components'
-import { RepresentanteEmpresaMeta } from '../../modules/representanteEmpresa/representanteEmpresa.meta'
 
 const RepresentanteEmpresa = () => (
-  <ModuleView metaModel={RepresentanteEmpresaMeta} />
+  <ModuleView metaModelKey={'representanteEmpresa'} />
 )
 
 export default RepresentanteEmpresa

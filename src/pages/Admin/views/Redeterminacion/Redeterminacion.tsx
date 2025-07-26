@@ -1,6 +1,5 @@
 import { ModuleView } from '../../components'
-import { RedeterminacionMeta } from '../../modules/redeterminacion/redeterminacion.meta'
 
-const Redeterminacion = () => <ModuleView metaModel={RedeterminacionMeta} />
+const Redeterminacion = () => <ModuleView metaModelKey={'redeterminacion'} />
 
 export default Redeterminacion

@@ -1,89 +1,35 @@
-import { COMMON_PROPS } from '../../constants/commonProps.const'
-import {
-  defineProps,
-  buildMetaModel,
-  createDateProp,
-  createTextProp,
-  createRefProp,
-  createNumberProp,
-} from '../../meta'
 import { Method } from '@/services/config'
 import { omitBaseEntity } from '../../constants/selectors.const'
 import { PagoCertificacionService } from './pagoCertificacion.service'
+import { PagoCertificacionProps } from './pagoCertificacion.props'
 import { PagoCertificacionModel } from '.'
-import { AreaMeta } from '../area/area.meta'
-import { FojaMedicionMeta } from '../fojaMedicion/fojaMedicion.meta'
-import { RedeterminacionMeta } from '../redeterminacion/redeterminacion.meta'
+import { MetaModelDefinition } from '../../meta/metaModel'
 
-const { props, allFields } = defineProps<PagoCertificacionModel.Entity>({
-  numero: createNumberProp({
-    title: 'Número de Pago',
-    config: {
-      field: {
-        required: true,
-      },
-    },
-  }),
-  ordenPago: createTextProp({
-    title: 'Orden de pago',
-    config: {
-      field: {
-        required: true,
-      },
-    },
-  }),
-  fecha: createDateProp({
-    title: 'Fecha de Pago',
-  }),
-  monto: createNumberProp({
-    title: 'Monto orden de pago',
-    config: {
-      pre: '$',
-      isDecimal: true,
-      isMoney: true,
-      isBig: true,
-      calculate: 'sum',
-    },
-  }),
-  fojaMedicion: createRefProp({
-    metaModelKey: () => FojaMedicionMeta,
-  }),
-  redeterminacion: createRefProp({
-    metaModelKey: () => RedeterminacionMeta,
-  }),
-  area: createRefProp({
-    metaModelKey: () => AreaMeta,
-  }),
-  observaciones: createTextProp({
-    title: 'Observaciones',
-    config: {
-      isLong: true,
-    },
-  }),
-  ...COMMON_PROPS,
-})
+const { propFactories, allFields } = PagoCertificacionProps
 
-export const PagoCertificacionMeta = buildMetaModel(
+export const PagoCertificacionMeta: MetaModelDefinition<PagoCertificacionModel.Entity> =
   {
-    key: 'pagoCertificacion',
-    service: PagoCertificacionService,
-    refreshRate: 'medium',
-    title: {
-      singular: 'Pago de Certificación',
-      plural: 'Pagos de Certificación',
+    config: {
+      key: 'pagoCertificacion',
+      service: PagoCertificacionService,
+      refreshRate: 'medium',
+      title: {
+        singular: 'Pago de Certificación',
+        plural: 'Pagos de Certificación',
+      },
+      faIcon: 'fa-solid fa-file-invoice-dollar',
+      anchorField: 'numero',
+      propFactories,
     },
-    faIcon: 'fa-solid fa-file-invoice-dollar',
-    anchorField: 'numero',
-    props,
-  },
-  [
-    {
-      methods: [Method.GetAll, Method.GetOne],
-      fields: allFields,
-    },
-    {
-      methods: [Method.Create, Method.UpdateOne],
-      groups: [{ fields: omitBaseEntity(allFields) }],
-    },
-  ],
-)
+
+    fieldsByService: [
+      {
+        methods: [Method.GetAll, Method.GetOne],
+        fields: allFields,
+      },
+      {
+        methods: [Method.Create, Method.UpdateOne],
+        groups: [{ fields: omitBaseEntity(allFields) }],
+      },
+    ],
+  }

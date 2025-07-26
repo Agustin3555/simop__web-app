@@ -1,8 +1,8 @@
 import { select } from '../helpers'
-import { CommonFields } from './commonProps.const'
+import { COMMON_PROPS } from '../modules/consts/commonProps.const'
 
 export const omitBaseEntity = <T>(source: T[]) => {
-  const targets: (keyof CommonFields)[] = ['id', 'creado', 'modificado']
+  const targets: (keyof typeof COMMON_PROPS)[] = ['id', 'creado', 'modificado']
 
   return select(source, 'except', targets as T[])
 }

@@ -1,33 +1,34 @@
-import { defineProps, buildMetaModel } from '../../meta'
-import { TIPO_PROPS } from '../../constants/commonProps.const'
 import { Method } from '@/services/config'
 import { omitBaseEntity } from '../../constants/selectors.const'
 import { TipoModificacionService } from './tipoModificacion.service'
+import { TipoModificacionProps } from './tipoModificacion.props'
 import { TipoModificacionModel } from '.'
+import { MetaModelDefinition } from '../../meta/metaModel'
 
-const { props, allFields } =
-  defineProps<TipoModificacionModel.Entity>(TIPO_PROPS)
+const { propFactories, allFields } = TipoModificacionProps
 
-export const TipoModificacionMeta = buildMetaModel(
+export const TipoModificacionMeta: MetaModelDefinition<TipoModificacionModel.Entity> =
   {
-    key: 'tipoModificacion',
-    service: TipoModificacionService,
-    title: {
-      singular: 'Tipo de Modificación',
-      plural: 'Tipos de Modificaciones',
+    config: {
+      key: 'tipoModificacion',
+      service: TipoModificacionService,
+      title: {
+        singular: 'Tipo de Modificación',
+        plural: 'Tipos de Modificaciones',
+      },
+      faIcon: 'fa-solid fa-shapes',
+      anchorField: 'nombre',
+      propFactories,
     },
-    faIcon: 'fa-solid fa-shapes',
-    anchorField: 'nombre',
-    props,
-  },
-  [
-    {
-      methods: [Method.GetAll, Method.GetOne],
-      fields: allFields,
-    },
-    {
-      methods: [Method.Create, Method.UpdateOne],
-      groups: [{ fields: omitBaseEntity(allFields) }],
-    },
-  ],
-)
+
+    fieldsByService: [
+      {
+        methods: [Method.GetAll, Method.GetOne],
+        fields: allFields,
+      },
+      {
+        methods: [Method.Create, Method.UpdateOne],
+        groups: [{ fields: omitBaseEntity(allFields) }],
+      },
+    ],
+  }

@@ -1,4 +1,4 @@
-import { RefreshRate } from '../meta'
+import { RefreshRate } from '../meta/metaModel'
 
 const minToMs = (minutes: number) => 1000 * 60 * minutes
 

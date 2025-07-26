@@ -1,6 +1,5 @@
 import { ModuleView } from '../../components'
-import { PaisMeta } from '../../modules/pais/pais.meta'
 
-const Pais = () => <ModuleView metaModel={PaisMeta} />
+const Pais = () => <ModuleView metaModelKey={'pais'} />
 
 export default Pais

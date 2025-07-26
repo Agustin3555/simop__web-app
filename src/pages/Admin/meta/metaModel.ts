@@ -1,52 +1,58 @@
 import { Method, Service } from '@/services/config'
 import { PropFactory, Prop } from './utils'
 import { LooseEntity } from '@/models/config'
+import { MetaModelsContextProps } from '../contexts'
 
 export type RefreshRate = 'high' | 'medium' | 'low'
 
-type FieldsByService<E> = {
-  methods: (Method | string)[]
-  fields?: (keyof E)[]
-  groups?: {
-    key?: string
-    title?: string
-    fields: (keyof E)[]
-  }[]
-}[]
+type PropFactories<E> = Record<keyof E, PropFactory>
 
-interface Config<E> {
-  key: string
-  title: {
-    singular: string
-    plural: string
+export interface MetaModelDefinition<E = LooseEntity> {
+  config: {
+    key: string
+    title: {
+      singular: string
+      plural: string
+    }
+    faIcon?: string
+
+    service: Service<E>
+    refreshRate?: RefreshRate
+    anchorField: keyof E
+    propFactories: PropFactories<E>
   }
-  faIcon?: string
 
-  service: Service<E>
-  refreshRate?: RefreshRate
-  anchorField: keyof E
-  props: Record<keyof E, Prop>
+  fieldsByService: {
+    methods: (Method | string)[]
+    fields?: (keyof E)[]
+    groups?: {
+      key?: string
+      title?: string
+      fields: (keyof E)[]
+    }[]
+  }[]
 }
 
-export const defineProps = <E>(propsFactory: Record<keyof E, PropFactory>) => {
-  const props: Record<string, Prop> = {}
+export const defineProps = <E>(propFactories: PropFactories<E>) => {
+  const allFields = Object.keys(propFactories) as (keyof E)[]
 
-  Object.entries<PropFactory>(propsFactory).forEach(
-    ([key, propFactory]) => (props[key] = propFactory(key)),
-  )
-
-  const allFields = Object.keys(propsFactory) as (keyof E)[]
-
-  return { props, allFields }
+  return { propFactories, allFields }
 }
 
 export type MetaModel<E = LooseEntity> = ReturnType<typeof buildMetaModel<E>>
 
 export const buildMetaModel = <E = LooseEntity>(
-  config: Config<E>,
-  fieldsByService: FieldsByService<E>,
+  { config, fieldsByService }: MetaModelDefinition<E>,
+  getMetaModel: MetaModelsContextProps['getMetaModel'],
 ) => {
-  const { props } = config
+  const { propFactories, ...configRest } = config
+
+  const props = {} as Record<keyof E, Prop>
+
+  Object.entries<PropFactory>(propFactories).forEach(
+    ([key, propFactory]) =>
+      (props[key as keyof E] = propFactory(key, getMetaModel)),
+  )
 
   const findServiceEntry = (method: Method | string) =>
     fieldsByService?.find(({ methods }) => methods.includes(method))
@@ -87,7 +93,8 @@ export const buildMetaModel = <E = LooseEntity>(
   }
 
   return {
-    ...config,
+    ...configRest,
+    props,
     getFields,
     getPropFields,
     getPropFieldsRecord,

@@ -1,24 +1,14 @@
-import { defineProps, buildMetaModel, createTextProp } from '../../meta'
-import { COMMON_PROPS } from '../../constants/commonProps.const'
 import { Method } from '@/services/config'
 import { omitBaseEntity } from '../../constants/selectors.const'
 import { PaisService } from './pais.service'
+import { MetaModelDefinition } from '../../meta/metaModel'
 import { PaisModel } from '.'
+import { PaisProps } from './pais.props'
 
-const { props, allFields } = defineProps<PaisModel.Entity>({
-  nombre: createTextProp({
-    title: 'Nombre',
-    config: {
-      field: {
-        required: true,
-      },
-    },
-  }),
-  ...COMMON_PROPS,
-})
+const { propFactories, allFields } = PaisProps
 
-export const PaisMeta = buildMetaModel(
-  {
+export const PaisMeta: MetaModelDefinition<PaisModel.Entity> = {
+  config: {
     key: 'pais',
     service: PaisService,
     title: {
@@ -27,9 +17,10 @@ export const PaisMeta = buildMetaModel(
     },
     faIcon: 'fa-solid fa-earth-americas',
     anchorField: 'nombre',
-    props,
+    propFactories,
   },
-  [
+
+  fieldsByService: [
     {
       methods: [Method.GetAll, Method.GetOne],
       fields: allFields,
@@ -39,4 +30,4 @@ export const PaisMeta = buildMetaModel(
       groups: [{ fields: omitBaseEntity(allFields) }],
     },
   ],
-)
+}

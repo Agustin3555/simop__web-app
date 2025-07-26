@@ -1,6 +1,5 @@
 import { ModuleView } from '../../components'
-import { TipoNivelAreaMeta } from '../../modules/tipoNivelArea/tipoNivelArea.meta'
 
-const TipoNivelArea = () => <ModuleView metaModel={TipoNivelAreaMeta} />
+const TipoNivelArea = () => <ModuleView metaModelKey={'tipoNivelArea'} />
 
 export default TipoNivelArea

@@ -4,12 +4,12 @@ import { useAddFieldReset } from '../../hooks'
 import { useQuery } from '@tanstack/react-query'
 import { Control } from '@/types'
 import { LooseEntity } from '@/models/config'
-import { MetaModel } from '../../meta'
 import { REFETCH_INTERVALS } from '../../constants/refetchIntervals.const'
 import { Button } from '@/components'
 import { OptionSelectors } from '..'
 import BaseCombobox, { BaseComboboxProps } from '../BaseCombobox/BaseCombobox'
 import { baseSorter, extractKeys } from '../../helpers'
+import { MetaModel } from '../../meta/metaModel'
 
 export interface AutoComboboxProps
   extends Control,

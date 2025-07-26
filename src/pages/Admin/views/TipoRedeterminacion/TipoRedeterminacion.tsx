@@ -1,8 +1,7 @@
 import { ModuleView } from '../../components'
-import { TipoRedeterminacionMeta } from '../../modules/tipoRedeterminacion/tipoRedeterminacion.meta'
 
 const TipoRedeterminacion = () => (
-  <ModuleView metaModel={TipoRedeterminacionMeta} />
+  <ModuleView metaModelKey={'tipoRedeterminacion'} />
 )
 
 export default TipoRedeterminacion

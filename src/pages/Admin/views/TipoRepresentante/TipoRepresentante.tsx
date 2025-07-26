@@ -1,6 +1,7 @@
 import { ModuleView } from '../../components'
-import { TipoRepresentanteMeta } from '../../modules/tipoRepresentante/tipoRepresentante.meta'
 
-const TipoRepresentante = () => <ModuleView metaModel={TipoRepresentanteMeta} />
+const TipoRepresentante = () => (
+  <ModuleView metaModelKey={'tipoRepresentante'} />
+)
 
 export default TipoRepresentante

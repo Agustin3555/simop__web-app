@@ -1,0 +1,45 @@
+import { COMMON_PROPS } from '../consts/commonProps.const'
+import { EmpresaModel } from '.'
+import { defineProps } from '../../meta/metaModel'
+import { createNumberProp } from '../../meta/number'
+import { createRefProp } from '../../meta/ref'
+import { createTextProp } from '../../meta/text'
+
+export const EmpresaProps = defineProps<EmpresaModel.Entity>({
+  cuit: createNumberProp({
+    title: 'CUIT',
+    config: {
+      isBig: true,
+    },
+  }),
+  nombre: createTextProp({
+    title: 'Nombre',
+    config: {
+      field: {
+        required: true,
+      },
+    },
+  }),
+  direccion: createTextProp({
+    title: 'Dirección declarada',
+  }),
+  numeroContacto: createNumberProp({
+    title: 'Número de contacto',
+    config: {
+      isBig: true,
+    },
+  }),
+  email: createTextProp({
+    title: 'Email',
+  }),
+  pais: createRefProp({
+    metaModelKey: 'pais',
+  }),
+  provincia: createRefProp({
+    metaModelKey: 'provincia',
+  }),
+  localidad: createRefProp({
+    metaModelKey: 'localidad',
+  }),
+  ...COMMON_PROPS,
+})

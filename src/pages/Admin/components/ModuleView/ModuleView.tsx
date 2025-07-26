@@ -1,15 +1,16 @@
 import { useCallback, useMemo, useState } from 'react'
+import { useMetaModels } from '../../hooks'
 import { RowSelectionContext, MetaModelContext } from '../../contexts'
-import { MetaModel } from '../../meta'
 import { addIf } from '@/helpers'
 import { RowSelectionState } from '@tanstack/react-table'
 import { LocalAdd, LocalEdit, LocalQuery, View } from '..'
 import { LocalView, ViewProps } from '../View/View'
 import { LocalQueryProps } from '../LocalQuery/LocalQuery'
+import { MetaModelKey } from '../../constants/metaModelKey.const'
 
 interface ModuleViewProps {
   view?: Partial<ViewProps>
-  metaModel: MetaModel
+  metaModelKey: MetaModelKey
   query?: boolean | LocalQueryProps
   add?: boolean
   edit?: boolean
@@ -17,12 +18,13 @@ interface ModuleViewProps {
 
 const ModuleView = ({
   view,
-  metaModel,
+  metaModelKey,
   query = true,
   add = true,
   edit = true,
 }: ModuleViewProps) => {
-  const { key, title } = metaModel
+  const { getMetaModel } = useMetaModels()
+  const metaModel = getMetaModel(metaModelKey)
 
   const localViews = useMemo(
     () => [
@@ -64,17 +66,24 @@ const ModuleView = ({
   const deselectRows = useCallback(() => setRowSelection({}), [])
 
   return (
-    <MetaModelContext.Provider value={metaModel}>
-      <RowSelectionContext.Provider
-        value={{ rowSelection, setRowSelection, selectedRowIds, deselectRows }}
-      >
-        <View
-          viewKey={view?.viewKey ?? key}
-          title={view?.title ?? title.plural}
-          {...{ localViews }}
-        />
-      </RowSelectionContext.Provider>
-    </MetaModelContext.Provider>
+    metaModel && (
+      <MetaModelContext.Provider value={metaModel}>
+        <RowSelectionContext.Provider
+          value={{
+            rowSelection,
+            setRowSelection,
+            selectedRowIds,
+            deselectRows,
+          }}
+        >
+          <View
+            viewKey={view?.viewKey ?? metaModel.key}
+            title={view?.title ?? metaModel.title.plural}
+            {...{ localViews }}
+          />
+        </RowSelectionContext.Provider>
+      </MetaModelContext.Provider>
+    )
   )
 }
 

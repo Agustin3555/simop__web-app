@@ -1,77 +1,35 @@
-import {
-  defineProps,
-  buildMetaModel,
-  createTextProp,
-  createRefProp,
-  createNumberProp,
-} from '../../meta'
-import { COMMON_PROPS } from '../../constants/commonProps.const'
 import { Method } from '@/services/config'
 import { omitBaseEntity } from '../../constants/selectors.const'
 import { RepresentanteService } from './representante.service'
+import { RepresentanteProps } from './representante.props'
 import { RepresentanteModel } from '.'
-import { LocalidadMeta } from '../localidad/localidad.meta'
-import { PaisMeta } from '../pais/pais.meta'
-import { ProvinciaMeta } from '../provincia/provincia.meta'
+import { MetaModelDefinition } from '../../meta/metaModel'
 
-const { props, allFields } = defineProps<RepresentanteModel.Entity>({
-  cuil: createNumberProp({
-    title: 'CUIL',
-    config: {
-      isBig: true,
-      field: {
-        required: true,
-      },
-    },
-  }),
-  apellido: createTextProp({
-    title: 'Apellido',
-    config: {
-      field: { required: true },
-    },
-  }),
-  nombre: createTextProp({
-    title: 'Nombre',
-  }),
-  direccion: createTextProp({
-    title: 'Dirección',
-  }),
-  numeroMatricula: createTextProp({
-    title: 'Número de Matricula',
-  }),
-  pais: createRefProp({
-    metaModelKey: () => PaisMeta,
-  }),
-  provincia: createRefProp({
-    metaModelKey: () => ProvinciaMeta,
-  }),
-  localidad: createRefProp({
-    metaModelKey: () => LocalidadMeta,
-  }),
-  ...COMMON_PROPS,
-})
+const { propFactories, allFields } = RepresentanteProps
 
-export const RepresentanteMeta = buildMetaModel(
+export const RepresentanteMeta: MetaModelDefinition<RepresentanteModel.Entity> =
   {
-    key: 'representante',
-    service: RepresentanteService,
-    refreshRate: 'low',
-    title: {
-      singular: 'Representante',
-      plural: 'Representantes',
+    config: {
+      key: 'representante',
+      service: RepresentanteService,
+      refreshRate: 'low',
+      title: {
+        singular: 'Representante',
+        plural: 'Representantes',
+      },
+      faIcon: 'fa-solid fa-user-tie',
+      anchorField: 'apellido',
+      propFactories,
     },
-    faIcon: 'fa-solid fa-user-tie',
-    anchorField: 'apellido',
-    props,
-  },
-  [
-    {
-      methods: [Method.GetAll, Method.GetOne],
-      fields: allFields,
-    },
-    {
-      methods: [Method.Create, Method.UpdateOne],
-      groups: [{ fields: omitBaseEntity(allFields) }],
-    },
-  ],
-)
+
+    fieldsByService: [
+      {
+        methods: [Method.GetAll, Method.GetOne],
+        fields: allFields,
+      },
+      {
+        methods: [Method.Create, Method.UpdateOne],
+        groups: [{ fields: omitBaseEntity(allFields) }],
+      },
+    ],
+  }

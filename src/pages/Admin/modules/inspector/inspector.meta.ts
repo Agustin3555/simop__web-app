@@ -1,46 +1,14 @@
-import {
-  defineProps,
-  buildMetaModel,
-  createRefListProp,
-  createTextProp,
-  createNumberProp,
-} from '../../meta'
-import { COMMON_PROPS } from '../../constants/commonProps.const'
 import { Method } from '@/services/config'
 import { omitBaseEntity } from '../../constants/selectors.const'
 import { InspectorService } from './inspector.service'
 import { InspectorModel } from '.'
-import { TipoProfesionMeta } from '../tipoProfesion/tipoProfesion.meta'
+import { MetaModelDefinition } from '../../meta/metaModel'
+import { InspectorProps } from './inspector.props'
 
-const { props, allFields } = defineProps<InspectorModel.Entity>({
-  cuil: createNumberProp({
-    title: 'CUIL',
-    config: {
-      isBig: true,
-      field: {
-        required: true,
-      },
-    },
-  }),
-  apellido: createTextProp({
-    title: 'Apellido',
-    config: {
-      field: {
-        required: true,
-      },
-    },
-  }),
-  nombre: createTextProp({
-    title: 'Nombre',
-  }),
-  profesiones: createRefListProp({
-    metaModelKey: () => TipoProfesionMeta,
-  }),
-  ...COMMON_PROPS,
-})
+const { propFactories, allFields } = InspectorProps
 
-export const InspectorMeta = buildMetaModel(
-  {
+export const InspectorMeta: MetaModelDefinition<InspectorModel.Entity> = {
+  config: {
     key: 'inspector',
     service: InspectorService,
     refreshRate: 'low',
@@ -50,9 +18,10 @@ export const InspectorMeta = buildMetaModel(
     },
     faIcon: 'fa-solid fa-helmet-safety',
     anchorField: 'apellido',
-    props,
+    propFactories,
   },
-  [
+
+  fieldsByService: [
     {
       methods: [Method.GetAll, Method.GetOne],
       fields: allFields,
@@ -62,4 +31,4 @@ export const InspectorMeta = buildMetaModel(
       groups: [{ fields: omitBaseEntity(allFields) }],
     },
   ],
-)
+}

@@ -1,33 +1,34 @@
-import { defineProps, buildMetaModel } from '../../meta'
-import { TIPO_PROPS } from '../../constants/commonProps.const'
 import { Method } from '@/services/config'
 import { omitBaseEntity } from '../../constants/selectors.const'
 import { TipoParalizacionService } from './tipoParalizacion.service'
 import { TipoParalizacionModel } from '.'
+import { TipoParalizacionProps } from './tipoParalizacion.props'
+import { MetaModelDefinition } from '../../meta/metaModel'
 
-const { props, allFields } =
-  defineProps<TipoParalizacionModel.Entity>(TIPO_PROPS)
+const { propFactories, allFields } = TipoParalizacionProps
 
-export const TipoParalizacionMeta = buildMetaModel(
+export const TipoParalizacionMeta: MetaModelDefinition<TipoParalizacionModel.Entity> =
   {
-    key: 'tipoParalizacion',
-    service: TipoParalizacionService,
-    title: {
-      singular: 'Tipo de Paralización',
-      plural: 'Tipos de Paralización',
+    config: {
+      key: 'tipoParalizacion',
+      service: TipoParalizacionService,
+      title: {
+        singular: 'Tipo de Paralización',
+        plural: 'Tipos de Paralización',
+      },
+      faIcon: 'fa-solid fa-shapes',
+      anchorField: 'nombre',
+      propFactories,
     },
-    faIcon: 'fa-solid fa-shapes',
-    anchorField: 'nombre',
-    props,
-  },
-  [
-    {
-      methods: [Method.GetAll, Method.GetOne],
-      fields: allFields,
-    },
-    {
-      methods: [Method.Create, Method.UpdateOne],
-      groups: [{ fields: omitBaseEntity(allFields) }],
-    },
-  ],
-)
+
+    fieldsByService: [
+      {
+        methods: [Method.GetAll, Method.GetOne],
+        fields: allFields,
+      },
+      {
+        methods: [Method.Create, Method.UpdateOne],
+        groups: [{ fields: omitBaseEntity(allFields) }],
+      },
+    ],
+  }

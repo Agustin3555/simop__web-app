@@ -1,37 +1,14 @@
-import {
-  defineProps,
-  buildMetaModel,
-  createTextProp,
-  createNumberProp,
-} from '../../meta'
-import { COMMON_PROPS } from '../../constants/commonProps.const'
 import { Method } from '@/services/config'
 import { omitBaseEntity } from '../../constants/selectors.const'
 import { APGService } from './apg.service'
+import { MetaModelDefinition } from '../../meta/metaModel'
+import { APGProps } from './apg.props'
 import { APGModel } from '.'
 
-const { props, allFields } = defineProps<APGModel.Entity>({
-  numero: createNumberProp({
-    title: 'Número',
-    config: {
-      field: {
-        required: true,
-      },
-    },
-  }),
-  color: createTextProp({
-    title: 'Color',
-    config: {
-      field: {
-        required: true,
-      },
-    },
-  }),
-  ...COMMON_PROPS,
-})
+const { propFactories, allFields } = APGProps
 
-export const APGMeta = buildMetaModel(
-  {
+export const APGMeta: MetaModelDefinition<APGModel.Entity> = {
+  config: {
     key: 'apg',
     service: APGService,
     refreshRate: 'low',
@@ -41,9 +18,10 @@ export const APGMeta = buildMetaModel(
     },
     faIcon: 'fa-solid fa-vector-square',
     anchorField: 'numero',
-    props,
+    propFactories,
   },
-  [
+
+  fieldsByService: [
     {
       methods: [Method.GetAll, Method.GetOne],
       fields: allFields,
@@ -53,4 +31,4 @@ export const APGMeta = buildMetaModel(
       groups: [{ fields: omitBaseEntity(allFields) }],
     },
   ],
-)
+}

@@ -1,80 +1,14 @@
-import {
-  defineProps,
-  buildMetaModel,
-  createDateProp,
-  createTextProp,
-  createRefProp,
-  createNumberProp,
-} from '../../meta'
-import { COMMON_PROPS } from '../../constants/commonProps.const'
 import { Method } from '@/services/config'
 import { omitBaseEntity } from '../../constants/selectors.const'
 import { ModificacionService } from './modificacion.service'
+import { ModificacionProps } from './modificacion.props'
+import { MetaModelDefinition } from '../../meta/metaModel'
 import { ModificacionModel } from '.'
-import { AreaMeta } from '../area/area.meta'
-import { ObraMeta } from '../obra/obra.meta'
-import { TipoModificacionMeta } from '../tipoModificacion/tipoModificacion.meta'
 
-const { props, allFields } = defineProps<ModificacionModel.Entity>({
-  obra: createRefProp({
-    metaModelKey: () => ObraMeta,
-    config: {
-      field: {
-        required: true,
-      },
-    },
-  }),
-  numeroExpediente: createTextProp({
-    title: 'Número De Expediente',
-    config: {
-      field: {
-        required: true,
-      },
-    },
-  }),
-  numeroResolucion: createTextProp({
-    title: 'Número De Resolución',
-  }),
-  monto: createNumberProp({
-    title: 'Monto',
-    config: {
-      pre: '$',
-      isDecimal: true,
-      isMoney: true,
-      isBig: true,
-      calculate: 'sum',
-    },
-  }),
-  nuevoMontoObra: createNumberProp({
-    title: 'Nuevo Monto',
-    config: {
-      pre: '$',
-      isDecimal: true,
-      isMoney: true,
-      isBig: true,
-      calculate: 'sum',
-    },
-  }),
-  fecha: createDateProp({
-    title: 'Fecha',
-  }),
-  tipoModificacion: createRefProp({
-    metaModelKey: () => TipoModificacionMeta,
-  }),
-  area: createRefProp({
-    metaModelKey: () => AreaMeta,
-  }),
-  observaciones: createTextProp({
-    title: 'Observaciones',
-    config: {
-      isLong: true,
-    },
-  }),
-  ...COMMON_PROPS,
-})
+const { propFactories, allFields } = ModificacionProps
 
-export const ModificacionMeta = buildMetaModel(
-  {
+export const ModificacionMeta: MetaModelDefinition<ModificacionModel.Entity> = {
+  config: {
     key: 'modificacion',
     service: ModificacionService,
     refreshRate: 'medium',
@@ -84,9 +18,10 @@ export const ModificacionMeta = buildMetaModel(
     },
     faIcon: 'fa-solid fa-file-pen',
     anchorField: 'numeroExpediente',
-    props,
+    propFactories,
   },
-  [
+
+  fieldsByService: [
     {
       methods: [Method.GetAll, Method.GetOne],
       fields: allFields,
@@ -96,4 +31,4 @@ export const ModificacionMeta = buildMetaModel(
       groups: [{ fields: omitBaseEntity(allFields) }],
     },
   ],
-)
+}

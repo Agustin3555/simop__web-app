@@ -1,7 +1,7 @@
 import { LooseEntity } from '@/models/config'
 import { ForView, MinSize, IRequired, PropFactory, BaseProp } from './utils'
 import { AutoCombobox, FetchRef, RefFilter } from '../components'
-import { META_MODELS, MetaModelKey } from '../constants/metaModels.const'
+import { MetaModelKey } from '../constants/metaModelKey.const'
 
 export const isFieldEnabled = (form: HTMLFormElement, key: string) => {
   const inputOption = form.querySelector<HTMLInputElement>(`[name="${key}"]`)
@@ -19,8 +19,10 @@ interface RefProp extends Pick<BaseProp, 'minSize'> {
 
 export const createRefProp =
   ({ metaModelKey, minSize = MinSize.s, config }: RefProp): PropFactory =>
-  key => {
-    const metaModel = META_MODELS[metaModelKey]
+  (key, getMetaModel) => {
+    const metaModel = getMetaModel(metaModelKey)
+
+    if (!metaModel) throw new Error()
 
     const { field } = config ?? {}
     const { hidden, required } = field ?? {}

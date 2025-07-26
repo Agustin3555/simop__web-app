@@ -1,33 +1,34 @@
-import { defineProps, buildMetaModel } from '../../meta'
-import { TIPO_PROPS } from '../../constants/commonProps.const'
 import { Method } from '@/services/config'
 import { omitBaseEntity } from '../../constants/selectors.const'
 import { TipoOrigenFinanciamientoObraService } from './tipoOrigenFinanciamientoObra.service'
+import { TipoOrigenFinanciamientoObraProps } from './tipoOrigenFinanciamientoObra.props'
 import { TipoOrigenFinanciamientoObraModel } from '.'
+import { MetaModelDefinition } from '../../meta/metaModel'
 
-const { props, allFields } =
-  defineProps<TipoOrigenFinanciamientoObraModel.Entity>(TIPO_PROPS)
+const { propFactories, allFields } = TipoOrigenFinanciamientoObraProps
 
-export const TipoOrigenFinanciamientoObraMeta = buildMetaModel(
+export const TipoOrigenFinanciamientoObraMeta: MetaModelDefinition<TipoOrigenFinanciamientoObraModel.Entity> =
   {
-    key: 'tipoOrigenFinanciamientoObra',
-    service: TipoOrigenFinanciamientoObraService,
-    title: {
-      singular: 'Tipo de Origen de Financiamiento',
-      plural: 'Tipos de Origen de Financiamiento',
+    config: {
+      key: 'tipoOrigenFinanciamientoObra',
+      service: TipoOrigenFinanciamientoObraService,
+      title: {
+        singular: 'Tipo de Origen de Financiamiento de Obra',
+        plural: 'Tipos de Origen de Financiamiento de Obra',
+      },
+      faIcon: 'fa-solid fa-shapes',
+      anchorField: 'nombre',
+      propFactories,
     },
-    faIcon: 'fa-solid fa-shapes',
-    anchorField: 'nombre',
-    props,
-  },
-  [
-    {
-      methods: [Method.GetAll, Method.GetOne],
-      fields: allFields,
-    },
-    {
-      methods: [Method.Create, Method.UpdateOne],
-      groups: [{ fields: omitBaseEntity(allFields) }],
-    },
-  ],
-)
+
+    fieldsByService: [
+      {
+        methods: [Method.GetAll, Method.GetOne],
+        fields: allFields,
+      },
+      {
+        methods: [Method.Create, Method.UpdateOne],
+        groups: [{ fields: omitBaseEntity(allFields) }],
+      },
+    ],
+  }

@@ -1,6 +1,5 @@
 import { ModuleView } from '../../components'
-import { TipoProgramaObraMeta } from '../../modules/tipoProgramaObra/tipoProgramaObra.meta'
 
-const ProgramaObra = () => <ModuleView metaModel={TipoProgramaObraMeta} />
+const ProgramaObra = () => <ModuleView metaModelKey={'tipoProgramaObra'} />
 
 export default ProgramaObra

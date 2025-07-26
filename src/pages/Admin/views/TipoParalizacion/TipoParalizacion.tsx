@@ -1,6 +1,5 @@
 import { ModuleView } from '../../components'
-import { TipoParalizacionMeta } from '../../modules/tipoParalizacion/tipoParalizacion.meta'
 
-const TipoParalizacion = () => <ModuleView metaModel={TipoParalizacionMeta} />
+const TipoParalizacion = () => <ModuleView metaModelKey={'tipoParalizacion'} />
 
 export default TipoParalizacion

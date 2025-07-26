@@ -1,36 +1,14 @@
-import {
-  defineProps,
-  buildMetaModel,
-  createTextProp,
-  createRefProp,
-} from '../../meta'
 import { Method } from '@/services/config'
 import { omitBaseEntity } from '../../constants/selectors.const'
-import { COMMON_PROPS } from '../../constants/commonProps.const'
 import { AreaService } from './area.service'
 import { AreaModel } from '.'
-import { TipoNivelAreaMeta } from '../tipoNivelArea/tipoNivelArea.meta'
+import { MetaModelDefinition } from '../../meta/metaModel'
+import { AreaProps } from './area.props'
 
-const { props, allFields } = defineProps<AreaModel.Entity>({
-  nombre: createTextProp({
-    title: 'Nombre',
-    config: {
-      field: {
-        required: true,
-      },
-    },
-  }),
-  tipoNivelArea: createRefProp({
-    metaModelKey: () => TipoNivelAreaMeta,
-  }),
-  area: createRefProp({
-    metaModelKey: () => AreaMeta,
-  }),
-  ...COMMON_PROPS,
-})
+const { propFactories, allFields } = AreaProps
 
-export const AreaMeta = buildMetaModel(
-  {
+export const AreaMeta: MetaModelDefinition<AreaModel.Entity> = {
+  config: {
     key: 'area',
     service: AreaService,
     title: {
@@ -39,9 +17,10 @@ export const AreaMeta = buildMetaModel(
     },
     faIcon: 'fa-solid fa-network-wired',
     anchorField: 'nombre',
-    props,
+    propFactories,
   },
-  [
+
+  fieldsByService: [
     {
       methods: [Method.GetAll, Method.GetOne],
       fields: allFields,
@@ -51,4 +30,4 @@ export const AreaMeta = buildMetaModel(
       groups: [{ fields: omitBaseEntity(allFields) }],
     },
   ],
-)
+}

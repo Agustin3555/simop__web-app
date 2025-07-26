@@ -1,6 +1,5 @@
 import { ModuleView } from '../../components'
-import { AmpliacionMeta } from '../../modules/ampliacion/ampliacion.meta'
 
-const Ampliacion = () => <ModuleView metaModel={AmpliacionMeta} />
+const Ampliacion = () => <ModuleView metaModelKey={'ampliacion'} />
 
 export default Ampliacion
