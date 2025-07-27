@@ -3,6 +3,7 @@ import {
   ReactNode,
   useCallback,
   useEffect,
+  useMemo,
   useState,
 } from 'react'
 import { MetaModelKey } from '../constants/metaModelKey.const'
@@ -13,8 +14,12 @@ export type MetaModels = Record<MetaModelKey, MetaModel>
 
 export interface MetaModelsContextProps {
   metaModels: MetaModels
+  allReady: boolean
   getMetaModel: (key: MetaModelKey) => undefined | MetaModel
-  addMetaModel: (key: MetaModelKey, metaModel: MetaModel) => void
+  getMetaModelEntry: (key: MetaModelKey) => {
+    metaModel: undefined | MetaModel
+    ready: boolean
+  }
 }
 
 export const MetaModelsContext = createContext<
@@ -25,48 +30,48 @@ interface MetaModelsProviderProps {
   children: ReactNode
 }
 
-const MAX_RETRIES = 5
-
 export const MetaModelsProvider = ({ children }: MetaModelsProviderProps) => {
   const [metaModels, setMetaModels] = useState({} as MetaModels)
-  const [retries, setRetries] = useState({} as Record<MetaModelKey, number>)
+  const [isReady, setIsReady] = useState({} as Record<MetaModelKey, boolean>)
+
+  const allReady = useMemo(() => {
+    const keys = Object.keys(META_MODEL_DEFINITIONS) as MetaModelKey[]
+    return keys.every(key => isReady[key])
+  }, [isReady])
 
   const getMetaModel = useCallback<MetaModelsContextProps['getMetaModel']>(
-    key => metaModels[key] ?? undefined,
+    key => metaModels[key],
     [metaModels],
   )
 
-  const addMetaModel = useCallback<MetaModelsContextProps['addMetaModel']>(
-    (key, metaModel) => setMetaModels(prev => ({ ...prev, [key]: metaModel })),
-    [],
+  const getMetaModelEntry = useCallback<
+    MetaModelsContextProps['getMetaModelEntry']
+  >(
+    key => ({ metaModel: metaModels[key], ready: !!isReady[key] }),
+    [metaModels, isReady],
   )
 
+  const tryBuildMetaModels = useCallback(() => {
+    Object.entries(META_MODEL_DEFINITIONS).forEach(([keyStr, definition]) => {
+      const key = keyStr as MetaModelKey
+
+      // Si ya está ready, se ignora
+      if (isReady[key]) return
+
+      const { ready, data } = buildMetaModel(definition, getMetaModel)
+
+      setMetaModels(prev => ({ ...prev, [key]: data }))
+      setIsReady(prev => ({ ...prev, [key]: ready }))
+    })
+  }, [getMetaModel, isReady])
+
   useEffect(() => {
-    const interval = setInterval(() => {
-      Object.entries(META_MODEL_DEFINITIONS).forEach(([key, definition]) => {
-        const metaKey = key as MetaModelKey
-        const alreadyExists = !!metaModels[metaKey]
-        const attempts = retries[metaKey] ?? 0
-
-        if (alreadyExists || attempts >= MAX_RETRIES) return
-
-        try {
-          const metaModel = buildMetaModel(definition, getMetaModel)
-          addMetaModel(metaKey, metaModel)
-        } catch (error) {
-          console.warn(`Failed to build metaModel: ${metaKey}`, error)
-
-          setRetries(prev => ({ ...prev, [metaKey]: attempts + 1 }))
-        }
-      })
-    }, 250)
-
-    return () => clearInterval(interval)
-  }, [metaModels, retries, addMetaModel, getMetaModel])
+    if (!allReady) tryBuildMetaModels()
+  }, [allReady, tryBuildMetaModels])
 
   return (
     <MetaModelsContext.Provider
-      value={{ metaModels, getMetaModel, addMetaModel }}
+      value={{ metaModels, allReady, getMetaModel, getMetaModelEntry }}
     >
       {children}
     </MetaModelsContext.Provider>

@@ -1,9 +1,9 @@
 import './View.css'
 import { ReactNode, useState } from 'react'
 import { useInputHandler, useViews } from '../../hooks'
-import { LocalViewContext } from '../../contexts'
 import { Icon } from '@/components'
 import { classList } from '@/helpers'
+import { LocalViewContext } from '../../contexts/localViewLocation.context'
 
 export interface LocalView {
   localViewKey: string

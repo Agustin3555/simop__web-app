@@ -67,7 +67,7 @@ export const RedeterminacionProps = defineProps<RedeterminacionModel.Entity>({
     metaModelKey: 'area',
   }),
   redeterminacionesHijas: createRefListProp({
-    metaModelKey: 'SELF',
+    metaModelKey: 'redeterminacion',
   }),
   observaciones: createTextProp({
     title: 'Observaciones',

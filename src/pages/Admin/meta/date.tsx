@@ -22,12 +22,13 @@ export const createDateProp =
       title,
       minSize: minSize ?? withTime ? MinSize.s : MinSize.xs,
 
-      getFormField: (value, editMode = false) => {
+      getFormField: (value?: string, editMode = false) => {
         if (hidden === true) return
 
-        value = withTime
-          ? new Date(value).toISOString().slice(0, 16)
-          : value.split('T')[0]
+        if (value)
+          value = withTime
+            ? new Date(value).toISOString().slice(0, 16)
+            : value.split('T')[0]
 
         return (
           <Input

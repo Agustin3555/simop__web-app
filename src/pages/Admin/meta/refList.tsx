@@ -22,7 +22,10 @@ export const createRefListProp =
   (key, getMetaModel) => {
     const metaModel = getMetaModel(metaModelKey)
 
-    if (!metaModel) throw new Error()
+    if (!metaModel)
+      throw new Error(
+        `No se ha encontrado un MetaModel con key '${metaModelKey}'`,
+      )
 
     const { field } = config ?? {}
     const { hidden, required } = field ?? {}

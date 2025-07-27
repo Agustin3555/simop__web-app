@@ -4,6 +4,7 @@ import { ObraService } from './obra.service'
 import { ObraModel } from '.'
 import { ObraProps } from './obra.props'
 import { MetaModelDefinition } from '../../meta/metaModel'
+import { omitBaseEntity } from '../../constants/selectors.const'
 
 const { propFactories, allFields } = ObraProps
 
@@ -232,5 +233,14 @@ export const ObraMeta: MetaModelDefinition<ObraModel.Entity> = {
     propFactories,
   },
 
-  fieldsByService,
+  fieldsByService: [
+    {
+      methods: [Method.GetAll, Method.GetOne],
+      fields: allFields,
+    },
+    {
+      methods: [Method.Create, Method.UpdateOne],
+      groups: [{ fields: omitBaseEntity(allFields) }],
+    },
+  ],
 }

@@ -1,4 +1,4 @@
-import { ViewInfo } from '../contexts'
+import { ViewInfo } from '../contexts/viewsInfo.context'
 
 export const AUX_VIEWS = {
   planificacionGeografica: {

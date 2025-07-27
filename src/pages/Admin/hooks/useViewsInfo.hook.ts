@@ -1,5 +1,5 @@
 import { useContext } from 'react'
-import { ViewsInfoContext } from '../contexts'
+import { ViewsInfoContext } from '../contexts/viewsInfo.context'
 
 export const useViewsInfo = () => {
   const ctx = useContext(ViewsInfoContext)

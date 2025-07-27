@@ -1,5 +1,3 @@
-console.log('index')
-
 export { default as AutoCombobox } from './AutoCombobox/AutoCombobox'
 export { default as BaseCombobox } from './BaseCombobox/BaseCombobox'
 export { default as BooleanFilter } from './BooleanFilter/BooleanFilter'

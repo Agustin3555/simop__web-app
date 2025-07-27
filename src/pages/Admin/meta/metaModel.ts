@@ -1,7 +1,7 @@
 import { Method, Service } from '@/services/config'
 import { PropFactory, Prop } from './utils'
 import { LooseEntity } from '@/models/config'
-import { MetaModelsContextProps } from '../contexts'
+import { MetaModelsContextProps } from '../contexts/metaModels.context'
 
 export type RefreshRate = 'high' | 'medium' | 'low'
 
@@ -39,7 +39,9 @@ export const defineProps = <E>(propFactories: PropFactories<E>) => {
   return { propFactories, allFields }
 }
 
-export type MetaModel<E = LooseEntity> = ReturnType<typeof buildMetaModel<E>>
+export type MetaModel<E = LooseEntity> = ReturnType<
+  typeof buildMetaModel<E>
+>['data']
 
 export const buildMetaModel = <E = LooseEntity>(
   { config, fieldsByService }: MetaModelDefinition<E>,
@@ -48,11 +50,15 @@ export const buildMetaModel = <E = LooseEntity>(
   const { propFactories, ...configRest } = config
 
   const props = {} as Record<keyof E, Prop>
+  let ready = true
 
-  Object.entries<PropFactory>(propFactories).forEach(
-    ([key, propFactory]) =>
-      (props[key as keyof E] = propFactory(key, getMetaModel)),
-  )
+  Object.entries<PropFactory>(propFactories).forEach(([key, propFactory]) => {
+    try {
+      props[key as keyof E] = propFactory(key, getMetaModel)
+    } catch (error) {
+      ready = false
+    }
+  })
 
   const findServiceEntry = (method: Method | string) =>
     fieldsByService?.find(({ methods }) => methods.includes(method))
@@ -92,7 +98,7 @@ export const buildMetaModel = <E = LooseEntity>(
     })
   }
 
-  return {
+  const data = {
     ...configRest,
     props,
     getFields,
@@ -102,4 +108,6 @@ export const buildMetaModel = <E = LooseEntity>(
     getPropGroups,
     getPropGroupsRecord,
   }
+
+  return { ready, data }
 }

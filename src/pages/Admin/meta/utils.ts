@@ -9,7 +9,7 @@ import {
 import { LooseEntity } from '@/models/config'
 import { ComboboxProps } from '../components/Combobox/Combobox'
 import { MetaModel } from './metaModel'
-import { MetaModelsContextProps } from '../contexts'
+import { MetaModelsContextProps } from '../contexts/metaModels.context'
 
 export type Color = 'blue' | 'green' | 'yellow' | 'red' | 'grey'
 

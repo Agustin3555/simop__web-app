@@ -17,7 +17,7 @@ export const AreaProps = defineProps<AreaModel.Entity>({
     metaModelKey: 'tipoNivelArea',
   }),
   area: createRefProp({
-    metaModelKey: 'SELF',
+    metaModelKey: 'area',
   }),
   ...COMMON_PROPS,
 })

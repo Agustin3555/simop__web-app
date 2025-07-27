@@ -7,7 +7,6 @@ import {
   ReportInTable,
   Table,
 } from '@/pages/Admin/components'
-import { MetaModelContext, TableProvider } from '@/pages/Admin/contexts'
 import { Button, Toggle } from '@/components'
 import { useQueryActionState } from '@/hooks'
 import { useCombinedQuery, useEntities } from '@/pages/Admin/hooks'
@@ -18,6 +17,8 @@ import { generateTableImages } from '@/pages/Admin/helpers'
 import { APGMeta } from '@/pages/Admin/modules/apg/apg.meta'
 import { DepartamentoMeta } from '@/pages/Admin/modules/departamento/departamento.meta'
 import { DepartamentosLayer, LocalidadesLayer } from './components'
+import { MetaModelContext } from '@/pages/Admin/contexts/metaModel.context'
+import { TableProvider } from '@/pages/Admin/contexts/table.context'
 
 const FixMapResize = () => {
   const map = useMap()

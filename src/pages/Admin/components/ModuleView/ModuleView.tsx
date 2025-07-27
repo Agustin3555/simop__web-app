@@ -1,12 +1,13 @@
 import { useCallback, useMemo, useState } from 'react'
 import { useMetaModels } from '../../hooks'
-import { RowSelectionContext, MetaModelContext } from '../../contexts'
 import { addIf } from '@/helpers'
 import { RowSelectionState } from '@tanstack/react-table'
 import { LocalAdd, LocalEdit, LocalQuery, View } from '..'
 import { LocalView, ViewProps } from '../View/View'
 import { LocalQueryProps } from '../LocalQuery/LocalQuery'
 import { MetaModelKey } from '../../constants/metaModelKey.const'
+import { MetaModelContext } from '../../contexts/metaModel.context'
+import { RowSelectionContext } from '../../contexts/rowSelection.context'
 
 interface ModuleViewProps {
   view?: Partial<ViewProps>
@@ -23,8 +24,8 @@ const ModuleView = ({
   add = true,
   edit = true,
 }: ModuleViewProps) => {
-  const { getMetaModel } = useMetaModels()
-  const metaModel = getMetaModel(metaModelKey)
+  const { getMetaModelEntry } = useMetaModels()
+  const { ready, metaModel } = getMetaModelEntry(metaModelKey)
 
   const localViews = useMemo(
     () => [
@@ -66,6 +67,7 @@ const ModuleView = ({
   const deselectRows = useCallback(() => setRowSelection({}), [])
 
   return (
+    ready &&
     metaModel && (
       <MetaModelContext.Provider value={metaModel}>
         <RowSelectionContext.Provider

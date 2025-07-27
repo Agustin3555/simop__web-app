@@ -7,7 +7,7 @@ import { DataDownloadBanner, ReportButton, ReportInTable, Table } from '..'
 import { QuickFilters, TableProps } from '../Table/Table'
 import { DeleteButton } from './components'
 import { generateTableImages } from '../../helpers'
-import { TableProvider } from '../../contexts'
+import { TableProvider } from '../../contexts/table.context'
 
 export interface LocalQueryProps extends Pick<TableProps, 'methods'> {
   fetch?: {
