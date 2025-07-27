@@ -7,17 +7,32 @@ import {
   useState,
 } from 'react'
 import { MetaModelKey } from '../constants/metaModelKey.const'
-import { buildMetaModel, MetaModel } from '../meta/metaModel'
+import {
+  buildMetaModel,
+  MetaModel,
+  MetaModelDefinition,
+} from '../meta/metaModel'
 import { META_MODEL_DEFINITIONS } from '../constants/metaModelDefinitions.const'
 
-export type MetaModels = Record<MetaModelKey, MetaModel>
+export type MetaModelMap = typeof META_MODEL_DEFINITIONS
+
+export type EntityOf<K extends MetaModelKey> =
+  MetaModelMap[K] extends MetaModelDefinition<infer E> ? E : never
+
+export type MetaModelOf<K extends MetaModelKey> = MetaModel<EntityOf<K>>
+
+export type MetaModels = {
+  [K in MetaModelKey]: MetaModelOf<K>
+}
 
 export interface MetaModelsContextProps {
   metaModels: MetaModels
   allReady: boolean
-  getMetaModel: (key: MetaModelKey) => undefined | MetaModel
-  getMetaModelEntry: (key: MetaModelKey) => {
-    metaModel: undefined | MetaModel
+  getMetaModel: <K extends MetaModelKey>(key: K) => undefined | MetaModelOf<K>
+  getMetaModelEntry: <K extends MetaModelKey>(
+    key: K,
+  ) => {
+    metaModel: undefined | MetaModelOf<K>
     ready: boolean
   }
 }
@@ -55,10 +70,12 @@ export const MetaModelsProvider = ({ children }: MetaModelsProviderProps) => {
     Object.entries(META_MODEL_DEFINITIONS).forEach(([keyStr, definition]) => {
       const key = keyStr as MetaModelKey
 
-      // Si ya está ready, se ignora
       if (isReady[key]) return
 
-      const { ready, data } = buildMetaModel(definition, getMetaModel)
+      const { ready, data } = buildMetaModel(
+        definition as unknown as MetaModelDefinition,
+        getMetaModel,
+      )
 
       setMetaModels(prev => ({ ...prev, [key]: data }))
       setIsReady(prev => ({ ...prev, [key]: ready }))

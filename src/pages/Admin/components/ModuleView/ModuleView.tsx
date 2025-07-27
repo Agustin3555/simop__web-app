@@ -8,6 +8,7 @@ import { LocalQueryProps } from '../LocalQuery/LocalQuery'
 import { MetaModelKey } from '../../constants/metaModelKey.const'
 import { MetaModelContext } from '../../contexts/metaModel.context'
 import { RowSelectionContext } from '../../contexts/rowSelection.context'
+import { MetaModel } from '../../meta/metaModel'
 
 interface ModuleViewProps {
   view?: Partial<ViewProps>
@@ -69,7 +70,7 @@ const ModuleView = ({
   return (
     ready &&
     metaModel && (
-      <MetaModelContext.Provider value={metaModel}>
+      <MetaModelContext.Provider value={metaModel as MetaModel}>
         <RowSelectionContext.Provider
           value={{
             rowSelection,

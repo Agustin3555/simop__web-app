@@ -81,6 +81,7 @@ const QUICK_FILTERS: (keyof ObraModel.Entity)[] = select(allFields, 'only', [
   'tipoTematicaObra',
 ])
 
+// TODO
 const fieldsByService = [
   {
     methods: [Method.GetAll, Method.GetOne],

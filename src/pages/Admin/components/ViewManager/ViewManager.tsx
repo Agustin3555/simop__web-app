@@ -58,6 +58,7 @@ const ViewManager = () => (
     <Localidad />
     <Modificacion />
     <Obra />
+    {/* TODO */}
     {/* <ObraDetalle /> */}
     {/* <ObraGeneral /> */}
     {/* <ObraTotales /> */}
