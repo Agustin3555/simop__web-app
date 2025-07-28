@@ -3,6 +3,7 @@ import { ForView, MinSize, PropFactory, IRequired, BaseProp } from './utils'
 import { AutoCombobox, FetchRef, RefFilter } from '../components'
 import { MetaModelKey } from '../constants/metaModelKey.const'
 import { isFieldEnabled } from './ref'
+import { MetaModel } from './metaModel'
 
 /*
   Solamente para controlar los vínculos de uno a muchos que no tengan atributos
@@ -11,20 +12,20 @@ import { isFieldEnabled } from './ref'
 */
 
 interface RefListProp extends Pick<BaseProp, 'minSize'> {
-  metaModelKey: MetaModelKey
+  metaModelRef: MetaModelKey
   config?: {
     field?: ForView & IRequired
   }
 }
 
 export const createRefListProp =
-  ({ metaModelKey, minSize = MinSize.s, config }: RefListProp): PropFactory =>
+  ({ metaModelRef, minSize = MinSize.s, config }: RefListProp): PropFactory =>
   (key, getMetaModel) => {
-    const metaModel = getMetaModel(metaModelKey)
+    const metaModel = getMetaModel(metaModelRef) as MetaModel
 
     if (!metaModel)
       throw new Error(
-        `No se ha encontrado un MetaModel con key '${metaModelKey}'`,
+        `No se ha encontrado un MetaModel con key '${metaModelRef}'`,
       )
 
     const { field } = config ?? {}
@@ -34,6 +35,7 @@ export const createRefListProp =
 
     return {
       key,
+      metaModelRef,
       title,
       minSize,
 

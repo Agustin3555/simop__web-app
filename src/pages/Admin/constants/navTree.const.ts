@@ -13,7 +13,6 @@ export const TREE: SectionNode[] = [
       { viewKey: asAuxView('planificacionGeografica') },
       { viewKey: asAuxView('obraTotales') },
       { viewKey: asAuxView('obraDetalle') },
-      { viewKey: asAuxView('obraGeneral') },
     ],
   },
   {

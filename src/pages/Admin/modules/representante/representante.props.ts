@@ -31,13 +31,13 @@ export const RepresentanteProps = defineProps<RepresentanteModel.Entity>({
     title: 'Número de Matricula',
   }),
   pais: createRefProp({
-    metaModelKey: 'pais',
+    metaModelRef: 'pais',
   }),
   provincia: createRefProp({
-    metaModelKey: 'provincia',
+    metaModelRef: 'provincia',
   }),
   localidad: createRefProp({
-    metaModelKey: 'localidad',
+    metaModelRef: 'localidad',
   }),
   ...COMMON_PROPS,
 })

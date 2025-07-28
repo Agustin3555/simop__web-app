@@ -8,7 +8,7 @@ import { COMMON_PROPS } from '../consts/commonProps.const'
 
 export const AmpliacionProps = defineProps<AmpliacionModel.Entity>({
   obra: createRefProp({
-    metaModelKey: 'obra',
+    metaModelRef: 'obra',
     config: {
       field: {
         required: true,
@@ -48,7 +48,7 @@ export const AmpliacionProps = defineProps<AmpliacionModel.Entity>({
     },
   }),
   area: createRefProp({
-    metaModelKey: 'area',
+    metaModelRef: 'area',
   }),
   ...COMMON_PROPS,
 })

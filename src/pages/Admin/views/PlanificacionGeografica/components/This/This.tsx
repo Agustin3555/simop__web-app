@@ -1,5 +1,5 @@
 import './This.css'
-import { useCallback, useEffect, useRef, useState } from 'react'
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { MapContainer, TileLayer, useMap } from 'react-leaflet'
 import {
   DataDownloadBanner,
@@ -9,13 +9,13 @@ import {
 } from '@/pages/Admin/components'
 import { Button, Toggle } from '@/components'
 import { useQueryActionState } from '@/hooks'
-import { useCombinedQuery, useEntities } from '@/pages/Admin/hooks'
-import { ObraMeta } from '@/pages/Admin/modules/obra/obra.meta'
-import { LocalidadMeta } from '@/pages/Admin/modules/localidad/localidad.meta'
+import {
+  useCombinedQuery,
+  useEntities,
+  useMetaModels,
+} from '@/pages/Admin/hooks'
 import { classList } from '@/helpers'
 import { generateTableImages } from '@/pages/Admin/helpers'
-import { APGMeta } from '@/pages/Admin/modules/apg/apg.meta'
-import { DepartamentoMeta } from '@/pages/Admin/modules/departamento/departamento.meta'
 import { DepartamentosLayer, LocalidadesLayer } from './components'
 import { MetaModelContext } from '@/pages/Admin/contexts/metaModel.context'
 import { TableProvider } from '@/pages/Admin/contexts/table.context'
@@ -34,6 +34,12 @@ const FixMapResize = () => {
 
 const ContextualizedThis = () => {
   const [enableMap, setEnableMap] = useState(true)
+  const { getMetaModel } = useMetaModels()
+
+  const APGMeta = useMemo(() => getMetaModel('apg'), [])!
+  const DepartamentoMeta = useMemo(() => getMetaModel('departamento'), [])!
+  const LocalidadMeta = useMemo(() => getMetaModel('localidad'), [])!
+  const ObraMeta = useMemo(() => getMetaModel('obra'), [])!
 
   const apgsQuery = useEntities([APGMeta.key], APGMeta.service.getAll)
 

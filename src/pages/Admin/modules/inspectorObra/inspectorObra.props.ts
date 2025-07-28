@@ -7,7 +7,7 @@ import { createRefProp } from '../../meta/ref'
 
 export const InspectorObraProps = defineProps<InspectorObraModel.Entity>({
   obra: createRefProp({
-    metaModelKey: 'obra',
+    metaModelRef: 'obra',
     config: {
       field: {
         required: true,
@@ -15,7 +15,7 @@ export const InspectorObraProps = defineProps<InspectorObraModel.Entity>({
     },
   }),
   inspector: createRefProp({
-    metaModelKey: 'inspector',
+    metaModelRef: 'inspector',
     config: {
       field: {
         required: true,
@@ -23,10 +23,10 @@ export const InspectorObraProps = defineProps<InspectorObraModel.Entity>({
     },
   }),
   tipoInspector: createRefProp({
-    metaModelKey: 'tipoInspector',
+    metaModelRef: 'tipoInspector',
   }),
   tipoProfesion: createRefProp({
-    metaModelKey: 'tipoProfesion',
+    metaModelRef: 'tipoProfesion',
   }),
   vigencia: createBooleanProp({
     title: 'Vigencia',

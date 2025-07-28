@@ -14,9 +14,9 @@ import { captureElementImage, newWindow } from '@/pages/Admin/helpers'
 import { TableWindow } from './components'
 import { TableWindowProps } from './components/TableWindow/TableWindow'
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
-import { MetaModel } from '@/pages/Admin/meta'
-import { ObraMeta } from '@/pages/Admin/modules/obra/obra.meta'
 import { ObraService } from '@/pages/Admin/modules/obra/obra.service'
+import { useMetaModels } from '@/pages/Admin/hooks'
+import { MetaModel } from '@/pages/Admin/meta/metaModel'
 
 const KEY_NAME = 'obra'
 
@@ -24,6 +24,9 @@ const Query = () => {
   const [enabled, setEnabled] = useState(false)
   const [id, setId] = useState<number>()
   const contentRef = useRef<HTMLDivElement | null>(null)
+
+  const { getMetaModel } = useMetaModels()
+  const ObraMeta = useMemo(() => getMetaModel('obra'), [])!
 
   const queryFn = useCallback(() => {
     if (id === undefined) return
@@ -58,16 +61,12 @@ const Query = () => {
     const detallePropGroups = ObraMeta.getPropGroups('detalle')
 
     return detallePropGroups?.map(({ props, ...rest }) => ({
-      components: props.map(
-        ({ key, title, getTableCell: getValueComponent, config }) => {
-          let metaModel: MetaModel | undefined
-
-          if (config?.getMetaModel)
-            metaModel = config.getMetaModel() as MetaModel
-
-          return { key, title, component: getValueComponent(data), metaModel }
-        },
-      ),
+      components: props.map(({ key, title, getTableCell, metaModelRef }) => ({
+        key,
+        title,
+        component: getTableCell(data),
+        metaModel: metaModelRef && (getMetaModel(metaModelRef) as MetaModel),
+      })),
       ...rest,
     }))
   }, [data])

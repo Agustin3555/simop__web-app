@@ -8,13 +8,13 @@ import { createRefProp } from '../../meta/ref'
 export const RepresentanteEmpresaProps =
   defineProps<RepresentanteEmpresaModel.Entity>({
     empresa: createRefProp({
-      metaModelKey: 'empresa',
+      metaModelRef: 'empresa',
     }),
     representante: createRefProp({
-      metaModelKey: 'representante',
+      metaModelRef: 'representante',
     }),
     tipoRepresentante: createRefProp({
-      metaModelKey: 'tipoRepresentante',
+      metaModelRef: 'tipoRepresentante',
     }),
     vigencia: createBooleanProp({
       title: 'Vigencia',

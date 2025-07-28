@@ -10,7 +10,7 @@ import { createTextProp } from '../../meta/text'
 
 export const RedeterminacionProps = defineProps<RedeterminacionModel.Entity>({
   obra: createRefProp({
-    metaModelKey: 'obra',
+    metaModelRef: 'obra',
     config: {
       field: {
         required: true,
@@ -61,13 +61,13 @@ export const RedeterminacionProps = defineProps<RedeterminacionModel.Entity>({
     title: 'AE Acum.',
   }),
   tipoRedeterminacion: createRefProp({
-    metaModelKey: 'tipoRedeterminacion',
+    metaModelRef: 'tipoRedeterminacion',
   }),
   area: createRefProp({
-    metaModelKey: 'area',
+    metaModelRef: 'area',
   }),
   redeterminacionesHijas: createRefListProp({
-    metaModelKey: 'redeterminacion',
+    metaModelRef: 'redeterminacion',
   }),
   observaciones: createTextProp({
     title: 'Observaciones',

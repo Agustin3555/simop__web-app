@@ -14,7 +14,7 @@ export const ProvinciaProps = defineProps<ProvinciaModel.Entity>({
     },
   }),
   pais: createRefProp({
-    metaModelKey: 'pais',
+    metaModelRef: 'pais',
     config: {
       field: {
         required: true,

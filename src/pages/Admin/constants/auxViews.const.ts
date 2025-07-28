@@ -11,9 +11,6 @@ export const AUX_VIEWS = {
   obraDetalle: {
     title: 'Detalle de Obra Básica',
   },
-  obraGeneral: {
-    title: 'Obra Básica General',
-  },
 } satisfies Record<string, ViewInfo>
 
 export type AuxViewKey = keyof typeof AUX_VIEWS

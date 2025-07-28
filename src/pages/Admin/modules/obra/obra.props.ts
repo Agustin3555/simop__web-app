@@ -25,7 +25,7 @@ export const ObraProps = defineProps<ObraModel.Entity>({
     },
   }),
   tipoEnteObra: createRefProp({
-    metaModelKey: 'tipoEnteObra',
+    metaModelRef: 'tipoEnteObra',
     minSize: 6,
   }),
   solicitante: createTextProp({
@@ -35,19 +35,19 @@ export const ObraProps = defineProps<ObraModel.Entity>({
     title: 'Fecha de Pedido',
   }),
   empresa: createRefProp({
-    metaModelKey: 'empresa',
+    metaModelRef: 'empresa',
     minSize: 7,
   }),
   localidades: createRefListProp({
-    metaModelKey: 'localidad',
+    metaModelRef: 'localidad',
     minSize: 6,
   }),
   apgs: createRefListProp({
-    metaModelKey: 'apg',
+    metaModelRef: 'apg',
     minSize: 6,
   }),
   tipoEstadoObra: createRefProp({
-    metaModelKey: 'tipoEstadoObra',
+    metaModelRef: 'tipoEstadoObra',
     minSize: 6,
   }),
   avanceTotal: createNumberProp({
@@ -74,11 +74,11 @@ export const ObraProps = defineProps<ObraModel.Entity>({
     title: 'Fecha de Contratación',
   }),
   tipoTematicaObra: createRefProp({
-    metaModelKey: 'tipoTematicaObra',
+    metaModelRef: 'tipoTematicaObra',
     minSize: 7,
   }),
   tipoProgramaObra: createRefProp({
-    metaModelKey: 'tipoProgramaObra',
+    metaModelRef: 'tipoProgramaObra',
   }),
   numeroExpediente: createTextProp({
     title: 'Número de Expediente de Contrato',
@@ -93,13 +93,13 @@ export const ObraProps = defineProps<ObraModel.Entity>({
     title: 'Número de Contratación',
   }),
   tipoContratacionObra: createRefProp({
-    metaModelKey: 'tipoContratacionObra',
+    metaModelRef: 'tipoContratacionObra',
   }),
   tipoOrigenFinanciamientoObra: createRefProp({
-    metaModelKey: 'tipoOrigenFinanciamientoObra',
+    metaModelRef: 'tipoOrigenFinanciamientoObra',
   }),
   tipoFinanciamientoObra: createRefProp({
-    metaModelKey: 'tipoFinanciamientoObra',
+    metaModelRef: 'tipoFinanciamientoObra',
   }),
   fechaInicio: createDateProp({
     title: 'Fecha de Inicio',
@@ -324,31 +324,31 @@ export const ObraProps = defineProps<ObraModel.Entity>({
   }),
 
   representantes: createRefListProp({
-    metaModelKey: 'representante',
+    metaModelRef: 'representante',
   }),
   inspectores: createRefListProp({
-    metaModelKey: 'inspector',
+    metaModelRef: 'inspector',
   }),
   fojasMedicion: createRefListProp({
-    metaModelKey: 'fojaMedicion',
+    metaModelRef: 'fojaMedicion',
   }),
   redeterminaciones: createRefListProp({
-    metaModelKey: 'redeterminacion',
+    metaModelRef: 'redeterminacion',
   }),
   ampliaciones: createRefListProp({
-    metaModelKey: 'ampliacion',
+    metaModelRef: 'ampliacion',
   }),
   modificaciones: createRefListProp({
-    metaModelKey: 'modificacion',
+    metaModelRef: 'modificacion',
   }),
   paralizaciones: createRefListProp({
-    metaModelKey: 'paralizacion',
+    metaModelRef: 'paralizacion',
   }),
   rescisiones: createRefListProp({
-    metaModelKey: 'rescision',
+    metaModelRef: 'rescision',
   }),
   recepciones: createRefListProp({
-    metaModelKey: 'recepcion',
+    metaModelRef: 'recepcion',
   }),
 
   ...COMMON_PROPS,

@@ -10,6 +10,7 @@ import { LooseEntity } from '@/models/config'
 import { ComboboxProps } from '../components/Combobox/Combobox'
 import { MetaModel } from './metaModel'
 import { MetaModelsContextProps } from '../contexts/metaModels.context'
+import { MetaModelKey } from '../constants/metaModelKey.const'
 
 export type Color = 'blue' | 'green' | 'yellow' | 'red' | 'grey'
 
@@ -38,6 +39,7 @@ export interface BaseProp {
 export interface Prop<E = LooseEntity> {
   key: string
   verboseKey?: string
+  metaModelRef?: MetaModelKey
   title: string
 
   // Para inicializar las columnas de @tanstack/react-table

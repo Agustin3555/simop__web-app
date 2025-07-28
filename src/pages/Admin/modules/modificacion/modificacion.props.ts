@@ -8,7 +8,7 @@ import { createTextProp } from '../../meta/text'
 
 export const ModificacionProps = defineProps<ModificacionModel.Entity>({
   obra: createRefProp({
-    metaModelKey: 'obra',
+    metaModelRef: 'obra',
     config: {
       field: {
         required: true,
@@ -50,10 +50,10 @@ export const ModificacionProps = defineProps<ModificacionModel.Entity>({
     title: 'Fecha',
   }),
   tipoModificacion: createRefProp({
-    metaModelKey: 'tipoModificacion',
+    metaModelRef: 'tipoModificacion',
   }),
   area: createRefProp({
-    metaModelKey: 'area',
+    metaModelRef: 'area',
   }),
   observaciones: createTextProp({
     title: 'Observaciones',

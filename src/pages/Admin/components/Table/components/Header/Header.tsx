@@ -20,9 +20,9 @@ import { classList } from '@/helpers'
 import { steppedSizes } from '../../helpers'
 import { OptionSelectors } from '@/pages/Admin/components'
 import { extractKeys } from '@/pages/Admin/helpers'
-import { AccessorKeys, QuickFilters } from '../../Table'
+import { AccessorKeys } from '../../Table'
 import { Method } from '@/services/config'
-import { Prop } from '@/pages/Admin/meta'
+import { Prop } from '@/pages/Admin/meta/utils'
 
 const SORT_ICON_MATCHER: Record<SortDirection, string> = {
   asc: 'fa-solid fa-arrow-up-wide-short',
@@ -30,15 +30,13 @@ const SORT_ICON_MATCHER: Record<SortDirection, string> = {
 }
 
 interface Props {
-  getAllPropsRecord: Record<string, Prop<LooseEntity>>
+  getAllPropsRecord: Record<string, Prop>
   header: TsHeader<LooseEntity, unknown>
   sorting: SortingState
   setSorting: Dispatch<SetStateAction<SortingState>>
   columnOrder: ColumnOrderState
   setColumnOrder: Dispatch<SetStateAction<ColumnOrderState>>
   setAccessorKeys: Dispatch<SetStateAction<AccessorKeys>>
-  quickFilterFields?: string[]
-  setQuickFilters?: Dispatch<SetStateAction<QuickFilters>>
 }
 
 const Header = ({
@@ -49,8 +47,6 @@ const Header = ({
   columnOrder,
   setColumnOrder,
   setAccessorKeys,
-  quickFilterFields,
-  setQuickFilters,
 }: Props) => {
   const { column, getContext, getResizeHandler, getSize } = header
 
@@ -108,18 +104,10 @@ const Header = ({
 
   const filterValue = getFilterValue()
 
-  const filter = useMemo(() => {
-    const filter = getFilter({ getFilterValue, options })
-
-    if (quickFilterFields?.includes(column.id)) {
-      const newQuickFilter = { [column.id]: { title, filter } }
-
-      setQuickFilters &&
-        setQuickFilters(prev => ({ ...prev, ...newQuickFilter }))
-    }
-
-    return filter
-  }, [options, filterValue])
+  const filter = useMemo(
+    () => getFilter({ getFilterValue, options }),
+    [options, filterValue],
+  )
 
   const getAllPropsRecordForSearchModes = useMemo(
     () => metaModel?.getPropFieldsRecord(Method.GetAll),

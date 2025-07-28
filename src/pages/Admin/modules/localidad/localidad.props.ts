@@ -15,7 +15,7 @@ export const LocalidadProps = defineProps<LocalidadModel.Entity>({
     },
   }),
   departamento: createRefProp({
-    metaModelKey: 'departamento',
+    metaModelRef: 'departamento',
   }),
   osmId: createNumberProp({
     title: 'OSM ID',

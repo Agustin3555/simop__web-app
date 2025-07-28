@@ -2,6 +2,7 @@ import { LooseEntity } from '@/models/config'
 import { ForView, MinSize, IRequired, PropFactory, BaseProp } from './utils'
 import { AutoCombobox, FetchRef, RefFilter } from '../components'
 import { MetaModelKey } from '../constants/metaModelKey.const'
+import { MetaModel } from './metaModel'
 
 export const isFieldEnabled = (form: HTMLFormElement, key: string) => {
   const inputOption = form.querySelector<HTMLInputElement>(`[name="${key}"]`)
@@ -11,20 +12,20 @@ export const isFieldEnabled = (form: HTMLFormElement, key: string) => {
 }
 
 interface RefProp extends Pick<BaseProp, 'minSize'> {
-  metaModelKey: MetaModelKey
+  metaModelRef: MetaModelKey
   config?: {
     field?: ForView & IRequired
   }
 }
 
 export const createRefProp =
-  ({ metaModelKey, minSize = MinSize.s, config }: RefProp): PropFactory =>
+  ({ metaModelRef, minSize = MinSize.s, config }: RefProp): PropFactory =>
   (key, getMetaModel) => {
-    const metaModel = getMetaModel(metaModelKey)
+    const metaModel = getMetaModel(metaModelRef) as MetaModel
 
     if (!metaModel)
       throw new Error(
-        `No se ha encontrado un MetaModel con key '${metaModelKey}'`,
+        `No se ha encontrado un MetaModel con key '${metaModelRef}'`,
       )
 
     const { field } = config ?? {}
@@ -36,6 +37,7 @@ export const createRefProp =
     return {
       key,
       verboseKey,
+      metaModelRef,
       title,
       minSize,
 

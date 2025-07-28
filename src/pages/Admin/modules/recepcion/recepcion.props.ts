@@ -8,7 +8,7 @@ import { createTextProp } from '../../meta/text'
 
 export const RecepcionProps = defineProps<RecepcionModel.Entity>({
   obra: createRefProp({
-    metaModelKey: 'obra',
+    metaModelRef: 'obra',
     config: {
       field: {
         required: true,
@@ -27,10 +27,10 @@ export const RecepcionProps = defineProps<RecepcionModel.Entity>({
     title: 'Fecha',
   }),
   tipoRecepcion: createRefProp({
-    metaModelKey: 'tipoRecepcion',
+    metaModelRef: 'tipoRecepcion',
   }),
   area: createRefProp({
-    metaModelKey: 'area',
+    metaModelRef: 'area',
   }),
   observaciones: createTextProp({
     title: 'Observaciones',

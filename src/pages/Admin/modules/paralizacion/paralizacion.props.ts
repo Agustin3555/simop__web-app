@@ -8,7 +8,7 @@ import { createTextProp } from '../../meta/text'
 
 export const ParalizacionProps = defineProps<ParalizacionModel.Entity>({
   obra: createRefProp({
-    metaModelKey: 'obra',
+    metaModelRef: 'obra',
     config: {
       field: {
         required: true,
@@ -41,10 +41,10 @@ export const ParalizacionProps = defineProps<ParalizacionModel.Entity>({
     title: 'Fecha',
   }),
   tipoParalizacion: createRefProp({
-    metaModelKey: 'tipoParalizacion',
+    metaModelRef: 'tipoParalizacion',
   }),
   area: createRefProp({
-    metaModelKey: 'area',
+    metaModelRef: 'area',
   }),
   observaciones: createTextProp({
     title: 'Observaciones',

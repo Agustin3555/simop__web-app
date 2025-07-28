@@ -11,13 +11,12 @@ import InspectorObra from '../../views/InspectorObra/InspectorObra'
 import Localidad from '../../views/Localidad/Localidad'
 import Modificacion from '../../views/Modificacion/Modificacion'
 import Obra from '../../views/Obra/Obra'
-// import ObraDetalle from '../../views/ObraDetalle/ObraDetalle'
-// import ObraGeneral from '../../views/ObraGeneral/ObraGeneral'
-// import ObraTotales from '../../views/ObraTotales/ObraTotales'
+import ObraDetalle from '../../views/ObraDetalle/ObraDetalle'
+import ObraTotales from '../../views/ObraTotales/ObraTotales'
 import PagoCertificacion from '../../views/PagoCertificacion/PagoCertificacion'
 import Pais from '../../views/Pais/Pais'
 import Paralizacion from '../../views/Paralizacion/Paralizacion'
-// import PlanificacionGeografica from '../../views/PlanificacionGeografica/PlanificacionGeografica'
+import PlanificacionGeografica from '../../views/PlanificacionGeografica/PlanificacionGeografica'
 import Provincia from '../../views/Provincia/Provincia'
 import Recepcion from '../../views/Recepcion/Recepcion'
 import Redeterminacion from '../../views/Redeterminacion/Redeterminacion'
@@ -58,14 +57,12 @@ const ViewManager = () => (
     <Localidad />
     <Modificacion />
     <Obra />
-    {/* TODO */}
-    {/* <ObraDetalle /> */}
-    {/* <ObraGeneral /> */}
-    {/* <ObraTotales /> */}
+    <ObraDetalle />
+    <ObraTotales />
     <PagoCertificacion />
     <Pais />
     <Paralizacion />
-    {/* <PlanificacionGeografica /> */}
+    <PlanificacionGeografica />
     <Provincia />
     <Recepcion />
     <Redeterminacion />

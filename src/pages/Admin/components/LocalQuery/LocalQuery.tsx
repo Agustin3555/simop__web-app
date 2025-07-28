@@ -1,10 +1,10 @@
 import './LocalQuery.css'
-import { useCallback, useMemo, useRef, useState } from 'react'
+import { useCallback, useRef } from 'react'
 import { useQueryActionState } from '@/hooks'
 import { useEntities, useRowSelection, useMetaModel } from '../../hooks'
 import { Button } from '@/components'
 import { DataDownloadBanner, ReportButton, ReportInTable, Table } from '..'
-import { QuickFilters, TableProps } from '../Table/Table'
+import { TableProps } from '../Table/Table'
 import { DeleteButton } from './components'
 import { generateTableImages } from '../../helpers'
 import { TableProvider } from '../../contexts/table.context'
@@ -18,14 +18,6 @@ export interface LocalQueryProps extends Pick<TableProps, 'methods'> {
 
 const LocalQuery = ({ fetch, methods }: LocalQueryProps) => {
   const { key, title, service } = useMetaModel()
-
-  const [quickFilters, setQuickFilters] = useState<QuickFilters>({})
-
-  const hasQuickFilters = useMemo(
-    () => Object.keys(quickFilters).length !== 0,
-    [quickFilters],
-  )
-
   const { selectedRowIds } = useRowSelection()!
 
   const { query, enableQuery } = useEntities(
@@ -64,16 +56,6 @@ const LocalQuery = ({ fetch, methods }: LocalQueryProps) => {
       {data ? (
         <>
           <header>
-            {hasQuickFilters && (
-              <div className="filter-container">
-                {Object.values(quickFilters).map(({ title, filter }) => (
-                  <div key={title} className="item">
-                    <small>{title}</small>
-                    {filter}
-                  </div>
-                ))}
-              </div>
-            )}
             <div className="left">
               <Button
                 title="Consultar datos"
@@ -88,7 +70,7 @@ const LocalQuery = ({ fetch, methods }: LocalQueryProps) => {
             </div>
           </header>
           <TableProvider>
-            <Table {...{ data, setQuickFilters, methods }} />
+            <Table {...{ data, methods }} />
           </TableProvider>
         </>
       ) : (

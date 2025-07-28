@@ -8,7 +8,7 @@ import { createRefProp } from '../../meta/ref'
 export const RepresentanteObraProps =
   defineProps<RepresentanteObraModel.Entity>({
     obra: createRefProp({
-      metaModelKey: 'obra',
+      metaModelRef: 'obra',
       config: {
         field: {
           required: true,
@@ -16,10 +16,10 @@ export const RepresentanteObraProps =
       },
     }),
     representante: createRefProp({
-      metaModelKey: 'representante',
+      metaModelRef: 'representante',
     }),
     tipoRepresentante: createRefProp({
-      metaModelKey: 'tipoRepresentante',
+      metaModelRef: 'tipoRepresentante',
     }),
     vigencia: createBooleanProp({
       title: 'Vigencia',

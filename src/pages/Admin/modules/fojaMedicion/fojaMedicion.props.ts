@@ -8,7 +8,7 @@ import { createTextProp } from '../../meta/text'
 
 export const FojaMedicionProps = defineProps<FojaMedicionModel.Entity>({
   obra: createRefProp({
-    metaModelKey: 'obra',
+    metaModelRef: 'obra',
     config: {
       field: {
         required: true,
@@ -55,10 +55,10 @@ export const FojaMedicionProps = defineProps<FojaMedicionModel.Entity>({
     },
   }),
   inspector: createRefProp({
-    metaModelKey: 'inspector',
+    metaModelRef: 'inspector',
   }),
   area: createRefProp({
-    metaModelKey: 'area',
+    metaModelRef: 'area',
   }),
   observaciones: createTextProp({
     title: 'Observaciones',

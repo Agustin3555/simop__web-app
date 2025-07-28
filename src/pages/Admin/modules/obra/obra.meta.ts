@@ -72,16 +72,6 @@ const DERIVADOS: (keyof ObraModel.Entity)[] = select(allFields, 'only', [
   'recepciones',
 ])
 
-const QUICK_FILTERS: (keyof ObraModel.Entity)[] = select(allFields, 'only', [
-  'empresa',
-  'fechaInicio',
-  'localidades',
-  'tipoEstadoObra',
-  'tipoProgramaObra',
-  'tipoTematicaObra',
-])
-
-// TODO
 const fieldsByService = [
   {
     methods: [Method.GetAll, Method.GetOne],
@@ -133,10 +123,6 @@ const fieldsByService = [
     ]),
   },
   {
-    methods: ['general-quickFilters'],
-    fields: QUICK_FILTERS,
-  },
-  {
     methods: ['totales'],
     fields: [
       ...select(allFields, 'only', [
@@ -150,12 +136,8 @@ const fieldsByService = [
         'tipoTematicaObra',
         'tipoProgramaObra',
       ]),
-      // ...TOTALES,
+      ...TOTALES,
     ] as (keyof ObraModel.Entity)[],
-  },
-  {
-    methods: ['totales-quickFilters'],
-    fields: QUICK_FILTERS,
   },
   {
     methods: ['detalle'],
@@ -234,14 +216,5 @@ export const ObraMeta: MetaModelDefinition<ObraModel.Entity> = {
     propFactories,
   },
 
-  fieldsByService: [
-    {
-      methods: [Method.GetAll, Method.GetOne],
-      fields: allFields,
-    },
-    {
-      methods: [Method.Create, Method.UpdateOne],
-      groups: [{ fields: omitBaseEntity(allFields) }],
-    },
-  ],
+  fieldsByService,
 }

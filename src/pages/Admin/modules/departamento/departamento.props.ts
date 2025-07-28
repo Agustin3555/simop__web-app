@@ -21,10 +21,10 @@ export const DepartamentoProps = defineProps<DepartamentoModel.Entity>({
     },
   }),
   provincia: createRefProp({
-    metaModelKey: 'provincia',
+    metaModelRef: 'provincia',
   }),
   apg: createRefProp({
-    metaModelKey: 'apg',
+    metaModelRef: 'apg',
   }),
   ...COMMON_PROPS,
 })

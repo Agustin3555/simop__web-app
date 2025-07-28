@@ -38,13 +38,13 @@ export const PagoCertificacionProps =
       },
     }),
     fojaMedicion: createRefProp({
-      metaModelKey: 'fojaMedicion',
+      metaModelRef: 'fojaMedicion',
     }),
     redeterminacion: createRefProp({
-      metaModelKey: 'redeterminacion',
+      metaModelRef: 'redeterminacion',
     }),
     area: createRefProp({
-      metaModelKey: 'area',
+      metaModelRef: 'area',
     }),
     observaciones: createTextProp({
       title: 'Observaciones',

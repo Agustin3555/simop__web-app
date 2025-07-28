@@ -27,7 +27,7 @@ export const InspectorProps = defineProps<InspectorModel.Entity>({
     title: 'Nombre',
   }),
   profesiones: createRefListProp({
-    metaModelKey: 'tipoProfesion',
+    metaModelRef: 'tipoProfesion',
   }),
   ...COMMON_PROPS,
 })

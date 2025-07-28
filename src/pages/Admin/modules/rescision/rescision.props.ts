@@ -7,7 +7,7 @@ import { createTextProp } from '../../meta/text'
 
 export const RescisionProps = defineProps<RescisionModel.Entity>({
   obra: createRefProp({
-    metaModelKey: 'obra',
+    metaModelRef: 'obra',
     config: {
       field: {
         required: true,
@@ -29,10 +29,10 @@ export const RescisionProps = defineProps<RescisionModel.Entity>({
     title: 'Fecha',
   }),
   tipoRescision: createRefProp({
-    metaModelKey: 'tipoRescision',
+    metaModelRef: 'tipoRescision',
   }),
   area: createRefProp({
-    metaModelKey: 'area',
+    metaModelRef: 'area',
   }),
   observaciones: createTextProp({
     title: 'Observaciones',

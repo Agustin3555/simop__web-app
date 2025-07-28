@@ -1,13 +1,5 @@
 import './Table.css'
-import {
-  Dispatch,
-  ReactNode,
-  SetStateAction,
-  useCallback,
-  useEffect,
-  useMemo,
-  useState,
-} from 'react'
+import { useCallback, useEffect, useMemo, useState } from 'react'
 import {
   useRowSelection,
   useMetaModel,
@@ -37,14 +29,10 @@ import { format } from '@formkit/tempo'
 import { utils, writeFile } from 'xlsx'
 import { Method } from '@/services/config'
 
-export type QuickFilters = Record<string, { title: string; filter: ReactNode }>
-
 export interface TableProps {
   data: LooseEntity[]
-  setQuickFilters?: Dispatch<SetStateAction<QuickFilters>>
   methods?: {
     forGetAll?: string
-    forQuickFilters?: string
   }
 }
 
@@ -53,8 +41,8 @@ export type AccessorKeys = Record<string, string>
 const SELECT_COLUMN = 'select'
 const STEP_WIDTH = 32
 
-const Table = ({ data, setQuickFilters, methods }: TableProps) => {
-  const { forGetAll, forQuickFilters } = methods ?? {}
+const Table = ({ data, methods }: TableProps) => {
+  const { forGetAll } = methods ?? {}
 
   const { key, title, getFields, getPropFields, getPropFieldsRecord } =
     useMetaModel()
@@ -139,11 +127,6 @@ const Table = ({ data, setQuickFilters, methods }: TableProps) => {
 
   const getAllPropsRecord = useMemo(
     () => getPropFieldsRecord(forGetAll ?? Method.GetAll),
-    [],
-  )
-
-  const quickFilterFields = useMemo(
-    () => getFields(forQuickFilters ?? 'quickFilters'),
     [],
   )
 
@@ -369,8 +352,6 @@ const Table = ({ data, setQuickFilters, methods }: TableProps) => {
                       columnOrder,
                       setColumnOrder,
                       setAccessorKeys,
-                      quickFilterFields,
-                      setQuickFilters,
                     }}
                   />
                 ),
