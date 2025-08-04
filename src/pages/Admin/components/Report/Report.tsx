@@ -16,6 +16,8 @@ const fonts = Object.entries(fontFiles)
   .filter((f): f is { src: string; fontWeight: number } => f !== null)
 
 Font.register({ family: 'Manrope Variable', fonts })
+// Desactiva completamente los guiones entre palabras
+Font.registerHyphenationCallback(word => [word])
 
 interface ReportProps {
   title: string

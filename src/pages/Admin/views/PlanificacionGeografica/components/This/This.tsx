@@ -4,7 +4,6 @@ import { MapContainer, TileLayer, useMap } from 'react-leaflet'
 import {
   DataDownloadBanner,
   ReportButton,
-  ReportInTable,
   Table,
 } from '@/pages/Admin/components'
 import { Button, Toggle } from '@/components'
@@ -15,7 +14,6 @@ import {
   useMetaModels,
 } from '@/pages/Admin/hooks'
 import { classList } from '@/helpers'
-import { generateTableImages } from '@/pages/Admin/helpers'
 import { DepartamentosLayer, LocalidadesLayer } from './components'
 import { MetaModelContext } from '@/pages/Admin/contexts/metaModel.context'
 import { TableProvider } from '@/pages/Admin/contexts/table.context'
@@ -74,44 +72,30 @@ const ContextualizedThis = () => {
 
   const infoRef = useRef<HTMLDivElement | null>(null)
 
-  const handleReportGenerate = useCallback(async () => {
-    if (!infoRef.current) return
-
-    const infoElement = infoRef.current
-
-    const tableElement = infoElement.querySelector<HTMLElement>('.table')
-    if (!tableElement) return
-
-    const imageUrls = await generateTableImages(tableElement)
-    if (!imageUrls) return
-
-    return <ReportInTable schemeTitle="Obras" {...{ imageUrls }} />
-  }, [])
-
   return (
     <div className="cmp-this">
       {apgs && departamentos && localidades && obras ? (
         <>
           <div className="info" ref={infoRef}>
-            <div className="actions">
-              <Button
-                title="Consultar datos"
-                faIcon="fa-solid fa-arrows-rotate"
-                actionState={queryActionState}
-                onAction={queryHandleClick}
-              />
-              <div className="right">
-                <ReportButton onGenerate={handleReportGenerate} />
-                <Toggle
-                  title="Mostrar mapa"
-                  faIcon="fa-solid fa-map"
-                  size="l"
-                  value={enableMap}
-                  setValue={setEnableMap}
-                />
-              </div>
-            </div>
             <MetaModelContext.Provider value={ObraMeta}>
+              <div className="actions">
+                <Button
+                  title="Consultar datos"
+                  faIcon="fa-solid fa-arrows-rotate"
+                  actionState={queryActionState}
+                  onAction={queryHandleClick}
+                />
+                <div className="right">
+                  <ReportButton />
+                  <Toggle
+                    title="Mostrar mapa"
+                    faIcon="fa-solid fa-map"
+                    size="l"
+                    value={enableMap}
+                    setValue={setEnableMap}
+                  />
+                </div>
+              </div>
               <Table
                 data={obras}
                 methods={{ forGetAll: 'planificacion-geografica' }}

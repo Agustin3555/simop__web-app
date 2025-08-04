@@ -4,10 +4,10 @@ import { useAppStore } from '@/store/config'
 import { useMutationActionState } from '@/hooks'
 import {
   useEntities,
-  useRowSelection,
   useMetaModel,
   useLocalView,
   UseEntitiesData,
+  useTable,
 } from '../../hooks'
 import { Button } from '@/components'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
@@ -17,19 +17,15 @@ import { Form } from '..'
 const LocalEdit = () => {
   const metaModel = useMetaModel()
   const { key, service, title, anchorField, getPropGroups } = metaModel
-
   const queryClient = useQueryClient()
   const toasting = useAppStore(store => store.toasting)
   const { setLocalView } = useLocalView()
-  const { selectedRowIds, deselectRows } = useRowSelection()!
+  const { selectedRowIds, deselectRows } = useTable().states
 
   const { query } = useEntities([key], service.getAll)
   const { data } = query
 
-  const isEditing = useMemo(
-    () => selectedRowIds.length === 1,
-    [selectedRowIds.length],
-  )
+  const isEditing = selectedRowIds.length === 1
 
   const selectedEntity = useMemo(
     () => data?.find(entity => entity.id === selectedRowIds[0]),

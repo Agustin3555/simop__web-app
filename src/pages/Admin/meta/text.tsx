@@ -1,6 +1,7 @@
 import { ForView, MinSize, PropFactory, IRequired, BaseProp } from './utils'
 import { Input } from '@/components'
 import { InputArea, TextFilter } from '../components'
+import { StyleSheet, Text } from '@react-pdf/renderer'
 
 interface TextProp extends BaseProp {
   config?: {
@@ -20,6 +21,8 @@ export const createTextProp =
       key,
       title,
       minSize: minSize ?? isLong ? MinSize.xl : MinSize.m,
+
+      filterFn: 'includesString',
 
       getFormField: (value, editMode = false) => {
         if (hidden === true) return
@@ -48,26 +51,36 @@ export const createTextProp =
         return (value as string).trim()
       },
 
-      filterFn: 'includesString',
-
-      getTableHeader: column => {
-        const { getFacetedUniqueValues, setFilterValue } = column
-
-        return {
-          title,
-          getFilter: ({ getFilterValue }) => (
-            <TextFilter
-              filterValue={getFilterValue()}
-              {...{ getFacetedUniqueValues, setFilterValue }}
-            />
-          ),
-        }
-      },
+      getTableHeader: column => ({
+        title,
+        getFilter: () => <TextFilter {...{ column }} />,
+      }),
 
       getTableCell: item => {
         const value = item[key] as undefined | string
 
         return value && <p className="text">{value}</p>
+      },
+
+      getReportTableFilter: column => {
+        const { getFilterValue } = column
+
+        const value = getFilterValue() as undefined | string
+        if (value === undefined) return
+
+        return { title, values: [value] }
+      },
+
+      getReportTableCell: item => {
+        const value = item[key] as undefined | string
+
+        if (value === undefined) return
+
+        const styles = StyleSheet.create({
+          value: {},
+        })
+
+        return <Text style={styles.value}>{value}</Text>
       },
 
       getExcelTableCell: item => {

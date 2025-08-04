@@ -1,6 +1,8 @@
 import { ForView, MinSize, PropFactory, IRequired, BaseProp } from './utils'
 import { Input } from '@/components'
 import { NumberFilter, StylizedNumber } from '../components'
+import { StyleSheet, Text } from '@react-pdf/renderer'
+import { FilterValueRange } from '../components/NumberFilter/NumberFilter'
 
 export interface NumberProp extends BaseProp {
   config?: {
@@ -40,6 +42,43 @@ export const createNumberProp =
       title,
       minSize,
 
+      filterFn: (row, columnId, filterValue) => {
+        const hasMin = filterValue.min !== undefined && filterValue.min !== ''
+        const hasMax = filterValue.max !== undefined && filterValue.max !== ''
+
+        if (!hasMin && !hasMax) return true
+
+        const rawValue = row.getValue<undefined | number | string>(columnId)
+        if (rawValue === undefined) return false
+
+        const value = typeof rawValue === 'number' ? rawValue : Number(rawValue)
+        if (isNaN(value)) return false
+
+        const min = hasMin ? Number(filterValue.min) : undefined
+        const max = hasMax ? Number(filterValue.max) : undefined
+
+        if (min !== undefined && value < min) return false
+        if (max !== undefined && value > max) return false
+
+        return true
+      },
+
+      footer: info => {
+        if (calculate === 'sum') {
+          const total = info.table.getRowModel().rows.reduce((acc, row) => {
+            const value = row.original[key] as undefined | number | string
+
+            if (value === undefined) return acc
+
+            const number = typeof value === 'string' ? Number(value) : value
+
+            return acc + number
+          }, 0)
+
+          return <StylizedNumber value={total} {...{ isMoney, pre, sub }} />
+        }
+      },
+
       getFormField: (value, editMode = false) => {
         if (hidden === true) return
 
@@ -65,41 +104,10 @@ export const createNumberProp =
         return isBig ? value : Number(value)
       },
 
-      filterFn: 'inNumberRange',
-
-      footer: info => {
-        if (calculate === 'sum') {
-          const total = info.table.getRowModel().rows.reduce((acc, row) => {
-            const value = row.original[key] as undefined | number | string
-
-            if (value === undefined) return acc
-
-            const number = typeof value === 'string' ? Number(value) : value
-
-            return acc + number
-          }, 0)
-
-          return <StylizedNumber value={total} {...{ isMoney, pre, sub }} />
-        }
-      },
-
-      getTableHeader: column => {
-        const { setFilterValue, getFacetedMinMaxValues } = column
-
-        return {
-          title,
-          getFilter: ({ getFilterValue }) => (
-            <NumberFilter
-              decimal={isDecimal}
-              {...{
-                getFilterValue,
-                setFilterValue,
-                getFacetedMinMaxValues,
-              }}
-            />
-          ),
-        }
-      },
+      getTableHeader: column => ({
+        title,
+        getFilter: () => <NumberFilter {...{ column, isDecimal }} />,
+      }),
 
       getTableCell: item => {
         const value = item[key] as undefined | number | string
@@ -107,6 +115,48 @@ export const createNumberProp =
         if (value === undefined) return
 
         return <StylizedNumber {...{ value, isMoney, pre, sub }} />
+      },
+
+      getReportTableFilter: column => {
+        const { getFilterValue } = column
+
+        const value = getFilterValue() as FilterValueRange
+
+        if (value === undefined) return
+
+        const { min, max } = value
+
+        const values = [] as string[]
+
+        if (min !== undefined && min !== '') values.push(`min: ${min}`)
+        if (max !== undefined && max !== '') values.push(`max: ${max}`)
+
+        if (!values.length) return
+
+        return { title, values }
+      },
+
+      getReportTableCell: item => {
+        const value = item[key] as undefined | number | string
+
+        if (value === undefined) return
+
+        const styles = StyleSheet.create({
+          value: {
+            maxLines: 1,
+          },
+        })
+
+        const displayValue = isMoney
+          ? new Intl.NumberFormat('es-ES', {
+              minimumFractionDigits: 2,
+              maximumFractionDigits: 6,
+            }).format(Number(value))
+          : value
+
+        return (
+          <Text style={styles.value}>{[pre, displayValue, sub].join(' ')}</Text>
+        )
       },
 
       getExcelTableCell: item => {

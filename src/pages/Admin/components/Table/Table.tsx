@@ -1,7 +1,6 @@
 import './Table.css'
 import { useCallback, useEffect, useMemo, useState } from 'react'
 import {
-  useRowSelection,
   useMetaModel,
   useDerivedState,
   DerivedToState,
@@ -15,14 +14,10 @@ import {
   getFacetedUniqueValues,
   getFilteredRowModel,
   getSortedRowModel,
-  SortingState,
   useReactTable,
-  ColumnOrderState,
   VisibilityState,
 } from '@tanstack/react-table'
-import { Button, Toggle } from '@/components'
-import { Cell, Footer, Header, RowSelectorCell } from './components'
-import { Combobox, Value } from '..'
+import { Cell, Footer, Header, RowSelectorCell, Toolbar } from './components'
 import { LooseEntity } from '@/models/config'
 import { classList } from '@/helpers'
 import { format } from '@formkit/tempo'
@@ -36,28 +31,41 @@ export interface TableProps {
   }
 }
 
-export type AccessorKeys = Record<string, string>
-
 const SELECT_COLUMN = 'select'
 const STEP_WIDTH = 32
 
 const Table = ({ data, methods }: TableProps) => {
   const { forGetAll } = methods ?? {}
 
-  const { key, title, getFields, getPropFields, getPropFieldsRecord } =
+  const { title, getFields, getPropFields, getPropFieldsRecord } =
     useMetaModel()
 
-  const [enableFilters, setEnableFilters] = useState(true)
-  const [enableColumnControl, setEnableColumnControl] = useState(false)
-  const [enableSimplifyMatches, setEnableSimplifyMatches] = useState(true)
-  const [enableStickHead, setEnableStickHead] = useState(false)
-  const [enableStickFoot, setEnableStickFoot] = useState(false)
-  const [sorting, setSorting] = useState<SortingState>([])
+  const [toggleStates, setToggleStates] = useState({
+    filters: true,
+    simplifyMatches: true,
+    columnControl: false,
+    stickHead: false,
+    stickFoot: false,
+  })
 
-  const { setTable, columnFilters } = useTable() ?? {}
+  const { setTable, isReadyToRender, states } = useTable()
+  const {
+    columnVisibility,
+    setColumnVisibility,
 
-  const { rowSelection, setRowSelection, selectedRowIds } =
-    useRowSelection() ?? {}
+    columnFilters,
+    setColumnFilters,
+
+    columnOrder,
+    setColumnOrder,
+
+    rowSelection,
+    setRowSelection,
+    selectedRowIds,
+
+    sorting,
+    setSorting,
+  } = states
 
   const getAllFields = useMemo(
     () => getFields(forGetAll ?? Method.GetAll) ?? [],
@@ -65,23 +73,8 @@ const Table = ({ data, methods }: TableProps) => {
   )
 
   const allColumnsVisible = useMemo(
-    () => Object.fromEntries(getAllFields?.map(key => [key, true]) ?? []),
+    () => Object.fromEntries(getAllFields.map(key => [key, true]) ?? []),
     [],
-  )
-
-  const [columnVisibility, setColumnVisibility] = useState<VisibilityState>(
-    () => {
-      const metaModelColumnVisibility = getFields('columnVisibility')
-
-      return metaModelColumnVisibility
-        ? {
-            ...Object.fromEntries(getAllFields?.map(key => [key, false]) ?? []),
-            ...Object.fromEntries(
-              metaModelColumnVisibility.map(key => [key, true]),
-            ),
-          }
-        : allColumnsVisible
-    },
   )
 
   const fromVisibilityToKeys = useCallback<
@@ -130,12 +123,22 @@ const Table = ({ data, methods }: TableProps) => {
     [],
   )
 
-  const [columnOrder, setColumnOrder] = useState<ColumnOrderState>([
-    SELECT_COLUMN,
-    ...getAllFields,
-  ])
+  useEffect(() => {
+    setColumnVisibility(() => {
+      const metaModelColumnVisibility = getFields('columnVisibility')
 
-  const [accessorKeys, setAccessorKeys] = useState<AccessorKeys>({})
+      return metaModelColumnVisibility
+        ? {
+            ...Object.fromEntries(getAllFields.map(key => [key, false]) ?? []),
+            ...Object.fromEntries(
+              metaModelColumnVisibility.map(key => [key, true]),
+            ),
+          }
+        : allColumnsVisible
+    })
+
+    setColumnOrder([SELECT_COLUMN, ...getAllFields])
+  }, [])
 
   const columns = useMemo(
     () => [
@@ -148,7 +151,7 @@ const Table = ({ data, methods }: TableProps) => {
             id: key,
             accessorKey: key,
             header: key,
-            minSize: size,
+            minSize: 2 * STEP_WIDTH,
             size,
             ...(accessorFn && { accessorFn }),
             ...(filterFn && { filterFn }),
@@ -163,20 +166,22 @@ const Table = ({ data, methods }: TableProps) => {
   const table = useReactTable({
     data,
     columns,
+
     state: {
       columnVisibility,
-      columnFilters: columnFilters?.state ?? undefined,
+      columnFilters,
       columnOrder,
       rowSelection,
       sorting,
     },
-    getRowId: row => String(row.id),
 
     onColumnVisibilityChange: setColumnVisibility,
-    onColumnFiltersChange: columnFilters?.setState ?? undefined,
+    onColumnFiltersChange: setColumnFilters,
     onColumnOrderChange: setColumnOrder,
     onRowSelectionChange: setRowSelection,
     onSortingChange: setSorting,
+
+    getRowId: row => String(row.id),
 
     getCoreRowModel: getCoreRowModel(),
     getFilteredRowModel: getFilteredRowModel(),
@@ -192,21 +197,21 @@ const Table = ({ data, methods }: TableProps) => {
 
   useEffect(() => {
     setTable && setTable(table)
-  }, [])
+  }, [setTable, table])
 
-  const exportHandleClick = useCallback(() => {
+  const handleExportClick = useCallback(() => {
     if (!data) return
 
     const selectedData =
-      selectedRowIds?.length === 0
+      selectedRowIds.length === 0
         ? data
-        : data.filter(({ id }) => selectedRowIds?.includes(id))
+        : data.filter(({ id }) => selectedRowIds.includes(id))
 
     const convertedData = selectedData.map(row =>
       Object.fromEntries(
-        getAllProps.map(({ title, getExcelTableCell: getExcelValue }) => [
+        getAllProps.map(({ title, getExcelTableCell }) => [
           title,
-          getExcelValue(row),
+          getExcelTableCell(row),
         ]),
       ),
     )
@@ -236,183 +241,116 @@ const Table = ({ data, methods }: TableProps) => {
   }, [data, selectedRowIds])
 
   return (
-    <div
-      className={classList('cmp-table', { 'enable-filters': enableFilters })}
-    >
-      {/* <pre>{JSON.stringify(columnFilters, undefined, 2)}</pre> */}
-      <div className="actions">
-        <div className="main-bar">
-          <div className="left">
-            <Toggle
-              title="Filtrar"
-              faIcon="fa-solid fa-filter"
-              value={enableFilters}
-              setValue={setEnableFilters}
-            />
-            <Toggle
-              title="Simplificar coincidencias"
-              faIcon="fa-solid fa-down-left-and-up-right-to-center fa-rotate-by"
-              value={enableSimplifyMatches}
-              setValue={setEnableSimplifyMatches}
-            />
-            <Toggle
-              title="Controlar columnas"
-              faIcon="fa-solid fa-table-columns"
-              value={enableColumnControl}
-              setValue={setEnableColumnControl}
-            />
-            <Toggle
-              title="Fijar cabecera de tabla"
-              faIcon="fa-regular fa-window-maximize"
-              value={enableStickHead}
-              setValue={setEnableStickHead}
-            />
-            <Toggle
-              title="Fijar pie de tabla"
-              faIcon="fa-regular fa-window-maximize fa-rotate-180"
-              value={enableStickFoot}
-              setValue={setEnableStickFoot}
-            />
-          </div>
-          <div className="center">
-            {table.getFilteredRowModel().rows.length !== data.length && (
-              <Value
-                text={table.getFilteredRowModel().rows.length}
-                faIcon="fa-solid fa-filter"
-                size="s"
-                type="secondary"
-                pill
-              />
+    isReadyToRender && (
+      <div
+        className={classList('cmp-table', {
+          'enable-filters': toggleStates['filters'],
+        })}
+      >
+        <Toolbar
+          {...{ toggleStates, setToggleStates }}
+          comboboxProps={{
+            selected: visibleKeys,
+            setSelected: setVisibleKeys,
+            options: columnOptions,
+          }}
+          onExportClick={handleExportClick}
+        />
+        <div className="table">
+          <div
+            className={classList(
+              'head',
+              { 'enable-stick': toggleStates['stickHead'] },
+              { 'enable-column-control': toggleStates['columnControl'] },
             )}
-            <Value
-              text={data.length}
-              faIcon="fa-solid fa-cubes-stacked"
-              size="s"
-              type="secondary"
-              pill
-            />
-          </div>
-          <div className="right">
-            <Button
-              text="Excel"
-              title={`Descargar Excel (${
-                selectedRowIds?.length ? 'seleccionados' : 'todo'
-              })`}
-              faIcon="fa-solid fa-file-arrow-down"
-              size="s"
-              type="secondary"
-              onAction={exportHandleClick}
-            />
-          </div>
-        </div>
-        {enableColumnControl && (
-          <Combobox
-            keyName={`visibility-${key}`}
-            title="Columnas activas"
-            hideLabel
-            multiple
-            reduceHeader
-            selected={visibleKeys}
-            setSelected={setVisibleKeys}
-            options={columnOptions}
-          />
-        )}
-      </div>
-      <div className="table">
-        {/* <pre>{JSON.stringify(data, undefined, 1)}</pre> */}
-        <div
-          className={classList(
-            'head',
-            { 'enable-stick': enableStickHead },
-            { 'enable-column-control': enableColumnControl },
-          )}
-        >
-          {table.getHeaderGroups().map(headerGroup => (
-            <div className="row" key={headerGroup.id}>
-              {headerGroup.headers.map(header =>
-                header.id === SELECT_COLUMN ? (
-                  selectedRowIds && (
-                    <RowSelectorCell
-                      key={header.id}
-                      checked={table.getIsAllRowsSelected()}
-                      indeterminate={table.getIsSomeRowsSelected()}
-                      onChange={table.getToggleAllRowsSelectedHandler()}
-                      asHeader
-                      selectionCounter={selectedRowIds.length}
-                    />
-                  )
-                ) : (
-                  <Header
-                    key={header.id}
-                    {...{
-                      getAllPropsRecord,
-                      header,
-                      sorting,
-                      setSorting,
-                      columnOrder,
-                      setColumnOrder,
-                      setAccessorKeys,
-                    }}
-                  />
-                ),
-              )}
-            </div>
-          ))}
-        </div>
-        <div className="body">
-          {table.getRowModel().rows.map(row => (
-            <div className="row" key={row.id}>
-              {row
-                .getVisibleCells()
-                .map(cell =>
-                  cell.column.columnDef.id === SELECT_COLUMN ? (
+          >
+            {table.getHeaderGroups().map(headerGroup => (
+              <div className="row" key={headerGroup.id}>
+                {headerGroup.headers.map(header =>
+                  header.id === SELECT_COLUMN ? (
                     selectedRowIds && (
                       <RowSelectorCell
-                        key={cell.id}
-                        checked={row.getIsSelected()}
-                        disabled={!row.getCanSelect()}
-                        indeterminate={row.getIsSomeSelected()}
-                        onChange={row.getToggleSelectedHandler()}
+                        key={header.id}
+                        checked={table.getIsAllRowsSelected()}
+                        indeterminate={table.getIsSomeRowsSelected()}
+                        onChange={table.getToggleAllRowsSelectedHandler()}
+                        asHeader
+                        selectionCounter={selectedRowIds.length}
                       />
                     )
                   ) : (
-                    <Cell
-                      key={cell.id}
-                      {...{ getAllPropsRecord, cell, accessorKeys }}
+                    <Header
+                      key={header.id}
+                      {...{
+                        getAllPropsRecord,
+                        header,
+                        sorting,
+                        setSorting,
+                        columnOrder,
+                        setColumnOrder,
+                      }}
                     />
                   ),
                 )}
-            </div>
-          ))}
-        </div>
-        <div className={classList('foot', { 'enable-stick': enableStickFoot })}>
-          {table.getFooterGroups().map(footerGroup => (
-            <div className="row" key={footerGroup.id}>
-              {footerGroup.headers.map(header =>
-                header.id === SELECT_COLUMN ? (
-                  selectedRowIds && (
-                    <RowSelectorCell
+              </div>
+            ))}
+          </div>
+          <div className="body">
+            {table.getRowModel().rows.map(row => (
+              <div className="row" key={row.id}>
+                {row
+                  .getVisibleCells()
+                  .map(cell =>
+                    cell.column.columnDef.id === SELECT_COLUMN ? (
+                      selectedRowIds && (
+                        <RowSelectorCell
+                          key={cell.id}
+                          checked={row.getIsSelected()}
+                          disabled={!row.getCanSelect()}
+                          indeterminate={row.getIsSomeSelected()}
+                          onChange={row.getToggleSelectedHandler()}
+                        />
+                      )
+                    ) : (
+                      <Cell key={cell.id} {...{ getAllPropsRecord, cell }} />
+                    ),
+                  )}
+              </div>
+            ))}
+          </div>
+          <div
+            className={classList('foot', {
+              'enable-stick': toggleStates['stickFoot'],
+            })}
+          >
+            {table.getFooterGroups().map(footerGroup => (
+              <div className="row" key={footerGroup.id}>
+                {footerGroup.headers.map(header =>
+                  header.id === SELECT_COLUMN ? (
+                    selectedRowIds && (
+                      <RowSelectorCell
+                        key={header.id}
+                        checked={table.getIsAllRowsSelected()}
+                        indeterminate={table.getIsSomeRowsSelected()}
+                        onChange={table.getToggleAllRowsSelectedHandler()}
+                        asHeader
+                        selectionCounter={selectedRowIds.length}
+                      />
+                    )
+                  ) : (
+                    <Footer
                       key={header.id}
-                      checked={table.getIsAllRowsSelected()}
-                      indeterminate={table.getIsSomeRowsSelected()}
-                      onChange={table.getToggleAllRowsSelectedHandler()}
-                      asHeader
-                      selectionCounter={selectedRowIds.length}
+                      column={header.column}
+                      getContext={header.getContext}
                     />
-                  )
-                ) : (
-                  <Footer
-                    key={header.id}
-                    column={header.column}
-                    getContext={header.getContext}
-                  />
-                ),
-              )}
-            </div>
-          ))}
+                  ),
+                )}
+              </div>
+            ))}
+          </div>
         </div>
       </div>
-    </div>
+    )
   )
 }
 

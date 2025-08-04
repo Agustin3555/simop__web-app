@@ -11,6 +11,7 @@ import { ComboboxProps } from '../components/Combobox/Combobox'
 import { MetaModel } from './metaModel'
 import { MetaModelsContextProps } from '../contexts/metaModels.context'
 import { MetaModelKey } from '../constants/metaModelKey.const'
+import { FilterProp } from '../components/ReportInTable/ReportInTable'
 
 export type Color = 'blue' | 'green' | 'yellow' | 'red' | 'grey'
 
@@ -49,6 +50,7 @@ export interface Prop<E = LooseEntity> {
   footer?: (info: HeaderContext<E, unknown>) => ReactNode
 
   getFormField: (value?: any, editMode?: boolean) => ReactNode
+
   getFormFieldValue: (
     formData: FormData,
     form: HTMLFormElement,
@@ -63,10 +65,16 @@ export interface Prop<E = LooseEntity> {
         Partial<Pick<ComboboxProps, 'options'>>,
     ) => ReactNode
   }
+
   getTableCell: (item: E, selectedSearchMode?: string) => ReactNode
 
-  // getReportTableHeader:
-  // getReportTableCell:
+  getReportTableFilter: (
+    column: Column<E>,
+    data: E[],
+    selectedSearchMode?: string,
+  ) => undefined | FilterProp
+
+  getReportTableCell: (item: E, selectedSearchMode?: string) => ReactNode
 
   getExcelTableCell: (item: E, selectedSearchMode?: string) => unknown
 }

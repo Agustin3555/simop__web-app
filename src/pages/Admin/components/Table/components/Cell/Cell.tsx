@@ -3,8 +3,8 @@ import { Cell as TsCell } from '@tanstack/react-table'
 import { LooseEntity } from '@/models/config'
 import { useMemo } from 'react'
 import { steppedSizes } from '../../helpers'
-import { AccessorKeys } from '../../Table'
-import { Prop } from '@/pages/Admin/meta'
+import { Prop } from '@/pages/Admin/meta/utils'
+import { useTable } from '@/pages/Admin/hooks'
 
 /*
   No se usa 'getValue' porque se necesita tener el valor original. 'getValue'
@@ -13,15 +13,15 @@ import { Prop } from '@/pages/Admin/meta'
 */
 
 interface Props {
-  getAllPropsRecord: Record<string, Prop<LooseEntity>>
+  getAllPropsRecord: Record<string, Prop>
   cell: TsCell<LooseEntity, unknown>
-  accessorKeys: AccessorKeys
 }
 
-const Cell = ({ getAllPropsRecord, cell, accessorKeys }: Props) => {
+const Cell = ({ getAllPropsRecord, cell }: Props) => {
   const { row, column } = cell
   const { original } = row
   const { id, columnDef, getSize } = column
+  const { accessorKeys } = useTable().states
 
   const component = useMemo(
     () => getAllPropsRecord[id].getTableCell(original, accessorKeys[id]),

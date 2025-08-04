@@ -1,14 +1,13 @@
-import { useCallback, useMemo, useState } from 'react'
+import { useMemo } from 'react'
 import { useMetaModels } from '../../hooks'
 import { addIf } from '@/helpers'
-import { RowSelectionState } from '@tanstack/react-table'
 import { LocalAdd, LocalEdit, LocalQuery, View } from '..'
 import { LocalView, ViewProps } from '../View/View'
 import { LocalQueryProps } from '../LocalQuery/LocalQuery'
 import { MetaModelKey } from '../../constants/metaModelKey.const'
 import { MetaModelContext } from '../../contexts/metaModel.context'
-import { RowSelectionContext } from '../../contexts/rowSelection.context'
 import { MetaModel } from '../../meta/metaModel'
+import { TableProvider } from '../../contexts/table.context'
 
 interface ModuleViewProps {
   view?: Partial<ViewProps>
@@ -55,36 +54,17 @@ const ModuleView = ({
     [],
   )
 
-  const [rowSelection, setRowSelection] = useState<RowSelectionState>({})
-
-  const selectedRowIds = useMemo(
-    () =>
-      Object.keys(rowSelection)
-        .filter(id => rowSelection[id])
-        .map(Number),
-    [rowSelection],
-  )
-
-  const deselectRows = useCallback(() => setRowSelection({}), [])
-
   return (
     ready &&
     metaModel && (
       <MetaModelContext.Provider value={metaModel as MetaModel}>
-        <RowSelectionContext.Provider
-          value={{
-            rowSelection,
-            setRowSelection,
-            selectedRowIds,
-            deselectRows,
-          }}
-        >
+        <TableProvider>
           <View
             viewKey={view?.viewKey ?? metaModel.key}
             title={view?.title ?? metaModel.title.plural}
             {...{ localViews }}
           />
-        </RowSelectionContext.Provider>
+        </TableProvider>
       </MetaModelContext.Provider>
     )
   )

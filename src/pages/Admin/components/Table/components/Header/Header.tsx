@@ -20,9 +20,9 @@ import { classList } from '@/helpers'
 import { steppedSizes } from '../../helpers'
 import { OptionSelectors } from '@/pages/Admin/components'
 import { extractKeys } from '@/pages/Admin/helpers'
-import { AccessorKeys } from '../../Table'
 import { Method } from '@/services/config'
 import { Prop } from '@/pages/Admin/meta/utils'
+import { useTable } from '@/pages/Admin/hooks'
 
 const SORT_ICON_MATCHER: Record<SortDirection, string> = {
   asc: 'fa-solid fa-arrow-up-wide-short',
@@ -36,7 +36,6 @@ interface Props {
   setSorting: Dispatch<SetStateAction<SortingState>>
   columnOrder: ColumnOrderState
   setColumnOrder: Dispatch<SetStateAction<ColumnOrderState>>
-  setAccessorKeys: Dispatch<SetStateAction<AccessorKeys>>
 }
 
 const Header = ({
@@ -46,7 +45,6 @@ const Header = ({
   setSorting,
   columnOrder,
   setColumnOrder,
-  setAccessorKeys,
 }: Props) => {
   const { column, getContext, getResizeHandler, getSize } = header
 
@@ -58,6 +56,8 @@ const Header = ({
     getFilterValue,
     getFacetedRowModel,
   } = column
+
+  const { setAccessorKeys } = useTable().states
 
   const { getTableHeader: getHeader } = getAllPropsRecord[column.id] ?? {}
 

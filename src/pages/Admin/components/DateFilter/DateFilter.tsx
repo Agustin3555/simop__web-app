@@ -1,18 +1,19 @@
-import { useCallback } from 'react'
+import { FocusEventHandler, useCallback } from 'react'
 import { DebouncedInput } from '..'
-import { DebouncedInputProps } from '../DebouncedInput/DebouncedInput'
 import { ColumnFiltersColumn } from '@tanstack/react-table'
+import { DebouncedInputProps } from '../DebouncedInput/DebouncedInput'
 import { LooseEntity } from '@/models/config'
-
-export type FilterValueRangeKey = 'min' | 'max'
-export type FilterValueRange = Record<FilterValueRangeKey, string> | undefined
+import {
+  FilterValueRange,
+  FilterValueRangeKey,
+} from '../NumberFilter/NumberFilter'
 
 interface Props {
   column: ColumnFiltersColumn<LooseEntity>
-  isDecimal: boolean
+  withTime?: boolean
 }
 
-const NumberFilter = ({ column, isDecimal }: Props) => {
+const DateFilter = ({ column, withTime = false }: Props) => {
   const { getFilterValue, setFilterValue } = column
 
   const { min = '', max = '' } = (getFilterValue() as FilterValueRange) ?? {}
@@ -23,9 +24,14 @@ const NumberFilter = ({ column, isDecimal }: Props) => {
     [setFilterValue],
   )
 
+  const handleBlur = useCallback<FocusEventHandler<HTMLInputElement>>(e => {
+    const input = e.currentTarget
+    input.classList.toggle('filled', input.value !== '')
+  }, [])
+
   const commonInputHTMLAttrs: Partial<DebouncedInputProps['inputHTMLAttrs']> = {
-    type: 'number',
-    step: isDecimal ? '0.000001' : '',
+    type: withTime ? 'datetime-local' : 'date',
+    onBlur: handleBlur,
   }
 
   return (
@@ -34,18 +40,18 @@ const NumberFilter = ({ column, isDecimal }: Props) => {
         title="Desde"
         value={min}
         hideLabel
-        inputHTMLAttrs={{ ...commonInputHTMLAttrs, placeholder: 'Min...' }}
+        inputHTMLAttrs={commonInputHTMLAttrs}
         handleChange={handleChange('min')}
       />
       <DebouncedInput
         title="Hasta"
         value={max}
         hideLabel
-        inputHTMLAttrs={{ ...commonInputHTMLAttrs, placeholder: 'Max...' }}
+        inputHTMLAttrs={commonInputHTMLAttrs}
         handleChange={handleChange('max')}
       />
     </>
   )
 }
 
-export default NumberFilter
+export default DateFilter

@@ -1,17 +1,99 @@
 import { useHandleAction } from '@/hooks'
 import { Button } from '@/components'
-import { DocumentProps, pdf } from '@react-pdf/renderer'
-import { ReactElement } from 'react'
-import { ButtonProps } from '@/components/Button/Button'
+import { pdf } from '@react-pdf/renderer'
+import { ReactNode, useCallback, useMemo, useState } from 'react'
+import { sleep } from '@/helpers'
+import { useMetaModel, useTable } from '../../hooks'
+import { Method } from '@/services/config'
+import { ReportInTable } from '..'
+import { steppedSizes } from '../Table/helpers'
+import { FilterProp } from '../ReportInTable/ReportInTable'
 
-interface ReportButtonProps extends Pick<ButtonProps, 'progress'> {
-  onGenerate: () => Promise<ReactElement<DocumentProps> | undefined>
+interface ReportButtonProps {
+  methods?: {
+    forGetAll?: string
+  }
 }
 
-const ReportButton = ({ progress, onGenerate }: ReportButtonProps) => {
+const ReportButton = ({ methods }: ReportButtonProps) => {
+  const [progress, setProgress] = useState(0)
+
+  const { title, getPropFields } = useMetaModel()
+  const { table, states } = useTable()
+  const { selectedRowIds, accessorKeys } = states
+
+  const getAllProps = useMemo(
+    () => getPropFields(methods?.forGetAll ?? Method.GetAll) ?? [],
+    [],
+  )
+
+  const generateReport = useCallback(async () => {
+    if (!table) return
+
+    setProgress(0)
+
+    const tableData = table
+      .getFilteredRowModel()
+      .rows.map(({ original }) => original)
+
+    const selectedData =
+      selectedRowIds.length === 0
+        ? tableData
+        : tableData.filter(({ id }) => selectedRowIds.includes(id))
+
+    // Obtener columnas visibles y en orden
+    const visibleColumns = table.getVisibleLeafColumns()
+    const visibleColumnIds = visibleColumns.map(column => column.id)
+
+    // Filtrar solo los props visibles y en el orden correcto
+    const visibleProps = getAllProps
+      .filter(prop => visibleColumnIds.includes(prop.key))
+      .sort(
+        (a, b) =>
+          visibleColumnIds.indexOf(a.key) - visibleColumnIds.indexOf(b.key),
+      )
+
+    const props = visibleColumns
+      .map(column => {
+        const { getReportTableFilter } =
+          getAllProps.find(({ key }) => key === column.id) ?? {}
+
+        if (!getReportTableFilter) return
+
+        return getReportTableFilter(
+          column,
+          table.options.data,
+          accessorKeys[column.id],
+        )
+      })
+      .filter(Boolean) as FilterProp[]
+
+    const header = visibleProps.map(({ title, minSize }, i) => ({
+      title,
+      size: steppedSizes(minSize, visibleColumns[i + 1].getSize()) / 2.6,
+    }))
+
+    const total = selectedData.length
+    const rows: ReactNode[][] = []
+
+    for (let i = 0; i < selectedData.length; i++) {
+      const row = visibleProps.map(({ key, getReportTableCell }) =>
+        getReportTableCell(selectedData[i], accessorKeys[key]),
+      )
+
+      rows.push(row)
+      setProgress(((i + 1) / total) * 100)
+      if (i % 10 === 0) await sleep()
+    }
+
+    return (
+      <ReportInTable schemeTitle={title.plural} {...{ props, header, rows }} />
+    )
+  }, [table, selectedRowIds, accessorKeys])
+
   const actionResult = useHandleAction(async ({ setError, setSuccess }) => {
     try {
-      const component = await onGenerate()
+      const component = await generateReport()
       if (!component) return
 
       const blob = await pdf(component).toBlob()
@@ -25,11 +107,14 @@ const ReportButton = ({ progress, onGenerate }: ReportButtonProps) => {
     }
   })
 
+  const handleReportFinished = useCallback(() => setProgress(0), [])
+
   return (
     <Button
       text="Informe"
       faIcon="fa-solid fa-file-pdf"
       type="secondary"
+      onFinished={handleReportFinished}
       {...{ progress, ...actionResult }}
     />
   )

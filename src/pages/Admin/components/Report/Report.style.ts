@@ -7,8 +7,8 @@ export const styles = StyleSheet.create({
     flexDirection: 'column',
     alignItems: 'flex-start',
     gap: palSize(Size.M),
-    padding: palSize(Size.XS),
 
+    fontSize: 8,
     fontFamily: 'Manrope Variable',
     color: palColor('AD1'),
   },
@@ -18,13 +18,8 @@ export const styles = StyleSheet.create({
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
-    borderWidth: 1,
-    borderStyle: 'solid',
-    borderColor: palColor('AL5'),
+    gap: 1,
     width: '100%',
-
-    borderRadius: palSize(Size.XS2),
-    overflow: 'hidden',
   },
   group: {
     flexShrink: 0,
@@ -73,8 +68,6 @@ export const styles = StyleSheet.create({
     alignItems: 'flex-end',
     justifyContent: 'space-between',
     height: 32,
-
-    fontSize: 8,
   },
   pagination: {
     display: 'flex',
@@ -98,20 +91,23 @@ export const styles = StyleSheet.create({
   },
   date: {},
   warning: {
-    paddingVertical: palSize(Size.XS2),
     width: '100%',
+    height: palSize(Size.M),
+    paddingTop: 2.5,
 
-    fontSize: 8,
     fontWeight: 650,
     textAlign: 'center',
     textTransform: 'uppercase',
 
-    borderRadius: palSize(Size.XS3),
-    backgroundColor: palColorGS('white'),
+    backgroundColor: palColor('AL5'),
   },
   content: {
     flex: 1,
 
+    display: 'flex',
+    gap: palSize(Size.S),
     width: '100%',
+
+    color: palColor('AD5'),
   },
 })

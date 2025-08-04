@@ -1,27 +1,24 @@
-import { Column } from '@tanstack/react-table'
+import { ColumnFiltersColumn } from '@tanstack/react-table'
 import { LooseEntity } from '@/models/config'
 import Combobox, { ComboboxProps } from '../Combobox/Combobox'
 
 interface RefFilterProps
-  extends Pick<ComboboxProps, 'keyName' | 'title' | 'options'>,
-    Pick<Column<LooseEntity>, 'getFilterValue' | 'setFilterValue'> {}
+  extends Pick<ComboboxProps, 'keyName' | 'title' | 'options'> {
+  column: ColumnFiltersColumn<LooseEntity>
+}
 
-const RefFilter = ({
-  keyName,
-  title,
-  options,
-  getFilterValue,
-  setFilterValue,
-}: RefFilterProps) => {
+const RefFilter = ({ column, keyName, title, options }: RefFilterProps) => {
+  const { getFilterValue, setFilterValue } = column
+
   const selected = (getFilterValue() as string[]) ?? []
-  const setSelected = setFilterValue
 
   return (
     <Combobox
       hideLabel
       reduceHeader
       multiple
-      {...{ keyName, title, options, selected, setSelected }}
+      setSelected={setFilterValue}
+      {...{ keyName, title, options, selected }}
     />
   )
 }

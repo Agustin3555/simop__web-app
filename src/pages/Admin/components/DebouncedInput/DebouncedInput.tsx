@@ -4,8 +4,8 @@ import { Input } from '@/components'
 import { InputProps } from '@/components/Input/Input'
 
 export interface DebouncedInputProps extends InputProps {
-  value: string | number
-  handleChange: (value: string | number) => void
+  value: string
+  handleChange: (value: string) => void
 }
 
 const DebouncedInput = ({
@@ -21,12 +21,12 @@ const DebouncedInput = ({
 }: DebouncedInputProps) => {
   const [value, setValue] = useState(initialValue)
 
-  useEffect(() => setValue(initialValue), [initialValue])
+  useEffect(() => {
+    setValue(initialValue)
+  }, [initialValue])
 
   useEffect(() => {
-    const timeout = setTimeout(() => {
-      handleChange(value)
-    }, 375)
+    const timeout = setTimeout(() => handleChange(value), 400)
 
     return () => clearTimeout(timeout)
   }, [value])
@@ -37,9 +37,9 @@ const DebouncedInput = ({
     <Input
       {...{ keyName, title, hideLabel, required, editMode, long }}
       inputHTMLAttrs={{
+        ...inputHTMLAttrs,
         value: String(value),
         onChange: handleInputChange,
-        ...inputHTMLAttrs,
       }}
     />
   )

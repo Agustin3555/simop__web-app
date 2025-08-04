@@ -1,22 +1,66 @@
+import { styles } from './ReportInTable.style'
 import { Report } from '@/pages/Admin/components'
-import { Image } from '@react-pdf/renderer'
+import { Text, View } from '@react-pdf/renderer'
+import { ReactNode } from 'react'
+
+export interface FilterProp {
+  title: string
+  values: (number | string)[]
+}
 
 interface ReportInTableProps {
   schemeTitle: string
-  imageUrls: string[]
+  props?: FilterProp[]
+  header: { title: string; size: number }[]
+  rows: ReactNode[][]
 }
 
-const ReportInTable = ({ schemeTitle, imageUrls }: ReportInTableProps) => (
-  <Report title={`Lista de ${schemeTitle}`} orientation="landscape">
-    {imageUrls.map((src, i) => (
-      <Image
-        style={{ objectFit: 'contain', objectPositionX: 0 }}
-        key={i}
-        {...{ src }}
-        break={i !== 0}
-      />
-    ))}
-  </Report>
-)
+const ReportInTable = ({
+  schemeTitle,
+  props = [],
+  header,
+  rows,
+}: ReportInTableProps) => {
+  props = [{ title: 'CANTIDAD', values: [rows.length] }, ...props]
+
+  return (
+    <Report title={`Lista de ${schemeTitle}`} orientation="landscape">
+      <View style={styles.props}>
+        {props.map(({ title, values }, i) => (
+          <View key={i} style={styles.item}>
+            <Text style={styles.title}>{title}:</Text>
+            <View style={styles.values}>
+              {values.map((value, j) => (
+                <View key={j} style={styles.valueContainer}>
+                  <Text>{value}</Text>
+                </View>
+              ))}
+            </View>
+          </View>
+        ))}
+      </View>
+      <View style={styles.table}>
+        <View style={styles.header} fixed>
+          {header.map(({ title, size }, i) => (
+            <View key={i} style={{ ...styles.cell, width: size }}>
+              <Text>{title}</Text>
+            </View>
+          ))}
+        </View>
+        <View style={styles.body}>
+          {rows.map((row, i) => (
+            <View key={i} style={styles.row} wrap={false}>
+              {row.map((value, j) => (
+                <View key={j} style={{ ...styles.cell, width: header[j].size }}>
+                  {value}
+                </View>
+              ))}
+            </View>
+          ))}
+        </View>
+      </View>
+    </Report>
+  )
+}
 
 export default ReportInTable

@@ -1,13 +1,11 @@
 import './LocalQuery.css'
-import { useCallback, useRef } from 'react'
+import { useCallback } from 'react'
 import { useQueryActionState } from '@/hooks'
-import { useEntities, useRowSelection, useMetaModel } from '../../hooks'
+import { useEntities, useMetaModel, useTable } from '../../hooks'
 import { Button } from '@/components'
-import { DataDownloadBanner, ReportButton, ReportInTable, Table } from '..'
+import { DataDownloadBanner, ReportButton, Table } from '..'
 import { TableProps } from '../Table/Table'
 import { DeleteButton } from './components'
-import { generateTableImages } from '../../helpers'
-import { TableProvider } from '../../contexts/table.context'
 
 export interface LocalQueryProps extends Pick<TableProps, 'methods'> {
   fetch?: {
@@ -17,8 +15,9 @@ export interface LocalQueryProps extends Pick<TableProps, 'methods'> {
 }
 
 const LocalQuery = ({ fetch, methods }: LocalQueryProps) => {
-  const { key, title, service } = useMetaModel()
-  const { selectedRowIds } = useRowSelection()!
+  const { key, service } = useMetaModel()
+  const { states } = useTable()
+  const { selectedRowIds } = states
 
   const { query, enableQuery } = useEntities(
     fetch?.key ? [key, fetch.key] : [key],
@@ -35,24 +34,8 @@ const LocalQuery = ({ fetch, methods }: LocalQueryProps) => {
     if (data || status === 'error') await refetch()
   }, [data, status])
 
-  const componentRef = useRef<HTMLDivElement | null>(null)
-
-  const handleReportGenerate = useCallback(async () => {
-    if (!componentRef.current) return
-
-    const localQueryElement = componentRef.current
-
-    const tableElement = localQueryElement.querySelector<HTMLElement>('.table')
-    if (!tableElement) return
-
-    const imageUrls = await generateTableImages(tableElement)
-    if (!imageUrls) return
-
-    return <ReportInTable schemeTitle={title.plural} {...{ imageUrls }} />
-  }, [])
-
   return (
-    <div className="cmp-local-query" ref={componentRef}>
+    <div className="cmp-local-query">
       {data ? (
         <>
           <header>
@@ -66,12 +49,10 @@ const LocalQuery = ({ fetch, methods }: LocalQueryProps) => {
             </div>
             <div className="actions">
               {selectedRowIds.length !== 0 && <DeleteButton />}
-              <ReportButton onGenerate={handleReportGenerate} />
+              <ReportButton {...{ methods }} />
             </div>
           </header>
-          <TableProvider>
-            <Table {...{ data, methods }} />
-          </TableProvider>
+          <Table {...{ data, methods }} />
         </>
       ) : (
         <DataDownloadBanner

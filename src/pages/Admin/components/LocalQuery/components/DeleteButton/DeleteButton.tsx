@@ -1,19 +1,14 @@
 import { useCallback } from 'react'
 import { useMutationActionState } from '@/hooks'
-import {
-  UseEntitiesData,
-  useRowSelection,
-  useMetaModel,
-} from '@/pages/Admin/hooks'
+import { UseEntitiesData, useMetaModel, useTable } from '@/pages/Admin/hooks'
 import { useAppStore } from '@/store/config'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { SecureHoldButton } from '../../..'
 
 const DeleteButton = () => {
   const { key, service } = useMetaModel()
-
   const toasting = useAppStore(store => store.toasting)
-  const { selectedRowIds, deselectRows } = useRowSelection()!
+  const { selectedRowIds, deselectRows } = useTable().states
   const queryClient = useQueryClient()
 
   const mutationFn = useCallback(

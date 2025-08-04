@@ -1,27 +1,24 @@
+import { useCallback } from 'react'
 import { ColumnFiltersColumn } from '@tanstack/react-table'
 import Combobox, { ComboboxProps } from '../Combobox/Combobox'
 import { LooseEntity } from '@/models/config'
 import { DerivedToState, StateToDerived, useDerivedState } from '../../hooks'
-import { useCallback } from 'react'
 
-interface BooleanFilterProps
-  extends Pick<ComboboxProps, 'keyName' | 'title'>,
-    Pick<
-      ColumnFiltersColumn<LooseEntity>,
-      'getFilterValue' | 'setFilterValue'
-    > {
+interface BooleanFilterProps extends Pick<ComboboxProps, 'keyName' | 'title'> {
+  column: ColumnFiltersColumn<LooseEntity>
   falseText: string
   trueText: string
 }
 
 const BooleanFilter = ({
+  column,
   keyName,
   title,
   falseText,
   trueText,
-  getFilterValue,
-  setFilterValue,
 }: BooleanFilterProps) => {
+  const { getFilterValue, setFilterValue } = column
+
   const fromFilterValueToKeys = useCallback<StateToDerived<unknown, string[]>>(
     filterValue => (filterValue === undefined ? [] : [String(filterValue)]),
     [],
@@ -30,7 +27,6 @@ const BooleanFilter = ({
   const fromKeysToFilterValue = useCallback<DerivedToState<unknown, string[]>>(
     keys => {
       const filterValue = keys[0]
-
       return filterValue === undefined ? filterValue : filterValue === 'true'
     },
     [],

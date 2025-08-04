@@ -3,6 +3,8 @@ import {
   Dispatch,
   ReactNode,
   SetStateAction,
+  useCallback,
+  useMemo,
   useState,
 } from 'react'
 import {
@@ -15,29 +17,33 @@ import {
 } from '@tanstack/react-table'
 import { LooseEntity } from '@/models/config'
 
+export type AccessorKeys = Record<string, string>
+
 interface TableContextProps {
   table?: Table<LooseEntity>
-  setTable: (table: Table<LooseEntity>) => void
+  setTable: Dispatch<SetStateAction<Table<LooseEntity> | undefined>>
+  isReadyToRender: boolean
 
-  columnVisibility: {
-    state: VisibilityState
-    setState: Dispatch<SetStateAction<VisibilityState>>
-  }
-  columnFilters: {
-    state: ColumnFiltersState
-    setState: Dispatch<SetStateAction<ColumnFiltersState>>
-  }
-  columnOrder: {
-    state: ColumnOrderState
-    setState: Dispatch<SetStateAction<ColumnOrderState>>
-  }
-  rowSelection: {
-    state: RowSelectionState
-    setState: Dispatch<SetStateAction<RowSelectionState>>
-  }
-  sorting: {
-    state: SortingState
-    setState: Dispatch<SetStateAction<SortingState>>
+  states: {
+    columnVisibility: VisibilityState
+    setColumnVisibility: Dispatch<SetStateAction<VisibilityState>>
+
+    columnFilters: ColumnFiltersState
+    setColumnFilters: Dispatch<SetStateAction<ColumnFiltersState>>
+
+    columnOrder: ColumnOrderState
+    setColumnOrder: Dispatch<SetStateAction<ColumnOrderState>>
+
+    rowSelection: RowSelectionState
+    setRowSelection: Dispatch<SetStateAction<RowSelectionState>>
+    selectedRowIds: number[]
+    deselectRows: () => void
+
+    sorting: SortingState
+    setSorting: Dispatch<SetStateAction<SortingState>>
+
+    accessorKeys: AccessorKeys
+    setAccessorKeys: Dispatch<SetStateAction<AccessorKeys>>
   }
 }
 
@@ -50,49 +56,65 @@ interface TableProviderProps {
 }
 
 export const TableProvider = ({ children }: TableProviderProps) => {
-  const [table, setTable] = useState<TableContextProps['table']>()
+  const [table, setTable] = useState<Table<LooseEntity>>()
 
-  const [columnVisibility, setColumnVisibility] = useState<
-    TableContextProps['columnVisibility']['state']
-  >({})
-  const [columnFilters, setColumnFilters] = useState<
-    TableContextProps['columnFilters']['state']
-  >([])
-  const [columnOrder, setColumnOrder] = useState<
-    TableContextProps['columnOrder']['state']
-  >([])
-  const [rowSelection, setRowSelection] = useState<
-    TableContextProps['rowSelection']['state']
-  >({})
-  const [sorting, setSorting] = useState<TableContextProps['sorting']['state']>(
+  const isReadyToRender = useMemo<TableContextProps['isReadyToRender']>(
+    () => table !== undefined,
+    [table],
+  )
+
+  const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({})
+
+  const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([])
+
+  const [columnOrder, setColumnOrder] = useState<ColumnOrderState>([])
+
+  const [rowSelection, setRowSelection] = useState<RowSelectionState>({})
+
+  const selectedRowIds = useMemo<TableContextProps['states']['selectedRowIds']>(
+    () =>
+      Object.keys(rowSelection)
+        .filter(id => rowSelection[id])
+        .map(Number),
+    [rowSelection],
+  )
+
+  const deselectRows = useCallback<TableContextProps['states']['deselectRows']>(
+    () => setRowSelection({}),
     [],
   )
+
+  const [sorting, setSorting] = useState<SortingState>([])
+
+  const [accessorKeys, setAccessorKeys] = useState<AccessorKeys>({})
 
   return (
     <TableContext.Provider
       value={{
         table,
         setTable,
+        isReadyToRender,
 
-        columnVisibility: {
-          state: columnVisibility,
-          setState: setColumnVisibility,
-        },
-        columnFilters: {
-          state: columnFilters,
-          setState: setColumnFilters,
-        },
-        columnOrder: {
-          state: columnOrder,
-          setState: setColumnOrder,
-        },
-        rowSelection: {
-          state: rowSelection,
-          setState: setRowSelection,
-        },
-        sorting: {
-          state: sorting,
-          setState: setSorting,
+        states: {
+          columnVisibility,
+          setColumnVisibility,
+
+          columnFilters,
+          setColumnFilters,
+
+          columnOrder,
+          setColumnOrder,
+
+          rowSelection,
+          setRowSelection,
+          selectedRowIds,
+          deselectRows,
+
+          sorting,
+          setSorting,
+
+          accessorKeys,
+          setAccessorKeys,
         },
       }}
     >

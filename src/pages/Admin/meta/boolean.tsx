@@ -1,6 +1,7 @@
 import { Color, PropFactory, ForView, MinSize, BaseProp } from './utils'
 import { BooleanFilter, Checkbox } from '../components'
 import { classList } from '@/helpers'
+import { StyleSheet, Text } from '@react-pdf/renderer'
 
 interface BooleanProp extends BaseProp {
   config?: {
@@ -46,25 +47,20 @@ export const createBooleanProp =
         return value === 'on'
       },
 
-      getTableHeader: column => {
-        const { setFilterValue } = column
-
-        return {
-          title,
-          getFilter: ({ getFilterValue }) => (
-            <BooleanFilter
-              keyName={key}
-              {...{
-                title,
-                falseText,
-                trueText,
-                getFilterValue,
-                setFilterValue,
-              }}
-            />
-          ),
-        }
-      },
+      getTableHeader: column => ({
+        title,
+        getFilter: () => (
+          <BooleanFilter
+            keyName={key}
+            {...{
+              column,
+              title,
+              falseText,
+              trueText,
+            }}
+          />
+        ),
+      }),
 
       getTableCell: item => {
         const value = item[key] as undefined | boolean
@@ -81,6 +77,27 @@ export const createBooleanProp =
             </p>
           )
         )
+      },
+
+      getReportTableFilter: column => {
+        const { getFilterValue } = column
+
+        const value = getFilterValue() as undefined | boolean
+        if (value === undefined) return
+
+        return { title, values: [value ? trueText : falseText] }
+      },
+
+      getReportTableCell: item => {
+        const value = item[key] as undefined | boolean
+
+        if (value === undefined) return
+
+        const styles = StyleSheet.create({
+          value: {},
+        })
+
+        return <Text style={styles.value}>{value ? trueText : falseText}</Text>
       },
 
       getExcelTableCell: item => {

@@ -3,6 +3,7 @@ import { ForView, MinSize, IRequired, PropFactory, BaseProp } from './utils'
 import { AutoCombobox, FetchRef, RefFilter } from '../components'
 import { MetaModelKey } from '../constants/metaModelKey.const'
 import { MetaModel } from './metaModel'
+import { StyleSheet, Text } from '@react-pdf/renderer'
 
 export const isFieldEnabled = (form: HTMLFormElement, key: string) => {
   const inputOption = form.querySelector<HTMLInputElement>(`[name="${key}"]`)
@@ -41,6 +42,18 @@ export const createRefProp =
       title,
       minSize,
 
+      accessorFn: row => row[key]?.[metaModel.anchorField],
+
+      filterFn: (row, columnId, filterValue?: string[]) => {
+        if (!filterValue?.length) return true
+
+        const entity = row.original[columnId] as undefined | LooseEntity
+
+        if (entity === undefined) return false
+
+        return filterValue.includes(String(entity.id))
+      },
+
       getFormField: (value, editMode = false) => {
         if (hidden === true) return
 
@@ -64,33 +77,14 @@ export const createRefProp =
         return Number(value)
       },
 
-      accessorFn: row => row[key]?.[metaModel.anchorField],
-      filterFn: (row, columnId, filterValue?: string[]) => {
-        if (!filterValue?.length) return true
-
-        const entity = row.original[columnId] as undefined | LooseEntity
-
-        if (entity === undefined) return false
-
-        return filterValue.includes(String(entity.id))
-      },
-
-      getTableHeader: column => {
-        const { setFilterValue } = column
-
-        return {
-          title,
-          metaModel,
-          getFilter: ({ options, ...rest }) =>
-            options && (
-              <RefFilter
-                keyName={verboseKey}
-                options={options}
-                {...{ title, setFilterValue, ...rest }}
-              />
-            ),
-        }
-      },
+      getTableHeader: column => ({
+        title,
+        metaModel,
+        getFilter: ({ options }) =>
+          options && (
+            <RefFilter keyName={verboseKey} {...{ column, options, title }} />
+          ),
+      }),
 
       getTableCell: (item, selectedSearchMode) => {
         const value = item[key] as undefined | LooseEntity
@@ -107,12 +101,46 @@ export const createRefProp =
         )
       },
 
-      getExcelTableCell: item => {
+      getReportTableFilter: (column, data, selectedSearchMode) => {
+        const { getFilterValue } = column
+
+        const filterValue = getFilterValue() as undefined | string[]
+        if (filterValue === undefined || !filterValue.length) return
+
+        const refs = data
+          .map(item => item[key])
+          .filter(Boolean)
+          .filter(({ id }) => filterValue.includes(String(id)))
+
+        const values = Array.from(
+          new Map(refs.map(item => [item.id, item])).values(),
+        ).map(item => item[selectedSearchMode ?? metaModel.anchorField])
+
+        return { title, values }
+      },
+
+      getReportTableCell: (item, selectedSearchMode) => {
         const value = item[key] as undefined | LooseEntity
 
         if (value === undefined) return
 
-        return value[metaModel.anchorField]
+        const styles = StyleSheet.create({
+          value: {},
+        })
+
+        return (
+          <Text style={styles.value}>
+            {value[selectedSearchMode ?? metaModel.anchorField]}
+          </Text>
+        )
+      },
+
+      getExcelTableCell: (item, selectedSearchMode) => {
+        const value = item[key] as undefined | LooseEntity
+
+        if (value === undefined) return
+
+        return value[selectedSearchMode ?? metaModel.anchorField]
       },
     }
   }
