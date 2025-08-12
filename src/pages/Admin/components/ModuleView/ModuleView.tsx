@@ -7,7 +7,7 @@ import { LocalQueryProps } from '../LocalQuery/LocalQuery'
 import { MetaModelKey } from '../../constants/metaModelKey.const'
 import { MetaModelContext } from '../../contexts/metaModel.context'
 import { MetaModel } from '../../meta/metaModel'
-import { TableProvider } from '../../contexts/table.context'
+import { TableProvider } from '../../providers'
 
 interface ModuleViewProps {
   view?: Partial<ViewProps>

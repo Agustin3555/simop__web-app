@@ -1,17 +1,9 @@
-import { createContext, ReactNode, useCallback, useState } from 'react'
+import { ReactNode, useCallback, useState } from 'react'
 import { favoriteViewsEntity } from '../services/localStorage/entities/favoriteViews'
-
-interface FavoriteViewsContextProps {
-  views: string[]
-  isFavorite: (viewKey: string) => boolean
-  add: (viewKey: string) => void
-  remove: (viewKey: string) => void
-  toggle: (viewKey: string) => void
-}
-
-export const FavoriteViewsContext = createContext<
-  FavoriteViewsContextProps | undefined
->(undefined)
+import {
+  FavoriteViewsContext,
+  FavoriteViewsContextProps,
+} from '../contexts/favoriteViews.context'
 
 interface FavoriteViewsProviderProps {
   children: ReactNode

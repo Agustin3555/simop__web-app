@@ -3,7 +3,7 @@ import { useCallback } from 'react'
 import { useQueryActionState } from '@/hooks'
 import { useEntities, useMetaModel, useTable } from '../../hooks'
 import { Button } from '@/components'
-import { DataDownloadBanner, ReportButton, Table } from '..'
+import { DataDownloadBanner, GraphList, ReportButton, Table } from '..'
 import { TableProps } from '../Table/Table'
 import { DeleteButton } from './components'
 
@@ -53,6 +53,7 @@ const LocalQuery = ({ fetch, methods }: LocalQueryProps) => {
             </div>
           </header>
           <Table {...{ data, methods }} />
+          {/* <GraphList /> */}
         </>
       ) : (
         <DataDownloadBanner

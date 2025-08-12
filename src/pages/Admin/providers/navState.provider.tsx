@@ -1,15 +1,5 @@
-import { createContext, ReactNode, useCallback, useState } from 'react'
-
-interface NavStateContextProps {
-  isOpen: boolean
-  openNav: () => void
-  closeNav: () => void
-  toggleNav: () => void
-}
-
-export const NavStateContext = createContext<NavStateContextProps | undefined>(
-  undefined,
-)
+import { ReactNode, useCallback, useState } from 'react'
+import { NavStateContext } from '../contexts/navState.context'
 
 interface NavStateProviderProps {
   children: ReactNode

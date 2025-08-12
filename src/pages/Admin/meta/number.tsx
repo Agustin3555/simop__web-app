@@ -3,6 +3,7 @@ import { Input } from '@/components'
 import { NumberFilter, StylizedNumber } from '../components'
 import { StyleSheet, Text } from '@react-pdf/renderer'
 import { FilterValueRange } from '../components/NumberFilter/NumberFilter'
+import { WDND_MODE } from '../components/GraphList/components/PieByField/PieByField'
 
 export interface NumberProp extends BaseProp {
   config?: {
@@ -172,6 +173,29 @@ export const createNumberProp =
           : value
 
         return pre + displayValue + sub
+      },
+
+      pieSectorConfig: {
+        defaultMode: WDND_MODE.key,
+        modes: {
+          unique: {
+            accumulate: (value: number | string, add) => {
+              const key = typeof value === 'number' ? String(value) : value
+
+              const getTitle = () =>
+                isMoney
+                  ? new Intl.NumberFormat('es-ES', {
+                      minimumFractionDigits: 2,
+                      maximumFractionDigits: 6,
+                    }).format(Number(value))
+                  : typeof value === 'number'
+                  ? String(value)
+                  : value
+
+              add(key, getTitle)
+            },
+          },
+        },
       },
     }
   }

@@ -139,5 +139,20 @@ export const createRefListProp =
           .map(value => value[selectedSearchMode ?? metaModel.anchorField])
           .join(', ')
       },
+
+      pieSectorConfig: {
+        defaultMode: 'unique',
+        modes: {
+          unique: {
+            accumulate: (value: LooseEntity[], add) =>
+              value.forEach(v => {
+                const key = String(v.id)
+                const getTitle = () => String(v[metaModel.anchorField])
+
+                add(key, getTitle)
+              }),
+          },
+        },
+      },
     }
   }

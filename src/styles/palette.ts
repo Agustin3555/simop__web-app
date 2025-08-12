@@ -56,8 +56,10 @@ type ColorKeys =
   | 'CL4'
   | 'CL5'
   | 'D'
+  | 'E'
+  | 'F'
 
-const COLOR_MATCHER: Record<ColorKeys, [number, number, number]> = {
+export const COLOR_MATCHER: Record<ColorKeys, [number, number, number]> = {
   AD5: [8, 9, 19],
   AD4: [22, 25, 53],
   AD3: [37, 41, 87],
@@ -95,6 +97,10 @@ const COLOR_MATCHER: Record<ColorKeys, [number, number, number]> = {
   CL5: [243, 244, 237],
 
   D: [188, 80, 80],
+
+  E: [6, 53, 101],
+
+  F: [242, 109, 249],
 }
 
 const COLOR_GS_MATCHER = {

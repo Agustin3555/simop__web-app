@@ -2,6 +2,7 @@ import { ForView, MinSize, PropFactory, IRequired, BaseProp } from './utils'
 import { Input } from '@/components'
 import { InputArea, TextFilter } from '../components'
 import { StyleSheet, Text } from '@react-pdf/renderer'
+import { WDND_MODE } from '../components/GraphList/components/PieByField/PieByField'
 
 interface TextProp extends BaseProp {
   config?: {
@@ -87,6 +88,20 @@ export const createTextProp =
         const value = item[key] as undefined | string
 
         return value
+      },
+
+      pieSectorConfig: {
+        defaultMode: WDND_MODE.key,
+        modes: {
+          unique: {
+            accumulate: (value: string, add) => {
+              const key = value
+              const getTitle = () => value
+
+              add(key, getTitle)
+            },
+          },
+        },
       },
     }
   }

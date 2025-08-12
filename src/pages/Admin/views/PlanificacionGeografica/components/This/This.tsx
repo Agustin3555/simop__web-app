@@ -16,7 +16,7 @@ import {
 import { classList } from '@/helpers'
 import { DepartamentosLayer, LocalidadesLayer } from './components'
 import { MetaModelContext } from '@/pages/Admin/contexts/metaModel.context'
-import { TableProvider } from '@/pages/Admin/contexts/table.context'
+import { TableProvider } from '@/pages/Admin/providers'
 
 const FixMapResize = () => {
   const map = useMap()

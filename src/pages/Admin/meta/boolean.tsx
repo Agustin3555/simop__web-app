@@ -107,5 +107,19 @@ export const createBooleanProp =
 
         return value ? trueText : falseText
       },
+
+      pieSectorConfig: {
+        defaultMode: 'unique',
+        modes: {
+          unique: {
+            accumulate: (value: boolean, add) => {
+              const key = String(value)
+              const getTitle = () => (value ? trueText : falseText)
+
+              add(key, getTitle)
+            },
+          },
+        },
+      },
     }
   }

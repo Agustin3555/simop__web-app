@@ -1,29 +1,14 @@
-import {
-  createContext,
-  ReactNode,
-  useCallback,
-  useEffect,
-  useState,
-} from 'react'
+import { ReactNode, useCallback, useEffect, useState } from 'react'
 import { useMetaModels } from '../hooks'
 import { AUX_VIEWS } from '../constants/auxViews.const'
+import {
+  ViewInfo,
+  ViewsInfo,
+  ViewsInfoContext,
+  ViewsInfoContextProps,
+} from '../contexts/viewsInfo.context'
 
 const DEFAULT_FA_ICON = 'fa-solid fa-cube'
-
-export interface ViewInfo {
-  title: string
-  faIcon?: string
-}
-
-type ViewsInfo = Record<string, Required<ViewInfo>>
-
-interface ViewsInfoContextProps {
-  getViewInfo: (key: string) => undefined | Required<ViewInfo>
-}
-
-export const ViewsInfoContext = createContext<
-  ViewsInfoContextProps | undefined
->(undefined)
 
 interface ViewsInfoProviderProps {
   children: ReactNode

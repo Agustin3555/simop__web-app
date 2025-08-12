@@ -142,5 +142,19 @@ export const createRefProp =
 
         return value[selectedSearchMode ?? metaModel.anchorField]
       },
+
+      pieSectorConfig: {
+        defaultMode: 'unique',
+        modes: {
+          unique: {
+            accumulate: (value: LooseEntity, add) => {
+              const key = String(value.id)
+              const getTitle = () => String(value[metaModel.anchorField])
+
+              add(key, getTitle)
+            },
+          },
+        },
+      },
     }
   }

@@ -2,8 +2,8 @@ import './TableWindow.css'
 import { LooseEntity } from '@/models/config'
 import { Table } from '@/pages/Admin/components'
 import { MetaModelContext } from '@/pages/Admin/contexts/metaModel.context'
-import { TableProvider } from '@/pages/Admin/contexts/table.context'
 import { MetaModel } from '@/pages/Admin/meta/metaModel'
+import { TableProvider } from '@/pages/Admin/providers'
 
 export interface TableWindowProps {
   metaModel: MetaModel

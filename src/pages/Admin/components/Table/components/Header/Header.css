@@ -47,32 +47,36 @@
       gap: var(--cell-padding-inline);
       padding: var(--cell-padding-inline);
 
-      > button {
+      > .text {
+        font-weight: 850;
+        text-align: start;
+        text-transform: uppercase;
+        color: var(--pal-color-a-d3);
+      }
+
+      > .actions {
         display: flex;
         flex-wrap: wrap;
-        align-items: flex-start;
         justify-content: space-between;
         gap: var(--cell-padding-inline);
 
-        > .text {
-          font-weight: 850;
-          text-align: start;
-          text-transform: uppercase;
-          color: var(--pal-color-a-d3);
-        }
-
-        > .sort {
-          --cmp-icon-size: var(--pal-size-s);
-
+        > .group {
           display: flex;
-          align-items: center;
-          gap: var(--pal-size-xs);
-          padding: var(--pal-size-xs);
+          gap: var(--pal-size-2xs);
 
-          color: var(--pal-color-white);
+          > .cmp-button {
+            &.primary {
+              color: var(--pal-color-white);
 
-          border-radius: var(--pal-size-2xs);
-          background-color: var(--pal-color-a);
+              background-color: var(--pal-color-a-l2);
+            }
+
+            &.secondary {
+              border-color: var(--pal-color-a-l4);
+
+              color: var(--pal-color-gs-400);
+            }
+          }
         }
       }
     }

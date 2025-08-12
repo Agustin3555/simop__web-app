@@ -1,13 +1,5 @@
-import { createContext, ReactNode, useCallback, useState } from 'react'
-
-interface ViewsContextProps {
-  isActive: (viewKey?: string) => boolean
-  select: (viewKey: string, i: 0 | 1) => void
-}
-
-export const ViewsContext = createContext<ViewsContextProps | undefined>(
-  undefined,
-)
+import { ReactNode, useCallback, useState } from 'react'
+import { ViewsContextProps, ViewsContext } from '../contexts/views.context'
 
 interface ViewsProviderProps {
   children: ReactNode

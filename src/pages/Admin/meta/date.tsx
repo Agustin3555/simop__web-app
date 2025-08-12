@@ -123,5 +123,69 @@ export const createDateProp =
 
         return formatter(value, withTime)
       },
+
+      pieSectorConfig: {
+        defaultMode: 'day',
+        modes: {
+          unique: {
+            accumulate: (value: string, add) => {
+              const key = value
+              const getTitle = () => formatter(value, withTime)
+
+              add(key, getTitle)
+            },
+          },
+          customs: {
+            year: {
+              title: 'Año',
+              accumulate: (value: string, add) => {
+                const year = String(new Date(value).getFullYear())
+
+                const key = year
+                const getTitle = () => year
+
+                add(key, getTitle)
+              },
+            },
+            month: {
+              title: 'Mes',
+              accumulate: (value: string, add) => {
+                const month = new Date(value)
+                  .toLocaleString('es-ES', {
+                    month: 'long',
+                  })
+                  .replace(/\b\w/g, char => char.toUpperCase())
+
+                const key = month
+                const getTitle = () => month
+
+                add(key, getTitle)
+              },
+            },
+            day: {
+              title: 'Día',
+              accumulate: (value: string, add) => {
+                const day = String(new Date(value).getDate()).padStart(2, '0')
+
+                const key = day
+                const getTitle = () => day
+
+                add(key, getTitle)
+              },
+            },
+            hour: {
+              title: 'Hora',
+              accumulate: (value: string, add) => {
+                const hour = String(new Date(value).getHours())
+
+                const key = hour
+                const getTitle = () => hour
+
+                add(key, getTitle)
+              },
+            },
+          },
+        },
+      },
     }
   }

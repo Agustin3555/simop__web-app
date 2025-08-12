@@ -8,7 +8,7 @@ import {
   useMemo,
   useState,
 } from 'react'
-import { Icon } from '@/components'
+import { Button, Toggle } from '@/components'
 import {
   ColumnOrderState,
   SortDirection,
@@ -57,7 +57,8 @@ const Header = ({
     getFacetedRowModel,
   } = column
 
-  const { setAccessorKeys } = useTable().states
+  const { setAccessorKeys, graphedFields, toggleGraphedField } =
+    useTable().states
 
   const { getTableHeader: getHeader } = getAllPropsRecord[column.id] ?? {}
 
@@ -209,7 +210,14 @@ const Header = ({
     return steppedSizes(column.columnDef.minSize!, deltaOffset ?? 0) + 'px'
   }, [])
 
+  const handleToggleChange = useCallback(
+    () => toggleGraphedField(column.id),
+    [toggleGraphedField],
+  )
+
   const width = steppedSizes(column.columnDef.minSize!, getSize())
+
+  const sortIndex = getSortIndex() === -1 ? undefined : getSortIndex() + 1
 
   return (
     <div
@@ -228,23 +236,36 @@ const Header = ({
           <span />
         </div>
         <div className="main">
-          <button onClick={handleSortingClick}>
-            <p className="text">{title}</p>
-            {sortIcon && (
-              <div className="sort">
-                <Icon faIcon={sortIcon} />
-                <small>{getSortIndex() + 1}</small>
-              </div>
+          <p className="text">{title}</p>
+          <div className="actions">
+            <div className="group">
+              <Toggle
+                title="Graficar"
+                faIcon="fa-solid fa-chart-pie"
+                value={graphedFields.includes(column.id)}
+                onChange={handleToggleChange}
+              />
+              <Button
+                title="Ordenar"
+                text={sortIndex ? String(sortIndex) : undefined}
+                faIcon={
+                  sortIcon ?? 'fa-solid fa-arrow-right-arrow-left fa-rotate-90'
+                }
+                size="s"
+                type={sortIndex ? 'primary' : 'secondary'}
+                inverted
+                onAction={handleSortingClick}
+              />
+            </div>
+            {searchModes && (
+              <OptionSelectors
+                name={`search-mode-header-${column.id}`}
+                selected={selectedSearchMode}
+                setSelected={setSelectedSearchMode}
+                options={searchModes}
+              />
             )}
-          </button>
-          {searchModes && (
-            <OptionSelectors
-              name={`search-mode-header-${column.id}`}
-              selected={selectedSearchMode}
-              setSelected={setSelectedSearchMode}
-              options={searchModes}
-            />
-          )}
+          </div>
         </div>
         <div className="filter-container">{filter}</div>
       </div>

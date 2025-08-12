@@ -37,6 +37,17 @@ export interface BaseProp {
   minSize?: MinSize | number
 }
 
+export type AddFn = (key: string, getTitle: () => string) => void
+
+interface SimplePieSectorMode {
+  accumulate: (value: any, add: AddFn) => void
+}
+
+export type PieSectorModes = Record<
+  string,
+  SimplePieSectorMode & { title: string }
+>
+
 export interface Prop<E = LooseEntity> {
   key: string
   verboseKey?: string
@@ -77,6 +88,14 @@ export interface Prop<E = LooseEntity> {
   getReportTableCell: (item: E, selectedSearchMode?: string) => ReactNode
 
   getExcelTableCell: (item: E, selectedSearchMode?: string) => unknown
+
+  pieSectorConfig: {
+    defaultMode: string
+    modes: {
+      unique?: SimplePieSectorMode
+      customs?: PieSectorModes
+    }
+  }
 }
 
 export type PropFactory = (

@@ -196,7 +196,7 @@
 
 .ui-l {
   --ui-gap: var(--pal-size-s);
-  --ui-padding-inline: 1.25rem;
+  --ui-padding-inline: var(--pal-size-m);
   --ui-height: var(--pal-size-2xl);
   --ui-font-size: var(--pal-size-font-s);
   --ui-icon-size: var(--pal-size-m);

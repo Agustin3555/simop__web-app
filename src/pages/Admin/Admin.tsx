@@ -2,12 +2,14 @@ import './Admin.css'
 import { useMetaModels, useNavState } from './hooks'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
-import { FavoriteViewsProvider } from './contexts/favoriteViews.context'
-import { MetaModelsProvider } from './contexts/metaModels.context'
-import { NavStateProvider } from './contexts/navState.context'
-import { ViewsProvider } from './contexts/views.context'
-import { ViewsInfoProvider } from './contexts/viewsInfo.context'
 import { Header, Nav, ViewManager } from './components'
+import {
+  FavoriteViewsProvider,
+  MetaModelsProvider,
+  NavStateProvider,
+  ViewsInfoProvider,
+  ViewsProvider,
+} from './providers'
 
 const client = new QueryClient({
   defaultOptions: {
