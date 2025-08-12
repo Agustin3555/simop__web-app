@@ -144,7 +144,7 @@ const Table = ({ data, methods }: TableProps) => {
     () => [
       { id: SELECT_COLUMN },
       ...getAllProps.map<ColumnDef<LooseEntity>>(
-        ({ key, minSize, accessorFn, filterFn, footer }) => {
+        ({ key, minSize, accessorFn, filterFn, sortingFn, footer }) => {
           const size = minSize * STEP_WIDTH
 
           return {
@@ -155,6 +155,7 @@ const Table = ({ data, methods }: TableProps) => {
             size,
             ...(accessorFn && { accessorFn }),
             ...(filterFn && { filterFn }),
+            ...(sortingFn && { sortingFn }),
             ...(footer && { footer }),
           }
         },

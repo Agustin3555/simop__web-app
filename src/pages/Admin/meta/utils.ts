@@ -5,6 +5,7 @@ import {
   Column,
   FilterFn,
   HeaderContext,
+  SortingFn,
 } from '@tanstack/react-table'
 import { LooseEntity } from '@/models/config'
 import { ComboboxProps } from '../components/Combobox/Combobox'
@@ -58,6 +59,7 @@ export interface Prop<E = LooseEntity> {
   minSize: MinSize | number
   accessorFn?: AccessorFn<E>
   filterFn?: FilterFn<E> | BuiltInFilterFn
+  sortingFn?: SortingFn<E>
   footer?: (info: HeaderContext<E, unknown>) => ReactNode
 
   getFormField: (value?: any, editMode?: boolean) => ReactNode

@@ -46,6 +46,25 @@ export const createRefListProp =
         return entities.some(entity => filterValue.includes(String(entity.id)))
       },
 
+      sortingFn: (rowA, rowB, columnId) => {
+        const a = (rowA.original[columnId] as LooseEntity[] | undefined) ?? []
+        const b = (rowB.original[columnId] as LooseEntity[] | undefined) ?? []
+
+        // Si uno no tiene valores, va al final
+        const isAEmpty = a.length === 0
+        const isBEmpty = b.length === 0
+
+        if (isAEmpty && !isBEmpty) return 1
+        if (!isAEmpty && isBEmpty) return -1
+        if (isAEmpty && isBEmpty) return 0
+
+        // Comparación normal usando el primer valor
+        const textA = String(a[0][metaModel.anchorField] ?? '')
+        const textB = String(b[0][metaModel.anchorField] ?? '')
+
+        return textA.localeCompare(textB, undefined, { sensitivity: 'base' })
+      },
+
       getFormField: (value: LooseEntity[], editMode = false) => {
         if (hidden === true) return
 
