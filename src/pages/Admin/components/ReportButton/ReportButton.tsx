@@ -33,7 +33,7 @@ const ReportButton = ({ methods }: ReportButtonProps) => {
     setProgress(0)
 
     const tableData = table
-      .getFilteredRowModel()
+      .getSortedRowModel()
       .rows.map(({ original }) => original)
 
     const selectedData =
