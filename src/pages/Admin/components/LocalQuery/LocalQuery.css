@@ -47,4 +47,25 @@
       }
     }
   }
+
+  > .content {
+    flex-grow: 1;
+
+    display: flex;
+    gap: var(--pal-size-s);
+
+    overflow: auto;
+
+    > .cmp-graph-list {
+      min-width: 35rem;
+
+      &:not(.show) {
+        display: none;
+      }
+    }
+
+    @media (width <= 76rem) {
+      flex-direction: column;
+    }
+  }
 }

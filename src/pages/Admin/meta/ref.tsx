@@ -148,7 +148,7 @@ export const createRefProp =
         modes: {
           unique: {
             accumulate: (value: LooseEntity, add) => {
-              const key = String(value.id)
+              const key = [value.id, value[metaModel.anchorField]].join('-')
               const getTitle = () => String(value[metaModel.anchorField])
 
               add(key, getTitle)

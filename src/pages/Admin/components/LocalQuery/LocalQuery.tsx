@@ -1,11 +1,12 @@
 import './LocalQuery.css'
-import { useCallback } from 'react'
+import { useCallback, useState } from 'react'
 import { useQueryActionState } from '@/hooks'
 import { useEntities, useMetaModel, useTable } from '../../hooks'
-import { Button } from '@/components'
+import { Button, Toggle } from '@/components'
 import { DataDownloadBanner, GraphList, ReportButton, Table } from '..'
 import { TableProps } from '../Table/Table'
 import { DeleteButton } from './components'
+import { classList } from '@/helpers'
 
 export interface LocalQueryProps extends Pick<TableProps, 'methods'> {
   fetch?: {
@@ -15,7 +16,9 @@ export interface LocalQueryProps extends Pick<TableProps, 'methods'> {
 }
 
 const LocalQuery = ({ fetch, methods }: LocalQueryProps) => {
+  const [showGraphList, setShowGraphList] = useState(false)
   const { key, service } = useMetaModel()
+
   const { states } = useTable()
   const { selectedRowIds } = states
 
@@ -50,10 +53,19 @@ const LocalQuery = ({ fetch, methods }: LocalQueryProps) => {
             <div className="actions">
               {selectedRowIds.length !== 0 && <DeleteButton />}
               <ReportButton {...{ methods }} />
+              <Toggle
+                title="Mostrar gráficos"
+                faIcon="fa-solid fa-chart-pie"
+                size="l"
+                value={showGraphList}
+                setValue={setShowGraphList}
+              />
             </div>
           </header>
-          <Table {...{ data, methods }} />
-          {/* <GraphList /> */}
+          <div className="content">
+            <Table {...{ data, methods }} />
+            <GraphList handlingClass={classList({ show: showGraphList })} />
+          </div>
         </>
       ) : (
         <DataDownloadBanner

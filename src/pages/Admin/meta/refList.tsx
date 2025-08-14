@@ -165,7 +165,7 @@ export const createRefListProp =
           unique: {
             accumulate: (value: LooseEntity[], add) =>
               value.forEach(v => {
-                const key = String(v.id)
+                const key = [v.id, v[metaModel.anchorField]].join('-')
                 const getTitle = () => String(v[metaModel.anchorField])
 
                 add(key, getTitle)
