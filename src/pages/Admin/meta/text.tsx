@@ -1,8 +1,15 @@
-import { ForView, MinSize, PropFactory, IRequired, BaseProp } from './utils'
+import {
+  ForView,
+  MinSize,
+  PropFactory,
+  IRequired,
+  BaseProp,
+  createUniqueMode,
+  WDND_MODE,
+} from './utils'
 import { Input } from '@/components'
 import { InputArea, TextFilter } from '../components'
 import { StyleSheet, Text } from '@react-pdf/renderer'
-import { WDND_MODE } from '../components/GraphList/components/PieByField/PieByField'
 
 interface TextProp extends BaseProp {
   config?: {
@@ -93,14 +100,14 @@ export const createTextProp =
       pieSectorConfig: {
         defaultMode: WDND_MODE.key,
         modes: {
-          unique: {
+          ...createUniqueMode({
             accumulate: (value: string, add) => {
               const key = value
               const getTitle = () => value
 
               add(key, getTitle)
             },
-          },
+          }),
         },
       },
     }

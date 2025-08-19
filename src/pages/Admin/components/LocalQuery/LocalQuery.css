@@ -66,6 +66,10 @@
 
     @media (width <= 76rem) {
       flex-direction: column;
+
+      > .cmp-graph-list {
+        min-width: unset;
+      }
     }
   }
 }

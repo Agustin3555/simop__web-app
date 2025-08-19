@@ -44,10 +44,7 @@ interface SimplePieSectorMode {
   accumulate: (value: any, add: AddFn) => void
 }
 
-export type PieSectorModes = Record<
-  string,
-  SimplePieSectorMode & { title: string }
->
+type PieSectorModes = Record<string, SimplePieSectorMode & { title: string }>
 
 export interface Prop<E = LooseEntity> {
   key: string
@@ -93,10 +90,7 @@ export interface Prop<E = LooseEntity> {
 
   pieSectorConfig: {
     defaultMode: string
-    modes: {
-      unique?: SimplePieSectorMode
-      customs?: PieSectorModes
-    }
+    modes: PieSectorModes
   }
 }
 
@@ -104,3 +98,19 @@ export type PropFactory = (
   key: string,
   getMetaModel: MetaModelsContextProps['getMetaModel'],
 ) => Prop
+
+export const WDND_MODE = {
+  key: 'with-data-no-data',
+  title: 'Presencia del dato',
+}
+
+export const UNIQUE_MODE = {
+  key: 'unique',
+  title: 'Valor absoluto',
+}
+
+export const createUniqueMode = ({
+  accumulate,
+}: SimplePieSectorMode): PieSectorModes => ({
+  [UNIQUE_MODE.key]: { title: UNIQUE_MODE.title, accumulate },
+})

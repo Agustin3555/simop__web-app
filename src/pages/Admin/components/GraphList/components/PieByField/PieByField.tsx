@@ -12,7 +12,7 @@ import { PieSectorData } from './components/AnnotationLayer/AnnotationLayer'
 import { Button, Toggle } from '@/components'
 import { classList } from '@/helpers'
 import { COLOR_MATCHER, palColorGS, RGBColor } from '@/styles/palette'
-import { AddFn, PieSectorModes, Prop } from '@/pages/Admin/meta/utils'
+import { AddFn, Prop, WDND_MODE } from '@/pages/Admin/meta/utils'
 import { Select } from '../../..'
 import { generateColorScaleFromKeys } from '../../helpers'
 
@@ -24,8 +24,6 @@ const BASE_COLORS: RGBColor[] = [
   COLOR_MATCHER.F,
 ]
 
-// TODO: optimizar
-
 const renderActiveShape = (props: any) => {
   return <Sector {...props} outerRadius={86} />
 }
@@ -34,12 +32,6 @@ const GRAPH_SIZE = { width: '100%', height: 232 }
 const CHAR_LIMIT = 24
 const WITH_DATA_KEY = 'WITH_DATA'
 const NO_DATA_KEY = 'NO_DATA'
-
-export const UNIQUE_MODE = { key: 'unique', title: 'Valor absoluto' }
-export const WDND_MODE = {
-  key: 'with-data-no-data',
-  title: 'Presencia del dato',
-}
 
 export interface PieData {
   title: string
@@ -71,14 +63,6 @@ const PieByField = ({ propField }: PieByFieldProps) => {
   const captured = isCaptured(fieldKey)
 
   useEffect(() => {
-    captureInfoRef.current = {
-      ...captureInfoRef.current,
-      // TODO: para obtener el mode se tendrá que refactorizar bastante
-      [fieldKey]: { column: title, mode },
-    }
-  }, [mode])
-
-  useEffect(() => {
     const unsubscribe = queryClient
       .getQueryCache()
       .subscribe(({ query, type }) => {
@@ -89,27 +73,23 @@ const PieByField = ({ propField }: PieByFieldProps) => {
     return unsubscribe
   }, [])
 
-  const pieSectorModes = useMemo(() => {
-    let record = {} as PieSectorModes
-
-    if (modes.unique)
-      record[UNIQUE_MODE.key] = { title: UNIQUE_MODE.title, ...modes.unique }
-
-    if (modes.customs) record = { ...record, ...modes.customs }
-
-    return record
-  }, [])
-
   const modeOptions = useMemo(
     () => [
       { value: WDND_MODE.key, title: WDND_MODE.title },
-      ...Object.entries(pieSectorModes).map(([key, { title }]) => ({
-        value: key,
-        title,
-      })),
+      ...Object.entries(modes).map(([k, { title }]) => ({ value: k, title })),
     ],
     [],
   )
+
+  useEffect(() => {
+    captureInfoRef.current = {
+      ...captureInfoRef.current,
+      [fieldKey]: {
+        column: title,
+        mode: modeOptions.find(v => v.value === mode)!.title,
+      },
+    }
+  }, [mode])
 
   const data = useMemo((): undefined | PieData[] => {
     if (!table) return
@@ -137,7 +117,7 @@ const PieByField = ({ propField }: PieByFieldProps) => {
           ? add(NO_DATA_KEY, () => 'SIN DATO')
           : add(WITH_DATA_KEY, () => 'CON DATO')
       } else {
-        const { accumulate } = pieSectorModes[mode]
+        const { accumulate } = modes[mode]
 
         value === undefined
           ? add(NO_DATA_KEY, () => 'SIN DATO')

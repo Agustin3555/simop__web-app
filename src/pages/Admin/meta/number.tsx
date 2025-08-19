@@ -1,9 +1,16 @@
-import { ForView, MinSize, PropFactory, IRequired, BaseProp } from './utils'
+import {
+  ForView,
+  MinSize,
+  PropFactory,
+  IRequired,
+  BaseProp,
+  createUniqueMode,
+  WDND_MODE,
+} from './utils'
 import { Input } from '@/components'
 import { NumberFilter, StylizedNumber } from '../components'
 import { StyleSheet, Text } from '@react-pdf/renderer'
 import { FilterValueRange } from '../components/NumberFilter/NumberFilter'
-import { WDND_MODE } from '../components/GraphList/components/PieByField/PieByField'
 
 export interface NumberProp extends BaseProp {
   config?: {
@@ -178,7 +185,7 @@ export const createNumberProp =
       pieSectorConfig: {
         defaultMode: WDND_MODE.key,
         modes: {
-          unique: {
+          ...createUniqueMode({
             accumulate: (value: number | string, add) => {
               const key = typeof value === 'number' ? String(value) : value
 
@@ -194,7 +201,7 @@ export const createNumberProp =
 
               add(key, getTitle)
             },
-          },
+          }),
         },
       },
     }

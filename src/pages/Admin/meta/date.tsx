@@ -1,4 +1,11 @@
-import { ForView, MinSize, PropFactory, IRequired, BaseProp } from './utils'
+import {
+  ForView,
+  MinSize,
+  PropFactory,
+  IRequired,
+  BaseProp,
+  createUniqueMode,
+} from './utils'
 import { Input } from '@/components'
 import { format } from '@formkit/tempo'
 import { DateFilter } from '../components'
@@ -127,62 +134,60 @@ export const createDateProp =
       pieSectorConfig: {
         defaultMode: 'day',
         modes: {
-          unique: {
+          ...createUniqueMode({
             accumulate: (value: string, add) => {
               const key = value
               const getTitle = () => formatter(value, withTime)
 
               add(key, getTitle)
             },
+          }),
+          year: {
+            title: 'Año',
+            accumulate: (value: string, add) => {
+              const year = String(new Date(value).getFullYear())
+
+              const key = year
+              const getTitle = () => year
+
+              add(key, getTitle)
+            },
           },
-          customs: {
-            year: {
-              title: 'Año',
-              accumulate: (value: string, add) => {
-                const year = String(new Date(value).getFullYear())
+          month: {
+            title: 'Mes',
+            accumulate: (value: string, add) => {
+              const month = new Date(value)
+                .toLocaleString('es-ES', {
+                  month: 'long',
+                })
+                .replace(/\b\w/g, char => char.toUpperCase())
 
-                const key = year
-                const getTitle = () => year
+              const key = month
+              const getTitle = () => month
 
-                add(key, getTitle)
-              },
+              add(key, getTitle)
             },
-            month: {
-              title: 'Mes',
-              accumulate: (value: string, add) => {
-                const month = new Date(value)
-                  .toLocaleString('es-ES', {
-                    month: 'long',
-                  })
-                  .replace(/\b\w/g, char => char.toUpperCase())
+          },
+          day: {
+            title: 'Día',
+            accumulate: (value: string, add) => {
+              const day = String(new Date(value).getDate()).padStart(2, '0')
 
-                const key = month
-                const getTitle = () => month
+              const key = day
+              const getTitle = () => day
 
-                add(key, getTitle)
-              },
+              add(key, getTitle)
             },
-            day: {
-              title: 'Día',
-              accumulate: (value: string, add) => {
-                const day = String(new Date(value).getDate()).padStart(2, '0')
+          },
+          hour: {
+            title: 'Hora',
+            accumulate: (value: string, add) => {
+              const hour = String(new Date(value).getHours())
 
-                const key = day
-                const getTitle = () => day
+              const key = hour
+              const getTitle = () => hour
 
-                add(key, getTitle)
-              },
-            },
-            hour: {
-              title: 'Hora',
-              accumulate: (value: string, add) => {
-                const hour = String(new Date(value).getHours())
-
-                const key = hour
-                const getTitle = () => hour
-
-                add(key, getTitle)
-              },
+              add(key, getTitle)
             },
           },
         },

@@ -1,4 +1,12 @@
-import { Color, PropFactory, ForView, MinSize, BaseProp } from './utils'
+import {
+  Color,
+  PropFactory,
+  ForView,
+  MinSize,
+  BaseProp,
+  createUniqueMode,
+  UNIQUE_MODE,
+} from './utils'
 import { BooleanFilter, Checkbox } from '../components'
 import { classList } from '@/helpers'
 import { StyleSheet, Text } from '@react-pdf/renderer'
@@ -109,16 +117,16 @@ export const createBooleanProp =
       },
 
       pieSectorConfig: {
-        defaultMode: 'unique',
+        defaultMode: UNIQUE_MODE.key,
         modes: {
-          unique: {
+          ...createUniqueMode({
             accumulate: (value: boolean, add) => {
               const key = String(value)
               const getTitle = () => (value ? trueText : falseText)
 
               add(key, getTitle)
             },
-          },
+          }),
         },
       },
     }

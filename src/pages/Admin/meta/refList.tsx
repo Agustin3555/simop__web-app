@@ -1,5 +1,13 @@
 import { LooseEntity } from '@/models/config'
-import { ForView, MinSize, PropFactory, IRequired, BaseProp } from './utils'
+import {
+  ForView,
+  MinSize,
+  PropFactory,
+  IRequired,
+  BaseProp,
+  createUniqueMode,
+  UNIQUE_MODE,
+} from './utils'
 import { AutoCombobox, FetchRef, RefFilter } from '../components'
 import { MetaModelKey } from '../constants/metaModelKey.const'
 import { isFieldEnabled } from './ref'
@@ -160,9 +168,9 @@ export const createRefListProp =
       },
 
       pieSectorConfig: {
-        defaultMode: 'unique',
+        defaultMode: UNIQUE_MODE.key,
         modes: {
-          unique: {
+          ...createUniqueMode({
             accumulate: (value: LooseEntity[], add) =>
               value.forEach(v => {
                 const key = [v.id, v[metaModel.anchorField]].join('-')
@@ -170,7 +178,7 @@ export const createRefListProp =
 
                 add(key, getTitle)
               }),
-          },
+          }),
         },
       },
     }
