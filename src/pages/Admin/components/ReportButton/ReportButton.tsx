@@ -3,7 +3,7 @@ import { Button } from '@/components'
 import { pdf } from '@react-pdf/renderer'
 import { ReactNode, useCallback, useMemo, useState } from 'react'
 import { sleep } from '@/helpers'
-import { useMetaModel, useTable } from '../../hooks'
+import { useGraphScreenshots, useMetaModel, useTable } from '../../hooks'
 import { Method } from '@/services/config'
 import { ReportInTable } from '..'
 import { steppedSizes } from '../Table/helpers'
@@ -21,6 +21,7 @@ const ReportButton = ({ methods }: ReportButtonProps) => {
   const { title, getPropFields } = useMetaModel()
   const { table, states } = useTable()
   const { selectedRowIds, accessorKeys } = states
+  const { captures, captureInfoRef, takeCapture } = useGraphScreenshots()
 
   const getAllProps = useMemo(
     () => getPropFields(methods?.forGetAll ?? Method.GetAll) ?? [],
@@ -86,10 +87,20 @@ const ReportButton = ({ methods }: ReportButtonProps) => {
       if (i % 10 === 0) await sleep()
     }
 
+    const imgs = await takeCapture()
+
+    const graphs = captures.map((fieldKey, i) => ({
+      ...captureInfoRef.current[fieldKey],
+      img: imgs[i],
+    }))
+
     return (
-      <ReportInTable schemeTitle={title.plural} {...{ props, header, rows }} />
+      <ReportInTable
+        schemeTitle={title.plural}
+        {...{ props, header, rows, graphs }}
+      />
     )
-  }, [table, selectedRowIds, accessorKeys])
+  }, [table, selectedRowIds, accessorKeys, captures])
 
   const actionResult = useHandleAction(async ({ setError, setSuccess }) => {
     try {

@@ -1,72 +1,28 @@
 import './PieByField.css'
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { useQueryClient } from '@tanstack/react-query'
-import { useMetaModel, useTable } from '@/pages/Admin/hooks'
+import {
+  useGraphScreenshots,
+  useMetaModel,
+  useTable,
+} from '@/pages/Admin/hooks'
 import { Cell, Pie, PieChart, ResponsiveContainer, Sector } from 'recharts'
 import { AnnotationLayer } from './components'
 import { PieSectorData } from './components/AnnotationLayer/AnnotationLayer'
 import { Button, Toggle } from '@/components'
 import { classList } from '@/helpers'
-import { COLOR_MATCHER, palColorGS } from '@/styles/palette'
+import { COLOR_MATCHER, palColorGS, RGBColor } from '@/styles/palette'
 import { AddFn, PieSectorModes, Prop } from '@/pages/Admin/meta/utils'
 import { Select } from '../../..'
+import { generateColorScaleFromKeys } from '../../helpers'
 
-// Paleta base: cada color como [R, G, B]
-const baseColors: [number, number, number][] = [
+const BASE_COLORS: RGBColor[] = [
   COLOR_MATCHER.A,
   COLOR_MATCHER.B,
   COLOR_MATCHER.C,
   COLOR_MATCHER.E,
   COLOR_MATCHER.F,
 ]
-
-// Función para ajustar brillo (factor > 1 = más claro, < 1 = más oscuro)
-function adjustBrightness([r, g, b]: [number, number, number], factor: number) {
-  return [
-    Math.min(255, Math.max(0, Math.round(r * factor))),
-    Math.min(255, Math.max(0, Math.round(g * factor))),
-    Math.min(255, Math.max(0, Math.round(b * factor))),
-  ]
-}
-
-// Hash para que la misma key siempre dé el mismo color
-function hashToIndex(value: string | number, totalColors: number) {
-  let hash = 0
-  const str = value.toString()
-  for (let i = 0; i < str.length; i++) {
-    hash = str.charCodeAt(i) + ((hash << 5) - hash)
-  }
-  return Math.abs(hash) % totalColors
-}
-
-// Generar paleta completa con variaciones
-function generateFullPalette() {
-  const variations = 20
-
-  const factors = Array.from(
-    { length: variations },
-    (_, i) => 0.625 + (i / (variations - 1)) * 0.75,
-  ) // de 70% a 130% brillo
-  const palette: string[] = []
-
-  baseColors.forEach(base => {
-    factors.forEach(factor => {
-      const [r, g, b] = adjustBrightness(base, factor)
-      palette.push(`rgb(${r}, ${g}, ${b})`)
-    })
-  })
-
-  return palette
-}
-
-// Mapear keys a colores
-function generateColorScaleFromDataKeys(keys: string[]) {
-  const palette = generateFullPalette()
-  return keys.map(key => {
-    const index = hashToIndex(key, palette.length)
-    return palette[index]
-  })
-}
 
 // TODO: optimizar
 
@@ -100,7 +56,6 @@ const PieByField = ({ propField }: PieByFieldProps) => {
   const { defaultMode, modes } = pieSectorConfig
 
   const [mode, setMode] = useState(defaultMode)
-  const [capture, setCapture] = useState(false)
   const [activeIndex, setActiveIndex] = useState<number>()
   const [dataUpdated, setDataUpdated] = useState<number>()
   const [dimensions, setDimensions] = useState({ width: 0, height: 0 })
@@ -110,6 +65,18 @@ const PieByField = ({ propField }: PieByFieldProps) => {
   const { key: modelKey } = useMetaModel()
   const { table, states } = useTable()
   const { columnFilters, toggleGraphedField } = states
+  const { captureInfoRef, isCaptured, toggleCapture, removeCapture } =
+    useGraphScreenshots()
+
+  const captured = isCaptured(fieldKey)
+
+  useEffect(() => {
+    captureInfoRef.current = {
+      ...captureInfoRef.current,
+      // TODO: para obtener el mode se tendrá que refactorizar bastante
+      [fieldKey]: { column: title, mode },
+    }
+  }, [mode])
 
   useEffect(() => {
     const unsubscribe = queryClient
@@ -180,7 +147,7 @@ const PieByField = ({ propField }: PieByFieldProps) => {
       return acc
     }, {})
 
-    const colors = generateColorScaleFromDataKeys(Object.keys(counts))
+    const colors = generateColorScaleFromKeys(BASE_COLORS, Object.keys(counts))
 
     return Object.entries(counts)
       .sort((a, b) => b[1].amount - a[1].amount)
@@ -236,6 +203,8 @@ const PieByField = ({ propField }: PieByFieldProps) => {
 
   const handleDeleteClick = useCallback(() => toggleGraphedField(fieldKey), [])
 
+  const handleCaptureChange = useCallback(() => toggleCapture(fieldKey), [])
+
   useEffect(() => {
     const container = containerRef.current
     if (!container) return
@@ -247,14 +216,16 @@ const PieByField = ({ propField }: PieByFieldProps) => {
 
     observer.observe(container)
 
-    return () => observer.disconnect()
-  }, [containerRef.current])
+    return () => {
+      observer.disconnect()
+      removeCapture(fieldKey)
+    }
+  }, [containerRef.current, removeCapture])
 
   if (!(data && pieSectorData && sectorRefs)) return null
 
   return (
-    <div className={classList('cmp-pie-by-field', { capture })}>
-      <h3>{title}</h3>
+    <div className={classList('cmp-pie-by-field', { captured })}>
       <header>
         <div className="left">
           <small>Por: </small>
@@ -274,6 +245,7 @@ const PieByField = ({ propField }: PieByFieldProps) => {
           onAction={handleDeleteClick}
         />
       </header>
+      <h3>{title}</h3>
       <div className="graph" style={GRAPH_SIZE}>
         <ResponsiveContainer ref={containerRef} {...GRAPH_SIZE}>
           <PieChart>
@@ -300,8 +272,8 @@ const PieByField = ({ propField }: PieByFieldProps) => {
         <Toggle
           title="Agregar al informe"
           faIcon="fa-solid fa-paperclip"
-          value={capture}
-          setValue={setCapture}
+          value={captured}
+          onChange={handleCaptureChange}
         />
       </div>
       {sectorRefs.length !== 0 && (

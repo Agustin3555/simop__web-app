@@ -59,7 +59,9 @@ type ColorKeys =
   | 'E'
   | 'F'
 
-export const COLOR_MATCHER: Record<ColorKeys, [number, number, number]> = {
+export type RGBColor = [number, number, number]
+
+export const COLOR_MATCHER: Record<ColorKeys, RGBColor> = {
   AD5: [8, 9, 19],
   AD4: [22, 25, 53],
   AD3: [37, 41, 87],

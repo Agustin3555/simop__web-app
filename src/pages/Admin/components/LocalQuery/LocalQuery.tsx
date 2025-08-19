@@ -6,6 +6,7 @@ import { Button, Toggle } from '@/components'
 import { DataDownloadBanner, GraphList, ReportButton, Table } from '..'
 import { TableProps } from '../Table/Table'
 import { DeleteButton } from './components'
+import { GraphScreenshotsProvider } from '../../providers'
 import { classList } from '@/helpers'
 
 export interface LocalQueryProps extends Pick<TableProps, 'methods'> {
@@ -40,7 +41,7 @@ const LocalQuery = ({ fetch, methods }: LocalQueryProps) => {
   return (
     <div className="cmp-local-query">
       {data ? (
-        <>
+        <GraphScreenshotsProvider>
           <header>
             <div className="left">
               <Button
@@ -66,7 +67,7 @@ const LocalQuery = ({ fetch, methods }: LocalQueryProps) => {
             <Table {...{ data, methods }} />
             <GraphList handlingClass={classList({ show: showGraphList })} />
           </div>
-        </>
+        </GraphScreenshotsProvider>
       ) : (
         <DataDownloadBanner
           actionState={queryActionState}

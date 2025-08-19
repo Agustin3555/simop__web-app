@@ -48,7 +48,6 @@ export const styles = StyleSheet.create({
     flexDirection: 'row',
     gap: palSize(Size.XS),
     borderBottomWidth: palSize(Size.XS3),
-    borderStyle: 'solid',
     borderColor: palColor('BL3'),
     paddingBottom: 7,
 
@@ -70,4 +69,27 @@ export const styles = StyleSheet.create({
     paddingBottom: 7,
   },
   cell: {},
+  graphs: {
+    display: 'flex',
+    flexDirection: 'column',
+    paddingHorizontal: palSize(Size.S),
+  },
+  graphItem: {
+    display: 'flex',
+    flexDirection: 'column',
+    gap: palSize(Size.S),
+  },
+  graphHeader: {
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+  },
+  column: {
+    textTransform: 'uppercase',
+    fontWeight: 850,
+    color: palColor('BD4'),
+  },
+  img: {
+    objectFit: 'contain',
+  },
 })

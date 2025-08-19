@@ -1,13 +1,13 @@
 import domtoimage from 'dom-to-image'
 
-const SCALE = 2
+const SCALE = 1
 
 export const captureElementImage = async (element: HTMLElement) =>
   await domtoimage.toPng(element, {
     height: element.offsetHeight * SCALE,
     width: element.offsetWidth * SCALE,
     style: {
-      scale: SCALE,
+      transform: `scale(${SCALE})`,
       transformOrigin: 'top left',
     },
   })

@@ -1,5 +1,5 @@
 import './GraphList.css'
-import { useMetaModel, useTable } from '../../hooks'
+import { useGraphScreenshots, useMetaModel, useTable } from '../../hooks'
 import { Fragment } from 'react/jsx-runtime'
 import { PieByField } from './components'
 import { Separator } from '@/components'
@@ -14,11 +14,15 @@ interface GraphListProps {
 const GraphList = ({ handlingClass }: GraphListProps) => {
   const { getPropFieldsRecord } = useMetaModel()
   const { graphedFields } = useTable().states
+  const { graphListRef } = useGraphScreenshots()
 
   const propFieldsRecord = useMemo(() => getPropFieldsRecord(Method.GetAll), [])
 
   return (
-    <div className={classList('cmp-graph-list', handlingClass)}>
+    <div
+      className={classList('cmp-graph-list', handlingClass)}
+      ref={graphListRef}
+    >
       {graphedFields.map((field, i) => (
         <Fragment key={field}>
           <PieByField propField={propFieldsRecord[field]} />

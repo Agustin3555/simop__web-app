@@ -1,7 +1,12 @@
 import { styles } from './ReportInTable.style'
 import { Report } from '@/pages/Admin/components'
-import { Text, View } from '@react-pdf/renderer'
+import { Text, View, Image } from '@react-pdf/renderer'
 import { ReactNode } from 'react'
+
+export interface GraphInfo {
+  column: string
+  mode: string
+}
 
 export interface FilterProp {
   title: string
@@ -13,6 +18,7 @@ interface ReportInTableProps {
   props?: FilterProp[]
   header: { title: string; size: number }[]
   rows: ReactNode[][]
+  graphs?: (GraphInfo & { img: string })[]
 }
 
 const ReportInTable = ({
@@ -20,6 +26,7 @@ const ReportInTable = ({
   props = [],
   header,
   rows,
+  graphs,
 }: ReportInTableProps) => {
   props = [{ title: 'CANTIDAD', values: [rows.length] }, ...props]
 
@@ -59,6 +66,19 @@ const ReportInTable = ({
           ))}
         </View>
       </View>
+      {graphs && (
+        <View style={styles.graphs}>
+          {graphs.map(({ column, mode, img }, i) => (
+            <View style={styles.graphItem} wrap={false}>
+              <View style={styles.graphHeader}>
+                <Text style={styles.column}>{column}</Text>
+                <Text>Por: {mode}</Text>
+              </View>
+              <Image key={i} style={styles.img} src={img} />
+            </View>
+          ))}
+        </View>
+      )}
     </Report>
   )
 }

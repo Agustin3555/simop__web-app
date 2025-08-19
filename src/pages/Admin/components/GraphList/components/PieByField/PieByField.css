@@ -4,28 +4,21 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  gap: var(--pal-size-m);
 
   *:focus {
     outline: none;
   }
 
-  > h3 {
-    position: absolute;
-
-    font-size: var(--pal-size-font-s);
-    color: var(--pal-color-a-l2);
-  }
-
   > header {
     display: flex;
     justify-content: space-between;
-    margin-bottom: var(--pal-size-s);
     width: 100%;
 
     > .left {
       display: flex;
       align-items: center;
-      gap: var(--pal-size-2xs);
+      gap: var(--pal-size-xs);
 
       > small {
         color: var(--pal-color-a);
@@ -37,6 +30,11 @@
 
       color: var(--pal-color-gs-400);
     }
+  }
+
+  > h3 {
+    font-size: var(--pal-size-font-s);
+    color: var(--pal-color-a-l2);
   }
 
   > .graph {
@@ -56,7 +54,6 @@
     display: grid;
     row-gap: var(--pal-size-xs);
     column-gap: var(--pal-size-m);
-    margin-top: var(--pal-size-l);
     width: 100%;
 
     font-size: var(--pal-size-font-2xs);
@@ -80,6 +77,28 @@
         > small {
           color: var(--pal-color-a);
         }
+      }
+    }
+  }
+
+  .capture-container > & {
+    width: 53rem;
+
+    > :is(header, h3) {
+      display: none;
+    }
+
+    > .graph {
+      > .recharts-responsive-container {
+        width: auto !important;
+
+        > div {
+          width: auto !important;
+        }
+      }
+
+      > .cmp-toggle {
+        display: none;
       }
     }
   }

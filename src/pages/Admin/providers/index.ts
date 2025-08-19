@@ -1,4 +1,5 @@
 export * from './favoriteViews.provider'
+export * from './graphScreenshots.provider'
 export * from './metaModels.provider'
 export * from './navState.provider'
 export * from './table.provider'
