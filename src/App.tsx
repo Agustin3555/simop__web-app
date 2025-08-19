@@ -1,13 +1,24 @@
 import './App.css'
+import { lazy, Suspense } from 'react'
 import { Route, Switch } from 'wouter'
-import { Admin, Login, NotFound } from './pages'
 import { Snackbar } from './components'
+import Login from './pages/Login/Login'
+import NotFound from './pages/NotFound/NotFound'
+
+const Admin = lazy(() => import('./pages/Admin/Admin'))
 
 const App = () => (
   <main className="cmp-app">
     <Switch>
       <Route path="/" component={Login} />
-      <Route path="/admin" component={Admin} />
+      <Route
+        path="/admin"
+        component={() => (
+          <Suspense>
+            <Admin />
+          </Suspense>
+        )}
+      />
       <Route component={NotFound} />
     </Switch>
     <Snackbar />

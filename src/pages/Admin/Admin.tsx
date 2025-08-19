@@ -10,6 +10,10 @@ import {
   ViewsInfoProvider,
   ViewsProvider,
 } from './providers'
+import { publicInstance } from '@/services/config'
+
+const wakeUp = async () => await publicInstance.get('Tel0YWwsIEFtaWdv/ping')
+wakeUp()
 
 const client = new QueryClient({
   defaultOptions: {
@@ -23,16 +27,16 @@ const ContextualizedAdmin = () => {
   const { allReady } = useMetaModels()
   const { isOpen } = useNavState()
 
+  if (!allReady) return null
+
   return (
-    allReady && (
-      <div className="cmp-admin" data-nav-open={isOpen}>
-        <Nav />
-        <div className="main-panel">
-          <Header />
-          <ViewManager />
-        </div>
+    <div className="cmp-admin" data-nav-open={isOpen}>
+      <Nav />
+      <div className="main-panel">
+        <Header />
+        <ViewManager />
       </div>
-    )
+    </div>
   )
 }
 
