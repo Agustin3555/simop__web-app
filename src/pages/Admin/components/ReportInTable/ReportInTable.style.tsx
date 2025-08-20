@@ -69,7 +69,10 @@ export const styles = StyleSheet.create({
     paddingBottom: 7,
   },
   cell: {},
+
   graphs: {
+    position: 'relative',
+
     display: 'flex',
     flexDirection: 'column',
     paddingHorizontal: palSize(Size.S),
@@ -79,15 +82,29 @@ export const styles = StyleSheet.create({
     flexDirection: 'column',
     gap: palSize(Size.S),
   },
-  graphHeader: {
-    display: 'flex',
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-  },
   column: {
+    alignSelf: 'center',
+
     textTransform: 'uppercase',
     fontWeight: 850,
     color: palColor('BD4'),
+  },
+  mode: {
+    position: 'absolute',
+    right: 0,
+
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: palSize(Size.XS),
+  },
+  modeValue: {
+    paddingHorizontal: 6,
+    paddingTop: palSize(Size.XS3) - 1,
+    paddingBottom: palSize(Size.XS3),
+
+    borderRadius: palSize(Size.XS3),
+    backgroundColor: palColor('AL5'),
   },
   img: {
     objectFit: 'contain',

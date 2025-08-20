@@ -122,6 +122,7 @@ const ReportButton = ({ methods }: ReportButtonProps) => {
 
   return (
     <Button
+      title="Generar informe"
       text="Informe"
       faIcon="fa-solid fa-file-pdf"
       type="secondary"
