@@ -7,7 +7,7 @@ import { LocalQueryProps } from '../LocalQuery/LocalQuery'
 import { MetaModelKey } from '../../constants/metaModelKey.const'
 import { MetaModelContext } from '../../contexts/metaModel.context'
 import { MetaModel } from '../../meta/metaModel'
-import { TableProvider } from '../../providers'
+import { ConfigsProvider, TableProvider } from '../../providers'
 
 interface ModuleViewProps {
   view?: Partial<ViewProps>
@@ -58,13 +58,15 @@ const ModuleView = ({
     ready &&
     metaModel && (
       <MetaModelContext.Provider value={metaModel as MetaModel}>
-        <TableProvider>
-          <View
-            viewKey={view?.viewKey ?? metaModel.key}
-            title={view?.title ?? metaModel.title.plural}
-            {...{ localViews }}
-          />
-        </TableProvider>
+        <ConfigsProvider>
+          <TableProvider>
+            <View
+              viewKey={view?.viewKey ?? metaModel.key}
+              title={view?.title ?? metaModel.title.plural}
+              {...{ localViews }}
+            />
+          </TableProvider>
+        </ConfigsProvider>
       </MetaModelContext.Provider>
     )
   )

@@ -33,3 +33,4 @@ export { default as DataDownloadBanner } from './DataDownloadBanner/DataDownload
 export { default as ReportInTable } from './ReportInTable/ReportInTable'
 export { default as GraphList } from './GraphList/GraphList'
 export { default as Select } from './Select/Select'
+export { default as FallbackBanner } from './FallbackBanner/FallbackBanner'

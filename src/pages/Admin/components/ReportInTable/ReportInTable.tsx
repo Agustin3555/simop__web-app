@@ -68,7 +68,7 @@ const ReportInTable = ({
       </View>
 
       {graphs && (
-        <View style={styles.graphs}>
+        <View style={styles.graphs} break>
           {graphs.map(({ column, mode, img }, i) => (
             <View style={styles.graphItem} wrap={false}>
               <Text style={styles.column}>{column}</Text>

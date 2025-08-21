@@ -1,0 +1,75 @@
+.cmp-local-query {
+  display: flex;
+  flex-direction: column;
+  gap: var(--pal-size-s);
+
+  /* mask-image: linear-gradient(to right, #fff 95%, transparent); */
+
+  > header {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--pal-size-s);
+
+    > .cmp-base-combobox {
+      width: 100%;
+    }
+
+    > .left {
+      flex-grow: 1;
+
+      display: flex;
+      align-items: center;
+      gap: var(--pal-size-s);
+
+      > .cmp-button {
+        color: var(--pal-color-white);
+      }
+    }
+
+    > .actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--pal-size-s);
+
+      > .cmp-secure-hold-button {
+        border-color: var(--pal-color-a-l1);
+        width: 8rem;
+
+        color: var(--pal-color-a);
+      }
+
+      .cmp-button {
+        border-color: var(--pal-color-c);
+
+        color: var(--pal-color-c-d1);
+      }
+    }
+  }
+
+  > .content {
+    flex-grow: 1;
+
+    display: flex;
+    gap: var(--pal-size-s);
+
+    overflow: auto;
+
+    > .cmp-graph-list {
+      min-width: 35rem;
+
+      &:not(.show) {
+        display: none;
+      }
+    }
+
+    @media (width <= 76rem) {
+      flex-direction: column;
+
+      > .cmp-graph-list {
+        min-width: unset;
+      }
+    }
+  }
+}

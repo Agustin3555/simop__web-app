@@ -16,4 +16,9 @@
   > * {
     flex-shrink: 0;
   }
+
+  > .cmp-fallback-banner > p > .cmp-button {
+    border-color: var(--pal-color-a-l4);
+    color: var(--pal-color-gs-400);
+  }
 }

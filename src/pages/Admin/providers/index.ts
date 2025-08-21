@@ -1,3 +1,4 @@
+export * from './configs.provider'
 export * from './favoriteViews.provider'
 export * from './graphScreenshots.provider'
 export * from './metaModels.provider'

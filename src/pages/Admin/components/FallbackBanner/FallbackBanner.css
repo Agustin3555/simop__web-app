@@ -1,0 +1,24 @@
+.cmp-fallback-banner {
+  align-content: center;
+  height: 100%;
+
+  > p {
+    margin-inline: auto;
+    padding: var(--pal-size-l);
+    width: fit-content;
+
+    font-weight: 500;
+    color: var(--pal-color-a-l1);
+
+    border-radius: var(--pal-size-xs);
+    background-color: var(--pal-color-a-l5);
+
+    * {
+      display: inline-flex;
+    }
+
+    :is(.cmp-button, .cmp-toggle) {
+      margin-inline: var(--pal-size-2xs);
+    }
+  }
+}

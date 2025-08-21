@@ -12,7 +12,7 @@ import {
 import { Button } from '@/components'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { Method } from '@/services/config'
-import { Form } from '..'
+import { FallbackBanner, Form } from '..'
 
 const LocalEdit = () => {
   const metaModel = useMetaModel()
@@ -109,21 +109,17 @@ const LocalEdit = () => {
           <Form {...{ actionState, handleSubmit, fieldGroups }} />
         </>
       ) : (
-        <div className="banner-container">
-          <div className="banner">
-            <p className="text">
-              Seleccione un/a <strong>{title.singular}</strong> a editar en
-            </p>
-            <Button
-              text="Consultar"
-              faIcon="fa-solid fa-search"
-              size="m"
-              type="secondary"
-              inverted
-              onAction={handleClick}
-            />
-          </div>
-        </div>
+        <FallbackBanner>
+          Seleccione un/a <strong>{title.singular}</strong> a editar en{' '}
+          <Button
+            text="Consultar"
+            faIcon="fa-solid fa-search"
+            size="m"
+            type="secondary"
+            inverted
+            onAction={handleClick}
+          />
+        </FallbackBanner>
       )}
     </div>
   )
