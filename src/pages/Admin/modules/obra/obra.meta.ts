@@ -1,10 +1,9 @@
-import { Method } from '@/services/config'
 import { select } from '../../helpers'
 import { ObraService } from './obra.service'
 import { ObraModel } from '.'
 import { ObraProps } from './obra.props'
 import { MetaModelDefinition } from '../../meta/metaModel'
-import { omitBaseEntity } from '../../constants/selectors.const'
+import { Method } from '@/services/config'
 
 const { propFactories, allFields } = ObraProps
 
@@ -213,8 +212,48 @@ export const ObraMeta: MetaModelDefinition<ObraModel.Entity> = {
     service: ObraService,
     refreshRate: 'medium',
     anchorField: 'nombre',
+    allFields,
     propFactories,
   },
 
-  fieldsByService,
+  mutationsFields: {
+    add: [
+      { fields: BASICO },
+      {
+        key: 'modalidad',
+        title: 'Modalidad',
+        fields: select(allFields, 'only', [
+          'obraNueva',
+          'porcentajeObraNueva',
+          'metrosCuadradosObraNueva',
+          'metrosLinealesObraNueva',
+          'observacionesObraNueva',
+          'obraRefaccionada',
+          'porcentajeObraRefaccionada',
+          'metrosCuadradosObraRefaccionada',
+          'metrosLinealesObraRefaccionada',
+          'observacionesObraRefaccionada',
+        ]),
+      },
+    ],
+    edit: [
+      { fields: BASICO },
+      {
+        key: 'modalidad',
+        title: 'Modalidad',
+        fields: select(allFields, 'only', [
+          'obraNueva',
+          'porcentajeObraNueva',
+          'metrosCuadradosObraNueva',
+          'metrosLinealesObraNueva',
+          'observacionesObraNueva',
+          'obraRefaccionada',
+          'porcentajeObraRefaccionada',
+          'metrosCuadradosObraRefaccionada',
+          'metrosLinealesObraRefaccionada',
+          'observacionesObraRefaccionada',
+        ]),
+      },
+    ],
+  },
 }

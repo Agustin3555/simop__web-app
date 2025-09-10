@@ -18,7 +18,7 @@ export const GraphScreenshotsProvider = ({
   const graphListRef = useRef<HTMLDivElement>(null)
 
   const isCaptured = useCallback<GraphScreenshotsContextProps['isCaptured']>(
-    key => captures.includes(key),
+    k => captures.includes(k),
     [captures],
   )
 
@@ -36,13 +36,14 @@ export const GraphScreenshotsProvider = ({
 
   const removeCapture = useCallback<
     GraphScreenshotsContextProps['removeCapture']
-  >(key => setCaptures(prev => prev.filter(v => v !== key)), [])
+  >(k => setCaptures(prev => prev.filter(v => v !== k)), [])
 
   const takeCapture = useCallback<
     GraphScreenshotsContextProps['takeCapture']
   >(() => {
     const graphListElement = graphListRef.current
 
+    // TODO: como no puede existir el gráfico se tendrá que hacer algo
     if (!graphListElement) throw new Error()
 
     const childsToCapture = Array.from(

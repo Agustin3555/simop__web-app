@@ -8,8 +8,10 @@ import { REFETCH_INTERVALS } from '../../constants/refetchIntervals.const'
 import { Button } from '@/components'
 import { OptionSelectors } from '..'
 import BaseCombobox, { BaseComboboxProps } from '../BaseCombobox/BaseCombobox'
-import { baseSorter, extractKeys } from '../../helpers'
+import { baseSorter } from '../../helpers'
 import { MetaModel } from '../../meta/metaModel'
+
+// BUG: no carga el título de la selección inicial del AutoCombobox
 
 export interface AutoComboboxProps
   extends Control,
@@ -28,43 +30,33 @@ const AutoCombobox = ({
   initOptions: initialData,
   ...rest
 }: AutoComboboxProps) => {
-  const { key, service, refreshRate, anchorField, props } = metaModel
+  const { key, service, refreshRate, anchorField, props, getProps } = metaModel
 
   const calculateInitSelected = useMemo(
-    () =>
-      (editMode ? initialData?.map(({ id }) => String(id)) : initSelected) ??
-      [],
+    () => (editMode ? initialData?.map(v => String(v.id)) : initSelected) ?? [],
     [],
   )
 
   const [search, setSearch] = useState('')
   const [selected, setSelected] = useState(calculateInitSelected)
   const [enabled, setEnabled] = useState(false)
-  const [searchModeKeys, setSearchModeKeys] = useState(extractKeys(initialData))
   const [selectedSearchMode, setSelectedSearchMode] = useState(anchorField)
 
   useAddFieldReset(() => setSelected([]))
 
-  const queryFn = useCallback(async () => {
-    const options = await service.getRefs!()
-
-    setSearchModeKeys(extractKeys(options))
-    return options
-  }, [])
-
   const { data, status, isFetching, refetch } = useQuery({
     queryKey: [key, 'refs'],
-    queryFn,
+    queryFn: service.getRefs!,
     refetchInterval: refreshRate ? REFETCH_INTERVALS[refreshRate] : Infinity,
-    retry: false,
     enabled,
+    retry: false,
   })
+
+  const { fields: searchModeKeys, rows: options } = data ?? {}
 
   const actionState = useQueryActionState({ status, isFetching })
 
   const handleAction = useCallback(async () => await refetch(), [])
-
-  const options = useMemo(() => data || initialData, [data])
 
   const fullSelection = useMemo(
     () => options?.map(({ id }) => String(id)),
@@ -73,10 +65,8 @@ const AutoCombobox = ({
 
   const searchModes = useMemo(
     () =>
-      searchModeKeys?.map(mode => ({
-        value: mode,
-        title: props[mode].title,
-      })),
+      searchModeKeys &&
+      getProps(searchModeKeys).map(({ key, title }) => ({ value: key, title })),
     [searchModeKeys],
   )
 
@@ -99,9 +89,7 @@ const AutoCombobox = ({
   )
 
   const getItemTitle = useCallback<BaseComboboxProps['getItemTitle']>(
-    id =>
-      options?.find(option => String(option.id) === id)![selectedSearchMode] ??
-      '',
+    id => options?.find(v => String(v.id) === id)![selectedSearchMode] ?? '',
     [options, selectedSearchMode],
   )
 

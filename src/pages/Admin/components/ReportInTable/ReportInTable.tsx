@@ -66,8 +66,7 @@ const ReportInTable = ({
           ))}
         </View>
       </View>
-
-      {graphs && (
+      {graphs?.length && (
         <View style={styles.graphs} break>
           {graphs.map(({ column, mode, img }, i) => (
             <View style={styles.graphItem} wrap={false}>

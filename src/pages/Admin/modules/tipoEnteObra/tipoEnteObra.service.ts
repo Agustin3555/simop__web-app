@@ -1,14 +1,15 @@
 import { publicInstance, Service } from '@/services/config'
 import { deleteManyHandler } from '@/services/handlers'
-import { buildPath } from '@/helpers'
+import { buildPath, sendFields } from '@/helpers'
 import { TipoEnteObraModel } from '.'
 import { TipoEnteObraAdapter } from './tipoEnteObra.adapter'
+import { refsAdapter } from '@/adapters/config'
 
 const collection = buildPath('tipos-entes-obra')
 
 export const TipoEnteObraService = {
-  getAll: async () => {
-    const response = await publicInstance.get(collection())
+  getAll: async fields => {
+    const response = await publicInstance.get(collection() + sendFields(fields))
 
     return TipoEnteObraAdapter.getAll.output(response.data)
   },
@@ -16,11 +17,13 @@ export const TipoEnteObraService = {
   getRefs: async () => {
     const response = await publicInstance.get(collection('refs'))
 
-    return TipoEnteObraAdapter.getRefs.output(response.data)
+    return refsAdapter(TipoEnteObraAdapter.getRefs.output, response.data)
   },
 
-  getOne: async id => {
-    const response = await publicInstance.get(collection(id))
+  getOne: async (id, fields) => {
+    const response = await publicInstance.get(
+      collection(id) + sendFields(fields),
+    )
 
     return TipoEnteObraAdapter.getOne.output(response.data)
   },

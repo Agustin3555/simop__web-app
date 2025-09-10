@@ -3,30 +3,28 @@ import { Button } from '@/components'
 import { pdf } from '@react-pdf/renderer'
 import { ReactNode, useCallback, useMemo, useState } from 'react'
 import { sleep } from '@/helpers'
-import { useGraphScreenshots, useMetaModel, useTable } from '../../hooks'
-import { Method } from '@/services/config'
+import {
+  useConfigModule,
+  useGraphScreenshots,
+  useMetaModel,
+  useTable,
+} from '../../hooks'
 import { ReportInTable } from '..'
 import { steppedSizes } from '../Table/helpers'
 import { FilterProp } from '../ReportInTable/ReportInTable'
 
-interface ReportButtonProps {
-  methods?: {
-    forGetAll?: string
-  }
-}
-
-const ReportButton = ({ methods }: ReportButtonProps) => {
+const ReportButton = () => {
   const [progress, setProgress] = useState(0)
 
-  const { title, getPropFields } = useMetaModel()
+  const { title, getProps } = useMetaModel()
+  const { selectedConfig } = useConfigModule()
+
   const { table, states } = useTable()
   const { selectedRowIds, accessorKeys } = states
+
   const { captures, captureInfoRef, takeCapture } = useGraphScreenshots()
 
-  const getAllProps = useMemo(
-    () => getPropFields(methods?.forGetAll ?? Method.GetAll) ?? [],
-    [],
-  )
+  const selectedProps = useMemo(() => getProps(selectedConfig.columns), [])
 
   const generateReport = useCallback(async () => {
     if (!table) return
@@ -47,7 +45,7 @@ const ReportButton = ({ methods }: ReportButtonProps) => {
     const visibleColumnIds = visibleColumns.map(column => column.id)
 
     // Filtrar solo los props visibles y en el orden correcto
-    const visibleProps = getAllProps
+    const visibleProps = selectedProps
       .filter(prop => visibleColumnIds.includes(prop.key))
       .sort(
         (a, b) =>
@@ -57,7 +55,7 @@ const ReportButton = ({ methods }: ReportButtonProps) => {
     const props = visibleColumns
       .map(column => {
         const { getReportTableFilter } =
-          getAllProps.find(({ key }) => key === column.id) ?? {}
+          selectedProps.find(({ key }) => key === column.id) ?? {}
 
         if (!getReportTableFilter) return
 
@@ -116,9 +114,8 @@ const ReportButton = ({ methods }: ReportButtonProps) => {
     } catch (error) {
       await setError()
     }
+    setProgress(0)
   })
-
-  const handleReportFinished = useCallback(() => setProgress(0), [])
 
   return (
     <Button
@@ -126,7 +123,6 @@ const ReportButton = ({ methods }: ReportButtonProps) => {
       text="Informe"
       faIcon="fa-solid fa-file-pdf"
       type="secondary"
-      onFinished={handleReportFinished}
       {...{ progress, ...actionResult }}
     />
   )

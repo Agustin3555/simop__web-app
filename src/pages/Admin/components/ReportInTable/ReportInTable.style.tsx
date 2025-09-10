@@ -1,4 +1,4 @@
-import { FontSize, palColor, palColorGS, palSize, Size } from '@/styles/palette'
+import { palColor, palColorGS, palSize, Size } from '@/styles/palette'
 import { StyleSheet } from '@react-pdf/renderer'
 
 export const styles = StyleSheet.create({
@@ -55,9 +55,7 @@ export const styles = StyleSheet.create({
     fontWeight: 850,
     color: palColor('BD4'),
   },
-  body: {
-    display: 'flex',
-  },
+  body: {},
   row: {
     display: 'flex',
     flexDirection: 'row',
@@ -81,7 +79,6 @@ export const styles = StyleSheet.create({
     display: 'flex',
     flexDirection: 'column',
     gap: palSize(Size.S),
-    height: '100%',
   },
   column: {
     alignSelf: 'center',

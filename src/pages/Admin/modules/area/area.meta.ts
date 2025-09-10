@@ -1,4 +1,3 @@
-import { Method } from '@/services/config'
 import { omitBaseEntity } from '../../constants/selectors.const'
 import { AreaService } from './area.service'
 import { AreaModel } from '.'
@@ -17,17 +16,12 @@ export const AreaMeta: MetaModelDefinition<AreaModel.Entity> = {
     },
     faIcon: 'fa-solid fa-network-wired',
     anchorField: 'nombre',
+    allFields,
     propFactories,
   },
 
-  fieldsByService: [
-    {
-      methods: [Method.GetAll, Method.GetOne],
-      fields: allFields,
-    },
-    {
-      methods: [Method.Create, Method.UpdateOne],
-      groups: [{ fields: omitBaseEntity(allFields) }],
-    },
-  ],
+  mutationsFields: {
+    add: [{ fields: omitBaseEntity(allFields) }],
+    edit: [{ fields: omitBaseEntity(allFields) }],
+  },
 }

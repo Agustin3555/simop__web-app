@@ -6,6 +6,7 @@ import {
   DerivedToState,
   StateToDerived,
   useTable,
+  useConfigModule,
 } from '@/pages/Admin/hooks'
 import {
   ColumnDef,
@@ -22,24 +23,15 @@ import { LooseEntity } from '@/models/config'
 import { classList } from '@/helpers'
 import { format } from '@formkit/tempo'
 import { utils, writeFile } from 'xlsx'
-import { Method } from '@/services/config'
-
-export interface TableProps {
-  data: LooseEntity[]
-  methods?: {
-    forGetAll?: string
-  }
-}
 
 const SELECT_COLUMN = 'select'
 const STEP_WIDTH = 32
 
-const Table = ({ data, methods }: TableProps) => {
-  const { forGetAll } = methods ?? {}
+export interface TableProps {
+  data: LooseEntity[]
+}
 
-  const { title, getFields, getPropFields, getPropFieldsRecord } =
-    useMetaModel()
-
+const Table = ({ data }: TableProps) => {
   const [toggleStates, setToggleStates] = useState({
     filters: true,
     simplifyMatches: true,
@@ -48,7 +40,14 @@ const Table = ({ data, methods }: TableProps) => {
     stickFoot: false,
   })
 
-  const { setTable, isReadyToRender, states } = useTable()
+  const { title, getProps, getPropsRecord } = useMetaModel()
+  const { selectedConfig } = useConfigModule()
+
+  const selectedFields = useMemo(() => selectedConfig.columns, [])
+
+  const selectedProps = useMemo(() => getProps(selectedFields), [])
+
+  const { setTable, isReadyToRender, reset, states } = useTable()
   const {
     columnVisibility,
     setColumnVisibility,
@@ -66,16 +65,6 @@ const Table = ({ data, methods }: TableProps) => {
     sorting,
     setSorting,
   } = states
-
-  const getAllFields = useMemo(
-    () => getFields(forGetAll ?? Method.GetAll) ?? [],
-    [],
-  )
-
-  const allColumnsVisible = useMemo(
-    () => Object.fromEntries(getAllFields.map(key => [key, true]) ?? []),
-    [],
-  )
 
   const fromVisibilityToKeys = useCallback<
     StateToDerived<VisibilityState, string[]>
@@ -105,45 +94,16 @@ const Table = ({ data, methods }: TableProps) => {
   )
 
   const columnOptions = useMemo(
-    () =>
-      getPropFields(forGetAll ?? Method.GetAll)?.map(({ key, title }) => ({
-        id: key,
-        title,
-      })) ?? [],
+    () => selectedProps.map(({ key, title }) => ({ id: key, title })),
     [],
   )
 
-  const getAllProps = useMemo(
-    () => getPropFields(forGetAll ?? Method.GetAll) ?? [],
-    [],
-  )
-
-  const getAllPropsRecord = useMemo(
-    () => getPropFieldsRecord(forGetAll ?? Method.GetAll),
-    [],
-  )
-
-  useEffect(() => {
-    setColumnVisibility(() => {
-      const metaModelColumnVisibility = getFields('columnVisibility')
-
-      return metaModelColumnVisibility
-        ? {
-            ...Object.fromEntries(getAllFields.map(key => [key, false]) ?? []),
-            ...Object.fromEntries(
-              metaModelColumnVisibility.map(key => [key, true]),
-            ),
-          }
-        : allColumnsVisible
-    })
-
-    setColumnOrder([SELECT_COLUMN, ...getAllFields])
-  }, [])
+  const selectedPropsRecord = useMemo(() => getPropsRecord(selectedFields), [])
 
   const columns = useMemo(
     () => [
       { id: SELECT_COLUMN },
-      ...getAllProps.map<ColumnDef<LooseEntity>>(
+      ...selectedProps.map<ColumnDef<LooseEntity>>(
         ({ key, minSize, accessorFn, filterFn, sortingFn, footer }) => {
           const size = minSize * STEP_WIDTH
 
@@ -196,10 +156,6 @@ const Table = ({ data, methods }: TableProps) => {
     columnResizeMode: 'onEnd',
   })
 
-  useEffect(() => {
-    setTable && setTable(table)
-  }, [setTable, table])
-
   const handleExportClick = useCallback(() => {
     if (!data) return
 
@@ -210,7 +166,7 @@ const Table = ({ data, methods }: TableProps) => {
 
     const convertedData = selectedData.map(row =>
       Object.fromEntries(
-        getAllProps.map(({ title, getExcelTableCell }) => [
+        selectedProps.map(({ title, getExcelTableCell }) => [
           title,
           getExcelTableCell(row),
         ]),
@@ -220,7 +176,7 @@ const Table = ({ data, methods }: TableProps) => {
     const worksheet = utils.json_to_sheet(convertedData)
 
     // Calcular el ancho óptimo por columna
-    const colWidths = getAllProps.map(({ title }) => {
+    const colWidths = selectedProps.map(({ title }) => {
       const maxLength = Math.max(
         title.length,
         ...convertedData.map(row => String(row[title] ?? '').length),
@@ -240,6 +196,15 @@ const Table = ({ data, methods }: TableProps) => {
 
     writeFile(workbook, fileName)
   }, [data, selectedRowIds])
+
+  useEffect(() => {
+    setTable(table)
+    // TODO: En este punto se podría ocultar, de ser necesario, la columna de 'id'
+    setColumnVisibility(Object.fromEntries(selectedFields.map(k => [k, true])))
+    setColumnOrder([SELECT_COLUMN, ...selectedFields])
+
+    return reset
+  }, [])
 
   return (
     isReadyToRender && (
@@ -283,7 +248,7 @@ const Table = ({ data, methods }: TableProps) => {
                     <Header
                       key={header.id}
                       {...{
-                        getAllPropsRecord,
+                        getAllPropsRecord: selectedPropsRecord,
                         header,
                         sorting,
                         setSorting,
@@ -313,7 +278,10 @@ const Table = ({ data, methods }: TableProps) => {
                         />
                       )
                     ) : (
-                      <Cell key={cell.id} {...{ getAllPropsRecord, cell }} />
+                      <Cell
+                        key={cell.id}
+                        {...{ getAllPropsRecord: selectedPropsRecord, cell }}
+                      />
                     ),
                   )}
               </div>

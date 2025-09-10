@@ -6,29 +6,34 @@ import {
   SetStateAction,
   useCallback,
   useEffect,
-  useMemo,
   useRef,
   useState,
 } from 'react'
 import { useControl } from '@/hooks'
-import { useInputHandler } from '../../hooks'
 import { Control } from '@/types'
-import { Button, ControlLabel, Icon, Toggle } from '@/components'
-import { Option } from './components'
-import { OptionProps } from './components/Option/Option'
+import { ControlLabel, Icon } from '@/components'
 import { classList } from '@/helpers'
+import { Dropdown, Selected } from './components'
+import { OptionProps } from './components/Dropdown/components/Option/Option'
+import {
+  autoUpdate,
+  flip,
+  offset,
+  shift,
+  useFloating,
+} from '@floating-ui/react'
 
 export interface BaseComboboxProps extends Control {
   multiple?: boolean
-  reduceHeader?: boolean
 
   search: string
   setSearch: Dispatch<SetStateAction<string>>
   selected: string[]
   setSelected: Dispatch<SetStateAction<string[]>>
+  staticSelected?: string[]
 
   fullSelection?: string[]
-  sortedOptions: Pick<OptionProps, 'id' | 'fields'>[]
+  sortedOptions: Pick<OptionProps, 'id' | 'fields' | 'isStatic'>[]
   getItemTitle: (id: string) => string
   handleReset?: () => void
   handleEnter?: () => void
@@ -45,12 +50,12 @@ const BaseCombobox = ({
   editMode = false,
   long,
   multiple = false,
-  reduceHeader = false,
 
   search,
   setSearch,
   selected,
   setSelected,
+  staticSelected,
 
   fullSelection,
   sortedOptions,
@@ -65,75 +70,73 @@ const BaseCombobox = ({
   const { disabled } = disabledState
 
   const [open, setOpen] = useState(false)
-  const componentRef = useRef<HTMLDivElement | null>(null)
+  const headerRef = useRef<HTMLFieldSetElement>(null)
 
-  const isVoid = useMemo(() => !fullSelection?.length, [fullSelection])
-
-  const isFullSelection = useMemo(
-    () => sortedOptions.length === selected.length,
-    [selected.length, sortedOptions.length],
-  )
+  const { refs, floatingStyles, update } = useFloating({
+    placement: 'bottom-start',
+    middleware: [offset(4), flip(), shift()],
+    whileElementsMounted: autoUpdate,
+  })
 
   const toggleItem = useCallback(
     (id: string) => {
       setSelected(prev => {
         if (!prev) return [id]
 
-        const exists = prev.includes(id)
+        const newState = [...prev]
+
+        const exists = newState.includes(id)
 
         if (multiple)
           return exists
-            ? prev.filter(selectedId => selectedId !== id)
-            : [...prev, id]
+            ? newState.filter(selectedId => selectedId !== id)
+            : [...newState, id]
 
         return exists ? [] : [id]
       })
 
       if (!multiple) setOpen(false)
     },
-    [multiple],
+    [multiple, setSelected],
   )
 
-  const handleHeaderClick = useCallback(() => setOpen(prev => !prev), [])
-
-  const handleSearchChange = useInputHandler(value => setSearch(value))
-
-  const handleOptionChange = useInputHandler(value => toggleItem(value))
+  const handleHeaderClick = useCallback(() => {
+    setOpen(prev => !prev)
+    if (!open) setTimeout(update, 0)
+  }, [open, update])
 
   const handleDeselectItemClick = useCallback<
     MouseEventHandler<HTMLButtonElement>
   >(event => {
-    // Evita que se dispare el evento de click del elemento padre (header)
+    // Evita que se dispare el evento de click del header
     event.stopPropagation()
 
-    toggleItem(event.currentTarget.name)
+    toggleItem(event.currentTarget.value)
   }, [])
-
-  const handleCheckAllChange = useCallback(
-    () => setSelected(isFullSelection ? [] : fullSelection!),
-    [isFullSelection],
-  )
 
   const handleResetClick = useCallback(() => {
     editMode && handleReset ? handleReset() : setSelected([])
   }, [])
 
   useEffect(() => {
-    const component = componentRef.current
+    if (headerRef.current) refs.setReference(headerRef.current)
+  }, [refs])
 
+  useEffect(() => {
     const handleClick = (event: MouseEvent) => {
-      // Cierra el componente si se produce un click fuera del propio elemento
-      if (component && !component.contains(event.target as Node)) setOpen(false)
+      const { target } = event
+      const isInsideHeader = headerRef.current?.contains(target as Node)
+      const isInsideDropdown = refs.floating.current?.contains(target as Node)
+
+      if (!(isInsideHeader || isInsideDropdown)) setOpen(false)
     }
 
     document.addEventListener('mousedown', handleClick)
-
     return () => document.removeEventListener('mousedown', handleClick)
-  }, [])
+  }, [refs.floating])
 
   return (
     <div
-      ref={componentRef}
       className={classList(
         'cmp-base-combobox',
         'control',
@@ -153,70 +156,60 @@ const BaseCombobox = ({
           ...disabledState,
         }}
       />
-      <header
-        className={classList('box', { reduce: reduceHeader })}
+      <fieldset
+        className="header box"
+        ref={headerRef}
+        name={keyName}
         title={inputTitle}
         {...(editMode && { disabled })}
         onClick={handleHeaderClick}
       >
-        <div className="selected-items">
-          {selected.map(id => (
-            <div key={id} className="item">
-              <p>{getItemTitle(id)}</p>
-              <Button
-                name={id}
-                title="Eliminar selección"
-                faIcon="fa-solid fa-xmark"
-                size="m"
-                type="tertiary"
-                onAction={handleDeselectItemClick}
-              />
-            </div>
-          ))}
-        </div>
+        <Selected
+          {...{
+            keyName,
+            editMode,
+            disabled,
+
+            selected,
+            staticSelected,
+
+            getItemTitle,
+            handleDeselectItemClick,
+          }}
+        />
         <div className="arrow">
           <Icon faIcon="fa-solid fa-angle-down" />
         </div>
-      </header>
-      <div className="drop-down">
-        <header>
-          {modeSlot}
-          <div className="search">
-            <input
-              className="box input"
-              value={search}
-              placeholder="Buscar..."
-              onChange={handleSearchChange}
-            />
-            {multiple && (
-              <Toggle
-                title="Seleccionador global"
-                style="checkbox"
-                value={isFullSelection}
-                onChange={handleCheckAllChange}
-              />
-            )}
-            {searchSlot}
-          </div>
-        </header>
-        {isVoid ? (
-          <div className="void">
-            <Icon faIcon="fa-solid fa-frog" />
-          </div>
-        ) : (
-          <fieldset {...(editMode && { disabled })}>
-            {sortedOptions.map(({ id, fields }) => (
-              <Option
-                key={id}
-                title={getItemTitle(id)}
-                checked={selected.some(selectedId => selectedId === id)}
-                handleChange={handleOptionChange}
-                {...{ id, fields, keyName, required, multiple }}
-              />
-            ))}
-          </fieldset>
-        )}
-      </div>
+      </fieldset>
+      <Dropdown
+        {...{
+          keyName,
+          required,
+          editMode,
+          multiple,
+          disabled,
+
+          search,
+          setSearch,
+          selected,
+          setSelected,
+          staticSelected,
+          open,
+
+          fullSelection,
+          sortedOptions,
+          getItemTitle,
+          toggleItem,
+          handleDeselectItemClick,
+
+          headerRef,
+          refs,
+          floatingStyles,
+
+          modeSlot,
+          searchSlot,
+        }}
+      />
     </div>
   )
 }

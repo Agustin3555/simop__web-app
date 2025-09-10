@@ -51,5 +51,5 @@ export const generateColorScaleFromKeys = (
 ) => {
   const palette = generateFullPalette(baseColors)
 
-  return keys.map(key => palette[hashToIndex(key, palette.length)])
+  return keys.map(k => palette[hashToIndex(k, palette.length)])
 }

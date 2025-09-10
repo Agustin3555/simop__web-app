@@ -1,4 +1,3 @@
-import { Method } from '@/services/config'
 import { omitBaseEntity } from '../../constants/selectors.const'
 import { DepartamentoService } from './departamento.service'
 import { MetaModelDefinition } from '../../meta/metaModel'
@@ -18,17 +17,12 @@ export const DepartamentoMeta: MetaModelDefinition<DepartamentoModel.Entity> = {
     },
     faIcon: 'fa-solid fa-vector-square',
     anchorField: 'nombre',
+    allFields,
     propFactories,
   },
 
-  fieldsByService: [
-    {
-      methods: [Method.GetAll, Method.GetOne],
-      fields: allFields,
-    },
-    {
-      methods: [Method.Create, Method.UpdateOne],
-      groups: [{ fields: omitBaseEntity(allFields) }],
-    },
-  ],
+  mutationsFields: {
+    add: [{ fields: omitBaseEntity(allFields) }],
+    edit: [{ fields: omitBaseEntity(allFields) }],
+  },
 }

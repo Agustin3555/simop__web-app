@@ -1,14 +1,15 @@
 import { publicInstance, Service } from '@/services/config'
 import { deleteManyHandler } from '@/services/handlers'
-import { buildPath } from '@/helpers'
+import { buildPath, sendFields } from '@/helpers'
 import { ProvinciaModel } from '.'
 import { ProvinciaAdapter } from './provincia.adapter'
+import { refsAdapter } from '@/adapters/config'
 
 const collection = buildPath('provincias')
 
 export const ProvinciaService = {
-  getAll: async () => {
-    const response = await publicInstance.get(collection())
+  getAll: async fields => {
+    const response = await publicInstance.get(collection() + sendFields(fields))
 
     return ProvinciaAdapter.getAll.output(response.data)
   },
@@ -16,11 +17,13 @@ export const ProvinciaService = {
   getRefs: async () => {
     const response = await publicInstance.get(collection('refs'))
 
-    return ProvinciaAdapter.getRefs.output(response.data)
+    return refsAdapter(ProvinciaAdapter.getRefs.output, response.data)
   },
 
-  getOne: async id => {
-    const response = await publicInstance.get(collection(id))
+  getOne: async (id, fields) => {
+    const response = await publicInstance.get(
+      collection(id) + sendFields(fields),
+    )
 
     return ProvinciaAdapter.getOne.output(response.data)
   },

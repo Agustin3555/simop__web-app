@@ -9,5 +9,5 @@ export const useAddFieldReset = (fn: FieldResetFn) => {
 
   useEffect(() => {
     fns.push(fn)
-  }, [])
+  }, [fns])
 }

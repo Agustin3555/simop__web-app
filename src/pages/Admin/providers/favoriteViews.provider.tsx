@@ -20,7 +20,6 @@ export const FavoriteViewsProvider = ({
         'empresa',
         'obra',
         'fojaMedicion',
-        'obraTotales',
         'obraDetalle',
       ]
 
@@ -28,6 +27,8 @@ export const FavoriteViewsProvider = ({
       return defaultValue
     }
   })
+
+  // BUG: varios errores por valores unknown
 
   const isFavorite = useCallback<FavoriteViewsContextProps['isFavorite']>(
     viewKey => views.includes(viewKey),

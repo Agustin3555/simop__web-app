@@ -1,4 +1,3 @@
-import { Method } from '@/services/config'
 import { omitBaseEntity } from '../../constants/selectors.const'
 import { TipoProfesionService } from './tipoProfesion.service'
 import { TipoProfesionProps } from './tipoProfesion.props'
@@ -18,17 +17,12 @@ export const TipoProfesionMeta: MetaModelDefinition<TipoProfesionModel.Entity> =
       },
       faIcon: 'fa-solid fa-shapes',
       anchorField: 'nombre',
+      allFields,
       propFactories,
     },
 
-    fieldsByService: [
-      {
-        methods: [Method.GetAll, Method.GetOne],
-        fields: allFields,
-      },
-      {
-        methods: [Method.Create, Method.UpdateOne],
-        groups: [{ fields: omitBaseEntity(allFields) }],
-      },
-    ],
+    mutationsFields: {
+      add: [{ fields: omitBaseEntity(allFields) }],
+      edit: [{ fields: omitBaseEntity(allFields) }],
+    },
   }

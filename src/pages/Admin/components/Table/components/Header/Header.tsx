@@ -20,7 +20,7 @@ import { classList } from '@/helpers'
 import { steppedSizes } from '../../helpers'
 import { OptionSelectors } from '@/pages/Admin/components'
 import { extractKeys } from '@/pages/Admin/helpers'
-import { Method } from '@/services/config'
+
 import { Prop } from '@/pages/Admin/meta/utils'
 import { useTable } from '@/pages/Admin/hooks'
 
@@ -63,12 +63,10 @@ const Header = ({
   const { getTableHeader: getHeader } = getAllPropsRecord[column.id] ?? {}
 
   const { title, metaModel, getFilter } = useMemo(() => getHeader(column), [])
+  const { anchorField, getProps } = metaModel ?? {}
 
+  const [selectedSearchMode, setSelectedSearchMode] = useState(anchorField)
   const [dragging, setDragging] = useState(false)
-
-  const [selectedSearchMode, setSelectedSearchMode] = useState(
-    metaModel?.anchorField,
-  )
 
   useEffect(() => {
     setAccessorKeys(prev => ({ ...prev, [column.id]: selectedSearchMode! }))
@@ -110,28 +108,17 @@ const Header = ({
     [options, filterValue],
   )
 
-  const getAllPropsRecordForSearchModes = useMemo(
-    () => metaModel?.getPropFieldsRecord(Method.GetAll),
-    [],
-  )
-
-  // TODO: actualizar si se actualiza la data
   const searchModes = useMemo(() => {
-    if (!getAllPropsRecordForSearchModes) return
+    if (!getProps) return
 
     const { rows } = getFacetedRowModel()
 
     const values = rows.map(({ original }) => original[column.id])
 
-    const firstValid = values.find(v => v !== undefined)
-    if (!firstValid) return
+    const keys = extractKeys(values)
+    if (!keys) return
 
-    const keys = extractKeys(firstValid)
-
-    return keys?.map(key => ({
-      value: key,
-      title: getAllPropsRecordForSearchModes[key].title,
-    }))
+    return getProps(keys).map(({ key, title }) => ({ value: key, title }))
   }, [])
 
   const sortValue = getIsSorted()

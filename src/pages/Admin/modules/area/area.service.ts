@@ -1,14 +1,15 @@
 import { publicInstance, Service } from '@/services/config'
 import { deleteManyHandler } from '@/services/handlers'
-import { buildPath } from '@/helpers'
+import { buildPath, sendFields } from '@/helpers'
 import { AreaModel } from '.'
 import { AreaAdapter } from './area.adapter'
+import { refsAdapter } from '@/adapters/config'
 
 const collection = buildPath('areas')
 
 export const AreaService = {
-  getAll: async () => {
-    const response = await publicInstance.get(collection())
+  getAll: async fields => {
+    const response = await publicInstance.get(collection() + sendFields(fields))
 
     return AreaAdapter.getAll.output(response.data)
   },
@@ -16,11 +17,13 @@ export const AreaService = {
   getRefs: async () => {
     const response = await publicInstance.get(collection('refs'))
 
-    return AreaAdapter.getRefs.output(response.data)
+    return refsAdapter(AreaAdapter.getRefs.output, response.data)
   },
 
-  getOne: async id => {
-    const response = await publicInstance.get(collection(id))
+  getOne: async (id, fields) => {
+    const response = await publicInstance.get(
+      collection(id) + sendFields(fields),
+    )
 
     return AreaAdapter.getOne.output(response.data)
   },

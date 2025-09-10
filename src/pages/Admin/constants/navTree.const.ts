@@ -11,7 +11,6 @@ export const TREE: SectionNode[] = [
     title: 'Tablero de Gestión',
     sections: [
       { viewKey: asAuxView('planificacionGeografica') },
-      { viewKey: asAuxView('obraTotales') },
       { viewKey: asAuxView('obraDetalle') },
     ],
   },

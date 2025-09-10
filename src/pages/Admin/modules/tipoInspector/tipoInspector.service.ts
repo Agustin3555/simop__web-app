@@ -1,14 +1,15 @@
 import { publicInstance, Service } from '@/services/config'
 import { deleteManyHandler } from '@/services/handlers'
-import { buildPath } from '@/helpers'
+import { buildPath, sendFields } from '@/helpers'
 import { TipoInspectorModel } from '.'
 import { TipoInspectorAdapter } from './tipoInspector.adapter'
+import { refsAdapter } from '@/adapters/config'
 
 const collection = buildPath('tipos-inspectores')
 
 export const TipoInspectorService = {
-  getAll: async () => {
-    const response = await publicInstance.get(collection())
+  getAll: async fields => {
+    const response = await publicInstance.get(collection() + sendFields(fields))
 
     return TipoInspectorAdapter.getAll.output(response.data)
   },
@@ -16,11 +17,13 @@ export const TipoInspectorService = {
   getRefs: async () => {
     const response = await publicInstance.get(collection('refs'))
 
-    return TipoInspectorAdapter.getRefs.output(response.data)
+    return refsAdapter(TipoInspectorAdapter.getRefs.output, response.data)
   },
 
-  getOne: async id => {
-    const response = await publicInstance.get(collection(id))
+  getOne: async (id, fields) => {
+    const response = await publicInstance.get(
+      collection(id) + sendFields(fields),
+    )
 
     return TipoInspectorAdapter.getOne.output(response.data)
   },

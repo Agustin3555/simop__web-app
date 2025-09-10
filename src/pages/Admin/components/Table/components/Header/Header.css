@@ -82,6 +82,8 @@
     }
 
     > .filter-container {
+      --cmp-selected-bordes: 1;
+
       display: flex;
       flex-direction: column;
 

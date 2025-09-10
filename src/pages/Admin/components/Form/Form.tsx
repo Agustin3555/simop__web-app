@@ -1,16 +1,10 @@
 import './Form.css'
-import {
-  KeyboardEventHandler,
-  MutableRefObject,
-  ReactNode,
-  useCallback,
-} from 'react'
+import { KeyboardEventHandler, ReactNode, RefObject, useCallback } from 'react'
 import { useSubmitAction } from '@/hooks'
 import { Button } from '@/components'
 
 interface FormProps extends ReturnType<typeof useSubmitAction> {
-  // TODO: deprecado
-  formRef?: MutableRefObject<HTMLFormElement | null>
+  formRef?: RefObject<HTMLFormElement | null>
   fieldGroups?: {
     key?: string
     title?: string

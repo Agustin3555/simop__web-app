@@ -1,0 +1,139 @@
+.cmp-base-combobox-drop-down {
+  --gap-1: var(--pal-size-s);
+  --gap-2: var(--pal-size-2xs);
+
+  z-index: 1;
+
+  display: none;
+  flex-direction: column;
+  border-width: 0;
+
+  background-color: var(--pal-color-white);
+  box-shadow: var(--pal-shadow-2);
+  scale: 0.975;
+  opacity: 0;
+
+  transition: display var(--pal-time-s) ease allow-discrete,
+    scale var(--pal-time-s) ease, opacity var(--pal-time-s) ease;
+
+  > .cmp-selected {
+    flex-shrink: 0;
+
+    height: 25%;
+
+    overflow: auto;
+  }
+
+  > header {
+    display: flex;
+    flex-direction: column;
+
+    > .cmp-option-selectors {
+      padding: var(--gap-1);
+      padding-top: var(--pal-size-xs);
+      padding-bottom: var(--gap-2);
+    }
+
+    > .search {
+      position: relative;
+
+      display: flex;
+      align-items: center;
+      gap: var(--gap-2);
+      border-width: 0;
+      border-style: solid;
+      border-color: var(--pal-color-a-l2);
+      border-bottom-width: var(--line-thickness);
+      padding-right: var(--gap-2);
+      padding-left: var(--gap-1);
+
+      > .input {
+        flex-grow: 1;
+
+        border-width: 0;
+        padding: 0;
+        width: 100%;
+        height: calc(var(--gap-2) * 2 + var(--pal-size-l));
+
+        font-size: var(--pal-size-font-xs);
+
+        border-radius: 0;
+      }
+
+      > .cmp-button {
+        border-color: var(--pal-color-a-l2);
+
+        color: var(--pal-color-a-l1);
+      }
+    }
+  }
+
+  > fieldset {
+    flex-grow: 1;
+
+    display: flex;
+    flex-direction: column;
+    border: none;
+
+    overflow: auto;
+  }
+
+  > .void {
+    --cmp-icon-size: var(--pal-size-l);
+
+    align-content: center;
+    height: 100%;
+    min-height: 8rem;
+
+    color: var(--pal-color-a-l4);
+
+    > * {
+      margin-inline: auto;
+    }
+  }
+
+  &:not(.multiple) {
+    border-radius: var(--pal-size-2xs);
+
+    > fieldset {
+      max-height: 15rem;
+    }
+  }
+
+  &.multiple {
+    right: 0;
+    left: auto !important;
+
+    width: 26rem !important;
+    height: 100%;
+
+    transform: none !important;
+
+    > header {
+      border-width: 0;
+      border-style: solid;
+      border-color: var(--pal-color-a-l2);
+      border-top-width: var(--line-thickness);
+    }
+
+    @media (width <= 50rem) {
+      top: auto !important;
+      bottom: 0;
+
+      width: 100% !important;
+      height: 50%;
+    }
+  }
+
+  &.open {
+    display: flex;
+
+    scale: initial;
+    opacity: initial;
+
+    @starting-style {
+      scale: 0.975;
+      opacity: 0;
+    }
+  }
+}

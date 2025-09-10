@@ -1,14 +1,15 @@
 import { publicInstance, Service } from '@/services/config'
 import { deleteManyHandler } from '@/services/handlers'
-import { buildPath } from '@/helpers'
+import { buildPath, sendFields } from '@/helpers'
 import { RepresentanteModel } from '.'
 import { RepresentanteAdapter } from './representante.adapter'
+import { refsAdapter } from '@/adapters/config'
 
 const collection = buildPath('representantes')
 
 export const RepresentanteService = {
-  getAll: async () => {
-    const response = await publicInstance.get(collection())
+  getAll: async fields => {
+    const response = await publicInstance.get(collection() + sendFields(fields))
 
     return RepresentanteAdapter.getAll.output(response.data)
   },
@@ -16,11 +17,13 @@ export const RepresentanteService = {
   getRefs: async () => {
     const response = await publicInstance.get(collection('refs'))
 
-    return RepresentanteAdapter.getRefs.output(response.data)
+    return refsAdapter(RepresentanteAdapter.getRefs.output, response.data)
   },
 
-  getOne: async id => {
-    const response = await publicInstance.get(collection(id))
+  getOne: async (id, fields) => {
+    const response = await publicInstance.get(
+      collection(id) + sendFields(fields),
+    )
 
     return RepresentanteAdapter.getOne.output(response.data)
   },

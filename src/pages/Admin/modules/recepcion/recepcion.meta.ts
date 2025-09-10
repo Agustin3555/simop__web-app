@@ -1,4 +1,3 @@
-import { Method } from '@/services/config'
 import { omitBaseEntity } from '../../constants/selectors.const'
 import { RecepcionService } from './recepcion.service'
 import { RecepcionProps } from './recepcion.props'
@@ -18,17 +17,12 @@ export const RecepcionMeta: MetaModelDefinition<RecepcionModel.Entity> = {
     },
     faIcon: 'fa-solid fa-handshake',
     anchorField: 'numeroActa',
+    allFields,
     propFactories,
   },
 
-  fieldsByService: [
-    {
-      methods: [Method.GetAll, Method.GetOne],
-      fields: allFields,
-    },
-    {
-      methods: [Method.Create, Method.UpdateOne],
-      groups: [{ fields: omitBaseEntity(allFields) }],
-    },
-  ],
+  mutationsFields: {
+    add: [{ fields: omitBaseEntity(allFields) }],
+    edit: [{ fields: omitBaseEntity(allFields) }],
+  },
 }

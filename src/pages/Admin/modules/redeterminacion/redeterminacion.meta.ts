@@ -1,4 +1,3 @@
-import { Method } from '@/services/config'
 import { omitBaseEntity } from '../../constants/selectors.const'
 import { RedeterminacionService } from './redeterminacion.service'
 import { RedeterminacionProps } from './redeterminacion.props'
@@ -19,17 +18,12 @@ export const RedeterminacionMeta: MetaModelDefinition<RedeterminacionModel.Entit
       },
       faIcon: 'fa-solid fa-calculator',
       anchorField: 'numeroExpedienteSolicitud',
+      allFields,
       propFactories,
     },
 
-    fieldsByService: [
-      {
-        methods: [Method.GetAll, Method.GetOne],
-        fields: allFields,
-      },
-      {
-        methods: [Method.Create, Method.UpdateOne],
-        groups: [{ fields: omitBaseEntity(allFields) }],
-      },
-    ],
+    mutationsFields: {
+      add: [{ fields: omitBaseEntity(allFields) }],
+      edit: [{ fields: omitBaseEntity(allFields) }],
+    },
   }

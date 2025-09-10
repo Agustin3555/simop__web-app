@@ -57,7 +57,8 @@ const Report = ({ title, orientation = 'portrait', children }: ReportProps) => (
         </View>
         <Text style={styles.warning}>
           Estos datos corresponden a gestión administrativa. Por cuestiones
-          burocráticas podría diferir con el avance real de la obra.
+          burocráticas podría diferir con el avance real de la obra y la
+          disponibilidad presupuestaria.
         </Text>
       </View>
       <View style={styles.content}>{children}</View>

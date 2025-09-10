@@ -1,14 +1,15 @@
 import { publicInstance, Service } from '@/services/config'
 import { deleteManyHandler } from '@/services/handlers'
-import { buildPath } from '@/helpers'
+import { buildPath, sendFields } from '@/helpers'
 import { TipoNivelAreaModel } from '.'
 import { TipoNivelAreaAdapter } from './tipoNivelArea.adapter'
+import { refsAdapter } from '@/adapters/config'
 
 const collection = buildPath('tipos-niveles-area')
 
 export const TipoNivelAreaService = {
-  getAll: async () => {
-    const response = await publicInstance.get(collection())
+  getAll: async fields => {
+    const response = await publicInstance.get(collection() + sendFields(fields))
 
     return TipoNivelAreaAdapter.getAll.output(response.data)
   },
@@ -16,11 +17,13 @@ export const TipoNivelAreaService = {
   getRefs: async () => {
     const response = await publicInstance.get(collection('refs'))
 
-    return TipoNivelAreaAdapter.getRefs.output(response.data)
+    return refsAdapter(TipoNivelAreaAdapter.getRefs.output, response.data)
   },
 
-  getOne: async id => {
-    const response = await publicInstance.get(collection(id))
+  getOne: async (id, fields) => {
+    const response = await publicInstance.get(
+      collection(id) + sendFields(fields),
+    )
 
     return TipoNivelAreaAdapter.getOne.output(response.data)
   },

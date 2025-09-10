@@ -19,10 +19,16 @@ export interface ViewProps {
 }
 
 const View = ({ viewKey, title, localViews = [] }: ViewProps) => {
-  const { isActive } = useViews()
-  const [localView, setLocalView] = useState(localViews[0].localViewKey)
+  const [localView, setLocalView] = useState(() => {
+    const localView =
+      localViews.find(v => v.localViewKey === 'query') ?? localViews[0]
 
-  const handleChange = useInputHandler(key => setLocalView(key))
+    return localView.localViewKey
+  })
+
+  const { isActive } = useViews()
+
+  const handleChange = useInputHandler(k => setLocalView(k))
 
   return (
     <div
@@ -47,7 +53,7 @@ const View = ({ viewKey, title, localViews = [] }: ViewProps) => {
         <h1>{title}</h1>
       </header>
       <div className="local-views">
-        <LocalViewContext.Provider value={{ setLocalView }}>
+        <LocalViewContext.Provider value={{ localView, setLocalView }}>
           {localViews.map(({ localViewKey, component }) => (
             <div
               key={localViewKey}

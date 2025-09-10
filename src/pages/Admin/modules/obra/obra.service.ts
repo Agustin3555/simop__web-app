@@ -1,20 +1,15 @@
 import { publicInstance, Service } from '@/services/config'
 import { deleteManyHandler } from '@/services/handlers'
-import { buildPath } from '@/helpers'
+import { buildPath, sendFields } from '@/helpers'
 import { ObraModel } from '.'
 import { ObraAdapter } from './obra.adapter'
+import { refsAdapter } from '@/adapters/config'
 
 const collection = buildPath('obras')
 
 export const ObraService = {
-  getAll: async () => {
-    const response = await publicInstance.get(collection())
-
-    return ObraAdapter.getAll.output(response.data)
-  },
-
-  getAllTotales: async () => {
-    const response = await publicInstance.get(collection('totales'))
+  getAll: async fields => {
+    const response = await publicInstance.get(collection() + sendFields(fields))
 
     return ObraAdapter.getAll.output(response.data)
   },
@@ -22,11 +17,13 @@ export const ObraService = {
   getRefs: async () => {
     const response = await publicInstance.get(collection('refs'))
 
-    return ObraAdapter.getRefs.output(response.data)
+    return refsAdapter(ObraAdapter.getRefs.output, response.data)
   },
 
-  getOne: async id => {
-    const response = await publicInstance.get(collection(id))
+  getOne: async (id, fields) => {
+    const response = await publicInstance.get(
+      collection(id) + sendFields(fields),
+    )
 
     return ObraAdapter.getOne.output(response.data)
   },

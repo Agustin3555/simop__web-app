@@ -1,14 +1,15 @@
 import { publicInstance, Service } from '@/services/config'
 import { deleteManyHandler } from '@/services/handlers'
-import { buildPath } from '@/helpers'
+import { buildPath, sendFields } from '@/helpers'
 import { LocalidadModel } from '.'
 import { LocalidadAdapter } from './localidad.adapter'
+import { refsAdapter } from '@/adapters/config'
 
 const collection = buildPath('localidades')
 
 export const LocalidadService = {
-  getAll: async () => {
-    const response = await publicInstance.get(collection())
+  getAll: async fields => {
+    const response = await publicInstance.get(collection() + sendFields(fields))
 
     return LocalidadAdapter.getAll.output(response.data)
   },
@@ -16,11 +17,13 @@ export const LocalidadService = {
   getRefs: async () => {
     const response = await publicInstance.get(collection('refs'))
 
-    return LocalidadAdapter.getRefs.output(response.data)
+    return refsAdapter(LocalidadAdapter.getRefs.output, response.data)
   },
 
-  getOne: async id => {
-    const response = await publicInstance.get(collection(id))
+  getOne: async (id, fields) => {
+    const response = await publicInstance.get(
+      collection(id) + sendFields(fields),
+    )
 
     return LocalidadAdapter.getOne.output(response.data)
   },

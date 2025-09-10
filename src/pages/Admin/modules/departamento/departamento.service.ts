@@ -1,14 +1,15 @@
 import { publicInstance, Service } from '@/services/config'
 import { deleteManyHandler } from '@/services/handlers'
-import { buildPath } from '@/helpers'
+import { buildPath, sendFields } from '@/helpers'
 import { DepartamentoModel } from '.'
 import { DepartamentoAdapter } from './departamento.adapter'
+import { refsAdapter } from '@/adapters/config'
 
 const collection = buildPath('departamentos')
 
 export const DepartamentoService = {
-  getAll: async () => {
-    const response = await publicInstance.get(collection())
+  getAll: async fields => {
+    const response = await publicInstance.get(collection() + sendFields(fields))
 
     return DepartamentoAdapter.getAll.output(response.data)
   },
@@ -16,11 +17,13 @@ export const DepartamentoService = {
   getRefs: async () => {
     const response = await publicInstance.get(collection('refs'))
 
-    return DepartamentoAdapter.getRefs.output(response.data)
+    return refsAdapter(DepartamentoAdapter.getRefs.output, response.data)
   },
 
-  getOne: async id => {
-    const response = await publicInstance.get(collection(id))
+  getOne: async (id, fields) => {
+    const response = await publicInstance.get(
+      collection(id) + sendFields(fields),
+    )
 
     return DepartamentoAdapter.getOne.output(response.data)
   },

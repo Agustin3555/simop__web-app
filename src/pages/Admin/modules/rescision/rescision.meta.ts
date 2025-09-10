@@ -1,4 +1,3 @@
-import { Method } from '@/services/config'
 import { omitBaseEntity } from '../../constants/selectors.const'
 import { RescisionService } from './rescision.service'
 import { RescisionProps } from './rescision.props'
@@ -18,17 +17,12 @@ export const RescisionMeta: MetaModelDefinition<RescisionModel.Entity> = {
     },
     faIcon: 'fa-solid fa-ban',
     anchorField: 'numeroExpediente',
+    allFields,
     propFactories,
   },
 
-  fieldsByService: [
-    {
-      methods: [Method.GetAll, Method.GetOne],
-      fields: allFields,
-    },
-    {
-      methods: [Method.Create, Method.UpdateOne],
-      groups: [{ fields: omitBaseEntity(allFields) }],
-    },
-  ],
+  mutationsFields: {
+    add: [{ fields: omitBaseEntity(allFields) }],
+    edit: [{ fields: omitBaseEntity(allFields) }],
+  },
 }

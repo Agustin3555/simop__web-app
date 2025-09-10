@@ -1,15 +1,18 @@
 import { useCallback } from 'react'
 import { useMutationActionState } from '@/hooks'
-import { UseEntitiesData, useMetaModel, useTable } from '@/pages/Admin/hooks'
+import { useConfigModule, useMetaModel, useTable } from '@/pages/Admin/hooks'
 import { useAppStore } from '@/store/config'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
-import { SecureHoldButton } from '../../..'
+import { LooseEntity } from '@/models/config'
+import { Button } from '@/components'
+import { buildConfigKey } from '@/pages/Admin/helpers'
 
 const DeleteButton = () => {
-  const { key, service } = useMetaModel()
   const toasting = useAppStore(store => store.toasting)
+  const { key, service } = useMetaModel()
   const { selectedRowIds, deselectRows } = useTable().states
   const queryClient = useQueryClient()
+  const { selectedConfig } = useConfigModule()
 
   const mutationFn = useCallback(
     async () => await service.deleteMany(selectedRowIds),
@@ -17,8 +20,9 @@ const DeleteButton = () => {
   )
 
   const onSuccess = useCallback(() => {
-    queryClient.setQueryData<UseEntitiesData>([key], oldData =>
-      oldData?.filter(({ id }) => !selectedRowIds.includes(id)),
+    queryClient.setQueryData<LooseEntity[]>(
+      buildConfigKey(key, selectedConfig),
+      oldData => oldData?.filter(({ id }) => !selectedRowIds.includes(id)),
     )
 
     toasting('success', 'Eliminado con éxito')
@@ -29,12 +33,13 @@ const DeleteButton = () => {
   const actionState = useMutationActionState({ status, isPending })
 
   return (
-    <SecureHoldButton
+    <Button
       text="Eliminar"
       title="Eliminar seleccionados"
       faIcon="fa-solid fa-trash"
       type="secondary"
-      handleAction={mutate}
+      hold
+      onAction={() => mutate()}
       {...{ actionState }}
     />
   )

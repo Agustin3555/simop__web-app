@@ -1,12 +1,9 @@
-export const extractKeys = <T extends object | undefined>(value: T | T[]) => {
-  if (!Array.isArray(value)) {
-    if (value === undefined) return
-    return Object.keys(value)
-  }
+export const extractKeys = <T>(values: T[] | T[][]) => {
+  if (!values?.length) return
 
-  if (!value?.length) return
-
-  const firstValid = value.find(item => item !== undefined)
+  const firstValid = Array.isArray(values[0])
+    ? values.flat().find(item => item !== undefined)
+    : values.find(item => item !== undefined)
 
   if (!firstValid) return
 

@@ -1,4 +1,4 @@
-import { Method, Service } from '@/services/config'
+import { Service } from '@/services/config'
 import { PropFactory, Prop } from './utils'
 import { LooseEntity } from '@/models/config'
 import { MetaModelsContextProps } from '../contexts/metaModels.context'
@@ -6,6 +6,8 @@ import { MetaModelsContextProps } from '../contexts/metaModels.context'
 export type RefreshRate = 'high' | 'medium' | 'low'
 
 type PropFactories<E> = Record<keyof E, PropFactory>
+
+type Mutation = 'add' | 'edit'
 
 export interface MetaModelDefinition<E = LooseEntity> {
   config: {
@@ -19,18 +21,18 @@ export interface MetaModelDefinition<E = LooseEntity> {
     service: Service<E>
     refreshRate?: RefreshRate
     anchorField: keyof E
+    allFields: (keyof E)[]
     propFactories: PropFactories<E>
   }
 
-  fieldsByService: {
-    methods: (Method | string)[]
-    fields?: (keyof E)[]
-    groups?: {
+  mutationsFields: Record<
+    Mutation,
+    {
       key?: string
       title?: string
       fields: (keyof E)[]
     }[]
-  }[]
+  >
 }
 
 export const defineProps = <E>(propFactories: PropFactories<E>) => {
@@ -39,12 +41,8 @@ export const defineProps = <E>(propFactories: PropFactories<E>) => {
   return { propFactories, allFields }
 }
 
-export type MetaModel<E = LooseEntity> = ReturnType<
-  typeof buildMetaModel<E>
->['data']
-
 export const buildMetaModel = <E = LooseEntity>(
-  { config, fieldsByService }: MetaModelDefinition<E>,
+  { config, mutationsFields }: MetaModelDefinition<E>,
   getMetaModel: MetaModelsContextProps['getMetaModel'],
 ) => {
   const { propFactories, ...configRest } = config
@@ -52,62 +50,63 @@ export const buildMetaModel = <E = LooseEntity>(
   const props = {} as Record<keyof E, Prop>
   let ready = true
 
-  Object.entries<PropFactory>(propFactories).forEach(([key, propFactory]) => {
+  Object.entries<PropFactory>(propFactories).forEach(([k, propFactory]) => {
     try {
-      props[key as keyof E] = propFactory(key, getMetaModel)
+      props[k as keyof E] = propFactory(k, getMetaModel)
     } catch (error) {
       ready = false
     }
   })
 
-  const findServiceEntry = (method: Method | string) =>
-    fieldsByService?.find(({ methods }) => methods.includes(method))
+  const createPropGroups = (mutation: Mutation) => {
+    const groups = mutationsFields[mutation]
 
-  const getFields = (method: Method | string) =>
-    findServiceEntry(method)?.fields as (keyof E)[] | undefined
-
-  const getPropFields = (method: Method | string) => {
-    const fields = getFields(method)
-    return fields?.map(key => props[key])
-  }
-
-  const getPropFieldsRecord = (method: Method | string) => {
-    const fields = getFields(method)
-    const acc: Record<string, Prop> = {}
-    fields?.forEach(key => (acc[key as string] = props[key]))
-    return acc
-  }
-
-  const getGroups = (method: Method | string) =>
-    findServiceEntry(method)?.groups
-
-  const getPropGroups = (method: Method | string) => {
-    const groups = getGroups(method)
-    return groups?.map(({ fields, ...rest }) => ({
-      props: fields.map(key => props[key]),
+    return groups.map(({ fields, ...rest }) => ({
+      props: fields.map(k => props[k]),
       ...rest,
     }))
   }
 
-  const getPropGroupsRecord = (method: Method | string) => {
-    const groups = getGroups(method)
-    return groups?.map(({ fields, ...rest }) => {
+  const createPropGroupsRecord = (mutation: Mutation) => {
+    const groups = mutationsFields[mutation]
+
+    return groups.map(({ fields, ...rest }) => {
       const acc: Record<string, Prop> = {}
-      fields.forEach(key => (acc[key as string] = props[key]))
+      fields.forEach(k => (acc[k as string] = props[k]))
       return { props: acc, ...rest }
     })
+  }
+
+  const getProps = (fields: (keyof E)[]) => fields.map(k => props[k])
+
+  const getPropsRecord = (fields: (keyof E)[]) => {
+    const acc: Record<string, Prop> = {}
+    fields.forEach(k => (acc[k as string] = props[k]))
+    return acc
+  }
+
+  const addProps = {
+    groups: createPropGroups('add'),
+    groupsRecord: createPropGroupsRecord('add'),
+  }
+
+  const editProps = {
+    groups: createPropGroups('edit'),
+    groupsRecord: createPropGroupsRecord('edit'),
   }
 
   const data = {
     ...configRest,
     props,
-    getFields,
-    getPropFields,
-    getPropFieldsRecord,
-    getGroups,
-    getPropGroups,
-    getPropGroupsRecord,
+    addProps,
+    editProps,
+    getProps,
+    getPropsRecord,
   }
 
   return { ready, data }
 }
+
+export type MetaModel<E = LooseEntity> = ReturnType<
+  typeof buildMetaModel<E>
+>['data']

@@ -1,1 +1,2 @@
-export { default as Option } from './Option/Option'
+export { default as Dropdown } from './Dropdown/Dropdown'
+export { default as Selected } from './Selected/Selected'

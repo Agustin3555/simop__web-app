@@ -1,4 +1,3 @@
-import { Method } from '@/services/config'
 import { omitBaseEntity } from '../../constants/selectors.const'
 import { RepresentanteEmpresaService } from './representanteEmpresa.service'
 import { RepresentanteEmpresaProps } from './representanteEmpresa.props'
@@ -19,17 +18,12 @@ export const RepresentanteEmpresaMeta: MetaModelDefinition<RepresentanteEmpresaM
       },
       faIcon: 'fa-solid fa-user-tie',
       anchorField: 'id',
+      allFields,
       propFactories,
     },
 
-    fieldsByService: [
-      {
-        methods: [Method.GetAll, Method.GetOne],
-        fields: allFields,
-      },
-      {
-        methods: [Method.Create, Method.UpdateOne],
-        groups: [{ fields: omitBaseEntity(allFields) }],
-      },
-    ],
+    mutationsFields: {
+      add: [{ fields: omitBaseEntity(allFields) }],
+      edit: [{ fields: omitBaseEntity(allFields) }],
+    },
   }

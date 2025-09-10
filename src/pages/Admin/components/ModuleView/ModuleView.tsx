@@ -1,74 +1,64 @@
-import { useMemo } from 'react'
 import { useMetaModels } from '../../hooks'
-import { addIf } from '@/helpers'
-import { LocalAdd, LocalEdit, LocalQuery, View } from '..'
-import { LocalView, ViewProps } from '../View/View'
-import { LocalQueryProps } from '../LocalQuery/LocalQuery'
+import { LocalAdd, LocalConfig, LocalEdit, LocalQuery, View } from '..'
+import { ViewProps } from '../View/View'
 import { MetaModelKey } from '../../constants/metaModelKey.const'
 import { MetaModelContext } from '../../contexts/metaModel.context'
 import { MetaModel } from '../../meta/metaModel'
-import { ConfigsProvider, TableProvider } from '../../providers'
+import { TableProvider } from '../../providers'
+import { LocalQueryProps } from '../LocalQuery/LocalQuery'
 
 interface ModuleViewProps {
   view?: Partial<ViewProps>
   metaModelKey: MetaModelKey
-  query?: boolean | LocalQueryProps
-  add?: boolean
-  edit?: boolean
+  queryPanels?: LocalQueryProps['panels']
 }
 
-const ModuleView = ({
-  view,
-  metaModelKey,
-  query = true,
-  add = true,
-  edit = true,
-}: ModuleViewProps) => {
+const ModuleView = ({ view, metaModelKey, queryPanels }: ModuleViewProps) => {
+  const { viewKey, title, localViews } = view ?? {}
+
   const { getMetaModelEntry } = useMetaModels()
   const { ready, metaModel } = getMetaModelEntry(metaModelKey)
 
-  const localViews = useMemo(
-    () => [
-      ...addIf<LocalView>([
-        query && {
-          title: 'Consultar',
-          faIcon: 'fa-solid fa-search',
-          localViewKey: 'query',
-          component: <LocalQuery {...(query !== true && { ...query })} />,
-        },
-        add && {
-          title: 'Agregar',
-          faIcon: 'fa-solid fa-plus',
-          localViewKey: 'add',
-          component: <LocalAdd />,
-        },
-        edit && {
-          title: 'Editar',
-          faIcon: 'fa-solid fa-pen',
-          localViewKey: 'edit',
-          component: <LocalEdit />,
-        },
-      ]),
-      ...(view?.localViews ?? []),
-    ],
-    [],
-  )
+  if (!(ready && metaModel)) return null
+
+  const views = [
+    {
+      title: 'Configurar',
+      faIcon: 'fa-solid fa-sliders',
+      localViewKey: 'config',
+      component: <LocalConfig />,
+    },
+    {
+      title: 'Consultar',
+      faIcon: 'fa-solid fa-search',
+      localViewKey: 'query',
+      component: <LocalQuery panels={queryPanels} />,
+    },
+    {
+      title: 'Agregar',
+      faIcon: 'fa-solid fa-plus',
+      localViewKey: 'add',
+      component: <LocalAdd />,
+    },
+    {
+      title: 'Editar',
+      faIcon: 'fa-solid fa-pen',
+      localViewKey: 'edit',
+      component: <LocalEdit />,
+    },
+    ...(localViews ?? []),
+  ]
 
   return (
-    ready &&
-    metaModel && (
-      <MetaModelContext.Provider value={metaModel as MetaModel}>
-        <ConfigsProvider>
-          <TableProvider>
-            <View
-              viewKey={view?.viewKey ?? metaModel.key}
-              title={view?.title ?? metaModel.title.plural}
-              {...{ localViews }}
-            />
-          </TableProvider>
-        </ConfigsProvider>
-      </MetaModelContext.Provider>
-    )
+    <MetaModelContext.Provider value={metaModel as MetaModel}>
+      <TableProvider>
+        <View
+          viewKey={viewKey ?? metaModel.key}
+          title={title ?? metaModel.title.plural}
+          localViews={views}
+        />
+      </TableProvider>
+    </MetaModelContext.Provider>
   )
 }
 

@@ -14,10 +14,10 @@ import { MetaModel } from './metaModel'
 import { StyleSheet, Text } from '@react-pdf/renderer'
 
 export const isFieldEnabled = (form: HTMLFormElement, key: string) => {
-  const inputOption = form.querySelector<HTMLInputElement>(`[name="${key}"]`)
+  const { disabled } =
+    form.querySelector<HTMLFieldSetElement>(`fieldset[name="${key}"]`) ?? {}
 
-  // Verifica si 'inputOption' está dentro de un 'fieldset' habilitado
-  return inputOption && !inputOption.closest('fieldset')?.disabled
+  return !disabled
 }
 
 interface RefProp extends Pick<BaseProp, 'minSize'> {

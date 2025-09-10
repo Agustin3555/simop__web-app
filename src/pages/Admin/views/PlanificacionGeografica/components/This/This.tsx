@@ -10,7 +10,7 @@ import { Button, Toggle } from '@/components'
 import { useQueryActionState } from '@/hooks'
 import {
   useCombinedQuery,
-  useEntities,
+  useLazyQuery,
   useMetaModels,
 } from '@/pages/Admin/hooks'
 import { classList } from '@/helpers'
@@ -39,19 +39,19 @@ const ContextualizedThis = () => {
   const LocalidadMeta = useMemo(() => getMetaModel('localidad'), [])!
   const ObraMeta = useMemo(() => getMetaModel('obra'), [])!
 
-  const apgsQuery = useEntities([APGMeta.key], APGMeta.service.getAll)
+  const apgsQuery = useLazyQuery([APGMeta.key], APGMeta.service.getAll)
 
-  const departamentosQuery = useEntities(
+  const departamentosQuery = useLazyQuery(
     [DepartamentoMeta.key],
     DepartamentoMeta.service.getAll,
   )
 
-  const localidadesQuery = useEntities(
+  const localidadesQuery = useLazyQuery(
     [LocalidadMeta.key],
     LocalidadMeta.service.getAll,
   )
 
-  const obrasQuery = useEntities([ObraMeta.key], ObraMeta.service.getAll)
+  const obrasQuery = useLazyQuery([ObraMeta.key], ObraMeta.service.getAll)
 
   const { data, status, isFetching, refetch, enableQuery } = useCombinedQuery(
     apgsQuery,

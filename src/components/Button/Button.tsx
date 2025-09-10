@@ -7,6 +7,9 @@ import {
   forwardRef,
   MouseEventHandler,
   useCallback,
+  useEffect,
+  useMemo,
+  useRef,
 } from 'react'
 
 export interface ButtonProps {
@@ -21,8 +24,8 @@ export interface ButtonProps {
   submit?: boolean
   actionState?: ActionState
   progress?: number
+  hold?: boolean
   onAction?: MouseEventHandler<HTMLButtonElement>
-  onFinished?: () => void
   buttonHTMLAttrs?: ButtonHTMLAttributes<HTMLButtonElement>
 }
 
@@ -40,19 +43,42 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       submit = false,
       actionState,
       progress,
+      hold = false,
       onAction,
-      onFinished,
       buttonHTMLAttrs,
     },
     ref,
   ) => {
-    const handleClick = useCallback<MouseEventHandler<HTMLButtonElement>>(
+    const timerRef = useRef<number>(null)
+
+    const clearTimer = useCallback(() => {
+      if (!timerRef.current) return
+      clearTimeout(timerRef.current)
+      timerRef.current = null
+    }, [])
+
+    const handleMouseDown = useCallback<MouseEventHandler<HTMLButtonElement>>(
       e => {
-        onAction && onAction(e)
-        onFinished && onFinished()
+        if (!onAction) return
+        if (actionState === 'ready')
+          timerRef.current = setTimeout(() => onAction(e), 3000)
       },
-      [onAction, onFinished],
+      [actionState, onAction],
     )
+
+    const handlers = useMemo<ButtonHTMLAttributes<HTMLButtonElement>>(
+      () =>
+        hold
+          ? {
+              onMouseDown: handleMouseDown,
+              onMouseUp: clearTimer,
+              onMouseLeave: clearTimer,
+            }
+          : { onClick: onAction },
+      [handleMouseDown, onAction],
+    )
+
+    useEffect(() => clearTimer, [clearTimer])
 
     return (
       <button
@@ -60,12 +86,13 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
           inverted,
           wrap,
           square: faIcon !== undefined && text === undefined,
+          hold,
         })}
-        title={title ?? text}
+        // TODO: mejorar
+        title={(title ?? text ?? '') + (hold ? ' (mantener)' : '')}
         type={submit ? 'submit' : 'button'}
         disabled={actionState ? actionState !== 'ready' : false}
-        onClick={handleClick}
-        {...{ ref, name, ...buttonHTMLAttrs }}
+        {...{ ref, name, ...handlers, ...buttonHTMLAttrs }}
       >
         {actionState && (
           <>

@@ -1,14 +1,15 @@
 import { publicInstance, Service } from '@/services/config'
 import { deleteManyHandler } from '@/services/handlers'
-import { buildPath } from '@/helpers'
+import { buildPath, sendFields } from '@/helpers'
 import { AmpliacionAdapter } from './ampliacion.adapter'
+import { refsAdapter } from '@/adapters/config'
 import { AmpliacionModel } from '.'
 
 const collection = buildPath('ampliaciones')
 
 export const AmpliacionService = {
-  getAll: async () => {
-    const response = await publicInstance.get(collection())
+  getAll: async fields => {
+    const response = await publicInstance.get(collection() + sendFields(fields))
 
     return AmpliacionAdapter.getAll.output(response.data)
   },
@@ -16,11 +17,13 @@ export const AmpliacionService = {
   getRefs: async () => {
     const response = await publicInstance.get(collection('refs'))
 
-    return AmpliacionAdapter.getRefs.output(response.data)
+    return refsAdapter(AmpliacionAdapter.getRefs.output, response.data)
   },
 
-  getOne: async id => {
-    const response = await publicInstance.get(collection(id))
+  getOne: async (id, fields) => {
+    const response = await publicInstance.get(
+      collection(id) + sendFields(fields),
+    )
 
     return AmpliacionAdapter.getOne.output(response.data)
   },

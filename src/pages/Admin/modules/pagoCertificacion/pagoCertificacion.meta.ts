@@ -1,4 +1,3 @@
-import { Method } from '@/services/config'
 import { omitBaseEntity } from '../../constants/selectors.const'
 import { PagoCertificacionService } from './pagoCertificacion.service'
 import { PagoCertificacionProps } from './pagoCertificacion.props'
@@ -19,17 +18,12 @@ export const PagoCertificacionMeta: MetaModelDefinition<PagoCertificacionModel.E
       },
       faIcon: 'fa-solid fa-file-invoice-dollar',
       anchorField: 'numero',
+      allFields,
       propFactories,
     },
 
-    fieldsByService: [
-      {
-        methods: [Method.GetAll, Method.GetOne],
-        fields: allFields,
-      },
-      {
-        methods: [Method.Create, Method.UpdateOne],
-        groups: [{ fields: omitBaseEntity(allFields) }],
-      },
-    ],
+    mutationsFields: {
+      add: [{ fields: omitBaseEntity(allFields) }],
+      edit: [{ fields: omitBaseEntity(allFields) }],
+    },
   }

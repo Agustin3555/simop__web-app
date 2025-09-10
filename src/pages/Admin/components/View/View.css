@@ -43,7 +43,7 @@
         transition: color var(--pal-time-xs) ease-out,
           background-color var(--pal-time-xs) ease-out;
 
-        @media (width < 45rem) {
+        @container cmp-view (width <= 55rem) {
           padding: 0;
           width: var(--height);
 

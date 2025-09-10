@@ -28,7 +28,7 @@ export const ViewsInfoProvider = ({ children }: ViewsInfoProviderProps) => {
   const { metaModels } = useMetaModels()
 
   const getViewInfo = useCallback<ViewsInfoContextProps['getViewInfo']>(
-    key => viewsInfo[key] ?? undefined,
+    k => viewsInfo[k] ?? undefined,
     [viewsInfo],
   )
 

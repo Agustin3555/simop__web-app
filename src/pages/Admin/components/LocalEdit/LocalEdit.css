@@ -4,29 +4,41 @@
   gap: var(--pal-size-l);
   height: 100%;
 
-  > h2 {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    gap: var(--pal-size-s);
-
-    font-size: var(--pal-size-font-s);
-    color: var(--pal-color-a);
-
-    > strong {
-      font-weight: 650;
-
-      background-color: var(--pal-color-a-l4);
-    }
-  }
+  overflow: auto;
 
   > .cmp-fallback-banner > p {
+    > .cmp-loader {
+      --cmp-loader-size: var(--pal-size-s);
+
+      margin-right: var(--pal-size-l);
+
+      color: var(--pal-color-a);
+    }
+
     > strong {
       color: var(--pal-color-a);
     }
 
     > .cmp-button {
       border-color: var(--pal-color-a-l2);
+    }
+  }
+
+  > h2 {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--pal-size-m);
+
+    font-size: var(--pal-size-font-s);
+    font-weight: 550;
+    color: var(--pal-color-a);
+
+    > strong {
+      font-weight: 650;
+      color: var(--pal-color-a-d1);
+
+      background-color: var(--pal-color-a-l5);
     }
   }
 }

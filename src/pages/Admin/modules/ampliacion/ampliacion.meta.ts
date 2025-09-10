@@ -1,4 +1,3 @@
-import { Method } from '@/services/config'
 import { omitBaseEntity } from '../../constants/selectors.const'
 import { AmpliacionService } from './ampliacion.service'
 import { MetaModelDefinition } from '../../meta/metaModel'
@@ -19,17 +18,12 @@ export const AmpliacionMeta: MetaModelDefinition<AmpliacionModel.Entity> = {
     faIcon: 'fa-solid fa-expand',
 
     anchorField: 'numeroExpedienteSolicitud',
+    allFields,
     propFactories,
   },
 
-  fieldsByService: [
-    {
-      methods: [Method.GetAll, Method.GetOne],
-      fields: allFields,
-    },
-    {
-      methods: [Method.Create, Method.UpdateOne],
-      groups: [{ fields: omitBaseEntity(allFields) }],
-    },
-  ],
+  mutationsFields: {
+    add: [{ fields: omitBaseEntity(allFields) }],
+    edit: [{ fields: omitBaseEntity(allFields) }],
+  },
 }

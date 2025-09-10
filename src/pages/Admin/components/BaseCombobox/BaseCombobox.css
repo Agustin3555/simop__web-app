@@ -1,90 +1,22 @@
 .cmp-base-combobox {
   position: relative;
 
-  > header {
+  > .header {
     display: flex;
     justify-content: space-between;
-    height: auto;
-    min-height: var(--control-height);
+    height: var(--pal-size-2xl);
 
     overflow: hidden;
     cursor: pointer;
 
-    transition: border-color var(--pal-time-xs) ease-out,
-      height var(--pal-time-s) ease;
+    transition: border-color var(--pal-time-xs) ease-out;
 
     &[disabled] {
       pointer-events: none;
     }
 
-    &.reduce {
-      height: var(--control-height);
-
-      interpolate-size: allow-keywords;
-
-      > .selected-items > .item > p {
-        font-size: var(--pal-size-font-xs);
-      }
-    }
-
     &:hover > .arrow {
       background-color: var(--pal-color-white);
-    }
-
-    > .selected-items {
-      --padding: var(--pal-size-2xs);
-
-      flex-grow: 1;
-
-      display: flex;
-      flex-wrap: wrap;
-      gap: var(--padding);
-      padding: var(--padding);
-
-      cursor: default;
-
-      > .item {
-        --border-color: var(--pal-color-a-l5);
-
-        display: flex;
-        align-items: center;
-        border-width: var(--line-thickness);
-        border-style: solid;
-        border-color: var(--border-color);
-        max-width: 15rem;
-
-        border-radius: var(--pal-size-3xs);
-        background-color: var(--pal-color-white);
-        overflow: hidden;
-
-        transition: background-color var(--pal-time-xs) ease-out;
-
-        > p {
-          flex-grow: 1;
-
-          padding-left: var(--pal-size-xs);
-
-          line-height: initial;
-          white-space: nowrap;
-          text-overflow: ellipsis;
-
-          overflow: hidden;
-        }
-
-        > .cmp-button {
-          --cmp-button-bg-color: transparent;
-
-          border-width: 0;
-          border-color: var(--border-color);
-          border-left-width: var(--line-thickness);
-          height: calc(
-            var(--control-height) - (var(--padding) + var(--line-thickness) * 2) *
-              2
-          );
-
-          color: var(--pal-color-a-l1);
-        }
-      }
     }
 
     > .arrow {
@@ -106,113 +38,10 @@
     }
   }
 
-  > .drop-down {
-    position: absolute;
-    z-index: 1;
-    top: calc(100% + var(--pal-size-3xs));
+  &.open > .header {
+    border-color: var(--pal-color-a);
 
-    display: none;
-    flex-direction: column;
-    width: 100%;
-
-    border-radius: var(--control-border-radius);
-    background-color: var(--pal-color-white);
-    box-shadow: var(--pal-shadow-1);
-    translate: 0 var(--pal-size-xs);
-    opacity: 0;
-    overflow: hidden;
-
-    transition: display var(--pal-time-s) ease allow-discrete,
-      translate var(--pal-time-s) ease, opacity var(--pal-time-s) ease;
-
-    > header {
-      display: flex;
-      flex-direction: column;
-
-      > .cmp-option-selectors {
-        padding-inline: var(--control-padding-inline);
-        padding-top: var(--pal-size-xs);
-        padding-bottom: var(--pal-size-2xs);
-      }
-
-      > .search {
-        --button-gap: var(--pal-size-2xs);
-        --button-size: calc(var(--control-height) - var(--button-gap) * 2);
-
-        position: relative;
-
-        display: flex;
-        align-items: center;
-        gap: var(--pal-size-xs);
-        border-width: 0;
-        border-style: solid;
-        border-color: var(--pal-color-a-l2);
-        border-bottom-width: var(--line-thickness);
-        padding-left: var(--control-padding-inline);
-        padding-right: var(--pal-size-xs);
-
-        > .input {
-          border-width: 0;
-          padding: 0;
-
-          border-radius: 0;
-          background-color: transparent; /* TODO: no se debería establecer */
-        }
-
-        > .cmp-button {
-          border-color: var(--pal-color-a-l2);
-
-          color: var(--pal-color-a-l1);
-        }
-      }
-    }
-
-    > fieldset {
-      display: flex;
-      flex-direction: column;
-      border: none;
-      height: 100%;
-      max-height: calc(var(--control-height) * 7.5);
-
-      overflow-y: auto;
-    }
-
-    > .void {
-      --cmp-icon-size: var(--pal-size-l);
-
-      align-content: center;
-      height: calc(var(--control-height) * 2);
-
-      color: var(--pal-color-a-l4);
-
-      > * {
-        margin-inline: auto;
-      }
-    }
-  }
-
-  &.open {
-    > header {
-      border-color: var(--pal-color-a);
-
-      &.reduce {
-        height: auto;
-      }
-    }
-
-    > .drop-down {
-      display: flex;
-
-      translate: initial;
-      opacity: initial;
-
-      @starting-style {
-        translate: 0 var(--pal-size-xs);
-        opacity: 0;
-      }
-    }
-
-    > header > .arrow {
+    > .arrow {
       background-color: var(--pal-color-white);
 
       > .cmp-icon {

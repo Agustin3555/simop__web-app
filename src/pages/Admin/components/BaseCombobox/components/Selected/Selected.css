@@ -1,0 +1,68 @@
+:root {
+  --cmp-selected-bordes: 2;
+}
+
+.cmp-selected {
+  --height: var(--pal-size-2xl);
+  --padding: var(--pal-size-2xs);
+
+  display: flex;
+  align-content: flex-start;
+  flex-wrap: wrap;
+  gap: var(--padding);
+  padding: var(--padding);
+  height: 100%;
+
+  cursor: default;
+
+  > .item {
+    --border-color: var(--pal-color-a-l5);
+
+    display: flex;
+    align-items: center;
+    border-width: var(--line-thickness);
+    border-style: solid;
+    border-color: var(--border-color);
+    max-width: 12rem;
+    height: calc(
+      var(--height) - var(--padding) * 2 - var(--line-thickness) *
+        var(--cmp-selected-bordes)
+    );
+
+    border-radius: var(--pal-size-3xs);
+    background-color: var(--pal-color-white);
+    overflow: hidden;
+
+    > p {
+      padding-left: var(--pal-size-xs);
+
+      font-size: var(--pal-size-font-xs);
+      line-height: initial;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+
+      overflow: hidden;
+    }
+
+    > button {
+      --cmp-icon-size: var(--pal-size-s);
+
+      aspect-ratio: 1;
+      height: 100%;
+
+      color: var(--pal-color-b-l3);
+
+      > * {
+        margin-inline: auto;
+      }
+    }
+
+    &:hover {
+      background-color: var(--pal-color-a-l5);
+    }
+
+    &:not(:has(button)) > p {
+      padding-right: var(--pal-size-xs);
+    }
+  }
+}

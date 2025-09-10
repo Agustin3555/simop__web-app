@@ -1,6 +1,7 @@
 import { createContext } from 'react'
 
 interface LocalViewContextProps {
+  localView: string
   setLocalView: (view: string) => void
 }
 

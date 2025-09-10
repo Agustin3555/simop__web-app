@@ -1,4 +1,3 @@
-import { Method } from '@/services/config'
 import { omitBaseEntity } from '../../constants/selectors.const'
 import { LocalidadService } from './localidad.service'
 import { LocalidadModel } from '.'
@@ -19,17 +18,12 @@ export const LocalidadMeta: MetaModelDefinition<LocalidadModel.Entity> = {
     service: LocalidadService,
     refreshRate: 'low',
     anchorField: 'nombre',
+    allFields,
     propFactories,
   },
 
-  fieldsByService: [
-    {
-      methods: [Method.GetAll, Method.GetOne],
-      fields: allFields,
-    },
-    {
-      methods: [Method.Create, Method.UpdateOne],
-      groups: [{ fields: omitBaseEntity(allFields) }],
-    },
-  ],
+  mutationsFields: {
+    add: [{ fields: omitBaseEntity(allFields) }],
+    edit: [{ fields: omitBaseEntity(allFields) }],
+  },
 }

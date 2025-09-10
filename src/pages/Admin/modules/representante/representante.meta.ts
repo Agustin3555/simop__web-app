@@ -1,4 +1,3 @@
-import { Method } from '@/services/config'
 import { omitBaseEntity } from '../../constants/selectors.const'
 import { RepresentanteService } from './representante.service'
 import { RepresentanteProps } from './representante.props'
@@ -19,17 +18,12 @@ export const RepresentanteMeta: MetaModelDefinition<RepresentanteModel.Entity> =
       },
       faIcon: 'fa-solid fa-user-tie',
       anchorField: 'apellido',
+      allFields,
       propFactories,
     },
 
-    fieldsByService: [
-      {
-        methods: [Method.GetAll, Method.GetOne],
-        fields: allFields,
-      },
-      {
-        methods: [Method.Create, Method.UpdateOne],
-        groups: [{ fields: omitBaseEntity(allFields) }],
-      },
-    ],
+    mutationsFields: {
+      add: [{ fields: omitBaseEntity(allFields) }],
+      edit: [{ fields: omitBaseEntity(allFields) }],
+    },
   }

@@ -1,4 +1,3 @@
-import { Method } from '@/services/config'
 import { omitBaseEntity } from '../../constants/selectors.const'
 import { InspectorObraService } from './inspectorObra.service'
 import { InspectorObraModel } from '.'
@@ -19,17 +18,12 @@ export const InspectorObraMeta: MetaModelDefinition<InspectorObraModel.Entity> =
       },
       faIcon: 'fa-solid fa-helmet-safety',
       anchorField: 'id',
+      allFields,
       propFactories,
     },
 
-    fieldsByService: [
-      {
-        methods: [Method.GetAll, Method.GetOne],
-        fields: allFields,
-      },
-      {
-        methods: [Method.Create, Method.UpdateOne],
-        groups: [{ fields: omitBaseEntity(allFields) }],
-      },
-    ],
+    mutationsFields: {
+      add: [{ fields: omitBaseEntity(allFields) }],
+      edit: [{ fields: omitBaseEntity(allFields) }],
+    },
   }

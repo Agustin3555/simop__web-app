@@ -18,18 +18,18 @@ export const MetaModelsProvider = ({ children }: MetaModelsProviderProps) => {
 
   const allReady = useMemo(() => {
     const keys = Object.keys(META_MODEL_DEFINITIONS) as MetaModelKey[]
-    return keys.every(key => isReady[key])
+    return keys.every(k => isReady[k])
   }, [isReady])
 
   const getMetaModel = useCallback<MetaModelsContextProps['getMetaModel']>(
-    key => metaModels[key],
+    k => metaModels[k],
     [metaModels],
   )
 
   const getMetaModelEntry = useCallback<
     MetaModelsContextProps['getMetaModelEntry']
   >(
-    key => ({ metaModel: metaModels[key], ready: !!isReady[key] }),
+    k => ({ metaModel: metaModels[k], ready: !!isReady[k] }),
     [metaModels, isReady],
   )
 

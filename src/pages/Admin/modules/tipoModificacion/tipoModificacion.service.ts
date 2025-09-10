@@ -1,14 +1,15 @@
 import { publicInstance, Service } from '@/services/config'
 import { deleteManyHandler } from '@/services/handlers'
-import { buildPath } from '@/helpers'
+import { buildPath, sendFields } from '@/helpers'
 import { TipoModificacionModel } from '.'
 import { TipoModificacionAdapter } from './tipoModificacion.adapter'
+import { refsAdapter } from '@/adapters/config'
 
 const collection = buildPath('tipos-modificaciones')
 
 export const TipoModificacionService = {
-  getAll: async () => {
-    const response = await publicInstance.get(collection())
+  getAll: async fields => {
+    const response = await publicInstance.get(collection() + sendFields(fields))
 
     return TipoModificacionAdapter.getAll.output(response.data)
   },
@@ -16,11 +17,13 @@ export const TipoModificacionService = {
   getRefs: async () => {
     const response = await publicInstance.get(collection('refs'))
 
-    return TipoModificacionAdapter.getRefs.output(response.data)
+    return refsAdapter(TipoModificacionAdapter.getRefs.output, response.data)
   },
 
-  getOne: async id => {
-    const response = await publicInstance.get(collection(id))
+  getOne: async (id, fields) => {
+    const response = await publicInstance.get(
+      collection(id) + sendFields(fields),
+    )
 
     return TipoModificacionAdapter.getOne.output(response.data)
   },

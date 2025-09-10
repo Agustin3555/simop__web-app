@@ -5,15 +5,16 @@
   flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
-  gap: var(--control-padding-inline);
+  gap: var(--gap-1);
   padding-block: var(--pal-size-s);
-  padding-inline: var(--control-padding-inline);
+  padding-inline: var(--gap-1);
 
   color: var(--pal-color-a-d2);
 
   cursor: pointer;
 
   > strong {
+    font-size: var(--pal-size-font-xs);
     font-weight: unset;
   }
 

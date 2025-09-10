@@ -119,7 +119,6 @@ const Toolbar = ({
           title="Columnas activas"
           hideLabel
           multiple
-          reduceHeader
           {...comboboxProps}
         />
       )}

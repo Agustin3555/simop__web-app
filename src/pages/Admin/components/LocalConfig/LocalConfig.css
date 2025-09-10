@@ -1,2 +1,129 @@
 .cmp-local-config {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 28rem), 1fr));
+  grid-template-rows: repeat(auto-fill, minmax(min(100%, 12rem), 1fr));
+  gap: var(--pal-size-m);
+
+  overflow: auto;
+
+  > * {
+    border-width: var(--line-thickness);
+    border-style: solid;
+    border-color: var(--pal-color-a-l4);
+    min-height: 12rem;
+
+    border-radius: var(--pal-size-xs);
+    overflow: hidden;
+  }
+
+  > .cmp-config,
+  .new-config {
+    > header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--pal-size-s);
+      border-width: 0;
+      border-style: solid;
+      border-color: var(--pal-color-a-l4);
+      border-bottom-width: var(--line-thickness);
+
+      .cmp-button {
+        border-color: var(--pal-color-a-l2);
+
+        color: var(--pal-color-a-l1);
+      }
+    }
+
+    > .content {
+      display: flex;
+      flex-direction: column;
+      gap: var(--pal-size-s);
+      padding: var(--pal-size-s);
+      height: 100%;
+    }
+  }
+
+  > .cmp-config {
+    > header {
+      padding: var(--pal-size-s);
+
+      > label {
+        cursor: pointer;
+
+        > input {
+          display: none;
+        }
+      }
+
+      > input {
+        flex: 1;
+
+        border: none;
+
+        color: var(--pal-color-a);
+
+        background-color: transparent;
+      }
+
+      > .actions {
+        display: flex;
+        gap: var(--pal-size-2xs);
+      }
+
+      &:has(input:checked) {
+        background-color: var(--pal-color-a-l5);
+      }
+    }
+
+    > .content {
+      overflow: auto;
+    }
+  }
+
+  > .new-config {
+    gap: 0;
+
+    > header {
+      padding: var(--pal-size-2xs);
+      padding-right: var(--pal-size-s);
+    }
+
+    > .content {
+      justify-content: space-between;
+      height: 100%;
+
+      > .cmp-button {
+        align-self: flex-start;
+
+        color: var(--pal-color-white);
+      }
+    }
+  }
+
+  > button {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: var(--pal-size-m);
+    padding: var(--pal-size-m);
+
+    font-size: var(--pal-size-font-xs);
+    color: var(--pal-color-a);
+
+    background-color: var(--pal-color-a-l5);
+
+    > .cmp-icon {
+      --cmp-icon-size: var(--pal-size-2xl);
+
+      color: var(--pal-color-a-l4);
+
+      transition: scale var(--pal-time-m) ease;
+    }
+
+    &:hover > .cmp-icon {
+      scale: 1.15;
+    }
+  }
 }

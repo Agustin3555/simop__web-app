@@ -1,21 +1,26 @@
-import { createContext } from 'react'
+import { createContext, Dispatch, SetStateAction } from 'react'
 
-interface BaseConfig {
+export interface BaseConfig {
   title: string
   columns: string[]
 }
 
 export interface Config extends BaseConfig {
-  id: string
-  selected: boolean
+  id: number
 }
 
-export type Configs = Record<string, Config[]>
+export type Configs = Record<
+  string,
+  {
+    currentIdIndex: number
+    selected: number
+    items: Config[]
+  }
+>
 
 export interface ConfigsContextProps {
   configs: Configs
-  add: (baseConfig: BaseConfig) => void
-  toggleSelection: (id: Config['id']) => void
+  setConfigs: Dispatch<SetStateAction<Configs>>
 }
 
 export const ConfigsContext = createContext<ConfigsContextProps | undefined>(

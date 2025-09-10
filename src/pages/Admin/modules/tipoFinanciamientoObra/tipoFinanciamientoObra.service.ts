@@ -1,14 +1,15 @@
 import { publicInstance, Service } from '@/services/config'
 import { deleteManyHandler } from '@/services/handlers'
-import { buildPath } from '@/helpers'
+import { buildPath, sendFields } from '@/helpers'
 import { TipoFinanciamientoObraModel } from '.'
 import { TipoFinanciamientoObraAdapter } from './tipoFinanciamientoObra.adapter'
+import { refsAdapter } from '@/adapters/config'
 
 const collection = buildPath('tipos-financiamientos-obra')
 
 export const TipoFinanciamientoObraService = {
-  getAll: async () => {
-    const response = await publicInstance.get(collection())
+  getAll: async fields => {
+    const response = await publicInstance.get(collection() + sendFields(fields))
 
     return TipoFinanciamientoObraAdapter.getAll.output(response.data)
   },
@@ -16,11 +17,16 @@ export const TipoFinanciamientoObraService = {
   getRefs: async () => {
     const response = await publicInstance.get(collection('refs'))
 
-    return TipoFinanciamientoObraAdapter.getRefs.output(response.data)
+    return refsAdapter(
+      TipoFinanciamientoObraAdapter.getRefs.output,
+      response.data,
+    )
   },
 
-  getOne: async id => {
-    const response = await publicInstance.get(collection(id))
+  getOne: async (id, fields) => {
+    const response = await publicInstance.get(
+      collection(id) + sendFields(fields),
+    )
 
     return TipoFinanciamientoObraAdapter.getOne.output(response.data)
   },

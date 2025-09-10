@@ -1,14 +1,15 @@
 import { publicInstance, Service } from '@/services/config'
 import { deleteManyHandler } from '@/services/handlers'
-import { buildPath } from '@/helpers'
+import { buildPath, sendFields } from '@/helpers'
 import { APGModel } from '.'
 import { APGAdapter } from './apg.adapter'
+import { refsAdapter } from '@/adapters/config'
 
 const collection = buildPath('apgs')
 
 export const APGService = {
-  getAll: async () => {
-    const response = await publicInstance.get(collection())
+  getAll: async fields => {
+    const response = await publicInstance.get(collection() + sendFields(fields))
 
     return APGAdapter.getAll.output(response.data)
   },
@@ -16,11 +17,13 @@ export const APGService = {
   getRefs: async () => {
     const response = await publicInstance.get(collection('refs'))
 
-    return APGAdapter.getRefs.output(response.data)
+    return refsAdapter(APGAdapter.getRefs.output, response.data)
   },
 
-  getOne: async id => {
-    const response = await publicInstance.get(collection(id))
+  getOne: async (id, fields) => {
+    const response = await publicInstance.get(
+      collection(id) + sendFields(fields),
+    )
 
     return APGAdapter.getOne.output(response.data)
   },

@@ -1,14 +1,15 @@
 import { publicInstance, Service } from '@/services/config'
 import { deleteManyHandler } from '@/services/handlers'
-import { buildPath } from '@/helpers'
+import { buildPath, sendFields } from '@/helpers'
 import { RedeterminacionModel } from '.'
 import { RedeterminacionAdapter } from './redeterminacion.adapter'
+import { refsAdapter } from '@/adapters/config'
 
 const collection = buildPath('redeterminaciones')
 
 export const RedeterminacionService = {
-  getAll: async () => {
-    const response = await publicInstance.get(collection())
+  getAll: async fields => {
+    const response = await publicInstance.get(collection() + sendFields(fields))
 
     return RedeterminacionAdapter.getAll.output(response.data)
   },
@@ -16,11 +17,13 @@ export const RedeterminacionService = {
   getRefs: async () => {
     const response = await publicInstance.get(collection('refs'))
 
-    return RedeterminacionAdapter.getRefs.output(response.data)
+    return refsAdapter(RedeterminacionAdapter.getRefs.output, response.data)
   },
 
-  getOne: async id => {
-    const response = await publicInstance.get(collection(id))
+  getOne: async (id, fields) => {
+    const response = await publicInstance.get(
+      collection(id) + sendFields(fields),
+    )
 
     return RedeterminacionAdapter.getOne.output(response.data)
   },

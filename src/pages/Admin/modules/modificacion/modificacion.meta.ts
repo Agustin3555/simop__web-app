@@ -1,4 +1,3 @@
-import { Method } from '@/services/config'
 import { omitBaseEntity } from '../../constants/selectors.const'
 import { ModificacionService } from './modificacion.service'
 import { ModificacionProps } from './modificacion.props'
@@ -18,17 +17,12 @@ export const ModificacionMeta: MetaModelDefinition<ModificacionModel.Entity> = {
     },
     faIcon: 'fa-solid fa-file-pen',
     anchorField: 'numeroExpediente',
+    allFields,
     propFactories,
   },
 
-  fieldsByService: [
-    {
-      methods: [Method.GetAll, Method.GetOne],
-      fields: allFields,
-    },
-    {
-      methods: [Method.Create, Method.UpdateOne],
-      groups: [{ fields: omitBaseEntity(allFields) }],
-    },
-  ],
+  mutationsFields: {
+    add: [{ fields: omitBaseEntity(allFields) }],
+    edit: [{ fields: omitBaseEntity(allFields) }],
+  },
 }

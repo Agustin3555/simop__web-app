@@ -1,72 +1,64 @@
-import { ReactNode, useCallback, useEffect, useState } from 'react'
+import { ReactNode, useCallback, useEffect, useRef, useState } from 'react'
 import {
   ConfigsContext,
   ConfigsContextProps,
 } from '../contexts/configs.context'
 import { configsEntity } from '../services/localStorage/entities/configs'
-import { useMetaModel } from '../hooks'
-
-export const ALL_CONFIG_KEY = 'all'
+import { useMetaModels } from '../hooks'
 
 interface ConfigsProviderProps {
   children: ReactNode
 }
 
 export const ConfigsProvider = ({ children }: ConfigsProviderProps) => {
-  const [configs, setConfigs] = useState<ConfigsContextProps['configs']>({})
-  const { key: metaModelKey } = useMetaModel()
+  const { metaModels } = useMetaModels()
 
-  const add = useCallback<ConfigsContextProps['add']>(
-    baseConfig =>
-      setConfigs(prev => {
-        const newState = structuredClone(prev)
+  const [configs, setConfigs] = useState<ConfigsContextProps['configs']>(() => {
+    try {
+      return configsEntity.state
+    } catch (error) {
+      const currentIdIndex = 0
 
-        newState[metaModelKey].push({
-          id: crypto.randomUUID(),
-          selected: false,
-          ...baseConfig,
-        })
+      const init = Object.fromEntries(
+        Object.entries(metaModels).map(([key, { allFields }]) => [
+          key,
+          {
+            currentIdIndex,
+            selected: currentIdIndex,
+            items: [
+              {
+                id: currentIdIndex,
+                title: 'Por defecto',
+                columns: allFields,
+              },
+            ],
+          },
+        ]),
+      )
 
-        return newState
-      }),
-    [],
-  )
+      configsEntity.state = init
+      return init
+    }
+  })
 
-  const toggleSelection = useCallback<ConfigsContextProps['toggleSelection']>(
-    id =>
-      setConfigs(prev => {
-        const newState = structuredClone(prev)
+  const debounceRef = useRef<number>(null)
 
-        newState[metaModelKey].find(v => v.selected === true)!.selected = false
-        newState[metaModelKey].find(v => v.id === id)!.selected = true
-
-        return newState
-      }),
-    [],
-  )
-
-  useEffect(() => {
-    const isVoid = !configs[metaModelKey]
-
-    if (isVoid)
-      setConfigs(prev => {
-        const newState = structuredClone(prev)
-
-        return {
-          [metaModelKey]: [
-            { id: ALL_CONFIG_KEY, selected: true, title: 'Todos', columns: [] },
-          ],
-          ...newState,
-        }
-      })
-  }, [configs])
+  const clearDebounce = useCallback(() => {
+    if (debounceRef.current) clearTimeout(debounceRef.current)
+  }, [])
 
   useEffect(() => {
-    configsEntity.state = configs
+    clearDebounce()
+
+    debounceRef.current = setTimeout(() => {
+      configsEntity.state = configs
+    }, 2500)
+
+    return clearDebounce
   }, [configs])
 
   return (
-    <ConfigsContext.Provider value={{ configs, add, toggleSelection }}>
+    <ConfigsContext.Provider value={{ configs, setConfigs }}>
       {children}
     </ConfigsContext.Provider>
   )

@@ -8,9 +8,9 @@ export enum Method {
 }
 
 export type Service<E = LooseEntity> = {
-  getAll: () => Promise<E[]>
-  getRefs?: () => Promise<Partial<E>[]>
-  getOne: (id: number) => Promise<E>
+  getAll: (fields?: string[]) => Promise<E[]>
+  getRefs?: () => Promise<{ fields: string[]; rows: Partial<E>[] }>
+  getOne: (id: number, fields?: string[]) => Promise<E>
   create?: (data: any) => Promise<E>
   updateOne?: (id: number, data: any) => Promise<E>
   updateMany?: (ids: number[], data: any) => Promise<E>

@@ -1,4 +1,5 @@
 export * from './baseSorter.helper'
+export * from './buildConfigKey.helper'
 export * from './captureElementImage.helper'
 export * from './extractKeys.helper'
 export * from './newWindow.helper'

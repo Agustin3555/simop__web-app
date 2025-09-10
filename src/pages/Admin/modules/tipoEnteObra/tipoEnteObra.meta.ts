@@ -1,4 +1,3 @@
-import { Method } from '@/services/config'
 import { omitBaseEntity } from '../../constants/selectors.const'
 import { TipoEnteObraService } from './tipoEnteObra.service'
 import { TipoEnteObraProps } from './tipoEnteObra.props'
@@ -17,17 +16,12 @@ export const TipoEnteObraMeta: MetaModelDefinition<TipoEnteObraModel.Entity> = {
     },
     faIcon: 'fa-solid fa-shapes',
     anchorField: 'nombre',
+    allFields,
     propFactories,
   },
 
-  fieldsByService: [
-    {
-      methods: [Method.GetAll, Method.GetOne],
-      fields: allFields,
-    },
-    {
-      methods: [Method.Create, Method.UpdateOne],
-      groups: [{ fields: omitBaseEntity(allFields) }],
-    },
-  ],
+  mutationsFields: {
+    add: [{ fields: omitBaseEntity(allFields) }],
+    edit: [{ fields: omitBaseEntity(allFields) }],
+  },
 }

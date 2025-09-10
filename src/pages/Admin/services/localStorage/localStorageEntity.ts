@@ -1,7 +1,7 @@
 export class LocalStorageEntity<T> {
   constructor(
     protected key: string,
-    private validate: (data: unknown) => data is T,
+    private validate: (data: unknown) => boolean,
   ) {}
 
   get state() {
@@ -22,7 +22,5 @@ export class LocalStorageEntity<T> {
     localStorage.setItem(this.key, JSON.stringify(value))
   }
 
-  delete() {
-    localStorage.removeItem(this.key)
-  }
+  delete = () => localStorage.removeItem(this.key)
 }

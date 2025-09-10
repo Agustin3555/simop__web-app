@@ -4,6 +4,7 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 import { Header, Nav, ViewManager } from './components'
 import {
+  ConfigsProvider,
   FavoriteViewsProvider,
   MetaModelsProvider,
   NavStateProvider,
@@ -23,20 +24,22 @@ const client = new QueryClient({
   },
 })
 
-const ContextualizedAdmin = () => {
+const AdminBody = () => {
   const { allReady } = useMetaModels()
   const { isOpen } = useNavState()
 
   if (!allReady) return null
 
   return (
-    <div className="cmp-admin" data-nav-open={isOpen}>
-      <Nav />
-      <div className="main-panel">
-        <Header />
-        <ViewManager />
+    <ConfigsProvider>
+      <div className="cmp-admin" data-nav-open={isOpen}>
+        <Nav />
+        <div className="main-panel">
+          <Header />
+          <ViewManager />
+        </div>
       </div>
-    </div>
+    </ConfigsProvider>
   )
 }
 
@@ -47,7 +50,7 @@ const Admin = () => (
         <ViewsProvider>
           <NavStateProvider>
             <FavoriteViewsProvider>
-              <ContextualizedAdmin />
+              <AdminBody />
             </FavoriteViewsProvider>
           </NavStateProvider>
         </ViewsProvider>

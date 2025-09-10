@@ -1,14 +1,15 @@
 import { publicInstance, Service } from '@/services/config'
 import { deleteManyHandler } from '@/services/handlers'
-import { buildPath } from '@/helpers'
+import { buildPath, sendFields } from '@/helpers'
 import { ParalizacionModel } from '.'
 import { ParalizacionAdapter } from './paralizacion.adapter'
+import { refsAdapter } from '@/adapters/config'
 
 const collection = buildPath('paralizaciones')
 
 export const ParalizacionService = {
-  getAll: async () => {
-    const response = await publicInstance.get(collection())
+  getAll: async fields => {
+    const response = await publicInstance.get(collection() + sendFields(fields))
 
     return ParalizacionAdapter.getAll.output(response.data)
   },
@@ -16,11 +17,13 @@ export const ParalizacionService = {
   getRefs: async () => {
     const response = await publicInstance.get(collection('refs'))
 
-    return ParalizacionAdapter.getRefs.output(response.data)
+    return refsAdapter(ParalizacionAdapter.getRefs.output, response.data)
   },
 
-  getOne: async id => {
-    const response = await publicInstance.get(collection(id))
+  getOne: async (id, fields) => {
+    const response = await publicInstance.get(
+      collection(id) + sendFields(fields),
+    )
 
     return ParalizacionAdapter.getOne.output(response.data)
   },

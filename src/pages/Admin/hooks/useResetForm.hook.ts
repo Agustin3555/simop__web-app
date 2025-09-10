@@ -1,10 +1,7 @@
-import { MutableRefObject, useCallback, useContext } from 'react'
+import { RefObject, useCallback, useContext } from 'react'
 import { FieldResetFnsContext } from '../contexts/fieldResetFns.context'
 
-export const useResetForm = (
-  // TODO: deprecated
-  formRef: MutableRefObject<HTMLFormElement | null>,
-) => {
+export const useResetForm = (formRef: RefObject<HTMLFormElement | null>) => {
   const fns = useContext(FieldResetFnsContext)
 
   const reset = useCallback(() => {

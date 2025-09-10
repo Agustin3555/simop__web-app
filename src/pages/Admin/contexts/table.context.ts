@@ -16,6 +16,7 @@ export interface TableContextProps {
   table?: Table<LooseEntity>
   setTable: Dispatch<SetStateAction<Table<LooseEntity> | undefined>>
   isReadyToRender: boolean
+  reset: () => void
 
   states: {
     columnVisibility: VisibilityState

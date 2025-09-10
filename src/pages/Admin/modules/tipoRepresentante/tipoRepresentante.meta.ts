@@ -1,4 +1,3 @@
-import { Method } from '@/services/config'
 import { omitBaseEntity } from '../../constants/selectors.const'
 import { TipoRepresentanteService } from './tipoRepresentante.service'
 import { TipoRepresentanteProps } from './tipoRepresentante.props'
@@ -18,17 +17,12 @@ export const TipoRepresentanteMeta: MetaModelDefinition<TipoRepresentanteModel.E
       },
       faIcon: 'fa-solid fa-shapes',
       anchorField: 'nombre',
+      allFields,
       propFactories,
     },
 
-    fieldsByService: [
-      {
-        methods: [Method.GetAll, Method.GetOne],
-        fields: allFields,
-      },
-      {
-        methods: [Method.Create, Method.UpdateOne],
-        groups: [{ fields: omitBaseEntity(allFields) }],
-      },
-    ],
+    mutationsFields: {
+      add: [{ fields: omitBaseEntity(allFields) }],
+      edit: [{ fields: omitBaseEntity(allFields) }],
+    },
   }

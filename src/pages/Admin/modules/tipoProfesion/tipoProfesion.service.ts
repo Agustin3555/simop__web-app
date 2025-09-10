@@ -1,14 +1,15 @@
 import { publicInstance, Service } from '@/services/config'
 import { deleteManyHandler } from '@/services/handlers'
-import { buildPath } from '@/helpers'
+import { buildPath, sendFields } from '@/helpers'
 import { TipoProfesionModel } from '.'
 import { TipoProfesionAdapter } from './tipoProfesion.adapter'
+import { refsAdapter } from '@/adapters/config'
 
 const collection = buildPath('tipos-profesiones')
 
 export const TipoProfesionService = {
-  getAll: async () => {
-    const response = await publicInstance.get(collection())
+  getAll: async fields => {
+    const response = await publicInstance.get(collection() + sendFields(fields))
 
     return TipoProfesionAdapter.getAll.output(response.data)
   },
@@ -16,11 +17,13 @@ export const TipoProfesionService = {
   getRefs: async () => {
     const response = await publicInstance.get(collection('refs'))
 
-    return TipoProfesionAdapter.getRefs.output(response.data)
+    return refsAdapter(TipoProfesionAdapter.getRefs.output, response.data)
   },
 
-  getOne: async id => {
-    const response = await publicInstance.get(collection(id))
+  getOne: async (id, fields) => {
+    const response = await publicInstance.get(
+      collection(id) + sendFields(fields),
+    )
 
     return TipoProfesionAdapter.getOne.output(response.data)
   },

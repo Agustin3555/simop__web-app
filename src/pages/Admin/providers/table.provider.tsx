@@ -64,12 +64,23 @@ export const TableProvider = ({ children }: TableProviderProps) => {
     [graphedFields],
   )
 
+  const reset = useCallback(() => {
+    setColumnVisibility({})
+    setColumnFilters([])
+    setColumnOrder([])
+    setRowSelection({})
+    setSorting([])
+    setAccessorKeys({})
+    setGraphedFields([])
+  }, [])
+
   return (
     <TableContext.Provider
       value={{
         table,
         setTable,
         isReadyToRender,
+        reset,
 
         states: {
           columnVisibility,

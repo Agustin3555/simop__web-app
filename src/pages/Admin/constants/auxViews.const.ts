@@ -5,9 +5,6 @@ export const AUX_VIEWS = {
     title: 'Planificación Geográfica',
     faIcon: 'fa-solid fa-map-location-dot',
   },
-  obraTotales: {
-    title: 'Totales de Obra',
-  },
   obraDetalle: {
     title: 'Detalle de Obra Básica',
   },

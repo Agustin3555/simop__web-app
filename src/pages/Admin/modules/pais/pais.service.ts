@@ -1,14 +1,15 @@
 import { publicInstance, Service } from '@/services/config'
 import { deleteManyHandler } from '@/services/handlers'
-import { buildPath } from '@/helpers'
+import { buildPath, sendFields } from '@/helpers'
 import { PaisModel } from '.'
 import { PaisAdapter } from './pais.adapter'
+import { refsAdapter } from '@/adapters/config'
 
 const collection = buildPath('paises')
 
 export const PaisService = {
-  getAll: async () => {
-    const response = await publicInstance.get(collection())
+  getAll: async fields => {
+    const response = await publicInstance.get(collection() + sendFields(fields))
 
     return PaisAdapter.getAll.output(response.data)
   },
@@ -16,11 +17,13 @@ export const PaisService = {
   getRefs: async () => {
     const response = await publicInstance.get(collection('refs'))
 
-    return PaisAdapter.getRefs.output(response.data)
+    return refsAdapter(PaisAdapter.getRefs.output, response.data)
   },
 
-  getOne: async id => {
-    const response = await publicInstance.get(collection(id))
+  getOne: async (id, fields) => {
+    const response = await publicInstance.get(
+      collection(id) + sendFields(fields),
+    )
 
     return PaisAdapter.getOne.output(response.data)
   },

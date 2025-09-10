@@ -1,14 +1,15 @@
 import { publicInstance, Service } from '@/services/config'
 import { deleteManyHandler } from '@/services/handlers'
-import { buildPath } from '@/helpers'
+import { buildPath, sendFields } from '@/helpers'
 import { InspectorModel } from '.'
 import { InspectorAdapter } from './inspector.adapter'
+import { refsAdapter } from '@/adapters/config'
 
 const collection = buildPath('inspectores')
 
 export const InspectorService = {
-  getAll: async () => {
-    const response = await publicInstance.get(collection())
+  getAll: async fields => {
+    const response = await publicInstance.get(collection() + sendFields(fields))
 
     return InspectorAdapter.getAll.output(response.data)
   },
@@ -16,11 +17,13 @@ export const InspectorService = {
   getRefs: async () => {
     const response = await publicInstance.get(collection('refs'))
 
-    return InspectorAdapter.getRefs.output(response.data)
+    return refsAdapter(InspectorAdapter.getRefs.output, response.data)
   },
 
-  getOne: async id => {
-    const response = await publicInstance.get(collection(id))
+  getOne: async (id, fields) => {
+    const response = await publicInstance.get(
+      collection(id) + sendFields(fields),
+    )
 
     return InspectorAdapter.getOne.output(response.data)
   },
