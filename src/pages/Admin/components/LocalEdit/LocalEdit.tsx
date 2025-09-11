@@ -126,6 +126,7 @@ const LocalEdit = () => {
   const handleClick = useCallback(() => setLocalView('query'), [])
 
   useEffect(() => {
+    if (selectedId === undefined) setEditId(undefined)
     // Se congela selectedId mientras no se está en 'edit'
     if (localView === 'edit' && selectedId !== undefined) setEditId(selectedId)
   }, [localView, selectedId])
