@@ -74,7 +74,7 @@ export const createDateProp =
         if (value === null) return
         if (value === '') return editMode ? null : undefined
 
-        return value + withTime ? ':00Z' : 'T00:00:00Z'
+        return value + (withTime ? ':00Z' : 'T00:00:00Z')
       },
 
       getTableHeader: column => ({
