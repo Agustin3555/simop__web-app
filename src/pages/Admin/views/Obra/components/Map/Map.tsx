@@ -1,5 +1,5 @@
 import './Map.css'
-import { useEffect, useMemo } from 'react'
+import { useEffect } from 'react'
 import { useQueryActionState } from '@/hooks'
 import { useLazyQuery, useMetaModels } from '@/pages/Admin/hooks'
 import { MapContainer, TileLayer, useMap } from 'react-leaflet'
@@ -21,15 +21,11 @@ const FixMapResize = () => {
 const Map = () => {
   const { getMetaModel } = useMetaModels()
 
-  const APGMeta = useMemo(() => getMetaModel('apg'), [])!
-  const DepartamentoMeta = useMemo(() => getMetaModel('departamento'), [])!
-  const LocalidadMeta = useMemo(() => getMetaModel('localidad'), [])!
-
   const { query, handleClick } = useLazyQuery(['map'], async () => {
     const [apgs, departamentos, localidades] = await Promise.all([
-      APGMeta.service.getAll(['id', 'color', 'numero']),
-      DepartamentoMeta.service.getAll(['osmId', 'apg']),
-      LocalidadMeta.service.getAll(['id', 'osmId']),
+      getMetaModel('apg')!.service.getAll(['id', 'color', 'numero']),
+      getMetaModel('departamento')!.service.getAll(['osmId', 'apg']),
+      getMetaModel('localidad')!.service.getAll(['id', 'osmId']),
     ])
 
     return { apgs, departamentos, localidades }
