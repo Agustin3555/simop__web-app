@@ -8,16 +8,10 @@ export interface SectionNode {
 
 export const TREE: SectionNode[] = [
   {
-    title: 'Tablero de Gestión',
-    sections: [
-      { viewKey: asAuxView('planificacionGeografica') },
-      { viewKey: asAuxView('obraDetalle') },
-    ],
-  },
-  {
     title: 'Sobre Obras',
     sections: [
       { viewKey: asModuleView('obra') },
+      { viewKey: asAuxView('obraDetalle') },
       {
         title: 'Eventos',
         sections: [

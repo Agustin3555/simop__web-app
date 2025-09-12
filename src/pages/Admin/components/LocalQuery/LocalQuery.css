@@ -71,6 +71,15 @@
 
       display: contents;
 
+      > * {
+        border-width: var(--line-thickness);
+        border-style: solid;
+        border-color: var(--pal-color-a-l4);
+        min-height: 25rem;
+
+        border-radius: var(--pal-size-xs);
+      }
+
       &:not(.active) {
         display: none;
       }

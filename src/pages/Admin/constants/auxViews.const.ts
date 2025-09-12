@@ -1,12 +1,8 @@
 import { ViewInfo } from '../contexts/viewsInfo.context'
 
 export const AUX_VIEWS = {
-  planificacionGeografica: {
-    title: 'Planificación Geográfica',
-    faIcon: 'fa-solid fa-map-location-dot',
-  },
   obraDetalle: {
-    title: 'Detalle de Obra Básica',
+    title: 'Detalle',
   },
 } satisfies Record<string, ViewInfo>
 

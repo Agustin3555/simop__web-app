@@ -58,14 +58,16 @@ interface LocalidadesLayerProps {
 const LocalidadesLayer = ({ localidades }: LocalidadesLayerProps) => {
   const animation = useAnimation()
 
-  const { table, columnFilters } = useTable() ?? {}
+  const { table, states } = useTable() ?? {}
+  const { columnFilters } = states
+
   const { getFilterValue, setFilterValue } =
     table?.getColumn('localidades') ?? {}
 
   const selectedCities = useMemo(() => {
-    const cityFilter = columnFilters?.state?.find(f => f.id === 'localidades')
+    const cityFilter = columnFilters.find(f => f.id === 'localidades')
     return (cityFilter?.value as string[] | undefined) ?? []
-  }, [columnFilters?.state])
+  }, [columnFilters])
 
   const handleToggleCityClick = useCallback(
     (id: number) => {
@@ -83,8 +85,6 @@ const LocalidadesLayer = ({ localidades }: LocalidadesLayerProps) => {
   )
 
   useEffect(() => {
-    if (!localidades) return
-
     const selected = selectedCities.map(Number)
 
     localidades.forEach(({ id }) => {
@@ -101,7 +101,7 @@ const LocalidadesLayer = ({ localidades }: LocalidadesLayerProps) => {
           if (type !== 'Point') return
 
           const { id } =
-            localidades?.find(l => {
+            localidades.find(l => {
               if (l.osmId === undefined) return
 
               const osmId = fullOsmId.match(/(\d+)$/)?.[1]

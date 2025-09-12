@@ -15,7 +15,6 @@ import Obra from '../../views/Obra/Obra'
 import PagoCertificacion from '../../views/PagoCertificacion/PagoCertificacion'
 import Pais from '../../views/Pais/Pais'
 import Paralizacion from '../../views/Paralizacion/Paralizacion'
-// import PlanificacionGeografica from '../../views/PlanificacionGeografica/PlanificacionGeografica'
 import Provincia from '../../views/Provincia/Provincia'
 import Recepcion from '../../views/Recepcion/Recepcion'
 import Redeterminacion from '../../views/Redeterminacion/Redeterminacion'
@@ -60,7 +59,6 @@ const ViewManager = () => (
     <PagoCertificacion />
     <Pais />
     <Paralizacion />
-    {/* <PlanificacionGeografica /> */}
     <Provincia />
     <Recepcion />
     <Redeterminacion />
