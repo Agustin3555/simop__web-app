@@ -1,6 +1,8 @@
 .cmp-base-combobox {
   position: relative;
 
+  container: cmp-base-combobox / inline-size;
+
   > .header {
     display: flex;
     justify-content: space-between;

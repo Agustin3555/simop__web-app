@@ -161,8 +161,8 @@ const BaseCombobox = ({
         ref={headerRef}
         name={keyName}
         title={inputTitle}
-        {...(editMode && { disabled })}
         onClick={handleHeaderClick}
+        {...(editMode && { disabled })}
       >
         <Selected
           {...{
