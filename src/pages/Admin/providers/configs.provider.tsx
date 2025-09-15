@@ -6,6 +6,17 @@ import {
 import { configsEntity } from '../services/localStorage/entities/configs'
 import { useMetaModels } from '../hooks'
 
+const currentIdIndex = 0
+
+const buildDefaultConfig = (key: string, columns: string[]) => [
+  key,
+  {
+    currentIdIndex,
+    selected: currentIdIndex,
+    items: [{ id: currentIdIndex, title: 'Por defecto', columns }],
+  },
+]
+
 interface ConfigsProviderProps {
   children: ReactNode
 }
@@ -15,29 +26,36 @@ export const ConfigsProvider = ({ children }: ConfigsProviderProps) => {
 
   const [configs, setConfigs] = useState<ConfigsContextProps['configs']>(() => {
     try {
-      return configsEntity.state
-    } catch (error) {
-      const currentIdIndex = 0
+      const state = configsEntity.state
 
-      const init = Object.fromEntries(
-        Object.entries(metaModels).map(([key, { allFields }]) => [
-          key,
-          {
-            currentIdIndex,
-            selected: currentIdIndex,
-            items: [
-              {
-                id: currentIdIndex,
-                title: 'Por defecto',
-                columns: allFields,
-              },
-            ],
-          },
-        ]),
+      const updatedState = Object.fromEntries(
+        Object.entries(metaModels).map(([key, { allFields }]) => {
+          const existingConfig = state[key]
+
+          if (existingConfig) {
+            const sanitizedItems = existingConfig.items.map(item => ({
+              ...item,
+              columns: item.columns.filter(v => allFields.includes(v as any)),
+            }))
+
+            return [key, { ...existingConfig, items: sanitizedItems }]
+          }
+
+          return buildDefaultConfig(key, allFields)
+        }),
       )
 
-      configsEntity.state = init
-      return init
+      configsEntity.state = updatedState
+      return updatedState
+    } catch (error) {
+      const defaultState = Object.fromEntries(
+        Object.entries(metaModels).map(([key, { allFields }]) =>
+          buildDefaultConfig(key, allFields),
+        ),
+      )
+
+      configsEntity.state = defaultState
+      return defaultState
     }
   })
 
@@ -52,7 +70,7 @@ export const ConfigsProvider = ({ children }: ConfigsProviderProps) => {
 
     debounceRef.current = setTimeout(() => {
       configsEntity.state = configs
-    }, 2500)
+    }, 2000)
 
     return clearDebounce
   }, [configs])
