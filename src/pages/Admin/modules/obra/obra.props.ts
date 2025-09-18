@@ -73,6 +73,9 @@ export const ObraProps = defineProps<ObraModel.Entity>({
   fechaContratacion: createDateProp({
     title: 'Fecha de Contratación',
   }),
+  gestion2023: createBooleanProp({
+    title: 'Gestión 2023 - 2027',
+  }),
   tipoTematicaObra: createRefProp({
     metaModelRef: 'tipoTematicaObra',
     minSize: 7,

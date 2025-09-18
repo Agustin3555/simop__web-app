@@ -29,6 +29,7 @@ export interface OwnFields {
   anioResolucion: string
   numeroContratacion: number
   fechaContratacion: string
+  gestion2023: boolean
   montoContratacion: string
   fechaInicio: string
   fechaFin: string
