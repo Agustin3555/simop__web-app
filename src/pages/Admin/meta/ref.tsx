@@ -12,6 +12,7 @@ import { AutoCombobox, FetchRef, RefFilter } from '../components'
 import { MetaModelKey } from '../constants/metaModelKey.const'
 import { MetaModel } from './metaModel'
 import { StyleSheet, Text } from '@react-pdf/renderer'
+import { summarizeArray } from '../helpers'
 
 export const isFieldEnabled = (form: HTMLFormElement, key: string) => {
   const { disabled } =
@@ -120,9 +121,11 @@ export const createRefProp =
           .filter(Boolean)
           .filter(({ id }) => filterValue.includes(String(id)))
 
-        const values = Array.from(
+        let values = Array.from(
           new Map(refs.map(item => [item.id, item])).values(),
         ).map(item => item[selectedSearchMode ?? metaModel.anchorField])
+
+        values = summarizeArray(values)
 
         return { title, values }
       },

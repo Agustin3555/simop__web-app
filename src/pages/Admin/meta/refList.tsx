@@ -13,6 +13,7 @@ import { MetaModelKey } from '../constants/metaModelKey.const'
 import { isFieldEnabled } from './ref'
 import { MetaModel } from './metaModel'
 import { StyleSheet, Text } from '@react-pdf/renderer'
+import { summarizeArray } from '../helpers'
 
 interface RefListProp extends Pick<BaseProp, 'minSize'> {
   metaModelRef: MetaModelKey
@@ -132,9 +133,11 @@ export const createRefListProp =
           .filter(Boolean)
           .filter(({ id }) => filterValue.includes(String(id)))
 
-        const values = Array.from(
+        let values = Array.from(
           new Map(refs.map(item => [item.id, item])).values(),
         ).map(item => item[selectedSearchMode ?? metaModel.anchorField])
+
+        values = summarizeArray(values)
 
         return { title, values }
       },
