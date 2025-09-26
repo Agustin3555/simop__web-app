@@ -26,7 +26,6 @@ export const styles = StyleSheet.create({
   values: {
     display: 'flex',
     flexDirection: 'row',
-    flexWrap: 'wrap',
     gap: palSize(Size.XS2),
   },
   valueContainer: {
