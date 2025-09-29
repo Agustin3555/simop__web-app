@@ -31,7 +31,7 @@ export interface NumberProp extends BaseProp {
 }
 
 export const createNumberProp =
-  ({ title, minSize = MinSize.xs, config }: NumberProp): PropFactory =>
+  ({ title, minSize = 6, config }: NumberProp): PropFactory =>
   key => {
     const {
       pre = '',
@@ -150,9 +150,7 @@ export const createNumberProp =
         if (value === undefined) return
 
         const styles = StyleSheet.create({
-          value: {
-            maxLines: 1,
-          },
+          value: {},
         })
 
         const displayValue = isMoney
