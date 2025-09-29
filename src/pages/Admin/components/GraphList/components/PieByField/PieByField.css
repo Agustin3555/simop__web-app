@@ -54,6 +54,7 @@
     display: grid;
     row-gap: var(--pal-size-xs);
     column-gap: var(--pal-size-m);
+    margin-top: var(--pal-size-l);
     width: 100%;
 
     font-size: var(--pal-size-font-2xs);

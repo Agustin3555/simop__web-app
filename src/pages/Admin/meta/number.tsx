@@ -1,6 +1,5 @@
 import {
   ForView,
-  MinSize,
   PropFactory,
   IRequired,
   BaseProp,

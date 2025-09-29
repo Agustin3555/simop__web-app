@@ -77,18 +77,21 @@ export const styles = StyleSheet.create({
   graphItem: {
     display: 'flex',
     flexDirection: 'column',
-    gap: palSize(Size.S),
+    justifyContent: 'center',
+    gap: palSize(Size.M),
+    height: '100%',
   },
   column: {
     alignSelf: 'center',
 
-    fontSize: 10,
+    fontSize: 12,
     textTransform: 'uppercase',
     fontWeight: 850,
     color: palColor('BD4'),
   },
   mode: {
     position: 'absolute',
+    top: 0,
     right: 0,
 
     display: 'flex',
@@ -106,6 +109,7 @@ export const styles = StyleSheet.create({
   },
   img: {
     width: '100%',
+    height: '100%',
 
     objectFit: 'contain',
   },
