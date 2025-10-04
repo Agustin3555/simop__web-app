@@ -87,7 +87,9 @@ const LocalEditBody = ({ editId }: LocalEditBodyProps) => {
   const onSuccess = useCallback(() => {
     toasting('success', 'Cambios aplicados con éxito')
     deselectRows()
-  }, [])
+
+    queryClient.invalidateQueries({ queryKey: [key, 'one', editId] })
+  }, [editId])
 
   const { status, isPending, mutate } = useMutation({ mutationFn, onSuccess })
   const actionState = useMutationActionState({ status, isPending })

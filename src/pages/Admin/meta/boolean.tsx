@@ -7,14 +7,16 @@ import {
   createUniqueMode,
   UNIQUE_MODE,
 } from './utils'
-import { BooleanFilter, Checkbox } from '../components'
+import { BooleanFilter, Checkbox, Combobox } from '../components'
 import { classList } from '@/helpers'
 import { StyleSheet, Text } from '@react-pdf/renderer'
+import { isFieldEnabled } from './ref'
 
 interface BooleanProp extends BaseProp {
   config?: {
     falseText?: string
     trueText?: string
+    allowNull?: boolean
 
     column?: ForView & {
       falseColor?: Color
@@ -27,7 +29,14 @@ interface BooleanProp extends BaseProp {
 export const createBooleanProp =
   ({ title, minSize = MinSize.xs, config }: BooleanProp): PropFactory =>
   key => {
-    const { falseText = 'No', trueText = 'Si', column, field } = config ?? {}
+    const {
+      falseText = 'No',
+      trueText = 'Si',
+      allowNull = false,
+      column,
+      field,
+    } = config ?? {}
+
     const { falseColor = 'grey', trueColor = 'green' } = column ?? {}
     const { hidden } = field ?? {}
 
@@ -39,6 +48,20 @@ export const createBooleanProp =
       getFormField: (value, editMode = false) => {
         if (hidden) return
 
+        if (allowNull) {
+          return (
+            <Combobox
+              keyName={key}
+              options={[
+                { id: 'false', title: falseText },
+                { id: 'true', title: trueText },
+              ]}
+              initSelected={value === undefined ? undefined : [String(value)]}
+              {...{ title, editMode }}
+            />
+          )
+        }
+
         return (
           <Checkbox
             keyName={key}
@@ -47,10 +70,19 @@ export const createBooleanProp =
         )
       },
 
-      getFormFieldValue: (formData, _, editMode = false) => {
-        if (editMode && !formData.has(key)) return
-
+      getFormFieldValue: (formData, form, editMode = false) => {
         const value = formData.get(key)
+
+        if (allowNull) {
+          if (value === null) {
+            if (editMode && isFieldEnabled(form, key)) return null
+            return
+          }
+
+          return value === 'true'
+        }
+
+        if (editMode && !formData.has(key)) return
 
         return value === 'on'
       },

@@ -49,6 +49,7 @@ export interface OwnFields {
   metrosCuadradosObraRefaccionada: number
   metrosLinealesObraRefaccionada: number
   observacionesObraRefaccionada: string
+  inaugurable: boolean
   inaugurada: boolean
   totalPendientePago: string
 

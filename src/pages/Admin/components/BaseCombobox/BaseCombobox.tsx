@@ -22,6 +22,7 @@ import {
   shift,
   useFloating,
 } from '@floating-ui/react'
+import { useAddFieldReset } from '../../hooks'
 
 export interface BaseComboboxProps extends Control {
   multiple?: boolean
@@ -71,6 +72,8 @@ const BaseCombobox = ({
 
   const [open, setOpen] = useState(false)
   const headerRef = useRef<HTMLFieldSetElement>(null)
+
+  useAddFieldReset(() => setSelected([]))
 
   const { refs, floatingStyles, update } = useFloating({
     placement: 'bottom-start',

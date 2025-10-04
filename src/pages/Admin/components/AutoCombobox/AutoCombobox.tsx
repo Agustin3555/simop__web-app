@@ -1,6 +1,5 @@
 import { useCallback, useMemo, useState } from 'react'
 import { useQueryActionState } from '@/hooks'
-import { useAddFieldReset } from '../../hooks'
 import { useQuery } from '@tanstack/react-query'
 import { Control } from '@/types'
 import { LooseEntity } from '@/models/config'
@@ -41,8 +40,6 @@ const AutoCombobox = ({
   const [selected, setSelected] = useState(calculateInitSelected)
   const [enabled, setEnabled] = useState(false)
   const [selectedSearchMode, setSelectedSearchMode] = useState(anchorField)
-
-  useAddFieldReset(() => setSelected([]))
 
   const { data, status, isFetching, refetch } = useQuery({
     queryKey: [key, 'refs'],

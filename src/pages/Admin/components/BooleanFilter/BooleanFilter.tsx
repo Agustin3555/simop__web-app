@@ -42,7 +42,6 @@ const BooleanFilter = ({
   return (
     <Combobox
       hideLabel
-      reduceHeader
       options={[
         { id: 'false', title: falseText },
         { id: 'true', title: trueText },

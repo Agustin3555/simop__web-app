@@ -1,4 +1,4 @@
-import { useCallback, useMemo, useState } from 'react'
+import { useCallback, useEffect, useMemo, useState } from 'react'
 import { Control } from '@/types'
 import { baseSorter } from '../../helpers'
 import BaseCombobox, { BaseComboboxProps } from '../BaseCombobox/BaseCombobox'
@@ -53,6 +53,10 @@ const Combobox = ({
     () => initSelected && selectedState.setSelected(initSelected),
     [],
   )
+
+  useEffect(() => {
+    initSelected && selectedState.setSelected(initSelected)
+  }, [])
 
   return (
     <BaseCombobox

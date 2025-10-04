@@ -35,6 +35,7 @@ const BASICO: (keyof ObraModel.Entity)[] = select(allFields, 'only', [
   'direccion',
   'lugar',
   'avanceTotal',
+  'inaugurable',
   'inaugurada',
   'porcentajePendienteCertificar',
   'totalPendientePago',

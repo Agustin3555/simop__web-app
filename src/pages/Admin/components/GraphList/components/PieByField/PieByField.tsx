@@ -24,9 +24,7 @@ const BASE_COLORS: RGBColor[] = [
   COLOR_MATCHER.F,
 ]
 
-const renderActiveShape = (props: any) => {
-  return <Sector {...props} outerRadius={86} />
-}
+const renderActiveShape = (props: any) => <Sector {...props} outerRadius={86} />
 
 const GRAPH_SIZE = { width: '100%', height: 232 }
 const CHAR_LIMIT = 24

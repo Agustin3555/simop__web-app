@@ -57,8 +57,17 @@ export const ObraProps = defineProps<ObraModel.Entity>({
       isDecimal: true,
     },
   }),
+  inaugurable: createBooleanProp({
+    title: 'Inaugurable',
+    config: {
+      allowNull: true,
+    },
+  }),
   inaugurada: createBooleanProp({
     title: 'Inaugurada',
+    config: {
+      allowNull: true,
+    },
   }),
   montoContratacion: createNumberProp({
     title: 'Monto de Contratación',

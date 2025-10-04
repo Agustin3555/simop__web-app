@@ -38,6 +38,7 @@ const Selected = ({
         <button
           title="Eliminar selección"
           value={id}
+          type="button"
           onClick={handleDeselectItemClick}
         >
           <Icon faIcon="fa-solid fa-xmark" />
