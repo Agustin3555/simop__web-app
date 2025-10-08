@@ -79,7 +79,6 @@ export const styles = StyleSheet.create({
     flexDirection: 'column',
     justifyContent: 'center',
     gap: palSize(Size.M),
-    height: '100%',
   },
   column: {
     alignSelf: 'center',
@@ -108,8 +107,9 @@ export const styles = StyleSheet.create({
     backgroundColor: palColor('AL5'),
   },
   img: {
+    flexGrow: 1,
+
     width: '100%',
-    height: '100%',
 
     objectFit: 'contain',
   },
