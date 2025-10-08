@@ -60,6 +60,10 @@ const Report = ({ title, orientation = 'portrait', children }: ReportProps) => (
           burocráticas podría diferir con el avance real de la obra y la
           disponibilidad presupuestaria.
         </Text>
+        <Text style={styles.warning}>
+          La mayoría de obras por Administración son intervenciones menores y de
+          mantenimiento.
+        </Text>
       </View>
       <View style={styles.content}>{children}</View>
       <Text style={styles.warning} fixed>

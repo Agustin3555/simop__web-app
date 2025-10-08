@@ -66,20 +66,16 @@ const ReportInTable = ({
           ))}
         </View>
       </View>
-      {graphs?.length && (
-        <View style={styles.graphs} break>
-          {graphs.map(({ column, mode, img }, i) => (
-            <View style={styles.graphItem} wrap={false}>
-              <Text style={styles.column}>{column}</Text>
-              <View style={styles.mode}>
-                <Text>Por:</Text>
-                <Text style={styles.modeValue}>{mode}</Text>
-              </View>
-              <Image key={i} style={styles.img} src={img} />
-            </View>
-          ))}
+      {graphs?.map(({ column, mode, img }, i) => (
+        <View style={styles.graphItem} wrap={false} break>
+          <Text style={styles.column}>{column}</Text>
+          <View style={styles.mode}>
+            <Text>Por:</Text>
+            <Text style={styles.modeValue}>{mode}</Text>
+          </View>
+          <Image key={i} style={styles.img} src={img} />
         </View>
-      )}
+      ))}
     </Report>
   )
 }

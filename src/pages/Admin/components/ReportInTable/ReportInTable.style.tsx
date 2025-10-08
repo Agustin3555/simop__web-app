@@ -67,18 +67,15 @@ export const styles = StyleSheet.create({
   },
   cell: {},
 
-  graphs: {
+  graphItem: {
     position: 'relative',
+
+    flexGrow: 1,
 
     display: 'flex',
     flexDirection: 'column',
-    paddingHorizontal: palSize(Size.S),
-  },
-  graphItem: {
-    display: 'flex',
-    flexDirection: 'column',
-    justifyContent: 'center',
     gap: palSize(Size.M),
+    paddingHorizontal: palSize(Size.S),
   },
   column: {
     alignSelf: 'center',
@@ -91,7 +88,7 @@ export const styles = StyleSheet.create({
   mode: {
     position: 'absolute',
     top: 0,
-    right: 0,
+    right: palSize(Size.S),
 
     display: 'flex',
     flexDirection: 'row',
@@ -109,7 +106,7 @@ export const styles = StyleSheet.create({
   img: {
     flexGrow: 1,
 
-    width: '100%',
+    maxHeight: 424,
 
     objectFit: 'contain',
   },
