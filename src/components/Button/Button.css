@@ -132,4 +132,43 @@
       width: 100%;
     }
   }
+
+  &.badge {
+    padding-left: var(--pal-size-m);
+
+    color: var(--pal-color-a);
+    overflow: visible;
+
+    &::before {
+      position: absolute;
+      top: 0.125rem;
+      left: 0.125rem;
+
+      aspect-ratio: 1;
+      width: 0.375rem;
+
+      content: '';
+
+      border-radius: 100%;
+      background-color: rgba(var(--pal-color-base-b), 0.75);
+      outline-style: solid;
+      outline-width: 0;
+
+      animation: pulsar 3s linear infinite;
+    }
+  }
+}
+
+@keyframes pulsar {
+  from {
+    outline-color: rgba(var(--pal-color-base-b), 0.25);
+    outline-offset: initial;
+    outline-width: 0;
+  }
+  25%,
+  to {
+    outline-color: transparent;
+    outline-offset: var(--pal-size-m);
+    outline-width: 0.0625rem;
+  }
 }

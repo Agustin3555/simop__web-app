@@ -1,5 +1,6 @@
 export * from './addIf.helper'
 export * from './buildPath.helper'
 export * from './classList.helper'
+export * from './safe.helper'
 export * from './sleep.helper'
 export * from './varList.helper'

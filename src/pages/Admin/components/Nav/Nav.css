@@ -60,8 +60,7 @@
     }
 
     @media (width <= 50rem) {
-      background-color: rgba(var(--pal-color-base-white), 0.75);
-      backdrop-filter: blur(0.5rem);
+      background-color: var(--pal-color-a-l5);
     }
 
     @media (width <= 27.5rem) {

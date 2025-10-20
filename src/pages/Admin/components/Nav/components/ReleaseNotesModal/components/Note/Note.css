@@ -1,0 +1,71 @@
+:root {
+  --cmp-note-title-color: var(--pal-color-a-l4);
+}
+
+.cmp-note {
+  > * {
+    margin-bottom: var(--gap);
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  > header {
+    display: flex;
+    justify-content: space-between;
+    gap: var(--pal-size-s);
+
+    > h2 {
+      align-content: center;
+      padding-inline: var(--pal-size-xs);
+      height: var(--pal-size-xl);
+
+      font-size: var(--pal-size-font-m);
+
+      border-radius: var(--pal-size-2xs);
+      background-color: var(--cmp-note-title-color);
+    }
+
+    > small {
+      font-size: var(--pal-size-font-xs);
+      color: var(--pal-color-a);
+    }
+  }
+
+  h3 {
+    display: flex;
+    gap: var(--pal-size-s);
+
+    font-size: var(--pal-size-font-s);
+
+    > i {
+      color: var(--pal-color-a);
+    }
+  }
+
+  h4 {
+    font-size: var(--pal-size-font-xs);
+  }
+
+  p,
+  li {
+    font-size: var(--pal-size-font-xs);
+    line-height: 1.4;
+    text-wrap: pretty;
+
+    opacity: 0.875;
+  }
+
+  ul {
+    flex-direction: column;
+    gap: var(--pal-size-2xs);
+    padding-left: var(--pal-size-m);
+
+    list-style: initial;
+
+    li::marker {
+      color: var(--pal-color-c);
+    }
+  }
+}

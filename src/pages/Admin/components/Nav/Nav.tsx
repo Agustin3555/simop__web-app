@@ -3,7 +3,7 @@ import { useState } from 'react'
 import { useNavState } from '../../hooks'
 import { FavoriteViews, SegmentedControl } from '..'
 import { SegmentedControlProps } from '../SegmentedControl/SegmentedControl'
-import { Tree } from './components'
+import { ReleaseNotesModal, Tree } from './components'
 
 type ViewMode = 'tree' | 'favorites'
 
@@ -22,7 +22,7 @@ const Nav = () => {
       <div className="layout">
         <header>
           <img src="/isologotipo-gobierno-ministerio.webp" />
-          <small>v1.0.0</small>
+          <ReleaseNotesModal />
         </header>
         <div className="content">
           <SegmentedControl

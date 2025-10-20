@@ -25,6 +25,7 @@ export interface ButtonProps {
   actionState?: ActionState
   progress?: number
   hold?: boolean
+  badge?: boolean
   onAction?: MouseEventHandler<HTMLButtonElement>
   buttonHTMLAttrs?: ButtonHTMLAttributes<HTMLButtonElement>
 }
@@ -44,6 +45,7 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       actionState,
       progress,
       hold = false,
+      badge = false,
       onAction,
       buttonHTMLAttrs,
     },
@@ -87,6 +89,7 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
           wrap,
           square: faIcon !== undefined && text === undefined,
           hold,
+          badge,
         })}
         // TODO: mejorar
         title={(title ?? text ?? '') + (hold ? ' (mantener)' : '')}
