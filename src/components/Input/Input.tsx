@@ -44,7 +44,7 @@ const Input = ({
         name={keyName}
         autoComplete="off"
         {...(editMode && { disabled })}
-        {...{ defaultValue, required, ...inputHTMLAttrs }}
+        {...{ defaultValue, ...inputHTMLAttrs }}
       />
     </div>
   )

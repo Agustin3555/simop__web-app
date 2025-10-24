@@ -51,6 +51,7 @@ export interface Prop<E = LooseEntity> {
   verboseKey?: string
   metaModelRef?: MetaModelKey
   title: string
+  required?: boolean
 
   // Para inicializar las columnas de @tanstack/react-table
   minSize: MinSize | number

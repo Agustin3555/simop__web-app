@@ -29,6 +29,7 @@ export const createTextProp =
       key,
       title,
       minSize: minSize ?? isLong ? MinSize.xl : MinSize.m,
+      required,
 
       filterFn: 'includesString',
 

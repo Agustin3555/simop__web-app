@@ -56,6 +56,11 @@ export const FojaMedicionProps = defineProps<FojaMedicionModel.Entity>({
   }),
   inspector: createRefProp({
     metaModelRef: 'inspector',
+    config: {
+      field: {
+        required: true,
+      },
+    },
   }),
   area: createRefProp({
     metaModelRef: 'area',

@@ -34,6 +34,7 @@ export const createDateProp =
       key,
       title,
       minSize: minSize ?? withTime ? MinSize.s : MinSize.xs,
+      required,
 
       filterFn: (row, columnId, filterValue) => {
         if (!filterValue) return true

@@ -50,6 +50,7 @@ export const createRefProp =
       metaModelRef,
       title,
       minSize,
+      required,
 
       accessorFn: row => row[key]?.[metaModel.anchorField],
 

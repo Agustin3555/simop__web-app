@@ -44,7 +44,7 @@ const InputArea = ({
         name={keyName}
         defaultValue={value}
         {...(editMode && { disabled })}
-        {...{ required, ...textareaHTMLAttrs }}
+        {...textareaHTMLAttrs}
       />
     </div>
   )

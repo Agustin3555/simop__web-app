@@ -48,6 +48,7 @@ export const createNumberProp =
       key,
       title,
       minSize,
+      required,
 
       filterFn: (row, columnId, filterValue) => {
         const hasMin = filterValue.min !== undefined && filterValue.min !== ''
