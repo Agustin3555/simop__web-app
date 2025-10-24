@@ -1,5 +1,5 @@
 import './Form.css'
-import { KeyboardEventHandler, ReactNode, RefObject, useCallback } from 'react'
+import { ReactNode, RefObject } from 'react'
 import { useSubmitAction } from '@/hooks'
 import { Button } from '@/components'
 
@@ -17,37 +17,25 @@ const Form = ({
   handleSubmit,
   formRef,
   fieldGroups,
-}: FormProps) => {
-  const handleKeyDown = useCallback<KeyboardEventHandler<HTMLFormElement>>(
-    event => event.key === 'Enter' && event.preventDefault(),
-    [],
-  )
-
-  return (
-    <form
-      className="cmp-form"
-      ref={formRef}
-      onSubmit={handleSubmit}
-      onKeyDown={handleKeyDown}
-    >
-      <div className="field-groups">
-        {fieldGroups?.map(({ key, title, fields }, i) => (
-          <div key={key ?? i} className="section">
-            {title && <small>{title}</small>}
-            <div className="fields">{fields}</div>
-          </div>
-        ))}
-      </div>
-      <footer>
-        <Button
-          text="Confirmar"
-          faIcon="fa-solid fa-check"
-          submit
-          {...{ actionState }}
-        />
-      </footer>
-    </form>
-  )
-}
+}: FormProps) => (
+  <form className="cmp-form" ref={formRef} onSubmit={handleSubmit}>
+    <div className="field-groups">
+      {fieldGroups?.map(({ key, title, fields }, i) => (
+        <div key={key ?? i} className="section">
+          {title && <small>{title}</small>}
+          <div className="fields">{fields}</div>
+        </div>
+      ))}
+    </div>
+    <footer>
+      <Button
+        text="Confirmar"
+        faIcon="fa-solid fa-check"
+        submit
+        {...{ actionState }}
+      />
+    </footer>
+  </form>
+)
 
 export default Form
