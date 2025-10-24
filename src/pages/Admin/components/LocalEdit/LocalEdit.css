@@ -32,12 +32,17 @@
 
     font-size: var(--pal-size-font-s);
     font-weight: 550;
+
     color: var(--pal-color-a);
 
     > strong {
-      font-weight: 650;
-      color: var(--pal-color-a-d1);
+      padding: var(--pal-size-xs) var(--pal-size-s);
 
+      font-weight: 650;
+      white-space: initial;
+
+      border-radius: var(--pal-size-2xs);
+      color: var(--pal-color-a-d1);
       background-color: var(--pal-color-a-l5);
     }
   }

@@ -104,7 +104,7 @@ const LocalEditBody = ({ editId }: LocalEditBodyProps) => {
     <>
       <h2>
         Editando:
-        <strong className="button-look s">{selectedEntity[anchorField]}</strong>
+        <strong className="text">{selectedEntity[anchorField]}</strong>
       </h2>
       <Form {...{ actionState, handleSubmit, fieldGroups }} />
     </>

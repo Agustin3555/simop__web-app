@@ -1,15 +1,16 @@
 .cmp-control-label {
   display: flex;
-  align-items: center;
+  align-items: flex-end;
   justify-content: space-between;
+  gap: var(--pal-size-2xs);
 
   > .title {
     display: flex;
     gap: var(--pal-size-xs);
 
     font-size: var(--pal-size-font-xs);
+    line-height: 1.4;
     font-weight: 750;
-    white-space: nowrap;
 
     color: var(--pal-color-a-d1);
 

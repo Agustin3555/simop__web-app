@@ -26,7 +26,7 @@ const InputArea = ({
   const { renderKey, resetHandleClick } = useResetByRender(keyName)
 
   return (
-    <div className={classList('cmp-text-area', 'control', long)}>
+    <div className={classList('cmp-input-area', 'control', long)}>
       <ControlLabel
         {...{
           title,

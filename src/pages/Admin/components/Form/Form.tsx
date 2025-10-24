@@ -38,12 +38,14 @@ const Form = ({
           </div>
         ))}
       </div>
-      <Button
-        text="Confirmar"
-        faIcon="fa-solid fa-check"
-        submit
-        {...{ actionState }}
-      />
+      <footer>
+        <Button
+          text="Confirmar"
+          faIcon="fa-solid fa-check"
+          submit
+          {...{ actionState }}
+        />
+      </footer>
     </form>
   )
 }

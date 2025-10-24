@@ -203,7 +203,7 @@
   gap: var(--pal-size-2xl);
   border-width: var(--line-thickness);
   border-style: solid;
-  border-color: var(--pal-color-a-l5);
+  border-color: var(--pal-color-a-l4);
   padding: var(--pal-size-m);
 
   border-radius: var(--pal-size-xs);
