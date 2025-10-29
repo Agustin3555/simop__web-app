@@ -90,5 +90,5 @@ button {
 form {
   display: flex;
   flex-direction: column;
-  gap: var(--pal-size-l);
+  gap: var(--pal-size-m);
 }

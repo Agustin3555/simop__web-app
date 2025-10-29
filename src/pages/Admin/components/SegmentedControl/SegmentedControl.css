@@ -8,8 +8,8 @@
   --cmp-icon-size: var(--ui-icon-size);
 
   display: grid;
-  grid-auto-flow: column;
   grid-auto-columns: 1fr;
+  grid-auto-flow: column;
   border-width: var(--line-thickness);
   border-style: solid;
   border-color: var(--cmp-segmented-control-bg-color);
@@ -24,7 +24,7 @@
     justify-content: center;
     gap: var(--ui-gap);
     padding-inline: var(--ui-padding-inline);
-    height: var(--ui-height);
+    height: calc(var(--ui-height) - var(--line-thickness) * 2);
 
     font-size: var(--ui-font-size);
     line-height: 0;
@@ -56,6 +56,11 @@
         var(--cmp-segmented-control-bg-color) 10%,
         transparent
       );
+    }
+
+    &.square {
+      padding: 0;
+      aspect-ratio: 1;
     }
   }
 }

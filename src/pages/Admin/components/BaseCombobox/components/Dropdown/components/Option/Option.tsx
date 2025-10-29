@@ -3,7 +3,7 @@ import { ChangeEventHandler } from 'react'
 import { BaseComboboxProps } from '../../../../BaseCombobox'
 
 export interface OptionProps
-  extends Pick<BaseComboboxProps, 'keyName' | 'required' | 'multiple'> {
+  extends Pick<BaseComboboxProps, 'keyName' | 'multiple'> {
   id: string
   title: string
   checked: boolean
@@ -18,7 +18,6 @@ const Option = ({
   checked,
   fields,
   keyName,
-  required,
   multiple,
   isStatic = false,
   handleChange,
@@ -41,7 +40,6 @@ const Option = ({
       onChange={handleChange}
       name={keyName}
       checked={isStatic ? true : checked}
-      // BUG: si se usa 'required' y es true, dará un error al no ser focusable
     />
   </label>
 )

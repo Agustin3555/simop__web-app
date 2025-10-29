@@ -70,14 +70,14 @@ const ContextualizedLocalAdd = () => {
 
   return (
     <div className="cmp-local-add">
-      <Toggle
-        title="Limpiar después de crear"
-        faIcon="fa-solid fa-eraser"
-        style="switch"
-        value={resetOnCompletion}
-        setValue={setResetOnCompletion}
-      />
-      <Form {...{ ...submitActionResult, formRef, fieldGroups }} />
+      <Form {...{ ...submitActionResult, formRef, fieldGroups }}>
+        <Toggle
+          title="Limpiar después de crear"
+          faIcon="fa-solid fa-eraser"
+          value={resetOnCompletion}
+          setValue={setResetOnCompletion}
+        />
+      </Form>
     </div>
   )
 }

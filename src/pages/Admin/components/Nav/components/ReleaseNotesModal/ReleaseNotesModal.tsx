@@ -125,13 +125,17 @@ const ReleaseNotesModal = () => {
     })
   }, [oldNotes, newNotes])
 
+  const newVersionAvailable =
+    compareVersions(pkg.version, lastSeenVersion) === 1
+
   return (
     <div className="cmp-release-notes-modal">
       <Button
         text={`v${pkg.version}`}
+        title={newVersionAvailable ? '¡Nueva versión disponible!' : undefined}
         size="s"
         type="secondary"
-        badge={compareVersions(pkg.version, lastSeenVersion) === 1}
+        badge={newVersionAvailable}
         buttonHTMLAttrs={{ commandfor: 'notes-modal', command: 'show-modal' }}
       />
       <dialog id="notes-modal" onClick={handleDialogClick}>

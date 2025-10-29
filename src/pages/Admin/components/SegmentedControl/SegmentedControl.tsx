@@ -10,7 +10,8 @@ export interface SegmentedControlProps<T> {
   setSelected: Dispatch<SetStateAction<T>>
   options: {
     value: T
-    text: string
+    title?: string
+    text?: string
     faIcon: string
   }[]
   size?: 's' | 'm'
@@ -27,8 +28,12 @@ const SegmentedControl = <T extends string>({
 
   return (
     <fieldset className={classList('cmp-segmented-control', `ui-${size}`)}>
-      {options.map(({ value, text, faIcon }) => (
-        <label key={value}>
+      {options.map(({ value, title, text, faIcon }) => (
+        <label
+          key={value}
+          className={classList({ square: text === undefined })}
+          {...{ title }}
+        >
           {text}
           <input
             type="radio"

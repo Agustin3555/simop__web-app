@@ -1,13 +1,19 @@
 .cmp-header {
+  --cmp-button-progress-color: var(--pal-color-white);
+
   display: flex;
   justify-content: space-between;
   padding: var(--pal-size-s);
 
   color: var(--pal-color-white);
-
   background-color: var(--pal-color-a-d2);
 
   transition: border-radius var(--pal-time-m) ease;
+
+  > .right {
+    display: flex;
+    gap: var(--pal-size-s);
+  }
 
   @media (50rem < width) {
     [data-nav-open='true'] & {
