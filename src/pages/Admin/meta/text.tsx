@@ -23,39 +23,39 @@ export const createTextProp =
   ({ title, minSize, config }: TextProp): PropFactory =>
   key => {
     const { isLong = false, field } = config ?? {}
-    const { hidden, required } = field ?? {}
+    const { hidden, isRequired } = field ?? {}
 
     return {
       key,
       title,
       minSize: minSize ?? isLong ? MinSize.xl : MinSize.m,
-      required,
+      isRequired,
 
       filterFn: 'includesString',
 
-      getFormField: (value, editMode = false) => {
+      getFormField: (value, isEditMode = false) => {
         if (hidden === true) return
 
         return isLong ? (
           <InputArea
             keyName={key}
-            {...(!editMode && { required })}
-            {...{ title, value, editMode }}
+            {...(!isEditMode && { isRequired })}
+            {...{ title, value, isEditMode }}
           />
         ) : (
           <Input
             keyName={key}
-            {...(!editMode && { required })}
-            {...{ title, value, editMode }}
+            {...(!isEditMode && { isRequired })}
+            {...{ title, value, isEditMode }}
           />
         )
       },
 
-      getFormFieldValue: (formData, _, editMode = false) => {
+      getFormFieldValue: (formData, _, isEditMode = false) => {
         const value = formData.get(key)
 
         if (value === null) return
-        if (value === '') return editMode ? null : undefined
+        if (value === '') return isEditMode ? null : undefined
 
         return (value as string).trim()
       },

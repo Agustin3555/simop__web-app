@@ -13,9 +13,8 @@ const DebouncedInput = ({
   title,
   value: initialValue,
   hideLabel = false,
-  required = false,
-  editMode = false,
-  long = 'm',
+  isRequired = false,
+  isEditMode = false,
   handleChange,
   inputHTMLAttrs,
 }: DebouncedInputProps) => {
@@ -35,7 +34,7 @@ const DebouncedInput = ({
 
   return (
     <Input
-      {...{ keyName, title, hideLabel, required, editMode, long }}
+      {...{ keyName, title, hideLabel, isRequired, isEditMode }}
       inputHTMLAttrs={{
         ...inputHTMLAttrs,
         value: String(value),

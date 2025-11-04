@@ -1,5 +1,5 @@
 import './Form.css'
-import { ReactNode, RefObject, useState } from 'react'
+import { ReactNode, RefObject, useId, useState } from 'react'
 import { useSubmitAction } from '@/hooks'
 import { useMetaModel } from '../../hooks'
 import { Button } from '@/components'
@@ -43,12 +43,13 @@ const Form = ({
   const [layoutMode, setLayoutMode] = useState<LayoutMode>('masonry')
 
   const { key } = useMetaModel()
+  const id = useId()
 
   return (
     <div className="cmp-form">
       <header>
         <SegmentedControl
-          name={`layoutMode-${key}`}
+          name={`layoutMode-${key}-${id}`}
           selected={layoutMode}
           setSelected={setLayoutMode}
           options={LAYOUT_MODES_OPTIONS}

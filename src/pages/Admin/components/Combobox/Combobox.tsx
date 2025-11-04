@@ -1,30 +1,34 @@
 import { useCallback, useEffect, useMemo, useState } from 'react'
-import { Control } from '@/types'
+import { useComboboxCore } from '../../hooks'
 import { baseSorter } from '../../helpers'
 import BaseCombobox, { BaseComboboxProps } from '../BaseCombobox/BaseCombobox'
+import { ComboboxCoreContextProps } from '../../contexts/comboboxCore.context'
+import { ComboboxCoreProvider } from '../../providers/comboboxCore.provider'
 
-export interface ComboboxProps
-  extends Control,
-    Pick<BaseComboboxProps, 'staticSelected' | 'multiple'>,
+export interface ComboboxInnerProps
+  extends Pick<
+      BaseComboboxProps,
+      'title' | 'hideLabel' | 'isRequired' | 'staticSelected'
+    >,
     Partial<Pick<BaseComboboxProps, 'selected' | 'setSelected'>> {
   options: { id: string; title: string }[]
   staticSelected?: string[]
   initSelected?: string[]
 }
 
-const Combobox = ({
+const ComboboxInner = ({
   options,
   staticSelected,
   initSelected,
   selected,
   setSelected,
   ...rest
-}: ComboboxProps) => {
+}: ComboboxInnerProps) => {
   const [internalSelected, setInternalSelected] = useState<
     BaseComboboxProps['selected']
   >([])
 
-  const [search, setSearch] = useState('')
+  const { search } = useComboboxCore()
 
   const fullSelection = useMemo(() => options.map(({ id }) => id), [options])
 
@@ -65,8 +69,6 @@ const Combobox = ({
 
         ...selectedState,
         staticSelected,
-        search,
-        setSearch,
 
         fullSelection,
         sortedOptions,
@@ -76,5 +78,27 @@ const Combobox = ({
     />
   )
 }
+
+export interface ComboboxProps
+  extends Omit<ComboboxInnerProps, 'hideLabel' | 'isRequired'>,
+    Partial<Pick<ComboboxInnerProps, 'hideLabel' | 'isRequired'>>,
+    Pick<ComboboxCoreContextProps, 'keyName'>,
+    Partial<Pick<ComboboxCoreContextProps, 'isEditMode' | 'isMultiple'>> {}
+
+const Combobox = ({
+  keyName,
+  hideLabel = false,
+  isRequired = false,
+  isEditMode = false,
+  isMultiple = false,
+  ...rest
+}: ComboboxProps) => (
+  <ComboboxCoreProvider {...{ keyName, isEditMode, isMultiple }}>
+    <ComboboxInner
+      isRequired={isEditMode ? false : isRequired}
+      {...{ hideLabel, ...rest }}
+    />
+  </ComboboxCoreProvider>
+)
 
 export default Combobox

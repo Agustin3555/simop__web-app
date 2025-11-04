@@ -57,9 +57,9 @@ const LocalConfig = () => {
             <Input
               keyName="title"
               title="Nombre"
-              required
+              isRequired
               hideLabel
-              inputHTMLAttrs={{ placeholder: 'Nombre...' }}
+              inputHTMLAttrs={{ placeholder: 'Nombre...', required: true }}
             />
             <Button
               title="Descartar configuración"
@@ -73,7 +73,7 @@ const LocalConfig = () => {
             <Combobox
               keyName="columns"
               title="Columnas"
-              multiple
+              isMultiple
               staticSelected={STATIC_SELECTED}
               {...{ options }}
             />

@@ -30,7 +30,7 @@ export interface ForView {
 }
 
 export interface IRequired {
-  required?: boolean
+  isRequired?: boolean
 }
 
 export interface BaseProp {
@@ -51,7 +51,7 @@ export interface Prop<E = LooseEntity> {
   verboseKey?: string
   metaModelRef?: MetaModelKey
   title: string
-  required?: boolean
+  isRequired?: boolean
 
   // Para inicializar las columnas de @tanstack/react-table
   minSize: MinSize | number
@@ -60,12 +60,12 @@ export interface Prop<E = LooseEntity> {
   sortingFn?: SortingFn<E>
   footer?: (info: HeaderContext<E, unknown>) => ReactNode
 
-  getFormField: (value?: any, editMode?: boolean) => ReactNode
+  getFormField: (value?: any, isEditMode?: boolean) => ReactNode
 
   getFormFieldValue: (
     formData: FormData,
     form: HTMLFormElement,
-    editMode?: boolean,
+    isEditMode?: boolean,
   ) => undefined | unknown
 
   getTableHeader: (column: Column<E>) => {

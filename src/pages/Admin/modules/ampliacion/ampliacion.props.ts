@@ -11,7 +11,7 @@ export const AmpliacionProps = defineProps<AmpliacionModel.Entity>({
     metaModelRef: 'obra',
     config: {
       field: {
-        required: true,
+        isRequired: true,
       },
     },
   }),
@@ -19,7 +19,7 @@ export const AmpliacionProps = defineProps<AmpliacionModel.Entity>({
     title: 'Número De Ampliación',
     config: {
       field: {
-        required: true,
+        isRequired: true,
       },
     },
   }),

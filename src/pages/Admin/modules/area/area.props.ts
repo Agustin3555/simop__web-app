@@ -9,7 +9,7 @@ export const AreaProps = defineProps<AreaModel.Entity>({
     title: 'Nombre',
     config: {
       field: {
-        required: true,
+        isRequired: true,
       },
     },
   }),

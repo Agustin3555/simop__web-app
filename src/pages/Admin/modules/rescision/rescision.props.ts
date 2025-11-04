@@ -10,7 +10,7 @@ export const RescisionProps = defineProps<RescisionModel.Entity>({
     metaModelRef: 'obra',
     config: {
       field: {
-        required: true,
+        isRequired: true,
       },
     },
   }),
@@ -18,7 +18,7 @@ export const RescisionProps = defineProps<RescisionModel.Entity>({
     title: 'Número De Expediente',
     config: {
       field: {
-        required: true,
+        isRequired: true,
       },
     },
   }),

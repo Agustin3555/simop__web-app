@@ -1,6 +1,7 @@
 export * from './useAddFieldReset.hook'
 export * from './useChangeHandler.hook'
 export * from './useCombineQuery.hook'
+export * from './useComboboxCore.hook'
 export * from './useConfigModule.hook'
 export * from './useConfigs.hook'
 export * from './useDerivedState.hook'

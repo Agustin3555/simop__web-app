@@ -9,7 +9,7 @@ export const ProvinciaProps = defineProps<ProvinciaModel.Entity>({
     title: 'Nombre',
     config: {
       field: {
-        required: true,
+        isRequired: true,
       },
     },
   }),
@@ -17,7 +17,7 @@ export const ProvinciaProps = defineProps<ProvinciaModel.Entity>({
     metaModelRef: 'pais',
     config: {
       field: {
-        required: true,
+        isRequired: true,
       },
     },
   }),

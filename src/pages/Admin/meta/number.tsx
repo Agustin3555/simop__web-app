@@ -42,13 +42,13 @@ export const createNumberProp =
       field,
     } = config ?? {}
 
-    const { hidden, required } = field ?? {}
+    const { hidden, isRequired } = field ?? {}
 
     return {
       key,
       title,
       minSize,
-      required,
+      isRequired,
 
       filterFn: (row, columnId, filterValue) => {
         const hasMin = filterValue.min !== undefined && filterValue.min !== ''
@@ -87,14 +87,14 @@ export const createNumberProp =
         }
       },
 
-      getFormField: (value, editMode = false) => {
+      getFormField: (value, isEditMode = false) => {
         if (hidden === true) return
 
         return (
           <Input
             keyName={key}
-            {...(!editMode && { required })}
-            {...{ title, value, editMode }}
+            {...(!isEditMode && { isRequired })}
+            {...{ title, value, isEditMode }}
             inputHTMLAttrs={{
               type: 'number',
               step: isDecimal ? '0.000001' : undefined,
@@ -103,11 +103,11 @@ export const createNumberProp =
         )
       },
 
-      getFormFieldValue: (formData, _, editMode = false) => {
+      getFormFieldValue: (formData, _, isEditMode = false) => {
         const value = formData.get(key)
 
         if (value === null) return
-        if (value === '') return editMode ? null : undefined
+        if (value === '') return isEditMode ? null : undefined
 
         return isBig ? value : Number(value)
       },

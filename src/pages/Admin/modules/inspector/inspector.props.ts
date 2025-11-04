@@ -11,7 +11,7 @@ export const InspectorProps = defineProps<InspectorModel.Entity>({
     config: {
       isBig: true,
       field: {
-        required: true,
+        isRequired: true,
       },
     },
   }),
@@ -19,7 +19,7 @@ export const InspectorProps = defineProps<InspectorModel.Entity>({
     title: 'Apellido',
     config: {
       field: {
-        required: true,
+        isRequired: true,
       },
     },
   }),

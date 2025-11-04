@@ -11,7 +11,7 @@ export const RepresentanteObraProps =
       metaModelRef: 'obra',
       config: {
         field: {
-          required: true,
+          isRequired: true,
         },
       },
     }),

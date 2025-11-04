@@ -31,7 +31,7 @@ const Login = () => {
           <Input
             keyName="pass"
             title="Contraseña"
-            required
+            isRequired
             inputHTMLAttrs={{ type: 'password' }}
           />
           <Button

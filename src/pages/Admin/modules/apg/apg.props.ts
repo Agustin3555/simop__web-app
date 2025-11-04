@@ -9,7 +9,7 @@ export const APGProps = defineProps<APGModel.Entity>({
     title: 'Número',
     config: {
       field: {
-        required: true,
+        isRequired: true,
       },
     },
   }),
@@ -17,7 +17,7 @@ export const APGProps = defineProps<APGModel.Entity>({
     title: 'Color',
     config: {
       field: {
-        required: true,
+        isRequired: true,
       },
     },
   }),

@@ -8,7 +8,7 @@ import {
   createUniqueMode,
   UNIQUE_MODE,
 } from './utils'
-import { AutoCombobox, FetchRef, RefFilter } from '../components'
+import { RefsCombobox, FetchRef, RefFilter } from '../components'
 import { MetaModelKey } from '../constants/metaModelKey.const'
 import { MetaModel } from './metaModel'
 import { StyleSheet, Text } from '@react-pdf/renderer'
@@ -39,7 +39,7 @@ export const createRefProp =
       )
 
     const { field } = config ?? {}
-    const { hidden, required } = field ?? {}
+    const { hidden, isRequired } = field ?? {}
 
     const verboseKey = `${key}Id`
     const title = metaModel.title.singular
@@ -50,7 +50,7 @@ export const createRefProp =
       metaModelRef,
       title,
       minSize,
-      required,
+      isRequired,
 
       accessorFn: row => row[key]?.[metaModel.anchorField],
 
@@ -64,23 +64,23 @@ export const createRefProp =
         return filterValue.includes(String(entity.id))
       },
 
-      getFormField: (value, editMode = false) => {
+      getFormField: (value, isEditMode = false) => {
         if (hidden === true) return
 
         return (
-          <AutoCombobox
+          <RefsCombobox
             keyName={verboseKey}
             initOptions={value && [value]}
-            {...{ title, required, editMode, metaModel }}
+            {...{ title, isRequired, isEditMode, metaModel }}
           />
         )
       },
 
-      getFormFieldValue: (formData, form, editMode = false) => {
+      getFormFieldValue: (formData, form, isEditMode = false) => {
         const value = formData.get(verboseKey)
 
         if (value === null) {
-          if (editMode && isFieldEnabled(form, verboseKey)) return null
+          if (isEditMode && isFieldEnabled(form, verboseKey)) return null
           return
         }
 

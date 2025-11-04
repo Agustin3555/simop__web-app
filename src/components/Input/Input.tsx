@@ -1,11 +1,11 @@
 import './Input.css'
 import { InputHTMLAttributes } from 'react'
-import { useControl, useResetByRender } from '@/hooks'
-import { Control } from '@/types'
+import { useInputField, useResetByRender } from '@/hooks'
+import { InputFieldPartial } from '@/types'
 import { classList } from '@/helpers'
-import { ControlLabel } from '..'
+import { InputLabel } from '..'
 
-export interface InputProps extends Control {
+export interface InputProps extends InputFieldPartial {
   value?: number | string
   inputHTMLAttrs?: InputHTMLAttributes<HTMLInputElement>
 }
@@ -15,24 +15,23 @@ const Input = ({
   title,
   value: defaultValue,
   hideLabel = false,
-  required = false,
-  editMode = false,
-  long = 'm',
+  isRequired = false,
+  isEditMode = false,
   inputHTMLAttrs,
 }: InputProps) => {
-  const { inputTitle, disabledState } = useControl({ title, required })
+  const { inputTitle, disabledState } = useInputField({ title, isRequired })
   const { disabled } = disabledState
 
   const { renderKey, resetHandleClick } = useResetByRender(keyName)
 
   return (
-    <div className={classList('cmp-input', 'control', long)}>
-      <ControlLabel
+    <div className={classList('cmp-input', 'control')}>
+      <InputLabel
         {...{
           title,
           hideLabel,
-          required,
-          editMode,
+          isRequired,
+          isEditMode,
           ...disabledState,
           resetHandleClick,
         }}
@@ -43,7 +42,7 @@ const Input = ({
         title={inputTitle}
         name={keyName}
         autoComplete="off"
-        {...(editMode && { disabled })}
+        {...(isEditMode && { disabled })}
         {...{ defaultValue, ...inputHTMLAttrs }}
       />
     </div>

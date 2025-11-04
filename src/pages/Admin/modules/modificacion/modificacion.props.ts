@@ -11,7 +11,7 @@ export const ModificacionProps = defineProps<ModificacionModel.Entity>({
     metaModelRef: 'obra',
     config: {
       field: {
-        required: true,
+        isRequired: true,
       },
     },
   }),
@@ -19,7 +19,7 @@ export const ModificacionProps = defineProps<ModificacionModel.Entity>({
     title: 'Número De Expediente',
     config: {
       field: {
-        required: true,
+        isRequired: true,
       },
     },
   }),

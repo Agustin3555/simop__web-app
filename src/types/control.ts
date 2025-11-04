@@ -1,11 +1,10 @@
-export interface Long {
-  long?: 's' | 'm' | 'l'
-}
-
-export interface Control extends Long {
+export interface InputField {
   keyName: string
   title: string
-  hideLabel?: boolean
-  required?: boolean
-  editMode?: boolean
+  hideLabel: boolean
+  isRequired: boolean
+  isEditMode: boolean
 }
+
+export type InputFieldPartial = Pick<InputField, 'keyName' | 'title'> &
+  Partial<Omit<InputField, 'keyName' | 'title'>>

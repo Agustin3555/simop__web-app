@@ -20,7 +20,7 @@ export const ObraProps = defineProps<ObraModel.Entity>({
     title: 'Nombre',
     config: {
       field: {
-        required: true,
+        isRequired: true,
       },
     },
   }),

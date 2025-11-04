@@ -1,10 +1,10 @@
 import './Checkbox.css'
-import { useControl, useResetByRender } from '@/hooks'
-import { ControlLabel, Icon } from '@/components'
-import { Control } from '@/types'
+import { useInputField, useResetByRender } from '@/hooks'
+import { InputLabel, Icon } from '@/components'
+import { InputFieldPartial } from '@/types'
 import { classList } from '@/helpers'
 
-interface CheckboxProps extends Control {
+interface CheckboxProps extends InputFieldPartial {
   value?: boolean
   falseText?: string
   trueText?: string
@@ -15,36 +15,35 @@ const Checkbox = ({
   title,
   value: defaultChecked,
   hideLabel = false,
-  required = false,
-  editMode = false,
-  long = 's',
+  isRequired = false,
+  isEditMode = false,
   falseText = 'No',
   trueText = 'Si',
 }: CheckboxProps) => {
-  const { inputTitle, disabledState } = useControl({ title, required })
+  const { inputTitle, disabledState } = useInputField({ title, isRequired })
   const { disabled } = disabledState
 
   const { renderKey, resetHandleClick } = useResetByRender(keyName)
 
   return (
-    <div className={classList('cmp-checkbox', 'control', long)}>
-      <ControlLabel
+    <div className={classList('cmp-checkbox', 'control')}>
+      <InputLabel
         {...{
           title,
           hideLabel,
-          required,
-          editMode,
+          isRequired,
+          isEditMode,
           ...disabledState,
           resetHandleClick,
         }}
       />
-      <div className={classList('box', { ...(editMode && { disabled }) })}>
+      <div className={classList('box', { ...(isEditMode && { disabled }) })}>
         <input
           key={renderKey}
           title={inputTitle}
           name={keyName}
           type="checkbox"
-          {...(editMode && { disabled })}
+          {...(isEditMode && { disabled })}
           {...{ defaultChecked }}
         />
         <div className="check-container">

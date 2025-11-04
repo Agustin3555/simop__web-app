@@ -1,47 +1,59 @@
 import './Option.css'
 import { ChangeEventHandler } from 'react'
-import { BaseComboboxProps } from '../../../../BaseCombobox'
+import { useComboboxCore } from '@/pages/Admin/hooks'
+import { classList } from '@/helpers'
 
-export interface OptionProps
-  extends Pick<BaseComboboxProps, 'keyName' | 'multiple'> {
+interface SafeValueProps {
+  value?: string
+}
+
+const SafeValue = ({ value }: SafeValueProps) => (
+  <span className={classList('text', { 'is-undefined': value === undefined })}>
+    {value ?? 'Indefinido'}
+  </span>
+)
+
+export interface OptionProps {
   id: string
-  title: string
-  checked: boolean
-  fields?: { title: string; value: string }[]
+  isChecked: boolean
   isStatic?: boolean
+  title?: string
+  fields?: { title: string; value?: string }[]
   handleChange: ChangeEventHandler<HTMLInputElement>
 }
 
 const Option = ({
   id,
-  title,
-  checked,
-  fields,
-  keyName,
-  multiple,
+  isChecked,
   isStatic = false,
+  title,
+  fields,
   handleChange,
-}: OptionProps) => (
-  <label className="cmp-option" hidden={isStatic}>
-    <strong className="text">{title}</strong>
-    {fields && (
-      <ul>
-        {fields.map(({ title, value }) => (
-          <li className="text" key={title}>
-            <strong>{`${title}:`}</strong>
-            {value}
-          </li>
-        ))}
-      </ul>
-    )}
-    <input
-      type={multiple ? 'checkbox' : 'radio'}
-      value={id}
-      onChange={handleChange}
-      name={keyName}
-      checked={isStatic ? true : checked}
-    />
-  </label>
-)
+}: OptionProps) => {
+  const { keyName, isMultiple } = useComboboxCore()
+
+  return (
+    <label className="cmp-option" hidden={isStatic}>
+      <SafeValue value={title} />
+      {fields && (
+        <ul>
+          {fields.map(({ title, value }) => (
+            <li key={title}>
+              <strong>{`${title}:`}</strong>
+              <SafeValue {...{ value }} />
+            </li>
+          ))}
+        </ul>
+      )}
+      <input
+        type={isMultiple ? 'checkbox' : 'radio'}
+        name={keyName}
+        value={id}
+        checked={isStatic ? true : isChecked}
+        onChange={handleChange}
+      />
+    </label>
+  )
+}
 
 export default Option

@@ -11,7 +11,7 @@ export const FojaMedicionProps = defineProps<FojaMedicionModel.Entity>({
     metaModelRef: 'obra',
     config: {
       field: {
-        required: true,
+        isRequired: true,
       },
     },
   }),
@@ -19,7 +19,7 @@ export const FojaMedicionProps = defineProps<FojaMedicionModel.Entity>({
     title: 'Numero de Expediente de Foja',
     config: {
       field: {
-        required: true,
+        isRequired: true,
       },
     },
   }),
@@ -27,7 +27,7 @@ export const FojaMedicionProps = defineProps<FojaMedicionModel.Entity>({
     title: 'Número de foja',
     config: {
       field: {
-        required: true,
+        isRequired: true,
       },
     },
   }),
@@ -58,7 +58,7 @@ export const FojaMedicionProps = defineProps<FojaMedicionModel.Entity>({
     metaModelRef: 'inspector',
     config: {
       field: {
-        required: true,
+        isRequired: true,
       },
     },
   }),

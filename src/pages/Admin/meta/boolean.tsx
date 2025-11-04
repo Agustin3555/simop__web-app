@@ -45,7 +45,7 @@ export const createBooleanProp =
       title,
       minSize,
 
-      getFormField: (value, editMode = false) => {
+      getFormField: (value, isEditMode = false) => {
         if (hidden) return
 
         if (allowNull) {
@@ -57,7 +57,7 @@ export const createBooleanProp =
                 { id: 'true', title: trueText },
               ]}
               initSelected={value === undefined ? undefined : [String(value)]}
-              {...{ title, editMode }}
+              {...{ title, isEditMode }}
             />
           )
         }
@@ -65,24 +65,24 @@ export const createBooleanProp =
         return (
           <Checkbox
             keyName={key}
-            {...{ title, value, editMode, falseText, trueText }}
+            {...{ title, value, isEditMode, falseText, trueText }}
           />
         )
       },
 
-      getFormFieldValue: (formData, form, editMode = false) => {
+      getFormFieldValue: (formData, form, isEditMode = false) => {
         const value = formData.get(key)
 
         if (allowNull) {
           if (value === null) {
-            if (editMode && isFieldEnabled(form, key)) return null
+            if (isEditMode && isFieldEnabled(form, key)) return null
             return
           }
 
           return value === 'true'
         }
 
-        if (editMode && !formData.has(key)) return
+        if (isEditMode && !formData.has(key)) return
 
         return value === 'on'
       },

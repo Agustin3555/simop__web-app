@@ -11,7 +11,7 @@ export const RecepcionProps = defineProps<RecepcionModel.Entity>({
     metaModelRef: 'obra',
     config: {
       field: {
-        required: true,
+        isRequired: true,
       },
     },
   }),
@@ -19,7 +19,7 @@ export const RecepcionProps = defineProps<RecepcionModel.Entity>({
     title: 'Número De Acta',
     config: {
       field: {
-        required: true,
+        isRequired: true,
       },
     },
   }),

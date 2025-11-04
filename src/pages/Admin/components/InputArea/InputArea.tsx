@@ -1,11 +1,11 @@
 import './InputArea.css'
 import { TextareaHTMLAttributes } from 'react'
-import { useControl, useResetByRender } from '@/hooks'
+import { useInputField, useResetByRender } from '@/hooks'
 import { classList } from '@/helpers'
-import { Control } from '@/types'
-import { ControlLabel } from '@/components'
+import { InputFieldPartial } from '@/types'
+import { InputLabel } from '@/components'
 
-interface InputAreaProps extends Control {
+interface InputAreaProps extends InputFieldPartial {
   value?: string
   textareaHTMLAttrs?: TextareaHTMLAttributes<HTMLTextAreaElement>
 }
@@ -15,24 +15,23 @@ const InputArea = ({
   title,
   value,
   hideLabel = false,
-  required = false,
-  editMode = false,
-  long = 'l',
+  isRequired = false,
+  isEditMode = false,
   textareaHTMLAttrs,
 }: InputAreaProps) => {
-  const { inputTitle, disabledState } = useControl({ title, required })
+  const { inputTitle, disabledState } = useInputField({ title, isRequired })
   const { disabled } = disabledState
 
   const { renderKey, resetHandleClick } = useResetByRender(keyName)
 
   return (
-    <div className={classList('cmp-input-area', 'control', long)}>
-      <ControlLabel
+    <div className={classList('cmp-input-area', 'control')}>
+      <InputLabel
         {...{
           title,
           hideLabel,
-          required,
-          editMode,
+          isRequired,
+          isEditMode,
           ...disabledState,
           resetHandleClick,
         }}
@@ -43,7 +42,7 @@ const InputArea = ({
         title={inputTitle}
         name={keyName}
         defaultValue={value}
-        {...(editMode && { disabled })}
+        {...(isEditMode && { disabled })}
         {...textareaHTMLAttrs}
       />
     </div>

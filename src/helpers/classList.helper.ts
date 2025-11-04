@@ -1,3 +1,6 @@
+const toKebab = (str: string) =>
+  str.replace(/([a-z0-9])([A-Z])/g, '$1-$2').toLowerCase()
+
 export const classList = (
   ...values: (
     | undefined
@@ -14,7 +17,7 @@ export const classList = (
 
       return Object.entries(item)
         .filter(([, value]) => value)
-        .map(([key]) => key)
+        .map(([key]) => toKebab(String(key)))
         .join(' ')
     })
     .join(' ')

@@ -28,13 +28,13 @@ export const createDateProp =
   ({ title, minSize, config }: DateProp): PropFactory =>
   key => {
     const { withTime = false, field } = config ?? {}
-    const { hidden, required } = field ?? {}
+    const { hidden, isRequired } = field ?? {}
 
     return {
       key,
       title,
       minSize: minSize ?? withTime ? MinSize.s : MinSize.xs,
-      required,
+      isRequired,
 
       filterFn: (row, columnId, filterValue) => {
         if (!filterValue) return true
@@ -48,7 +48,7 @@ export const createDateProp =
         return isAfterMin && isBeforeMax
       },
 
-      getFormField: (value?: string, editMode = false) => {
+      getFormField: (value?: string, isEditMode = false) => {
         if (hidden === true) return
 
         if (value)
@@ -59,8 +59,8 @@ export const createDateProp =
         return (
           <Input
             keyName={key}
-            {...(!editMode && { required })}
-            {...{ title, value, editMode }}
+            {...(!isEditMode && { isRequired })}
+            {...{ title, value, isEditMode }}
             inputHTMLAttrs={{
               type: withTime ? 'datetime-local' : 'date',
               min: withTime ? '1900-01-01T00:00' : '1900-01-01',
@@ -69,11 +69,11 @@ export const createDateProp =
         )
       },
 
-      getFormFieldValue: (formData, _, editMode = false) => {
+      getFormFieldValue: (formData, _, isEditMode = false) => {
         const value = formData.get(key) as null | string
 
         if (value === null) return
-        if (value === '') return editMode ? null : undefined
+        if (value === '') return isEditMode ? null : undefined
 
         return value + (withTime ? ':00Z' : 'T00:00:00Z')
       },

@@ -49,8 +49,7 @@ const LocalQueryBody = ({ panels: customPanels = [] }: LocalQueryProps) => {
 
   const { query, handleClick } = useLazyQuery(
     buildConfigKey(key, selectedConfig),
-    // TODO: mientras tanto, solo incluye 'id'
-    () => service.getAll([...selectedConfig.columns, 'id']),
+    () => service.getAll(selectedConfig.columns),
   )
 
   const handleChange = useCallback<(key: string) => () => void>(

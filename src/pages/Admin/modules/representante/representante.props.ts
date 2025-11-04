@@ -11,14 +11,14 @@ export const RepresentanteProps = defineProps<RepresentanteModel.Entity>({
     config: {
       isBig: true,
       field: {
-        required: true,
+        isRequired: true,
       },
     },
   }),
   apellido: createTextProp({
     title: 'Apellido',
     config: {
-      field: { required: true },
+      field: { isRequired: true },
     },
   }),
   nombre: createTextProp({

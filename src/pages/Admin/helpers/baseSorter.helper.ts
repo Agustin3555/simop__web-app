@@ -1,14 +1,24 @@
 export const baseSorter = <T>(
   search: string,
   options: T[],
-  accessorFn?: (option: T) => number | string,
+  accessorFn?: (option: T) => undefined | number | string,
 ) => {
-  // Si la búsqueda está vacía, no modifica el orden
   if (!search) return options
 
   return options.toSorted((optionA, optionB) => {
-    const a = String(accessorFn ? accessorFn(optionA) : optionA).toLowerCase()
-    const b = String(accessorFn ? accessorFn(optionB) : optionB).toLowerCase()
+    const valA = accessorFn ? accessorFn(optionA) : optionA
+    const valB = accessorFn ? accessorFn(optionB) : optionB
+
+    const isAUndefined = valA === undefined
+    const isBUndefined = valB === undefined
+
+    // Los undefined siempre al final
+    if (isAUndefined && !isBUndefined) return 1
+    if (isBUndefined && !isAUndefined) return -1
+    if (isAUndefined && isBUndefined) return 0
+
+    const a = String(valA).toLowerCase()
+    const b = String(valB).toLowerCase()
 
     if (a === search && b !== search) return -1
     if (b === search && a !== search) return 1

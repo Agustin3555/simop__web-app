@@ -15,8 +15,7 @@ const RefFilter = ({ column, keyName, title, options }: RefFilterProps) => {
   return (
     <Combobox
       hideLabel
-      reduceHeader
-      multiple
+      isMultiple
       setSelected={setFilterValue}
       {...{ keyName, title, options, selected }}
     />

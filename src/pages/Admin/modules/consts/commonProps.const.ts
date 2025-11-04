@@ -36,7 +36,7 @@ export const TIPO_PROPS = {
     title: 'Nombre',
     config: {
       field: {
-        required: true,
+        isRequired: true,
       },
     },
   }),

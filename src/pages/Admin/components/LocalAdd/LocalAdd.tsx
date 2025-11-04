@@ -38,9 +38,10 @@ const ContextualizedLocalAdd = () => {
 
         groups.forEach(v =>
           Object.values(v.props).forEach(
-            ({ key, verboseKey, required, getFormFieldValue }) => {
+            ({ key, verboseKey, isRequired, getFormFieldValue }) => {
               const value = getFormFieldValue(formData, form)
-              if (required && value === undefined) throw new Error('required')
+              if (isRequired && value === undefined)
+                throw new Error('isRequired')
               if (value !== undefined) createData[verboseKey || key] = value
             },
           ),
@@ -60,7 +61,7 @@ const ContextualizedLocalAdd = () => {
 
         await setSuccess()
       } catch (error) {
-        if ((error as Error).message === 'required')
+        if ((error as Error).message === 'isRequired')
           toasting('error', 'Complete los campos requeridos')
 
         await setError()

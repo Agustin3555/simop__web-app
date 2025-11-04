@@ -118,7 +118,7 @@ const Toolbar = ({
           keyName={`visibility-${key}`}
           title="Columnas activas"
           hideLabel
-          multiple
+          isMultiple
           {...comboboxProps}
         />
       )}

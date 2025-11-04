@@ -8,7 +8,7 @@ import {
   createUniqueMode,
   UNIQUE_MODE,
 } from './utils'
-import { AutoCombobox, FetchRef, RefFilter } from '../components'
+import { RefsCombobox, FetchRef, RefFilter } from '../components'
 import { MetaModelKey } from '../constants/metaModelKey.const'
 import { isFieldEnabled } from './ref'
 import { MetaModel } from './metaModel'
@@ -33,7 +33,7 @@ export const createRefListProp =
       )
 
     const { field } = config ?? {}
-    const { hidden, required } = field ?? {}
+    const { hidden, isRequired } = field ?? {}
 
     const title = metaModel.title.plural
 
@@ -42,7 +42,7 @@ export const createRefListProp =
       metaModelRef,
       title,
       minSize,
-      required,
+      isRequired,
 
       accessorFn: row => row[key]?.[metaModel.anchorField],
 
@@ -75,24 +75,24 @@ export const createRefListProp =
         return textA.localeCompare(textB, undefined, { sensitivity: 'base' })
       },
 
-      getFormField: (value: LooseEntity[], editMode = false) => {
+      getFormField: (value: LooseEntity[], isEditMode = false) => {
         if (hidden === true) return
 
         return (
-          <AutoCombobox
+          <RefsCombobox
             keyName={key}
-            multiple
+            isMultiple
             initOptions={value}
-            {...{ title, required, editMode, metaModel }}
+            {...{ title, isRequired, isEditMode, metaModel }}
           />
         )
       },
 
-      getFormFieldValue: (formData, form, editMode = false) => {
+      getFormFieldValue: (formData, form, isEditMode = false) => {
         const value = formData.getAll(key)
 
         if (value.length === 0) {
-          if (editMode && isFieldEnabled(form, key)) return []
+          if (isEditMode && isFieldEnabled(form, key)) return []
           return
         }
 

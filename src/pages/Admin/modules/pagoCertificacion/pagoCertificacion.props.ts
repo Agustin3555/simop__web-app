@@ -12,7 +12,7 @@ export const PagoCertificacionProps =
       title: 'Número de Pago',
       config: {
         field: {
-          required: true,
+          isRequired: true,
         },
       },
     }),
@@ -20,7 +20,7 @@ export const PagoCertificacionProps =
       title: 'Orden de pago',
       config: {
         field: {
-          required: true,
+          isRequired: true,
         },
       },
     }),

@@ -40,7 +40,7 @@
     }
   }
 
-  &.open > .header {
+  &.is-open > .header {
     border-color: var(--pal-color-a);
 
     > .arrow {

@@ -1,49 +1,52 @@
 import { useCallback, useMemo, useState } from 'react'
 import { useQueryActionState } from '@/hooks'
+import { useComboboxCore } from '../../hooks'
 import { useQuery } from '@tanstack/react-query'
-import { Control } from '@/types'
 import { LooseEntity } from '@/models/config'
 import { REFETCH_INTERVALS } from '../../constants/refetchIntervals.const'
 import { Button } from '@/components'
-import { OptionSelectors } from '..'
 import BaseCombobox, { BaseComboboxProps } from '../BaseCombobox/BaseCombobox'
 import { baseSorter } from '../../helpers'
 import { MetaModel } from '../../meta/metaModel'
+import { OptionSelectors } from '../../components'
+import { ComboboxCoreProvider } from '../../providers/comboboxCore.provider'
+import { ComboboxCoreContextProps } from '../../contexts/comboboxCore.context'
 
-// BUG: no carga el título de la selección inicial del AutoCombobox
-
-export interface AutoComboboxProps
-  extends Control,
-    Pick<BaseComboboxProps, 'multiple'> {
+export interface RefsComboboxInnerProps
+  extends Pick<BaseComboboxProps, 'title' | 'hideLabel' | 'isRequired'> {
   metaModel: MetaModel
   initSelected?: string[]
   initOptions?: LooseEntity[]
 }
 
-const AutoCombobox = ({
-  keyName,
-  required,
-  editMode,
-  metaModel,
+const RefsComboboxInner = ({
+  metaModel: {
+    key,
+    service: { getRefs },
+    refreshRate,
+    anchorField,
+    props,
+    getProps,
+  },
   initSelected,
   initOptions: initialData,
   ...rest
-}: AutoComboboxProps) => {
-  const { key, service, refreshRate, anchorField, props, getProps } = metaModel
+}: RefsComboboxInnerProps) => {
+  const { keyName, isEditMode, search } = useComboboxCore()
 
   const calculateInitSelected = useMemo(
-    () => (editMode ? initialData?.map(v => String(v.id)) : initSelected) ?? [],
+    () =>
+      (isEditMode ? initialData?.map(v => String(v.id)) : initSelected) ?? [],
     [],
   )
 
-  const [search, setSearch] = useState('')
   const [selected, setSelected] = useState(calculateInitSelected)
   const [enabled, setEnabled] = useState(false)
   const [selectedSearchMode, setSelectedSearchMode] = useState(anchorField)
 
   const { data, status, isFetching, refetch } = useQuery({
     queryKey: [key, 'refs'],
-    queryFn: service.getRefs!,
+    queryFn: getRefs,
     refetchInterval: refreshRate ? REFETCH_INTERVALS[refreshRate] : Infinity,
     enabled,
     retry: false,
@@ -52,8 +55,6 @@ const AutoCombobox = ({
   const { fields: searchModeKeys, rows: options } = data ?? {}
 
   const actionState = useQueryActionState({ status, isFetching })
-
-  const handleAction = useCallback(async () => await refetch(), [])
 
   const fullSelection = useMemo(
     () => options?.map(({ id }) => String(id)),
@@ -67,28 +68,28 @@ const AutoCombobox = ({
     [searchModeKeys],
   )
 
-  const enhancedOptions = useMemo<BaseComboboxProps['sortedOptions']>(
-    () =>
-      options?.map(option => {
-        const fields: NonNullable<
-          BaseComboboxProps['sortedOptions'][number]['fields']
-        > = []
-
-        searchModeKeys
-          ?.filter(mode => mode !== selectedSearchMode)
-          .forEach(mode =>
-            fields.push({ title: props[mode].title, value: option[mode] }),
-          )
-
-        return { id: String(option.id), fields }
-      }) ?? [],
-    [options, searchModeKeys, selectedSearchMode],
-  )
-
   const getItemTitle = useCallback<BaseComboboxProps['getItemTitle']>(
-    id => options?.find(v => String(v.id) === id)![selectedSearchMode] ?? '',
+    id => options?.find(v => String(v.id) === id)![selectedSearchMode],
     [options, selectedSearchMode],
   )
+
+  const enhancedOptions = useMemo<BaseComboboxProps['sortedOptions']>(() => {
+    if (!options) return []
+
+    return options.map(option => {
+      const fields: NonNullable<
+        BaseComboboxProps['sortedOptions'][number]['fields']
+      > = []
+
+      searchModeKeys
+        ?.filter(mode => mode !== selectedSearchMode)
+        .forEach(mode =>
+          fields.push({ title: props[mode].title, value: option[mode] }),
+        )
+
+      return { id: String(option.id), fields }
+    })
+  }, [options, searchModeKeys, selectedSearchMode])
 
   const sortedOptions = useMemo<BaseComboboxProps['sortedOptions']>(
     () =>
@@ -96,20 +97,19 @@ const AutoCombobox = ({
     [enhancedOptions, getItemTitle, search],
   )
 
+  const handleUpdateAction = useCallback(async () => {
+    await refetch()
+  }, [])
+
   const handleEnter = useCallback(() => setEnabled(true), [])
 
   const handleReset = useCallback(() => setSelected(calculateInitSelected), [])
 
   return (
     <BaseCombobox
-      required={editMode ? false : required}
       {...{
         ...rest,
-        keyName,
-        editMode,
 
-        search,
-        setSearch,
         selected,
         setSelected,
 
@@ -135,7 +135,7 @@ const AutoCombobox = ({
           faIcon="fa-solid fa-rotate"
           size="s"
           type="secondary"
-          onAction={handleAction}
+          onAction={handleUpdateAction}
           {...{ actionState }}
         />
       }
@@ -143,4 +143,26 @@ const AutoCombobox = ({
   )
 }
 
-export default AutoCombobox
+export interface RefsProps
+  extends Omit<RefsComboboxInnerProps, 'hideLabel' | 'isRequired'>,
+    Partial<Pick<RefsComboboxInnerProps, 'hideLabel' | 'isRequired'>>,
+    Pick<ComboboxCoreContextProps, 'keyName'>,
+    Partial<Pick<ComboboxCoreContextProps, 'isEditMode' | 'isMultiple'>> {}
+
+const RefsCombobox = ({
+  keyName,
+  hideLabel = false,
+  isRequired = false,
+  isEditMode = false,
+  isMultiple = false,
+  ...rest
+}: RefsProps) => (
+  <ComboboxCoreProvider {...{ keyName, isEditMode, isMultiple }}>
+    <RefsComboboxInner
+      isRequired={isEditMode ? false : isRequired}
+      {...{ hideLabel, ...rest }}
+    />
+  </ComboboxCoreProvider>
+)
+
+export default RefsCombobox

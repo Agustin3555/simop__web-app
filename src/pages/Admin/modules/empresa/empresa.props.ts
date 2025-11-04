@@ -16,7 +16,7 @@ export const EmpresaProps = defineProps<EmpresaModel.Entity>({
     title: 'Nombre',
     config: {
       field: {
-        required: true,
+        isRequired: true,
       },
     },
   }),

@@ -13,7 +13,7 @@ export const RedeterminacionProps = defineProps<RedeterminacionModel.Entity>({
     metaModelRef: 'obra',
     config: {
       field: {
-        required: true,
+        isRequired: true,
       },
     },
   }),
@@ -21,7 +21,7 @@ export const RedeterminacionProps = defineProps<RedeterminacionModel.Entity>({
     title: 'Número de Expediente de Solicitud',
     config: {
       field: {
-        required: true,
+        isRequired: true,
       },
     },
   }),

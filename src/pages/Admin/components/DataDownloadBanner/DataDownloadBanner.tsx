@@ -5,7 +5,7 @@ import { classList } from '@/helpers'
 import { Particles } from './components'
 
 export interface DataDownloadBannerProps {
-  particles: boolean
+  particles?: boolean
   actionState: ActionState
   onDownload: () => void
 }

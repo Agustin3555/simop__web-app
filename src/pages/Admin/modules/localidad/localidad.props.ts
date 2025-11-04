@@ -10,7 +10,7 @@ export const LocalidadProps = defineProps<LocalidadModel.Entity>({
     title: 'Nombre',
     config: {
       field: {
-        required: true,
+        isRequired: true,
       },
     },
   }),

@@ -8,7 +8,7 @@ export const PaisProps = defineProps<PaisModel.Entity>({
     title: 'Nombre',
     config: {
       field: {
-        required: true,
+        isRequired: true,
       },
     },
   }),

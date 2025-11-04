@@ -92,7 +92,7 @@
     }
   }
 
-  &:not(.multiple) {
+  &:not(.is-multiple) {
     border-radius: var(--pal-size-2xs);
 
     > fieldset {
@@ -100,7 +100,7 @@
     }
   }
 
-  &.multiple {
+  &.is-multiple {
     right: 0;
     left: auto !important;
 
@@ -125,7 +125,7 @@
     }
   }
 
-  &.open {
+  &.is-open {
     display: flex;
 
     scale: initial;

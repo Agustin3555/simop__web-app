@@ -10,7 +10,7 @@ export const InspectorObraProps = defineProps<InspectorObraModel.Entity>({
     metaModelRef: 'obra',
     config: {
       field: {
-        required: true,
+        isRequired: true,
       },
     },
   }),
@@ -18,7 +18,7 @@ export const InspectorObraProps = defineProps<InspectorObraModel.Entity>({
     metaModelRef: 'inspector',
     config: {
       field: {
-        required: true,
+        isRequired: true,
       },
     },
   }),

@@ -199,8 +199,12 @@ const Table = ({ data }: TableProps) => {
 
   useEffect(() => {
     setTable(table)
-    // TODO: En este punto se podría ocultar, de ser necesario, la columna de 'id'
-    setColumnVisibility(Object.fromEntries(selectedFields.map(k => [k, true])))
+
+    setColumnVisibility({
+      ...Object.fromEntries(selectedFields.map(k => [k, true])),
+      ...{ id: false },
+    })
+
     setColumnOrder([SELECT_COLUMN, ...selectedFields])
 
     return reset

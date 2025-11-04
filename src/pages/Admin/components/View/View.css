@@ -1,4 +1,5 @@
 .cmp-view {
+  /* Se declara como container porque en un futuro se podría mostrar mas de una view */
   container: cmp-view / inline-size;
   display: none;
   flex-direction: column;

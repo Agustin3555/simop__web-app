@@ -10,7 +10,7 @@ export const DepartamentoProps = defineProps<DepartamentoModel.Entity>({
     title: 'Nombre',
     config: {
       field: {
-        required: true,
+        isRequired: true,
       },
     },
   }),

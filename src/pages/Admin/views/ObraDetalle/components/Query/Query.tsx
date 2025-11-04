@@ -146,7 +146,7 @@ const Query = () => {
             keyName={KEY_NAME}
             title="Obra"
             metaModel={ObraMeta}
-            required
+            isRequired
           />
           <Button
             title="Consultar datos"

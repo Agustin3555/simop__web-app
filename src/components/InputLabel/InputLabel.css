@@ -1,5 +1,5 @@
-.cmp-control-label {
-  display: flex;
+.cmp-input-label {
+  display: inline-flex;
   align-items: flex-end;
   justify-content: space-between;
   gap: var(--pal-size-2xs);

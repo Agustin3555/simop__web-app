@@ -105,7 +105,7 @@ const Config = ({
           title="Columnas"
           selected={columns}
           setSelected={getSetSelected(id)}
-          multiple
+          isMultiple
           {...{ staticSelected, options }}
         />
       </div>

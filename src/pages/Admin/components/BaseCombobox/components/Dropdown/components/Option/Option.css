@@ -13,15 +13,19 @@
 
   cursor: pointer;
 
-  > strong {
+  span.is-undefined {
+    opacity: 0.375;
+  }
+
+  > span {
     font-size: var(--pal-size-font-xs);
-    font-weight: unset;
+    font-weight: 650;
   }
 
   > ul {
     display: flex;
     flex-wrap: wrap;
-    row-gap: var(--pal-size-xs);
+    row-gap: var(--pal-size-2xs);
     column-gap: var(--pal-size-m);
 
     > li {
