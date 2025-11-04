@@ -69,10 +69,11 @@ const RefsComboboxInner = ({
   )
 
   const getItemTitle = useCallback<BaseComboboxProps['getItemTitle']>(
-    id =>
-      options
-        ? options.find(v => String(v.id) === id)![selectedSearchMode]
-        : initialData?.find(v => String(v.id) === id)![selectedSearchMode],
+    id => {
+      const source = options ?? initialData
+      const item = source?.find(v => String(v.id) === id)
+      return item?.[selectedSearchMode]
+    },
     [options, selectedSearchMode],
   )
 
