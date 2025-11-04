@@ -34,11 +34,13 @@ const RefsComboboxInner = ({
 }: RefsComboboxInnerProps) => {
   const { keyName, isEditMode, search } = useComboboxCore()
 
-  const [selected, setSelected] = useState(
+  const calculateInitSelected = useMemo(
     () =>
       (isEditMode ? initialData?.map(v => String(v.id)) : initSelected) ?? [],
+    [],
   )
 
+  const [selected, setSelected] = useState(calculateInitSelected)
   const [enabled, setEnabled] = useState(false)
   const [selectedSearchMode, setSelectedSearchMode] = useState(anchorField)
 
