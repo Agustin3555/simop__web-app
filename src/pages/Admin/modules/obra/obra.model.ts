@@ -112,4 +112,4 @@ export type CreateEntity = OwnFields & {
 
 export type UpdateEntity = Partial<CreateEntity>
 
-export type Ref = EntityRef<OwnFields, 'nombre'>
+export type Ref = EntityRef<OwnFields, 'numero' | 'nombre'>
