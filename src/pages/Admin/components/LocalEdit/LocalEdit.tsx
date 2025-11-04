@@ -57,8 +57,8 @@ const LocalEditBody = ({ editId }: LocalEditBodyProps) => {
 
       groups.forEach(({ props }) =>
         Object.values(props).forEach(
-          ({ key, verboseKey, getFormFieldValue: getFieldValue }) => {
-            const value = getFieldValue(formData, form, true)
+          ({ key, verboseKey, getFormFieldValue }) => {
+            const value = getFormFieldValue(formData, form, true)
 
             if (value !== undefined) updateData[verboseKey || key] = value
           },
@@ -94,10 +94,9 @@ const LocalEditBody = ({ editId }: LocalEditBodyProps) => {
   const { status, isPending, mutate } = useMutation({ mutationFn, onSuccess })
   const actionState = useMutationActionState({ status, isPending })
 
-  const handleSubmit: FormEventHandler<HTMLFormElement> = event => {
-    event.preventDefault()
-
-    mutate(event.currentTarget)
+  const handleSubmit: FormEventHandler<HTMLFormElement> = e => {
+    e.preventDefault()
+    mutate(e.currentTarget)
   }
 
   return selectedEntity ? (
