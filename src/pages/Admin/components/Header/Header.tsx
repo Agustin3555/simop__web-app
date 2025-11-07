@@ -4,8 +4,7 @@ import { useNavState } from '../../hooks'
 import { useAppStore } from '@/store/config'
 import { Button, ExternalLink } from '@/components'
 import { publicInstance } from '@/services/config'
-
-const mainServerUrl: undefined | string = import.meta.env.VITE_MAIN_SERVER_URL
+import { apiAdminPath, mainServerUrl } from '@/env'
 
 const Header = () => {
   const { isOpen, toggleNav } = useNavState()
@@ -15,7 +14,7 @@ const Header = () => {
     if (!mainServerUrl) return
 
     try {
-      await publicInstance.post('Tel0YWwsIEFtaWdv/sync', { url: mainServerUrl })
+      await publicInstance.post(`${apiAdminPath}/sync`, { url: mainServerUrl })
 
       toasting('success', 'Base de datos sincronizada con éxito')
       await setSuccess()

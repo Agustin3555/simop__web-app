@@ -3,6 +3,7 @@ import { useSubmitAction } from '@/hooks'
 import { useAppStore } from '@/store/config'
 import { useLocation } from 'wouter'
 import { Button, CardPage, Input } from '@/components'
+import { uniquePass } from '@/env'
 
 const Login = () => {
   const [, navigate] = useLocation()
@@ -12,7 +13,7 @@ const Login = () => {
     async ({ formValues, setError, setSuccess }) => {
       const pass = formValues.get.string('pass')
 
-      if (pass === import.meta.env.VITE_UNIQUE_PASS) {
+      if (pass === uniquePass) {
         navigate('/admin')
         toasting('info', 'Bienvenido')
 

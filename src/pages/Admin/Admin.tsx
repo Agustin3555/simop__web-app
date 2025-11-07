@@ -12,8 +12,9 @@ import {
   ViewsProvider,
 } from './providers'
 import { publicInstance } from '@/services/config'
+import { apiAdminPath } from '@/env'
 
-const wakeUp = async () => await publicInstance.get('Tel0YWwsIEFtaWdv/ping')
+const wakeUp = async () => await publicInstance.get(`${apiAdminPath}/ping`)
 wakeUp()
 
 const client = new QueryClient({
