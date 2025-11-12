@@ -7,6 +7,7 @@ import {
   StateToDerived,
   useTable,
   useConfigModule,
+  useInfiniteScroll,
 } from '@/pages/Admin/hooks'
 import {
   ColumnDef,
@@ -156,6 +157,10 @@ const Table = ({ data }: TableProps) => {
     columnResizeMode: 'onEnd',
   })
 
+  const rowsLength = table.getRowModel().rows.length
+
+  const { visibleCount, handleScroll } = useInfiniteScroll(rowsLength)
+
   const handleExportClick = useCallback(() => {
     if (!data) return
 
@@ -226,7 +231,7 @@ const Table = ({ data }: TableProps) => {
           }}
           onExportClick={handleExportClick}
         />
-        <div className="table">
+        <div className="table" onScroll={handleScroll}>
           <div
             className={classList(
               'head',
@@ -266,30 +271,33 @@ const Table = ({ data }: TableProps) => {
             ))}
           </div>
           <div className="body">
-            {table.getRowModel().rows.map(row => (
-              <div className="row" key={row.id}>
-                {row
-                  .getVisibleCells()
-                  .map(cell =>
-                    cell.column.columnDef.id === SELECT_COLUMN ? (
-                      selectedRowIds && (
-                        <RowSelectorCell
+            {table
+              .getRowModel()
+              .rows.slice(0, visibleCount)
+              .map(row => (
+                <div className="row" key={row.id}>
+                  {row
+                    .getVisibleCells()
+                    .map(cell =>
+                      cell.column.columnDef.id === SELECT_COLUMN ? (
+                        selectedRowIds && (
+                          <RowSelectorCell
+                            key={cell.id}
+                            checked={row.getIsSelected()}
+                            disabled={!row.getCanSelect()}
+                            indeterminate={row.getIsSomeSelected()}
+                            onChange={row.getToggleSelectedHandler()}
+                          />
+                        )
+                      ) : (
+                        <Cell
                           key={cell.id}
-                          checked={row.getIsSelected()}
-                          disabled={!row.getCanSelect()}
-                          indeterminate={row.getIsSomeSelected()}
-                          onChange={row.getToggleSelectedHandler()}
+                          {...{ getAllPropsRecord: selectedPropsRecord, cell }}
                         />
-                      )
-                    ) : (
-                      <Cell
-                        key={cell.id}
-                        {...{ getAllPropsRecord: selectedPropsRecord, cell }}
-                      />
-                    ),
-                  )}
-              </div>
-            ))}
+                      ),
+                    )}
+                </div>
+              ))}
           </div>
           <div
             className={classList('foot', {

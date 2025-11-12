@@ -1,7 +1,7 @@
 import './Cell.css'
+import { memo, useMemo } from 'react'
 import { Cell as TsCell } from '@tanstack/react-table'
 import { LooseEntity } from '@/models/config'
-import { useMemo } from 'react'
 import { steppedSizes } from '../../helpers'
 import { Prop } from '@/pages/Admin/meta/utils'
 import { useTable } from '@/pages/Admin/hooks'
@@ -37,4 +37,4 @@ const Cell = ({ getAllPropsRecord, cell }: Props) => {
   )
 }
 
-export default Cell
+export default memo(Cell)

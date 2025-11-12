@@ -67,6 +67,8 @@
         border-bottom-style: solid;
         border-bottom-color: var(--pal-color-a-l5);
 
+        content-visibility: auto;
+
         &:last-of-type {
           border: none;
         }
