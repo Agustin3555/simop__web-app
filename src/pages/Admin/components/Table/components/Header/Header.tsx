@@ -202,14 +202,12 @@ const Header = ({
     [toggleGraphedField],
   )
 
-  const width = steppedSizes(column.columnDef.minSize!, getSize())
-
   const sortIndex = getSortIndex() === -1 ? undefined : getSortIndex() + 1
 
   return (
     <div
       className={classList('cmp-table-header', { dragging })}
-      style={{ width }}
+      style={{ width: `var(--col-${column.id}-size)` }}
     >
       <div className="content">
         <div

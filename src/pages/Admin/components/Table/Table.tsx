@@ -24,6 +24,7 @@ import { LooseEntity } from '@/models/config'
 import { classList } from '@/helpers'
 import { format } from '@formkit/tempo'
 import { utils, writeFile } from 'xlsx'
+import { steppedSizes } from './helpers'
 
 const SELECT_COLUMN = 'select'
 const STEP_WIDTH = 32
@@ -157,9 +158,21 @@ const Table = ({ data }: TableProps) => {
     columnResizeMode: 'onEnd',
   })
 
+  const { columnSizing } = table.getState()
   const rowsLength = table.getRowModel().rows.length
 
   const { visibleCount, handleScroll } = useInfiniteScroll(rowsLength)
+
+  const columnSizeVars = useMemo(() => {
+    const sizes: Record<string, string> = {}
+
+    table.getFlatHeaders().forEach(({ column: { id, columnDef, getSize } }) => {
+      const size = steppedSizes(columnDef.minSize!, getSize()) / 16
+      sizes[`--col-${id}-size`] = size + 'rem'
+    })
+
+    return sizes
+  }, [columnSizing])
 
   const handleExportClick = useCallback(() => {
     if (!data) return
@@ -231,7 +244,7 @@ const Table = ({ data }: TableProps) => {
           }}
           onExportClick={handleExportClick}
         />
-        <div className="table" onScroll={handleScroll}>
+        <div className="table" style={columnSizeVars} onScroll={handleScroll}>
           <div
             className={classList(
               'head',

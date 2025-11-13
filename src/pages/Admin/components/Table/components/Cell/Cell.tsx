@@ -2,7 +2,6 @@ import './Cell.css'
 import { memo, useMemo } from 'react'
 import { Cell as TsCell } from '@tanstack/react-table'
 import { LooseEntity } from '@/models/config'
-import { steppedSizes } from '../../helpers'
 import { Prop } from '@/pages/Admin/meta/utils'
 import { useTable } from '@/pages/Admin/hooks'
 
@@ -17,10 +16,13 @@ interface Props {
   cell: TsCell<LooseEntity, unknown>
 }
 
-const Cell = ({ getAllPropsRecord, cell }: Props) => {
-  const { row, column } = cell
-  const { original } = row
-  const { id, columnDef, getSize } = column
+const Cell = ({
+  getAllPropsRecord,
+  cell: {
+    row: { original },
+    column: { id },
+  },
+}: Props) => {
   const { accessorKeys } = useTable().states
 
   const component = useMemo(
@@ -28,10 +30,8 @@ const Cell = ({ getAllPropsRecord, cell }: Props) => {
     [original, accessorKeys],
   )
 
-  const width = steppedSizes(columnDef.minSize!, getSize())
-
   return (
-    <div className="cmp-cell" style={{ width }}>
+    <div className="cmp-cell" style={{ width: `var(--col-${id}-size)` }}>
       {component}
     </div>
   )
