@@ -1,3 +1,22 @@
+## `1.2.0` - 2025-11-26
+
+### Nuevas funcionalidades
+
+- Se agrega la posibilidad de elegir entre 2 tipos de diseño para visualizar los grupos y campos de los formularios.
+- Habilita la posibilidad de confirmar los formularios con “Enter”.
+- Se agrega el “Número” como campo de referencia para Obras.
+
+### Mejoras
+
+- Se mejora la experiencia con los formularios, fijando el botón de “Confirmar” y mejorando el flujo y diseño de los campos.
+- Se agrega el grupo de “Variables” a Obras.
+- Se mejora la velocidad de carga de los items de la tabla.
+- Mejoras técnicas.
+
+### Correcciones
+
+- Se puede visualizar nuevamente los valores del recurso actual en los desplegables al momento de editar.
+
 ## `1.1.3` - 2025-10-20
 
 ### Nuevas funcionalidades
