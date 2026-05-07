@@ -28,7 +28,7 @@ const Login = () => {
     <CardPage>
       <article className="cmp-login">
         <img src="/isologotipo-gobierno-ministerio.webp" />
-        <form onSubmit={handleSubmit}>
+        <form className="form-style" onSubmit={handleSubmit}>
           <Input
             keyName="pass"
             title="Contraseña"

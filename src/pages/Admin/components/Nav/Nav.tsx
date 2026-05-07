@@ -3,7 +3,7 @@ import { useState } from 'react'
 import { useNavState } from '../../hooks'
 import { FavoriteViews, SegmentedControl } from '..'
 import { SegmentedControlProps } from '../SegmentedControl/SegmentedControl'
-import { ReleaseNotesModal, Tree } from './components'
+import { AssistantButton, ReleaseNotesModal, Tree } from './components'
 
 type ViewMode = 'tree' | 'favorites'
 
@@ -36,6 +36,9 @@ const Nav = () => {
             <FavoriteViews />
           </nav>
         </div>
+        <footer>
+          <AssistantButton />
+        </footer>
       </div>
     </div>
   )

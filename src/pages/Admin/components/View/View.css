@@ -2,122 +2,16 @@
   /* Se declara como container porque en un futuro se podría mostrar mas de una view */
   container: cmp-view / inline-size;
   display: none;
-  flex-direction: column;
   width: 100%;
   height: 100%;
 
   content-visibility: auto;
 
-  > header {
-    display: flex;
-    align-items: flex-start;
-    justify-content: space-between;
-    gap: var(--pal-size-s);
-
-    > fieldset {
-      display: flex;
-      border: none;
-
-      > label {
-        --cmp-icon-size: var(--ui-icon-size);
-        --height: var(--ui-height);
-
-        position: relative;
-
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: var(--ui-gap);
-        border-width: 0;
-        border-style: solid;
-        border-color: var(--pal-color-a-l4);
-        border-top-width: var(--line-thickness);
-        border-right-width: var(--line-thickness);
-        padding-inline: var(--ui-padding-inline);
-        height: var(--height);
-
-        font-weight: 650;
-        color: var(--pal-color-a);
-
-        border-top-left-radius: var(--ui-border-radius);
-        border-top-right-radius: var(--ui-border-radius);
-        cursor: pointer;
-
-        transition: color var(--pal-time-xs) ease-out,
-          background-color var(--pal-time-xs) ease-out;
-
-        @container cmp-view (width <= 55rem) {
-          padding: 0;
-          width: var(--height);
-
-          > .text {
-            display: none;
-          }
-        }
-
-        > input {
-          display: none;
-        }
-
-        &:first-child {
-          border-left-width: var(--line-thickness);
-        }
-
-        &:has(input:checked) {
-          color: var(--pal-color-a-d2);
-
-          background-color: var(--pal-color-white);
-        }
-
-        &:hover {
-          background-color: color-mix(
-            in srgb,
-            var(--pal-color-a) 10%,
-            transparent
-          );
-        }
-      }
-    }
-
-    > h1 {
-      font-size: clamp(var(--pal-size-font-s), 2.5dvw, var(--pal-size-font-m));
-      line-height: normal;
-      white-space: nowrap;
-      text-overflow: ellipsis;
-      color: var(--pal-color-a-l1);
-
-      overflow: hidden;
-    }
-  }
-
-  > .local-views {
-    border-width: 0;
-    border-left-width: var(--line-thickness);
-    border-style: solid;
-    border-color: var(--pal-color-a-l4);
-    padding: var(--pal-size-m);
-    height: 100%;
-
-    border-radius: var(--pal-size-xs);
-    border-top-left-radius: 0;
-    background-color: var(--pal-color-white);
-
-    overflow: auto;
-
-    > div {
-      display: none;
-
-      > * {
-        height: 100%;
-      }
-
-      &.active {
-        display: inline;
-      }
-    }
-  }
-
   &.active {
     display: flex;
+  }
+
+  &:has(.cmp-tabs) {
+    flex-direction: column;
   }
 }

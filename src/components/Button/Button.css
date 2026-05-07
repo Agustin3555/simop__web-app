@@ -28,14 +28,17 @@
   );
   overflow: hidden;
 
-  transition: background-color var(--pal-time-s) ease-out,
+  transition:
+    background-color var(--pal-time-s) ease-out,
     var(--cmp-button-transition, var(--transition-dummy));
 
   > * {
     scale: 0;
     opacity: 0;
 
-    transition: scale var(--pal-time-m) ease, opacity var(--pal-time-m) ease;
+    transition:
+      scale var(--pal-time-m) ease,
+      opacity var(--pal-time-m) ease;
   }
 
   > :not(.body) {
@@ -117,7 +120,8 @@
       border-radius: var(--pill-radius);
       background-color: var(--cmp-button-progress-color);
 
-      transition: width var(--width-transition-time) ease-out,
+      transition:
+        width var(--width-transition-time) ease-out,
         height var(--pal-time-s) ease-out;
     }
 
@@ -156,19 +160,5 @@
 
       animation: pulsar 3s linear infinite;
     }
-  }
-}
-
-@keyframes pulsar {
-  from {
-    outline-color: rgba(var(--pal-color-base-b), 0.25);
-    outline-offset: initial;
-    outline-width: 0;
-  }
-  25%,
-  to {
-    outline-color: transparent;
-    outline-offset: var(--pal-size-m);
-    outline-width: 0.0625rem;
   }
 }

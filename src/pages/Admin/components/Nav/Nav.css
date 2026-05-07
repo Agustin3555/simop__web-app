@@ -59,6 +59,11 @@
       }
     }
 
+    > footer {
+      display: flex;
+      flex-direction: column;
+    }
+
     @media (width <= 50rem) {
       background-color: var(--pal-color-a-l5);
     }

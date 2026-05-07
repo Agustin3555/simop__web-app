@@ -1,0 +1,73 @@
+@keyframes show-chat-thread {
+  to {
+    opacity: initial;
+  }
+}
+
+.cmp-chat-thread {
+  flex-grow: 1;
+
+  overflow: auto;
+
+  > * {
+    opacity: 0;
+
+    animation: show-chat-thread var(--pal-time-m) ease forwards;
+  }
+
+  > div {
+    position: relative;
+
+    > .actions {
+      position: sticky;
+
+      display: inline-flex;
+      padding: var(--pal-size-s);
+
+      .cmp-button {
+        background-color: var(--pal-color-a-l5);
+      }
+
+      &.top {
+        top: 0;
+
+        color: var(--pal-color-a-l2);
+      }
+
+      &.bot {
+        bottom: 0;
+        left: 100%;
+
+        color: var(--pal-color-a);
+
+        transition: translate var(--pal-time-s) ease;
+
+        > .cmp-button {
+          border-radius: 50%;
+          outline-style: solid;
+          outline-width: 0;
+
+          animation: pulsar 3s linear infinite;
+        }
+
+        &.is-at-bottom {
+          translate: 100%;
+        }
+      }
+    }
+
+    > ul {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: var(--pal-size-s);
+      padding: var(--pal-size-s);
+    }
+  }
+
+  &:has(> .loader-display) {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}

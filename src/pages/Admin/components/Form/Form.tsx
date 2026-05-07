@@ -57,7 +57,7 @@ const Form = ({
         />
         {children}
       </header>
-      <form ref={formRef} onSubmit={handleSubmit}>
+      <form className="form-style" ref={formRef} onSubmit={handleSubmit}>
         <div className={classList('field-groups', layoutMode)}>
           {fieldGroups?.map(({ key, title, fields }, i) => (
             <div key={key ?? i} className="section">

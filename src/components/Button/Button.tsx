@@ -26,6 +26,7 @@ export interface ButtonProps {
   progress?: number
   hold?: boolean
   badge?: boolean
+  handlingClass?: string
   onAction?: MouseEventHandler<HTMLButtonElement>
   buttonHTMLAttrs?: ButtonHTMLAttributes<HTMLButtonElement>
 }
@@ -46,6 +47,7 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       progress,
       hold = false,
       badge = false,
+      handlingClass,
       onAction,
       buttonHTMLAttrs,
     },
@@ -84,7 +86,7 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
 
     return (
       <button
-        className={classList('cmp-button', `ui-${size}`, type, {
+        className={classList('cmp-button', `ui-${size}`, type, handlingClass, {
           inverted,
           wrap,
           square: faIcon !== undefined && text === undefined,

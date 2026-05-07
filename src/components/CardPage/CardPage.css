@@ -1,4 +1,4 @@
-@keyframes show {
+@keyframes show-card {
   to {
     translate: initial;
     opacity: initial;
@@ -24,6 +24,6 @@
     translate: 0 var(--pal-size-2xl);
     opacity: 0;
 
-    animation: show var(--pal-time-l) ease forwards;
+    animation: show-card var(--pal-time-l) ease forwards;
   }
 }

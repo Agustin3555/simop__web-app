@@ -56,7 +56,8 @@
       scale: 0;
       opacity: 0;
 
-      transition: scale var(--pal-time-m) ease,
+      transition:
+        scale var(--pal-time-m) ease,
         opacity var(--pal-time-m) ease-out;
     }
 
@@ -152,7 +153,8 @@
 
     background-color: transparent;
 
-    transition: color var(--pal-time-xs) ease-out,
+    transition:
+      color var(--pal-time-xs) ease-out,
       border-color var(--pal-time-xs) ease-out;
 
     &:focus {
@@ -216,6 +218,12 @@
     font-size: var(--pal-size-font-m);
     color: var(--pal-color-a-l1);
   }
+}
+
+.form-style {
+  display: flex;
+  flex-direction: column;
+  gap: var(--pal-size-m);
 }
 
 .capture-container {

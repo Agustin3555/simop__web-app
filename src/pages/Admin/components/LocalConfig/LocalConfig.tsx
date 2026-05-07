@@ -52,7 +52,7 @@ const LocalConfig = () => {
         />
       ))}
       {creating ? (
-        <form className="new-config" onSubmit={handleSubmit}>
+        <form className="new-config form-style" onSubmit={handleSubmit}>
           <header>
             <Input
               keyName="title"

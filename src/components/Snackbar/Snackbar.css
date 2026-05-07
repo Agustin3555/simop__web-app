@@ -1,4 +1,4 @@
-@keyframes show {
+@keyframes show-toast {
   to {
     translate: initial;
     opacity: initial;
@@ -54,7 +54,8 @@
     translate: 0 var(--pal-size-2xl);
     opacity: 0;
 
-    animation: show var(--pal-time-m) var(--pal-timing-func-a) forwards,
+    animation:
+      show-toast var(--pal-time-m) var(--pal-timing-func-a) forwards,
       disappear var(--exit-time) var(--screen-time) var(--pal-timing-func-a)
         forwards;
 

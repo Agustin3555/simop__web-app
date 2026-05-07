@@ -4,7 +4,12 @@ import { useNavState } from '../../hooks'
 import { useAppStore } from '@/store/config'
 import { Button, ExternalLink } from '@/components'
 import { publicInstance } from '@/services/config'
-import { apiAdminPath, mainServerUrl } from '@/env'
+import { apiAdminPath, apiUrl, mainServerUrl, uniquePass } from '@/env'
+
+console.log('Unique Pass: ', uniquePass)
+console.log('API URL: ', apiUrl)
+console.log('API Admin Path: ', apiAdminPath)
+console.log('Main Server URL: ', mainServerUrl)
 
 const Header = () => {
   const { isOpen, toggleNav } = useNavState()

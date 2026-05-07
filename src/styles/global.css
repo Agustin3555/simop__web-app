@@ -86,9 +86,3 @@ button {
   background-color: transparent;
   cursor: pointer;
 }
-
-form {
-  display: flex;
-  flex-direction: column;
-  gap: var(--pal-size-m);
-}
