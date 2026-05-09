@@ -89,7 +89,7 @@
     border-left-width: var(--line-thickness);
     border-style: solid;
     border-color: var(--pal-color-a-l4);
-    padding: var(--pal-size-m);
+    padding: var(--pal-size-s);
     height: 100%;
 
     border-radius: var(--pal-size-xs);

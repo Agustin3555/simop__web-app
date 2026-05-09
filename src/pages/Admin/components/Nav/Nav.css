@@ -14,25 +14,29 @@
     background-color: var(--pal-color-black);
     opacity: 0;
 
-    transition: opacity var(--pal-time-m) ease,
+    transition:
+      opacity var(--pal-time-m) ease,
       display var(--pal-time-m) ease allow-discrete;
   }
 
   > .layout {
+    --gap: calc(var(--pal-size-s) + var(--pal-size-xs));
+
     position: fixed;
     z-index: 1;
 
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    gap: 1.25rem;
-    padding: var(--pal-size-l);
+    gap: var(--gap);
+    padding: var(--gap);
     width: var(--nav-width);
     height: 100%;
 
     translate: -100%;
 
-    transition: box-shadow var(--pal-time-m) ease,
+    transition:
+      box-shadow var(--pal-time-m) ease,
       translate var(--pal-time-m) ease;
 
     > header {
@@ -50,7 +54,7 @@
 
       display: flex;
       flex-direction: column;
-      gap: var(--pal-size-l);
+      gap: var(--gap);
 
       overflow: auto;
 

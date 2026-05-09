@@ -16,7 +16,7 @@
     overflow: hidden;
   }
 
-  > .cmp-config,
+  > .cmp-config-item,
   .new-config {
     > header {
       display: flex;
@@ -44,7 +44,7 @@
     }
   }
 
-  > .cmp-config {
+  > .cmp-config-item {
     > header {
       padding: var(--pal-size-s);
 

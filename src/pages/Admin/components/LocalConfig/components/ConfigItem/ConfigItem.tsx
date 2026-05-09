@@ -12,10 +12,9 @@ import Combobox, { ComboboxProps } from '../../../Combobox/Combobox'
 import { Config as ConfigCtx } from '@/pages/Admin/contexts/configs.context'
 
 interface ConfigProps
-  extends ConfigCtx,
-    Pick<ComboboxProps, 'options' | 'staticSelected'> {}
+  extends ConfigCtx, Pick<ComboboxProps, 'options' | 'staticSelected'> {}
 
-const Config = ({
+const ConfigItem = ({
   id,
   title: initTitle,
   columns,
@@ -59,7 +58,7 @@ const Config = ({
   )
 
   return (
-    <div className="cmp-config">
+    <div className="cmp-config-item">
       <header>
         <label title="Seleccionar">
           <input
@@ -113,4 +112,4 @@ const Config = ({
   )
 }
 
-export default Config
+export default ConfigItem

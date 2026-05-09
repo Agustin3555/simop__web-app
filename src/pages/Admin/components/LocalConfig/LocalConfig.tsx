@@ -5,7 +5,7 @@ import { useSubmitAction } from '@/hooks'
 import { useConfigModule, useMetaModel } from '../../hooks'
 import { Button, Icon, Input } from '@/components'
 import { Combobox } from '..'
-import { Config } from './components'
+import { ConfigItem } from './components'
 
 const STATIC_SELECTED = ['id']
 
@@ -45,7 +45,7 @@ const LocalConfig = () => {
   return (
     <div className="cmp-local-config">
       {config.items.map(item => (
-        <Config
+        <ConfigItem
           key={item.id}
           staticSelected={STATIC_SELECTED}
           {...{ ...item, options }}
