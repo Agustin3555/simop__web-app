@@ -22,10 +22,18 @@ Font.registerHyphenationCallback(word => [word])
 interface ReportProps {
   title: string
   orientation?: Orientation
+  topComments: string[]
+  botComments: string[]
   children: ReactNode
 }
 
-const Report = ({ title, orientation = 'portrait', children }: ReportProps) => (
+const Report = ({
+  title,
+  orientation = 'portrait',
+  topComments,
+  botComments,
+  children,
+}: ReportProps) => (
   <Document>
     <Page style={styles.page} size="A4" {...{ orientation }}>
       <View style={styles.header} fixed>
@@ -55,21 +63,16 @@ const Report = ({ title, orientation = 'portrait', children }: ReportProps) => (
             </View>
           </View>
         </View>
-        <Text style={styles.warning}>
-          Estos datos corresponden a gestión administrativa. Por cuestiones
-          burocráticas podría diferir con el avance real de la obra y la
-          disponibilidad presupuestaria.
-        </Text>
-        <Text style={styles.warning}>
-          La mayoría de obras por Administración son intervenciones menores y de
-          mantenimiento.
-        </Text>
+        {topComments.map(c => (
+          <Text style={styles.warning}>{c}</Text>
+        ))}
       </View>
       <View style={styles.content}>{children}</View>
-      <Text style={styles.warning} fixed>
-        Las obras con expedientes electrónicos están confirmadas. Y las obras
-        con expedientes en papel están sujetas a revisión.
-      </Text>
+      {botComments.map(c => (
+        <Text style={styles.warning} fixed>
+          {c}
+        </Text>
+      ))}
     </Page>
   </Document>
 )

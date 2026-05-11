@@ -1,7 +1,16 @@
 import { styles } from './ReportInTable.style'
+import { ReactNode, useMemo } from 'react'
+import { useConfig } from '../../store'
 import { Report } from '@/pages/Admin/components'
 import { Text, View, Image } from '@react-pdf/renderer'
-import { ReactNode } from 'react'
+
+const getParagraphs = (block: string) => {
+  if (!block) return []
+  return block
+    .split(/\n/)
+    .map(f => f.trim())
+    .filter(f => f.length > 0)
+}
 
 export interface GraphInfo {
   column: string
@@ -28,10 +37,25 @@ const ReportInTable = ({
   rows,
   graphs,
 }: ReportInTableProps) => {
+  const commentsReports = useConfig(s => s.config.commentsReports)
+
+  const [topComments, botComments] = useMemo(() => {
+    if (typeof commentsReports !== 'string') return [[], []]
+
+    const blocks = commentsReports.split(/\n\s*\n/)
+    const top = getParagraphs(blocks[0])
+    const bot = getParagraphs(blocks[1])
+    return [top, bot]
+  }, [commentsReports])
+
   props = [{ title: 'CANTIDAD', values: [rows.length] }, ...props]
 
   return (
-    <Report title={`Lista de ${schemeTitle}`} orientation="landscape">
+    <Report
+      title={`Lista de ${schemeTitle}`}
+      orientation="landscape"
+      {...{ topComments, botComments }}
+    >
       <View style={styles.props}>
         {props.map(({ title, values }, i) => (
           <View key={i} style={styles.item}>

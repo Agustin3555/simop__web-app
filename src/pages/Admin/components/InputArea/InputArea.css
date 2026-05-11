@@ -4,7 +4,8 @@
   > .input {
     resize: vertical;
     padding: var(--pal-size-s);
-    min-height: 8rem;
     field-sizing: content;
+    height: auto;
+    min-height: 8rem;
   }
 }
