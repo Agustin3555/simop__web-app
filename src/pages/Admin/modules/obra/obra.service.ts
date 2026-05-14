@@ -51,4 +51,14 @@ export const ObraService = {
   },
 
   deleteMany: async ids => await deleteManyHandler(collection, ids),
+
+  getUpdateAmounts: async () => {
+    const response = await publicInstance.get(collection('update-amounts'))
+
+    return ObraAdapter.getUpdateAmounts.output(response.data)
+  },
+
+  updateAmounts: async () => {
+    await publicInstance.post(collection('update-amounts'))
+  },
 } satisfies Service<ObraModel.Entity>

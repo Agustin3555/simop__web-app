@@ -1,1 +1,2 @@
-export { default as Map } from './Map/Map'
+export * from './Map/Map'
+export * from './UpdateAmounts/UpdateAmounts'

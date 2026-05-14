@@ -31,6 +31,7 @@ export interface OwnFields {
   fechaContratacion: string
   gestion2023: boolean
   montoContratacion: string
+  nuevoMonto: string
   fechaInicio: string
   fechaFin: string
   plazoMeses: number
@@ -55,7 +56,6 @@ export interface OwnFields {
 
   avanceTotal: number
   balanceEconomico: string
-  nuevoMonto: string
 
   totalCertificadoFojaMedicion: string
   totalOrdenPagoFojaMedicion: string
@@ -113,3 +113,10 @@ export type CreateEntity = OwnFields & {
 export type UpdateEntity = Partial<CreateEntity>
 
 export type Ref = EntityRef<OwnFields, 'numero' | 'nombre'>
+
+export interface MontosActualizadosObra {
+  id: number
+  periodoNombre: string
+  actualizados: number
+  createdAt: string
+}

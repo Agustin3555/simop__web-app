@@ -79,6 +79,16 @@ export const ObraProps = defineProps<ObraModel.Entity>({
       calculate: 'sum',
     },
   }),
+  nuevoMonto: createNumberProp({
+    title: 'Nuevo Monto',
+    config: {
+      pre: '$',
+      isDecimal: true,
+      isMoney: true,
+      isBig: true,
+      calculate: 'sum',
+    },
+  }),
   fechaContratacion: createDateProp({
     title: 'Fecha de Contratación',
   }),
@@ -207,16 +217,6 @@ export const ObraProps = defineProps<ObraModel.Entity>({
 
   balanceEconomico: createNumberProp({
     title: 'Balance Económico',
-    config: {
-      pre: '$',
-      isDecimal: true,
-      isMoney: true,
-      isBig: true,
-      calculate: 'sum',
-    },
-  }),
-  nuevoMonto: createNumberProp({
-    title: 'Nuevo Monto',
     config: {
       pre: '$',
       isDecimal: true,

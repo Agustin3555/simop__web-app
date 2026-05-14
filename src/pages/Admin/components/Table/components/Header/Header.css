@@ -1,8 +1,6 @@
 .cmp-table-header {
   position: relative;
 
-  flex-shrink: 0;
-
   transition: width var(--pal-time-s) ease;
 
   > .content {
@@ -44,15 +42,6 @@
       flex-direction: column;
       flex-wrap: wrap;
       justify-content: space-between;
-      gap: var(--cell-padding-inline);
-      padding: var(--cell-padding-inline);
-
-      > .text {
-        font-weight: 850;
-        text-align: start;
-        text-transform: uppercase;
-        color: var(--pal-color-a-d3);
-      }
 
       > .actions {
         display: flex;
@@ -132,7 +121,8 @@
     pointer-events: none;
     user-select: none;
 
-    transition: opacity var(--pal-time-xs) ease-out,
+    transition:
+      opacity var(--pal-time-xs) ease-out,
       translate var(--pal-time-s) ease;
     touch-action: none;
 

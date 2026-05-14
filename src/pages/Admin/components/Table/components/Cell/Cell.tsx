@@ -31,7 +31,7 @@ const Cell = ({
   )
 
   return (
-    <div className="cmp-cell" style={{ width: `var(--col-${id}-size)` }}>
+    <div className="cmp-cell cell" style={{ width: `var(--col-${id}-size)` }}>
       {component}
     </div>
   )

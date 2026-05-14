@@ -1,5 +1,5 @@
 import { ModuleView } from '../../components'
-import { Map } from './components'
+import { Map, UpdateAmounts } from './components'
 
 const Obra = () => (
   <ModuleView
@@ -12,6 +12,16 @@ const Obra = () => (
         component: <Map />,
       },
     ]}
+    view={{
+      tabPanels: [
+        {
+          tabPanelKey: 'update-amounts',
+          title: 'Actualizar montos',
+          faIcon: 'fa-solid fa-money-bill-trend-up',
+          component: <UpdateAmounts />,
+        },
+      ],
+    }}
   />
 )
 

@@ -18,7 +18,7 @@ const FixMapResize = () => {
   return null
 }
 
-const Map = () => {
+export const Map = () => {
   const { getMetaModel } = useMetaModels()
 
   const { query, handleClick } = useLazyQuery(['map'], async () => {
@@ -61,5 +61,3 @@ const Map = () => {
     />
   )
 }
-
-export default Map

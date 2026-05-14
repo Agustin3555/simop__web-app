@@ -231,7 +231,7 @@ const Table = ({ data }: TableProps) => {
   return (
     isReadyToRender && (
       <div
-        className={classList('cmp-table', {
+        className={classList('cmp-table', 'table-container', {
           'enable-filters': toggleStates['filters'],
         })}
       >

@@ -206,7 +206,7 @@ const Header = ({
 
   return (
     <div
-      className={classList('cmp-table-header', { dragging })}
+      className={classList('cmp-table-header cell', { dragging })}
       style={{ width: `var(--col-${column.id}-size)` }}
     >
       <div className="content">

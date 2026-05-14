@@ -1,0 +1,31 @@
+.cmp-update-amounts {
+  display: flex;
+  flex-direction: column;
+  gap: var(--pal-size-s);
+
+  overflow: hidden;
+
+  > header {
+    display: flex;
+    flex-wrap: wrap;
+    align-content: flex-start;
+    gap: var(--pal-size-s);
+
+    > .cmp-button {
+      --cmp-button-progress-color: var(--pal-color-white);
+
+      color: var(--pal-color-white);
+    }
+
+    > small {
+      flex-grow: 1;
+
+      padding: var(--pal-size-s);
+
+      text-align: center;
+
+      border-radius: var(--pal-size-2xs);
+      background-color: var(--pal-color-a-l5);
+    }
+  }
+}

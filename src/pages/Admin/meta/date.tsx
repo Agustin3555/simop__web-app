@@ -11,7 +11,7 @@ import { format } from '@formkit/tempo'
 import { DateFilter } from '../components'
 import { StyleSheet, Text } from '@react-pdf/renderer'
 
-const formatter = (value: string, withTime: boolean) =>
+export const formatter = (value: string, withTime: boolean) =>
   withTime
     ? format(value, { date: 'short', time: 'short' })
     : format(value.slice(0, 10), { date: 'short' })
@@ -33,7 +33,7 @@ export const createDateProp =
     return {
       key,
       title,
-      minSize: minSize ?? withTime ? MinSize.s : MinSize.xs,
+      minSize: (minSize ?? withTime) ? MinSize.s : MinSize.xs,
       isRequired,
 
       filterFn: (row, columnId, filterValue) => {

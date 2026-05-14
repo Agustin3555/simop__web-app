@@ -1,0 +1,11 @@
+.cmp-static-table {
+  display: flex;
+  flex-direction: column;
+
+  overflow: auto;
+
+  .head {
+    position: sticky;
+    top: 0;
+  }
+}

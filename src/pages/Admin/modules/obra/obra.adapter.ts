@@ -35,10 +35,20 @@ const updateOne: {
   output: response => response,
 }
 
+const getUpdateAmounts: {
+  output: OutputAdapter<
+    ObraModel.MontosActualizadosObra[],
+    ObraModel.MontosActualizadosObra[]
+  >
+} = {
+  output: response => response,
+}
+
 export const ObraAdapter = {
   getAll,
   getRefs,
   getOne,
   create,
   updateOne,
+  getUpdateAmounts,
 }
