@@ -1,16 +1,7 @@
 import { TimestampedEntity, EntityRef } from '@/models/config'
 import { EmpresaModel } from '../empresa'
 import { TipoContratacionObraModel } from '../tipoContratacionObra'
-import { AmpliacionModel } from '../ampliacion'
-import { FojaMedicionModel } from '../fojaMedicion'
-import { InspectorModel } from '../inspector'
 import { LocalidadModel } from '../localidad'
-import { ModificacionModel } from '../modificacion'
-import { ParalizacionModel } from '../paralizacion'
-import { RecepcionModel } from '../recepcion'
-import { RedeterminacionModel } from '../redeterminacion'
-import { RepresentanteModel } from '../representante'
-import { RescisionModel } from '../rescision'
 import { TipoEstadoObraModel } from '../tipoEstadoObra'
 import { TipoFinanciamientoObraModel } from '../tipoFinanciamientoObra'
 import { TipoProgramaObraModel } from '../tipoProgramaObra'
@@ -29,7 +20,6 @@ export interface OwnFields {
   anioResolucion: string
   numeroContratacion: number
   fechaContratacion: string
-  gestion2023: boolean
   montoContratacion: string
   nuevoMonto: string
   fechaInicio: string
@@ -50,25 +40,14 @@ export interface OwnFields {
   metrosCuadradosObraRefaccionada: number
   metrosLinealesObraRefaccionada: number
   observacionesObraRefaccionada: string
+  avanceTotal: number
   inaugurable: boolean
   inaugurada: boolean
   totalPendientePago: string
 
-  avanceTotal: number
-  balanceEconomico: string
-
-  totalCertificadoFojaMedicion: string
-  totalOrdenPagoFojaMedicion: string
-  totalPagadoFojaMedicion: string
-  totalPendientePagoFojaMedicion: string
-
-  totalCertificadoRedeterminacion: string
-  totalOrdenPagoRedeterminacion: string
-  totalPagadoRedeterminacion: string
-  totalPendientePagoRedeterminacion: string
-
+  gestion2023: boolean
   porcentajePendienteCertificar: number
-  montoPendienteCertificar: string
+  montoPendienteCertificarActualizado: string
 }
 
 export interface RelationFields {
@@ -83,15 +62,6 @@ export interface RelationFields {
 
   localidades: LocalidadModel.Ref[]
   apgs: APGModel.Ref[]
-  representantes: RepresentanteModel.Ref[]
-  inspectores: InspectorModel.Ref[]
-  fojasMedicion: FojaMedicionModel.Ref[]
-  redeterminaciones: RedeterminacionModel.Ref[]
-  ampliaciones: AmpliacionModel.Ref[]
-  modificaciones: ModificacionModel.Ref[]
-  paralizaciones: ParalizacionModel.Ref[]
-  rescisiones: RescisionModel.Ref[]
-  recepciones: RecepcionModel.Ref[]
 }
 
 export interface Entity extends TimestampedEntity, OwnFields, RelationFields {}

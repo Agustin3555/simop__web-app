@@ -57,6 +57,9 @@ export const ObraProps = defineProps<ObraModel.Entity>({
       isDecimal: true,
     },
   }),
+  fechaContratacion: createDateProp({
+    title: 'Fecha de Contratación',
+  }),
   inaugurable: createBooleanProp({
     title: 'Inaugurable',
     config: {
@@ -68,6 +71,9 @@ export const ObraProps = defineProps<ObraModel.Entity>({
     config: {
       allowNull: true,
     },
+  }),
+  gestion2023: createBooleanProp({
+    title: 'Gestión 2023 - 2027',
   }),
   montoContratacion: createNumberProp({
     title: 'Monto de Contratación',
@@ -89,11 +95,22 @@ export const ObraProps = defineProps<ObraModel.Entity>({
       calculate: 'sum',
     },
   }),
-  fechaContratacion: createDateProp({
-    title: 'Fecha de Contratación',
+  porcentajePendienteCertificar: createNumberProp({
+    title: 'Porcentaje Pendiente a Certificar',
+    config: {
+      sub: '%',
+      isDecimal: true,
+    },
   }),
-  gestion2023: createBooleanProp({
-    title: 'Gestión 2023 - 2027',
+  montoPendienteCertificarActualizado: createNumberProp({
+    title: 'Monto Pendiente a Certificar Actualizado',
+    config: {
+      pre: '$',
+      isDecimal: true,
+      isMoney: true,
+      isBig: true,
+      calculate: 'sum',
+    },
   }),
   tipoTematicaObra: createRefProp({
     metaModelRef: 'tipoTematicaObra',
@@ -153,7 +170,6 @@ export const ObraProps = defineProps<ObraModel.Entity>({
       isLong: true,
     },
   }),
-
   obraNueva: createBooleanProp({
     title: 'Obra nueva',
   }),
@@ -214,118 +230,8 @@ export const ObraProps = defineProps<ObraModel.Entity>({
       isLong: true,
     },
   }),
-
-  balanceEconomico: createNumberProp({
-    title: 'Balance Económico',
-    config: {
-      pre: '$',
-      isDecimal: true,
-      isMoney: true,
-      isBig: true,
-      calculate: 'sum',
-    },
-  }),
-  totalCertificadoFojaMedicion: createNumberProp({
-    title: 'Total Certificado de Fojas',
-    config: {
-      pre: '$',
-      isDecimal: true,
-      isMoney: true,
-      isBig: true,
-      calculate: 'sum',
-    },
-  }),
-  totalOrdenPagoFojaMedicion: createNumberProp({
-    title: 'Total Orden de Pago de Fojas',
-    config: {
-      pre: '$',
-      isDecimal: true,
-      isMoney: true,
-      isBig: true,
-      calculate: 'sum',
-    },
-  }),
-  totalPagadoFojaMedicion: createNumberProp({
-    title: 'Total Pagado de Fojas',
-    config: {
-      pre: '$',
-      isDecimal: true,
-      isMoney: true,
-      isBig: true,
-      calculate: 'sum',
-    },
-  }),
-  totalPendientePagoFojaMedicion: createNumberProp({
-    title: 'Total Pendiente de Pago de Fojas',
-    config: {
-      pre: '$',
-      isDecimal: true,
-      isMoney: true,
-      isBig: true,
-      calculate: 'sum',
-    },
-  }),
-  totalCertificadoRedeterminacion: createNumberProp({
-    title: 'Total Certificado de Redeterm.',
-    config: {
-      pre: '$',
-      isDecimal: true,
-      isMoney: true,
-      isBig: true,
-      calculate: 'sum',
-    },
-  }),
-  totalOrdenPagoRedeterminacion: createNumberProp({
-    title: 'Total Orden de Pago de Redeterm.',
-    config: {
-      pre: '$',
-      isDecimal: true,
-      isMoney: true,
-      isBig: true,
-      calculate: 'sum',
-    },
-  }),
-  totalPagadoRedeterminacion: createNumberProp({
-    title: 'Total Pagado de Redeterm.',
-    config: {
-      pre: '$',
-      isDecimal: true,
-      isMoney: true,
-      isBig: true,
-      calculate: 'sum',
-    },
-  }),
-  totalPendientePagoRedeterminacion: createNumberProp({
-    title: 'Total Pendiente de Pago de Redeterm.',
-    config: {
-      pre: '$',
-      isDecimal: true,
-      isMoney: true,
-      isBig: true,
-      calculate: 'sum',
-    },
-  }),
-  porcentajePendienteCertificar: createNumberProp({
-    title: 'Porcentaje Pendiente a Certificar',
-    config: {
-      sub: '%',
-      isDecimal: true,
-    },
-  }),
-  montoPendienteCertificar: createNumberProp({
-    title: 'Monto Pendiente a Certificar',
-    minSize: MinSize.m,
-    config: {
-      pre: '$',
-      isDecimal: true,
-      isMoney: true,
-      isBig: true,
-      calculate: 'sum',
-    },
-  }),
-
   totalPendientePago: createNumberProp({
-    title: 'Total Pendiente de Pago de Redeterm.',
+    title: 'Total Pendiente de Pago',
     config: {
       pre: '$',
       isDecimal: true,
@@ -334,34 +240,5 @@ export const ObraProps = defineProps<ObraModel.Entity>({
       calculate: 'sum',
     },
   }),
-
-  representantes: createRefListProp({
-    metaModelRef: 'representante',
-  }),
-  inspectores: createRefListProp({
-    metaModelRef: 'inspector',
-  }),
-  fojasMedicion: createRefListProp({
-    metaModelRef: 'fojaMedicion',
-  }),
-  redeterminaciones: createRefListProp({
-    metaModelRef: 'redeterminacion',
-  }),
-  ampliaciones: createRefListProp({
-    metaModelRef: 'ampliacion',
-  }),
-  modificaciones: createRefListProp({
-    metaModelRef: 'modificacion',
-  }),
-  paralizaciones: createRefListProp({
-    metaModelRef: 'paralizacion',
-  }),
-  rescisiones: createRefListProp({
-    metaModelRef: 'rescision',
-  }),
-  recepciones: createRefListProp({
-    metaModelRef: 'recepcion',
-  }),
-
   ...COMMON_PROPS,
 })
