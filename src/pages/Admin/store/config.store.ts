@@ -1,3 +1,4 @@
+import { useAppStore } from '@/store/config'
 import { create } from 'zustand'
 import { persist } from 'zustand/middleware'
 
@@ -22,7 +23,10 @@ Las obras con expedientes electrónicos están confirmadas. Y las obras con expe
       },
 
       setConfig: (key, value) => {
+        const toasting = useAppStore.getState().toasting
+
         set(s => ({ config: { ...s.config, [key]: value } }))
+        toasting('success', 'Configuración actualizada con éxito')
       },
     }),
     {
