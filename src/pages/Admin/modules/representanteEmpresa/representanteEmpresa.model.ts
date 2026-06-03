@@ -4,7 +4,6 @@ import { RepresentanteModel } from '../representante'
 import { TipoRepresentanteModel } from '../tipoRepresentante'
 
 export interface OwnFields {
-  vigencia: boolean
   fecha: string
 }
 

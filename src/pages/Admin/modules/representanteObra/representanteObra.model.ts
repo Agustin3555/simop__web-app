@@ -4,7 +4,6 @@ import { RepresentanteModel } from '../representante'
 import { ObraModel } from '../obra'
 
 export interface OwnFields {
-  vigencia: boolean
   fecha: string
 }
 

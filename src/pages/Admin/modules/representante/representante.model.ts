@@ -5,7 +5,6 @@ import { LocalidadModel } from '../localidad'
 
 export interface OwnFields {
   cuil: number
-  apellido: string
   nombre: string
   direccion: string
   numeroMatricula: string
@@ -24,4 +23,4 @@ export type CreateEntity = OwnFields &
 
 export type UpdateEntity = Partial<CreateEntity>
 
-export type Ref = EntityRef<OwnFields, 'cuil' | 'nombre' | 'apellido'>
+export type Ref = EntityRef<OwnFields, 'cuil' | 'nombre'>

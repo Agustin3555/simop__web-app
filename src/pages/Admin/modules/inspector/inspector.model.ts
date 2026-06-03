@@ -3,7 +3,6 @@ import { TipoProfesionModel } from '../tipoProfesion'
 
 export interface OwnFields {
   cuil: number
-  apellido: string
   nombre: string
 }
 
@@ -17,4 +16,4 @@ export type CreateEntity = OwnFields & { profesiones: number[] }
 
 export type UpdateEntity = Partial<CreateEntity>
 
-export type Ref = EntityRef<OwnFields, 'cuil' | 'apellido' | 'nombre'>
+export type Ref = EntityRef<OwnFields, 'cuil' | 'nombre'>

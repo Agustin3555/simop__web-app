@@ -7,7 +7,6 @@ import { createNumberProp } from '../../meta/number'
 import { createRefProp } from '../../meta/ref'
 import { createRefListProp } from '../../meta/refList'
 import { createTextProp } from '../../meta/text'
-import { MinSize } from '../../meta/utils'
 
 export const ObraProps = defineProps<ObraModel.Entity>({
   numero: createNumberProp({
@@ -15,6 +14,7 @@ export const ObraProps = defineProps<ObraModel.Entity>({
     config: {
       isBig: true,
     },
+    minSize: 4,
   }),
   nombre: createTextProp({
     title: 'Nombre',
@@ -239,6 +239,9 @@ export const ObraProps = defineProps<ObraModel.Entity>({
       isBig: true,
       calculate: 'sum',
     },
+  }),
+  inspectorTitular: createRefProp({
+    metaModelRef: 'inspector',
   }),
   ...COMMON_PROPS,
 })

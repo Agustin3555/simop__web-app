@@ -17,7 +17,7 @@ export const RepresentanteMeta: MetaModelDefinition<RepresentanteModel.Entity> =
         plural: 'Representantes',
       },
       faIcon: 'fa-solid fa-user-tie',
-      anchorField: 'apellido',
+      anchorField: 'nombre',
       allFields,
       propFactories,
     },

@@ -15,16 +15,13 @@ export const InspectorProps = defineProps<InspectorModel.Entity>({
       },
     },
   }),
-  apellido: createTextProp({
-    title: 'Apellido',
+  nombre: createTextProp({
+    title: 'Nombre',
     config: {
       field: {
         isRequired: true,
       },
     },
-  }),
-  nombre: createTextProp({
-    title: 'Nombre',
   }),
   profesiones: createRefListProp({
     metaModelRef: 'tipoProfesion',

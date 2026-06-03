@@ -15,14 +15,13 @@ export const RepresentanteProps = defineProps<RepresentanteModel.Entity>({
       },
     },
   }),
-  apellido: createTextProp({
-    title: 'Apellido',
-    config: {
-      field: { isRequired: true },
-    },
-  }),
   nombre: createTextProp({
     title: 'Nombre',
+    config: {
+      field: {
+        isRequired: true,
+      },
+    },
   }),
   direccion: createTextProp({
     title: 'Dirección',

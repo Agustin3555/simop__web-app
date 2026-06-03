@@ -5,7 +5,6 @@ import { TipoProfesionModel } from '../tipoProfesion'
 import { ObraModel } from '../obra'
 
 export interface OwnFields {
-  vigencia: boolean
   fecha: string
 }
 

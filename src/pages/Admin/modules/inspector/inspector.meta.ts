@@ -16,7 +16,7 @@ export const InspectorMeta: MetaModelDefinition<InspectorModel.Entity> = {
       plural: 'Inspectores',
     },
     faIcon: 'fa-solid fa-helmet-safety',
-    anchorField: 'apellido',
+    anchorField: 'nombre',
     allFields,
     propFactories,
   },

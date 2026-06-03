@@ -9,6 +9,7 @@ import { TipoTematicaObraModel } from '../tipoTematicaObra'
 import { TipoEnteObraModel } from '../tipoEnteObra'
 import { TipoOrigenFinanciamientoObraModel } from '../tipoOrigenFinanciamientoObra'
 import { APGModel } from '../apg'
+import { InspectorModel } from '../inspector'
 
 export interface OwnFields {
   numero: number
@@ -59,6 +60,7 @@ export interface RelationFields {
   tipoProgramaObra: TipoProgramaObraModel.Ref
   tipoTematicaObra: TipoTematicaObraModel.Ref
   tipoEstadoObra: TipoEstadoObraModel.Ref
+  inspectorTitular: InspectorModel.Ref
 
   localidades: LocalidadModel.Ref[]
   apgs: APGModel.Ref[]
