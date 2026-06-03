@@ -4,14 +4,9 @@ import { useNavState, useViews } from '../../hooks'
 import { useAppStore } from '@/store/config'
 import { Button, ExternalLink } from '@/components'
 import { publicInstance } from '@/services/config'
-import { apiAdminPath, apiUrl, uniquePass } from '@/env'
+import { apiAdminPath } from '@/env'
 import { useCallback } from 'react'
 import { useConfig } from '../../store'
-
-// TODO: sacarlo
-console.log('Unique Pass: ', uniquePass)
-console.log('API URL: ', apiUrl)
-console.log('API Admin Path: ', apiAdminPath)
 
 const Header = () => {
   const { isOpen, toggleNav } = useNavState()

@@ -86,7 +86,7 @@ const ViewManager = () => (
     <TipoRescision />
     <TipoTematicaObra />
 
-    <Assistant />
+    {/* <Assistant /> */}
     <Config />
   </div>
 )
