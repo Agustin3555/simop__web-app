@@ -112,6 +112,16 @@ export const ObraProps = defineProps<ObraModel.Entity>({
       calculate: 'sum',
     },
   }),
+  presupuestoProximoAnio: createNumberProp({
+    title: 'Presupuesto actualizado 2027 (+30%)',
+    config: {
+      pre: '$',
+      isDecimal: true,
+      isMoney: true,
+      isBig: true,
+      calculate: 'sum',
+    },
+  }),
   tipoTematicaObra: createRefProp({
     metaModelRef: 'tipoTematicaObra',
     minSize: 7,

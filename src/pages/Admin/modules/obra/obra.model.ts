@@ -49,6 +49,7 @@ export interface OwnFields {
   gestion2023: boolean
   porcentajePendienteCertificar: number
   montoPendienteCertificarActualizado: string
+  presupuestoProximoAnio: string
 }
 
 export interface RelationFields {
