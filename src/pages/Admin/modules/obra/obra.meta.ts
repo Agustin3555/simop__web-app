@@ -33,7 +33,6 @@ const BASIC = {
     'direccion',
     'lugar',
     'porcentajePendienteCertificar',
-    'totalPendientePago',
     'observaciones',
   ]),
 }
