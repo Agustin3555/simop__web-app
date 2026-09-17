@@ -86,7 +86,7 @@ export const ObraProps = defineProps<ObraModel.Entity>({
     },
   }),
   nuevoMonto: createNumberProp({
-    title: 'Nuevo Monto',
+    title: 'Nuevo Monto de Contratación',
     config: {
       pre: '$',
       isDecimal: true,
