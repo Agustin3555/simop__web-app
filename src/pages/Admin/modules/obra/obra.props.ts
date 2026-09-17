@@ -144,7 +144,7 @@ export const ObraProps = defineProps<ObraModel.Entity>({
     title: 'Fecha de Inicio',
   }),
   fechaFin: createDateProp({
-    title: 'Fecha de Fin',
+    title: 'Finaliza en',
   }),
   plazoMeses: createNumberProp({
     title: 'Plazo en Meses',
@@ -171,7 +171,7 @@ export const ObraProps = defineProps<ObraModel.Entity>({
     },
   }),
   obraNueva: createBooleanProp({
-    title: 'Obra nueva',
+    title: 'Tiene cartel',
   }),
   porcentajeObraNueva: createNumberProp({
     title: 'Porcentaje de obra nueva',
@@ -195,13 +195,13 @@ export const ObraProps = defineProps<ObraModel.Entity>({
     },
   }),
   observacionesObraNueva: createTextProp({
-    title: 'Observaciones de obra nueva',
+    title: 'Estado físico',
     config: {
       isLong: true,
     },
   }),
   obraRefaccionada: createBooleanProp({
-    title: 'Obra refaccionada',
+    title: 'Tiene placa',
   }),
   porcentajeObraRefaccionada: createNumberProp({
     title: 'Porcentaje de obra refaccionada',

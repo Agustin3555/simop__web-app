@@ -26,7 +26,6 @@ const BASIC = {
     'tipoProgramaObra',
     'tipoTematicaObra',
     'fechaInicio',
-    'fechaFin',
     'plazoMeses',
     'plazoDias',
     'nomenclaturaCatastral',
@@ -43,10 +42,14 @@ const VARIABLES = {
   key: 'variables',
   title: 'Variables',
   fields: select(allFields, 'only', [
-    'tipoEstadoObra',
     'avanceTotal',
+    'tipoEstadoObra',
+    'observacionesObraNueva',
+    'fechaFin',
     'inaugurable',
     'inaugurada',
+    'obraNueva',
+    'obraRefaccionada',
   ]),
 }
 
@@ -54,12 +57,9 @@ const MODALIDAD = {
   key: 'modalidad',
   title: 'Modalidad',
   fields: select(allFields, 'only', [
-    'obraNueva',
     'porcentajeObraNueva',
     'metrosCuadradosObraNueva',
     'metrosLinealesObraNueva',
-    'observacionesObraNueva',
-    'obraRefaccionada',
     'porcentajeObraRefaccionada',
     'metrosCuadradosObraRefaccionada',
     'metrosLinealesObraRefaccionada',
