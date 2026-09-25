@@ -32,6 +32,7 @@ const BASIC = {
     'localidades',
     'direccion',
     'lugar',
+    'observacionesObraRefaccionada',
     'porcentajePendienteCertificar',
     'observaciones',
   ]),
@@ -62,7 +63,6 @@ const MODALIDAD = {
     'porcentajeObraRefaccionada',
     'metrosCuadradosObraRefaccionada',
     'metrosLinealesObraRefaccionada',
-    'observacionesObraRefaccionada',
   ]),
 }
 

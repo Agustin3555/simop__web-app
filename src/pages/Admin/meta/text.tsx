@@ -14,6 +14,7 @@ import { StyleSheet, Text } from '@react-pdf/renderer'
 interface TextProp extends BaseProp {
   config?: {
     isLong?: boolean
+    isURL?: boolean
 
     field?: ForView & IRequired
   }
@@ -22,13 +23,13 @@ interface TextProp extends BaseProp {
 export const createTextProp =
   ({ title, minSize, config }: TextProp): PropFactory =>
   key => {
-    const { isLong = false, field } = config ?? {}
+    const { isLong = false, isURL = false, field } = config ?? {}
     const { hidden, isRequired } = field ?? {}
 
     return {
       key,
       title,
-      minSize: minSize ?? isLong ? MinSize.xl : MinSize.m,
+      minSize: (minSize ?? isLong) ? MinSize.xl : MinSize.m,
       isRequired,
 
       filterFn: 'includesString',
@@ -45,6 +46,7 @@ export const createTextProp =
         ) : (
           <Input
             keyName={key}
+            {...(isURL && { inputHTMLAttrs: { type: 'url' } })}
             {...(!isEditMode && { isRequired })}
             {...{ title, value, isEditMode }}
           />
@@ -68,7 +70,20 @@ export const createTextProp =
       getTableCell: item => {
         const value = item[key] as undefined | string
 
-        return value && <p className="text">{value}</p>
+        if (!value) return
+
+        return isURL ? (
+          <a
+            className="text"
+            href={value}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            {value}
+          </a>
+        ) : (
+          <p className="text">{value}</p>
+        )
       },
 
       getReportTableFilter: column => {

@@ -113,7 +113,7 @@ export const ObraProps = defineProps<ObraModel.Entity>({
     },
   }),
   presupuestoProximoAnio: createNumberProp({
-    title: 'Presupuesto actualizado 2027 (+30%)',
+    title: 'Presupuesto actualizado 2027 (+20%)',
     config: {
       pre: '$',
       isDecimal: true,
@@ -235,9 +235,9 @@ export const ObraProps = defineProps<ObraModel.Entity>({
     },
   }),
   observacionesObraRefaccionada: createTextProp({
-    title: 'Observaciones de obra refaccionada',
+    title: 'Geolocalización',
     config: {
-      isLong: true,
+      isURL: true,
     },
   }),
   totalPendientePago: createNumberProp({
