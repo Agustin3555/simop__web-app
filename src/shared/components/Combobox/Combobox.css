@@ -1,0 +1,47 @@
+.cmp-combobox {
+  > button {
+    display: flex;
+    align-items: center;
+    gap: var(--pal-size-xs);
+    height: 3rem;
+
+    background-color: var(--pal-color-a);
+
+    > .null-option {
+      position: relative;
+
+      pointer-events: none;
+
+      > input {
+        position: absolute;
+        opacity: 0;
+      }
+    }
+
+    > .selected-option {
+      padding: var(--pal-size-xs);
+
+      > label {
+        cursor: pointer;
+      }
+
+      &:hover {
+        background-color: var(--pal-color-a-l5);
+      }
+    }
+  }
+
+  > .dropdown {
+    flex-direction: column;
+    gap: var(--pal-size-xs);
+    padding: var(--pal-size-xs);
+
+    > * {
+      padding: var(--pal-size-xs);
+
+      &:hover {
+        background-color: var(--pal-color-a-l1);
+      }
+    }
+  }
+}

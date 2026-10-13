@@ -46,6 +46,7 @@ const VARIABLES = {
     'tipoEstadoObra',
     'observacionesObraNueva',
     'fechaFin',
+    'visitable',
     'inaugurable',
     'inaugurada',
     'obraNueva',

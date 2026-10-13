@@ -42,6 +42,7 @@ export interface OwnFields {
   metrosLinealesObraRefaccionada: number
   observacionesObraRefaccionada: string
   avanceTotal: number
+  visitable: boolean
   inaugurable: boolean
   inaugurada: boolean
   totalPendientePago: string

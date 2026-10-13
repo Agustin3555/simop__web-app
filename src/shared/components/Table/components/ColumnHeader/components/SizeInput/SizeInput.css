@@ -1,0 +1,27 @@
+﻿.cmp-size-input {
+  position: absolute;
+  right: 0;
+  bottom: var(--pal-size-s);
+
+  align-content: center;
+  border-width: var(--line-thickness);
+  border-style: solid;
+  border-color: var(--pal-color-a-l4);
+  border-right-width: 0;
+  padding-bottom: var(--pal-size-3xs);
+  width: calc(var(--chars) * 1ch + 1.5ch);
+  height: var(--pal-size-l);
+
+  font-size: var(--pal-size-font-2xs);
+
+  border-top-left-radius: 2rem;
+  border-bottom-left-radius: 2rem;
+  overflow: hidden;
+
+  > input {
+    border: none;
+    padding-left: 0.875ch;
+
+    background-color: transparent;
+  }
+}

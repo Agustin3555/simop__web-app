@@ -1,0 +1,17 @@
+.new-cmp-row-selector-cell {
+  position: sticky;
+  left: 0;
+
+  align-content: center;
+  border-width: 0;
+  border-style: solid;
+  border-color: var(--pal-color-a-l4);
+  border-right-width: var(--line-thickness);
+  padding: var(--pal-size-s);
+
+  background-color: var(--pal-color-white);
+
+  > label {
+    cursor: pointer;
+  }
+}

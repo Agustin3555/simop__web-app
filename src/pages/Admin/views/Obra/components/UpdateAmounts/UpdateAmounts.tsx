@@ -95,6 +95,39 @@ export const UpdateAmounts = () => {
         }}
         {...{ data }}
       />
+
+      {/* <TableProvider>
+        <NewTable
+          rowKey="createdAt"
+          columnDefs={[
+            {
+              type: 'text',
+              key: 'createdAt',
+              title: 'Fecha',
+              domain: 'shortText',
+            },
+            {
+              type: 'text',
+              key: 'periodoNombre',
+              title: 'Periodo',
+            },
+            {
+              type: 'number',
+              key: 'actualizados',
+              title: 'Actualizados',
+              isDecimal: true,
+              pre: '$',
+              sub: 'k',
+            },
+            // {
+            //   type: 'number',
+            //   key: 'id',
+            //   title: 'ID',
+            // },
+          ]}
+          data={data}
+        />
+      </TableProvider> */}
     </div>
   )
 }

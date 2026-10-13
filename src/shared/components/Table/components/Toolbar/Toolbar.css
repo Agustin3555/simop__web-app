@@ -1,0 +1,28 @@
+.new-cmp-toolbar {
+  display: flex;
+  justify-content: space-between;
+  border-width: 0;
+  border-style: solid;
+  border-color: var(--pal-color-a-l4);
+  border-bottom-width: var(--line-thickness);
+  padding: var(--pal-size-2xs);
+  gap: var(--pal-size-2xs);
+
+  > * {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--pal-size-2xs);
+  }
+
+  > .center > .cmp-value {
+    border-color: var(--pal-color-a-l5);
+
+    color: var(--pal-color-a);
+  }
+
+  > .right > .cmp-button {
+    border-color: var(--pal-color-c-l1);
+
+    color: var(--pal-color-c-d1);
+  }
+}

@@ -1,0 +1,47 @@
+.cmp-dropdown {
+  display: contents;
+
+  /* TODO: estas animaciones son buenas, otros componentes como Select deben ser iguales */
+  > .dropdown {
+    position-area: bottom;
+    position-try-fallbacks: flip-block;
+
+    margin: var(--pal-size-xs);
+
+    border-radius: var(--pal-size-xs);
+    scale: 0.9;
+    opacity: 0;
+    transform-origin: top;
+
+    transition:
+      display var(--pal-time-s) allow-discrete,
+      overlay var(--pal-time-s) allow-discrete,
+      scale var(--pal-time-s) var(--pal-timing-func-a),
+      opacity var(--pal-time-s) var(--pal-timing-func-b);
+
+    > * {
+      flex-shrink: 0;
+    }
+
+    &:popover-open {
+      display: flex;
+
+      scale: initial;
+      opacity: initial;
+
+      &.gallery {
+        display: grid;
+      }
+
+      @starting-style {
+        scale: 0.9;
+        opacity: 0;
+      }
+    }
+
+    &.gallery {
+      grid-template-columns: repeat(var(--c), 1fr);
+      grid-template-rows: repeat(var(--r), 1fr);
+    }
+  }
+}

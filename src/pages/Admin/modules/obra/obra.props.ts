@@ -60,6 +60,12 @@ export const ObraProps = defineProps<ObraModel.Entity>({
   fechaContratacion: createDateProp({
     title: 'Fecha de Contratación',
   }),
+  visitable: createBooleanProp({
+    title: 'Visitable',
+    config: {
+      allowNull: true,
+    },
+  }),
   inaugurable: createBooleanProp({
     title: 'Inaugurable',
     config: {
