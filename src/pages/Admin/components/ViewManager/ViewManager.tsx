@@ -19,22 +19,22 @@ import FavoriteViews from '../FavoriteViews/FavoriteViews'
 // import RepresentanteEmpresa from '../../views/RepresentanteEmpresa/RepresentanteEmpresa'
 // import RepresentanteObra from '../../views/RepresentanteObra/RepresentanteObra'
 // import Rescision from '../../views/Rescision/Rescision'
-// import TipoContratacionObra from '../../views/TipoContratacionObra/TipoContratacionObra'
-// import TipoEnteObra from '../../views/TipoEnteObra/TipoEnteObra'
-// import TipoEstadoObra from '../../views/TipoEstadoObra/TipoEstadoObra'
-// import TipoFinanciamientoObra from '../../views/TipoFinanciamientoObra/TipoFinanciamientoObra'
-// import TipoInspector from '../../views/TipoInspector/TipoInspector'
-// import TipoModificacion from '../../views/TipoModificacion/TipoModificacion'
-// import TipoNivelArea from '../../views/TipoNivelArea/TipoNivelArea'
-// import TipoOrigenFinanciamientoObra from '../../views/TipoOrigenFinanciamientoObra/TipoOrigenFinanciamientoObra'
-// import TipoParalizacion from '../../views/TipoParalizacion/TipoParalizacion'
-// import TipoProfesion from '../../views/TipoProfesion/TipoProfesion'
-// import TipoProgramaObra from '../../views/TipoProgramaObra/TipoProgramaObra'
-// import TipoRecepcion from '../../views/TipoRecepcion/TipoRecepcion'
-// import TipoRedeterminacion from '../../views/TipoRedeterminacion/TipoRedeterminacion'
-// import TipoRepresentante from '../../views/TipoRepresentante/TipoRepresentante'
-// import TipoRescision from '../../views/TipoRescision/TipoRescision'
-// import TipoTematicaObra from '../../views/TipoTematicaObra/TipoTematicaObra'
+import { TipoContratacionObra } from '@/modules/tipoContratacionObra/components/TipoContratacionObra/TipoContratacionObra'
+import { TipoEnteObra } from '@/modules/tipoEnteObra/components/TipoEnteObra/TipoEnteObra'
+import { TipoEstadoObra } from '@/modules/tipoEstadoObra/components/TipoEstadoObra/TipoEstadoObra'
+import { TipoFinanciamientoObra } from '@/modules/tipoFinanciamientoObra/components/TipoFinanciamientoObra/TipoFinanciamientoObra'
+import { TipoInspector } from '@/modules/tipoInspector/components/TipoInspector/TipoInspector'
+import { TipoModificacion } from '@/modules/tipoModificacion/components/TipoModificacion/TipoModificacion'
+import { TipoNivelArea } from '@/modules/tipoNivelArea/components/TipoNivelArea/TipoNivelArea'
+import { TipoOrigenFinanciamientoObra } from '@/modules/tipoOrigenFinanciamientoObra/components/TipoOrigenFinanciamientoObra/TipoOrigenFinanciamientoObra'
+import { TipoParalizacion } from '@/modules/tipoParalizacion/components/TipoParalizacion/TipoParalizacion'
+import { TipoProfesion } from '@/modules/tipoProfesion/components/TipoProfesion/TipoProfesion'
+import { TipoProgramaObra } from '@/modules/tipoProgramaObra/components/TipoProgramaObra/TipoProgramaObra'
+import { TipoRecepcion } from '@/modules/tipoRecepcion/components/TipoRecepcion/TipoRecepcion'
+import { TipoRedeterminacion } from '@/modules/tipoRedeterminacion/components/TipoRedeterminacion/TipoRedeterminacion'
+import { TipoRepresentante } from '@/modules/tipoRepresentante/components/TipoRepresentante/TipoRepresentante'
+import { TipoRescision } from '@/modules/tipoRescision/components/TipoRescision/TipoRescision'
+import { TipoTematicaObra } from '@/modules/tipoTematicaObra/components/TipoTematicaObra/TipoTematicaObra'
 
 import { Config } from '../../views/Config/Config'
 import { Pais } from '@/modules/pais/components/Pais/Pais'
@@ -70,22 +70,22 @@ const ViewManager = () => (
     {/* <RepresentanteEmpresa /> */}
     {/* <RepresentanteObra /> */}
     {/* <Rescision /> */}
-    {/* <TipoContratacionObra /> */}
-    {/* <TipoEnteObra /> */}
-    {/* <TipoEstadoObra /> */}
-    {/* <TipoFinanciamientoObra /> */}
-    {/* <TipoInspector /> */}
-    {/* <TipoModificacion /> */}
-    {/* <TipoNivelArea /> */}
-    {/* <TipoOrigenFinanciamientoObra /> */}
-    {/* <TipoParalizacion /> */}
-    {/* <TipoProfesion /> */}
-    {/* <TipoProgramaObra /> */}
-    {/* <TipoRecepcion /> */}
-    {/* <TipoRedeterminacion /> */}
-    {/* <TipoRepresentante /> */}
-    {/* <TipoRescision /> */}
-    {/* <TipoTematicaObra /> */}
+    <TipoContratacionObra />
+    <TipoEnteObra />
+    <TipoEstadoObra />
+    <TipoFinanciamientoObra />
+    <TipoInspector />
+    <TipoModificacion />
+    <TipoNivelArea />
+    <TipoOrigenFinanciamientoObra />
+    <TipoParalizacion />
+    <TipoProfesion />
+    <TipoProgramaObra />
+    <TipoRecepcion />
+    <TipoRedeterminacion />
+    <TipoRepresentante />
+    <TipoRescision />
+    <TipoTematicaObra />
   </div>
 )
 
