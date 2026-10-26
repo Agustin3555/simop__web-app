@@ -12,6 +12,7 @@
     scale: 0.9;
     opacity: 0;
     transform-origin: top;
+    overflow: auto;
 
     transition:
       display var(--pal-time-s) allow-discrete,

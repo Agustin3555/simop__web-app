@@ -31,7 +31,7 @@ export const ChatThread = ({ id, onDelete }: ChatThreadProps) => {
   const scrollRef = useRef<HTMLDivElement>(null)
   const tempMessageIdRef = useRef(0)
 
-  const toasting = useAppStore(store => store.toasting)
+  const toasting = useAppStore(s => s.toasting)
 
   const { data: initMessages } = useQuery({
     queryKey: ['chats', id, 'messages'],

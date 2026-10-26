@@ -1,11 +1,13 @@
 import { Dispatch, SetStateAction, useCallback, useMemo } from 'react'
 import { useConfigs } from './useConfigs.hook'
-import { useMetaModel } from './useMetaModel.hook'
+import { useTableDef } from './useTableDef.hook'
 import { BaseConfig } from '../contexts/configs.context'
 
 export const useConfigModule = () => {
   const { configs, setConfigs } = useConfigs()
-  const { key } = useMetaModel()
+  const {
+    tableDef: { key },
+  } = useTableDef()
 
   const config = configs[key]
 

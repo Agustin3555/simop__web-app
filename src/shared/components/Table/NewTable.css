@@ -48,8 +48,6 @@
       border-color: var(--pal-color-a-l4);
       border-bottom-width: var(--line-thickness);
 
-      background-color: var(--pal-color-a-l5);
-
       &.stick {
         top: 0;
       }

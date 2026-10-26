@@ -1,88 +1,95 @@
-import { asAuxView, asModuleView } from './views.const'
+import { TableKey } from './metaModelKey.const'
 
-export interface SectionNode {
-  viewKey?: string
-  title?: string
-  sections?: SectionNode[]
-}
+export type SectionNode =
+  | {
+      tableKey: TableKey
+      title?: never
+      sections?: never
+    }
+  | {
+      tableKey?: never
+      title: string
+      sections: SectionNode[]
+    }
 
 export const TREE: SectionNode[] = [
-  {
-    title: 'Sobre Obras',
-    sections: [
-      { viewKey: asModuleView('obra') },
-      { viewKey: asAuxView('obraDetalle') },
-      {
-        title: 'Eventos',
-        sections: [
-          { viewKey: asModuleView('fojaMedicion') },
-          { viewKey: asModuleView('pagoCertificacion') },
-          { viewKey: asModuleView('redeterminacion') },
-          { viewKey: asModuleView('ampliacion') },
-          { viewKey: asModuleView('modificacion') },
-          { viewKey: asModuleView('paralizacion') },
-          { viewKey: asModuleView('rescision') },
-          { viewKey: asModuleView('recepcion') },
-        ],
-      },
-      {
-        title: 'Actores',
-        sections: [
-          { viewKey: asModuleView('representanteObra') },
-          { viewKey: asModuleView('inspectorObra') },
-        ],
-      },
-    ],
-  },
-  {
-    title: 'Sobre Empresas',
-    sections: [
-      { viewKey: asModuleView('empresa') },
-      {
-        title: 'Actores',
-        sections: [{ viewKey: asModuleView('representanteEmpresa') }],
-      },
-    ],
-  },
-  {
-    title: 'Ubicación',
-    sections: [
-      { viewKey: asModuleView('pais') },
-      { viewKey: asModuleView('provincia') },
-      { viewKey: asModuleView('apg') },
-      { viewKey: asModuleView('departamento') },
-      { viewKey: asModuleView('localidad') },
-    ],
-  },
-  {
-    title: 'Actores',
-    sections: [
-      { viewKey: asModuleView('representante') },
-      { viewKey: asModuleView('inspector') },
-    ],
-  },
-  {
-    title: 'Tipos',
-    sections: [
-      { viewKey: asModuleView('tipoNivelArea') },
-      { viewKey: asModuleView('tipoProfesion') },
-      { viewKey: asModuleView('tipoRepresentante') },
-      { viewKey: asModuleView('tipoInspector') },
+  { tableKey: 'pais' },
+  { tableKey: 'provincia' },
 
-      { viewKey: asModuleView('tipoEnteObra') },
-      { viewKey: asModuleView('tipoContratacionObra') },
-      { viewKey: asModuleView('tipoOrigenFinanciamientoObra') },
-      { viewKey: asModuleView('tipoFinanciamientoObra') },
-      { viewKey: asModuleView('tipoProgramaObra') },
-      { viewKey: asModuleView('tipoTematicaObra') },
-      { viewKey: asModuleView('tipoEstadoObra') },
+  // {
+  //   title: 'Sobre Obras',
+  //   sections: [
+  //     { tableKey: 'obra' },
+  //     {
+  //       title: 'Eventos',
+  //       sections: [
+  //         { tableKey: 'fojaMedicion' },
+  //         { tableKey: 'pagoCertificacion' },
+  //         { tableKey: 'redeterminacion' },
+  //         { tableKey: 'ampliacion' },
+  //         { tableKey: 'modificacion' },
+  //         { tableKey: 'paralizacion' },
+  //         { tableKey: 'rescision' },
+  //         { tableKey: 'recepcion' },
+  //       ],
+  //     },
+  //     {
+  //       title: 'Actores',
+  //       sections: [
+  //         { tableKey: 'representanteObra' },
+  //         { tableKey: 'inspectorObra' },
+  //       ],
+  //     },
+  //   ],
+  // },
+  // {
+  //   title: 'Sobre Empresas',
+  //   sections: [
+  //     { tableKey: 'empresa' },
+  //     {
+  //       title: 'Actores',
+  //       sections: [{ tableKey: 'representanteEmpresa' }],
+  //     },
+  //   ],
+  // },
+  // {
+  //   title: 'Ubicación',
+  //   sections: [
+  //     { tableKey: 'pais' },
+  //     { tableKey: 'provincia' },
+  //     { tableKey: 'apg' },
+  //     { tableKey: 'departamento' },
+  //     { tableKey: 'localidad' },
+  //   ],
+  // },
+  // {
+  //   title: 'Actores',
+  //   sections: [{ tableKey: 'representante' }, { tableKey: 'inspector' }],
+  // },
+  // {
+  //   title: 'Tipos',
+  //   sections: [
+  //     { tableKey: 'tipoNivelArea' },
+  //     { tableKey: 'tipoProfesion' },
+  //     { tableKey: 'tipoRepresentante' },
+  //     { tableKey: 'tipoInspector' },
 
-      { viewKey: asModuleView('tipoParalizacion') },
-      { viewKey: asModuleView('tipoRescision') },
-      { viewKey: asModuleView('tipoRedeterminacion') },
-      { viewKey: asModuleView('tipoRecepcion') },
-      { viewKey: asModuleView('tipoModificacion') },
-    ],
-  },
-  { viewKey: asModuleView('area') },
+  //     { tableKey: 'tipoEnteObra' },
+  //     { tableKey: 'tipoContratacionObra' },
+  //     { tableKey: 'tipoOrigenFinanciamientoObra' },
+  //     { tableKey: 'tipoFinanciamientoObra' },
+  //     { tableKey: 'tipoProgramaObra' },
+  //     { tableKey: 'tipoTematicaObra' },
+  //     { tableKey: 'tipoEstadoObra' },
+
+  //     { tableKey: 'tipoParalizacion' },
+  //     { tableKey: 'tipoRescision' },
+  //     { tableKey: 'tipoRedeterminacion' },
+  //     { tableKey: 'tipoRecepcion' },
+  //     { tableKey: 'tipoModificacion' },
+  //   ],
+  // },
+  // { tableKey: 'area' },
 ]
+
+// TODO: constantes a revivir

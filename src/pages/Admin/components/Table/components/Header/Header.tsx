@@ -18,11 +18,11 @@ import {
 import { LooseEntity } from '@/models/config'
 import { classList } from '@/helpers'
 import { steppedSizes } from '../../helpers'
-import { OptionSelectors } from '@/pages/Admin/components'
 import { extractKeys } from '@/pages/Admin/helpers'
 
 import { Prop } from '@/pages/Admin/meta/utils'
-import { useTable } from '@/pages/Admin/hooks'
+import { useTable } from '@/pages/Admin/hooks/useTable.hook'
+import OptionSelectors from '../../../OptionSelectors/OptionSelectors'
 
 const SORT_ICON_MATCHER: Record<SortDirection, string> = {
   asc: 'fa-solid fa-arrow-up-wide-short',

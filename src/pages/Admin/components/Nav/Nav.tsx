@@ -1,9 +1,11 @@
 import './Nav.css'
 import { useState } from 'react'
-import { useNavState } from '../../hooks'
-import { FavoriteViews, SegmentedControl } from '..'
-import { SegmentedControlProps } from '../SegmentedControl/SegmentedControl'
+import SegmentedControl, {
+  SegmentedControlProps,
+} from '../SegmentedControl/SegmentedControl'
 import { AssistantButton, ReleaseNotesModal, Tree } from './components'
+import { useNavState } from '../../hooks/useNavState.hook'
+import FavoriteViews from '../FavoriteViews/FavoriteViews'
 
 type ViewMode = 'tree' | 'favorites'
 

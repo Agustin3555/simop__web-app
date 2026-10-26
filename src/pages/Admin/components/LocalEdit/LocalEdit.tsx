@@ -8,27 +8,25 @@ import {
 } from 'react'
 import { useAppStore } from '@/store/config'
 import { useMutationActionState } from '@/hooks'
-import {
-  useMetaModel,
-  useLocalView,
-  useTable,
-  useConfigModule,
-} from '../../hooks'
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import { Button, Loader } from '@/components'
 import { FallbackBanner, Form } from '..'
 import { LooseEntity } from '@/models/config'
 import { buildConfigKey } from '../../helpers'
+import { useConfigModule } from '../../hooks/useConfigModule.hook'
+import { useLocalView } from '../../hooks/useLocalView.hook'
+import { useTableDef } from '../../hooks/useTableDef.hook'
+import { useTable } from '../../hooks/useTable.hook'
 
 interface LocalEditBodyProps {
   editId: number
 }
 
 const LocalEditBody = ({ editId }: LocalEditBodyProps) => {
-  const { key, title, service, anchorField, editProps } = useMetaModel()
+  const { key, title, service, anchorField, editProps } = useTableDef()
   const { groups } = editProps
 
-  const toasting = useAppStore(store => store.toasting)
+  const toasting = useAppStore(s => s.toasting)
   const { selectedConfig } = useConfigModule()
   const { deselectRows } = useTable().states
   const queryClient = useQueryClient()
@@ -65,7 +63,7 @@ const LocalEditBody = ({ editId }: LocalEditBodyProps) => {
         ),
       )
 
-      const editEntity = await service.updateOne!(editId, updateData)
+      const editEntity = await service.updateOne(editId, updateData)
 
       queryClient.setQueryData<LooseEntity[]>(
         buildConfigKey(key, selectedConfig),
@@ -118,7 +116,7 @@ const LocalEditBody = ({ editId }: LocalEditBodyProps) => {
 const LocalEdit = () => {
   const [editId, setEditId] = useState<number>()
 
-  const { title } = useMetaModel()
+  const { title } = useTableDef()
   const { localView, setLocalView } = useLocalView()
   const { selectedRowIds } = useTable().states
 

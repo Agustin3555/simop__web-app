@@ -1,8 +1,22 @@
 .cmp-filter-menu {
+  > .cmp-button {
+    &.is-filtering {
+      --cmp-button-bg-color: var(--pal-color-b-l3);
+    }
+  }
+
   > .dropdown {
-    display: flex;
     flex-direction: column;
     gap: var(--pal-size-xs);
     padding: var(--pal-size-xs);
+  }
+
+  .value-state-filter {
+    display: flex;
+    flex-direction: column;
+    gap: var(--pal-size-xs);
+    margin: 0;
+    padding: 0;
+    border: 0;
   }
 }

@@ -1,15 +1,6 @@
 import './Table.css'
 import { useCallback, useEffect, useMemo, useState } from 'react'
 import {
-  useMetaModel,
-  useDerivedState,
-  DerivedToState,
-  StateToDerived,
-  useTable,
-  useConfigModule,
-  useInfiniteScroll,
-} from '@/pages/Admin/hooks'
-import {
   ColumnDef,
   getCoreRowModel,
   getFacetedMinMaxValues,
@@ -25,6 +16,15 @@ import { classList } from '@/helpers'
 import { format } from '@formkit/tempo'
 import { utils, writeFile } from 'xlsx'
 import { steppedSizes } from './helpers'
+import { useConfigModule } from '../../hooks/useConfigModule.hook'
+import {
+  StateToDerived,
+  DerivedToState,
+  useDerivedState,
+} from '../../hooks/useDerivedState.hook'
+import { useInfiniteScroll } from '../../hooks/useInfiniteScroll.hook'
+import { useTableDef } from '../../hooks/useTableDef.hook'
+import { useTable } from '../../hooks/useTable.hook'
 
 const SELECT_COLUMN = 'select'
 const STEP_WIDTH = 32
@@ -42,7 +42,7 @@ const Table = ({ data }: TableProps) => {
     stickFoot: false,
   })
 
-  const { title, getProps, getPropsRecord } = useMetaModel()
+  const { title, getProps, getPropsRecord } = useTableDef()
   const { selectedConfig } = useConfigModule()
 
   const selectedFields = useMemo(() => selectedConfig.columns, [])

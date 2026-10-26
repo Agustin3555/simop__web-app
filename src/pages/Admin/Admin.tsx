@@ -1,18 +1,14 @@
 import './Admin.css'
-import { useMetaModels, useNavState } from './hooks'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
-import { Header, Nav, ViewManager } from './components'
-import {
-  ConfigsProvider,
-  FavoriteViewsProvider,
-  MetaModelsProvider,
-  NavStateProvider,
-  ViewsInfoProvider,
-  ViewsProvider,
-} from './providers'
 import { publicInstance } from '@/services/config'
 import { apiAdminPath } from '@/env'
+import { useNavState } from './hooks/useNavState.hook'
+import { NavStateProvider } from './providers/navState.provider'
+import { ViewsProvider } from './providers/views.provider'
+import Header from './components/Header/Header'
+import Nav from './components/Nav/Nav'
+import ViewManager from './components/ViewManager/ViewManager'
 
 const wakeUp = async () => await publicInstance.get(`${apiAdminPath}/ping`)
 wakeUp()
@@ -26,37 +22,26 @@ const client = new QueryClient({
 })
 
 const AdminBody = () => {
-  const { allReady } = useMetaModels()
   const { isOpen } = useNavState()
 
-  if (!allReady) return null
-
   return (
-    <ConfigsProvider>
-      <div className="cmp-admin" data-nav-open={isOpen}>
-        <Nav />
-        <div className="main-panel">
-          <Header />
-          <ViewManager />
-        </div>
+    <div className="cmp-admin" data-nav-open={isOpen}>
+      <Nav />
+      <div className="main-panel">
+        <Header />
+        <ViewManager />
       </div>
-    </ConfigsProvider>
+    </div>
   )
 }
 
 const Admin = () => (
   <QueryClientProvider {...{ client }}>
-    <MetaModelsProvider>
-      <ViewsInfoProvider>
-        <ViewsProvider>
-          <NavStateProvider>
-            <FavoriteViewsProvider>
-              <AdminBody />
-            </FavoriteViewsProvider>
-          </NavStateProvider>
-        </ViewsProvider>
-      </ViewsInfoProvider>
-    </MetaModelsProvider>
+    <ViewsProvider>
+      <NavStateProvider>
+        <AdminBody />
+      </NavStateProvider>
+    </ViewsProvider>
     <ReactQueryDevtools />
   </QueryClientProvider>
 )

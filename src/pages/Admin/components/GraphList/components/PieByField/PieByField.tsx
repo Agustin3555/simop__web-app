@@ -1,11 +1,7 @@
 import './PieByField.css'
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { useQueryClient } from '@tanstack/react-query'
-import {
-  useGraphScreenshots,
-  useMetaModel,
-  useTable,
-} from '@/pages/Admin/hooks'
+
 import { Cell, Pie, PieChart, ResponsiveContainer, Sector } from 'recharts'
 import { AnnotationLayer } from './components'
 import { PieSectorData } from './components/AnnotationLayer/AnnotationLayer'
@@ -13,8 +9,11 @@ import { Button, Toggle } from '@/components'
 import { classList } from '@/helpers'
 import { COLOR_MATCHER, palColorGS, RGBColor } from '@/styles/palette'
 import { AddFn, Prop, WDND_MODE } from '@/pages/Admin/meta/utils'
-import { Select } from '../../..'
 import { generateColorScaleFromKeys } from '../../helpers'
+import { useTableDef } from '@/pages/Admin/hooks/useTableDef.hook'
+import { useGraphScreenshots } from '@/pages/Admin/hooks/useGraphScreenshots.hook'
+import { useTable } from '@/pages/Admin/hooks/useTable.hook'
+import Select from '../../../Select/Select'
 
 const BASE_COLORS: RGBColor[] = [
   COLOR_MATCHER.A,
@@ -52,7 +51,9 @@ const PieByField = ({ propField }: PieByFieldProps) => {
   const containerRef = useRef<HTMLDivElement>(null)
 
   const queryClient = useQueryClient()
-  const { key: modelKey } = useMetaModel()
+  const {
+    tableDef: { key: modelKey },
+  } = useTableDef()
   const { table, states } = useTable()
   const { columnFilters, toggleGraphedField } = states
   const { captureInfoRef, isCaptured, toggleCapture, removeCapture } =

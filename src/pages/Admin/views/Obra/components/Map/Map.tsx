@@ -1,10 +1,10 @@
 import './Map.css'
 import { useEffect } from 'react'
 import { useQueryActionState } from '@/hooks'
-import { useLazyQuery, useMetaModels } from '@/pages/Admin/hooks'
 import { MapContainer, TileLayer, useMap } from 'react-leaflet'
-import { DataDownloadBanner } from '@/pages/Admin/components'
 import { DepartamentosLayer, LocalidadesLayer } from './components'
+import DataDownloadBanner from '@/pages/Admin/components/DataDownloadBanner/DataDownloadBanner'
+import { useTableQuery } from '@/pages/Admin/hooks/useTableQuery.hook'
 
 const FixMapResize = () => {
   const map = useMap()
@@ -21,7 +21,7 @@ const FixMapResize = () => {
 export const Map = () => {
   const { getMetaModel } = useMetaModels()
 
-  const { query, handleClick } = useLazyQuery(['map'], async () => {
+  const { query, refetch: handleClick } = useTableQuery(['map'], async () => {
     const [apgs, departamentos, localidades] = await Promise.all([
       getMetaModel('apg')!.service.getAll(['id', 'color', 'numero']),
       getMetaModel('departamento')!.service.getAll(['osmId', 'apg']),

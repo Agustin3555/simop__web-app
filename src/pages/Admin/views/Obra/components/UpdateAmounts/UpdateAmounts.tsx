@@ -3,19 +3,38 @@ import { useState } from 'react'
 import { useQuery } from '@tanstack/react-query'
 import { useHandleAction } from '@/hooks'
 import { Button, Toggle } from '@/components'
-import { StaticTable } from '@/pages/Admin/components'
 import { ObraService } from '@/pages/Admin/modules/obra/obra.service'
-import { formatter } from '@/pages/Admin/meta/date'
 import { useAppStore } from '@/store/config'
 import { apiUrl } from '@/env'
+import { TableProvider } from '@/shared/components/Table/contexts/Table/Table.context'
+import { NewTable } from '@/shared/components'
+import {
+  createColumnBehaviors,
+  toColumnDefs,
+} from '@/shared/core/column.helper'
+import { MontosActualizadosObra } from '@/pages/Admin/modules/obra/obra.model'
 
-const getUpdateAmounts = async () => {
-  const rowData = await ObraService.getUpdateAmounts()
-  return rowData.map(({ createdAt, ...rest }) => ({
-    createdAt: formatter(createdAt, true),
-    ...rest,
-  }))
-}
+const columns = createColumnBehaviors(
+  toColumnDefs<MontosActualizadosObra>({
+    createdAt: {
+      type: 'text',
+      title: 'Fecha',
+      domain: 'shortText',
+    },
+    periodoNombre: {
+      type: 'text',
+      title: 'Periodo',
+    },
+    actualizados: {
+      type: 'number',
+      title: 'Actualizados',
+    },
+    id: {
+      type: 'number',
+      title: 'ID',
+    },
+  }),
+)
 
 export const UpdateAmounts = () => {
   const [progress, setProgress] = useState(0)
@@ -23,7 +42,7 @@ export const UpdateAmounts = () => {
 
   const { data, refetch } = useQuery({
     queryKey: ['getUpdateAmounts'],
-    queryFn: getUpdateAmounts,
+    queryFn: ObraService.getUpdateAmounts,
     retry: false,
   })
 
@@ -75,59 +94,9 @@ export const UpdateAmounts = () => {
           Construcción).
         </small>
       </header>
-      <StaticTable
-        columns={{
-          createdAt: {
-            title: 'Fecha',
-            size: 13,
-          },
-          periodoNombre: {
-            title: 'Periodo',
-            size: 7,
-          },
-          actualizados: {
-            title: 'Actualizados',
-            size: 10,
-          },
-          id: {
-            title: 'ID',
-          },
-        }}
-        {...{ data }}
-      />
-
-      {/* <TableProvider>
-        <NewTable
-          rowKey="createdAt"
-          columnDefs={[
-            {
-              type: 'text',
-              key: 'createdAt',
-              title: 'Fecha',
-              domain: 'shortText',
-            },
-            {
-              type: 'text',
-              key: 'periodoNombre',
-              title: 'Periodo',
-            },
-            {
-              type: 'number',
-              key: 'actualizados',
-              title: 'Actualizados',
-              isDecimal: true,
-              pre: '$',
-              sub: 'k',
-            },
-            // {
-            //   type: 'number',
-            //   key: 'id',
-            //   title: 'ID',
-            // },
-          ]}
-          data={data}
-        />
-      </TableProvider> */}
+      <TableProvider>
+        <NewTable {...{ columns, data }} />
+      </TableProvider>
     </div>
   )
 }

@@ -3,20 +3,17 @@ import { Button } from '@/components'
 import { pdf } from '@react-pdf/renderer'
 import { ReactNode, useCallback, useMemo, useState } from 'react'
 import { sleep } from '@/helpers'
-import {
-  useConfigModule,
-  useGraphScreenshots,
-  useMetaModel,
-  useTable,
-} from '../../hooks'
-import { ReportInTable } from '..'
 import { steppedSizes } from '../Table/helpers'
-import { FilterProp } from '../ReportInTable/ReportInTable'
+import ReportInTable, { FilterProp } from '../ReportInTable/ReportInTable'
+import { useConfigModule } from '../../hooks/useConfigModule.hook'
+import { useGraphScreenshots } from '../../hooks/useGraphScreenshots.hook'
+import { useTableDef } from '../../hooks/useTableDef.hook'
+import { useTable } from '../../hooks/useTable.hook'
 
 const ReportButton = () => {
   const [progress, setProgress] = useState(0)
 
-  const { title, getProps } = useMetaModel()
+  const { title, getProps } = useTableDef()
   const { selectedConfig } = useConfigModule()
 
   const { table, states } = useTable()
@@ -94,8 +91,8 @@ const ReportButton = () => {
 
     return (
       <ReportInTable
-        schemeTitle={title.plural}
-        {...{ props, header, rows, graphs }}
+        title={`Lista de ${title}`}
+        {...{ props, columns: header, rows, graphs }}
       />
     )
   }, [table, selectedRowIds, accessorKeys, captures])

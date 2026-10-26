@@ -3,9 +3,10 @@ import { Dispatch, SetStateAction, useCallback } from 'react'
 import { Button, Toggle } from '@/components'
 import { ToggleProps } from '@/components/Toggle/Toggle'
 import { Combobox, Value } from '../../..'
-import { useMetaModel, useTable } from '@/pages/Admin/hooks'
 import { ButtonProps } from '@/components/Button/Button'
 import { ComboboxProps } from '../../../Combobox/Combobox'
+import { useTableDef } from '@/pages/Admin/hooks/useTableDef.hook'
+import { useTable } from '@/pages/Admin/hooks/useTable.hook'
 
 export type ToggleKey =
   | 'filters'
@@ -55,7 +56,7 @@ const Toolbar = ({
   onExportClick,
   comboboxProps,
 }: ToolbarProps) => {
-  const { key } = useMetaModel()
+  const { key } = useTableDef()
   const { table } = useTable()
 
   const dataLength = table!.options.data.length

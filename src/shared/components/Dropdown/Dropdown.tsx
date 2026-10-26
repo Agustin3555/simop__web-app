@@ -13,8 +13,7 @@ interface DropdownProps {
   gallery?: { c: number; r?: number }
   opener: (attrs: ButtonHTMLAttributes<HTMLButtonElement>) => ReactNode
   children:
-    | ReactNode
-    | ((attrs: ButtonHTMLAttributes<HTMLButtonElement>) => ReactNode)
+    ReactNode | ((attrs: ButtonHTMLAttributes<HTMLButtonElement>) => ReactNode)
 }
 
 export const Dropdown = ({

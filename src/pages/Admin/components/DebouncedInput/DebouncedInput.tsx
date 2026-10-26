@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
-import { useInputHandler } from '@/pages/Admin/hooks'
 import { Input } from '@/components'
 import { InputProps } from '@/components/Input/Input'
+import { useInputHandler } from '../../hooks/useInputHandler.hook'
 
 export interface DebouncedInputProps extends InputProps {
   value: string

@@ -7,9 +7,9 @@ import {
   useRef,
   useState,
 } from 'react'
-import { useInputHandler } from '../../hooks'
 import { classList } from '@/helpers'
 import { Icon } from '@/components'
+import { useInputHandler } from '../../hooks/useInputHandler.hook'
 
 interface SelectProps {
   name: string

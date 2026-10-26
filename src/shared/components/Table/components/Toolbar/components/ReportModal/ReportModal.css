@@ -1,0 +1,27 @@
+.cmp-report-modal > dialog > .content {
+  --cmp-modal-max-width: max-content;
+
+  > form {
+    display: flex;
+    flex-direction: column;
+    gap: var(--pal-size-l);
+    padding: var(--pal-size-l);
+
+    > fieldset {
+      display: flex;
+      flex-direction: column;
+      gap: var(--pal-size-xs);
+      border: none;
+
+      > legend {
+        margin-bottom: var(--pal-size-s);
+
+        font-size: var(--pal-size-font-xs);
+      }
+    }
+
+    > .cmp-button {
+      color: var(--pal-color-white);
+    }
+  }
+}

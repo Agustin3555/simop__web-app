@@ -8,9 +8,9 @@ import {
   PromptInputProps,
 } from './components'
 import { useCallback, useState } from 'react'
-import { useInputHandler } from '../../hooks'
 import { AiChatService } from '../../modules/aiChat/aiChat.service'
 import { useQuery } from '@tanstack/react-query'
+import { useInputHandler } from '../../hooks/useInputHandler.hook'
 
 const Assistant = () => {
   const [selectedChat, setSelectedChat] = useState<number>()

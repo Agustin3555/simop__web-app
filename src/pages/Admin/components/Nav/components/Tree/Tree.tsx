@@ -5,7 +5,7 @@ import { TREE } from '@/pages/Admin/constants/navTree.const'
 const Tree = () => (
   <div className="cmp-tree">
     {TREE.map(section => (
-      <Node key={section.viewKey ?? section.title} {...section} />
+      <Node key={section.tableKey ?? section.title} {...section} />
     ))}
   </div>
 )

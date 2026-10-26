@@ -1,6 +1,6 @@
 import './InputArea.css'
 import { TextareaHTMLAttributes } from 'react'
-import { useInputField, useResetByRender } from '@/hooks'
+import { useInputField } from '@/hooks'
 import { classList } from '@/helpers'
 import { InputFieldPartial } from '@/types'
 import { InputLabel } from '@/components'
@@ -22,8 +22,6 @@ const InputArea = ({
   const { inputTitle, disabledState } = useInputField({ title, isRequired })
   const { disabled } = disabledState
 
-  const { renderKey, resetHandleClick } = useResetByRender(keyName)
-
   return (
     <div className={classList('cmp-input-area', 'control')}>
       <InputLabel
@@ -33,11 +31,9 @@ const InputArea = ({
           isRequired,
           isEditMode,
           ...disabledState,
-          resetHandleClick,
         }}
       />
       <textarea
-        key={renderKey}
         className="input box text"
         title={inputTitle}
         name={keyName}

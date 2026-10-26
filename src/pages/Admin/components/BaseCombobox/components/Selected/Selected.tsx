@@ -1,14 +1,13 @@
 import './Selected.css'
 import { MouseEventHandler } from 'react'
-import { useComboboxCore } from '@/pages/Admin/hooks'
 import { Icon } from '@/components'
 import { BaseComboboxProps } from '../../BaseCombobox'
+import { useComboboxCore } from '@/pages/Admin/hooks/useComboboxCore.hook'
 
-export interface SelectedProps
-  extends Pick<
-    BaseComboboxProps,
-    'selected' | 'staticSelected' | 'getItemTitle'
-  > {
+export interface SelectedProps extends Pick<
+  BaseComboboxProps,
+  'selected' | 'staticSelected' | 'getItemTitle'
+> {
   disabled: boolean
 
   handleDeselectItemClick: MouseEventHandler<HTMLButtonElement>

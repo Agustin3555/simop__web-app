@@ -13,7 +13,7 @@ interface SortButtonProps {
 
 export const SortButton = ({
   propBuilders: {
-    def: { key },
+    usefulDef: { key },
   },
 }: SortButtonProps) => {
   const columnSorting = useTable(s => s.columnSorting)

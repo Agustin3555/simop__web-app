@@ -1,3 +1,4 @@
+import InputArea from '@/pages/Admin/components/InputArea/InputArea'
 import {
   Column,
   ColumnBehavior,
@@ -5,9 +6,13 @@ import {
   InputConfig,
   Size,
 } from '../types'
+import { Input } from '@/components'
+import { StyleSheet, Text } from '@react-pdf/renderer'
+import { COLOR_MATCHER, palColor } from '@/styles/palette'
 
 export interface TextColumn extends Column {
   type: 'text'
+  title: string
   domain?: 'shortText' | 'longText' | 'email' | 'url'
   columnConfig?: ColumnConfig
   inputConfig?: InputConfig
@@ -16,53 +21,52 @@ export interface TextColumn extends Column {
 export const buildTextColumnBehavior = (def: TextColumn): ColumnBehavior => {
   const {
     key,
-    title,
-    type,
+    title: originTitle,
     domain = 'shortText',
     columnConfig,
     inputConfig,
   } = def
 
   const { size = Size.m, overrideTitle } = columnConfig ?? {}
-  const { isRequired = false } = inputConfig ?? {}
+  const { isHidden = false, isRequired = false } = inputConfig ?? {}
+
+  const title = overrideTitle ?? originTitle
 
   return {
-    def: {
+    usefulDef: {
       key,
       title,
-      type,
-      domain,
-      columnConfig: { size, overrideTitle },
-      inputConfig: { isRequired },
+      input: { isHidden },
+      column: { size },
     },
 
-    // getInput: (value, isEditMode = false) => {
-    //   if (hidden === true) return
+    getFormField: (value, isEditMode = false) => {
+      if (domain === 'longText') {
+        return (
+          <InputArea
+            keyName={key}
+            value={typeof value === 'string' ? value : undefined}
+            {...(!isEditMode && { isRequired })}
+            {...{ title, isEditMode }}
+          />
+        )
+      }
 
-    //   return isLong ? (
-    //     <InputArea
-    //       keyName={key}
-    //       {...(!isEditMode && { isRequired })}
-    //       {...{ title, value, isEditMode }}
-    //     />
-    //   ) : (
-    //     <Input
-    //       keyName={key}
-    //       {...(isURL && { inputHTMLAttrs: { type: 'url' } })}
-    //       {...(!isEditMode && { isRequired })}
-    //       {...{ title, value, isEditMode }}
-    //     />
-    //   )
-    // },
+      return (
+        <Input
+          keyName={key}
+          value={typeof value === 'string' ? value : undefined}
+          {...(domain === 'url' && { inputHTMLAttrs: { type: 'url' } })}
+          {...(!isEditMode && { isRequired })}
+          {...{ title, isEditMode }}
+        />
+      )
+    },
 
-    // getFormFieldValue: (formData, _, isEditMode = false) => {
-    //   const value = formData.get(key)
-
-    //   if (value === null) return
-    //   if (value === '') return isEditMode ? null : undefined
-
-    //   return (value as string).trim()
-    // },
+    writeFormValue: (formValues, accData) => {
+      const value = formValues.get.string(key).trim()
+      accData[key] = value === '' ? null : value
+    },
 
     compareTableValues: (a, b) => {
       if (typeof a !== 'string' || typeof b !== 'string') return 0
@@ -127,26 +131,27 @@ export const buildTextColumnBehavior = (def: TextColumn): ColumnBehavior => {
       }
     },
 
-    // getReportTableFilter: column => {
-    //   const { getFilterValue } = column
+    getReportTableFilter: filterValue => {
+      if (typeof filterValue !== 'string') return
 
-    //   const value = getFilterValue() as undefined | string
-    //   if (value === undefined) return
+      return { label: title, values: [filterValue] }
+    },
 
-    //   return { title, values: [value] }
-    // },
+    getReportTableCell: value => {
+      if (!value || typeof value !== 'string') return
 
-    // getReportTableCell: item => {
-    //   const value = item[key] as undefined | string
+      const styles = StyleSheet.create({
+        value: {
+          ...((domain === 'email' || domain === 'url') && {
+            textDecoration: 'underline',
+            textDecorationStyle: 'solid',
+            textDecorationColor: palColor('A'),
+          }),
+        },
+      })
 
-    //   if (value === undefined) return
-
-    //   const styles = StyleSheet.create({
-    //     value: {},
-    //   })
-
-    //   return <Text style={styles.value}>{value}</Text>
-    // },
+      return <Text style={styles.value}>{value}</Text>
+    },
 
     // getExcelTableCell: item => {
     //   const value = item[key] as undefined | string

@@ -1,6 +1,6 @@
 import './AssistantButton.css'
 import { useCallback, useEffect, useRef } from 'react'
-import { useViews } from '@/pages/Admin/hooks'
+import { useViews } from '@/pages/Admin/hooks/useViews.hook'
 import { palColor } from '@/styles/palette'
 import { classList } from '@/helpers'
 import { randomBlob } from './AssistantButton.style'

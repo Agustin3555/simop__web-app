@@ -1,11 +1,11 @@
 import { ColumnBehavior } from '@/shared/core/types'
 import { createStore } from 'zustand/vanilla'
 
-export type ColumnKey = number | string
-export type RowKey = number | string
+export type ColumnKey = string
+export type RowKey = string
 
-interface TableFilterValue {
-  blank: boolean
+interface Filters {
+  valueState?: 'value' | 'null'
   custom: unknown
 }
 
@@ -19,11 +19,8 @@ export interface TableState {
   columnVisibility: ColumnKey[]
   columnWidths: { columnKey: ColumnKey; points: number }[]
   columnSorting: { columnKey: ColumnKey; sort: 'asc' | 'desc'; order: number }[]
-  columnFilters: {
-    column: ColumnKey
-    filters: TableFilterValue
-  }[]
-  columnCalcs: { columnKey: ColumnKey; calc: unknown }[]
+  columnFilters: { columnKey: ColumnKey; filters: Filters }[]
+  columnCalcs: { columnKey: ColumnKey; calc: string }[]
   rowSelection: RowKey[]
 
   setColumnGraphed: (column: ColumnKey) => void
@@ -31,10 +28,8 @@ export interface TableState {
   setColumnVisibility: (column: ColumnKey, visible: boolean) => void
   setColumnWidth: (column: ColumnKey, points: number) => void
   setColumnSorting: (column: ColumnKey) => void
-  setColumnFilter: (
-    column: ColumnKey,
-    filters: Partial<TableFilterValue>,
-  ) => void
+  setColumnFilter: (column: ColumnKey, filters: Partial<Filters>) => void
+  setColumnCalc: (column: ColumnKey, calc?: string) => void
   setRowSelection: (row: RowKey) => void
 
   cleanFilters: () => void
@@ -44,7 +39,7 @@ export interface TableState {
   deselectFilteredRows: (rows: RowKey[]) => void
 }
 
-type TableProps = Partial<
+export type TableProps = Partial<
   Pick<
     TableState,
     | 'columnOrder'
@@ -62,7 +57,18 @@ export const createTableStore = (init?: TableProps) => {
     columns: [],
 
     loadColumns: columns => {
-      set({ columns })
+      set(({ columnOrder, columnWidths }) => ({
+        columns,
+        ...(columnOrder.length === 0 && {
+          columnOrder: columns.map(c => c.usefulDef.key),
+        }),
+        ...(columnWidths.length === 0 && {
+          columnWidths: columns.map(({ usefulDef: { key, column } }) => ({
+            columnKey: key,
+            points: column.size,
+          })),
+        }),
+      }))
     },
 
     columnOrder: init?.columnOrder ?? [],
@@ -89,7 +95,7 @@ export const createTableStore = (init?: TableProps) => {
     setColumnVisibility: (column, visible) => {
       set(s => ({
         columnVisibility: visible
-          ? s.columnVisibility.filter(item => item !== column)
+          ? s.columnVisibility.filter(i => i !== column)
           : s.columnVisibility.includes(column)
             ? s.columnVisibility
             : [...s.columnVisibility, column],
@@ -98,7 +104,7 @@ export const createTableStore = (init?: TableProps) => {
 
     setColumnWidth: (column, points) => {
       set(s => {
-        const current = s.columnWidths.find(item => item.columnKey === column)
+        const current = s.columnWidths.find(i => i.columnKey === column)
 
         if (!current) {
           return {
@@ -107,8 +113,8 @@ export const createTableStore = (init?: TableProps) => {
         }
 
         return {
-          columnWidths: s.columnWidths.map(item =>
-            item.columnKey === column ? { ...item, points } : item,
+          columnWidths: s.columnWidths.map(i =>
+            i.columnKey === column ? { ...i, points } : i,
           ),
         }
       })
@@ -116,7 +122,7 @@ export const createTableStore = (init?: TableProps) => {
 
     setColumnSorting: column => {
       set(s => {
-        const current = s.columnSorting.find(item => item.columnKey === column)
+        const current = s.columnSorting.find(i => i.columnKey === column)
 
         if (!current) {
           return {
@@ -129,19 +135,17 @@ export const createTableStore = (init?: TableProps) => {
 
         if (current.sort === 'asc') {
           return {
-            columnSorting: s.columnSorting.map(item =>
-              item.columnKey === column ? { ...item, sort: 'desc' } : item,
+            columnSorting: s.columnSorting.map(i =>
+              i.columnKey === column ? { ...i, sort: 'desc' } : i,
             ),
           }
         }
 
         return {
           columnSorting: s.columnSorting
-            .filter(item => item.columnKey !== column)
-            .map(item =>
-              item.order > current.order
-                ? { ...item, order: item.order - 1 }
-                : item,
+            .filter(i => i.columnKey !== column)
+            .map(i =>
+              i.order > current.order ? { ...i, order: i.order - 1 } : i,
             ),
         }
       })
@@ -149,27 +153,30 @@ export const createTableStore = (init?: TableProps) => {
 
     setColumnFilter: (column, filters) => {
       set(s => {
-        const current = s.columnFilters.find(item => item.column === column)
-        const custom =
-          filters.custom === undefined
-            ? current?.filters.custom
-            : filters.custom
-        const nextFilters: TableFilterValue = {
-          blank: filters.blank ?? current?.filters.blank ?? false,
+        const current = s.columnFilters.find(i => i.columnKey === column)
+        const custom = Object.prototype.hasOwnProperty.call(filters, 'custom')
+          ? filters.custom
+          : current?.filters.custom
+        const valueState = Object.prototype.hasOwnProperty.call(
+          filters,
+          'valueState',
+        )
+          ? filters.valueState
+          : current?.filters.valueState
+        const nextFilters: Filters = {
+          valueState,
           custom,
         }
 
         const hasFilter =
-          nextFilters.blank ||
+          nextFilters.valueState !== undefined ||
           (typeof nextFilters.custom === 'string'
             ? nextFilters.custom.trim() !== ''
             : nextFilters.custom !== undefined && nextFilters.custom !== null)
 
         if (!hasFilter) {
           return {
-            columnFilters: s.columnFilters.filter(
-              item => item.column !== column,
-            ),
+            columnFilters: s.columnFilters.filter(i => i.columnKey !== column),
           }
         }
 
@@ -177,14 +184,38 @@ export const createTableStore = (init?: TableProps) => {
           return {
             columnFilters: [
               ...s.columnFilters,
-              { column, filters: nextFilters },
+              { columnKey: column, filters: nextFilters },
             ],
           }
         }
 
         return {
-          columnFilters: s.columnFilters.map(item =>
-            item.column === column ? { ...item, filters: nextFilters } : item,
+          columnFilters: s.columnFilters.map(i =>
+            i.columnKey === column ? { ...i, filters: nextFilters } : i,
+          ),
+        }
+      })
+    },
+
+    setColumnCalc: (column, calc) => {
+      set(s => {
+        if (calc === undefined) {
+          return {
+            columnCalcs: s.columnCalcs.filter(i => i.columnKey !== column),
+          }
+        }
+
+        const current = s.columnCalcs.find(i => i.columnKey === column)
+
+        if (!current) {
+          return {
+            columnCalcs: [...s.columnCalcs, { columnKey: column, calc }],
+          }
+        }
+
+        return {
+          columnCalcs: s.columnCalcs.map(i =>
+            i.columnKey === column ? { ...i, calc } : i,
           ),
         }
       })

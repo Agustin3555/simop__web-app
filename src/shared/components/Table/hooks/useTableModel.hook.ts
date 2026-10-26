@@ -1,26 +1,31 @@
 import { useMemo } from 'react'
 import { useTable } from '../contexts/Table/useTable.hook'
-import type { ColumnKey } from '../contexts/Table/table.store'
+import type { ColumnKey, RowKey } from '../contexts/Table/table.store'
 import type { ColumnBehavior } from '@/shared/core/types'
 import type { DragEndEvent } from '@dnd-kit/react'
 import { isSortable } from '@dnd-kit/react/sortable'
 
-type Row = Record<ColumnKey, unknown>
-type KeyedRow<K extends ColumnKey> = Row & Record<K, string | number>
+type Row = object
 type TableColumn = ColumnBehavior
 
-const validateRows = <K extends ColumnKey>(
+export type CalcResults = (
+  { calc: string; label: string; result: unknown } | undefined
+)[]
+
+const getRowValue = (row: Row, key: string): unknown => Reflect.get(row, key)
+
+const validateRows = (
   data: Row[],
-  rowKey: K,
+  rowKey: ColumnKey,
 ): {
-  rows: KeyedRow<K>[]
-  keys: (string | number)[]
+  rows: Row[]
+  keys: RowKey[]
 } => {
-  const rows: KeyedRow<K>[] = []
-  const keys: (string | number)[] = []
+  const rows: Row[] = []
+  const keys: RowKey[] = []
 
   for (const row of data) {
-    const key = row[rowKey]
+    const key = getRowValue(row, rowKey)
     // La selección de filas necesita una clave estable y compatible con React.
     if (typeof key !== 'string' && typeof key !== 'number') {
       throw new Error(
@@ -28,8 +33,8 @@ const validateRows = <K extends ColumnKey>(
       )
     }
 
-    keys.push(key)
-    rows.push(row as KeyedRow<K>)
+    keys.push(String(key))
+    rows.push(row)
   }
 
   return { rows, keys }
@@ -50,7 +55,7 @@ const sortColumnsByOrder = (
     .map((column, index) => ({
       column,
       index,
-      order: order.get(column.def.key) ?? Number.POSITIVE_INFINITY,
+      order: order.get(column.usefulDef.key) ?? Number.POSITIVE_INFINITY,
     }))
     .sort((a, b) => a.order - b.order || a.index - b.index)
     .map(({ column }) => column)
@@ -62,11 +67,11 @@ const getOrderedColumns = (
   columnOrder: ColumnKey[],
 ) => {
   const hiddenColumnKeys = new Set(columnVisibility)
-  const hiddenColumns = columns.filter(({ def }) =>
-    hiddenColumnKeys.has(def.key),
+  const hiddenColumns = columns.filter(({ usefulDef: { key } }) =>
+    hiddenColumnKeys.has(key),
   )
   const renderedColumns = columns.filter(
-    ({ def }) => !hiddenColumnKeys.has(def.key),
+    ({ usefulDef: { key } }) => !hiddenColumnKeys.has(key),
   )
 
   return {
@@ -82,7 +87,9 @@ const reorderColumnKeys = (
   fromIndex: number,
   toIndex: number,
 ) => {
-  const columnKeys = new Set<ColumnKey>(columns.map(({ def }) => def.key))
+  const columnKeys = new Set<ColumnKey>(
+    columns.map(({ usefulDef: { key } }) => key),
+  )
   const includedKeys = new Set<ColumnKey>()
   const completeOrder: ColumnKey[] = []
 
@@ -98,7 +105,9 @@ const reorderColumnKeys = (
     completeOrder.push(key)
   }
 
-  const reorderedVisibleKeys = visibleColumns.map(({ def }) => def.key)
+  const reorderedVisibleKeys = visibleColumns.map(
+    ({ usefulDef: { key } }) => key,
+  )
   const [movedKey] = reorderedVisibleKeys.splice(fromIndex, 1)
   reorderedVisibleKeys.splice(toIndex, 0, movedKey)
 
@@ -123,8 +132,8 @@ const compareRows = (
 ) => {
   // Evalúa los criterios por prioridad; los valores vacíos siempre quedan al final.
   for (const { columnKey, sort, compare } of sorting) {
-    const firstValue = first[columnKey]
-    const secondValue = second[columnKey]
+    const firstValue = getRowValue(first, columnKey)
+    const secondValue = getRowValue(second, columnKey)
 
     if (firstValue == null || secondValue == null) {
       if (firstValue == null && secondValue == null) continue
@@ -147,6 +156,8 @@ export const useTableModel = (data: Row[], rowKey: ColumnKey) => {
   const columnWidths = useTable(s => s.columnWidths)
   const columnFilters = useTable(s => s.columnFilters)
   const columnSorting = useTable(s => s.columnSorting)
+  const columnCalcs = useTable(s => s.columnCalcs)
+  const rowSelection = useTable(s => s.rowSelection)
   const setColumnOrder = useTable(s => s.setColumnOrder)
 
   const { renderedColumns, hiddenColumns } = useMemo(
@@ -161,7 +172,7 @@ export const useTableModel = (data: Row[], rowKey: ColumnKey) => {
     if (!isSortable(source)) return
 
     const fromIndex = renderedColumns.findIndex(
-      ({ def }) => def.key === source.id,
+      ({ usefulDef: { key } }) => key === source.id,
     )
     const toIndex = source.sortable.index
     if (
@@ -186,16 +197,16 @@ export const useTableModel = (data: Row[], rowKey: ColumnKey) => {
   const renderedRows = useMemo(() => {
     // Indexa las definiciones para resolver filtros y comparadores en tiempo constante.
     const columnsByKey = new Map<ColumnKey, TableColumn>(
-      columns.map(column => [column.def.key, column]),
+      columns.map(column => [column.usefulDef.key, column]),
     )
     const filteredRows = validation.rows.filter(row =>
-      columnFilters.every(({ column, filters }) => {
-        const value = row[column]
-        const isBlank = value == null
+      columnFilters.every(({ columnKey, filters }) => {
+        const value = getRowValue(row, columnKey)
 
-        if (isBlank) return filters.blank
+        if (filters.valueState === 'null') return value == null
+        if (filters.valueState === 'value' && value == null) return false
 
-        const propBuilder = columnsByKey.get(column)
+        const propBuilder = columnsByKey.get(columnKey)
 
         return (
           !propBuilder?.applyTableFilter ||
@@ -217,15 +228,15 @@ export const useTableModel = (data: Row[], rowKey: ColumnKey) => {
       : filteredRows
 
     return sortedRows.map(row => ({
-      key: row[rowKey],
-      row: renderedColumns.reduce<Row>(
-        (renderedRow, { def: { key } }) => {
+      key: String(getRowValue(row, rowKey)),
+      row: renderedColumns.reduce<Record<string, unknown>>(
+        (renderedRow, { usefulDef: { key } }) => {
           if (Object.prototype.hasOwnProperty.call(row, key)) {
-            renderedRow[key] = row[key]
+            Reflect.set(renderedRow, key, getRowValue(row, key))
           }
           return renderedRow
         },
-        { [rowKey]: row[rowKey] },
+        { [rowKey]: getRowValue(row, rowKey) },
       ),
     }))
   }, [
@@ -242,6 +253,13 @@ export const useTableModel = (data: Row[], rowKey: ColumnKey) => {
     [renderedRows],
   )
 
+  const selectedRowKeys = useMemo(() => new Set(rowSelection), [rowSelection])
+
+  const selectedRows = useMemo(
+    () => renderedRows.filter(({ key }) => selectedRowKeys.has(key)),
+    [renderedRows, selectedRowKeys],
+  )
+
   const columnSizeVars = useMemo(() => {
     const widthsByKey = new Map<ColumnKey, number>(
       columnWidths.map(({ columnKey, points }) => [columnKey, points]),
@@ -249,27 +267,39 @@ export const useTableModel = (data: Row[], rowKey: ColumnKey) => {
 
     // Prioriza el ancho ajustado por el usuario y usa el tamaño definido como respaldo.
     return Object.fromEntries(
-      columns.map(
-        ({
-          def: {
-            key,
-            columnConfig: { size },
-          },
-        }) => [
-          `col-${key}-size`,
-          `calc(${widthsByKey.get(key) ?? size!} * 1rem)`,
-        ],
-      ),
+      columns.map(({ usefulDef: { key } }) => [
+        `col-${key}-size`,
+        `calc(${widthsByKey.get(key)} * 1rem)`,
+      ]),
     )
   }, [columnWidths, columns])
+
+  const calcResults: CalcResults = useMemo(
+    () =>
+      renderedColumns.map(({ usefulDef: { key }, getTableFooterCalcs }) => {
+        if (!getTableFooterCalcs) return
+
+        const { calc } = columnCalcs.find(c => c.columnKey === key) ?? {}
+        if (!calc) return
+
+        const values = renderedRows.map(r => r.row[key])
+        const { label, getResult } = getTableFooterCalcs()[calc]
+        return { calc, label, result: getResult(values) }
+      }),
+    [columnCalcs, renderedColumns, renderedRows],
+  )
 
   return {
     renderedColumns,
     hiddenColumns,
-    renderedRows,
-    allRowKeys: validation.keys,
-    filteredRowKeys,
     columnSizeVars,
     handleColumnDragEnd,
+
+    renderedRows,
+    selectedRows,
+    allRowKeys: validation.keys,
+    filteredRowKeys,
+
+    calcResults,
   }
 }

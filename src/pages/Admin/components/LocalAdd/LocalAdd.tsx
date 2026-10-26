@@ -1,69 +1,44 @@
 import './LocalAdd.css'
-import { useMemo, useRef, useState } from 'react'
-import { useAppStore } from '@/store/config'
+import { useMemo } from 'react'
 import { useSubmitAction } from '@/hooks'
-import { useResetForm, useMetaModel, useConfigModule } from '../../hooks'
-import { Toggle } from '@/components'
-import { Form } from '..'
-import { useQueryClient } from '@tanstack/react-query'
-import { FieldResetFnsContext } from '../../contexts/fieldResetFns.context'
-import { LooseEntity } from '@/models/config'
-import { buildConfigKey } from '../../helpers'
+import { useTableDef } from '../../hooks/useTableDef.hook'
+import { useTableQuery } from '../../hooks/useTableQuery.hook'
+import Form from '../Form/Form'
 
-const ContextualizedLocalAdd = () => {
-  const [resetOnCompletion, setResetOnCompletion] = useState(true)
-  const formRef = useRef<HTMLFormElement | null>(null)
+const LocalAdd = () => {
+  const {
+    tableDef: { key, mutationColumns, mutationColumnGroups },
+    columns,
+  } = useTableDef()
 
-  const { key, service, addProps } = useMetaModel()
-  const { groups } = addProps
-
-  const { selectedConfig } = useConfigModule()
-  const toasting = useAppStore(store => store.toasting)
-  const resetForm = useResetForm(formRef)
-  const queryClient = useQueryClient()
+  const { createItem } = useTableQuery()
 
   const fieldGroups = useMemo(
     () =>
-      groups.map(({ props, ...rest }) => ({
-        fields: Object.values(props).map(v => v.getFormField()),
+      mutationColumnGroups.map(({ columnKeys, ...rest }) => ({
+        fields: columnKeys.map(columnKey =>
+          columns.find(c => c.usefulDef.key === columnKey)!.getFormField(),
+        ),
         ...rest,
       })),
     [],
   )
 
   const submitActionResult = useSubmitAction(
-    async ({ form, formData, setError, setSuccess }) => {
+    async ({ formValues, setError, setSuccess }) => {
       try {
         const createData: Record<string, unknown> = {}
 
-        groups.forEach(v =>
-          Object.values(v.props).forEach(
-            ({ key, verboseKey, isRequired, getFormFieldValue }) => {
-              const value = getFormFieldValue(formData, form)
-              if (isRequired && value === undefined)
-                throw new Error('isRequired')
-              if (value !== undefined) createData[verboseKey || key] = value
-            },
-          ),
+        mutationColumns.forEach(columnKey =>
+          columns
+            .find(c => c.usefulDef.key === columnKey)!
+            .writeFormValue(formValues, createData),
         )
 
-        const newEntity = await service.create!(createData)
-
-        queryClient.setQueryData<LooseEntity[]>(
-          buildConfigKey(key, selectedConfig),
-          oldData => {
-            if (oldData) return [newEntity, ...oldData]
-          },
-        )
-
-        toasting('success', 'Agregado con éxito')
-        if (resetOnCompletion) resetForm()
+        await createItem(createData)
 
         await setSuccess()
       } catch (error) {
-        if ((error as Error).message === 'isRequired')
-          toasting('error', 'Complete los campos requeridos')
-
         await setError()
       }
     },
@@ -71,22 +46,14 @@ const ContextualizedLocalAdd = () => {
 
   return (
     <div className="cmp-local-add">
-      <Form {...{ ...submitActionResult, formRef, fieldGroups }}>
-        <Toggle
-          title="Limpiar después de crear"
-          faIcon="fa-solid fa-eraser"
-          value={resetOnCompletion}
-          setValue={setResetOnCompletion}
-        />
-      </Form>
+      <Form
+        tableKey={key}
+        enableReset
+        {...submitActionResult}
+        {...{ fieldGroups }}
+      />
     </div>
   )
 }
-
-const LocalAdd = () => (
-  <FieldResetFnsContext.Provider value={[]}>
-    <ContextualizedLocalAdd />
-  </FieldResetFnsContext.Provider>
-)
 
 export default LocalAdd

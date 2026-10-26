@@ -1,7 +1,7 @@
 import './Option.css'
 import { ChangeEventHandler } from 'react'
-import { useComboboxCore } from '@/pages/Admin/hooks'
 import { classList } from '@/helpers'
+import { useComboboxCore } from '@/pages/Admin/hooks/useComboboxCore.hook'
 
 interface SafeValueProps {
   value?: string

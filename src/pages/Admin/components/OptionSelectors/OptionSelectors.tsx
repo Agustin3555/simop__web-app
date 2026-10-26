@@ -1,6 +1,6 @@
 import './OptionSelectors.css'
 import { Dispatch, SetStateAction } from 'react'
-import { useInputHandler } from '../../hooks'
+import { useInputHandler } from '../../hooks/useInputHandler.hook'
 
 interface OptionSelectorsProps {
   name: string

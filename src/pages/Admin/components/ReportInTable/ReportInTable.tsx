@@ -1,8 +1,9 @@
 import { styles } from './ReportInTable.style'
 import { ReactNode, useMemo } from 'react'
 import { useConfig } from '../../store'
-import { Report } from '@/pages/Admin/components'
 import { Text, View, Image } from '@react-pdf/renderer'
+import Report from '../Report/Report'
+import { palColor } from '@/styles/palette'
 
 const getParagraphs = (block: string) => {
   if (!block) return []
@@ -18,25 +19,31 @@ export interface GraphInfo {
 }
 
 export interface FilterProp {
-  title: string
+  label: string
   values: (number | string)[]
 }
 
-interface ReportInTableProps {
-  schemeTitle: string
+export interface ReportInTableProps {
+  title: string
   props?: FilterProp[]
-  header: { title: string; size: number }[]
+  columns: { title: string; size: number }[]
   rows: ReactNode[][]
+  footer: ({ label: string; cell: ReactNode } | undefined)[]
   graphs?: (GraphInfo & { img: string })[]
+  rowNumber: boolean
 }
 
 const ReportInTable = ({
-  schemeTitle,
+  title,
   props = [],
-  header,
+  columns,
   rows,
+  footer,
   graphs,
+  rowNumber,
 }: ReportInTableProps) => {
+  props = [{ label: 'CANTIDAD', values: [rows.length] }, ...props]
+
   const commentsReports = useConfig(s => s.config.commentsReports)
 
   const [topComments, botComments] = useMemo(() => {
@@ -48,16 +55,10 @@ const ReportInTable = ({
     return [top, bot]
   }, [commentsReports])
 
-  props = [{ title: 'CANTIDAD', values: [rows.length] }, ...props]
-
   return (
-    <Report
-      title={`Lista de ${schemeTitle}`}
-      orientation="landscape"
-      {...{ topComments, botComments }}
-    >
+    <Report orientation="landscape" {...{ title, topComments, botComments }}>
       <View style={styles.props}>
-        {props.map(({ title, values }, i) => (
+        {props.map(({ label: title, values }, i) => (
           <View key={i} style={styles.item}>
             <Text style={styles.title}>{title}:</Text>
             <View style={styles.values}>
@@ -72,7 +73,12 @@ const ReportInTable = ({
       </View>
       <View style={styles.table}>
         <View style={styles.header} fixed>
-          {header.map(({ title, size }, i) => (
+          {rowNumber && (
+            <View key="rowNumber" style={{ ...styles.cell, width: 16 }}>
+              <Text>#</Text>
+            </View>
+          )}
+          {columns.map(({ title, size }, i) => (
             <View key={i} style={{ ...styles.cell, width: size }}>
               <Text>{title}</Text>
             </View>
@@ -80,18 +86,48 @@ const ReportInTable = ({
         </View>
         <View style={styles.body}>
           {rows.map((row, i) => (
-            <View key={i} style={styles.row} wrap={false}>
+            <View
+              key={i}
+              wrap={false}
+              style={{
+                ...styles.row,
+                ...(i !== rows.length - 1 && {
+                  borderBottomWidth: 1,
+                  borderColor: palColor('AL4'),
+                }),
+              }}
+            >
+              {rowNumber && (
+                <View key="rowNumber" style={{ ...styles.cell, width: 16 }}>
+                  <Text>{i + 1}</Text>
+                </View>
+              )}
               {row.map((value, j) => (
-                <View key={j} style={{ ...styles.cell, width: header[j].size }}>
+                <View
+                  key={j}
+                  style={{ ...styles.cell, width: columns[j].size }}
+                >
                   {value}
                 </View>
               ))}
             </View>
           ))}
         </View>
+        <View style={[styles.row, styles.calcs]}>
+          {footer.map((f, i) => (
+            <View key={i} style={{ width: columns[i].size }}>
+              {f && (
+                <View style={styles.calcContentItem}>
+                  <Text style={styles.calcContentItem_label}>{f.label}</Text>
+                  {f.cell}
+                </View>
+              )}
+            </View>
+          ))}
+        </View>
       </View>
       {graphs?.map(({ column, mode, img }, i) => (
-        <View style={styles.graphItem} wrap={false} break>
+        <View key={i} style={styles.graphItem} wrap={false} break>
           <Text style={styles.column}>{column}</Text>
           <View style={styles.mode}>
             <Text>Por:</Text>

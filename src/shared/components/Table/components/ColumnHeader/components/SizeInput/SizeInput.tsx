@@ -4,15 +4,13 @@ import { varList } from '@/helpers'
 
 interface SizeInputProps {
   columnKey: string
-  initSize: number
 }
 
-export const SizeInput = ({ columnKey, initSize }: SizeInputProps) => {
+export const SizeInput = ({ columnKey }: SizeInputProps) => {
   const columnWidths = useTable(s => s.columnWidths)
   const setColumnWidth = useTable(s => s.setColumnWidth)
 
-  const { points = initSize } =
-    columnWidths.find(f => f.columnKey === columnKey) ?? {}
+  const { points } = columnWidths.find(f => f.columnKey === columnKey) ?? {}
 
   return (
     <label

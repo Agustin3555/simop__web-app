@@ -1,12 +1,13 @@
 import { useCallback, useEffect, useMemo, useState } from 'react'
-import { useComboboxCore } from '../../hooks'
+import { useComboboxCore } from '../../hooks/useComboboxCore.hook'
 import { baseSorter } from '../../helpers'
 import BaseCombobox, { BaseComboboxProps } from '../BaseCombobox/BaseCombobox'
 import { ComboboxCoreContextProps } from '../../contexts/comboboxCore.context'
 import { ComboboxCoreProvider } from '../../providers/comboboxCore.provider'
 
 export interface ComboboxInnerProps
-  extends Pick<
+  extends
+    Pick<
       BaseComboboxProps,
       'title' | 'hideLabel' | 'isRequired' | 'staticSelected'
     >,
@@ -80,7 +81,8 @@ const ComboboxInner = ({
 }
 
 export interface ComboboxProps
-  extends Omit<ComboboxInnerProps, 'hideLabel' | 'isRequired'>,
+  extends
+    Omit<ComboboxInnerProps, 'hideLabel' | 'isRequired'>,
     Partial<Pick<ComboboxInnerProps, 'hideLabel' | 'isRequired'>>,
     Pick<ComboboxCoreContextProps, 'keyName'>,
     Partial<Pick<ComboboxCoreContextProps, 'isEditMode' | 'isMultiple'>> {}

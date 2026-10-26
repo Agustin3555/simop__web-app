@@ -1,6 +1,6 @@
 import './View.css'
 import { ReactNode } from 'react'
-import { useViews } from '../../hooks'
+import { useViews } from '../../hooks/useViews.hook'
 import { classList } from '@/helpers'
 
 export interface ViewProps {

@@ -1,6 +1,5 @@
 import { useCallback, useMemo, useState } from 'react'
 import { useQueryActionState } from '@/hooks'
-import { useComboboxCore } from '../../hooks'
 import { useQuery } from '@tanstack/react-query'
 import { LooseEntity } from '@/models/config'
 import { REFETCH_INTERVALS } from '../../constants/refetchIntervals.const'
@@ -8,12 +7,15 @@ import { Button } from '@/components'
 import BaseCombobox, { BaseComboboxProps } from '../BaseCombobox/BaseCombobox'
 import { baseSorter } from '../../helpers'
 import { MetaModel } from '../../meta/metaModel'
-import { OptionSelectors } from '../../components'
 import { ComboboxCoreProvider } from '../../providers/comboboxCore.provider'
 import { ComboboxCoreContextProps } from '../../contexts/comboboxCore.context'
+import { useComboboxCore } from '../../hooks/useComboboxCore.hook'
+import OptionSelectors from '../OptionSelectors/OptionSelectors'
 
-export interface RefsComboboxInnerProps
-  extends Pick<BaseComboboxProps, 'title' | 'hideLabel' | 'isRequired'> {
+export interface RefsComboboxInnerProps extends Pick<
+  BaseComboboxProps,
+  'title' | 'hideLabel' | 'isRequired'
+> {
   metaModel: MetaModel
   initSelected?: string[]
   initOptions?: LooseEntity[]
@@ -148,7 +150,8 @@ const RefsComboboxInner = ({
 }
 
 export interface RefsProps
-  extends Omit<RefsComboboxInnerProps, 'hideLabel' | 'isRequired'>,
+  extends
+    Omit<RefsComboboxInnerProps, 'hideLabel' | 'isRequired'>,
     Partial<Pick<RefsComboboxInnerProps, 'hideLabel' | 'isRequired'>>,
     Pick<ComboboxCoreContextProps, 'keyName'>,
     Partial<Pick<ComboboxCoreContextProps, 'isEditMode' | 'isMultiple'>> {}

@@ -1,206 +1,197 @@
-import {
-  ForView,
-  MinSize,
-  ColumnBehavior,
-  IRequired,
-  Column,
-  createUniqueMode,
-  InputConfig,
-  ColumnConfig,
-} from '../types'
 import { Input } from '@/components'
 import { format } from '@formkit/tempo'
-import { DateFilter } from '../components'
 import { StyleSheet, Text } from '@react-pdf/renderer'
+import {
+  Column,
+  ColumnBehavior,
+  ColumnConfig,
+  InputConfig,
+  Size,
+} from '../types'
 
 export const formatter = (value: string, withTime: boolean) =>
   withTime
     ? format(value, { date: 'short', time: 'short' })
     : format(value.slice(0, 10), { date: 'short' })
 
+interface DateRange {
+  min: string
+  max: string
+}
+
+const getDateRange = (value: unknown): DateRange => {
+  if (typeof value !== 'object' || value === null) {
+    return { min: '', max: '' }
+  }
+
+  const range = value as Record<string, unknown>
+
+  return {
+    min: typeof range.min === 'string' ? range.min : '',
+    max: typeof range.max === 'string' ? range.max : '',
+  }
+}
+
+const getTimestamp = (value: unknown) => {
+  if (typeof value !== 'string' || value.trim() === '') return
+
+  const timestamp = Date.parse(value)
+
+  return Number.isFinite(timestamp) ? timestamp : undefined
+}
+
+const getInputValue = (value: unknown, withTime: boolean) => {
+  if (typeof value !== 'string' || getTimestamp(value) === undefined) {
+    return undefined
+  }
+
+  if (!withTime) return value.slice(0, 10)
+
+  return new Date(value).toISOString().slice(0, 16)
+}
+
 export interface DatetimeColumn extends Column {
   type: 'datetime'
+  title: string
   withTime?: boolean
   columnConfig?: ColumnConfig
   inputConfig?: InputConfig
 }
 
-interface DateProp extends Column {
-  config?: {
-    withTime?: boolean
+export const buildDatetimeColumnBehavior = (
+  def: DatetimeColumn,
+): ColumnBehavior => {
+  const {
+    key,
+    title: originTitle,
+    withTime = false,
+    columnConfig,
+    inputConfig,
+  } = def
 
-    field?: ForView & IRequired
-  }
-}
+  const { size = withTime ? Size.s : Size.xs, overrideTitle } =
+    columnConfig ?? {}
+  const { isHidden = false, isRequired = false } = inputConfig ?? {}
+  const title = overrideTitle ?? originTitle
 
-export const createDateProp =
-  ({ title, minSize, config }: DateProp): ColumnBehavior =>
-  key => {
-    const { withTime = false, field } = config ?? {}
-    const { hidden, isRequired } = field ?? {}
-
-    return {
+  return {
+    usefulDef: {
       key,
       title,
-      minSize: (minSize ?? withTime) ? MinSize.s : MinSize.xs,
-      isRequired,
+      input: { isHidden },
+      column: { size },
+    },
 
-      filterFn: (row, columnId, filterValue) => {
-        if (!filterValue) return true
+    getFormField: (value, isEditMode = false) => (
+      <Input
+        keyName={key}
+        value={getInputValue(value, withTime)}
+        {...(!isEditMode && { isRequired })}
+        {...{ title, isEditMode }}
+        inputHTMLAttrs={{
+          type: withTime ? 'datetime-local' : 'date',
+          min: withTime ? '1900-01-01T00:00' : '1900-01-01',
+        }}
+      />
+    ),
 
-        const { min, max } = filterValue
-        const rowDate = new Date(row.getValue(columnId))
+    writeFormValue: (formValues, accData) => {
+      const value = formValues.get.string(key)
 
-        const isAfterMin = min ? rowDate >= new Date(min) : true
-        const isBeforeMax = max ? rowDate <= new Date(max) : true
+      accData[key] = value ? value + (withTime ? ':00Z' : 'T00:00:00Z') : null
+    },
 
-        return isAfterMin && isBeforeMax
-      },
+    compareTableValues: (a, b) => {
+      const timestampA = getTimestamp(a)
+      const timestampB = getTimestamp(b)
 
-      getFormField: (value?: string, isEditMode = false) => {
-        if (hidden === true) return
+      if (timestampA === undefined || timestampB === undefined) return 0
 
-        if (value)
-          value = withTime
-            ? new Date(value).toISOString().slice(0, 16)
-            : value.split('T')[0]
+      return timestampA - timestampB
+    },
 
-        return (
-          <Input
-            keyName={key}
-            {...(!isEditMode && { isRequired })}
-            {...{ title, value, isEditMode }}
-            inputHTMLAttrs={{
-              type: withTime ? 'datetime-local' : 'date',
-              min: withTime ? '1900-01-01T00:00' : '1900-01-01',
-            }}
-          />
+    applyTableFilter: (value, filterValue) => {
+      const { min, max } = getDateRange(filterValue)
+      const hasMin = min !== ''
+      const hasMax = max !== ''
+
+      if (!hasMin && !hasMax) return true
+
+      const timestamp = getTimestamp(value)
+      if (timestamp === undefined) return false
+
+      const minTimestamp = hasMin ? getTimestamp(min) : undefined
+      const maxTimestamp = hasMax ? getTimestamp(max) : undefined
+
+      if (hasMin && minTimestamp === undefined) return false
+      if (hasMax && maxTimestamp === undefined) return false
+      if (minTimestamp !== undefined && timestamp < minTimestamp) return false
+      if (maxTimestamp !== undefined && timestamp > maxTimestamp) return false
+
+      return true
+    },
+
+    getTableFilter: (filterValue, setFilterValue) => {
+      const range = getDateRange(filterValue)
+      const updateRange = (bound: keyof DateRange, value: string) => {
+        const nextRange = { ...range, [bound]: value }
+        const hasRange = Object.values(nextRange).some(
+          rangeValue => rangeValue !== '',
         )
-      },
 
-      getFormFieldValue: (formData, _, isEditMode = false) => {
-        const value = formData.get(key) as null | string
+        setFilterValue(hasRange ? nextRange : undefined)
+      }
 
-        if (value === null) return
-        if (value === '') return isEditMode ? null : undefined
+      return (
+        <>
+          <label>
+            <span>Desde</span>
+            <input
+              type={withTime ? 'datetime-local' : 'date'}
+              value={range.min}
+              onChange={({ currentTarget: { value } }) =>
+                updateRange('min', value)
+              }
+            />
+          </label>
+          <label>
+            <span>Hasta</span>
+            <input
+              type={withTime ? 'datetime-local' : 'date'}
+              value={range.max}
+              onChange={({ currentTarget: { value } }) =>
+                updateRange('max', value)
+              }
+            />
+          </label>
+        </>
+      )
+    },
 
-        return value + (withTime ? ':00Z' : 'T00:00:00Z')
-      },
+    getTableCell: value => {
+      if (typeof value !== 'string' || getTimestamp(value) === undefined) return
 
-      getTableHeader: column => ({
-        title,
-        getFilter: () => <DateFilter {...{ column, withTime }} />,
-      }),
+      return <p className="text">{formatter(value, withTime)}</p>
+    },
 
-      getTableCell: item => {
-        const value = item[key] as undefined | string
+    getReportTableFilter: filterValue => {
+      const { min, max } = getDateRange(filterValue)
+      const values: string[] = []
 
-        return value && <p>{formatter(value, withTime)}</p>
-      },
+      if (min !== '') values.push(`Desde: ${formatter(min, withTime)}`)
+      if (max !== '') values.push(`Hasta: ${formatter(max, withTime)}`)
 
-      getReportTableFilter: column => {
-        const { getFilterValue } = column
+      return values.length ? { label: title, values } : undefined
+    },
 
-        const value = getFilterValue() as
-          | undefined
-          | { min?: string; max?: string }
+    getReportTableCell: value => {
+      if (typeof value !== 'string' || getTimestamp(value) === undefined) return
 
-        if (value === undefined) return
+      const styles = StyleSheet.create({
+        value: {},
+      })
 
-        const { min, max } = value
-
-        const values = [] as string[]
-
-        if (min !== undefined && min !== '')
-          values.push(`min: ${formatter(min, withTime)}`)
-        if (max !== undefined && max !== '')
-          values.push(`max: ${formatter(max, withTime)}`)
-
-        if (!values.length) return
-
-        return { title, values }
-      },
-
-      getReportTableCell: item => {
-        const value = item[key] as undefined | string
-
-        if (value === undefined) return
-
-        const styles = StyleSheet.create({
-          value: {},
-        })
-
-        return <Text style={styles.value}>{formatter(value, withTime)}</Text>
-      },
-
-      getExcelTableCell: item => {
-        const value = item[key] as undefined | string
-
-        if (value === undefined) return
-
-        return formatter(value, withTime)
-      },
-
-      pieSectorConfig: {
-        defaultMode: 'day',
-        modes: {
-          ...createUniqueMode({
-            accumulate: (value: string, add) => {
-              const key = value
-              const getTitle = () => formatter(value, withTime)
-
-              add(key, getTitle)
-            },
-          }),
-          year: {
-            title: 'Año',
-            accumulate: (value: string, add) => {
-              const year = String(new Date(value).getFullYear())
-
-              const key = year
-              const getTitle = () => year
-
-              add(key, getTitle)
-            },
-          },
-          month: {
-            title: 'Mes',
-            accumulate: (value: string, add) => {
-              const month = new Date(value)
-                .toLocaleString('es-ES', {
-                  month: 'long',
-                })
-                .replace(/\b\w/g, char => char.toUpperCase())
-
-              const key = month
-              const getTitle = () => month
-
-              add(key, getTitle)
-            },
-          },
-          day: {
-            title: 'Día',
-            accumulate: (value: string, add) => {
-              const day = String(new Date(value).getDate()).padStart(2, '0')
-
-              const key = day
-              const getTitle = () => day
-
-              add(key, getTitle)
-            },
-          },
-          hour: {
-            title: 'Hora',
-            accumulate: (value: string, add) => {
-              const hour = String(new Date(value).getHours())
-
-              const key = hour
-              const getTitle = () => hour
-
-              add(key, getTitle)
-            },
-          },
-        },
-      },
-    }
+      return <Text style={styles.value}>{formatter(value, withTime)}</Text>
+    },
   }
+}

@@ -1,6 +1,10 @@
-import { Config } from '../contexts/configs.context'
+import { Config } from '@/shared/contexts/Configs/configs.store'
 
 export const buildConfigKey = (modelKey: string, selectedConfig: Config) => {
-  const { id, columns } = selectedConfig
-  return [modelKey, id, columns.length]
+  const {
+    id,
+    states: { columnFetch },
+  } = selectedConfig
+
+  return [modelKey, id, columnFetch.length]
 }

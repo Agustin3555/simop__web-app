@@ -125,7 +125,7 @@ export const createBooleanProp =
         const value = getFilterValue() as undefined | boolean
         if (value === undefined) return
 
-        return { title, values: [value ? trueText : falseText] }
+        return { label: title, values: [value ? trueText : falseText] }
       },
 
       getReportTableCell: item => {

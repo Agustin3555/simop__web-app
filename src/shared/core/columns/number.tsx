@@ -1,3 +1,4 @@
+import { Input } from '@/components'
 import {
   ColumnBehavior,
   Size,
@@ -5,6 +6,7 @@ import {
   InputConfig,
   ColumnConfig,
 } from '../types'
+import { StyleSheet, Text } from '@react-pdf/renderer'
 
 interface NumberRange {
   exact: string
@@ -45,18 +47,19 @@ const toNumber = (value: unknown) => {
   return Number.isFinite(number) ? number : undefined
 }
 
+type CalcType = 'sum' | 'average'
+
 export interface NumberColumn extends Column {
   type: 'number'
+  title: string
   pre?: string
   sub?: string
   isDecimal?: boolean
   isMoney?: boolean
   isBig?: boolean
-  columnConfig?: ColumnConfig
-  // TODO
-  // columnConfig?: ColumnConfig & {
-  //   calc?: 'sum' | 'average'
-  // }
+  columnConfig?: ColumnConfig & {
+    calc?: CalcType
+  }
   inputConfig?: InputConfig & {
     min?: number
     max?: number
@@ -68,8 +71,7 @@ export const buildNumberColumnBehavior = (
 ): ColumnBehavior => {
   const {
     key,
-    title,
-    type,
+    title: originTitle,
     pre = '',
     sub = '',
     isDecimal = false,
@@ -80,20 +82,41 @@ export const buildNumberColumnBehavior = (
   } = def
 
   const { size = Size.m, overrideTitle } = columnConfig ?? {}
-  const { isRequired = false, min, max } = inputConfig ?? {}
+  const { isHidden = false, isRequired = false, min, max } = inputConfig ?? {}
+
+  const title = overrideTitle ?? originTitle
 
   return {
-    def: {
+    usefulDef: {
       key,
       title,
-      type,
-      pre,
-      sub,
-      isDecimal,
-      isMoney,
-      isBig,
-      columnConfig: { size, overrideTitle },
-      inputConfig: { isRequired, min, max },
+      input: { isHidden },
+      column: { size },
+    },
+
+    getFormField: (value, isEditMode = false) => {
+      return (
+        <Input
+          keyName={key}
+          value={
+            typeof value === 'string' || typeof value === 'number'
+              ? value
+              : undefined
+          }
+          {...(!isEditMode && { isRequired })}
+          {...{ title, isEditMode }}
+          inputHTMLAttrs={{
+            type: 'number',
+            step: isDecimal ? '0.000001' : undefined,
+          }}
+        />
+      )
+    },
+
+    writeFormValue: (formValues, accData) => {
+      accData[key] = isBig
+        ? formValues.get.string(key)
+        : formValues.get.number(key)
     },
 
     compareTableValues: (a, b) => {
@@ -132,8 +155,14 @@ export const buildNumberColumnBehavior = (
 
     getTableFilter: (filterValue, setFilterValue) => {
       const range = getNumberRange(filterValue)
-      const updateRange = (bound: keyof NumberRange, value: string) =>
-        setFilterValue({ ...range, [bound]: value })
+      const updateRange = (bound: keyof NumberRange, value: string) => {
+        const nextRange = { ...range, [bound]: value }
+        const hasRange = Object.values(nextRange).some(
+          rangeValue => rangeValue.trim() !== '',
+        )
+
+        setFilterValue(hasRange ? nextRange : undefined)
+      }
 
       return (
         <>
@@ -199,27 +228,67 @@ export const buildNumberColumnBehavior = (
       )
     },
 
-    getTableColumnCalcs: values => {
-      const numbers = values
-        .map(toNumber)
-        .filter((value): value is number => value !== undefined)
+    getTableFooterCalcs: () => {
+      const getNumbers = (values: unknown[]) =>
+        values.map(toNumber).filter((v): v is number => v !== undefined)
 
-      return [
-        {
-          value: 'sum',
+      const calcs: Record<
+        CalcType,
+        { label: string; getResult: (values: unknown[]) => number }
+      > = {
+        sum: {
           label: 'Suma',
-          result: () => numbers.reduce((total, number) => total + number, 0),
+          getResult: values => {
+            const numbers = getNumbers(values)
+            return numbers.reduce((total, number) => total + number, 0)
+          },
         },
-        {
-          value: 'average',
+        average: {
           label: 'Promedio',
-          result: () =>
-            numbers.length
-              ? numbers.reduce((total, number) => total + number, 0) /
-                numbers.length
-              : undefined,
+          getResult: values => {
+            const numbers = getNumbers(values)
+            return (
+              numbers.reduce((total, number) => total + number, 0) /
+              numbers.length
+            )
+          },
         },
-      ]
+      }
+
+      return calcs
+    },
+
+    getReportTableFilter: filterValue => {
+      const { exact, min, max } = getNumberRange(filterValue)
+
+      const values: string[] = []
+      if (exact !== '') values.push(exact)
+      if (min !== '') values.push(`Min: ${min}`)
+      if (max !== '') values.push(`Max: ${max}`)
+
+      if (values.length === 0) return
+
+      return { label: title, values }
+    },
+
+    getReportTableCell: value => {
+      if (value === undefined || value === null) return
+      if (typeof value !== 'number' && typeof value !== 'string') return
+
+      const styles = StyleSheet.create({
+        value: {},
+      })
+
+      const displayValue = isMoney
+        ? new Intl.NumberFormat('es-ES', {
+            minimumFractionDigits: 2,
+            maximumFractionDigits: 6,
+          }).format(Number(value))
+        : value
+
+      return (
+        <Text style={styles.value}>{[pre, displayValue, sub].join(' ')}</Text>
+      )
     },
   }
 }

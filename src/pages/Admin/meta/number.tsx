@@ -141,7 +141,7 @@ export const createNumberProp =
 
         if (!values.length) return
 
-        return { title, values }
+        return { label: title, values }
       },
 
       getReportTableCell: item => {
@@ -194,8 +194,8 @@ export const createNumberProp =
                       maximumFractionDigits: 6,
                     }).format(Number(value))
                   : typeof value === 'number'
-                  ? String(value)
-                  : value
+                    ? String(value)
+                    : value
 
               add(key, getTitle)
             },

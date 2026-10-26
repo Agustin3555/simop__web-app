@@ -1,17 +1,18 @@
 import './Header.css'
 import { useHandleAction } from '@/hooks'
-import { useNavState, useViews } from '../../hooks'
 import { useAppStore } from '@/store/config'
 import { Button, ExternalLink } from '@/components'
 import { publicInstance } from '@/services/config'
 import { apiAdminPath } from '@/env'
 import { useCallback } from 'react'
 import { useConfig } from '../../store'
+import { useNavState } from '../../hooks/useNavState.hook'
+import { useViews } from '../../hooks/useViews.hook'
 
 const Header = () => {
   const { isOpen, toggleNav } = useNavState()
   const { select } = useViews()
-  const toasting = useAppStore(store => store.toasting)
+  const toasting = useAppStore(s => s.toasting)
   const mainServerUrl = useConfig(s => s.config.mainServerUrl)
 
   const syncAction = useHandleAction(async ({ setSuccess, setError }) => {

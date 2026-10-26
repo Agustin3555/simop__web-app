@@ -1,12 +1,12 @@
 import './Form.css'
-import { ReactNode, RefObject, useId, useState } from 'react'
+import { ReactNode, useEffect, useId, useState } from 'react'
 import { useSubmitAction } from '@/hooks'
-import { useMetaModel } from '../../hooks'
-import { Button } from '@/components'
+import { Button, Toggle } from '@/components'
 import SegmentedControl, {
   SegmentedControlProps,
 } from '../SegmentedControl/SegmentedControl'
 import { classList } from '@/helpers'
+import { TableKey } from '../../constants/metaModelKey.const'
 
 type LayoutMode = 'masonry' | 'rows'
 
@@ -24,43 +24,56 @@ const LAYOUT_MODES_OPTIONS: SegmentedControlProps<LayoutMode>['options'] = [
 ]
 
 interface FormProps extends ReturnType<typeof useSubmitAction> {
-  formRef?: RefObject<HTMLFormElement | null>
+  tableKey: TableKey
   fieldGroups?: {
-    key?: string
     title?: string
     fields: ReactNode[]
   }[]
-  children?: ReactNode
+  enableReset?: boolean
 }
 
 const Form = ({
+  tableKey,
   actionState,
   handleSubmit,
-  formRef,
   fieldGroups,
-  children,
+  enableReset = false,
 }: FormProps) => {
+  const [resetOnSuccess, setResetOnSuccess] = useState(true)
+  const [resetKey, setResetKey] = useState(0)
   const [layoutMode, setLayoutMode] = useState<LayoutMode>('masonry')
 
-  const { key } = useMetaModel()
   const id = useId()
+
+  useEffect(() => {
+    if (enableReset && resetOnSuccess && actionState === 'success') {
+      setResetKey(prev => prev + 1)
+    }
+  }, [actionState, enableReset, resetOnSuccess])
 
   return (
     <div className="cmp-form">
       <header>
         <SegmentedControl
-          name={`layoutMode-${key}-${id}`}
+          name={`layoutMode-${tableKey}-${id}`}
           selected={layoutMode}
           setSelected={setLayoutMode}
           options={LAYOUT_MODES_OPTIONS}
           size="s"
         />
-        {children}
+        {enableReset && (
+          <Toggle
+            title="Limpiar después de crear"
+            faIcon="fa-solid fa-eraser"
+            value={resetOnSuccess}
+            setValue={setResetOnSuccess}
+          />
+        )}
       </header>
-      <form className="form-style" ref={formRef} onSubmit={handleSubmit}>
-        <div className={classList('field-groups', layoutMode)}>
-          {fieldGroups?.map(({ key, title, fields }, i) => (
-            <div key={key ?? i} className="section">
+      <form className="form-style" onSubmit={handleSubmit}>
+        <div key={resetKey} className={classList('field-groups', layoutMode)}>
+          {fieldGroups?.map(({ title, fields }, i) => (
+            <div key={i} className="section">
               {title && <small>{title}</small>}
               <div className="fields">{fields}</div>
             </div>

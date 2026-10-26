@@ -2,7 +2,8 @@ import './Config.css'
 import { FocusEventHandler, useCallback } from 'react'
 import { useConfig } from '../../store'
 import { Input } from '@/components'
-import { InputArea, View } from '../../components'
+import View from '../../components/View/View'
+import InputArea from '../../components/InputArea/InputArea'
 
 export const Config = () => {
   const mainServerUrl = useConfig(s => s.config.mainServerUrl)

@@ -7,7 +7,7 @@ import { uniquePass } from '@/env'
 
 const Login = () => {
   const [, navigate] = useLocation()
-  const toasting = useAppStore(store => store.toasting)
+  const toasting = useAppStore(s => s.toasting)
 
   const { handleSubmit, actionState } = useSubmitAction(
     async ({ formValues, setError, setSuccess }) => {

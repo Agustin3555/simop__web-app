@@ -1,25 +1,60 @@
 import { useMemo } from 'react'
-import { useMetaModels } from '../../hooks'
-import { MetaModelKey } from '../../constants/metaModelKey.const'
-import { MetaModelContext } from '../../contexts/metaModel.context'
-import { MetaModel } from '../../meta/metaModel'
-import { TableProvider } from '../../providers'
-import { LocalQueryProps } from '../LocalQuery/LocalQuery'
-import { LocalAdd, LocalConfig, LocalEdit, LocalQuery } from '..'
+import { TableKey } from '../../constants/metaModelKey.const'
+import { TableDefContext } from '../../contexts/tableDef.context'
+import LocalQuery, { LocalQueryProps } from '../LocalQuery/LocalQuery'
 import ViewTabs, { ViewTabsProps } from '../ViewTabs/ViewTabs'
 import { TabPanel } from '../Tabs/Tabs'
+import LocalAdd from '../LocalAdd/LocalAdd'
+import LocalConfig from '../LocalConfig/LocalConfig'
+import LocalEdit from '../LocalEdit/LocalEdit'
+import { TABLE_DEFS } from '../../constants/metaModelDefinitions.const'
+import { TableProvider } from '@/shared/components/Table/contexts/Table/Table.context'
+import { ConfigsProvider } from '@/shared/contexts/Configs/Configs.context'
+import { useConfigs } from '@/shared/contexts/Configs/useConfigs.hook'
+import { createColumnBehaviors } from '@/shared/core/column.helper'
+
+interface ModuleViewContentProps {
+  viewKey: ViewTabsProps['viewKey']
+  title: ViewTabsProps['title']
+  tabPanels: ViewTabsProps['tabPanels']
+}
+
+const ModuleViewContent = ({
+  viewKey,
+  title,
+  tabPanels,
+}: ModuleViewContentProps) => {
+  const selectedId = useConfigs(s => s.selectedId)
+  const getSelectedConfig = useConfigs(s => s.getSelectedConfig)
+
+  const init = useMemo(
+    () => getSelectedConfig().states,
+    [getSelectedConfig, selectedId],
+  )
+
+  return (
+    <TableProvider {...{ init }}>
+      <ViewTabs {...{ viewKey, title, tabPanels }} />
+    </TableProvider>
+  )
+}
 
 interface ModuleViewProps {
   view?: Partial<ViewTabsProps>
-  metaModelKey: MetaModelKey
+  tableKey: TableKey
   queryPanels?: LocalQueryProps['panels']
 }
 
-const ModuleView = ({ view, metaModelKey, queryPanels }: ModuleViewProps) => {
+const ModuleView = ({ view, tableKey, queryPanels }: ModuleViewProps) => {
   const { viewKey, title, tabPanels } = view ?? {}
 
-  const { getMetaModelEntry } = useMetaModels()
-  const { ready, metaModel } = getMetaModelEntry(metaModelKey)
+  const tableDefCtx = useMemo(() => {
+    const tableDef = TABLE_DEFS[tableKey]
+    const columns = createColumnBehaviors(tableDef.columnDefs)
+    return { tableDef, columns }
+  }, [tableKey])
+
+  const { tableDef } = tableDefCtx
 
   const panels = useMemo<TabPanel[]>(
     () => [
@@ -41,29 +76,27 @@ const ModuleView = ({ view, metaModelKey, queryPanels }: ModuleViewProps) => {
         tabPanelKey: 'add',
         component: <LocalAdd />,
       },
-      {
-        title: 'Editar',
-        faIcon: 'fa-solid fa-pen',
-        tabPanelKey: 'edit',
-        component: <LocalEdit />,
-      },
+      // {
+      //   title: 'Editar',
+      //   faIcon: 'fa-solid fa-pen',
+      //   tabPanelKey: 'edit',
+      //   component: <LocalEdit />,
+      // },
       ...(tabPanels ?? []),
     ],
     [],
   )
 
-  if (!(ready && metaModel)) return null
-
   return (
-    <MetaModelContext.Provider value={metaModel as MetaModel}>
-      <TableProvider>
-        <ViewTabs
-          viewKey={viewKey ?? metaModel.key}
-          title={title ?? metaModel.title.plural}
+    <TableDefContext.Provider value={tableDefCtx}>
+      <ConfigsProvider>
+        <ModuleViewContent
+          viewKey={viewKey ?? tableDef.key}
+          title={title ?? tableDef.title.plural}
           tabPanels={panels}
         />
-      </TableProvider>
-    </MetaModelContext.Provider>
+      </ConfigsProvider>
+    </TableDefContext.Provider>
   )
 }
 

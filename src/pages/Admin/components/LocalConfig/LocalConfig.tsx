@@ -2,23 +2,27 @@ import './LocalConfig.css'
 import { useCallback, useMemo, useState } from 'react'
 import { useAppStore } from '@/store/config'
 import { useSubmitAction } from '@/hooks'
-import { useConfigModule, useMetaModel } from '../../hooks'
 import { Button, Icon, Input } from '@/components'
-import { Combobox } from '..'
 import { ConfigItem } from './components'
+import { useTableDef } from '../../hooks/useTableDef.hook'
+import { useConfigs } from '@/shared/contexts/Configs/useConfigs.hook'
+import { ComboboxProps, NewCombobox } from '@/shared/components'
 
 const STATIC_SELECTED = ['id']
 
 const LocalConfig = () => {
   const [creating, setCreating] = useState(false)
+  const toasting = useAppStore(s => s.toasting)
+  const add = useConfigs(s => s.add)
+  const configs = useConfigs(s => s.configs)
 
-  const toasting = useAppStore(store => store.toasting)
-  const { allFields, props } = useMetaModel()
-
-  const { config, add } = useConfigModule()
+  const { columns } = useTableDef()
 
   const options = useMemo(
-    () => allFields.map(k => ({ id: k, title: props[k].title })),
+    () =>
+      columns.map<ComboboxProps['options'][number]>(
+        ({ usefulDef: { key: value, title: label } }) => ({ value, label }),
+      ),
     [],
   )
 
@@ -29,7 +33,9 @@ const LocalConfig = () => {
       try {
         add({
           title: formData.get('title') as string,
-          columns: formData.getAll('columns') as string[],
+          columns: JSON.parse(
+            formData.get('columnFetch') as string,
+          ) as string[],
         })
 
         toasting('success', 'Agregado con éxito')
@@ -44,11 +50,11 @@ const LocalConfig = () => {
 
   return (
     <div className="cmp-local-config">
-      {config.items.map(item => (
+      {configs.map(c => (
         <ConfigItem
-          key={item.id}
-          staticSelected={STATIC_SELECTED}
-          {...{ ...item, options }}
+          key={c.id}
+          config={c}
+          comboboxProps={{ options, staticSelected: STATIC_SELECTED }}
         />
       ))}
       {creating ? (
@@ -70,10 +76,10 @@ const LocalConfig = () => {
             />
           </header>
           <div className="content">
-            <Combobox
-              keyName="columns"
-              title="Columnas"
-              isMultiple
+            <NewCombobox
+              name="columnFetch"
+              multiple
+              required
               staticSelected={STATIC_SELECTED}
               {...{ options }}
             />

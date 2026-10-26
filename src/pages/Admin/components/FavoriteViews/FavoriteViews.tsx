@@ -1,53 +1,39 @@
 import './FavoriteViews.css'
-import { MouseEventHandler, useCallback } from 'react'
-import { useFavoriteViews, useViews, useViewsInfo } from '../../hooks'
 import { Button, Icon } from '@/components'
+import { useViews } from '../../hooks/useViews.hook'
+import { useFavoriteTables } from '../../store/favoriteTables.store'
+import { TABLE_DEFS } from '../../constants/metaModelDefinitions.const'
 import { classList } from '@/helpers'
 
 const FavoriteViews = () => {
-  const { getViewInfo } = useViewsInfo()
   const { isActive, select } = useViews()
-  const { views, remove } = useFavoriteViews()
-
-  const handleClick = useCallback(
-    (viewKey: string) => () => select(viewKey, 0),
-    [],
-  )
-
-  const handleDeleteButtonClick = useCallback<
-    (viewKey: string) => MouseEventHandler<HTMLButtonElement>
-  >(
-    viewKey => e => {
-      e.stopPropagation()
-      remove(viewKey)
-    },
-    [],
-  )
+  const { tables, remove } = useFavoriteTables()
 
   return (
     <div className="cmp-favorite-views">
-      {views.map(viewKey => {
-        const viewInfo = getViewInfo(viewKey)
+      {tables.map(tableKey => {
+        const { title, classIcon } = TABLE_DEFS[tableKey]
 
         return (
-          viewInfo && (
-            <div
-              key={viewKey}
-              className={classList('item', 'ui-l', {
-                active: isActive(viewKey),
-              })}
-              title={viewInfo.title}
-              onClick={handleClick(viewKey)}
-            >
-              <Button
-                faIcon="fa-solid fa-minus"
-                size="s"
-                onAction={handleDeleteButtonClick(viewKey)}
-              />
-              <Icon faIcon={viewInfo.faIcon} />
-              <p className="text">{viewInfo.title}</p>
-            </div>
-          )
+          <div
+            key={tableKey}
+            className={classList('item', 'ui-l', {
+              active: isActive(tableKey),
+            })}
+            title={title.plural}
+            onClick={() => select(tableKey, 0)}
+          >
+            <Button
+              faIcon="fa-solid fa-minus"
+              size="s"
+              onAction={e => {
+                e.stopPropagation()
+                remove(tableKey)
+              }}
+            />
+            <Icon faIcon={classIcon} />
+            <p className="text">{title.plural}</p>
+          </div>
         )
       })}
     </div>

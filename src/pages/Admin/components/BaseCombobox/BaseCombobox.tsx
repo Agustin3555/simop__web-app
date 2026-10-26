@@ -9,7 +9,6 @@ import {
   useRef,
 } from 'react'
 import { useInputField } from '@/hooks'
-import { useAddFieldReset, useComboboxCore } from '../../hooks'
 import { InputField } from '@/types'
 import { InputLabel, Icon } from '@/components'
 import { classList } from '@/helpers'
@@ -22,9 +21,13 @@ import {
   shift,
   useFloating,
 } from '@floating-ui/react'
+import { useAddFieldReset } from '../../hooks/useAddFieldReset.hook'
+import { useComboboxCore } from '../../hooks/useComboboxCore.hook'
 
-export interface BaseComboboxProps
-  extends Pick<InputField, 'title' | 'hideLabel' | 'isRequired'> {
+export interface BaseComboboxProps extends Pick<
+  InputField,
+  'title' | 'hideLabel' | 'isRequired'
+> {
   selected: string[]
   setSelected: Dispatch<SetStateAction<string[]>>
   staticSelected?: string[]

@@ -21,11 +21,7 @@ export const ColumnHeader = ({
   hidden = false,
 }: ColumnHeaderProps) => {
   const {
-    def: {
-      key,
-      title,
-      columnConfig: { size },
-    },
+    usefulDef: { key, title },
   } = propBuilders
 
   const setColumnVisibility = useTable(s => s.setColumnVisibility)
@@ -41,7 +37,7 @@ export const ColumnHeader = ({
     <div
       className={classList('cmp-column-header', { hidden, isDragging })}
       style={hidden ? undefined : { width: `var(--col-${key}-size)` }}
-      {...{ ref }}
+      ref={control ? ref : undefined}
     >
       {control && (
         <div className="header">
@@ -64,13 +60,13 @@ export const ColumnHeader = ({
         <h2 className="text">{title}</h2>
         {!hidden && (
           <div className="actions">
-            <Toggle title="Graficar" faIcon="fa-solid fa-chart-pie" />
+            {/* <Toggle title="Graficar" faIcon="fa-solid fa-chart-pie" /> */}
             <SortButton {...{ propBuilders }} />
             <FilterMenu {...{ propBuilders }} />
           </div>
         )}
       </div>
-      {control && !hidden && <SizeInput columnKey={key} initSize={size!} />}
+      {control && !hidden && <SizeInput columnKey={key} />}
     </div>
   )
 }

@@ -1,9 +1,12 @@
+:root {
+  --cmp-toggle-color: var(--pal-color-a-l2);
+}
+
 .cmp-toggle {
   --cmp-icon-size: var(--ui-icon-size);
   --border-radius: var(--pal-size-2xs);
 
   color: var(--pal-color-gs-400);
-
   cursor: pointer;
 
   > input {
@@ -18,11 +21,12 @@
     align-content: center;
     border-width: var(--line-thickness);
     border-style: solid;
-    border-color: var(--pal-color-a-l4);
+    border-color: var(--pal-color-gs-200);
     aspect-ratio: 1;
     width: var(--ui-height);
 
-    transition: border-color var(--pal-time-xs) ease-out,
+    transition:
+      border-color var(--pal-time-xs) ease-out,
       color var(--pal-time-xs) ease-out,
       background-color var(--pal-time-xs) ease-out;
 
@@ -31,41 +35,10 @@
     }
 
     .cmp-toggle:has(input:checked) > & {
-      border-color: var(--pal-color-a-l2);
+      border-color: var(--cmp-toggle-color);
 
       color: var(--pal-color-white);
-
-      background-color: var(--pal-color-a-l2);
-    }
-  }
-
-  > .checkbox {
-    align-content: center;
-    border-width: var(--line-thickness);
-    border-style: solid;
-    border-color: var(--pal-color-a-l2);
-    aspect-ratio: 1;
-    width: var(--ui-height);
-
-    transition: background-color var(--pal-time-xs) ease-out;
-
-    > .cmp-icon {
-      margin-inline: auto;
-
-      color: var(--pal-color-white);
-      scale: 0;
-
-      transition: scale var(--pal-time-s) ease;
-    }
-
-    .cmp-toggle:has(input:checked) > & {
-      border: none;
-
-      background-color: var(--pal-color-a);
-
-      > .cmp-icon {
-        scale: initial;
-      }
+      background-color: var(--cmp-toggle-color);
     }
   }
 
@@ -77,20 +50,21 @@
 
     border-width: var(--line-thickness);
     border-style: solid;
-    border-color: var(--pal-color-a-l3);
+    border-color: var(--pal-color-gs-200);
     width: var(--width);
     height: var(--height);
 
     background: linear-gradient(
       90deg,
-      var(--pal-color-a-l1) 0%,
-      var(--pal-color-a-l1) 50%,
+      var(--cmp-toggle-color) 0%,
+      var(--cmp-toggle-color) 50%,
       var(--pal-color-gs-200) 50%,
       var(--pal-color-gs-200) 100%
     );
     overflow: hidden;
 
-    transition: border-color var(--pal-time-xs) ease-out,
+    transition:
+      border-color var(--pal-time-xs) ease-out,
       color var(--pal-time-xs) ease-out;
 
     > .lever {
@@ -112,9 +86,9 @@
     }
 
     .cmp-toggle:has(input:checked) > & {
-      color: var(--pal-color-a);
+      border-color: var(--cmp-toggle-color);
 
-      border-color: var(--pal-color-a-l1);
+      color: var(--cmp-toggle-color);
 
       > .lever {
         left: calc(var(--width) - var(--height));

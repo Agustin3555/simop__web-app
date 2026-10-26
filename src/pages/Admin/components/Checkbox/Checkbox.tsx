@@ -1,5 +1,5 @@
 import './Checkbox.css'
-import { useInputField, useResetByRender } from '@/hooks'
+import { useInputField } from '@/hooks'
 import { InputLabel, Icon } from '@/components'
 import { InputFieldPartial } from '@/types'
 import { classList } from '@/helpers'
@@ -23,8 +23,6 @@ const Checkbox = ({
   const { inputTitle, disabledState } = useInputField({ title, isRequired })
   const { disabled } = disabledState
 
-  const { renderKey, resetHandleClick } = useResetByRender(keyName)
-
   return (
     <div className={classList('cmp-checkbox', 'control')}>
       <InputLabel
@@ -34,12 +32,10 @@ const Checkbox = ({
           isRequired,
           isEditMode,
           ...disabledState,
-          resetHandleClick,
         }}
       />
       <div className={classList('box', { ...(isEditMode && { disabled }) })}>
         <input
-          key={renderKey}
           title={inputTitle}
           name={keyName}
           type="checkbox"

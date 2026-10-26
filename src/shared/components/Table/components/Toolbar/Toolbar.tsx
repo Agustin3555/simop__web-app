@@ -3,11 +3,15 @@ import { useTable } from '../../contexts/Table/useTable.hook'
 import { Dispatch, SetStateAction } from 'react'
 import { Button, Toggle } from '@/components'
 import { ToggleProps } from '@/components/Toggle/Toggle'
-import { Value } from '@/pages/Admin/components'
+import Value from '@/pages/Admin/components/Value/Value'
+import { ReportModal } from './components'
+import { ColumnBehavior } from '@/shared/core/types'
+import { CalcResults } from '../../hooks/useTableModel.hook'
 
 export type ToggleKey = 'columnControl' | 'stickHeader' | 'stickFooter'
+export type TogglesState = Record<ToggleKey, boolean>
 
-const toggles: Record<
+const TOGGLES_INFO: Record<
   ToggleKey,
   Required<Pick<ToggleProps, 'title' | 'faIcon'>>
 > = {
@@ -25,38 +29,52 @@ const toggles: Record<
   },
 }
 
-export type ToggleStates = Record<ToggleKey, boolean>
-
 export interface ToolbarProps {
-  filteredDataLength: number
+  renderedColumns: ColumnBehavior[]
+  renderedRows: { key: string; row: Record<string, unknown> }[]
+  selectedRows: { key: string; row: Record<string, unknown> }[]
+  calcResults: CalcResults
   dataLength: number
-  toggleStates: ToggleStates
-  setToggleStates: Dispatch<SetStateAction<ToggleStates>>
+  editModeState?: [boolean, Dispatch<SetStateAction<boolean>>]
+  togglesState: [TogglesState, Dispatch<SetStateAction<TogglesState>>]
 }
 
 export const Toolbar = ({
-  filteredDataLength,
+  renderedColumns,
+  renderedRows,
+  selectedRows,
+  calcResults,
   dataLength,
-  toggleStates,
-  setToggleStates,
+  editModeState,
+  togglesState: [toggles, setToggles],
 }: ToolbarProps) => {
+  const columnFilters = useTable(s => s.columnFilters)
   const cleanFilters = useTable(s => s.cleanFilters)
 
   const handleToggleChange = (key: ToggleKey) => () => {
-    setToggleStates(prev => ({ ...prev, [key]: !toggleStates[key] }))
+    setToggles(prev => ({ ...prev, [key]: !toggles[key] }))
   }
 
   return (
     <div className="new-cmp-toolbar">
       <div className="left">
-        {Object.entries(toggles).map(([key, props]) => (
+        {Object.entries(TOGGLES_INFO).map(([key, props]) => (
           <Toggle
             key={key}
-            value={toggleStates[key as ToggleKey]}
+            value={toggles[key as ToggleKey]}
             onChange={handleToggleChange(key as ToggleKey)}
             {...props}
           />
         ))}
+        {editModeState && (
+          <Toggle
+            handlingClass="edit-mode"
+            title="Modo edición"
+            faIcon="fa-solid fa-pen"
+            value={editModeState[0]}
+            setValue={editModeState[1]}
+          />
+        )}
         {/* <Button
           title="Simplificar coincidencias"
           faIcon="fa-solid fa-compress"
@@ -66,10 +84,10 @@ export const Toolbar = ({
         /> */}
       </div>
       <div className="center">
-        {filteredDataLength !== dataLength && (
+        {columnFilters.length !== 0 && (
           <>
             <Value
-              text={filteredDataLength}
+              text={renderedRows.length}
               faIcon="fa-solid fa-filter"
               size="s"
               type="secondary"
@@ -93,10 +111,13 @@ export const Toolbar = ({
         />
       </div>
       <div className="right">
+        <ReportModal
+          {...{ renderedColumns, renderedRows, selectedRows, calcResults }}
+        />
         <Button
           text="Excel"
           title="Descargar Excel"
-          faIcon="fa-solid fa-file-arrow-down"
+          faIcon="fa-regular fa-file-excel"
           size="s"
           type="secondary"
         />

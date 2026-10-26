@@ -1,6 +1,6 @@
 import './Input.css'
 import { InputHTMLAttributes } from 'react'
-import { useInputField, useResetByRender } from '@/hooks'
+import { useInputField } from '@/hooks'
 import { InputFieldPartial } from '@/types'
 import { classList } from '@/helpers'
 import { InputLabel } from '..'
@@ -22,8 +22,6 @@ const Input = ({
   const { inputTitle, disabledState } = useInputField({ title, isRequired })
   const { disabled } = disabledState
 
-  const { renderKey, resetHandleClick } = useResetByRender(keyName)
-
   return (
     <div className={classList('cmp-input', 'control')}>
       <InputLabel
@@ -33,11 +31,9 @@ const Input = ({
           isRequired,
           isEditMode,
           ...disabledState,
-          resetHandleClick,
         }}
       />
       <input
-        key={renderKey}
         className="input box"
         title={inputTitle}
         name={keyName}

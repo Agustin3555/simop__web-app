@@ -12,7 +12,7 @@ const faIconMatching: Record<ToastType, string> = {
 }
 
 const Snackbar = () => {
-  const toasts = useAppStore(store => store.toasts)
+  const toasts = useAppStore(s => s.toasts)
 
   return (
     <div className="cmp-snackbar">

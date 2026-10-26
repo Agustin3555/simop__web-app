@@ -9,55 +9,59 @@ import {
   ColumnHeader,
   RowSelectorCell,
   RowSelectorHeader,
-  ToggleStates,
+  TogglesState,
   Toolbar,
 } from './components'
 import { DragDropProvider } from '@dnd-kit/react'
 import { RestrictToHorizontalAxis } from '@dnd-kit/abstract/modifiers'
 import { classList, varList } from '@/helpers'
-import { ColumnDef, ColumnBehavior } from '@/shared/core/types'
-import { buildTextColumnBehavior } from '@/shared/core/columns/text'
-import { buildNumberColumnBehavior } from '@/shared/core/columns/number'
+import { ColumnBehavior } from '@/shared/core/types'
+import { ServiceData } from '@/infra/http/service.type'
 
-const COLUMN_BEHAVIOR_BUILDERS: Record<
-  ColumnDef['type'],
-  (prop: any) => ColumnBehavior
-> = {
-  text: buildTextColumnBehavior,
-  number: buildNumberColumnBehavior,
+const togglesStateInit: TogglesState = {
+  columnControl: false,
+  stickHeader: false,
+  stickFooter: false,
 }
 
-export interface TableProps {
-  data: Record<string, unknown>[]
-  columnDefs: ColumnDef[]
-  rowKey: string
+export interface NewTableProps {
+  columns: ColumnBehavior[]
+  rowKey?: string
+  updater?: (id: string, data: ServiceData) => Promise<void>
+  data: object[]
 }
 
-export const NewTable = ({ columnDefs, data, rowKey }: TableProps) => {
+export const NewTable = ({
+  columns,
+  rowKey = 'id',
+  updater,
+  data,
+}: NewTableProps) => {
+  const editModeState = useState(false)
+  const [editMode] = editModeState
+
+  const togglesState = useState<TogglesState>(togglesStateInit)
+  const [toggles] = togglesState
+
   const loadColumns = useTable(s => s.loadColumns)
-  const state = useTable(s => s.columnVisibility)
-
-  const [toggleStates, setToggleStates] = useState<ToggleStates>({
-    columnControl: false,
-    stickHeader: false,
-    stickFooter: false,
-  })
+  // const state = useTable(s => s.columnVisibility)
 
   useEffect(() => {
-    const propBuilders = columnDefs.map(c =>
-      COLUMN_BEHAVIOR_BUILDERS[c.type](c),
-    )
-    loadColumns(propBuilders)
-  }, [columnDefs, loadColumns])
+    loadColumns(columns)
+  }, [columns, loadColumns])
 
   const {
     renderedColumns,
     hiddenColumns,
-    renderedRows,
-    allRowKeys,
-    filteredRowKeys,
     columnSizeVars,
     handleColumnDragEnd,
+
+    renderedRows,
+    selectedRows,
+    allRowKeys,
+    filteredRowKeys,
+
+    calcResults,
   } = useTableModel(data, rowKey)
 
   const { containerRef, visibleRows, loadMoreTrigger } =
@@ -65,57 +69,63 @@ export const NewTable = ({ columnDefs, data, rowKey }: TableProps) => {
 
   return (
     <div className="new-cmp-table" style={varList(columnSizeVars)}>
-      {JSON.stringify(state)}
+      {/* {JSON.stringify(state)} */}
       <Toolbar
-        filteredDataLength={renderedRows.length}
         dataLength={data.length}
-        {...{ toggleStates, setToggleStates }}
+        {...(updater && { editModeState })}
+        {...{
+          renderedColumns,
+          renderedRows,
+          selectedRows,
+          calcResults,
+          togglesState,
+        }}
       />
       <article className="new-table" ref={containerRef}>
         <DragDropProvider
           modifiers={[RestrictToHorizontalAxis]}
           onDragEnd={handleColumnDragEnd}
         >
-          <header className={classList({ stick: toggleStates.stickHeader })}>
+          <header className={classList({ stick: toggles.stickHeader })}>
             <RowSelectorHeader {...{ allRowKeys, filteredRowKeys }} />
-            {renderedColumns.map((c, index) => (
+            {renderedColumns.map((c, i) => (
               <ColumnHeader
-                key={c.def.key}
+                key={c.usefulDef.key}
                 propBuilders={c}
-                index={index}
-                control={toggleStates.columnControl}
+                index={i}
+                control={toggles.columnControl}
               />
             ))}
-            {toggleStates.columnControl &&
+            {toggles.columnControl &&
               hiddenColumns.map(c => (
-                <ColumnHeader key={c.def.key} propBuilders={c} hidden />
+                <ColumnHeader key={c.usefulDef.key} propBuilders={c} hidden />
               ))}
           </header>
         </DragDropProvider>
         <ol className="body">
-          {visibleRows.map(item => (
-            <li className="row" key={item.key}>
-              <RowSelectorCell rowKey={item.key} />
+          {visibleRows.map(r => (
+            <li className="row" key={r.key}>
+              <RowSelectorCell rowKey={r.key} />
               {renderedColumns.map(c => (
                 <Cell
-                  key={`${item.key}-${c.def.key}`}
+                  key={`${r.key}-${c.usefulDef.key}`}
+                  rowId={r.key}
                   column={c}
-                  value={item.row[c.def.key]}
+                  value={r.row[c.usefulDef.key]}
+                  {...{ updater, editMode }}
                 />
               ))}
             </li>
           ))}
           {loadMoreTrigger}
         </ol>
-        <footer className={classList({ stick: toggleStates.stickFooter })}>
+        <footer className={classList({ stick: toggles.stickFooter })}>
           <RowSelectorHeader {...{ allRowKeys, filteredRowKeys }} />
-          {renderedColumns.map(c => (
+          {renderedColumns.map((c, i) => (
             <ColumnFooter
-              key={c.def.key}
-              propBuilders={c}
-              values={
-                c.getTableColumnCalcs && renderedRows.map(r => r.row[c.def.key])
-              }
+              key={c.usefulDef.key}
+              column={c}
+              calcResult={calcResults[i]}
             />
           ))}
         </footer>

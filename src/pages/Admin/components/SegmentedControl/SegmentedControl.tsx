@@ -1,6 +1,6 @@
 import './SegmentedControl.css'
 import { Dispatch, SetStateAction } from 'react'
-import { useInputHandler } from '../../hooks'
+import { useInputHandler } from '../../hooks/useInputHandler.hook'
 import { classList } from '@/helpers'
 import { Icon } from '@/components'
 

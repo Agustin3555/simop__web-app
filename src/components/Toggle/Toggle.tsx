@@ -1,6 +1,4 @@
 import './Toggle.css'
-import { Icon } from '@/components'
-import { classList } from '@/helpers'
 import {
   Dispatch,
   ReactNode,
@@ -8,10 +6,13 @@ import {
   useCallback,
   useMemo,
 } from 'react'
+import { Icon } from '@/components'
+import { classList } from '@/helpers'
 
-type Style = 'toggle' | 'checkbox' | 'switch'
+type Style = 'toggle' | 'switch'
 
 export interface ToggleProps {
+  handlingClass?: string
   title: string
   faIcon?: string
   size?: 's' | 'm' | 'l'
@@ -22,6 +23,7 @@ export interface ToggleProps {
 }
 
 const Toggle = ({
+  handlingClass,
   title,
   faIcon = 'fa-solid fa-check',
   size = 's',
@@ -34,11 +36,6 @@ const Toggle = ({
     const components: Record<Style, ReactNode> = {
       toggle: (
         <div className="toggle">
-          <Icon {...{ faIcon }} />
-        </div>
-      ),
-      checkbox: (
-        <div className="checkbox">
           <Icon {...{ faIcon }} />
         </div>
       ),
@@ -60,7 +57,10 @@ const Toggle = ({
   }, [onChange, setValue])
 
   return (
-    <label className={classList('cmp-toggle', `ui-${size}`)} {...{ title }}>
+    <label
+      className={classList('cmp-toggle', `ui-${size}`, handlingClass)}
+      {...{ title }}
+    >
       <input type="checkbox" onChange={handleChange} {...{ checked }} />
       {ui}
     </label>

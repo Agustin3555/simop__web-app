@@ -1,6 +1,6 @@
 import './Tabs.css'
 import { ReactNode, useState } from 'react'
-import { useInputHandler } from '@/pages/Admin/hooks'
+import { useInputHandler } from '../../hooks/useInputHandler.hook'
 import { LocalViewContext } from '@/pages/Admin/contexts/localViewLocation.context'
 import { Icon } from '@/components'
 import { classList } from '@/helpers'

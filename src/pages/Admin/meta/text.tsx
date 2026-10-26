@@ -92,7 +92,7 @@ export const createTextProp =
         const value = getFilterValue() as undefined | string
         if (value === undefined) return
 
-        return { title, values: [value] }
+        return { label: title, values: [value] }
       },
 
       getReportTableCell: item => {

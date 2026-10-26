@@ -4,19 +4,23 @@ import { NumberColumn } from './columns/number'
 import { BooleanColumn } from './columns/boolean'
 import { DatetimeColumn } from './columns/datetime'
 import { RefColumn } from './columns/ref'
-import { Service } from '@/services/config'
+import { TableKey } from '@/pages/Admin/constants/metaModelKey.const'
+import { FormValues } from '@/hooks'
+import { Service } from '@/infra/http/service.type'
+import { LooseEntity } from '@/infra/http/entity.types'
 
-export interface TableDef<C extends readonly ColumnDef[]> {
-  key: string
+export interface PartialTableDef<C extends readonly ColumnDef[]> {
+  key: TableKey
   title: {
     singular: string
     plural: string
   }
   classIcon?: string
 
-  columns: C
+  columnDefs: C
   anchorColumnKey: C[number]['key']
-  mutationColumnGroups: {
+  mutationColumns?: C[number]['key'][]
+  mutationColumnGroups?: {
     title?: string
     columnKeys: C[number]['key'][]
   }[]
@@ -24,19 +28,9 @@ export interface TableDef<C extends readonly ColumnDef[]> {
   services: Service
 }
 
-export const createTableDef = <const C extends readonly ColumnDef[]>(
-  table: TableDef<C>,
-): TableDef<C> => table
-
-// USO SOLO CON LA INTERFAZ:
-// const columns = [
-//   { type: 'number', key: 'id', title: 'ID' },
-//   { type: 'text', key: 'name', title: 'Nombre' },
-// ] as const satisfies readonly ColumnDef[]
-// const table: TableDef<typeof columns> = {
-//   columns,
-//   anchorColumnKey: 'id', // Solo acepta 'id' o 'name'
-// }
+export type TableDef<C extends readonly ColumnDef[]> = Required<
+  PartialTableDef<C>
+>
 
 export enum Size {
   xs = 5,
@@ -52,23 +46,31 @@ export interface ColumnConfig {
 }
 
 export interface InputConfig {
+  isHidden?: boolean
   isRequired?: boolean
 }
 
 export interface Column {
   key: string
-  title: string
 }
 
 export type ColumnDef =
-  | BooleanColumn
-  | TextColumn
-  | NumberColumn
-  | DatetimeColumn
-  | RefColumn
+  BooleanColumn | TextColumn | NumberColumn | DatetimeColumn | RefColumn
 
 export type ColumnBehavior = {
-  def: Required<ColumnDef>
+  usefulDef: {
+    key: string
+    title: string
+    input: { isHidden: boolean }
+    column: { size: number }
+  }
+
+  getFormField: (value?: unknown, isEditMode?: boolean) => ReactNode
+
+  writeFormValue: (
+    formValues: FormValues,
+    accData: Record<string, unknown>,
+  ) => void
 
   compareTableValues: (a: unknown, b: unknown) => number
 
@@ -81,25 +83,17 @@ export type ColumnBehavior = {
 
   getTableCell: (value: unknown) => ReactNode
 
-  getTableColumnCalcs?: (
-    values: unknown[],
-  ) => { value: string; label: string; result: () => unknown }[]
+  getTableFooterCalcs?: () => Record<
+    string,
+    { label: string; getResult: (values: unknown[]) => unknown }
+  >
 
-  // getFormFieldValue: (
-  //   formData: FormData,
-  //   form: HTMLFormElement,
-  //   isEditMode?: boolean,
-  // ) => undefined | unknown
+  getReportTableFilter: (
+    filterValue: unknown,
+    refs?: LooseEntity[],
+  ) => { label: string; values: (number | string)[] } | undefined
 
-  // getTableCell: (item: E, selectedSearchMode?: string) => ReactNode
-
-  // getReportTableFilter: (
-  //   column: Column<E>,
-  //   data: E[],
-  //   selectedSearchMode?: string,
-  // ) => undefined | FilterProp
-
-  // getReportTableCell: (item: E, selectedSearchMode?: string) => ReactNode
+  getReportTableCell: (value: unknown) => ReactNode
 
   // getExcelTableCell: (item: E, selectedSearchMode?: string) => unknown
 

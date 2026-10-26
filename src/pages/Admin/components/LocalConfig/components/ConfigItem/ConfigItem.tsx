@@ -1,33 +1,36 @@
-import { MouseEventHandler, useCallback, useState } from 'react'
+import { MouseEventHandler, useCallback, useMemo, useState } from 'react'
 import { useAppStore } from '@/store/config'
-import {
-  useConfigModule,
-  useInputHandler,
-  useMetaModel,
-} from '@/pages/Admin/hooks'
 import { useHandleAction } from '@/hooks'
 import { Button } from '@/components'
-import { Checker } from '../../..'
-import Combobox, { ComboboxProps } from '../../../Combobox/Combobox'
-import { Config as ConfigCtx } from '@/pages/Admin/contexts/configs.context'
+import { useInputHandler } from '@/pages/Admin/hooks/useInputHandler.hook'
+import { useTableDef } from '@/pages/Admin/hooks/useTableDef.hook'
+import Checker from '../../../Checker/Checker'
+import { Config } from '@/shared/contexts/Configs/configs.store'
+import { useConfigs } from '@/shared/contexts/Configs/useConfigs.hook'
+import { ComboboxProps, NewCombobox } from '@/shared/components'
 
-interface ConfigProps
-  extends ConfigCtx, Pick<ComboboxProps, 'options' | 'staticSelected'> {}
+interface ConfigProps {
+  config: Config
+  comboboxProps: Pick<ComboboxProps, 'options' | 'staticSelected'>
+}
 
 const ConfigItem = ({
-  id,
-  title: initTitle,
-  columns,
-  staticSelected,
-  options,
+  config: { id, title: initTitle, states },
+  comboboxProps: { options, staticSelected },
 }: ConfigProps) => {
   const [title, setTitle] = useState(initTitle)
+  const toasting = useAppStore(s => s.toasting)
 
-  const toasting = useAppStore(store => store.toasting)
-  const { key } = useMetaModel()
+  const {
+    tableDef: { key },
+  } = useTableDef()
 
-  const { config, remove, clone, getSetSelected, editTitle, selectConfig } =
-    useConfigModule()
+  const isSelected = useConfigs(s => s.selectedId === id)
+  const remove = useConfigs(s => s.remove)
+  const clone = useConfigs(s => s.clone)
+  const editTitle = useConfigs(s => s.editTitle)
+  const setColumnFetch = useConfigs(s => s.setColumnFetch)
+  const selectConfig = useConfigs(s => s.selectConfig)
 
   const handleChange = useInputHandler(id => selectConfig(Number(id)))
 
@@ -65,7 +68,7 @@ const ConfigItem = ({
             name={`config-selectors-${key}`}
             type="radio"
             value={id}
-            checked={config.selected === id}
+            checked={isSelected}
             onChange={handleChange}
           />
           <Checker />
@@ -77,7 +80,7 @@ const ConfigItem = ({
           onBlur={handleTitleBlur}
         />
         <div className="actions">
-          {config.selected !== id && (
+          {!isSelected && (
             <Button
               title="Eliminar configuración"
               name={String(id)}
@@ -99,13 +102,20 @@ const ConfigItem = ({
         </div>
       </header>
       <div className="content">
-        <Combobox
+        {/* <Combobox
           keyName={`columns-${key}`}
           title="Columnas"
-          selected={columns}
+          selected={states.columnFetch}
           setSelected={getSetSelected(id)}
           isMultiple
           {...{ staticSelected, options }}
+        /> */}
+        <NewCombobox
+          name={`columns-${key}`}
+          selected={states.columnFetch}
+          multiple
+          onChange={selected => setColumnFetch(id, selected)}
+          {...{ options, staticSelected }}
         />
       </div>
     </div>

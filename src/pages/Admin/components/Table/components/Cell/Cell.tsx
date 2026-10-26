@@ -3,7 +3,7 @@ import { memo, useMemo } from 'react'
 import { Cell as TsCell } from '@tanstack/react-table'
 import { LooseEntity } from '@/models/config'
 import { Prop } from '@/pages/Admin/meta/utils'
-import { useTable } from '@/pages/Admin/hooks'
+import { useTable } from '@/pages/Admin/hooks/useTable.hook'
 
 /*
   No se usa 'getValue' porque se necesita tener el valor original. 'getValue'

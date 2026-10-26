@@ -93,8 +93,7 @@ export const createDateProp =
         const { getFilterValue } = column
 
         const value = getFilterValue() as
-          | undefined
-          | { min?: string; max?: string }
+          undefined | { min?: string; max?: string }
 
         if (value === undefined) return
 
@@ -109,7 +108,7 @@ export const createDateProp =
 
         if (!values.length) return
 
-        return { title, values }
+        return { label: title, values }
       },
 
       getReportTableCell: item => {

@@ -52,6 +52,7 @@ export const styles = StyleSheet.create({
 
     textTransform: 'uppercase',
     fontWeight: 850,
+
     color: palColor('BD4'),
   },
   body: {},
@@ -60,12 +61,26 @@ export const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     gap: palSize(Size.XS),
-    borderBottomWidth: 1,
-    borderColor: palColor('AL4'),
     paddingTop: 6,
     paddingBottom: 7,
   },
   cell: {},
+  calcs: {
+    borderTopWidth: palSize(Size.XS3),
+    borderColor: palColor('CL3'),
+  },
+  calcContentItem: {
+    display: 'flex',
+    flexDirection: 'column',
+    gap: palSize(Size.XS2),
+
+    fontWeight: 850,
+  },
+  calcContentItem_label: {
+    textTransform: 'uppercase',
+
+    color: palColor('CD4'),
+  },
 
   graphItem: {
     position: 'relative',
@@ -83,6 +98,7 @@ export const styles = StyleSheet.create({
     fontSize: 12,
     textTransform: 'uppercase',
     fontWeight: 850,
+
     color: palColor('BD4'),
   },
   mode: {

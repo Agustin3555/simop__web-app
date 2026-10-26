@@ -1,10 +1,10 @@
 import { useCallback, useEffect, useMemo, useRef } from 'react'
-import { useTable } from '@/pages/Admin/hooks'
 import { CircleMarker, Tooltip } from 'react-leaflet'
 import { CircleMarker as LeafletCircleMarker } from 'leaflet'
 import { palColor } from '@/styles/palette'
 import { LocalidadModel } from '@/pages/Admin/modules/localidad'
 import geoLocalidades from '@/data/chaco_localidades.json'
+import { useTable } from '@/pages/Admin/hooks/useTable.hook'
 
 const PULSE_SPEED = 37.5
 

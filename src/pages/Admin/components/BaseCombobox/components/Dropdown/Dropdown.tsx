@@ -7,7 +7,6 @@ import {
   useMemo,
   useState,
 } from 'react'
-import { useComboboxCore, useInputHandler } from '@/pages/Admin/hooks'
 import { createPortal } from 'react-dom'
 import { UseFloatingReturn } from '@floating-ui/react'
 import { Button, Icon } from '@/components'
@@ -15,9 +14,12 @@ import { Selected } from '..'
 import { classList } from '@/helpers'
 import { BaseComboboxProps } from '../../BaseCombobox'
 import { Option } from './components'
+import { useComboboxCore } from '@/pages/Admin/hooks/useComboboxCore.hook'
+import { useInputHandler } from '@/pages/Admin/hooks/useInputHandler.hook'
 
 export interface DropdownProps
-  extends Pick<
+  extends
+    Pick<
       BaseComboboxProps,
       | 'selected'
       | 'setSelected'

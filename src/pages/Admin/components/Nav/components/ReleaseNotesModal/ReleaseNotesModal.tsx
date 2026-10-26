@@ -1,6 +1,6 @@
 import './ReleaseNotesModal.css'
 import { MouseEventHandler, useCallback, useEffect, useState } from 'react'
-import { useToggle } from '@/pages/Admin/hooks'
+import { useToggle } from '@/pages/Admin/hooks/useToggle.hook'
 import { Button, Icon } from '@/components'
 import Note, { NoteProps } from './components/Note/Note'
 import { classList, safe } from '@/helpers'

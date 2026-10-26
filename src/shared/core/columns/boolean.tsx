@@ -1,175 +1,156 @@
-import {
-  Color,
-  ColumnBehavior,
-  ForView,
-  MinSize,
-  Column,
-  createUniqueMode,
-  UNIQUE_MODE,
-  InputConfig,
-  ColumnConfig,
-} from '../types'
-import { BooleanFilter, Checkbox, Combobox } from '../components'
-import { classList } from '@/helpers'
+import Checkbox from '@/pages/Admin/components/Checkbox/Checkbox'
+import { NewCombobox } from '@/shared/components'
 import { StyleSheet, Text } from '@react-pdf/renderer'
-import { isFieldEnabled } from './ref'
+import { Column, ColumnBehavior, ColumnConfig, InputConfig, Size } from '../types'
 
 export interface BooleanColumn extends Column {
   type: 'boolean'
+  title: string
   falseText?: string
   trueText?: string
+  allowNull?: boolean
   columnConfig?: ColumnConfig
   inputConfig?: InputConfig
 }
 
-interface BooleanProp extends Column {
-  config?: {
-    falseText?: string
-    trueText?: string
-    allowNull?: boolean
+const getBooleanFilterValue = (value: unknown): boolean | undefined =>
+  typeof value === 'boolean' ? value : undefined
 
-    column?: ForView & {
-      falseColor?: Color
-      trueColor?: Color
-    }
-    field?: ForView
-  }
-}
+export const buildBooleanColumnBehavior = (
+  def: BooleanColumn,
+): ColumnBehavior => {
+  const {
+    key,
+    title: originTitle,
+    falseText = 'No',
+    trueText = 'Si',
+    allowNull = false,
+    columnConfig,
+    inputConfig,
+  } = def
 
-export const createBooleanProp =
-  ({ title, minSize = MinSize.xs, config }: BooleanProp): ColumnBehavior =>
-  key => {
-    const {
-      falseText = 'No',
-      trueText = 'Si',
-      allowNull = false,
-      column,
-      field,
-    } = config ?? {}
+  const { size = Size.m, overrideTitle } = columnConfig ?? {}
+  const { isHidden = false, isRequired = false } = inputConfig ?? {}
+  const title = overrideTitle ?? originTitle
+  const options = [
+    { value: 'false', label: falseText },
+    { value: 'true', label: trueText },
+  ]
 
-    const { falseColor = 'grey', trueColor = 'green' } = column ?? {}
-    const { hidden } = field ?? {}
-
-    return {
+  return {
+    usefulDef: {
       key,
       title,
-      minSize,
+      input: { isHidden },
+      column: { size },
+    },
 
-      getFormField: (value, isEditMode = false) => {
-        if (hidden) return
-
-        if (allowNull) {
-          return (
-            <Combobox
-              keyName={key}
-              options={[
-                { id: 'false', title: falseText },
-                { id: 'true', title: trueText },
-              ]}
-              initSelected={value === undefined ? undefined : [String(value)]}
-              {...{ title, isEditMode }}
+    getFormField: (value, isEditMode = false) => {
+      if (allowNull) {
+        return (
+          <div>
+            <span>{title}</span>
+            <NewCombobox
+              name={key}
+              options={options}
+              defaultSelected={
+                typeof value === 'boolean' ? [String(value)] : undefined
+              }
+              required={!isEditMode && isRequired}
             />
-          )
-        }
-
-        return (
-          <Checkbox
-            keyName={key}
-            {...{ title, value, isEditMode, falseText, trueText }}
-          />
+          </div>
         )
-      },
+      }
 
-      getFormFieldValue: (formData, form, isEditMode = false) => {
-        const value = formData.get(key)
+      return (
+        <Checkbox
+          keyName={key}
+          value={typeof value === 'boolean' ? value : undefined}
+          {...(!isEditMode && { isRequired })}
+          {...{ title, isEditMode, falseText, trueText }}
+        />
+      )
+    },
 
-        if (allowNull) {
-          if (value === null) {
-            if (isEditMode && isFieldEnabled(form, key)) return null
-            return
-          }
+    writeFormValue: (formValues, accData) => {
+      if (!allowNull) {
+        accData[key] = formValues.get.boolean(key)
+        return
+      }
 
-          return value === 'true'
-        }
+      const selected = JSON.parse(formValues.get.string(key) || '[]') as unknown
 
-        if (isEditMode && !formData.has(key)) return
+      if (!Array.isArray(selected) || selected.length === 0) {
+        accData[key] = null
+        return
+      }
 
-        return value === 'on'
-      },
+      if (
+        selected.length !== 1 ||
+        (selected[0] !== 'true' && selected[0] !== 'false')
+      ) {
+        throw new Error(`Invalid boolean value submitted for "${key}".`)
+      }
 
-      getTableHeader: column => ({
-        title,
-        getFilter: () => (
-          <BooleanFilter
-            keyName={key}
-            {...{
-              column,
-              title,
-              falseText,
-              trueText,
-            }}
-          />
-        ),
-      }),
+      accData[key] = selected[0] === 'true'
+    },
 
-      getTableCell: item => {
-        const value = item[key] as undefined | boolean
+    compareTableValues: (a, b) => {
+      const booleanA = getBooleanFilterValue(a)
+      const booleanB = getBooleanFilterValue(b)
 
-        return (
-          value !== undefined && (
-            <p
-              className={classList(
-                'highlighted',
-                value ? trueColor : falseColor,
-              )}
-            >
-              {value ? trueText : falseText}
-            </p>
-          )
-        )
-      },
+      if (booleanA === undefined || booleanB === undefined) return 0
+      if (booleanA === booleanB) return 0
 
-      getReportTableFilter: column => {
-        const { getFilterValue } = column
+      return booleanA ? 1 : -1
+    },
 
-        const value = getFilterValue() as undefined | boolean
-        if (value === undefined) return
+    applyTableFilter: (value, filterValue) => {
+      const selectedValue = getBooleanFilterValue(filterValue)
 
-        return { title, values: [value ? trueText : falseText] }
-      },
+      return selectedValue === undefined || value === selectedValue
+    },
 
-      getReportTableCell: item => {
-        const value = item[key] as undefined | boolean
+    getTableFilter: (filterValue, setFilterValue) => {
+      const selectedValue = getBooleanFilterValue(filterValue)
 
-        if (value === undefined) return
+      return (
+        <NewCombobox
+          name={`${key}-filter`}
+          options={options}
+          selected={selectedValue === undefined ? [] : [String(selectedValue)]}
+          onChange={selected => {
+            const value = selected[0]
+            setFilterValue(
+              value === undefined ? undefined : value === 'true',
+            )
+          }}
+        />
+      )
+    },
 
-        const styles = StyleSheet.create({
-          value: {},
-        })
+    getTableCell: value => {
+      if (typeof value !== 'boolean') return
 
-        return <Text style={styles.value}>{value ? trueText : falseText}</Text>
-      },
+      return <p className="text">{value ? trueText : falseText}</p>
+    },
 
-      getExcelTableCell: item => {
-        const value = item[key] as undefined | boolean
+    getReportTableFilter: filterValue => {
+      const value = getBooleanFilterValue(filterValue)
 
-        if (value === undefined) return
+      if (value === undefined) return
 
-        return value ? trueText : falseText
-      },
+      return { label: title, values: [value ? trueText : falseText] }
+    },
 
-      pieSectorConfig: {
-        defaultMode: UNIQUE_MODE.key,
-        modes: {
-          ...createUniqueMode({
-            accumulate: (value: boolean, add) => {
-              const key = String(value)
-              const getTitle = () => (value ? trueText : falseText)
+    getReportTableCell: value => {
+      if (typeof value !== 'boolean') return
 
-              add(key, getTitle)
-            },
-          }),
-        },
-      },
-    }
+      const styles = StyleSheet.create({
+        value: {},
+      })
+
+      return <Text style={styles.value}>{value ? trueText : falseText}</Text>
+    },
   }
+}

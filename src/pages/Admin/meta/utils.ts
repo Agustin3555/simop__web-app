@@ -11,7 +11,7 @@ import { LooseEntity } from '@/models/config'
 import { ComboboxProps } from '../components/Combobox/Combobox'
 import { MetaModel } from './metaModel'
 import { MetaModelsContextProps } from '../contexts/metaModels.context'
-import { MetaModelKey } from '../constants/metaModelKey.const'
+import { TableKey } from '../constants/metaModelKey.const'
 import { FilterProp } from '../components/ReportInTable/ReportInTable'
 
 export type Color = 'blue' | 'green' | 'yellow' | 'red' | 'grey'
@@ -49,7 +49,7 @@ type PieSectorModes = Record<string, SimplePieSectorMode & { title: string }>
 export interface Prop<E = LooseEntity> {
   key: string
   verboseKey?: string
-  metaModelRef?: MetaModelKey
+  metaModelRef?: TableKey
   title: string
   isRequired?: boolean
 

@@ -9,7 +9,7 @@ import {
   UNIQUE_MODE,
 } from './utils'
 import { RefsCombobox, FetchRef, RefFilter } from '../components'
-import { MetaModelKey } from '../constants/metaModelKey.const'
+import { TableKey } from '../constants/metaModelKey.const'
 import { MetaModel } from './metaModel'
 import { StyleSheet, Text } from '@react-pdf/renderer'
 import { summarizeArray } from '../helpers'
@@ -22,7 +22,7 @@ export const isFieldEnabled = (form: HTMLFormElement, key: string) => {
 }
 
 interface RefProp extends Pick<BaseProp, 'minSize'> {
-  metaModelRef: MetaModelKey
+  metaModelRef: TableKey
   config?: {
     field?: ForView & IRequired
   }
@@ -128,7 +128,7 @@ export const createRefProp =
 
         values = summarizeArray(values)
 
-        return { title, values }
+        return { label: title, values }
       },
 
       getReportTableCell: (item, selectedSearchMode) => {

@@ -1,65 +1,66 @@
 import './Node.css'
 import { MouseEventHandler, useCallback, useState } from 'react'
-import { useFavoriteViews, useViews, useViewsInfo } from '@/pages/Admin/hooks'
 import { Button, Icon } from '@/components'
 import { SectionNode } from '@/pages/Admin/constants/navTree.const'
 import { classList } from '@/helpers'
+import { useViews } from '@/pages/Admin/hooks/useViews.hook'
+import { TABLE_DEFS } from '@/pages/Admin/constants/metaModelDefinitions.const'
+import { TableKey } from '@/pages/Admin/constants/metaModelKey.const'
+import { useFavoriteTables } from '@/pages/Admin/store/favoriteTables.store'
 
-const LeafNode = ({ viewKey }: Required<Pick<SectionNode, 'viewKey'>>) => {
-  const { getViewInfo } = useViewsInfo()
+interface LeafNodeProps {
+  tableKey: TableKey
+}
+
+const LeafNode = ({ tableKey }: LeafNodeProps) => {
   const { isActive, select } = useViews()
-  const { isFavorite, toggle } = useFavoriteViews()
+  const { isFavorite, toggle } = useFavoriteTables()
 
-  const info = getViewInfo(viewKey)
+  const { title, classIcon } = TABLE_DEFS[tableKey]
 
-  const handleClick = useCallback(() => select(viewKey, 0), [viewKey, select])
+  const handleClick = useCallback(() => select(tableKey, 0), [tableKey, select])
 
   const handleToggleFavoriteClick = useCallback<MouseEventHandler>(
     e => {
       e.stopPropagation()
-      toggle(viewKey)
+      toggle(tableKey)
     },
-    [toggle, viewKey],
+    [toggle, tableKey],
   )
 
   return (
-    info && (
-      <div className="cmp-node ui-m">
+    <div className="cmp-node ui-m">
+      <div
+        className={classList('content', {
+          active: isActive(tableKey),
+        })}
+        title={title.plural}
+        onClick={handleClick}
+      >
+        <Icon faIcon={classIcon} />
+        <p>{title.plural}</p>
         <div
-          className={classList('content', {
-            active: isActive(viewKey),
+          className={classList('actions', {
+            'show-favorite': isFavorite(tableKey),
           })}
-          title={info.title}
-          onClick={handleClick}
         >
-          <Icon faIcon={info.faIcon} />
-          <p>{info.title}</p>
-          <div
-            className={classList('actions', {
-              'show-favorite': isFavorite(viewKey),
-            })}
-          >
-            <Button
-              title={
-                isFavorite(viewKey)
-                  ? 'Eliminar de favoritos'
-                  : 'Agregar a favoritos'
-              }
-              faIcon={`fa-${isFavorite(viewKey) ? 'solid' : 'regular'} fa-star`}
-              size="s"
-              onAction={handleToggleFavoriteClick}
-            />
-          </div>
+          <Button
+            title={
+              isFavorite(tableKey)
+                ? 'Eliminar de favoritos'
+                : 'Agregar a favoritos'
+            }
+            faIcon={`fa-${isFavorite(tableKey) ? 'solid' : 'regular'} fa-star`}
+            size="s"
+            onAction={handleToggleFavoriteClick}
+          />
         </div>
       </div>
-    )
+    </div>
   )
 }
 
-const BranchingNode = ({
-  title,
-  sections,
-}: Pick<SectionNode, 'title' | 'sections'>) => {
+const BranchingNode = ({ title, sections }: SectionNode) => {
   const [isOpen, setOpen] = useState(false)
 
   const handleClick = useCallback(() => setOpen(prev => !prev), [])
@@ -74,11 +75,11 @@ const BranchingNode = ({
         <div className="items">
           <span className="bar" />
           <div className="sections">
-            {sections.map(({ viewKey, title, sections }) =>
-              viewKey ? (
-                <LeafNode key={viewKey} {...{ viewKey }} />
+            {sections.map(section =>
+              section.tableKey ? (
+                <LeafNode key={section.tableKey} tableKey={section.tableKey} />
               ) : (
-                <BranchingNode key={title} {...{ title, sections }} />
+                <BranchingNode key={section.title} {...section} />
               ),
             )}
           </div>
@@ -89,8 +90,8 @@ const BranchingNode = ({
 }
 
 const Node = (props: SectionNode) =>
-  props.viewKey ? (
-    <LeafNode viewKey={props.viewKey} />
+  props.tableKey ? (
+    <LeafNode tableKey={props.tableKey} />
   ) : (
     <BranchingNode {...props} />
   )

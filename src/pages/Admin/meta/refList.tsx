@@ -9,14 +9,14 @@ import {
   UNIQUE_MODE,
 } from './utils'
 import { RefsCombobox, FetchRef, RefFilter } from '../components'
-import { MetaModelKey } from '../constants/metaModelKey.const'
+import { TableKey } from '../constants/metaModelKey.const'
 import { isFieldEnabled } from './ref'
 import { MetaModel } from './metaModel'
 import { StyleSheet, Text } from '@react-pdf/renderer'
 import { summarizeArray } from '../helpers'
 
 interface RefListProp extends Pick<BaseProp, 'minSize'> {
-  metaModelRef: MetaModelKey
+  metaModelRef: TableKey
   config?: {
     field?: ForView & IRequired
   }
@@ -140,7 +140,7 @@ export const createRefListProp =
 
         values = summarizeArray(values)
 
-        return { title, values }
+        return { label: title, values }
       },
 
       getReportTableCell: (item, selectedSearchMode) => {

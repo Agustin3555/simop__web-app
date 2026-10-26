@@ -3,7 +3,35 @@
 
   display: flex;
   align-items: center;
-  padding: var(--pal-size-s);
 
   transition: width var(--pal-time-s) ease;
+
+  > form {
+    position: relative;
+
+    padding: var(--pal-size-s);
+
+    > .cmp-button {
+      --cmp-button-bg-color: var(--pal-color-c);
+
+      position: absolute;
+      right: 0;
+      bottom: 0;
+
+      color: var(--pal-color-white);
+      opacity: 0;
+
+      transition: opacity var(--pal-time-xs) ease-out;
+    }
+  }
+
+  &:not(:has(> form)) {
+    padding: var(--pal-size-s);
+  }
+
+  &:hover {
+    > form > .cmp-button {
+      opacity: 1;
+    }
+  }
 }
