@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc --noEmit && vite build",
-    "format": "prettier --write . --ignore-unknown --ignore-path .gitignore",
+    "format": "prettier --write . --ignore-unknown",
     "lint": "eslint .",
     "preview": "vite preview"
   },

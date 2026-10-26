@@ -2,8 +2,10 @@ import { ColumnFiltersColumn } from '@tanstack/react-table'
 import { LooseEntity } from '@/models/config'
 import Combobox, { ComboboxProps } from '../Combobox/Combobox'
 
-interface RefFilterProps
-  extends Pick<ComboboxProps, 'keyName' | 'title' | 'options'> {
+interface RefFilterProps extends Pick<
+  ComboboxProps,
+  'keyName' | 'title' | 'options'
+> {
   column: ColumnFiltersColumn<LooseEntity>
 }
 

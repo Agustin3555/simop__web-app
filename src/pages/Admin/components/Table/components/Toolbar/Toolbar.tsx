@@ -9,11 +9,7 @@ import { useTableDef } from '@/pages/Admin/hooks/useTableDef.hook'
 import { useTable } from '@/pages/Admin/hooks/useTable.hook'
 
 export type ToggleKey =
-  | 'filters'
-  | 'columnControl'
-  | 'simplifyMatches'
-  | 'stickHead'
-  | 'stickFoot'
+  'filters' | 'columnControl' | 'simplifyMatches' | 'stickHead' | 'stickFoot'
 
 const toggles: Record<
   ToggleKey,

@@ -3,10 +3,7 @@ const toKebab = (str: string) =>
 
 export const classList = (
   ...values: (
-    | undefined
-    | string
-    | number
-    | { [key: string | number]: boolean }
+    undefined | string | number | { [key: string | number]: boolean }
   )[]
 ) =>
   values

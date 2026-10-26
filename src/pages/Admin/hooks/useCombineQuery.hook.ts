@@ -4,9 +4,8 @@ import { UseEntitiesResult } from './useEntities.hook'
 type CombinedStatus = 'pending' | 'success' | 'error'
 
 // Extrae el tipo del data de cada query
-type ExtractEntity<T> = T extends UseEntitiesResult<() => Promise<infer R>>
-  ? R
-  : never
+type ExtractEntity<T> =
+  T extends UseEntitiesResult<() => Promise<infer R>> ? R : never
 
 export const useCombinedQuery = <
   T extends UseEntitiesResult<() => Promise<any>>[],
@@ -28,8 +27,8 @@ export const useCombinedQuery = <
   const status: CombinedStatus = queries.some(q => q.query.status === 'error')
     ? 'error'
     : queries.every(q => q.query.status === 'success')
-    ? 'success'
-    : 'pending'
+      ? 'success'
+      : 'pending'
 
   const refetch = useCallback(
     () => Promise.all(queries.map(q => q.query.refetch())),

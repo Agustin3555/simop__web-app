@@ -1,0 +1,12 @@
+# Dependencies and generated output
+node_modules/
+dist/
+coverage/
+
+# Static assets and large data files
+public/
+src/assets/
+src/data/
+
+# Package manager lockfile
+pnpm-lock.yaml

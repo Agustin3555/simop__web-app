@@ -19,7 +19,8 @@
     backdrop-filter: blur(8px);
     cursor: pointer;
 
-    transition: display var(--pal-time-m) ease allow-discrete,
+    transition:
+      display var(--pal-time-m) ease allow-discrete,
       opacity var(--pal-time-m) ease;
 
     > .content {

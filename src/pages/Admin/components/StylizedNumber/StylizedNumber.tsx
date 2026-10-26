@@ -1,8 +1,10 @@
 import './StylizedNumber.css'
 import { NumberProp } from '../../meta/number'
 
-interface StylizedNumberProps
-  extends Pick<NonNullable<NumberProp['config']>, 'isMoney' | 'pre' | 'sub'> {
+interface StylizedNumberProps extends Pick<
+  NonNullable<NumberProp['config']>,
+  'isMoney' | 'pre' | 'sub'
+> {
   value: number | string
 }
 

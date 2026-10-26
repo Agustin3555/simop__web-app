@@ -7,7 +7,7 @@ export const useChangeHandler = (callback: (id: string) => void) => {
 
       callback(id)
     },
-    [callback]
+    [callback],
   )
 
   return handleChange

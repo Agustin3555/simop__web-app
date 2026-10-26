@@ -13,8 +13,10 @@
   scale: 0.975;
   opacity: 0;
 
-  transition: display var(--pal-time-s) ease allow-discrete,
-    scale var(--pal-time-s) ease, opacity var(--pal-time-s) ease;
+  transition:
+    display var(--pal-time-s) ease allow-discrete,
+    scale var(--pal-time-s) ease,
+    opacity var(--pal-time-s) ease;
 
   > .cmp-selected {
     flex-shrink: 0;

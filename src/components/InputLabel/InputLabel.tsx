@@ -12,11 +12,10 @@ const LabelContent = ({ title, isRequired }: LabelContentProps) => (
   </>
 )
 
-export interface InputLabelProps
-  extends Pick<
-    InputField,
-    'title' | 'hideLabel' | 'isRequired' | 'isEditMode'
-  > {
+export interface InputLabelProps extends Pick<
+  InputField,
+  'title' | 'hideLabel' | 'isRequired' | 'isEditMode'
+> {
   discreetLabel?: boolean
   disabled: ToggleProps['value']
   setDisabled: ToggleProps['setValue']

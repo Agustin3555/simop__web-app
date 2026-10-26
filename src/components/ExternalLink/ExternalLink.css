@@ -27,7 +27,8 @@
     var(--cmp-external-link-bg-color)
   );
 
-  transition: background-color var(--pal-time-s) ease-out,
+  transition:
+    background-color var(--pal-time-s) ease-out,
     var(--cmp-external-link-transition, var(--transition-dummy));
 
   &.square {

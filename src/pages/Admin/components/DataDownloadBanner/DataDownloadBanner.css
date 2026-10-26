@@ -22,7 +22,8 @@
     scale: 4;
     rotate: 0.6turn;
 
-    transition: scale var(--fall-time) var(--function),
+    transition:
+      scale var(--fall-time) var(--function),
       rotate var(--fall-time) var(--function);
 
     > * {
@@ -86,7 +87,9 @@
       scale: 0;
       opacity: 0;
 
-      transition: scale var(--pal-time-m) ease, opacity var(--pal-time-m) ease;
+      transition:
+        scale var(--pal-time-m) ease,
+        opacity var(--pal-time-m) ease;
     }
 
     > .active {

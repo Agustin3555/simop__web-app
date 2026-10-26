@@ -32,7 +32,8 @@
     width: calc(var(--fragment) + var(--ui-height));
     height: 100%;
 
-    background-image: linear-gradient(
+    background-image:
+      linear-gradient(
         to right,
         rgba(var(--pal-color-base-white), 0.3) var(--line-thickness),
         transparent var(--line-thickness)
@@ -73,7 +74,9 @@
     border-radius: 28% 45% 39% 51%;
     color: var(--pal-color-b-l4);
 
-    transition: border-radius 1s ease, background-color var(--pal-time-l) ease;
+    transition:
+      border-radius 1s ease,
+      background-color var(--pal-time-l) ease;
 
     transform: translateZ(0);
   }

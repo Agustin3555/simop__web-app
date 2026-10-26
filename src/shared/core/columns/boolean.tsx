@@ -1,7 +1,13 @@
 import Checkbox from '@/pages/Admin/components/Checkbox/Checkbox'
 import { NewCombobox } from '@/shared/components'
 import { StyleSheet, Text } from '@react-pdf/renderer'
-import { Column, ColumnBehavior, ColumnConfig, InputConfig, Size } from '../types'
+import {
+  Column,
+  ColumnBehavior,
+  ColumnConfig,
+  InputConfig,
+  Size,
+} from '../types'
 
 export interface BooleanColumn extends Column {
   type: 'boolean'
@@ -121,9 +127,7 @@ export const buildBooleanColumnBehavior = (
           selected={selectedValue === undefined ? [] : [String(selectedValue)]}
           onChange={selected => {
             const value = selected[0]
-            setFilterValue(
-              value === undefined ? undefined : value === 'true',
-            )
+            setFilterValue(value === undefined ? undefined : value === 'true')
           }}
         />
       )

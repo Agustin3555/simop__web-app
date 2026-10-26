@@ -33,7 +33,8 @@
 
     cursor: pointer;
 
-    transition: color var(--pal-time-xs) ease-out,
+    transition:
+      color var(--pal-time-xs) ease-out,
       background-color var(--pal-time-xs) ease-out;
 
     > input {

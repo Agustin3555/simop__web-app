@@ -4,11 +4,10 @@ import {
   ComboboxCoreContextProps,
 } from '../contexts/comboboxCore.context'
 
-interface ComboboxCoreProviderProps
-  extends Pick<
-    ComboboxCoreContextProps,
-    'keyName' | 'isEditMode' | 'isMultiple'
-  > {
+interface ComboboxCoreProviderProps extends Pick<
+  ComboboxCoreContextProps,
+  'keyName' | 'isEditMode' | 'isMultiple'
+> {
   children: ReactNode
 }
 
