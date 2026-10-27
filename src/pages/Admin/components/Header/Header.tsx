@@ -28,7 +28,7 @@ const Header = () => {
     }
   })
 
-  const handleActiveConfig = useCallback(() => select('config', 0), [select])
+  const handleActiveConfig = useCallback(() => select('config'), [select])
 
   return (
     <div className="cmp-header">

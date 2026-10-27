@@ -21,7 +21,7 @@ const FavoriteViews = () => {
               active: isActive(tableKey),
             })}
             title={title.plural}
-            onClick={() => select(tableKey, 0)}
+            onClick={() => select(tableKey)}
           >
             <Button
               faIcon="fa-solid fa-minus"

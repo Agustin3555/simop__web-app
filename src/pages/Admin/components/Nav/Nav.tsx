@@ -3,7 +3,7 @@ import { useState } from 'react'
 import SegmentedControl, {
   SegmentedControlProps,
 } from '../SegmentedControl/SegmentedControl'
-import { AssistantButton, ReleaseNotesModal, Tree } from './components'
+import { ReleaseNotesModal, Tree } from './components'
 import { useNavState } from '../../hooks/useNavState.hook'
 import FavoriteViews from '../FavoriteViews/FavoriteViews'
 
@@ -38,9 +38,7 @@ const Nav = () => {
             <FavoriteViews />
           </nav>
         </div>
-        <footer>
-          <AssistantButton />
-        </footer>
+        <footer></footer>
       </div>
     </div>
   )

@@ -18,7 +18,7 @@ const LeafNode = ({ tableKey }: LeafNodeProps) => {
 
   const { title, classIcon } = TABLE_DEFS[tableKey]
 
-  const handleClick = useCallback(() => select(tableKey, 0), [tableKey, select])
+  const handleClick = useCallback(() => select(tableKey), [tableKey, select])
 
   const handleToggleFavoriteClick = useCallback<MouseEventHandler>(
     e => {
