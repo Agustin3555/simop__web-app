@@ -1,44 +1,43 @@
 import './ViewManager.css'
 import FavoriteViews from '../FavoriteViews/FavoriteViews'
-// import Ampliacion from '../../views/Ampliacion/Ampliacion'
-// import APG from '../../views/APG/APG'
-// import Area from '../../views/Area/Area'
-// import Departamento from '../../views/Departamento/Departamento'
-// import Empresa from '../../views/Empresa/Empresa'
-// import FojaMedicion from '../../views/FojaMedicion/FojaMedicion'
-// import Inspector from '../../views/Inspector/Inspector'
-// import InspectorObra from '../../views/InspectorObra/InspectorObra'
-// import Localidad from '../../views/Localidad/Localidad'
-// import Modificacion from '../../views/Modificacion/Modificacion'
-// import Obra from '../../views/Obra/Obra'
-// import PagoCertificacion from '../../views/PagoCertificacion/PagoCertificacion'
-// import Paralizacion from '../../views/Paralizacion/Paralizacion'
-// import Recepcion from '../../views/Recepcion/Recepcion'
-// import Redeterminacion from '../../views/Redeterminacion/Redeterminacion'
-// import Representante from '../../views/Representante/Representante'
-// import RepresentanteEmpresa from '../../views/RepresentanteEmpresa/RepresentanteEmpresa'
-// import RepresentanteObra from '../../views/RepresentanteObra/RepresentanteObra'
-// import Rescision from '../../views/Rescision/Rescision'
-import { TipoContratacionObra } from '@/modules/tipoContratacionObra/components/TipoContratacionObra/TipoContratacionObra'
-import { TipoEnteObra } from '@/modules/tipoEnteObra/components/TipoEnteObra/TipoEnteObra'
-import { TipoEstadoObra } from '@/modules/tipoEstadoObra/components/TipoEstadoObra/TipoEstadoObra'
-import { TipoFinanciamientoObra } from '@/modules/tipoFinanciamientoObra/components/TipoFinanciamientoObra/TipoFinanciamientoObra'
-import { TipoInspector } from '@/modules/tipoInspector/components/TipoInspector/TipoInspector'
-import { TipoModificacion } from '@/modules/tipoModificacion/components/TipoModificacion/TipoModificacion'
-import { TipoNivelArea } from '@/modules/tipoNivelArea/components/TipoNivelArea/TipoNivelArea'
-import { TipoOrigenFinanciamientoObra } from '@/modules/tipoOrigenFinanciamientoObra/components/TipoOrigenFinanciamientoObra/TipoOrigenFinanciamientoObra'
-import { TipoParalizacion } from '@/modules/tipoParalizacion/components/TipoParalizacion/TipoParalizacion'
-import { TipoProfesion } from '@/modules/tipoProfesion/components/TipoProfesion/TipoProfesion'
-import { TipoProgramaObra } from '@/modules/tipoProgramaObra/components/TipoProgramaObra/TipoProgramaObra'
-import { TipoRecepcion } from '@/modules/tipoRecepcion/components/TipoRecepcion/TipoRecepcion'
-import { TipoRedeterminacion } from '@/modules/tipoRedeterminacion/components/TipoRedeterminacion/TipoRedeterminacion'
-import { TipoRepresentante } from '@/modules/tipoRepresentante/components/TipoRepresentante/TipoRepresentante'
-import { TipoRescision } from '@/modules/tipoRescision/components/TipoRescision/TipoRescision'
-import { TipoTematicaObra } from '@/modules/tipoTematicaObra/components/TipoTematicaObra/TipoTematicaObra'
-
+import { TipoContratacionObra } from '@/modules/tipoContratacionObra/TipoContratacionObra'
+import { TipoEnteObra } from '@/modules/tipoEnteObra/TipoEnteObra'
+import { TipoEstadoObra } from '@/modules/tipoEstadoObra/TipoEstadoObra'
+import { TipoFinanciamientoObra } from '@/modules/tipoFinanciamientoObra/TipoFinanciamientoObra'
+import { TipoInspector } from '@/modules/tipoInspector/TipoInspector'
+import { TipoModificacion } from '@/modules/tipoModificacion/TipoModificacion'
+import { TipoNivelArea } from '@/modules/tipoNivelArea/TipoNivelArea'
+import { TipoOrigenFinanciamientoObra } from '@/modules/tipoOrigenFinanciamientoObra/TipoOrigenFinanciamientoObra'
+import { TipoParalizacion } from '@/modules/tipoParalizacion/TipoParalizacion'
+import { TipoProfesion } from '@/modules/tipoProfesion/TipoProfesion'
+import { TipoProgramaObra } from '@/modules/tipoProgramaObra/TipoProgramaObra'
+import { TipoRecepcion } from '@/modules/tipoRecepcion/TipoRecepcion'
+import { TipoRedeterminacion } from '@/modules/tipoRedeterminacion/TipoRedeterminacion'
+import { TipoRepresentante } from '@/modules/tipoRepresentante/TipoRepresentante'
+import { TipoRescision } from '@/modules/tipoRescision/TipoRescision'
+import { TipoTematicaObra } from '@/modules/tipoTematicaObra/TipoTematicaObra'
+import { Pais } from '@/modules/pais/Pais'
+import { Provincia } from '@/modules/provincia/Provincia'
 import { Config } from '../../views/Config/Config'
-import { Pais } from '@/modules/pais/components/Pais/Pais'
-import { Provincia } from '@/modules/provincia/components/Provincia/Provincia'
+import { Obra } from '@/modules/obra/Obra'
+import { Ampliacion } from '@/modules/ampliacion/Ampliacion'
+import { APG } from '@/modules/apg/APG'
+import { Area } from '@/modules/area/Area'
+import { Departamento } from '@/modules/departamento/Departamento'
+import { Empresa } from '@/modules/empresa/Empresa'
+import { FojaMedicion } from '@/modules/fojaMedicion/FojaMedicion'
+import { Inspector } from '@/modules/inspector/Inspector'
+import { InspectorObra } from '@/modules/inspectorObra/InspectorObra'
+import { Localidad } from '@/modules/localidad/Localidad'
+import { Modificacion } from '@/modules/modificacion/Modificacion'
+import { PagoCertificacion } from '@/modules/pagoCertificacion/PagoCertificacion'
+import { Paralizacion } from '@/modules/paralizacion/Paralizacion'
+import { Recepcion } from '@/modules/recepcion/Recepcion'
+import { Redeterminacion } from '@/modules/redeterminacion/Redeterminacion'
+import { Representante } from '@/modules/representante/Representante'
+import { RepresentanteEmpresa } from '@/modules/representanteEmpresa/RepresentanteEmpresa'
+import { RepresentanteObra } from '@/modules/representanteObra/RepresentanteObra'
+import { Rescision } from '@/modules/rescision/Rescision'
 
 const ViewManager = () => (
   <div className="cmp-view-manager">
@@ -46,30 +45,27 @@ const ViewManager = () => (
       <FavoriteViews />
     </div>
 
-    {/* TODO: no debería ser una vista, si no abrirse desde un dropdown */}
-    <Config />
-
-    {/* <Ampliacion /> */}
-    {/* <APG /> */}
-    {/* <Area /> */}
-    {/* <Departamento /> */}
-    {/* <Empresa /> */}
-    {/* <FojaMedicion /> */}
-    {/* <Inspector /> */}
-    {/* <InspectorObra /> */}
-    {/* <Localidad /> */}
-    {/* <Modificacion /> */}
-    {/* <Obra /> */}
-    {/* <PagoCertificacion /> */}
+    <Ampliacion />
+    <APG />
+    <Area />
+    <Departamento />
+    <Empresa />
+    <FojaMedicion />
+    <Inspector />
+    <InspectorObra />
+    <Localidad />
+    <Modificacion />
+    <Obra />
+    <PagoCertificacion />
     <Pais />
-    {/* <Paralizacion /> */}
+    <Paralizacion />
     <Provincia />
-    {/* <Recepcion /> */}
-    {/* <Redeterminacion /> */}
-    {/* <Representante /> */}
-    {/* <RepresentanteEmpresa /> */}
-    {/* <RepresentanteObra /> */}
-    {/* <Rescision /> */}
+    <Recepcion />
+    <Redeterminacion />
+    <Representante />
+    <RepresentanteEmpresa />
+    <RepresentanteObra />
+    <Rescision />
     <TipoContratacionObra />
     <TipoEnteObra />
     <TipoEstadoObra />
@@ -86,9 +82,10 @@ const ViewManager = () => (
     <TipoRepresentante />
     <TipoRescision />
     <TipoTematicaObra />
+
+    {/* TODO: no debería ser una vista, si no abrirse desde un dropdown */}
+    <Config />
   </div>
 )
 
 export default ViewManager
-
-// TODO: constantes a revivir

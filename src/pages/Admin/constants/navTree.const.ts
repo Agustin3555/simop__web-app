@@ -16,56 +16,54 @@ export const TREE: SectionNode[] = [
   { tableKey: 'pais' },
   { tableKey: 'provincia' },
 
-  // {
-  //   title: 'Sobre Obras',
-  //   sections: [
-  //     { tableKey: 'obra' },
-  //     {
-  //       title: 'Eventos',
-  //       sections: [
-  //         { tableKey: 'fojaMedicion' },
-  //         { tableKey: 'pagoCertificacion' },
-  //         { tableKey: 'redeterminacion' },
-  //         { tableKey: 'ampliacion' },
-  //         { tableKey: 'modificacion' },
-  //         { tableKey: 'paralizacion' },
-  //         { tableKey: 'rescision' },
-  //         { tableKey: 'recepcion' },
-  //       ],
-  //     },
-  //     {
-  //       title: 'Actores',
-  //       sections: [
-  //         { tableKey: 'representanteObra' },
-  //         { tableKey: 'inspectorObra' },
-  //       ],
-  //     },
-  //   ],
-  // },
-  // {
-  //   title: 'Sobre Empresas',
-  //   sections: [
-  //     { tableKey: 'empresa' },
-  //     {
-  //       title: 'Actores',
-  //       sections: [{ tableKey: 'representanteEmpresa' }],
-  //     },
-  //   ],
-  // },
-  // {
-  //   title: 'Ubicación',
-  //   sections: [
-  //     { tableKey: 'pais' },
-  //     { tableKey: 'provincia' },
-  //     { tableKey: 'apg' },
-  //     { tableKey: 'departamento' },
-  //     { tableKey: 'localidad' },
-  //   ],
-  // },
-  // {
-  //   title: 'Actores',
-  //   sections: [{ tableKey: 'representante' }, { tableKey: 'inspector' }],
-  // },
+  {
+    title: 'Sobre Obras',
+    sections: [
+      { tableKey: 'obra' },
+      {
+        title: 'Eventos',
+        sections: [
+          { tableKey: 'fojaMedicion' },
+          { tableKey: 'pagoCertificacion' },
+          { tableKey: 'redeterminacion' },
+          { tableKey: 'ampliacion' },
+          { tableKey: 'modificacion' },
+          { tableKey: 'paralizacion' },
+          { tableKey: 'rescision' },
+          { tableKey: 'recepcion' },
+        ],
+      },
+      {
+        title: 'Actores',
+        sections: [
+          { tableKey: 'representanteObra' },
+          { tableKey: 'inspectorObra' },
+        ],
+      },
+    ],
+  },
+  {
+    title: 'Sobre Empresas',
+    sections: [
+      { tableKey: 'empresa' },
+      {
+        title: 'Actores',
+        sections: [{ tableKey: 'representanteEmpresa' }],
+      },
+    ],
+  },
+  {
+    title: 'Ubicación',
+    sections: [
+      { tableKey: 'apg' },
+      { tableKey: 'departamento' },
+      { tableKey: 'localidad' },
+    ],
+  },
+  {
+    title: 'Actores',
+    sections: [{ tableKey: 'representante' }, { tableKey: 'inspector' }],
+  },
   {
     title: 'Tipos',
     sections: [
@@ -89,7 +87,5 @@ export const TREE: SectionNode[] = [
       { tableKey: 'tipoModificacion' },
     ],
   },
-  // { tableKey: 'area' },
+  { tableKey: 'area' },
 ]
-
-// TODO: constantes a revivir

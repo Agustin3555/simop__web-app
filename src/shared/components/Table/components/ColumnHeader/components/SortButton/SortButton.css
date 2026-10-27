@@ -1,0 +1,7 @@
+.cmp-sort-button {
+  &.sorting {
+    --cmp-button-bg-color: var(--pal-color-b-l2);
+
+    color: var(--pal-color-black) !important;
+  }
+}

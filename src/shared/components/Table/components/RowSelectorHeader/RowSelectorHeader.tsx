@@ -38,24 +38,6 @@ export const RowSelectorHeader = ({
         {attrs => (
           <>
             <Button
-              text="Seleccionar todo"
-              faIcon="fa-solid fa-check-square"
-              size="m"
-              type="secondary"
-              inverted
-              onAction={() => selectAllRows(allRowKeys)}
-              buttonHTMLAttrs={attrs}
-            />
-            <Button
-              text="Deseleccionar todo"
-              faIcon="fa-regular fa-square"
-              size="m"
-              type="secondary"
-              inverted
-              onAction={() => deselectAllRows()}
-              buttonHTMLAttrs={attrs}
-            />
-            <Button
               text="Seleccionar filtrados"
               faIcon="fa-solid fa-check-square"
               size="m"
@@ -71,6 +53,24 @@ export const RowSelectorHeader = ({
               type="secondary"
               inverted
               onAction={() => deselectFilteredRows(filteredRowKeys)}
+              buttonHTMLAttrs={attrs}
+            />
+            <Button
+              text="Seleccionar todo"
+              faIcon="fa-solid fa-check-square"
+              size="m"
+              type="secondary"
+              inverted
+              onAction={() => selectAllRows(allRowKeys)}
+              buttonHTMLAttrs={attrs}
+            />
+            <Button
+              text="Deseleccionar todo"
+              faIcon="fa-regular fa-square"
+              size="m"
+              type="secondary"
+              inverted
+              onAction={() => deselectAllRows()}
               buttonHTMLAttrs={attrs}
             />
           </>

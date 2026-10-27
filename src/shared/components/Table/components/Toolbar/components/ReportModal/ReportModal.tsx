@@ -130,8 +130,6 @@ export const ReportModal = ({
           rowNumber: formValues.get.boolean('rowNumber'),
         }
 
-        console.log(config)
-
         const component = await generateReport(config)
         if (!component) return
 

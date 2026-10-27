@@ -66,6 +66,7 @@
         border-bottom-width: var(--line-thickness);
 
         white-space: nowrap;
+        content-visibility: auto;
 
         > * {
           flex-shrink: 0;
@@ -75,7 +76,7 @@
           border: none;
         }
 
-        &:hover > * {
+        &:hover {
           background-color: var(--pal-color-a-l5);
         }
       }

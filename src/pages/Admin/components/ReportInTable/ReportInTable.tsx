@@ -5,6 +5,8 @@ import { Text, View, Image } from '@react-pdf/renderer'
 import Report from '../Report/Report'
 import { palColor } from '@/styles/palette'
 
+const ROW_NUMBER_WIDTH = 16
+
 const getParagraphs = (block: string) => {
   if (!block) return []
   return block
@@ -74,7 +76,10 @@ const ReportInTable = ({
       <View style={styles.table}>
         <View style={styles.header} fixed>
           {rowNumber && (
-            <View key="rowNumber" style={{ ...styles.cell, width: 16 }}>
+            <View
+              key="rowNumber"
+              style={{ ...styles.cell, width: ROW_NUMBER_WIDTH }}
+            >
               <Text>#</Text>
             </View>
           )}
@@ -98,7 +103,10 @@ const ReportInTable = ({
               }}
             >
               {rowNumber && (
-                <View key="rowNumber" style={{ ...styles.cell, width: 16 }}>
+                <View
+                  key="rowNumber"
+                  style={{ ...styles.cell, width: ROW_NUMBER_WIDTH }}
+                >
                   <Text>{i + 1}</Text>
                 </View>
               )}
@@ -114,6 +122,12 @@ const ReportInTable = ({
           ))}
         </View>
         <View style={[styles.row, styles.calcs]}>
+          {rowNumber && (
+            <View
+              key="rowNumber"
+              style={{ ...styles.cell, width: ROW_NUMBER_WIDTH }}
+            ></View>
+          )}
           {footer.map((f, i) => (
             <View key={i} style={{ width: columns[i].size }}>
               {f && (

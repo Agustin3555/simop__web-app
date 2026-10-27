@@ -2,6 +2,7 @@ import { publicInstance } from '@/services/config'
 import { buildPath, sendFields } from '@/helpers'
 import { Service } from './service.type'
 
+// TODO: que se pueda pasar por callback (para enviar coll) la extensión del servicio, como necesita obra.service
 export const createService = <T>(name: string): Service<T> => {
   const coll = buildPath(name)
 
