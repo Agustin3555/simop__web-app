@@ -51,7 +51,7 @@ export const ObraTable = createTableDef({
         'tipoEstadoObra',
         'observacionesObraNueva',
         'fechaFin',
-        // 'visitable',
+        'visitable',
         'inaugurable',
         'inaugurada',
         'obraNueva',

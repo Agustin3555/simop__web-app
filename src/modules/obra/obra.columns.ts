@@ -6,9 +6,6 @@ export const ObraColumns = toColumnDefsWithShared<ObraModel.Entity>({
     type: 'number',
     title: 'Número De Obra',
     isBig: true,
-    columnConfig: {
-      size: 4,
-    },
   },
   nombre: {
     type: 'text',
@@ -20,9 +17,6 @@ export const ObraColumns = toColumnDefsWithShared<ObraModel.Entity>({
   tipoEnteObra: {
     type: 'ref',
     tableRefKey: 'tipoEnteObra',
-    columnConfig: {
-      size: 6,
-    },
   },
   solicitante: {
     type: 'text',
@@ -35,32 +29,23 @@ export const ObraColumns = toColumnDefsWithShared<ObraModel.Entity>({
   empresa: {
     type: 'ref',
     tableRefKey: 'empresa',
-    columnConfig: {
-      size: 7,
-    },
   },
   localidades: {
     type: 'ref',
     tableRefKey: 'localidad',
     isMultiple: true,
-    columnConfig: {
-      size: 6,
-    },
   },
   apgs: {
     type: 'ref',
     tableRefKey: 'apg',
     isMultiple: true,
-    columnConfig: {
-      size: 6,
+    inputConfig: {
+      isHidden: true,
     },
   },
   tipoEstadoObra: {
     type: 'ref',
     tableRefKey: 'tipoEstadoObra',
-    columnConfig: {
-      size: 6,
-    },
   },
   avanceTotal: {
     type: 'number',
@@ -72,11 +57,11 @@ export const ObraColumns = toColumnDefsWithShared<ObraModel.Entity>({
     type: 'datetime',
     title: 'Fecha de Contratación',
   },
-  // visitable: {
-  //   type: 'boolean',
-  //   title: 'Visitable',
-  //   allowNull: true,
-  // },
+  visitable: {
+    type: 'boolean',
+    title: 'Visitable',
+    allowNull: true,
+  },
   inaugurable: {
     type: 'boolean',
     title: 'Inaugurable',
@@ -112,6 +97,9 @@ export const ObraColumns = toColumnDefsWithShared<ObraModel.Entity>({
     title: 'Porcentaje Pendiente a Certificar',
     sub: '%',
     isDecimal: true,
+    inputConfig: {
+      isHidden: true,
+    },
   },
   montoPendienteCertificarActualizado: {
     type: 'number',
@@ -132,9 +120,6 @@ export const ObraColumns = toColumnDefsWithShared<ObraModel.Entity>({
   tipoTematicaObra: {
     type: 'ref',
     tableRefKey: 'tipoTematicaObra',
-    columnConfig: {
-      size: 7,
-    },
   },
   tipoProgramaObra: {
     type: 'ref',
@@ -267,5 +252,8 @@ export const ObraColumns = toColumnDefsWithShared<ObraModel.Entity>({
   inspectorTitular: {
     type: 'ref',
     tableRefKey: 'inspector',
+    inputConfig: {
+      isHidden: true,
+    },
   },
 })

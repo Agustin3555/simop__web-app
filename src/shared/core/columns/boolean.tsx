@@ -38,6 +38,7 @@ export const buildBooleanColumnBehavior = (
   const { size = Size.m, overrideTitle } = columnConfig ?? {}
   const { isHidden = false, isRequired = false } = inputConfig ?? {}
   const title = overrideTitle ?? originTitle
+
   const options = [
     { value: 'false', label: falseText },
     { value: 'true', label: trueText },
@@ -84,19 +85,11 @@ export const buildBooleanColumnBehavior = (
         return
       }
 
-      const selected = JSON.parse(formValues.get.string(key) || '[]') as unknown
+      const value = formValues.get.string(key)
+      if (!value) return
 
-      if (!Array.isArray(selected) || selected.length === 0) {
-        accData[key] = null
-        return
-      }
-
-      if (
-        selected.length !== 1 ||
-        (selected[0] !== 'true' && selected[0] !== 'false')
-      ) {
-        throw new Error(`Invalid boolean value submitted for "${key}".`)
-      }
+      const selected = JSON.parse(value) as string[]
+      if (selected.length === 0) return
 
       accData[key] = selected[0] === 'true'
     },

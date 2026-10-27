@@ -42,7 +42,7 @@ export interface Entity extends TableEntity {
   metrosLinealesObraRefaccionada: number
   observacionesObraRefaccionada: string
   avanceTotal: number
-  // visitable: boolean
+  visitable: boolean
   inaugurable: boolean
   inaugurada: boolean
   totalPendientePago: string

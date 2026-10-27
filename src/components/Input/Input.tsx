@@ -38,6 +38,7 @@ const Input = ({
         title={inputTitle}
         name={keyName}
         autoComplete="off"
+        required={isRequired}
         {...(isEditMode && { disabled })}
         {...{ defaultValue, ...inputHTMLAttrs }}
       />

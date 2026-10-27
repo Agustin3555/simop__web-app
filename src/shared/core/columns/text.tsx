@@ -64,8 +64,13 @@ export const buildTextColumnBehavior = (def: TextColumn): ColumnBehavior => {
     },
 
     writeFormValue: (formValues, accData) => {
-      const value = formValues.get.string(key).trim()
-      accData[key] = value === '' ? null : value
+      let value = formValues.get.string(key)
+      if (!value) return
+
+      value = value.trim()
+      if (value === '') return
+
+      accData[key] = value
     },
 
     compareTableValues: (a, b) => {

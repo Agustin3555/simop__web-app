@@ -5,7 +5,7 @@ import { TipoEstadoObraService } from './tipoEstadoObra.service'
 export const TipoEstadoObraTable = createTableDef({
   key: 'tipoEstadoObra',
   title: {
-    singular: 'Estado',
+    singular: 'Estado Administrativo',
     plural: 'Tipos de Estados de Obra',
   },
   classIcon: 'fa-solid fa-shapes',

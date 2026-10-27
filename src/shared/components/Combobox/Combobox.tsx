@@ -135,11 +135,11 @@ export const NewCombobox = (props: ComboboxProps) => {
 
   return (
     <div className={classList('new-cmp-combobox', 'ui-l', { multiple })}>
+      {name}
       <input
-        value={selected.length ? JSON.stringify(selected) : undefined}
+        value={selected.length ? JSON.stringify(selected) : ''}
         tabIndex={-1}
-        aria-hidden="true"
-        readOnly
+        onChange={() => {}}
         {...{ name, required }}
       />
       <Dropdown

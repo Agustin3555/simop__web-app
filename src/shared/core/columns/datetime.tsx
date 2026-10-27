@@ -97,8 +97,9 @@ export const buildDatetimeColumnBehavior = (
 
     writeFormValue: (formValues, accData) => {
       const value = formValues.get.string(key)
+      if (!value) return
 
-      accData[key] = value ? value + (withTime ? ':00Z' : 'T00:00:00Z') : null
+      accData[key] = value + (withTime ? ':00Z' : 'T00:00:00Z')
     },
 
     compareTableValues: (a, b) => {

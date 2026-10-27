@@ -114,9 +114,13 @@ export const buildNumberColumnBehavior = (
     },
 
     writeFormValue: (formValues, accData) => {
-      accData[key] = isBig
+      const value = isBig
         ? formValues.get.string(key)
         : formValues.get.number(key)
+
+      if (!value) return
+
+      accData[key] = value
     },
 
     compareTableValues: (a, b) => {

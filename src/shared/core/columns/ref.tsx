@@ -12,14 +12,6 @@ import { RefsCombobox } from '@/shared/components'
 import { z } from 'zod'
 import { StyleSheet, Text } from '@react-pdf/renderer'
 
-export interface RefColumn extends Column {
-  type: 'ref'
-  tableRefKey: TableKey
-  isMultiple?: boolean
-  columnConfig?: ColumnConfig
-  inputConfig?: InputConfig
-}
-
 const getEntities = (value: unknown): LooseEntity[] => {
   if (Array.isArray(value)) {
     return value.filter(
@@ -46,10 +38,20 @@ const refFilterSchema = z.array(z.string())
 const getSelectedRefIds = (filterValue: unknown) =>
   refFilterSchema.parse(filterValue ?? [])
 
+export interface RefColumn extends Column {
+  type: 'ref'
+  tableRefKey: TableKey
+  customKey?: string
+  isMultiple?: boolean
+  columnConfig?: ColumnConfig
+  inputConfig?: InputConfig
+}
+
 export const buildRefColumnBehavior = (def: RefColumn): ColumnBehavior => {
   const {
     key,
     tableRefKey,
+    customKey,
     isMultiple = false,
     columnConfig,
     inputConfig,
@@ -60,7 +62,7 @@ export const buildRefColumnBehavior = (def: RefColumn): ColumnBehavior => {
   const { size = Size.m, overrideTitle } = columnConfig ?? {}
   const { isHidden = false, isRequired = false } = inputConfig ?? {}
 
-  const verboseKey = `${key}Id${isMultiple ? 's' : ''}`
+  const verboseKey = `${customKey ?? refTableDef.key}Id${isMultiple ? 's' : ''}`
 
   const title =
     overrideTitle ??
@@ -87,8 +89,11 @@ export const buildRefColumnBehavior = (def: RefColumn): ColumnBehavior => {
     },
 
     writeFormValue: (formValues, accData) => {
-      const items = JSON.parse(formValues.get.string(verboseKey)) as string[]
-      const ids = items.map(Number)
+      const value = formValues.get.string(verboseKey)
+      if (!value || value === '') return
+
+      const ids = (JSON.parse(value) as string[]).map(Number)
+
       accData[verboseKey] = isMultiple ? ids : ids[0]
     },
 

@@ -35,10 +35,14 @@ const LocalAdd = () => {
             .writeFormValue(formValues, createData),
         )
 
+        // console.log(createData)
+
         await createItem(createData)
 
         await setSuccess()
       } catch (error) {
+        // console.log(error)
+
         await setError()
       }
     },
