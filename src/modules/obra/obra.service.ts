@@ -1,14 +1,18 @@
+import { publicInstance } from '@/services/config'
 import { ObraModel } from '.'
 import { createService } from '@/infra/http/service.helper'
 
 export const ObraService = createService<ObraModel.Entity>('obras')
 
-// getUpdateAmounts: async () => {
-//   const response = await publicInstance.get(collection('update-amounts'))
+const coll = ObraService.coll
 
-//   return ObraAdapter.getUpdateAmounts.output(response.data)
-// },
+export const ObraServiceExtension = {
+  getUpdateAmounts: async () => {
+    const res = await publicInstance.get(coll('update-amounts'))
+    return res.data
+  },
 
-// updateAmounts: async () => {
-//   await publicInstance.post(collection('update-amounts'))
-// },
+  updateAmounts: async () => {
+    await publicInstance.post(coll('update-amounts'))
+  },
+}

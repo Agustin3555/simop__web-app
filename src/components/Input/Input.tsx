@@ -1,6 +1,5 @@
 import './Input.css'
 import { InputHTMLAttributes } from 'react'
-import { useInputField } from '@/hooks'
 import { InputFieldPartial } from '@/types'
 import { classList } from '@/helpers'
 
@@ -17,18 +16,13 @@ const Input = ({
   isEditMode = false,
   inputHTMLAttrs,
 }: InputProps) => {
-  const { inputTitle, disabledState } = useInputField({ title, isRequired })
-  const { disabled } = disabledState
-
   return (
     <div className={classList('cmp-input', 'control')}>
       <input
         className="input box"
-        title={inputTitle}
         name={keyName}
         autoComplete="off"
         required={isRequired}
-        {...(isEditMode && { disabled })}
         {...{ defaultValue, ...inputHTMLAttrs }}
       />
     </div>

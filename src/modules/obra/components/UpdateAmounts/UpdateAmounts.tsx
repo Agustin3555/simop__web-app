@@ -3,7 +3,6 @@ import { useState } from 'react'
 import { useQuery } from '@tanstack/react-query'
 import { useHandleAction } from '@/hooks'
 import { Button, Toggle } from '@/components'
-import { ObraService } from '@/pages/Admin/modules/obra/obra.service'
 import { useAppStore } from '@/store/config'
 import { apiUrl } from '@/env'
 import { TableProvider } from '@/shared/components/Table/contexts/Table/Table.context'
@@ -12,22 +11,29 @@ import {
   createColumnBehaviors,
   toColumnDefs,
 } from '@/shared/core/column.helper'
-import { MontosActualizadosObra } from '@/pages/Admin/modules/obra/obra.model'
+import { MontosActualizadosObra } from '../../obra.model'
+import { ObraServiceExtension } from '../../obra.service'
 
 const columns = createColumnBehaviors(
   toColumnDefs<MontosActualizadosObra>({
     createdAt: {
-      type: 'text',
+      type: 'datetime',
       title: 'Fecha',
-      domain: 'shortText',
+      withTime: true,
     },
     periodoNombre: {
       type: 'text',
       title: 'Periodo',
+      columnConfig: {
+        size: 6,
+      },
     },
     actualizados: {
       type: 'number',
       title: 'Actualizados',
+      columnConfig: {
+        size: 10,
+      },
     },
     id: {
       type: 'number',
@@ -42,7 +48,7 @@ export const UpdateAmounts = () => {
 
   const { data, refetch } = useQuery({
     queryKey: ['getUpdateAmounts'],
-    queryFn: ObraService.getUpdateAmounts,
+    queryFn: ObraServiceExtension.getUpdateAmounts,
     retry: false,
   })
 
@@ -58,7 +64,7 @@ export const UpdateAmounts = () => {
         if (progress === 100) progressEvent.close()
       }
 
-      await ObraService.updateAmounts()
+      await ObraServiceExtension.updateAmounts()
 
       await refetch()
       await setSuccess()

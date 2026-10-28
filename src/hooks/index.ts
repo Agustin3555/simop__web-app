@@ -1,6 +1,5 @@
 export * from './useActionState.hook'
 export * from './useHandleAction.hook'
-export * from './useInputField.hook'
 export * from './useMutationActionState.hook'
 export * from './useQueryActionState.hook'
 export * from './useSubmitAction.hook'

@@ -1,5 +1,5 @@
 import ModuleView from '@/pages/Admin/components/ModuleView/ModuleView'
-// import { Map, UpdateAmounts } from './components'
+import { UpdateAmounts } from './components'
 
 export const Obra = () => (
   <ModuleView
@@ -12,15 +12,15 @@ export const Obra = () => (
     //     component: <Map />,
     //   },
     // ]}
-    // view={{
-    //   tabPanels: [
-    //     {
-    //       tabPanelKey: 'update-amounts',
-    //       title: 'Actualizar montos',
-    //       faIcon: 'fa-solid fa-money-bill-trend-up',
-    //       component: <UpdateAmounts />,
-    //     },
-    //   ],
-    // }}
+    view={{
+      tabPanels: [
+        {
+          tabPanelKey: 'update-amounts',
+          title: 'Actualizar montos',
+          faIcon: 'fa-solid fa-money-bill-trend-up',
+          component: <UpdateAmounts />,
+        },
+      ],
+    }}
   />
 )

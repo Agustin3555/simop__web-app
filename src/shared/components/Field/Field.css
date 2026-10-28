@@ -9,10 +9,20 @@
     gap: var(--pal-size-2xs);
 
     > .title {
+      --cmp-icon-size: var(--pal-size-xs);
+
+      display: flex;
+      align-items: center;
+      gap: var(--pal-size-2xs);
+
       font-size: var(--pal-size-font-xs);
       font-weight: 800;
 
       color: var(--pal-color-a-d1);
+
+      > .cmp-icon {
+        color: var(--pal-color-b);
+      }
 
       &.visually-hidden {
         position: absolute;
@@ -26,5 +36,9 @@
 
   > fieldset {
     border: none;
+  }
+
+  &:not(:has(*:required)) > * > .title > .cmp-icon {
+    display: none;
   }
 }
