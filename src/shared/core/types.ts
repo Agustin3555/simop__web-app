@@ -33,11 +33,11 @@ export type TableDef<C extends readonly ColumnDef[]> = Required<
 >
 
 export enum Size {
-  xs = 5,
+  xs = 6,
   s = 8,
-  m = 10,
-  l = 12,
-  xl = 16,
+  m = 12,
+  l = 16,
+  xl = 20,
 }
 
 export interface ColumnConfig {

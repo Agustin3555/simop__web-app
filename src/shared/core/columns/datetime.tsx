@@ -8,6 +8,7 @@ import {
   InputConfig,
   Size,
 } from '../types'
+import { Field } from '@/shared/components/Field/Field'
 
 export const formatter = (value: string, withTime: boolean) =>
   withTime
@@ -69,8 +70,7 @@ export const buildDatetimeColumnBehavior = (
     inputConfig,
   } = def
 
-  const { size = withTime ? Size.s : Size.xs, overrideTitle } =
-    columnConfig ?? {}
+  const { size = Size.m, overrideTitle } = columnConfig ?? {}
   const { isHidden = false, isRequired = false } = inputConfig ?? {}
   const title = overrideTitle ?? originTitle
 
@@ -83,16 +83,18 @@ export const buildDatetimeColumnBehavior = (
     },
 
     getFormField: (value, isEditMode = false) => (
-      <Input
-        keyName={key}
-        value={getInputValue(value, withTime)}
-        {...(!isEditMode && { isRequired })}
-        {...{ title, isEditMode }}
-        inputHTMLAttrs={{
-          type: withTime ? 'datetime-local' : 'date',
-          min: withTime ? '1900-01-01T00:00' : '1900-01-01',
-        }}
-      />
+      <Field {...{ title }} hideTitle={isEditMode}>
+        <Input
+          keyName={key}
+          value={getInputValue(value, withTime)}
+          {...(!isEditMode && { isRequired })}
+          {...{ title, isEditMode }}
+          inputHTMLAttrs={{
+            type: withTime ? 'datetime-local' : 'date',
+            min: withTime ? '1900-01-01T00:00' : '1900-01-01',
+          }}
+        />
+      </Field>
     ),
 
     writeFormValue: (formValues, accData) => {

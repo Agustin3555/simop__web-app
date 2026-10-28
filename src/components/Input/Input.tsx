@@ -3,7 +3,6 @@ import { InputHTMLAttributes } from 'react'
 import { useInputField } from '@/hooks'
 import { InputFieldPartial } from '@/types'
 import { classList } from '@/helpers'
-import { InputLabel } from '..'
 
 export interface InputProps extends InputFieldPartial {
   value?: number | string
@@ -14,7 +13,6 @@ const Input = ({
   keyName,
   title,
   value: defaultValue,
-  hideLabel = false,
   isRequired = false,
   isEditMode = false,
   inputHTMLAttrs,
@@ -24,15 +22,6 @@ const Input = ({
 
   return (
     <div className={classList('cmp-input', 'control')}>
-      <InputLabel
-        {...{
-          title,
-          hideLabel,
-          isRequired,
-          isEditMode,
-          ...disabledState,
-        }}
-      />
       <input
         className="input box"
         title={inputTitle}

@@ -4,6 +4,8 @@
   > input {
     position: absolute;
 
+    field-sizing: content;
+
     opacity: 0;
     pointer-events: none;
   }

@@ -8,6 +8,7 @@ import {
   InputConfig,
   Size,
 } from '../types'
+import { Field } from '@/shared/components/Field/Field'
 
 export interface BooleanColumn extends Column {
   type: 'boolean'
@@ -35,7 +36,7 @@ export const buildBooleanColumnBehavior = (
     inputConfig,
   } = def
 
-  const { size = Size.m, overrideTitle } = columnConfig ?? {}
+  const { size = Size.xs, overrideTitle } = columnConfig ?? {}
   const { isHidden = false, isRequired = false } = inputConfig ?? {}
   const title = overrideTitle ?? originTitle
 
@@ -53,10 +54,9 @@ export const buildBooleanColumnBehavior = (
     },
 
     getFormField: (value, isEditMode = false) => {
-      if (allowNull) {
-        return (
-          <div>
-            <span>{title}</span>
+      return (
+        <Field {...{ title }} hideTitle={isEditMode}>
+          {allowNull ? (
             <NewCombobox
               name={key}
               options={options}
@@ -65,17 +65,15 @@ export const buildBooleanColumnBehavior = (
               }
               required={!isEditMode && isRequired}
             />
-          </div>
-        )
-      }
-
-      return (
-        <Checkbox
-          keyName={key}
-          value={typeof value === 'boolean' ? value : undefined}
-          {...(!isEditMode && { isRequired })}
-          {...{ title, isEditMode, falseText, trueText }}
-        />
+          ) : (
+            <Checkbox
+              keyName={key}
+              value={typeof value === 'boolean' ? value : undefined}
+              {...(!isEditMode && { isRequired })}
+              {...{ title, isEditMode, falseText, trueText }}
+            />
+          )}
+        </Field>
       )
     },
 

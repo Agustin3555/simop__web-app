@@ -6,6 +6,6 @@
     padding: var(--pal-size-s);
     field-sizing: content;
     height: auto;
-    min-height: 8rem;
+    min-height: 6rem;
   }
 }

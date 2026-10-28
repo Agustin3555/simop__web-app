@@ -9,6 +9,7 @@ import {
 import { Input } from '@/components'
 import { StyleSheet, Text } from '@react-pdf/renderer'
 import { COLOR_MATCHER, palColor } from '@/styles/palette'
+import { Field } from '@/shared/components/Field/Field'
 
 export interface TextColumn extends Column {
   type: 'text'
@@ -27,7 +28,8 @@ export const buildTextColumnBehavior = (def: TextColumn): ColumnBehavior => {
     inputConfig,
   } = def
 
-  const { size = Size.m, overrideTitle } = columnConfig ?? {}
+  const { size = domain === 'longText' ? Size.xl : Size.l, overrideTitle } =
+    columnConfig ?? {}
   const { isHidden = false, isRequired = false } = inputConfig ?? {}
 
   const title = overrideTitle ?? originTitle
@@ -41,25 +43,25 @@ export const buildTextColumnBehavior = (def: TextColumn): ColumnBehavior => {
     },
 
     getFormField: (value, isEditMode = false) => {
-      if (domain === 'longText') {
-        return (
-          <InputArea
-            keyName={key}
-            value={typeof value === 'string' ? value : undefined}
-            {...(!isEditMode && { isRequired })}
-            {...{ title, isEditMode }}
-          />
-        )
-      }
-
       return (
-        <Input
-          keyName={key}
-          value={typeof value === 'string' ? value : undefined}
-          {...(domain === 'url' && { inputHTMLAttrs: { type: 'url' } })}
-          {...(!isEditMode && { isRequired })}
-          {...{ title, isEditMode }}
-        />
+        <Field {...{ title }} hideTitle={isEditMode}>
+          {domain === 'longText' ? (
+            <InputArea
+              keyName={key}
+              value={typeof value === 'string' ? value : undefined}
+              {...(!isEditMode && { isRequired })}
+              {...{ title, isEditMode }}
+            />
+          ) : (
+            <Input
+              keyName={key}
+              value={typeof value === 'string' ? value : undefined}
+              {...(domain === 'url' && { inputHTMLAttrs: { type: 'url' } })}
+              {...(!isEditMode && { isRequired })}
+              {...{ title, isEditMode }}
+            />
+          )}
+        </Field>
       )
     },
 

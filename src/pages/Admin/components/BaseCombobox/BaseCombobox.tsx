@@ -10,7 +10,7 @@ import {
 } from 'react'
 import { useInputField } from '@/hooks'
 import { InputField } from '@/types'
-import { InputLabel, Icon } from '@/components'
+import { Field, Icon } from '@/components'
 import { classList } from '@/helpers'
 import { Dropdown, Selected } from './components'
 import { OptionProps } from './components/Dropdown/components/Option/Option'
@@ -132,7 +132,7 @@ const BaseCombobox = ({
       className={classList('cmp-base-combobox', 'control', { isOpen })}
       onMouseEnter={handleEnter}
     >
-      <InputLabel
+      <Field
         discreetLabel
         resetHandleClick={handleResetClick}
         {...{

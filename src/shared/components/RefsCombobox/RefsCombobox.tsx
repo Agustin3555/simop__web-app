@@ -67,14 +67,14 @@ export const RefsCombobox = (props: RefsComboboxProps) => {
       ? { selected: props.selected, onChange: props.onChange }
       : { defaultSelected: props.defaultSelected }
 
-  // FIXME: habilitarlo cuando que getRefs admita los ids como parámetro en la API
-  // useEffect(() => {
-  //   if (!props.selected?.length) return
+  // TODO: optimizarlo
+  useEffect(() => {
+    if (!props.defaultSelected?.length) return
 
-  //   getRefs(props.selected.map(Number)).then(({ rows }) =>
-  //     setOptions(rows.map(getOption)),
-  //   )
-  // }, [])
+    getRefs(props.defaultSelected.map(Number)).then(({ rows }) =>
+      setOptions(rows.map(getOption)),
+    )
+  }, [])
 
   return (
     <NewCombobox

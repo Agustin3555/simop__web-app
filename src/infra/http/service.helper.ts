@@ -13,7 +13,7 @@ export const createService = <T>(name: string): Service<T> => {
     },
 
     getRefs: async ids => {
-      const res = await publicInstance.get(coll('refs'), { ids })
+      const res = await publicInstance.post(coll('refs'), { ids })
       return res.data
     },
 

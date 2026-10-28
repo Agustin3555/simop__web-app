@@ -1,6 +1,6 @@
 import './Checkbox.css'
 import { useInputField } from '@/hooks'
-import { InputLabel, Icon } from '@/components'
+import { Icon } from '@/components'
 import { InputFieldPartial } from '@/types'
 import { classList } from '@/helpers'
 
@@ -14,7 +14,6 @@ const Checkbox = ({
   keyName,
   title,
   value: defaultChecked,
-  hideLabel = false,
   isRequired = false,
   isEditMode = false,
   falseText = 'No',
@@ -25,15 +24,6 @@ const Checkbox = ({
 
   return (
     <div className={classList('cmp-checkbox', 'control')}>
-      <InputLabel
-        {...{
-          title,
-          hideLabel,
-          isRequired,
-          isEditMode,
-          ...disabledState,
-        }}
-      />
       <div className={classList('box', { ...(isEditMode && { disabled }) })}>
         <input
           title={inputTitle}

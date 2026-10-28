@@ -1,0 +1,30 @@
+.cmp-field {
+  display: contents;
+
+  > * {
+    position: relative;
+
+    display: flex;
+    flex-direction: column;
+    gap: var(--pal-size-2xs);
+
+    > .title {
+      font-size: var(--pal-size-font-xs);
+      font-weight: 800;
+
+      color: var(--pal-color-a-d1);
+
+      &.visually-hidden {
+        position: absolute;
+
+        white-space: nowrap;
+
+        clip: rect(0, 0, 0, 0);
+      }
+    }
+  }
+
+  > fieldset {
+    border: none;
+  }
+}

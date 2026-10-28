@@ -11,6 +11,8 @@ import { TABLE_DEFS } from '@/pages/Admin/constants/metaModelDefinitions.const'
 import { RefsCombobox } from '@/shared/components'
 import { z } from 'zod'
 import { StyleSheet, Text } from '@react-pdf/renderer'
+import { BaseEntity } from '@/infra/http/entity.types'
+import { Field } from '@/shared/components/Field/Field'
 
 const getEntities = (value: unknown): LooseEntity[] => {
   if (Array.isArray(value)) {
@@ -77,14 +79,26 @@ export const buildRefColumnBehavior = (def: RefColumn): ColumnBehavior => {
     },
 
     getFormField: (value, isEditMode = false) => {
+      let ids: undefined | number[] = undefined
+
+      if (value) {
+        ids = Array.isArray(value)
+          ? (value as BaseEntity[]).map(({ id }) => id)
+          : [(value as BaseEntity).id]
+      }
+
       return (
-        <RefsCombobox
-          name={verboseKey}
-          {...(isEditMode && { defaultSelected: getSelectedRefIds(value) })}
-          multiple={isMultiple}
-          required={isRequired}
-          {...{ refTableDef }}
-        />
+        <Field {...{ title }} hideTitle={isEditMode}>
+          <RefsCombobox
+            name={verboseKey}
+            {...(isEditMode && {
+              defaultSelected: getSelectedRefIds(ids?.map(String)),
+            })}
+            multiple={isMultiple}
+            required={isRequired}
+            {...{ refTableDef }}
+          />
+        </Field>
       )
     },
 

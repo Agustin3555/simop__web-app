@@ -1,5 +1,6 @@
 .new-cmp-row-selector-cell {
   position: sticky;
+  z-index: 1;
   left: 0;
 
   align-content: center;

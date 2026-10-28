@@ -20,8 +20,8 @@ export const SizeInput = ({ columnKey }: SizeInputProps) => {
       <input
         type="number"
         value={points}
-        min={8}
-        max={30}
+        min={6}
+        max={32}
         step={1}
         onChange={({ target: { value } }) => {
           setColumnWidth(columnKey, Math.round(Number(value)))

@@ -3,7 +3,6 @@ import { TextareaHTMLAttributes } from 'react'
 import { useInputField } from '@/hooks'
 import { classList } from '@/helpers'
 import { InputFieldPartial } from '@/types'
-import { InputLabel } from '@/components'
 
 interface InputAreaProps extends InputFieldPartial {
   value?: string
@@ -14,7 +13,6 @@ const InputArea = ({
   keyName,
   title,
   value,
-  hideLabel = false,
   isRequired = false,
   isEditMode = false,
   textareaHTMLAttrs,
@@ -24,15 +22,6 @@ const InputArea = ({
 
   return (
     <div className={classList('cmp-input-area', 'control')}>
-      <InputLabel
-        {...{
-          title,
-          hideLabel,
-          isRequired,
-          isEditMode,
-          ...disabledState,
-        }}
-      />
       <textarea
         className="input box text"
         title={inputTitle}
