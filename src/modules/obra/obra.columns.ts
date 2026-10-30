@@ -91,6 +91,9 @@ export const ObraColumns = toColumnDefsWithShared<ObraModel.Entity>({
     isDecimal: true,
     isMoney: true,
     isBig: true,
+    inputConfig: {
+      isHidden: true,
+    },
   },
   porcentajePendienteCertificar: {
     type: 'number',
@@ -108,6 +111,9 @@ export const ObraColumns = toColumnDefsWithShared<ObraModel.Entity>({
     isDecimal: true,
     isMoney: true,
     isBig: true,
+    inputConfig: {
+      isHidden: true,
+    },
   },
   presupuestoProximoAnio: {
     type: 'number',
@@ -116,6 +122,9 @@ export const ObraColumns = toColumnDefsWithShared<ObraModel.Entity>({
     isDecimal: true,
     isMoney: true,
     isBig: true,
+    inputConfig: {
+      isHidden: true,
+    },
   },
   tipoTematicaObra: {
     type: 'ref',

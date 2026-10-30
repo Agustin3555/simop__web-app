@@ -196,9 +196,9 @@ export const NewCombobox = (props: ComboboxProps) => {
                     type="secondary"
                     onAction={handleDeselectAll}
                   />
-                  {children}
                 </>
               )}
+              {children}
             </div>
             <div
               className="list"

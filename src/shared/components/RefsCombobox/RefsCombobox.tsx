@@ -1,8 +1,10 @@
-import { useEffect, useState } from 'react'
+import { useCallback, useEffect, useRef, useState } from 'react'
 import { useHandleAction } from '@/hooks'
+import { useRefs } from '@/shared/hooks/useRefs.hook'
 import { Button } from '@/components'
 import { ComboboxProps, NewCombobox } from '../Combobox/Combobox'
 import { ColumnDef, TableDef } from '@/shared/core/types'
+import { LooseEntity } from '@/infra/http/entity.types'
 
 interface RefsComboboxBaseProps {
   name: string
@@ -25,36 +27,60 @@ export type RefsComboboxProps = RefsComboboxBaseProps &
       }
   )
 
-// getRefs: (ids?: number[]) => Promise<{ fields: string[]; rows: T[] }>
-// getOption: (item: T) => ComboboxProps['options'][number]
-
 export const RefsCombobox = (props: RefsComboboxProps) => {
   const {
     name,
-    refTableDef: {
-      anchorColumnKey,
-      services: { getRefs },
-    },
+    refTableDef: { key, anchorColumnKey },
     multiple,
     required,
   } = props
 
   const [options, setOptions] = useState<ComboboxProps['options']>([])
+  const loadingOptions = useRef<Promise<void> | null>(null)
+  const { query, refetch } = useRefs(key)
 
-  const getOption = item => ({
-    label: item[anchorColumnKey],
-    value: String(item.id),
-  })
+  const getOption = useCallback(
+    (item: Partial<LooseEntity>) => ({
+      label: item[anchorColumnKey],
+      value: String(item.id),
+    }),
+    [anchorColumnKey],
+  )
 
-  const handleLoadOptions = async () => {
-    const { rows } = await getRefs()
-    setOptions(rows.map(getOption))
-  }
+  const loadOptions = useCallback(
+    async (force = false) => {
+      const cachedRows = query.data?.rows
 
-  const loadOptionsAction = useHandleAction(
+      if (!force && cachedRows) {
+        setOptions(cachedRows.map(getOption))
+        return
+      }
+
+      if (loadingOptions.current) return loadingOptions.current
+
+      const request = (async () => {
+        const result = await refetch()
+        if (result.error) throw result.error
+        if (result.data?.rows) {
+          setOptions(result.data.rows.map(getOption))
+        }
+      })()
+
+      loadingOptions.current = request
+
+      try {
+        await request
+      } finally {
+        if (loadingOptions.current === request) loadingOptions.current = null
+      }
+    },
+    [getOption, query.data, refetch],
+  )
+
+  const reloadOptionsAction = useHandleAction(
     async ({ setSuccess, setError }) => {
       try {
-        await handleLoadOptions()
+        await loadOptions(true)
         await setSuccess()
       } catch {
         await setError()
@@ -67,18 +93,14 @@ export const RefsCombobox = (props: RefsComboboxProps) => {
       ? { selected: props.selected, onChange: props.onChange }
       : { defaultSelected: props.defaultSelected }
 
-  // TODO: optimizarlo
   useEffect(() => {
-    if (!props.defaultSelected?.length) return
-
-    getRefs(props.defaultSelected.map(Number)).then(({ rows }) =>
-      setOptions(rows.map(getOption)),
-    )
-  }, [])
+    if (props.defaultSelected === undefined) return
+    void loadOptions()
+  }, [props.defaultSelected, loadOptions])
 
   return (
     <NewCombobox
-      onFirstOpen={handleLoadOptions}
+      onFirstOpen={loadOptions}
       {...{ name, options, multiple, required }}
       {...selectionProps}
     >
@@ -87,7 +109,7 @@ export const RefsCombobox = (props: RefsComboboxProps) => {
         faIcon="fa-solid fa-arrows-rotate"
         size="s"
         type="secondary"
-        {...loadOptionsAction}
+        {...reloadOptionsAction}
       />
     </NewCombobox>
   )
