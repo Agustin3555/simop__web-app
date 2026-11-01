@@ -27,7 +27,10 @@ const getEntities = (value: unknown): LooseEntity[] => {
     : []
 }
 
-const getEntityLabel = (entity: LooseEntity, anchorColumnKey: string) => {
+const getEntityLabel = (
+  entity: Partial<LooseEntity>,
+  anchorColumnKey: string,
+) => {
   const label = entity[anchorColumnKey] ?? entity.nombre ?? entity.title
 
   return typeof label === 'string' || typeof label === 'number'
@@ -37,7 +40,7 @@ const getEntityLabel = (entity: LooseEntity, anchorColumnKey: string) => {
 
 const refFilterSchema = z.array(z.string())
 
-const getSelectedRefIds = (filterValue: unknown) =>
+export const getSelectedRefIds = (filterValue: unknown) =>
   refFilterSchema.parse(filterValue ?? [])
 
 export interface RefColumn extends Column {

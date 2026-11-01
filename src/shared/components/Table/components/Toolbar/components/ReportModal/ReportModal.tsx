@@ -12,6 +12,8 @@ import ReportInTable, {
 } from '@/pages/Admin/components/ReportInTable/ReportInTable'
 import { ColumnBehavior } from '@/shared/core/types'
 import { CalcResults } from '@/shared/components/Table/hooks/useTableModel.hook'
+import { getSelectedRefIds } from '@/shared/core/columns/ref'
+import { TABLE_DEFS } from '@/pages/Admin/constants/metaModelDefinitions.const'
 
 type SelectionType = 'rendered' | 'selected'
 
@@ -44,7 +46,7 @@ export const ReportModal = ({
   )
 
   const {
-    tableDef: { title },
+    tableDef: { title, columnDefs },
     columns: columnBehaviors,
   } = useTableDef()
 
@@ -55,18 +57,30 @@ export const ReportModal = ({
     async ({ title, selectionType, rowNumber }: GenerateReportConfig) => {
       setProgress(0)
 
-      const filters = columnFilters
-        .map(({ columnKey: key, filters: allFilters }) => {
-          const column = columnBehaviors.find(f => f.usefulDef.key === key)
-          if (!column) return
+      const filters = (
+        await Promise.all(
+          columnFilters.map(async ({ columnKey: key, filters: allFilters }) => {
+            const column = columnBehaviors.find(f => f.usefulDef.key === key)
+            if (!column) return
 
-          const { valueState, custom } = allFilters
-          // TODO: agregar el filtro de valueState
+            const { valueState, custom } = allFilters
+            // TODO: agregar el filtro de valueState
 
-          // TODO: agregar las refs de tanstack query cuando sea del tipo ref
-          return column.getReportTableFilter(custom)
-        })
-        .filter(Boolean) as ReportInTableProps['props']
+            const columnDef = columnDefs.find(def => def.key === key)
+
+            if (columnDef?.type === 'ref') {
+              const ids = getSelectedRefIds(custom).map(Number)
+              if (ids.length === 0) return
+
+              const { rows } =
+                await TABLE_DEFS[columnDef.tableRefKey].services.getRefs(ids)
+              return column.getReportTableFilter(custom, rows)
+            }
+
+            return column.getReportTableFilter(custom)
+          }),
+        )
+      ).filter(Boolean) as ReportInTableProps['props']
 
       const columns: ReportInTableProps['columns'] = renderedColumns.map(
         ({ usefulDef: { key, title } }) => ({
@@ -112,6 +126,7 @@ export const ReportModal = ({
     [
       calcResults,
       columnBehaviors,
+      columnDefs,
       columnFilters,
       columnWidths,
       renderedColumns,

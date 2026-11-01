@@ -90,7 +90,7 @@ export type ColumnBehavior = {
 
   getReportTableFilter: (
     filterValue: unknown,
-    refs?: LooseEntity[],
+    refs?: Partial<LooseEntity>[],
   ) => { label: string; values: (number | string)[] } | undefined
 
   getReportTableCell: (value: unknown) => ReactNode
