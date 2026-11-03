@@ -1,0 +1,35 @@
+:root {
+  --cmp-option-group-color: var(--pal-color-a-l3);
+}
+
+.cmp-option-group {
+  display: flex;
+  gap: var(--ui-gap);
+
+  font-size: var(--ui-font-size);
+
+  > label {
+    display: flex;
+    align-items: center;
+    gap: var(--ui-gap);
+    border-width: var(--line-thickness);
+    border-style: solid;
+    border-color: var(--cmp-option-group-color);
+    padding-inline: var(--ui-padding-inline);
+    height: var(--ui-height);
+
+    border-radius: var(--ui-border-radius);
+
+    &:not(:has(> input:checked)) {
+      cursor: pointer;
+    }
+
+    &:has(> input:checked) {
+      background-color: var(--pal-color-a-l4);
+    }
+
+    &:has(> .cmp-checker) {
+      padding-left: calc((var(--ui-height) - var(--pal-size-l)) / 2);
+    }
+  }
+}

@@ -1,7 +1,7 @@
 import './RowSelectorCell.css'
 import { useTable } from '../../contexts/Table/useTable.hook'
 import { RowKey } from '../../contexts/Table/table.store'
-import Checker from '@/pages/Admin/components/Checker/Checker'
+import { Checker } from '@/shared/components/Checker/Checker'
 
 interface RowSelectorCellProps {
   rowKey: RowKey

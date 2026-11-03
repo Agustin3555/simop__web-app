@@ -1,13 +1,13 @@
-import { MouseEventHandler, useCallback, useMemo, useState } from 'react'
+import { MouseEventHandler, useCallback, useState } from 'react'
 import { useAppStore } from '@/store/config'
 import { useHandleAction } from '@/hooks'
 import { Button } from '@/components'
 import { useInputHandler } from '@/pages/Admin/hooks/useInputHandler.hook'
 import { useTableDef } from '@/pages/Admin/hooks/useTableDef.hook'
-import Checker from '../../../Checker/Checker'
 import { Config } from '@/shared/contexts/Configs/configs.store'
 import { useConfigs } from '@/shared/contexts/Configs/useConfigs.hook'
 import { ComboboxProps, NewCombobox } from '@/shared/components'
+import { Checker } from '@/shared/components/Checker/Checker'
 
 interface ConfigProps {
   config: Config
