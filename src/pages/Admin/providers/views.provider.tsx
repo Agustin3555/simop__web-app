@@ -37,9 +37,7 @@ export const ViewsProvider = ({ children }: ViewsProviderProps) => {
       else params.set('module', viewKey)
 
       const query = params.toString()
-      navigate(
-        `${location}${query ? `?${query}` : ''}${window.location.hash}`,
-      )
+      navigate(`${location}${query ? `?${query}` : ''}${window.location.hash}`)
     },
     [location, navigate, search],
   )
@@ -63,10 +61,9 @@ export const ViewsProvider = ({ children }: ViewsProviderProps) => {
     if (!hasInvalidModule) return
 
     const query = params.toString()
-    navigate(
-      `${location}${query ? `?${query}` : ''}${window.location.hash}`,
-      { replace: true },
-    )
+    navigate(`${location}${query ? `?${query}` : ''}${window.location.hash}`, {
+      replace: true,
+    })
   }, [location, navigate, search])
 
   return (

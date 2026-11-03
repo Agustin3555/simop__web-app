@@ -7,12 +7,29 @@ import { isSortable } from '@dnd-kit/react/sortable'
 
 type Row = object
 type TableColumn = ColumnBehavior
+type TableRow = { row: Record<string, unknown> }
 
 export type CalcResults = (
   { calc: string; label: string; result: unknown } | undefined
 )[]
 
 const getRowValue = (row: Row, key: string): unknown => Reflect.get(row, key)
+
+const getCalcResults = (
+  rows: TableRow[],
+  columns: TableColumn[],
+  columnCalcs: { columnKey: ColumnKey; calc: string }[],
+): CalcResults =>
+  columns.map(({ usefulDef: { key }, getTableFooterCalcs }) => {
+    if (!getTableFooterCalcs) return
+
+    const { calc } = columnCalcs.find(c => c.columnKey === key) ?? {}
+    if (!calc) return
+
+    const values = rows.map(({ row }) => row[key])
+    const { label, getResult } = getTableFooterCalcs()[calc]
+    return { calc, label, result: getResult(values) }
+  })
 
 const validateRows = (
   data: Row[],
@@ -274,19 +291,14 @@ export const useTableModel = (data: Row[], rowKey: ColumnKey) => {
     )
   }, [columnWidths, columns])
 
-  const calcResults: CalcResults = useMemo(
-    () =>
-      renderedColumns.map(({ usefulDef: { key }, getTableFooterCalcs }) => {
-        if (!getTableFooterCalcs) return
-
-        const { calc } = columnCalcs.find(c => c.columnKey === key) ?? {}
-        if (!calc) return
-
-        const values = renderedRows.map(r => r.row[key])
-        const { label, getResult } = getTableFooterCalcs()[calc]
-        return { calc, label, result: getResult(values) }
-      }),
+  const renderedCalcResults: CalcResults = useMemo(
+    () => getCalcResults(renderedRows, renderedColumns, columnCalcs),
     [columnCalcs, renderedColumns, renderedRows],
+  )
+
+  const selectedCalcResults: CalcResults = useMemo(
+    () => getCalcResults(selectedRows, renderedColumns, columnCalcs),
+    [columnCalcs, renderedColumns, selectedRows],
   )
 
   return {
@@ -300,6 +312,7 @@ export const useTableModel = (data: Row[], rowKey: ColumnKey) => {
     allRowKeys: validation.keys,
     filteredRowKeys,
 
-    calcResults,
+    renderedCalcResults,
+    selectedCalcResults,
   }
 }

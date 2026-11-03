@@ -27,14 +27,16 @@ interface ReportModalProps {
   renderedColumns: ColumnBehavior[]
   renderedRows: { key: string; row: Record<string, unknown> }[]
   selectedRows: { key: string; row: Record<string, unknown> }[]
-  calcResults: CalcResults
+  renderedCalcResults: CalcResults
+  selectedCalcResults: CalcResults
 }
 
 export const ReportModal = ({
   renderedColumns,
   renderedRows,
   selectedRows,
-  calcResults,
+  renderedCalcResults,
+  selectedCalcResults,
 }: ReportModalProps) => {
   const [progress, setProgress] = useState(0)
 
@@ -90,9 +92,11 @@ export const ReportModal = ({
         }),
       )
 
+      const results =
+        selectionType === 'selected' ? selectedCalcResults : renderedCalcResults
       const footer: ReportInTableProps['footer'] = renderedColumns.map(
         ({ getReportTableCell }, i) => {
-          const calcResult = calcResults[i]
+          const calcResult = results[i]
           if (!calcResult) return
 
           const { label, result } = calcResult
@@ -124,13 +128,14 @@ export const ReportModal = ({
       )
     },
     [
-      calcResults,
       columnBehaviors,
       columnDefs,
       columnFilters,
       columnWidths,
       renderedColumns,
+      renderedCalcResults,
       rowTypes,
+      selectedCalcResults,
     ],
   )
 

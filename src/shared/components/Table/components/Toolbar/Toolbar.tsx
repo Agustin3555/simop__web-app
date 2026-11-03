@@ -33,7 +33,8 @@ export interface ToolbarProps {
   renderedColumns: ColumnBehavior[]
   renderedRows: { key: string; row: Record<string, unknown> }[]
   selectedRows: { key: string; row: Record<string, unknown> }[]
-  calcResults: CalcResults
+  renderedCalcResults: CalcResults
+  selectedCalcResults: CalcResults
   dataLength: number
   editModeState?: [boolean, Dispatch<SetStateAction<boolean>>]
   togglesState: [TogglesState, Dispatch<SetStateAction<TogglesState>>]
@@ -43,7 +44,8 @@ export const Toolbar = ({
   renderedColumns,
   renderedRows,
   selectedRows,
-  calcResults,
+  renderedCalcResults,
+  selectedCalcResults,
   dataLength,
   editModeState,
   togglesState: [toggles, setToggles],
@@ -112,7 +114,13 @@ export const Toolbar = ({
       </div>
       <div className="right">
         <ReportModal
-          {...{ renderedColumns, renderedRows, selectedRows, calcResults }}
+          {...{
+            renderedColumns,
+            renderedRows,
+            selectedRows,
+            renderedCalcResults,
+            selectedCalcResults,
+          }}
         />
         <Button
           text="Excel"

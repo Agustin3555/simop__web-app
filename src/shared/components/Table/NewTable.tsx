@@ -61,7 +61,8 @@ export const NewTable = ({
     allRowKeys,
     filteredRowKeys,
 
-    calcResults,
+    renderedCalcResults,
+    selectedCalcResults,
   } = useTableModel(data, rowKey)
 
   const { containerRef, visibleRows, loadMoreTrigger } =
@@ -77,7 +78,8 @@ export const NewTable = ({
           renderedColumns,
           renderedRows,
           selectedRows,
-          calcResults,
+          renderedCalcResults,
+          selectedCalcResults,
           togglesState,
         }}
       />
@@ -125,7 +127,7 @@ export const NewTable = ({
             <ColumnFooter
               key={c.usefulDef.key}
               column={c}
-              calcResult={calcResults[i]}
+              calcResult={renderedCalcResults[i]}
             />
           ))}
         </footer>
