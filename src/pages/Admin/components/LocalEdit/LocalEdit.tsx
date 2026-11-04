@@ -138,7 +138,6 @@ const LocalEdit = () => {
           <Button
             text="Consultar"
             faIcon="fa-solid fa-search"
-            size="m"
             type="secondary"
             inverted
             onAction={handleClick}

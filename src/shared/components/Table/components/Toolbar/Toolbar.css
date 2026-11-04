@@ -1,12 +1,12 @@
 .new-cmp-toolbar {
   display: flex;
   justify-content: space-between;
+  gap: var(--pal-size-2xs);
   border-width: 0;
   border-style: solid;
   border-color: var(--old-pal-color-a-l4);
   border-bottom-width: var(--line-thickness);
   padding: var(--pal-size-2xs);
-  gap: var(--pal-size-2xs);
 
   > * {
     display: flex;
@@ -26,9 +26,17 @@
     color: var(--old-pal-color-a);
   }
 
-  > .right > .cmp-button {
-    border-color: var(--old-pal-color-c-l1);
+  > .right {
+    > .cmp-dropdown > .dropdown {
+      flex-direction: column;
+      gap: var(--pal-size-3xs);
+      padding: var(--pal-size-3xs);
 
-    color: var(--old-pal-color-c-d1);
+      > .cmp-button {
+        border-color: var(--old-pal-color-c-l1);
+
+        color: var(--old-pal-color-c-d1);
+      }
+    }
   }
 }

@@ -133,6 +133,7 @@ const LocalQueryBody = ({ panels: customPanels = [] }: LocalQueryProps) => {
                 <Button
                   title="Consultar datos"
                   faIcon={`fa-solid fa-arrows-rotate`}
+                  size="l"
                   actionState={queryActionState}
                   onAction={refetch}
                 />
@@ -142,6 +143,7 @@ const LocalQueryBody = ({ panels: customPanels = [] }: LocalQueryProps) => {
                     text="Guardar configuración"
                     faIcon={`fa-solid fa-floppy-disk`}
                     type="secondary"
+                    size="l"
                     onAction={handleSaveConfig}
                   />
                 )}

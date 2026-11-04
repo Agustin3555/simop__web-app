@@ -172,8 +172,8 @@ export const ReportModal = ({
       opener={attrs => (
         <Button
           text="Informe"
+          title="Descargar .pdf"
           faIcon="fa-regular fa-file-pdf"
-          size="s"
           type="secondary"
           buttonHTMLAttrs={attrs}
         />
@@ -208,7 +208,6 @@ export const ReportModal = ({
         <Button
           text="Generar"
           faIcon="fa-regular fa-file-pdf"
-          size="m"
           submit
           {...{ progress, actionState }}
         />

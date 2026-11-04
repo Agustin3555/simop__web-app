@@ -36,7 +36,6 @@ const Header = () => {
         <Button
           title={isOpen ? 'Cerrar' : 'Abrir'}
           faIcon="fa-solid fa-mattress-pillow"
-          size="m"
           onAction={toggleNav}
         />
         {mainServerUrl && (
@@ -45,7 +44,6 @@ const Header = () => {
             text="Sincronizar"
             title="Sincronizar base de datos"
             faIcon="fa-solid fa-database"
-            size="m"
             hold
             inverted
             {...syncAction}
@@ -61,7 +59,6 @@ const Header = () => {
         <Button
           title="Ajustes"
           faIcon="fa-solid fa-gear"
-          size="m"
           onAction={handleActiveConfig}
         />
       </div>

@@ -38,7 +38,7 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       title,
       text,
       faIcon,
-      size = 'l',
+      size = 'm',
       type = 'primary',
       inverted = false,
       wrap = false,

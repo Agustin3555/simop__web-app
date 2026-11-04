@@ -87,7 +87,6 @@ const LocalConfig = () => {
               text="Confirmar"
               faIcon="fa-solid fa-check"
               submit
-              size="m"
               {...{ actionState }}
             />
           </div>

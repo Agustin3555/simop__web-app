@@ -144,7 +144,6 @@ const ReleaseNotesModal = () => {
             <h2>Notas de versión</h2>
             <Button
               text="Ok"
-              size="m"
               onAction={handleClose}
               buttonHTMLAttrs={{ commandfor: 'notes-modal', command: 'close' }}
             />

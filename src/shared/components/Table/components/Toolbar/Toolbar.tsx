@@ -7,6 +7,7 @@ import Value from '@/pages/Admin/components/Value/Value'
 import { ReportModal } from './components'
 import { ColumnBehavior } from '@/shared/core/types'
 import { CalcResults } from '../../hooks/useTableModel.hook'
+import { Dropdown } from '@/shared/components/Dropdown/Dropdown'
 
 export type ToggleKey = 'columnControl' | 'stickHeader' | 'stickFooter'
 export type TogglesState = Record<ToggleKey, boolean>
@@ -113,22 +114,40 @@ export const Toolbar = ({
         />
       </div>
       <div className="right">
-        <ReportModal
-          {...{
-            renderedColumns,
-            renderedRows,
-            selectedRows,
-            renderedCalcResults,
-            selectedCalcResults,
-          }}
-        />
-        <Button
-          text="Excel"
-          title="Descargar Excel"
-          faIcon="fa-regular fa-file-excel"
-          size="s"
-          type="secondary"
-        />
+        <Dropdown
+          opener={attrs => (
+            <Button
+              text="Exportar"
+              faIcon="fa-solid fa-file-arrow-down"
+              size="s"
+              type="secondary"
+              buttonHTMLAttrs={attrs}
+            />
+          )}
+        >
+          {/* TODO: Toggle para elegir si exportar filas seleccionadas o todas */}
+          <ReportModal
+            {...{
+              renderedColumns,
+              renderedRows,
+              selectedRows,
+              renderedCalcResults,
+              selectedCalcResults,
+            }}
+          />
+          <Button
+            text="Excel"
+            title="Descargar .xlsx"
+            faIcon="fa-regular fa-file-excel"
+            type="secondary"
+          />
+          <Button
+            text="Para IA"
+            title="Copiar formato TOON"
+            faIcon="fa-regular fa-copy"
+            type="secondary"
+          />
+        </Dropdown>
       </div>
     </div>
   )
