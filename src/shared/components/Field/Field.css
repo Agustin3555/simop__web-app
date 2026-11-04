@@ -18,10 +18,10 @@
       font-size: var(--pal-size-font-xs);
       font-weight: 800;
 
-      color: var(--pal-color-a-d1);
+      color: var(--old-pal-color-a-d1);
 
       > .cmp-icon {
-        color: var(--pal-color-b);
+        color: var(--old-pal-color-b);
       }
 
       &.visually-hidden {

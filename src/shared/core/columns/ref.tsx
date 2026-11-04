@@ -148,6 +148,8 @@ export const buildRefColumnBehavior = (def: RefColumn): ColumnBehavior => {
     },
 
     getTableFilter: (filterValue, setFilterValue) => {
+      // FIXME: no se están cargando los valores si ya existe una selección
+
       return (
         <RefsCombobox
           name={key}

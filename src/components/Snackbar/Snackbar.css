@@ -35,7 +35,7 @@
   display: flex;
   justify-content: center;
 
-  color: var(--pal-color-white);
+  color: var(--old-pal-color-white);
 
   > .toast {
     position: fixed;
@@ -60,21 +60,21 @@
         forwards;
 
     &.info {
-      color: var(--pal-color-a-d2);
+      color: var(--old-pal-color-a-d2);
 
-      background-color: var(--pal-color-white);
+      background-color: var(--old-pal-color-white);
     }
 
     &.warning {
-      background-color: var(--pal-color-a);
+      background-color: var(--old-pal-color-a);
     }
 
     &.error {
-      background-color: var(--pal-color-d);
+      background-color: var(--old-pal-color-d);
     }
 
     &.success {
-      background-color: var(--pal-color-c);
+      background-color: var(--old-pal-color-c);
     }
 
     > .cmp-icon {

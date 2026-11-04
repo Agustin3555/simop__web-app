@@ -3,11 +3,11 @@
   flex-direction: column;
   border-width: var(--line-thickness);
   border-style: solid;
-  border-color: var(--pal-color-a-l4);
+  border-color: var(--old-pal-color-a-l4);
   max-width: max-content;
 
   border-radius: var(--pal-size-xs);
-  background-color: var(--pal-color-white);
+  background-color: var(--old-pal-color-white);
   overflow: auto;
 
   > .new-table {
@@ -27,7 +27,7 @@
       > * {
         border-width: 0;
         border-style: solid;
-        border-color: var(--pal-color-a-l4);
+        border-color: var(--old-pal-color-a-l4);
         border-right-width: var(--line-thickness);
 
         &:last-child {
@@ -45,7 +45,7 @@
 
       border-width: 0;
       border-style: solid;
-      border-color: var(--pal-color-a-l4);
+      border-color: var(--old-pal-color-a-l4);
       border-bottom-width: var(--line-thickness);
 
       &.stick {
@@ -62,7 +62,7 @@
 
         border-width: 0;
         border-style: solid;
-        border-color: var(--pal-color-a-l5);
+        border-color: var(--old-pal-color-a-l5);
         border-bottom-width: var(--line-thickness);
 
         white-space: nowrap;
@@ -77,7 +77,7 @@
         }
 
         &:hover {
-          background-color: var(--pal-color-a-l5);
+          background-color: var(--old-pal-color-a-l5);
         }
       }
     }
@@ -85,7 +85,7 @@
     > footer {
       border-width: 0;
       border-style: solid;
-      border-color: var(--pal-color-a-l4);
+      border-color: var(--old-pal-color-a-l4);
       border-top-width: var(--line-thickness);
 
       &.stick {

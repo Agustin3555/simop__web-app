@@ -1,5 +1,5 @@
 :root {
-  --cmp-external-link-bg-color: var(--pal-color-a);
+  --cmp-external-link-bg-color: var(--old-pal-color-a);
 }
 
 .cmp-external-link {
@@ -46,6 +46,6 @@
   }
 
   &:active {
-    --interact-color: var(--pal-color-a-d1);
+    --interact-color: var(--old-pal-color-a-d1);
   }
 }

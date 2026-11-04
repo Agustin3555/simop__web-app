@@ -7,7 +7,7 @@
   > header {
     display: flex;
     gap: var(--pal-size-2xs);
-    border-bottom: var(--line-thickness) solid var(--pal-color-a-l4);
+    border-bottom: var(--line-thickness) solid var(--old-pal-color-a-l4);
     padding-bottom: var(--pal-size-m);
   }
 
@@ -70,14 +70,14 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      border-top: var(--line-thickness) solid var(--pal-color-a-l4);
+      border-top: var(--line-thickness) solid var(--old-pal-color-a-l4);
       padding-top: var(--pal-size-m);
       width: 100%;
 
-      background-color: var(--pal-color-white);
+      background-color: var(--old-pal-color-white);
 
       > .cmp-button {
-        color: var(--pal-color-white);
+        color: var(--old-pal-color-white);
       }
     }
   }

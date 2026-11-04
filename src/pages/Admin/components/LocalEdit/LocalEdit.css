@@ -12,15 +12,15 @@
 
       margin-right: var(--pal-size-l);
 
-      color: var(--pal-color-a);
+      color: var(--old-pal-color-a);
     }
 
     > strong {
-      color: var(--pal-color-a);
+      color: var(--old-pal-color-a);
     }
 
     > .cmp-button {
-      border-color: var(--pal-color-a-l2);
+      border-color: var(--old-pal-color-a-l2);
     }
   }
 
@@ -33,7 +33,7 @@
     font-size: var(--pal-size-font-s);
     font-weight: 550;
 
-    color: var(--pal-color-a);
+    color: var(--old-pal-color-a);
 
     > strong {
       padding: var(--pal-size-xs) var(--pal-size-s);
@@ -42,8 +42,8 @@
       white-space: initial;
 
       border-radius: var(--pal-size-2xs);
-      color: var(--pal-color-a-d1);
-      background-color: var(--pal-color-a-l5);
+      color: var(--old-pal-color-a-d1);
+      background-color: var(--old-pal-color-a-l5);
     }
   }
 }

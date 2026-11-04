@@ -23,14 +23,14 @@
         gap: var(--ui-gap);
         border-width: 0;
         border-style: solid;
-        border-color: var(--pal-color-a-l4);
+        border-color: var(--old-pal-color-a-l4);
         border-top-width: var(--line-thickness);
         border-right-width: var(--line-thickness);
         padding-inline: var(--ui-padding-inline);
         height: var(--height);
 
         font-weight: 650;
-        color: var(--pal-color-a);
+        color: var(--old-pal-color-a);
 
         border-top-left-radius: var(--ui-border-radius);
         border-top-right-radius: var(--ui-border-radius);
@@ -58,15 +58,15 @@
         }
 
         &:has(input:checked) {
-          color: var(--pal-color-a-d2);
+          color: var(--old-pal-color-a-d2);
 
-          background-color: var(--pal-color-white);
+          background-color: var(--old-pal-color-white);
         }
 
         &:hover {
           background-color: color-mix(
             in srgb,
-            var(--pal-color-a) 10%,
+            var(--old-pal-color-a) 10%,
             transparent
           );
         }
@@ -78,7 +78,7 @@
       line-height: normal;
       white-space: nowrap;
       text-overflow: ellipsis;
-      color: var(--pal-color-a-l1);
+      color: var(--old-pal-color-a-l1);
 
       overflow: hidden;
     }
@@ -88,13 +88,13 @@
     border-width: 0;
     border-left-width: var(--line-thickness);
     border-style: solid;
-    border-color: var(--pal-color-a-l4);
+    border-color: var(--old-pal-color-a-l4);
     padding: var(--pal-size-s);
     height: 100%;
 
     border-radius: var(--pal-size-xs);
     border-top-left-radius: 0;
-    background-color: var(--pal-color-white);
+    background-color: var(--old-pal-color-white);
 
     overflow: auto;
 

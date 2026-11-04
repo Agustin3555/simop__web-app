@@ -3,7 +3,7 @@
   justify-content: space-between;
   border-width: 0;
   border-style: solid;
-  border-color: var(--pal-color-a-l4);
+  border-color: var(--old-pal-color-a-l4);
   border-bottom-width: var(--line-thickness);
   padding: var(--pal-size-2xs);
   gap: var(--pal-size-2xs);
@@ -16,19 +16,19 @@
 
   > .left {
     > .edit-mode {
-      --cmp-toggle-color: var(--pal-color-c);
+      --cmp-toggle-color: var(--old-pal-color-c);
     }
   }
 
   > .center > .cmp-value {
-    border-color: var(--pal-color-a-l5);
+    border-color: var(--old-pal-color-a-l5);
 
-    color: var(--pal-color-a);
+    color: var(--old-pal-color-a);
   }
 
   > .right > .cmp-button {
-    border-color: var(--pal-color-c-l1);
+    border-color: var(--old-pal-color-c-l1);
 
-    color: var(--pal-color-c-d1);
+    color: var(--old-pal-color-c-d1);
   }
 }

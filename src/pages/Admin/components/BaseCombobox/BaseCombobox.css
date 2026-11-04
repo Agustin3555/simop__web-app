@@ -18,7 +18,7 @@
     }
 
     &:hover > .arrow {
-      background-color: var(--pal-color-white);
+      background-color: var(--old-pal-color-white);
     }
 
     > .arrow {
@@ -28,7 +28,7 @@
       width: var(--control-height);
       min-height: 100%;
 
-      color: var(--pal-color-a);
+      color: var(--old-pal-color-a);
 
       transition: background-color var(--pal-time-xs) ease-out;
 
@@ -41,10 +41,10 @@
   }
 
   &.is-open > .header {
-    border-color: var(--pal-color-a);
+    border-color: var(--old-pal-color-a);
 
     > .arrow {
-      background-color: var(--pal-color-white);
+      background-color: var(--old-pal-color-white);
 
       > .cmp-icon {
         rotate: -0.5turn;

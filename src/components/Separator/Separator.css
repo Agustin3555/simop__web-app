@@ -1,7 +1,7 @@
 :root {
   --cmp-separator-long: auto;
   --cmp-separator-thick: var(--line-thickness);
-  --cmp-separator-color: var(--pal-color-a-l2);
+  --cmp-separator-color: var(--old-pal-color-a-l2);
 }
 
 .cmp-separator {

@@ -1,7 +1,7 @@
 :root {
-  --cmp-option-selectors-color: var(--pal-color-a-l1);
-  --cmp-option-selectors-bg-color: var(--pal-color-a-l2);
-  --cmp-option-selectors-color-active: var(--pal-color-white);
+  --cmp-option-selectors-color: var(--old-pal-color-a-l1);
+  --cmp-option-selectors-bg-color: var(--old-pal-color-a-l2);
+  --cmp-option-selectors-color-active: var(--old-pal-color-white);
 }
 
 .cmp-option-selectors {

@@ -1,6 +1,6 @@
 .cmp-release-notes-modal {
   > .cmp-button {
-    border-color: rgba(var(--pal-color-base-a), 0.15);
+    border-color: rgba(var(--old-pal-color-base-a), 0.15);
   }
 
   > dialog {
@@ -14,7 +14,7 @@
     height: 100dvh;
     max-height: none;
 
-    background-color: rgba(var(--pal-color-base-black), 0.375);
+    background-color: rgba(var(--old-pal-color-base-black), 0.375);
     opacity: 0;
     backdrop-filter: blur(8px);
     cursor: pointer;
@@ -34,7 +34,7 @@
       max-width: 50rem;
       max-height: 100%;
 
-      background-color: var(--pal-color-a-l5);
+      background-color: var(--old-pal-color-a-l5);
       box-shadow: var(--pal-shadow-1);
       translate: 0 var(--pal-size-xl);
       overflow: auto;
@@ -53,16 +53,16 @@
       }
 
       > header {
-        --cmp-button-bg-color: var(--pal-color-a-l2);
+        --cmp-button-bg-color: var(--old-pal-color-a-l2);
 
         display: flex;
         justify-content: space-between;
         margin-bottom: var(--gap);
 
-        color: var(--pal-color-white);
+        color: var(--old-pal-color-white);
 
         > h2 {
-          color: var(--pal-color-a-l2);
+          color: var(--old-pal-color-a-l2);
         }
       }
 
@@ -72,10 +72,10 @@
       }
 
       > .news {
-        --cmp-note-title-color: var(--pal-color-c-l4);
+        --cmp-note-title-color: var(--old-pal-color-c-l4);
 
         > *:first-child {
-          --cmp-note-title-color: var(--pal-color-b-l4);
+          --cmp-note-title-color: var(--old-pal-color-b-l4);
         }
       }
 
@@ -92,7 +92,7 @@
         interpolate-size: allow-keywords;
 
         > .notes {
-          border-top: var(--line-thickness) solid var(--pal-color-a-l3);
+          border-top: var(--line-thickness) solid var(--old-pal-color-a-l3);
           padding-top: var(--gap);
 
           opacity: 0;
@@ -115,7 +115,7 @@
 
           font-size: var(--pal-size-font-xs);
 
-          color: var(--pal-color-a);
+          color: var(--old-pal-color-a);
 
           &::before,
           &::after {
@@ -125,7 +125,7 @@
 
             content: '';
 
-            background-color: var(--pal-color-a-l3);
+            background-color: var(--old-pal-color-a-l3);
           }
 
           > .cmp-icon {

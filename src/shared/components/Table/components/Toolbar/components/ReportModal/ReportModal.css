@@ -21,7 +21,7 @@
     }
 
     > .cmp-button {
-      color: var(--pal-color-white);
+      color: var(--old-pal-color-white);
     }
   }
 }

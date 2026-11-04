@@ -21,20 +21,20 @@
       gap: var(--pal-size-xs);
 
       > small {
-        color: var(--pal-color-a);
+        color: var(--old-pal-color-a);
       }
     }
 
     > .cmp-button {
-      border-color: var(--pal-color-a-l4);
+      border-color: var(--old-pal-color-a-l4);
 
-      color: var(--pal-color-gs-400);
+      color: var(--old-pal-color-gs-400);
     }
   }
 
   > h3 {
     font-size: var(--pal-size-font-s);
-    color: var(--pal-color-a-l2);
+    color: var(--old-pal-color-a-l2);
   }
 
   > .graph {
@@ -73,10 +73,10 @@
       }
 
       > .text {
-        color: var(--pal-color-black);
+        color: var(--old-pal-color-black);
 
         > small {
-          color: var(--pal-color-a);
+          color: var(--old-pal-color-a);
         }
       }
     }

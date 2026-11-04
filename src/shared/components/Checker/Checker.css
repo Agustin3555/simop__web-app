@@ -2,7 +2,7 @@
   align-content: center;
   border-width: var(--line-thickness);
   border-style: solid;
-  border-color: var(--pal-color-a-l2);
+  border-color: var(--old-pal-color-a-l2);
   aspect-ratio: 1;
   width: var(--pal-size-l);
 
@@ -15,7 +15,7 @@
 
     margin-inline: auto;
 
-    color: var(--pal-color-white);
+    color: var(--old-pal-color-white);
     scale: 0;
 
     transition: scale var(--pal-time-s) ease;
@@ -28,7 +28,7 @@
   input:checked ~ & {
     border: none;
 
-    background-color: var(--pal-color-a);
+    background-color: var(--old-pal-color-a);
 
     > .cmp-icon {
       scale: initial;

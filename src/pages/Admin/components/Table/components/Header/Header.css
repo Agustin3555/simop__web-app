@@ -24,7 +24,7 @@
         border-radius: calc(var(--table-border-radius) - var(--gap));
         background-image: radial-gradient(
           circle at 0.125rem 0.125rem,
-          var(--pal-color-a-l3) 0.0625rem,
+          var(--old-pal-color-a-l3) 0.0625rem,
           transparent 0
         );
         background-size: 0.25rem 0.25rem;
@@ -32,9 +32,9 @@
     }
 
     > .main {
-      --cmp-option-selectors-color: var(--pal-color-a-l2);
-      --cmp-option-selectors-bg-color: var(--pal-color-a-l4);
-      --cmp-option-selectors-color-active: var(--pal-color-a-d1);
+      --cmp-option-selectors-color: var(--old-pal-color-a-l2);
+      --cmp-option-selectors-bg-color: var(--old-pal-color-a-l4);
+      --cmp-option-selectors-color-active: var(--old-pal-color-a-d1);
 
       flex-grow: 1;
 
@@ -55,15 +55,15 @@
 
           > .cmp-button {
             &.primary {
-              color: var(--pal-color-white);
+              color: var(--old-pal-color-white);
 
-              background-color: var(--pal-color-a-l2);
+              background-color: var(--old-pal-color-a-l2);
             }
 
             &.secondary {
-              border-color: var(--pal-color-a-l4);
+              border-color: var(--old-pal-color-a-l4);
 
-              color: var(--pal-color-gs-400);
+              color: var(--old-pal-color-gs-400);
             }
           }
         }
@@ -82,7 +82,7 @@
           :placeholder-shown
         ),
       .cmp-input input.filled {
-        background-color: var(--pal-color-b-l4);
+        background-color: var(--old-pal-color-b-l4);
       }
 
       .input {
@@ -93,7 +93,7 @@
       .box {
         border-width: 0;
         border-top-width: var(--line-thickness);
-        border-color: var(--pal-color-a-l4);
+        border-color: var(--old-pal-color-a-l4);
 
         border-radius: unset;
       }
@@ -114,7 +114,7 @@
     width: var(--width);
     height: 100%;
 
-    background-color: var(--pal-color-white);
+    background-color: var(--old-pal-color-white);
     box-shadow: var(--pal-shadow-0);
     opacity: 0;
     cursor: col-resize;
@@ -139,7 +139,7 @@
       height: var(--pal-size-2xl);
 
       border-radius: var(--pill-radius);
-      background-color: var(--pal-color-a-l2);
+      background-color: var(--old-pal-color-a-l2);
 
       content: '';
     }
@@ -147,7 +147,7 @@
 
   > .ruler {
     --step-width: 2rem;
-    --step-color: var(--pal-color-a);
+    --step-color: var(--old-pal-color-a);
     --width: calc(var(--step-width) * 10);
     --height: var(--pal-size-2xl);
 
@@ -198,6 +198,6 @@
   }
 
   &.dragging {
-    background-color: var(--pal-color-c-l4);
+    background-color: var(--old-pal-color-c-l4);
   }
 }

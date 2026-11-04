@@ -1,5 +1,7 @@
 :root {
-  --cmp-option-group-color: var(--pal-color-a-l3);
+  --cmp-option-group-color-target: var(--pal-color-b-500);
+  --cmp-option-group-color-border-inactive: var(--pal-color-n-500);
+  --cmp-option-group-color-font-active: var(--pal-color-white);
 }
 
 .cmp-option-group {
@@ -14,18 +16,44 @@
     gap: var(--ui-gap);
     border-width: var(--line-thickness);
     border-style: solid;
-    border-color: var(--cmp-option-group-color);
+    border-color: color-mix(
+      in srgb,
+      var(--cmp-option-group-color-border-inactive),
+      #fff 80%
+    );
     padding-inline: var(--ui-padding-inline);
     height: var(--ui-height);
 
     border-radius: var(--ui-border-radius);
+
+    transition:
+      border-color var(--pal-time-2xs) ease-out,
+      color var(--pal-time-2xs) ease-out,
+      background-color var(--pal-time-2xs) ease-out;
+
+    &:hover {
+      border-color: color-mix(
+        in srgb,
+        var(--cmp-option-group-color-target),
+        #fff 80%
+      );
+
+      background-color: color-mix(
+        in srgb,
+        var(--cmp-option-group-color-target),
+        #fff 90%
+      );
+    }
 
     &:not(:has(> input:checked)) {
       cursor: pointer;
     }
 
     &:has(> input:checked) {
-      background-color: var(--pal-color-a-l4);
+      border-color: var(--cmp-option-group-color-target);
+
+      color: var(--cmp-option-group-color-font-active);
+      background-color: var(--cmp-option-group-color-target);
     }
 
     &:has(> .cmp-checker) {

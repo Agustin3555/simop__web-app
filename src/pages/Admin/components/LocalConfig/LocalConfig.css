@@ -9,7 +9,7 @@
   > * {
     border-width: var(--line-thickness);
     border-style: solid;
-    border-color: var(--pal-color-a-l4);
+    border-color: var(--old-pal-color-a-l4);
     min-height: 12rem;
 
     border-radius: var(--pal-size-xs);
@@ -25,13 +25,13 @@
       gap: var(--pal-size-s);
       border-width: 0;
       border-style: solid;
-      border-color: var(--pal-color-a-l4);
+      border-color: var(--old-pal-color-a-l4);
       border-bottom-width: var(--line-thickness);
 
       .cmp-button {
-        border-color: var(--pal-color-a-l2);
+        border-color: var(--old-pal-color-a-l2);
 
-        color: var(--pal-color-a-l1);
+        color: var(--old-pal-color-a-l1);
       }
     }
 
@@ -61,7 +61,7 @@
 
         border: none;
 
-        color: var(--pal-color-a);
+        color: var(--old-pal-color-a);
 
         background-color: transparent;
       }
@@ -72,7 +72,7 @@
       }
 
       &:has(input:checked) {
-        background-color: var(--pal-color-a-l5);
+        background-color: var(--old-pal-color-a-l5);
       }
     }
 
@@ -96,7 +96,7 @@
       > .cmp-button {
         align-self: flex-start;
 
-        color: var(--pal-color-white);
+        color: var(--old-pal-color-white);
       }
     }
   }
@@ -110,14 +110,14 @@
     padding: var(--pal-size-m);
 
     font-size: var(--pal-size-font-xs);
-    color: var(--pal-color-a);
+    color: var(--old-pal-color-a);
 
-    background-color: var(--pal-color-a-l5);
+    background-color: var(--old-pal-color-a-l5);
 
     > .cmp-icon {
       --cmp-icon-size: var(--pal-size-2xl);
 
-      color: var(--pal-color-a-l4);
+      color: var(--old-pal-color-a-l4);
 
       transition: scale var(--pal-time-m) ease;
     }

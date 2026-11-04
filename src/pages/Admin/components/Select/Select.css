@@ -13,7 +13,7 @@
     justify-content: space-between;
     border-width: var(--line-thickness);
     border-style: solid;
-    border-color: var(--pal-color-a-l4);
+    border-color: var(--old-pal-color-a-l4);
     padding-left: var(--ui-padding-inline);
     height: var(--ui-height);
     gap: var(--ui-padding-inline);
@@ -33,7 +33,7 @@
       aspect-ratio: 1;
       height: var(--ui-height);
 
-      color: var(--pal-color-a);
+      color: var(--old-pal-color-a);
 
       transition: background-color var(--pal-time-xs) ease-out;
 
@@ -45,7 +45,7 @@
     }
 
     &:hover > .arrow {
-      background-color: var(--pal-color-white);
+      background-color: var(--old-pal-color-white);
     }
   }
 
@@ -60,7 +60,7 @@
     width: 100%;
 
     border-radius: var(--ui-border-radius);
-    background-color: var(--pal-color-white);
+    background-color: var(--old-pal-color-white);
     box-shadow: var(--pal-shadow-1);
     translate: 0 var(--pal-size-xs);
     opacity: 0;
@@ -85,29 +85,29 @@
       }
 
       &:not(:last-child) {
-        border-bottom-color: var(--pal-color-a-l5);
+        border-bottom-color: var(--old-pal-color-a-l5);
         border-bottom-style: solid;
         border-bottom-width: var(--line-thickness);
       }
 
       &:has(input:checked) {
-        color: var(--pal-color-a-d3);
+        color: var(--old-pal-color-a-d3);
 
-        background-color: var(--pal-color-a-l4);
+        background-color: var(--old-pal-color-a-l4);
       }
 
       &:hover {
-        background-color: var(--pal-color-a-l5);
+        background-color: var(--old-pal-color-a-l5);
       }
     }
   }
 
   &.open {
     > header {
-      border-color: var(--pal-color-a);
+      border-color: var(--old-pal-color-a);
 
       > .arrow {
-        background-color: var(--pal-color-white);
+        background-color: var(--old-pal-color-white);
 
         > .cmp-icon {
           rotate: -0.5turn;

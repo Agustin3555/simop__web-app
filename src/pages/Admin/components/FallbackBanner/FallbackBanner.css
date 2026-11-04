@@ -8,10 +8,10 @@
     width: fit-content;
 
     font-weight: 500;
-    color: var(--pal-color-a-l1);
+    color: var(--old-pal-color-a-l1);
 
     border-radius: var(--pal-size-xs);
-    background-color: var(--pal-color-a-l5);
+    background-color: var(--old-pal-color-a-l5);
 
     * {
       display: inline-flex;

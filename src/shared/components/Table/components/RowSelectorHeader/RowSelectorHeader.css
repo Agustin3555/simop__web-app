@@ -10,7 +10,7 @@
   gap: var(--pal-size-xs);
   padding: var(--pal-size-s);
 
-  background-color: var(--pal-color-white);
+  background-color: var(--old-pal-color-white);
 
   > .counter {
     position: relative;

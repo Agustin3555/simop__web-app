@@ -6,7 +6,7 @@
   align-content: center;
   border-width: var(--line-thickness);
   border-style: solid;
-  border-color: var(--pal-color-a-l4);
+  border-color: var(--old-pal-color-a-l4);
   border-right-width: 0;
   padding-bottom: var(--pal-size-3xs);
   width: calc(var(--chars) * 1ch + 1.5ch);

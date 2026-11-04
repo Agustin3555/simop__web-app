@@ -14,7 +14,7 @@
   height: 100%;
 
   > .item {
-    --border-color: var(--pal-color-a-l5);
+    --border-color: var(--old-pal-color-a-l5);
 
     display: flex;
     align-items: center;
@@ -28,7 +28,7 @@
     );
 
     border-radius: var(--pal-size-3xs);
-    background-color: var(--pal-color-white);
+    background-color: var(--old-pal-color-white);
     overflow: hidden;
     cursor: default;
 
@@ -49,7 +49,7 @@
       aspect-ratio: 1;
       height: 100%;
 
-      color: var(--pal-color-b-l3);
+      color: var(--old-pal-color-b-l3);
 
       > * {
         margin-inline: auto;
@@ -57,7 +57,7 @@
     }
 
     &:hover {
-      background-color: var(--pal-color-a-l5);
+      background-color: var(--old-pal-color-a-l5);
     }
 
     &:not(:has(button)) > p {

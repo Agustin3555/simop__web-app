@@ -1,7 +1,7 @@
 :root {
-  --cmp-segmented-control-color: var(--pal-color-a-l1);
-  --cmp-segmented-control-bg-color: var(--pal-color-a-l2);
-  --cmp-segmented-control-color-active: var(--pal-color-white);
+  --cmp-segmented-control-color: var(--old-pal-color-a-l1);
+  --cmp-segmented-control-bg-color: var(--old-pal-color-a-l2);
+  --cmp-segmented-control-color-active: var(--old-pal-color-white);
 }
 
 .cmp-segmented-control {

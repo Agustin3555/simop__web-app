@@ -1,5 +1,5 @@
 :root {
-  --cmp-note-title-color: var(--pal-color-a-l4);
+  --cmp-note-title-color: var(--old-pal-color-a-l4);
 }
 
 .cmp-note {
@@ -29,7 +29,7 @@
 
     > small {
       font-size: var(--pal-size-font-xs);
-      color: var(--pal-color-a);
+      color: var(--old-pal-color-a);
     }
   }
 
@@ -40,7 +40,7 @@
     font-size: var(--pal-size-font-s);
 
     > i {
-      color: var(--pal-color-a);
+      color: var(--old-pal-color-a);
     }
   }
 
@@ -65,7 +65,7 @@
     list-style: initial;
 
     li::marker {
-      color: var(--pal-color-c);
+      color: var(--old-pal-color-c);
     }
   }
 }

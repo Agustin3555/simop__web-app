@@ -28,128 +28,234 @@
 
   /* COLOR */
 
-  --pal-color-base-a-d5: 8, 9, 19;
-  --pal-color-base-a-d4: 22, 25, 53;
-  --pal-color-base-a-d3: 37, 41, 87;
-  --pal-color-base-a-d2: 51, 57, 120;
-  --pal-color-base-a-d1: 66, 73, 154;
-  --pal-color-base-a: 80, 89, 188;
-  --pal-color-base-a-l1: 112, 119, 200;
-  --pal-color-base-a-l2: 143, 149, 212;
-  --pal-color-base-a-l3: 175, 179, 224;
-  --pal-color-base-a-l4: 206, 209, 236;
-  --pal-color-base-a-l5: 238, 238, 248;
+  --old-pal-color-base-a-d5: 8, 9, 19;
+  --old-pal-color-base-a-d4: 22, 25, 53;
+  --old-pal-color-base-a-d3: 37, 41, 87;
+  --old-pal-color-base-a-d2: 51, 57, 120;
+  --old-pal-color-base-a-d1: 66, 73, 154;
+  --old-pal-color-base-a: 80, 89, 188;
+  --old-pal-color-base-a-l1: 112, 119, 200;
+  --old-pal-color-base-a-l2: 143, 149, 212;
+  --old-pal-color-base-a-l3: 175, 179, 224;
+  --old-pal-color-base-a-l4: 206, 209, 236;
+  --old-pal-color-base-a-l5: 238, 238, 248;
 
-  --pal-color-base-b-d5: 23, 0, 13;
-  --pal-color-base-b-d4: 64, 0, 36;
-  --pal-color-base-b-d3: 105, 0, 58;
-  --pal-color-base-b-d2: 147, 0, 81;
-  --pal-color-base-b-d1: 188, 0, 104;
-  --pal-color-base-b: 229, 0, 127;
-  --pal-color-base-b-l1: 234, 46, 150;
-  --pal-color-base-b-l2: 238, 92, 173;
-  --pal-color-base-b-l3: 243, 138, 196;
-  --pal-color-base-b-l4: 248, 184, 219;
-  --pal-color-base-b-l5: 252, 230, 242;
+  --old-pal-color-base-b-d5: 23, 0, 13;
+  --old-pal-color-base-b-d4: 64, 0, 36;
+  --old-pal-color-base-b-d3: 105, 0, 58;
+  --old-pal-color-base-b-d2: 147, 0, 81;
+  --old-pal-color-base-b-d1: 188, 0, 104;
+  --old-pal-color-base-b: 229, 0, 127;
+  --old-pal-color-base-b-l1: 234, 46, 150;
+  --old-pal-color-base-b-l2: 238, 92, 173;
+  --old-pal-color-base-b-l3: 243, 138, 196;
+  --old-pal-color-base-b-l4: 248, 184, 219;
+  --old-pal-color-base-b-l5: 252, 230, 242;
 
-  --pal-color-base-c-d5: 13, 15, 7;
-  --pal-color-base-c-d4: 37, 42, 20;
-  --pal-color-base-c-d3: 61, 69, 32;
-  --pal-color-base-c-d2: 85, 95, 45;
-  --pal-color-base-c-d1: 109, 122, 57;
-  --pal-color-base-c: 133, 149, 70;
-  --pal-color-base-c-l1: 155, 168, 103;
-  --pal-color-base-c-l2: 177, 187, 137;
-  --pal-color-base-c-l3: 199, 206, 170;
-  --pal-color-base-c-l4: 221, 225, 203;
-  --pal-color-base-c-l5: 243, 244, 237;
+  --old-pal-color-base-c-d5: 13, 15, 7;
+  --old-pal-color-base-c-d4: 37, 42, 20;
+  --old-pal-color-base-c-d3: 61, 69, 32;
+  --old-pal-color-base-c-d2: 85, 95, 45;
+  --old-pal-color-base-c-d1: 109, 122, 57;
+  --old-pal-color-base-c: 133, 149, 70;
+  --old-pal-color-base-c-l1: 155, 168, 103;
+  --old-pal-color-base-c-l2: 177, 187, 137;
+  --old-pal-color-base-c-l3: 199, 206, 170;
+  --old-pal-color-base-c-l4: 221, 225, 203;
+  --old-pal-color-base-c-l5: 243, 244, 237;
 
-  --pal-color-base-d: 188, 80, 80;
+  --old-pal-color-base-d: 188, 80, 80;
 
-  --pal-color-base-black: 0, 0, 0;
-  --pal-color-base-gs-950: 13, 13, 13;
-  --pal-color-base-gs-900: 26, 26, 26;
-  --pal-color-base-gs-850: 38, 38, 38;
-  --pal-color-base-gs-800: 51, 51, 51;
-  --pal-color-base-gs-750: 64, 64, 64;
-  --pal-color-base-gs-700: 77, 77, 77;
-  --pal-color-base-gs-650: 89, 89, 89;
-  --pal-color-base-gs-600: 102, 102, 102;
-  --pal-color-base-gs-550: 115, 115, 115;
-  --pal-color-base-gs-500: 128, 128, 128;
-  --pal-color-base-gs-450: 140, 140, 140;
-  --pal-color-base-gs-400: 153, 153, 153;
-  --pal-color-base-gs-350: 166, 166, 166;
-  --pal-color-base-gs-300: 179, 179, 179;
-  --pal-color-base-gs-250: 191, 191, 191;
-  --pal-color-base-gs-200: 204, 204, 204;
-  --pal-color-base-gs-150: 217, 217, 217;
-  --pal-color-base-gs-100: 230, 230, 230;
-  --pal-color-base-gs-50: 242, 242, 242;
-  --pal-color-base-white: 255, 255, 255;
+  --old-pal-color-base-black: 0, 0, 0;
+  --old-pal-color-base-gs-950: 13, 13, 13;
+  --old-pal-color-base-gs-900: 26, 26, 26;
+  --old-pal-color-base-gs-850: 38, 38, 38;
+  --old-pal-color-base-gs-800: 51, 51, 51;
+  --old-pal-color-base-gs-750: 64, 64, 64;
+  --old-pal-color-base-gs-700: 77, 77, 77;
+  --old-pal-color-base-gs-650: 89, 89, 89;
+  --old-pal-color-base-gs-600: 102, 102, 102;
+  --old-pal-color-base-gs-550: 115, 115, 115;
+  --old-pal-color-base-gs-500: 128, 128, 128;
+  --old-pal-color-base-gs-450: 140, 140, 140;
+  --old-pal-color-base-gs-400: 153, 153, 153;
+  --old-pal-color-base-gs-350: 166, 166, 166;
+  --old-pal-color-base-gs-300: 179, 179, 179;
+  --old-pal-color-base-gs-250: 191, 191, 191;
+  --old-pal-color-base-gs-200: 204, 204, 204;
+  --old-pal-color-base-gs-150: 217, 217, 217;
+  --old-pal-color-base-gs-100: 230, 230, 230;
+  --old-pal-color-base-gs-50: 242, 242, 242;
+  --old-pal-color-base-white: 255, 255, 255;
 
-  --pal-color-a-d5: rgb(var(--pal-color-base-a-d5));
-  --pal-color-a-d4: rgb(var(--pal-color-base-a-d4));
-  --pal-color-a-d3: rgb(var(--pal-color-base-a-d3));
-  --pal-color-a-d2: rgb(var(--pal-color-base-a-d2));
-  --pal-color-a-d1: rgb(var(--pal-color-base-a-d1));
-  --pal-color-a: rgb(var(--pal-color-base-a));
-  --pal-color-a-l1: rgb(var(--pal-color-base-a-l1));
-  --pal-color-a-l2: rgb(var(--pal-color-base-a-l2));
-  --pal-color-a-l3: rgb(var(--pal-color-base-a-l3));
-  --pal-color-a-l4: rgb(var(--pal-color-base-a-l4));
-  --pal-color-a-l5: rgb(var(--pal-color-base-a-l5));
+  --old-pal-color-a-d5: rgb(var(--old-pal-color-base-a-d5));
+  --old-pal-color-a-d4: rgb(var(--old-pal-color-base-a-d4));
+  --old-pal-color-a-d3: rgb(var(--old-pal-color-base-a-d3));
+  --old-pal-color-a-d2: rgb(var(--old-pal-color-base-a-d2));
+  --old-pal-color-a-d1: rgb(var(--old-pal-color-base-a-d1));
+  --old-pal-color-a: rgb(var(--old-pal-color-base-a));
+  --old-pal-color-a-l1: rgb(var(--old-pal-color-base-a-l1));
+  --old-pal-color-a-l2: rgb(var(--old-pal-color-base-a-l2));
+  --old-pal-color-a-l3: rgb(var(--old-pal-color-base-a-l3));
+  --old-pal-color-a-l4: rgb(var(--old-pal-color-base-a-l4));
+  --old-pal-color-a-l5: rgb(var(--old-pal-color-base-a-l5));
 
-  --pal-color-b-d5: rgb(var(--pal-color-base-b-d5));
-  --pal-color-b-d4: rgb(var(--pal-color-base-b-d4));
-  --pal-color-b-d3: rgb(var(--pal-color-base-b-d3));
-  --pal-color-b-d2: rgb(var(--pal-color-base-b-d2));
-  --pal-color-b-d1: rgb(var(--pal-color-base-b-d1));
-  --pal-color-b: rgb(var(--pal-color-base-b));
-  --pal-color-b-l1: rgb(var(--pal-color-base-b-l1));
-  --pal-color-b-l2: rgb(var(--pal-color-base-b-l2));
-  --pal-color-b-l3: rgb(var(--pal-color-base-b-l3));
-  --pal-color-b-l4: rgb(var(--pal-color-base-b-l4));
-  --pal-color-b-l5: rgb(var(--pal-color-base-b-l5));
+  --old-pal-color-b-d5: rgb(var(--old-pal-color-base-b-d5));
+  --old-pal-color-b-d4: rgb(var(--old-pal-color-base-b-d4));
+  --old-pal-color-b-d3: rgb(var(--old-pal-color-base-b-d3));
+  --old-pal-color-b-d2: rgb(var(--old-pal-color-base-b-d2));
+  --old-pal-color-b-d1: rgb(var(--old-pal-color-base-b-d1));
+  --old-pal-color-b: rgb(var(--old-pal-color-base-b));
+  --old-pal-color-b-l1: rgb(var(--old-pal-color-base-b-l1));
+  --old-pal-color-b-l2: rgb(var(--old-pal-color-base-b-l2));
+  --old-pal-color-b-l3: rgb(var(--old-pal-color-base-b-l3));
+  --old-pal-color-b-l4: rgb(var(--old-pal-color-base-b-l4));
+  --old-pal-color-b-l5: rgb(var(--old-pal-color-base-b-l5));
 
-  --pal-color-c-d5: rgb(var(--pal-color-base-c-d5));
-  --pal-color-c-d4: rgb(var(--pal-color-base-c-d4));
-  --pal-color-c-d3: rgb(var(--pal-color-base-c-d3));
-  --pal-color-c-d2: rgb(var(--pal-color-base-c-d2));
-  --pal-color-c-d1: rgb(var(--pal-color-base-c-d1));
-  --pal-color-c: rgb(var(--pal-color-base-c));
-  --pal-color-c-l1: rgb(var(--pal-color-base-c-l1));
-  --pal-color-c-l2: rgb(var(--pal-color-base-c-l2));
-  --pal-color-c-l3: rgb(var(--pal-color-base-c-l3));
-  --pal-color-c-l4: rgb(var(--pal-color-base-c-l4));
-  --pal-color-c-l5: rgb(var(--pal-color-base-c-l5));
+  --old-pal-color-c-d5: rgb(var(--old-pal-color-base-c-d5));
+  --old-pal-color-c-d4: rgb(var(--old-pal-color-base-c-d4));
+  --old-pal-color-c-d3: rgb(var(--old-pal-color-base-c-d3));
+  --old-pal-color-c-d2: rgb(var(--old-pal-color-base-c-d2));
+  --old-pal-color-c-d1: rgb(var(--old-pal-color-base-c-d1));
+  --old-pal-color-c: rgb(var(--old-pal-color-base-c));
+  --old-pal-color-c-l1: rgb(var(--old-pal-color-base-c-l1));
+  --old-pal-color-c-l2: rgb(var(--old-pal-color-base-c-l2));
+  --old-pal-color-c-l3: rgb(var(--old-pal-color-base-c-l3));
+  --old-pal-color-c-l4: rgb(var(--old-pal-color-base-c-l4));
+  --old-pal-color-c-l5: rgb(var(--old-pal-color-base-c-l5));
 
-  --pal-color-d: rgb(var(--pal-color-base-d));
+  --old-pal-color-d: rgb(var(--old-pal-color-base-d));
 
-  --pal-color-black: rgb(var(--pal-color-base-black));
-  --pal-color-gs-950: rgb(var(--pal-color-base-gs-950));
-  --pal-color-gs-900: rgb(var(--pal-color-base-gs-900));
-  --pal-color-gs-850: rgb(var(--pal-color-base-gs-850));
-  --pal-color-gs-800: rgb(var(--pal-color-base-gs-800));
-  --pal-color-gs-750: rgb(var(--pal-color-base-gs-750));
-  --pal-color-gs-700: rgb(var(--pal-color-base-gs-700));
-  --pal-color-gs-650: rgb(var(--pal-color-base-gs-650));
-  --pal-color-gs-600: rgb(var(--pal-color-base-gs-600));
-  --pal-color-gs-550: rgb(var(--pal-color-base-gs-550));
-  --pal-color-gs-500: rgb(var(--pal-color-base-gs-500));
-  --pal-color-gs-450: rgb(var(--pal-color-base-gs-450));
-  --pal-color-gs-400: rgb(var(--pal-color-base-gs-400));
-  --pal-color-gs-350: rgb(var(--pal-color-base-gs-350));
-  --pal-color-gs-300: rgb(var(--pal-color-base-gs-300));
-  --pal-color-gs-250: rgb(var(--pal-color-base-gs-250));
-  --pal-color-gs-200: rgb(var(--pal-color-base-gs-200));
-  --pal-color-gs-150: rgb(var(--pal-color-base-gs-150));
-  --pal-color-gs-100: rgb(var(--pal-color-base-gs-100));
-  --pal-color-gs-50: rgb(var(--pal-color-base-gs-50));
-  --pal-color-white: rgb(var(--pal-color-base-white));
+  --old-pal-color-black: rgb(var(--old-pal-color-base-black));
+  --old-pal-color-gs-950: rgb(var(--old-pal-color-base-gs-950));
+  --old-pal-color-gs-900: rgb(var(--old-pal-color-base-gs-900));
+  --old-pal-color-gs-850: rgb(var(--old-pal-color-base-gs-850));
+  --old-pal-color-gs-800: rgb(var(--old-pal-color-base-gs-800));
+  --old-pal-color-gs-750: rgb(var(--old-pal-color-base-gs-750));
+  --old-pal-color-gs-700: rgb(var(--old-pal-color-base-gs-700));
+  --old-pal-color-gs-650: rgb(var(--old-pal-color-base-gs-650));
+  --old-pal-color-gs-600: rgb(var(--old-pal-color-base-gs-600));
+  --old-pal-color-gs-550: rgb(var(--old-pal-color-base-gs-550));
+  --old-pal-color-gs-500: rgb(var(--old-pal-color-base-gs-500));
+  --old-pal-color-gs-450: rgb(var(--old-pal-color-base-gs-450));
+  --old-pal-color-gs-400: rgb(var(--old-pal-color-base-gs-400));
+  --old-pal-color-gs-350: rgb(var(--old-pal-color-base-gs-350));
+  --old-pal-color-gs-300: rgb(var(--old-pal-color-base-gs-300));
+  --old-pal-color-gs-250: rgb(var(--old-pal-color-base-gs-250));
+  --old-pal-color-gs-200: rgb(var(--old-pal-color-base-gs-200));
+  --old-pal-color-gs-150: rgb(var(--old-pal-color-base-gs-150));
+  --old-pal-color-gs-100: rgb(var(--old-pal-color-base-gs-100));
+  --old-pal-color-gs-50: rgb(var(--old-pal-color-base-gs-50));
+  --old-pal-color-white: rgb(var(--old-pal-color-base-white));
+
+  /* https://hihayk.github.io/scale/#9/9/100/100/0/0/-25/-25/73758C/115/117/140/white */
+  --pal-color-black: #000000;
+  --pal-color-n-900: #0d0d0f;
+  --pal-color-n-850: #1a1b1f;
+  --pal-color-n-800: #27282e;
+  --pal-color-n-750: #34353e;
+  --pal-color-n-700: #41424d;
+  --pal-color-n-650: #4d4f5d;
+  --pal-color-n-600: #5a5c6c;
+  --pal-color-n-550: #67687c;
+  --pal-color-n-500: #73758c;
+  --pal-color-n-450: #838599;
+  --pal-color-n-400: #9394a5;
+  --pal-color-n-350: #a2a4b2;
+  --pal-color-n-300: #b2b3be;
+  --pal-color-n-250: #c2c2cb;
+  --pal-color-n-200: #d1d2d8;
+  --pal-color-n-150: #e0e1e5;
+  --pal-color-n-100: #f0f0f2;
+  --pal-color-white: #ffffff;
+
+  /* https://hihayk.github.io/scale/#9/9/90/90/0/0/-25/-25/5059BC/80/89/188/white */
+  --pal-color-a-950: #08080e;
+  --pal-color-a-900: #111220;
+  --pal-color-a-850: #1a1c33;
+  --pal-color-a-800: #222545;
+  --pal-color-a-750: #2b2f58;
+  --pal-color-a-700: #33386c;
+  --pal-color-a-650: #3b407f;
+  --pal-color-a-600: #424993;
+  --pal-color-a-550: #4951a7;
+  --pal-color-a-500: #5059bc;
+  --pal-color-a-450: #636bc2;
+  --pal-color-a-400: #767dc7;
+  --pal-color-a-350: #898fcd;
+  --pal-color-a-300: #9ba0d4;
+  --pal-color-a-250: #adb1db;
+  --pal-color-a-200: #bfc2e2;
+  --pal-color-a-150: #d0d2e9;
+  --pal-color-a-100: #e1e3f1;
+  --pal-color-a-50: #f2f3f9;
+
+  /* https://hihayk.github.io/scale/#9/9/90/90/0/0/-25/-25/50BC86/80/188/134/white */
+  --pal-color-b-950: #080e0b;
+  --pal-color-b-900: #112018;
+  --pal-color-b-850: #1a3326;
+  --pal-color-b-800: #224534;
+  --pal-color-b-750: #2b5842;
+  --pal-color-b-700: #336c4f;
+  --pal-color-b-650: #3b7f5d;
+  --pal-color-b-600: #42936b;
+  --pal-color-b-550: #49a778;
+  --pal-color-b-500: #50bc86;
+  --pal-color-b-450: #63c292;
+  --pal-color-b-400: #76c79f;
+  --pal-color-b-350: #89cdab;
+  --pal-color-b-300: #9bd4b8;
+  --pal-color-b-250: #addbc4;
+  --pal-color-b-200: #bfe2d0;
+  --pal-color-b-150: #d0e9dd;
+  --pal-color-b-100: #e1f1e9;
+  --pal-color-b-50: #f2f9f5;
+
+  /* https://hihayk.github.io/scale/#9/9/90/90/0/0/-25/-25/BCB350/188/179/80/white */
+  --pal-color-c-950: #0e0d08;
+  --pal-color-c-900: #201f11;
+  --pal-color-c-850: #33301a;
+  --pal-color-c-800: #454222;
+  --pal-color-c-750: #58552b;
+  --pal-color-c-700: #6c6733;
+  --pal-color-c-650: #7f7a3b;
+  --pal-color-c-600: #938c42;
+  --pal-color-c-550: #a7a049;
+  --pal-color-c-500: #bcb350;
+  --pal-color-c-450: #c2ba63;
+  --pal-color-c-400: #c7c176;
+  --pal-color-c-350: #cdc889;
+  --pal-color-c-300: #d4cf9b;
+  --pal-color-c-250: #dbd7ad;
+  --pal-color-c-200: #e2dfbf;
+  --pal-color-c-150: #e9e7d0;
+  --pal-color-c-100: #f1efe1;
+  --pal-color-c-50: #f9f8f2;
+
+  /* https://hihayk.github.io/scale/#9/9/90/90/0/0/-25/-25/BC5050/188/80/80/white */
+  --pal-color-d-950: #0e0808;
+  --pal-color-d-900: #201111;
+  --pal-color-d-850: #331a1a;
+  --pal-color-d-800: #452222;
+  --pal-color-d-750: #582b2b;
+  --pal-color-d-700: #6c3333;
+  --pal-color-d-650: #7f3b3b;
+  --pal-color-d-600: #934242;
+  --pal-color-d-550: #a74949;
+  --pal-color-d-500: #bc5050;
+  --pal-color-d-450: #c26363;
+  --pal-color-d-400: #c77676;
+  --pal-color-d-350: #cd8989;
+  --pal-color-d-300: #d49b9b;
+  --pal-color-d-250: #dbadad;
+  --pal-color-d-200: #e2bfbf;
+  --pal-color-d-150: #e9d0d0;
+  --pal-color-d-100: #f1e1e1;
+  --pal-color-d-50: #f9f2f2;
 
   /* TIME */
 
+  --pal-time-2xs: 0.05s;
   --pal-time-xs: 0.1s;
   --pal-time-s: 0.2s;
   --pal-time-m: 0.4s;
@@ -158,7 +264,52 @@
 
   /* TIMING FUNCTION */
 
-  --pal-timing-func-a: cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  --pal-timing-func-a: linear(
+    0,
+    0.921 14.4%,
+    1.19 22.4%,
+    1.34 31.2%,
+    1.378 38%,
+    1.363 45.6%,
+    1.06 80%,
+    1
+  );
+
+  --pal-timing-func-b: linear(
+    0,
+    0.333 8.5%,
+    0.596 17.4%,
+    0.795 26.9%,
+    0.87 31.9%,
+    0.93 37.1%,
+    1.002 46.9%,
+    1.023 52.2%,
+    1.035 58%,
+    1.035 67.8%,
+    1.006 89.3%,
+    1
+  );
+
+  --pal-timing-func-c: linear(
+    0,
+    -0.017 5.7%,
+    -0.104 18.1%,
+    -0.127 23.6%,
+    -0.127 26.6%,
+    -0.116 29.4%,
+    -0.059 34.6%,
+    0.041 39.3%,
+    0.191 43.8%,
+    0.695 53.6%,
+    0.879 58.1%,
+    1.017 63.1%,
+    1.098 68.4%,
+    1.125 72.8%,
+    1.123 77.8%,
+    1.1 82.5%,
+    1.018 94%,
+    1
+  );
 
   /* MISC */
 
@@ -205,7 +356,7 @@
 
 @keyframes pulsar {
   from {
-    outline-color: rgba(var(--pal-color-base-b), 0.375);
+    outline-color: rgba(var(--old-pal-color-base-b), 0.375);
     outline-offset: initial;
     outline-width: 0;
   }

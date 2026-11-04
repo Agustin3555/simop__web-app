@@ -12,9 +12,9 @@
     gap: var(--pal-size-s);
 
     > .cmp-button {
-      --cmp-button-progress-color: var(--pal-color-white);
+      --cmp-button-progress-color: var(--old-pal-color-white);
 
-      color: var(--pal-color-white);
+      color: var(--old-pal-color-white);
     }
 
     > small {
@@ -25,7 +25,7 @@
       text-align: center;
 
       border-radius: var(--pal-size-2xs);
-      background-color: var(--pal-color-a-l5);
+      background-color: var(--old-pal-color-a-l5);
     }
   }
 }

@@ -6,17 +6,17 @@
   align-content: center;
   border-width: 0;
   border-style: solid;
-  border-color: var(--pal-color-a-l4);
+  border-color: var(--old-pal-color-a-l4);
   border-right-width: var(--line-thickness);
   padding: var(--pal-size-s);
 
-  background-color: var(--pal-color-white);
+  background-color: var(--old-pal-color-white);
 
   > label {
     cursor: pointer;
   }
 
   &:has(input:checked) {
-    background-color: var(--pal-color-a-l5);
+    background-color: var(--old-pal-color-a-l5);
   }
 }

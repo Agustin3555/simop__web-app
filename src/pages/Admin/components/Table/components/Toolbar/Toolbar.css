@@ -7,7 +7,7 @@
   gap: var(--pal-size-2xs);
   border-bottom-width: var(--line-thickness);
   border-bottom-style: solid;
-  border-bottom-color: var(--pal-color-a-l4);
+  border-bottom-color: var(--old-pal-color-a-l4);
   padding: var(--pal-size-2xs);
 
   > .main-bar {
@@ -26,15 +26,15 @@
     }
 
     > .center > .cmp-value {
-      border-color: var(--pal-color-a-l5);
+      border-color: var(--old-pal-color-a-l5);
 
-      color: var(--pal-color-a);
+      color: var(--old-pal-color-a);
     }
 
     > .right > .cmp-button {
-      border-color: var(--pal-color-c-l1);
+      border-color: var(--old-pal-color-c-l1);
 
-      color: var(--pal-color-c-d1);
+      color: var(--old-pal-color-c-d1);
     }
   }
 

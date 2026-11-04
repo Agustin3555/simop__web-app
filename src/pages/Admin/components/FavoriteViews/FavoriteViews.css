@@ -14,10 +14,10 @@
     gap: var(--pal-size-m);
     border-width: var(--line-thickness);
     border-style: solid;
-    border-color: var(--pal-color-a-l2);
+    border-color: var(--old-pal-color-a-l2);
     padding: var(--pal-size-m);
 
-    color: var(--pal-color-a-l1);
+    color: var(--old-pal-color-a-l1);
 
     border-radius: var(--ui-border-radius);
     cursor: pointer;
@@ -28,14 +28,14 @@
 
     > .cmp-button {
       --separation: var(--pal-size-2xs);
-      --cmp-button-bg-color: var(--pal-color-a-l3);
+      --cmp-button-bg-color: var(--old-pal-color-a-l3);
       --cmp-button-transition: opacity var(--pal-time-s) ease-out;
 
       position: absolute;
       top: var(--separation);
       right: var(--separation);
 
-      color: var(--pal-color-white);
+      color: var(--old-pal-color-white);
 
       @media (hover: hover) {
         opacity: 0;
@@ -59,9 +59,9 @@
     }
 
     &.active {
-      color: var(--pal-color-white);
+      color: var(--old-pal-color-white);
 
-      background-color: var(--pal-color-a-l2);
+      background-color: var(--old-pal-color-a-l2);
     }
 
     &:hover > .cmp-button {

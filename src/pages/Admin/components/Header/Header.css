@@ -1,13 +1,13 @@
 .cmp-header {
   --gap: var(--pal-size-xs);
-  --cmp-button-progress-color: var(--pal-color-white);
+  --cmp-button-progress-color: var(--old-pal-color-white);
 
   display: flex;
   justify-content: space-between;
   padding: var(--gap);
 
-  color: var(--pal-color-white);
-  background-color: var(--pal-color-a-d2);
+  color: var(--old-pal-color-white);
+  background-color: var(--old-pal-color-a-d2);
 
   transition: border-radius var(--pal-time-m) ease;
 
@@ -16,7 +16,7 @@
     gap: var(--gap);
 
     > .sync {
-      --cmp-button-bg-color: var(--pal-color-c-d1);
+      --cmp-button-bg-color: var(--old-pal-color-c-d1);
     }
   }
 

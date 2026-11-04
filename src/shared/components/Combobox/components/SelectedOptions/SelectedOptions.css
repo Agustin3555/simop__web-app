@@ -19,7 +19,7 @@
     display: flex;
     border-width: var(--line-thickness);
     border-style: solid;
-    border-color: var(--pal-color-a-l4);
+    border-color: var(--old-pal-color-a-l4);
     max-width: 10rem;
     height: calc(var(--ui-height) - (var(--gap) + var(--line-thickness)) * 2);
 
@@ -48,11 +48,11 @@
 
         margin-inline: auto;
 
-        color: var(--pal-color-b-l1);
+        color: var(--old-pal-color-b-l1);
       }
 
       &:hover {
-        background-color: var(--pal-color-b-l5);
+        background-color: var(--old-pal-color-b-l5);
       }
     }
   }

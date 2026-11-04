@@ -47,7 +47,7 @@
         --cmp-button-bg-color: transparent;
         --cmp-button-transition: opacity var(--pal-time-xs) ease-out;
 
-        color: var(--pal-color-a-l1);
+        color: var(--old-pal-color-a-l1);
 
         @media (hover: hover) {
           opacity: 0;
@@ -60,7 +60,7 @@
     }
 
     &:hover {
-      background-color: var(--pal-color-white);
+      background-color: var(--old-pal-color-white);
 
       > .actions > .cmp-button {
         opacity: initial;
@@ -68,9 +68,9 @@
     }
 
     &.active {
-      color: var(--pal-color-white);
+      color: var(--old-pal-color-white);
 
-      background-color: var(--pal-color-a-l2);
+      background-color: var(--old-pal-color-a-l2);
 
       > .actions > .cmp-button {
         color: unset;
@@ -89,7 +89,7 @@
       width: var(--line-thickness);
 
       border-radius: var(--pill-radius);
-      background-color: var(--pal-color-a-l3);
+      background-color: var(--old-pal-color-a-l3);
       opacity: 0;
 
       transition: opacity var(--pal-time-xs) ease-out;

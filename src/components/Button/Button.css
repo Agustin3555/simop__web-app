@@ -1,6 +1,6 @@
 :root {
-  --cmp-button-bg-color: var(--pal-color-a);
-  --cmp-button-progress-color: var(--pal-color-a);
+  --cmp-button-bg-color: var(--old-pal-color-a);
+  --cmp-button-progress-color: var(--old-pal-color-a);
 }
 
 .cmp-button {
@@ -95,7 +95,7 @@
   }
 
   &:active {
-    --interact-color: var(--pal-color-a-d1);
+    --interact-color: var(--old-pal-color-a-d1);
   }
 
   &:disabled {
@@ -140,7 +140,7 @@
   &.badge {
     padding-left: var(--pal-size-m);
 
-    color: var(--pal-color-a);
+    color: var(--old-pal-color-a);
     overflow: visible;
 
     &::before {
@@ -154,7 +154,7 @@
       content: '';
 
       border-radius: 100%;
-      background-color: rgba(var(--pal-color-base-b), 0.75);
+      background-color: rgba(var(--old-pal-color-base-b), 0.75);
       outline-style: solid;
       outline-width: 0;
 

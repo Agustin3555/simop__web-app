@@ -15,13 +15,13 @@
     height: 100%;
 
     > .cmp-button {
-      --cmp-button-bg-color: var(--pal-color-c);
+      --cmp-button-bg-color: var(--old-pal-color-c);
 
       position: absolute;
       right: 0;
       bottom: 0;
 
-      color: var(--pal-color-white);
+      color: var(--old-pal-color-white);
       opacity: 0;
 
       transition: opacity var(--pal-time-xs) ease-out;

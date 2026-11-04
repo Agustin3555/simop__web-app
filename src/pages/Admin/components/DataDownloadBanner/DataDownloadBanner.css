@@ -43,19 +43,19 @@
 
     &.s {
       --size: var(--pal-size-xs);
-      --bg-color: var(--pal-color-a);
+      --bg-color: var(--old-pal-color-a);
       --fall-time: 3s;
     }
 
     &.m {
       --size: var(--pal-size-s);
-      --bg-color: var(--pal-color-a-l4);
+      --bg-color: var(--old-pal-color-a-l4);
       --fall-time: 6s;
     }
 
     &.l {
       --size: var(--pal-size-l);
-      --bg-color: var(--pal-color-a-l5);
+      --bg-color: var(--old-pal-color-a-l5);
       --fall-time: 9s;
     }
   }
@@ -73,11 +73,11 @@
     aspect-ratio: 1;
     width: var(--pal-size-3xl);
 
-    color: var(--pal-color-a);
+    color: var(--old-pal-color-a);
 
     border-radius: var(--pill-radius);
-    background-color: var(--pal-color-a-l5);
-    box-shadow: 0 0 var(--shadow-blur) var(--pal-color-a);
+    background-color: var(--old-pal-color-a-l5);
+    box-shadow: 0 0 var(--shadow-blur) var(--old-pal-color-a);
 
     transition: box-shadow var(--pal-time-m) ease-out;
 

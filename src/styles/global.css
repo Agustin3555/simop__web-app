@@ -10,13 +10,13 @@
 
   scroll-behavior: smooth;
   scrollbar-width: thin;
-  scrollbar-color: var(--pal-color-a-l3) transparent;
+  scrollbar-color: var(--old-pal-color-a-l3) transparent;
 }
 
 :root {
   --line-thickness: 0.0625rem;
   --pill-radius: 100rem;
-  --document-background-color: var(--pal-color-a-l5);
+  --document-background-color: var(--old-pal-color-a-l5);
   --transition-dummy: outline-width 0s;
 }
 
@@ -32,12 +32,12 @@ body {
   font-weight: 550;
   word-spacing: 0.0625rem;
   letter-spacing: 0.0125rem;
-  color: var(--pal-color-a-d3);
+  color: var(--old-pal-color-a-d3);
 }
 
 ::selection {
-  color: var(--pal-color-white);
-  background-color: var(--pal-color-a-d1);
+  color: var(--old-pal-color-white);
+  background-color: var(--old-pal-color-a-d1);
 }
 
 :is(h1, h2, h3, h4),
@@ -74,7 +74,7 @@ textarea {
   outline: none;
 
   &::placeholder {
-    color: var(--pal-color-a-d3);
+    color: var(--old-pal-color-a-d3);
 
     opacity: 0.5;
   }

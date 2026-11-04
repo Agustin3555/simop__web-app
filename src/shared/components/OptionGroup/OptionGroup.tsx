@@ -23,6 +23,7 @@ export const OptionGroup = ({
     <div className={classList('cmp-option-group', `ui-${size}`)}>
       {options.map(({ label, inputHtmlAttrs }, i) => (
         <label key={i}>
+          {/* TODO: testear si hidden no interfiere en los forms */}
           <input type={inputType} hidden {...inputHtmlAttrs} />
           {size !== 's' && <Checker />}
           {label}

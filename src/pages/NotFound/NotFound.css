@@ -4,10 +4,10 @@
   flex-wrap: wrap;
   gap: var(--pal-size-m);
 
-  color: var(--pal-color-a-l1);
+  color: var(--old-pal-color-a-l1);
 
   > small {
     font-size: var(--pal-size-font-s);
-    color: var(--pal-color-a-l2);
+    color: var(--old-pal-color-a-l2);
   }
 }

@@ -1,7 +1,7 @@
 .cmp-stylized-number > small {
   --gap: var(--pal-size-xs);
 
-  color: var(--pal-color-a);
+  color: var(--old-pal-color-a);
 
   &.pre {
     margin-right: var(--gap);

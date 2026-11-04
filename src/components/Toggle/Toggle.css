@@ -1,12 +1,12 @@
 :root {
-  --cmp-toggle-color: var(--pal-color-a-l2);
+  --cmp-toggle-color: var(--old-pal-color-a-l2);
 }
 
 .cmp-toggle {
   --cmp-icon-size: var(--ui-icon-size);
   --border-radius: var(--pal-size-2xs);
 
-  color: var(--pal-color-gs-400);
+  color: var(--old-pal-color-gs-400);
   cursor: pointer;
 
   > input {
@@ -21,7 +21,7 @@
     align-content: center;
     border-width: var(--line-thickness);
     border-style: solid;
-    border-color: var(--pal-color-gs-200);
+    border-color: var(--old-pal-color-gs-200);
     aspect-ratio: 1;
     width: var(--ui-height);
 
@@ -37,7 +37,7 @@
     .cmp-toggle:has(input:checked) > & {
       border-color: var(--cmp-toggle-color);
 
-      color: var(--pal-color-white);
+      color: var(--old-pal-color-white);
       background-color: var(--cmp-toggle-color);
     }
   }
@@ -50,7 +50,7 @@
 
     border-width: var(--line-thickness);
     border-style: solid;
-    border-color: var(--pal-color-gs-200);
+    border-color: var(--old-pal-color-gs-200);
     width: var(--width);
     height: var(--height);
 
@@ -58,8 +58,8 @@
       90deg,
       var(--cmp-toggle-color) 0%,
       var(--cmp-toggle-color) 50%,
-      var(--pal-color-gs-200) 50%,
-      var(--pal-color-gs-200) 100%
+      var(--old-pal-color-gs-200) 50%,
+      var(--old-pal-color-gs-200) 100%
     );
     overflow: hidden;
 
@@ -76,7 +76,7 @@
       height: 100%;
 
       border-radius: calc(var(--border-radius) - var(--line-thickness));
-      background-color: var(--pal-color-white);
+      background-color: var(--old-pal-color-white);
 
       transition: left var(--pal-time-s) ease;
 

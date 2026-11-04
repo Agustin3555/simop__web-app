@@ -4,7 +4,7 @@
   display: flex;
   flex-direction: column;
 
-  background-color: var(--pal-color-a-l5);
+  background-color: var(--old-pal-color-a-l5);
 
   transition:
     width var(--pal-time-s) ease,
@@ -29,7 +29,7 @@
 
         background-image: radial-gradient(
           circle at 0.125rem 0.125rem,
-          var(--pal-color-a-l3) 0.0625rem,
+          var(--old-pal-color-a-l3) 0.0625rem,
           transparent 0
         );
         background-size: 0.25rem 0.25rem;
@@ -63,15 +63,15 @@
 
       > .cmp-button {
         &.primary {
-          color: var(--pal-color-white);
+          color: var(--old-pal-color-white);
 
-          background-color: var(--pal-color-a-l2);
+          background-color: var(--old-pal-color-a-l2);
         }
 
         &.secondary {
-          border-color: var(--pal-color-a-l4);
+          border-color: var(--old-pal-color-a-l4);
 
-          color: var(--pal-color-gs-400);
+          color: var(--old-pal-color-gs-400);
         }
       }
     }
@@ -82,7 +82,7 @@
 
     border: none !important;
     border-radius: var(--pal-size-2xs);
-    background-color: var(--pal-color-c-l5);
+    background-color: var(--old-pal-color-c-l5);
     box-shadow: var(--pal-shadow-1);
   }
 

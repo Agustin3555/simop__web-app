@@ -32,7 +32,7 @@
       max-width: var(--cmp-modal-max-width);
 
       border-radius: var(--pal-size-xs);
-      background-color: var(--pal-color-a-l5);
+      background-color: var(--old-pal-color-a-l5);
       box-shadow: var(--pal-shadow-1);
       translate: 0 var(--pal-size-xl);
       overflow: auto;

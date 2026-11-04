@@ -111,13 +111,13 @@
     gap: 4rem;
     border-width: var(--line-thickness);
     border-style: solid;
-    border-color: var(--pal-color-a-l2);
+    border-color: var(--old-pal-color-a-l2);
     padding: var(--pal-size-xl);
     width: 100%;
     max-width: 26rem;
 
     border-radius: var(--border-radius);
-    background-color: var(--pal-color-white);
+    background-color: var(--old-pal-color-white);
 
     > * {
       width: 100%;
@@ -141,7 +141,7 @@
   .box {
     border-width: var(--line-thickness);
     border-style: solid;
-    border-color: var(--pal-color-a-l2);
+    border-color: var(--old-pal-color-a-l2);
     width: 100%;
     height: var(--control-height);
 
@@ -149,7 +149,7 @@
   }
 
   .input {
-    color: var(--pal-color-a-d1);
+    color: var(--old-pal-color-a-d1);
 
     background-color: transparent;
 
@@ -158,9 +158,9 @@
       border-color var(--pal-time-xs) ease-out;
 
     &:focus {
-      border-color: var(--pal-color-a);
+      border-color: var(--old-pal-color-a);
 
-      color: var(--pal-color-black);
+      color: var(--old-pal-color-black);
     }
   }
 
@@ -205,7 +205,7 @@
   gap: var(--pal-size-2xl);
   border-width: var(--line-thickness);
   border-style: solid;
-  border-color: var(--pal-color-a-l4);
+  border-color: var(--old-pal-color-a-l4);
   padding: var(--pal-size-m);
 
   border-radius: var(--pal-size-xs);
@@ -216,7 +216,7 @@
     gap: var(--gap);
 
     font-size: var(--pal-size-font-m);
-    color: var(--pal-color-a-l1);
+    color: var(--old-pal-color-a-l1);
   }
 }
 
@@ -236,10 +236,10 @@
 .table-container {
   border-width: var(--line-thickness);
   border-style: solid;
-  border-color: var(--pal-color-a-l4);
+  border-color: var(--old-pal-color-a-l4);
 
   border-radius: var(--pal-size-xs);
-  background-color: var(--pal-color-white);
+  background-color: var(--old-pal-color-white);
 }
 
 .table {
@@ -262,9 +262,9 @@
   > .head {
     border-bottom-width: var(--line-thickness);
     border-bottom-style: solid;
-    border-bottom-color: var(--pal-color-a-l4);
+    border-bottom-color: var(--old-pal-color-a-l4);
 
-    background-color: var(--pal-color-a-l5);
+    background-color: var(--old-pal-color-a-l5);
 
     > .row {
       .main {
@@ -275,14 +275,14 @@
           font-weight: 850;
           text-align: start;
           text-transform: uppercase;
-          color: var(--pal-color-a-d3);
+          color: var(--old-pal-color-a-d3);
         }
       }
 
       > * {
         border-right-width: var(--line-thickness);
         border-right-style: solid;
-        border-right-color: var(--pal-color-a-l4);
+        border-right-color: var(--old-pal-color-a-l4);
 
         &:last-child {
           border: none;
@@ -303,7 +303,7 @@
     > .row {
       border-bottom-width: var(--line-thickness);
       border-bottom-style: solid;
-      border-bottom-color: var(--pal-color-a-l5);
+      border-bottom-color: var(--old-pal-color-a-l5);
 
       > .cell {
         display: flex;
@@ -317,7 +317,7 @@
       }
 
       &:hover {
-        background-color: var(--pal-color-a-l5);
+        background-color: var(--old-pal-color-a-l5);
       }
     }
   }
@@ -325,8 +325,8 @@
   > .foot {
     border-top-width: var(--line-thickness);
     border-top-style: solid;
-    border-top-color: var(--pal-color-a-l4);
+    border-top-color: var(--old-pal-color-a-l4);
 
-    background-color: var(--pal-color-a-l5);
+    background-color: var(--old-pal-color-a-l5);
   }
 }
