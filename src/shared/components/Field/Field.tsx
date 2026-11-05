@@ -1,6 +1,6 @@
 import './Field.css'
 import { ReactNode, useMemo } from 'react'
-import { classList } from '@/helpers'
+import { clsx } from '@/helpers'
 import { Icon } from '@/components'
 
 type RenderType = 'label' | 'fieldset' | 'div'
@@ -19,14 +19,14 @@ export const Field = ({
   children,
 }: FieldProps) => {
   const content = useMemo(() => {
-    const titleClassName = classList('title', 'text', {
+    const titleClassName = clsx('title', 'text', {
       visuallyHidden: hideTitle,
     })
 
     const titleContent = (
       <>
         {title}
-        <Icon faIcon="fa-solid fa-asterisk" />
+        <Icon iconClass="fa-solid fa-asterisk" />
       </>
     )
 

@@ -7,7 +7,7 @@ import {
   useRef,
   useState,
 } from 'react'
-import { classList } from '@/helpers'
+import { clsx } from '@/helpers'
 import { Icon } from '@/components'
 import { useInputHandler } from '../../hooks/useInputHandler.hook'
 
@@ -55,13 +55,13 @@ const Select = ({
 
   return (
     <div
-      className={classList('cmp-select', `ui-${size}`, { open })}
+      className={clsx('cmp-select', `ui-${size}`, { open })}
       ref={componentRef}
     >
       <header onClick={handleHeaderClick} {...{ title }}>
         {options[selectedIndex].title}
         <div className="arrow">
-          <Icon faIcon="fa-solid fa-angle-down" />
+          <Icon iconClass="fa-solid fa-angle-down" />
         </div>
       </header>
       <fieldset>

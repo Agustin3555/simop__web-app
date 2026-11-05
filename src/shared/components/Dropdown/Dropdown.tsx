@@ -5,7 +5,7 @@ import {
   type ReactNode,
   type RefObject,
 } from 'react'
-import { classList, varList } from '../../../helpers'
+import { clsx, varList } from '../../../helpers'
 
 interface DropdownProps {
   handlingClass?: string
@@ -26,10 +26,10 @@ export const Dropdown = ({
   const id = useId()
 
   return (
-    <div className={classList('cmp-dropdown', handlingClass)}>
+    <div className={clsx('cmp-dropdown', handlingClass)}>
       {opener({ popoverTarget: id })}
       <div
-        className={classList('dropdown', 'raised-panel', {
+        className={clsx('dropdown', 'raised-panel', {
           gallery: !!gallery,
         })}
         style={varList({ c: gallery?.c, r: gallery?.r })}

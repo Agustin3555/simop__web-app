@@ -1,7 +1,7 @@
 import './DataDownloadBanner.css'
 import { Icon, Loader } from '@/components'
 import { ActionState } from '@/hooks'
-import { classList } from '@/helpers'
+import { clsx } from '@/helpers'
 import { Particles } from './components'
 
 export interface DataDownloadBannerProps {
@@ -16,7 +16,7 @@ const DataDownloadBanner = ({
   onDownload,
 }: DataDownloadBannerProps) => (
   <button
-    className={classList('cmp-data-download-banner', {
+    className={clsx('cmp-data-download-banner', {
       downloading: actionState === 'loading',
     })}
     title="Cargar datos"
@@ -26,15 +26,13 @@ const DataDownloadBanner = ({
     {particles && <Particles />}
     <div className="catalyst">
       <Icon
-        faIcon="fa-solid fa-cloud-arrow-down"
-        handlingClass={classList({ active: actionState === 'ready' })}
+        iconClass="fa-solid fa-cloud-arrow-down"
+        handlingClass={clsx({ active: actionState === 'ready' })}
       />
-      <Loader
-        handlingClass={classList({ active: actionState === 'loading' })}
-      />
+      <Loader handlingClass={clsx({ active: actionState === 'loading' })} />
       <Icon
-        faIcon="fa-solid fa-xmark"
-        handlingClass={classList({ active: actionState === 'error' })}
+        iconClass="fa-solid fa-xmark"
+        handlingClass={clsx({ active: actionState === 'error' })}
       />
     </div>
   </button>

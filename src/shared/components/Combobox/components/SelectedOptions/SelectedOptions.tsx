@@ -41,7 +41,7 @@ export const SelectedOptions = ({
                     onRemove(value)
                   }}
                 >
-                  <Icon faIcon="fa-solid fa-xmark" />
+                  <Icon iconClass="fa-solid fa-xmark" />
                 </button>
               )}
             </div>

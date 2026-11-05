@@ -1,7 +1,7 @@
 import './Input.css'
 import { InputHTMLAttributes } from 'react'
 import { InputFieldPartial } from '@/types'
-import { classList } from '@/helpers'
+import { clsx } from '@/helpers'
 
 export interface InputProps extends InputFieldPartial {
   value?: number | string
@@ -17,7 +17,7 @@ const Input = ({
   inputHTMLAttrs,
 }: InputProps) => {
   return (
-    <div className={classList('cmp-input', 'control')}>
+    <div className={clsx('cmp-input', 'control')}>
       <input
         className="input box"
         name={keyName}

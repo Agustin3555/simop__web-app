@@ -1,6 +1,6 @@
 import './Option.css'
 import { ChangeEventHandler } from 'react'
-import { classList } from '@/helpers'
+import { clsx } from '@/helpers'
 import { useComboboxCore } from '@/pages/Admin/hooks/useComboboxCore.hook'
 
 interface SafeValueProps {
@@ -8,7 +8,7 @@ interface SafeValueProps {
 }
 
 const SafeValue = ({ value }: SafeValueProps) => (
-  <span className={classList('text', { 'is-undefined': value === undefined })}>
+  <span className={clsx('text', { 'is-undefined': value === undefined })}>
     {value ?? 'Indefinido'}
   </span>
 )

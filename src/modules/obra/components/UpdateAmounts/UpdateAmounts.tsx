@@ -84,13 +84,13 @@ export const UpdateAmounts = () => {
         <Button
           text="Actualizar"
           title="Actualizar montos"
-          faIcon="fa-solid fa-arrows-rotate"
+          iconClass="fa-solid fa-arrows-rotate"
           hold
           {...{ ...updateAction, progress }}
         />
         {/* <Toggle
           title="Actualizar solo los faltantes"
-          faIcon="fa-solid fa-magnifying-glass-dollar"
+          iconClass="fa-solid fa-magnifying-glass-dollar"
           size="l"
         /> */}
         <small className="text">

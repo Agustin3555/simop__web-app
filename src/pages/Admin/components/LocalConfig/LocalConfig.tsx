@@ -69,7 +69,7 @@ const LocalConfig = () => {
             />
             <Button
               title="Descartar configuración"
-              faIcon="fa-solid fa-xmark"
+              iconClass="fa-solid fa-xmark"
               size="s"
               type="secondary"
               onAction={handleCreatingClick}
@@ -85,7 +85,7 @@ const LocalConfig = () => {
             />
             <Button
               text="Confirmar"
-              faIcon="fa-solid fa-check"
+              iconClass="fa-solid fa-check"
               submit
               {...{ actionState }}
             />
@@ -93,7 +93,7 @@ const LocalConfig = () => {
         </form>
       ) : (
         <button title="Crear nueva configuración" onClick={handleCreatingClick}>
-          <Icon faIcon="fa-solid fa-circle-plus" />
+          <Icon iconClass="fa-solid fa-circle-plus" />
           Crear configuración
         </button>
       )}

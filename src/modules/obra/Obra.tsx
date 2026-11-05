@@ -8,7 +8,7 @@ export const Obra = () => (
     //   {
     //     key: 'map',
     //     title: 'Mapa',
-    //     faIcon: 'fa-solid fa-map',
+    //     iconClass: 'fa-solid fa-map',
     //     component: <Map />,
     //   },
     // ]}
@@ -17,7 +17,7 @@ export const Obra = () => (
         {
           tabPanelKey: 'update-amounts',
           title: 'Actualizar montos',
-          faIcon: 'fa-solid fa-money-bill-trend-up',
+          iconClass: 'fa-solid fa-money-bill-trend-up',
           component: <UpdateAmounts />,
         },
       ],

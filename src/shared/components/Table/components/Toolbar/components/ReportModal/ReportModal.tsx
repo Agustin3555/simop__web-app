@@ -4,7 +4,7 @@ import { useSubmitAction } from '@/hooks'
 import { useTableDef } from '@/pages/Admin/hooks/useTableDef.hook'
 import { useTable } from '@/shared/components/Table/contexts/Table/useTable.hook'
 import { Modal } from '@/shared/components/Modal/Modal'
-import { Button, Input } from '@/components'
+import { Input } from '@/components'
 import { pdf } from '@react-pdf/renderer'
 import { sleep } from '@/helpers'
 import ReportInTable, {
@@ -14,6 +14,7 @@ import { ColumnBehavior } from '@/shared/core/types'
 import { CalcResults } from '@/shared/components/Table/hooks/useTableModel.hook'
 import { getSelectedRefIds } from '@/shared/core/columns/ref'
 import { TABLE_DEFS } from '@/pages/Admin/constants/metaModelDefinitions.const'
+import { Button } from '@/shared/components/Button/Button'
 
 type SelectionType = 'rendered' | 'selected'
 
@@ -173,9 +174,10 @@ export const ReportModal = ({
         <Button
           text="Informe"
           title="Descargar .pdf"
-          faIcon="fa-regular fa-file-pdf"
-          type="secondary"
-          buttonHTMLAttrs={attrs}
+          iconClass="fa-regular fa-file-pdf"
+          border
+          bodyStretch
+          htmlAttrs={attrs}
         />
       )}
     >
@@ -207,7 +209,7 @@ export const ReportModal = ({
         </label>
         <Button
           text="Generar"
-          faIcon="fa-regular fa-file-pdf"
+          iconClass="fa-regular fa-file-pdf"
           submit
           {...{ progress, actionState }}
         />

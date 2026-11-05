@@ -2,7 +2,7 @@ import './Node.css'
 import { MouseEventHandler, useCallback, useState } from 'react'
 import { Button, Icon } from '@/components'
 import { SectionNode } from '@/pages/Admin/constants/navTree.const'
-import { classList } from '@/helpers'
+import { clsx } from '@/helpers'
 import { useViews } from '@/pages/Admin/hooks/useViews.hook'
 import { TABLE_DEFS } from '@/pages/Admin/constants/metaModelDefinitions.const'
 import { TableKey } from '@/pages/Admin/constants/metaModelKey.const'
@@ -31,16 +31,16 @@ const LeafNode = ({ tableKey }: LeafNodeProps) => {
   return (
     <div className="cmp-node ui-m">
       <div
-        className={classList('content', {
+        className={clsx('content', {
           active: isActive(tableKey),
         })}
         title={title.plural}
         onClick={handleClick}
       >
-        <Icon faIcon={classIcon} />
+        <Icon iconClass={classIcon} />
         <p>{title.plural}</p>
         <div
-          className={classList('actions', {
+          className={clsx('actions', {
             'show-favorite': isFavorite(tableKey),
           })}
         >
@@ -50,7 +50,7 @@ const LeafNode = ({ tableKey }: LeafNodeProps) => {
                 ? 'Eliminar de favoritos'
                 : 'Agregar a favoritos'
             }
-            faIcon={`fa-${isFavorite(tableKey) ? 'solid' : 'regular'} fa-star`}
+            iconClass={`fa-${isFavorite(tableKey) ? 'solid' : 'regular'} fa-star`}
             size="s"
             onAction={handleToggleFavoriteClick}
           />
@@ -66,9 +66,9 @@ const BranchingNode = ({ title, sections }: SectionNode) => {
   const handleClick = useCallback(() => setOpen(prev => !prev), [])
 
   return (
-    <div className={classList('cmp-node ui-m', { open: isOpen })}>
+    <div className={clsx('cmp-node ui-m', { open: isOpen })}>
       <div className="content" onClick={handleClick} {...{ title }}>
-        <Icon faIcon="fa-solid fa-angle-right" />
+        <Icon iconClass="fa-solid fa-angle-right" />
         <p>{title}</p>
       </div>
       {sections && (

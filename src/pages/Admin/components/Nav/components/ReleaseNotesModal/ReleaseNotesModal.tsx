@@ -3,7 +3,7 @@ import { MouseEventHandler, useCallback, useEffect, useState } from 'react'
 import { useToggle } from '@/pages/Admin/hooks/useToggle.hook'
 import { Button, Icon } from '@/components'
 import Note, { NoteProps } from './components/Note/Note'
-import { classList, safe } from '@/helpers'
+import { clsx, safe } from '@/helpers'
 import { lastSeenVersionEntity } from '@/pages/Admin/services/localStorage/entities/lastSeenVersion'
 import changelogRaw from '@/../CHANGELOG.md?raw'
 import pkg from '@/../package.json'
@@ -44,9 +44,9 @@ const compareVersions = (v1: string, v2?: string) => {
 
 const isNewer = (v1: string, v2?: string) => compareVersions(v1, v2) === 1
 
-const createIcon = (faIcon: string) => {
+const createIcon = (iconClass: string) => {
   const icon = window.document.createElement('i')
-  icon.classList.add('cmp-icon', 'fa-solid', faIcon)
+  icon.classList.add('cmp-icon', 'fa-solid', iconClass)
   return icon
 }
 
@@ -156,9 +156,7 @@ const ReleaseNotesModal = () => {
             </section>
           )}
           {oldNotes.length !== 0 && (
-            <section
-              className={classList('olds', { 'is-expanded': oldsExpanded })}
-            >
+            <section className={clsx('olds', { 'is-expanded': oldsExpanded })}>
               <div className="notes">
                 {oldNotes.map(note => (
                   <Note key={note.version} {...note} />
@@ -168,7 +166,7 @@ const ReleaseNotesModal = () => {
                 {oldsExpanded
                   ? 'Cerrar versiones pasadas'
                   : 'Versiones pasadas'}
-                <Icon faIcon="fa-solid fa-angle-down" />
+                <Icon iconClass="fa-solid fa-angle-down" />
               </button>
             </section>
           )}

@@ -8,7 +8,7 @@ import {
   OptionGroup,
 } from '@/shared/components/OptionGroup/OptionGroup'
 import { ColumnBehavior } from '@/shared/core/types'
-import { classList } from '@/helpers'
+import { clsx } from '@/helpers'
 
 interface FilterMenuProps {
   propBuilders: ColumnBehavior
@@ -59,9 +59,9 @@ export const FilterMenu = ({
       handlingClass="cmp-filter-menu"
       opener={attrs => (
         <Button
-          handlingClass={classList({ isFiltering: !!filters })}
+          handlingClass={clsx({ isFiltering: !!filters })}
           title="Filtrar"
-          faIcon="fa-solid fa-filter"
+          iconClass="fa-solid fa-filter"
           size="s"
           type="secondary"
           inverted

@@ -118,7 +118,7 @@ const ReportButton = () => {
     <Button
       title="Generar informe"
       text="Informe"
-      faIcon="fa-solid fa-file-pdf"
+      iconClass="fa-solid fa-file-pdf"
       type="secondary"
       {...{ progress, ...actionResult }}
     />

@@ -8,7 +8,7 @@ import {
   UNIQUE_MODE,
 } from './utils'
 import { BooleanFilter, Checkbox, Combobox } from '../components'
-import { classList } from '@/helpers'
+import { clsx } from '@/helpers'
 import { StyleSheet, Text } from '@react-pdf/renderer'
 import { isFieldEnabled } from './ref'
 
@@ -107,12 +107,7 @@ export const createBooleanProp =
 
         return (
           value !== undefined && (
-            <p
-              className={classList(
-                'highlighted',
-                value ? trueColor : falseColor,
-              )}
-            >
+            <p className={clsx('highlighted', value ? trueColor : falseColor)}>
               {value ? trueText : falseText}
             </p>
           )

@@ -1,23 +1,29 @@
+:root {
+  --cmp-dropdown-max-width: 100%;
+}
+
 .cmp-dropdown {
   display: contents;
 
-  /* TODO: estas animaciones son buenas, otros componentes como Select deben ser iguales */
   > .dropdown {
     position-area: bottom;
     position-try-fallbacks: flip-block;
 
-    margin: var(--pal-size-xs);
+    margin: var(--pal-size-2xs);
+    border-width: var(--line-thickness);
+    border-color: var(--pal-color-a-200);
+    max-width: var(--cmp-dropdown-max-width);
 
     border-radius: var(--pal-size-xs);
+    box-shadow: var(--pal-shadow-1);
     scale: 0.9;
     opacity: 0;
-    transform-origin: top;
     overflow: auto;
 
     transition:
       display var(--pal-time-s) allow-discrete,
       overlay var(--pal-time-s) allow-discrete,
-      scale var(--pal-time-s) var(--pal-timing-func-a),
+      scale var(--pal-time-s) var(--pal-timing-func-b),
       opacity var(--pal-time-s) var(--pal-timing-func-b);
 
     > * {

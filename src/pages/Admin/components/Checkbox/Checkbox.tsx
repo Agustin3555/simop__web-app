@@ -1,7 +1,7 @@
 import './Checkbox.css'
 import { Icon } from '@/components'
 import { InputFieldPartial } from '@/types'
-import { classList } from '@/helpers'
+import { clsx } from '@/helpers'
 
 interface CheckboxProps extends InputFieldPartial {
   value?: boolean
@@ -19,11 +19,11 @@ const Checkbox = ({
   trueText = 'Si',
 }: CheckboxProps) => {
   return (
-    <div className={classList('cmp-checkbox', 'control')}>
+    <div className={clsx('cmp-checkbox', 'control')}>
       <div className="box">
         <input name={keyName} type="checkbox" {...{ defaultChecked }} />
         <div className="check-container">
-          <Icon faIcon="fa-solid fa-check" />
+          <Icon iconClass="fa-solid fa-check" />
         </div>
         <small className="false">{falseText}</small>
         <small className="true">{trueText}</small>

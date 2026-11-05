@@ -1,7 +1,7 @@
 import './Button.css'
 import { ActionState } from '@/hooks'
 import { Icon, Loader } from '..'
-import { classList } from '@/helpers'
+import { clsx } from '@/helpers'
 import {
   ButtonHTMLAttributes,
   forwardRef,
@@ -16,7 +16,7 @@ export interface ButtonProps {
   name?: string
   title?: string
   text?: string
-  faIcon?: string
+  iconClass?: string
   type?: 'primary' | 'secondary' | 'tertiary'
   size?: 'l' | 'm' | 's'
   inverted?: boolean
@@ -37,7 +37,7 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       name,
       title,
       text,
-      faIcon,
+      iconClass,
       size = 'm',
       type = 'primary',
       inverted = false,
@@ -86,10 +86,10 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
 
     return (
       <button
-        className={classList('cmp-button', `ui-${size}`, type, handlingClass, {
+        className={clsx('cmp-button', `ui-${size}`, type, handlingClass, {
           inverted,
           wrap,
-          square: faIcon !== undefined && text === undefined,
+          square: iconClass !== undefined && text === undefined,
           hold,
           badge,
         })}
@@ -102,7 +102,7 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
         {actionState && (
           <>
             <div
-              className={classList('loading', {
+              className={clsx('loading', {
                 active: actionState === 'loading',
               })}
             >
@@ -110,22 +110,22 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
               <Loader />
             </div>
             <Icon
-              faIcon="fa-solid fa-xmark"
-              handlingClass={classList({ active: actionState === 'error' })}
+              iconClass="fa-solid fa-xmark"
+              handlingClass={clsx({ active: actionState === 'error' })}
             />
             <Icon
-              faIcon="fa-solid fa-check"
-              handlingClass={classList({ active: actionState === 'success' })}
+              iconClass="fa-solid fa-check"
+              handlingClass={clsx({ active: actionState === 'success' })}
             />
           </>
         )}
         <div
-          className={classList('body', 'text', {
+          className={clsx('body', 'text', {
             active: actionState ? actionState === 'ready' : true,
           })}
         >
           {text}
-          {faIcon && <Icon {...{ faIcon }} />}
+          {iconClass && <Icon {...{ iconClass }} />}
         </div>
       </button>
     )

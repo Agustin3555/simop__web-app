@@ -4,7 +4,7 @@ import { ActionCallback, useActionState } from '.'
 export interface FormValues {
   get: {
     string: (key: string) => string
-    number: (key: string) => number
+    number: (key: string) => number | undefined
     boolean: (key: string) => boolean
   }
   getAll: {
@@ -35,7 +35,13 @@ export const useSubmitAction = (
     const formValues: FormValues = {
       get: {
         string: (key: string) => (formData.get(key) as string) || undefined,
-        number: (key: string) => Number(formData.get(key)) || undefined,
+        number: (key: string) => {
+          const value = formData.get(key)
+          if (typeof value !== 'string' || value.trim() === '') return undefined
+
+          const number = Number(value)
+          return Number.isFinite(number) ? number : undefined
+        },
         boolean: (key: string) => formData.get(key) === 'on',
       },
       getAll: {

@@ -7,14 +7,14 @@ import {
   useMemo,
 } from 'react'
 import { Icon } from '@/components'
-import { classList } from '@/helpers'
+import { clsx } from '@/helpers'
 
 type Style = 'toggle' | 'switch'
 
 export interface ToggleProps {
   handlingClass?: string
   title: string
-  faIcon?: string
+  iconClass?: string
   size?: 's' | 'm' | 'l'
   style?: Style
   value: boolean
@@ -25,7 +25,7 @@ export interface ToggleProps {
 const Toggle = ({
   handlingClass,
   title,
-  faIcon = 'fa-solid fa-check',
+  iconClass = 'fa-solid fa-check',
   size = 's',
   style = 'toggle',
   value: checked,
@@ -36,13 +36,13 @@ const Toggle = ({
     const components: Record<Style, ReactNode> = {
       toggle: (
         <div className="toggle">
-          <Icon {...{ faIcon }} />
+          <Icon {...{ iconClass }} />
         </div>
       ),
       switch: (
         <div className="switch">
           <div className="lever">
-            <Icon {...{ faIcon }} />
+            <Icon {...{ iconClass }} />
           </div>
         </div>
       ),
@@ -58,7 +58,7 @@ const Toggle = ({
 
   return (
     <label
-      className={classList('cmp-toggle', `ui-${size}`, handlingClass)}
+      className={clsx('cmp-toggle', `ui-${size}`, handlingClass)}
       {...{ title }}
     >
       <input type="checkbox" onChange={handleChange} {...{ checked }} />

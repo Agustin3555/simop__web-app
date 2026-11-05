@@ -1,5 +1,5 @@
 import './Separator.css'
-import { classList } from '@/helpers'
+import { clsx } from '@/helpers'
 
 interface Props {
   asSpan?: boolean
@@ -7,7 +7,7 @@ interface Props {
 }
 
 const Separator = ({ asSpan = false, invert = false }: Props) => {
-  const className = classList('cmp-separator', { invert })
+  const className = clsx('cmp-separator', { invert })
 
   return asSpan ? <span {...{ className }} /> : <hr {...{ className }} />
 }

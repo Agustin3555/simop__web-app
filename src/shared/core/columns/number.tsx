@@ -121,7 +121,7 @@ export const buildNumberColumnBehavior = (
         ? formValues.get.string(key)
         : formValues.get.number(key)
 
-      if (!value) return
+      if (value === undefined) return
 
       accData[key] = value
     },

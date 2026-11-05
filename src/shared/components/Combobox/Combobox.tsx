@@ -3,7 +3,7 @@ import { ReactNode, useMemo, useRef, useState } from 'react'
 import { Button, Icon } from '@/components'
 import { Dropdown } from '../Dropdown/Dropdown'
 import { SelectedOptions } from './components'
-import { classList } from '@/helpers'
+import { clsx } from '@/helpers'
 
 interface ComboboxBaseProps {
   name: string
@@ -134,7 +134,7 @@ export const NewCombobox = (props: ComboboxProps) => {
   }
 
   return (
-    <div className={classList('new-cmp-combobox', 'ui-l', { multiple })}>
+    <div className={clsx('new-cmp-combobox', 'ui-l', { multiple })}>
       <input
         value={selected.length ? JSON.stringify(selected) : ''}
         tabIndex={-1}
@@ -158,10 +158,10 @@ export const NewCombobox = (props: ComboboxProps) => {
               {multiple && (
                 <div className="counter">
                   {selected.length}
-                  <Icon faIcon="fa-solid fa-shapes" />
+                  <Icon iconClass="fa-solid fa-shapes" />
                 </div>
               )}
-              <Icon faIcon="fa-solid fa-angle-down" />
+              <Icon iconClass="fa-solid fa-angle-down" />
             </span>
           </button>
         )}
@@ -184,14 +184,14 @@ export const NewCombobox = (props: ComboboxProps) => {
                 <>
                   <Button
                     title="Seleccionar todo"
-                    faIcon="fa-solid fa-check-square"
+                    iconClass="fa-solid fa-check-square"
                     size="s"
                     type="secondary"
                     onAction={handleSelectAll}
                   />
                   <Button
                     title="Deseleccionar todo"
-                    faIcon="fa-regular fa-square"
+                    iconClass="fa-regular fa-square"
                     size="s"
                     type="secondary"
                     onAction={handleDeselectAll}
@@ -212,7 +212,7 @@ export const NewCombobox = (props: ComboboxProps) => {
                 return (
                   <button
                     key={value}
-                    className={classList({ isSelected })}
+                    className={clsx({ isSelected })}
                     type="button"
                     role="option"
                     aria-selected={isSelected}

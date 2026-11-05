@@ -47,7 +47,7 @@ export const Cell = ({
         <form onSubmit={handleSubmit}>
           {getFormField(value, true)}
           <Button
-            faIcon="fa-solid fa-check"
+            iconClass="fa-solid fa-check"
             size="s"
             submit
             {...{ actionState }}

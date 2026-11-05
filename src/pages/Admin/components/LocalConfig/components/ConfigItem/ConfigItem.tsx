@@ -84,7 +84,7 @@ const ConfigItem = ({
             <Button
               title="Eliminar configuración"
               name={String(id)}
-              faIcon="fa-solid fa-trash"
+              iconClass="fa-solid fa-trash"
               size="s"
               type="secondary"
               hold
@@ -94,7 +94,7 @@ const ConfigItem = ({
           <Button
             title="Duplicar configuración"
             name={String(id)}
-            faIcon="fa-solid fa-clone"
+            iconClass="fa-solid fa-clone"
             size="s"
             type="secondary"
             onAction={handleCloneClick}

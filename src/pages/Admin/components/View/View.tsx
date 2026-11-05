@@ -1,7 +1,7 @@
 import './View.css'
 import { ReactNode } from 'react'
 import { useViews } from '../../hooks/useViews.hook'
-import { classList } from '@/helpers'
+import { clsx } from '@/helpers'
 
 export interface ViewProps {
   viewKey: string
@@ -12,9 +12,7 @@ const View = ({ viewKey, children }: ViewProps) => {
   const { isActive } = useViews()
 
   return (
-    <div
-      className={classList('cmp-view', viewKey, { active: isActive(viewKey) })}
-    >
+    <div className={clsx('cmp-view', viewKey, { active: isActive(viewKey) })}>
       {children}
     </div>
   )

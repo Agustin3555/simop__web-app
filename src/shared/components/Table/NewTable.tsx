@@ -14,7 +14,7 @@ import {
 } from './components'
 import { DragDropProvider } from '@dnd-kit/react'
 import { RestrictToHorizontalAxis } from '@dnd-kit/abstract/modifiers'
-import { classList, varList } from '@/helpers'
+import { clsx, varList } from '@/helpers'
 import { ColumnBehavior } from '@/shared/core/types'
 import { ServiceData } from '@/infra/http/service.type'
 
@@ -88,7 +88,7 @@ export const NewTable = ({
           modifiers={[RestrictToHorizontalAxis]}
           onDragEnd={handleColumnDragEnd}
         >
-          <header className={classList({ stick: toggles.stickHeader })}>
+          <header className={clsx({ stick: toggles.stickHeader })}>
             <RowSelectorHeader {...{ allRowKeys, filteredRowKeys }} />
             {renderedColumns.map((c, i) => (
               <ColumnHeader
@@ -121,7 +121,7 @@ export const NewTable = ({
           ))}
           {loadMoreTrigger}
         </ol>
-        <footer className={classList({ stick: toggles.stickFooter })}>
+        <footer className={clsx({ stick: toggles.stickFooter })}>
           <RowSelectorHeader {...{ allRowKeys, filteredRowKeys }} />
           {renderedColumns.map((c, i) => (
             <ColumnFooter

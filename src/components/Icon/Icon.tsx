@@ -1,13 +1,13 @@
 import './Icon.css'
-import { classList } from '@/helpers'
+import { clsx } from '@/helpers'
 
 export interface Props {
-  faIcon: string
+  iconClass: string
   handlingClass?: string
 }
 
-const Icon = ({ faIcon, handlingClass }: Props) => (
-  <i className={classList('cmp-icon', faIcon, handlingClass)} />
+const Icon = ({ iconClass, handlingClass }: Props) => (
+  <i className={clsx('cmp-icon', iconClass, handlingClass)} />
 )
 
 export default Icon

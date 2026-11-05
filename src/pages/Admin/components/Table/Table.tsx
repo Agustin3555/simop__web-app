@@ -12,7 +12,7 @@ import {
 } from '@tanstack/react-table'
 import { Cell, Footer, Header, RowSelectorCell, Toolbar } from './components'
 import { LooseEntity } from '@/models/config'
-import { classList } from '@/helpers'
+import { clsx } from '@/helpers'
 import { format } from '@formkit/tempo'
 import { utils, writeFile } from 'xlsx'
 import { steppedSizes } from './helpers'
@@ -231,7 +231,7 @@ const Table = ({ data }: TableProps) => {
   return (
     isReadyToRender && (
       <div
-        className={classList('cmp-table', 'table-container', {
+        className={clsx('cmp-table', 'table-container', {
           'enable-filters': toggleStates['filters'],
         })}
       >
@@ -246,7 +246,7 @@ const Table = ({ data }: TableProps) => {
         />
         <div className="table" style={columnSizeVars} onScroll={handleScroll}>
           <div
-            className={classList(
+            className={clsx(
               'head',
               { 'enable-stick': toggleStates['stickHead'] },
               { 'enable-column-control': toggleStates['columnControl'] },
@@ -313,7 +313,7 @@ const Table = ({ data }: TableProps) => {
               ))}
           </div>
           <div
-            className={classList('foot', {
+            className={clsx('foot', {
               'enable-stick': toggleStates['stickFoot'],
             })}
           >

@@ -1,7 +1,7 @@
 import './RowSelectorCell.css'
 import { InputHTMLAttributes, useEffect, useRef } from 'react'
 import { Icon } from '@/components'
-import { classList } from '@/helpers'
+import { clsx } from '@/helpers'
 
 interface RowSelectorCellProps extends InputHTMLAttributes<HTMLInputElement> {
   indeterminate?: boolean
@@ -27,12 +27,12 @@ const RowSelectorCell = ({
   // TODO: diferenciar el estado indeterminate (en CSS -> :indeterminate)
 
   return (
-    <div className={classList('cmp-row-selector-cell', { header: asHeader })}>
+    <div className={clsx('cmp-row-selector-cell', { header: asHeader })}>
       <div className="content">
         {asHeader && <small>{selectionCounter}</small>}
         <label title="Alternar selección">
           <input type="checkbox" ref={inputRef} {...rest} />
-          <Icon faIcon="fa-solid fa-check" />
+          <Icon iconClass="fa-solid fa-check" />
         </label>
       </div>
     </div>

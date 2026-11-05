@@ -5,7 +5,7 @@ import { Button, Toggle } from '@/components'
 import SegmentedControl, {
   SegmentedControlProps,
 } from '../SegmentedControl/SegmentedControl'
-import { classList } from '@/helpers'
+import { clsx } from '@/helpers'
 import { TableKey } from '../../constants/metaModelKey.const'
 
 type LayoutMode = 'masonry' | 'rows'
@@ -14,12 +14,12 @@ const LAYOUT_MODES_OPTIONS: SegmentedControlProps<LayoutMode>['options'] = [
   {
     value: 'masonry',
     title: 'Por columnas',
-    faIcon: 'fa-solid fa-chart-simple fa-rotate-180',
+    iconClass: 'fa-solid fa-chart-simple fa-rotate-180',
   },
   {
     value: 'rows',
     title: 'Por filas',
-    faIcon: 'fa-solid fa-pause fa-rotate-90',
+    iconClass: 'fa-solid fa-pause fa-rotate-90',
   },
 ]
 
@@ -64,14 +64,14 @@ const Form = ({
         {enableReset && (
           <Toggle
             title="Limpiar después de crear"
-            faIcon="fa-solid fa-eraser"
+            iconClass="fa-solid fa-eraser"
             value={resetOnSuccess}
             setValue={setResetOnSuccess}
           />
         )}
       </header>
       <form className="form-style" onSubmit={handleSubmit}>
-        <div key={resetKey} className={classList('field-groups', layoutMode)}>
+        <div key={resetKey} className={clsx('field-groups', layoutMode)}>
           {fieldGroups?.map(({ title, fields }, i) => (
             <div key={i} className="section">
               {title && <small>{title}</small>}
@@ -82,7 +82,7 @@ const Form = ({
         <footer>
           <Button
             text="Confirmar"
-            faIcon="fa-solid fa-check"
+            iconClass="fa-solid fa-check"
             submit
             {...{ actionState }}
           />

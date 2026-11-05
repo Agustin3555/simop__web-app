@@ -6,7 +6,7 @@ import {
   type RefObject,
   type ButtonHTMLAttributes,
 } from 'react'
-import { classList } from '@/helpers'
+import { clsx } from '@/helpers'
 
 export interface ModalProps {
   handlingClass?: string
@@ -33,7 +33,7 @@ export const Modal = ({ handlingClass, ref, opener, children }: ModalProps) => {
   }
 
   return (
-    <div className={classList('cmp-modal', handlingClass)}>
+    <div className={clsx('cmp-modal', handlingClass)}>
       {opener && opener({ command: 'show-modal', commandFor: id })}
       <dialog popover="auto" onClick={handleClick} {...{ id, ref }}>
         <div className="content">{children}</div>

@@ -41,7 +41,7 @@ const Selected = ({
             type="button"
             onClick={handleDeselectItemClick}
           >
-            <Icon faIcon="fa-solid fa-xmark" />
+            <Icon iconClass="fa-solid fa-xmark" />
           </button>
         </div>
       ))}

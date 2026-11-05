@@ -138,7 +138,7 @@ const RefsComboboxInner = ({
       searchSlot={
         <Button
           title="Actualizar opciones"
-          faIcon="fa-solid fa-rotate"
+          iconClass="fa-solid fa-rotate"
           size="s"
           type="secondary"
           onAction={handleUpdateAction}

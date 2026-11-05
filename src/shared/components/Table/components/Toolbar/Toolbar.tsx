@@ -1,32 +1,38 @@
 import './Toolbar.css'
 import { useTable } from '../../contexts/Table/useTable.hook'
 import { Dispatch, SetStateAction } from 'react'
-import { Button, Toggle } from '@/components'
+import { Toggle } from '@/components'
 import { ToggleProps } from '@/components/Toggle/Toggle'
 import Value from '@/pages/Admin/components/Value/Value'
 import { ReportModal } from './components'
 import { ColumnBehavior } from '@/shared/core/types'
 import { CalcResults } from '../../hooks/useTableModel.hook'
 import { Dropdown } from '@/shared/components/Dropdown/Dropdown'
+import { Button } from '@/shared/components/Button/Button'
+import {
+  Option,
+  OptionGroup,
+} from '@/shared/components/OptionGroup/OptionGroup'
+import { Field } from '@/shared/components/Field/Field'
 
 export type ToggleKey = 'columnControl' | 'stickHeader' | 'stickFooter'
 export type TogglesState = Record<ToggleKey, boolean>
 
 const TOGGLES_INFO: Record<
   ToggleKey,
-  Required<Pick<ToggleProps, 'title' | 'faIcon'>>
+  Required<Pick<ToggleProps, 'title' | 'iconClass'>>
 > = {
   columnControl: {
     title: 'Controlar columnas',
-    faIcon: 'fa-solid fa-table-columns',
+    iconClass: 'fa-solid fa-table-columns',
   },
   stickHeader: {
     title: 'Fijar cabecera de tabla',
-    faIcon: 'fa-regular fa-window-maximize',
+    iconClass: 'fa-regular fa-window-maximize',
   },
   stickFooter: {
     title: 'Fijar pie de tabla',
-    faIcon: 'fa-regular fa-window-maximize fa-rotate-180',
+    iconClass: 'fa-regular fa-window-maximize fa-rotate-180',
   },
 }
 
@@ -58,6 +64,23 @@ export const Toolbar = ({
     setToggles(prev => ({ ...prev, [key]: !toggles[key] }))
   }
 
+  const options: Option[] = [
+    {
+      label: `En vista (${renderedRows.length})`,
+      inputHtmlAttrs: {
+        // checked: valueState === undefined,
+        // onChange: () => setColumnFilter(key, { valueState: undefined }),
+      },
+    },
+    {
+      label: `Seleccionados (${selectedRows.length})`,
+      inputHtmlAttrs: {
+        // checked: valueState === 'value',
+        // onChange: () => setColumnFilter(key, { valueState: 'value' }),
+      },
+    },
+  ]
+
   return (
     <div className="new-cmp-toolbar">
       <div className="left">
@@ -73,14 +96,14 @@ export const Toolbar = ({
           <Toggle
             handlingClass="edit-mode"
             title="Modo edición"
-            faIcon="fa-solid fa-pen"
+            iconClass="fa-solid fa-pen"
             value={editModeState[0]}
             setValue={editModeState[1]}
           />
         )}
         {/* <Button
           title="Simplificar coincidencias"
-          faIcon="fa-solid fa-compress"
+          iconClass="fa-solid fa-compress"
           size="s"
           type="secondary"
           onAction={handleHiddenColumnMatches}
@@ -91,23 +114,23 @@ export const Toolbar = ({
           <>
             <Value
               text={renderedRows.length}
-              faIcon="fa-solid fa-filter"
+              iconClass="fa-solid fa-filter"
               size="s"
               type="secondary"
               pill
             />
             <Button
               title="Limpiar filtros"
-              faIcon="fa-solid fa-xmark"
+              iconClass="fa-solid fa-xmark"
               size="s"
-              type="secondary"
+              border
               onAction={cleanFilters}
             />
           </>
         )}
         <Value
           text={dataLength}
-          faIcon="fa-solid fa-cubes-stacked"
+          iconClass="fa-solid fa-cubes-stacked"
           size="s"
           type="secondary"
           pill
@@ -118,35 +141,46 @@ export const Toolbar = ({
           opener={attrs => (
             <Button
               text="Exportar"
-              faIcon="fa-solid fa-file-arrow-down"
+              iconClass="fa-solid fa-file-arrow-down"
               size="s"
-              type="secondary"
-              buttonHTMLAttrs={attrs}
+              border
+              htmlAttrs={attrs}
             />
           )}
         >
-          {/* TODO: Toggle para elegir si exportar filas seleccionadas o todas */}
-          <ReportModal
-            {...{
-              renderedColumns,
-              renderedRows,
-              selectedRows,
-              renderedCalcResults,
-              selectedCalcResults,
-            }}
-          />
-          <Button
-            text="Excel"
-            title="Descargar .xlsx"
-            faIcon="fa-regular fa-file-excel"
-            type="secondary"
-          />
-          <Button
-            text="Para IA"
-            title="Copiar formato TOON"
-            faIcon="fa-regular fa-copy"
-            type="secondary"
-          />
+          <Field title="Valores" render="fieldset" hideTitle>
+            <OptionGroup
+              name="selectionType"
+              inputType="radio"
+              size="s"
+              {...{ options }}
+            />
+          </Field>
+          <div className="actions">
+            <ReportModal
+              {...{
+                renderedColumns,
+                renderedRows,
+                selectedRows,
+                renderedCalcResults,
+                selectedCalcResults,
+              }}
+            />
+            <Button
+              text="Excel"
+              title="Descargar .xlsx"
+              iconClass="fa-regular fa-file-excel"
+              border
+              bodyStretch
+            />
+            <Button
+              text="Para IA"
+              title="Copiar formato TOON"
+              iconClass="fa-regular fa-copy"
+              border
+              bodyStretch
+            />
+          </div>
         </Dropdown>
       </div>
     </div>

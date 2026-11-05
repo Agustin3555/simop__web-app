@@ -16,7 +16,7 @@ export interface MetaModelDefinition<E = LooseEntity> {
       singular: string
       plural: string
     }
-    faIcon?: string
+    iconClass?: string
 
     service: Service<E>
     refreshRate?: RefreshRate

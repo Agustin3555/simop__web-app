@@ -3,7 +3,7 @@ import { Button, Icon } from '@/components'
 import { useViews } from '../../hooks/useViews.hook'
 import { useFavoriteTables } from '../../store/favoriteTables.store'
 import { TABLE_DEFS } from '../../constants/metaModelDefinitions.const'
-import { classList } from '@/helpers'
+import { clsx } from '@/helpers'
 
 const FavoriteViews = () => {
   const { isActive, select } = useViews()
@@ -17,21 +17,21 @@ const FavoriteViews = () => {
         return (
           <div
             key={tableKey}
-            className={classList('item', 'ui-l', {
+            className={clsx('item', 'ui-l', {
               active: isActive(tableKey),
             })}
             title={title.plural}
             onClick={() => select(tableKey)}
           >
             <Button
-              faIcon="fa-solid fa-minus"
+              iconClass="fa-solid fa-minus"
               size="s"
               onAction={e => {
                 e.stopPropagation()
                 remove(tableKey)
               }}
             />
-            <Icon faIcon={classIcon} />
+            <Icon iconClass={classIcon} />
             <p className="text">{title.plural}</p>
           </div>
         )

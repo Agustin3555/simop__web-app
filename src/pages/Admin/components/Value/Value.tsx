@@ -1,10 +1,10 @@
 import './Value.css'
 import { Icon } from '@/components'
-import { classList } from '@/helpers'
+import { clsx } from '@/helpers'
 
 interface ValueProps {
   text?: number | string
-  faIcon?: string
+  iconClass?: string
   size?: 'l' | 'm' | 's'
   type?: 'primary' | 'secondary'
   pill?: boolean
@@ -12,19 +12,19 @@ interface ValueProps {
 
 const Value = ({
   text,
-  faIcon,
+  iconClass,
   size = 'l',
   type = 'primary',
   pill = false,
 }: ValueProps) => (
   <div
-    className={classList('cmp-value', `ui-${size}`, type, {
-      square: faIcon !== undefined && text === undefined,
+    className={clsx('cmp-value', `ui-${size}`, type, {
+      square: iconClass !== undefined && text === undefined,
       pill,
     })}
   >
     {text}
-    {faIcon && <Icon {...{ faIcon }} />}
+    {iconClass && <Icon {...{ iconClass }} />}
   </div>
 )
 

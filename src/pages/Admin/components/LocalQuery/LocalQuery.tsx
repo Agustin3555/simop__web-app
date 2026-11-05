@@ -3,7 +3,7 @@ import { ReactNode, useCallback, useEffect, useMemo, useState } from 'react'
 import { useQueryActionState } from '@/hooks'
 import { Button, Toggle } from '@/components'
 import { DeleteButton } from './components'
-import { classList } from '@/helpers'
+import { clsx } from '@/helpers'
 import { useTableQuery } from '../../hooks/useTableQuery.hook'
 import { useTableDef } from '../../hooks/useTableDef.hook'
 import { GraphScreenshotsProvider } from '../../providers/graphScreenshots.provider'
@@ -18,7 +18,7 @@ import { compareObjects } from '@/shared/helpers/compareObjects.helper'
 interface Panel {
   key: string
   title: string
-  faIcon: string
+  iconClass: string
   component: ReactNode
 }
 
@@ -31,7 +31,7 @@ const LocalQueryBody = ({ panels: customPanels = [] }: LocalQueryProps) => {
     const graphListPanel: Panel = {
       key: 'graphsList',
       title: 'Gráficos',
-      faIcon: 'fa-solid fa-chart-pie',
+      iconClass: 'fa-solid fa-chart-pie',
       component: <p>GraphList</p>,
       // component: <GraphList />,
     }
@@ -132,7 +132,7 @@ const LocalQueryBody = ({ panels: customPanels = [] }: LocalQueryProps) => {
               <div className="left">
                 <Button
                   title="Consultar datos"
-                  faIcon={`fa-solid fa-arrows-rotate`}
+                  iconClass={`fa-solid fa-arrows-rotate`}
                   size="l"
                   actionState={queryActionState}
                   onAction={refetch}
@@ -141,7 +141,7 @@ const LocalQueryBody = ({ panels: customPanels = [] }: LocalQueryProps) => {
                   <Button
                     handlingClass="save-config"
                     text="Guardar configuración"
-                    faIcon={`fa-solid fa-floppy-disk`}
+                    iconClass={`fa-solid fa-floppy-disk`}
                     type="secondary"
                     size="l"
                     onAction={handleSaveConfig}
@@ -150,14 +150,14 @@ const LocalQueryBody = ({ panels: customPanels = [] }: LocalQueryProps) => {
               </div>
               <div className="actions">
                 {rowSelection.length !== 0 && <DeleteButton />}
-                {panels.map(({ key, title, faIcon }) => (
+                {panels.map(({ key, title, iconClass }) => (
                   <Toggle
                     key={key}
                     title={`Mostrar ${title}`}
                     value={panelToggles[key]}
                     size="l"
                     onChange={handleChange(key)}
-                    {...{ faIcon }}
+                    {...{ iconClass }}
                   />
                 ))}
               </div>
@@ -165,14 +165,14 @@ const LocalQueryBody = ({ panels: customPanels = [] }: LocalQueryProps) => {
             <NewTable columns={fetchedColumns} {...{ updater, data }} />
           </div>
           <div
-            className={classList('panels', {
+            className={clsx('panels', {
               active: Object.values(panelToggles).find(v => v === true)!,
             })}
           >
             {panels.map(({ key, component }) => (
               <div
                 key={key}
-                className={classList('panel', { active: panelToggles[key] })}
+                className={clsx('panel', { active: panelToggles[key] })}
               >
                 {component}
               </div>

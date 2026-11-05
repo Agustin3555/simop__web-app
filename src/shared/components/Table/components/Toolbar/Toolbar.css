@@ -28,14 +28,18 @@
 
   > .right {
     > .cmp-dropdown > .dropdown {
+      --padding: var(--pal-size-2xs);
+
       flex-direction: column;
-      gap: var(--pal-size-3xs);
-      padding: var(--pal-size-3xs);
+      gap: var(--pal-size-s);
+      padding: var(--padding);
 
-      > .cmp-button {
-        border-color: var(--old-pal-color-c-l1);
+      border-radius: calc(var(--pal-size-2xs) + var(--padding));
 
-        color: var(--old-pal-color-c-d1);
+      > .actions {
+        display: flex;
+        flex-direction: column;
+        gap: var(--pal-size-2xs);
       }
     }
   }

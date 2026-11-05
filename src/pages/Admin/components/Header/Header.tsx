@@ -35,7 +35,7 @@ const Header = () => {
       <div className="right">
         <Button
           title={isOpen ? 'Cerrar' : 'Abrir'}
-          faIcon="fa-solid fa-mattress-pillow"
+          iconClass="fa-solid fa-mattress-pillow"
           onAction={toggleNav}
         />
         {mainServerUrl && (
@@ -43,7 +43,7 @@ const Header = () => {
             handlingClass="sync"
             text="Sincronizar"
             title="Sincronizar base de datos"
-            faIcon="fa-solid fa-database"
+            iconClass="fa-solid fa-database"
             hold
             inverted
             {...syncAction}
@@ -53,12 +53,12 @@ const Header = () => {
       <div className="left">
         <ExternalLink
           title="Manual"
-          faIcon="fa-solid fa-book"
+          iconClass="fa-solid fa-book"
           url="https://almondine-week-483.notion.site/SIMOP-Manual-del-Usuario-1528314303d88055a9c1da4222bea187"
         />
         <Button
           title="Ajustes"
-          faIcon="fa-solid fa-gear"
+          iconClass="fa-solid fa-gear"
           onAction={handleActiveConfig}
         />
       </div>

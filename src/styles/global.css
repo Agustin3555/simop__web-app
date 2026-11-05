@@ -25,6 +25,10 @@ html {
   text-rendering: optimizeLegibility;
 
   background-color: var(--document-background-color);
+
+  * {
+    border-width: var(--line-thickness);
+  }
 }
 
 body {

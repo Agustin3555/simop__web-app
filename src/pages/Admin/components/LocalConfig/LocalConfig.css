@@ -7,7 +7,6 @@
   overflow: auto;
 
   > * {
-    border-width: var(--line-thickness);
     border-style: solid;
     border-color: var(--old-pal-color-a-l4);
     min-height: 12rem;

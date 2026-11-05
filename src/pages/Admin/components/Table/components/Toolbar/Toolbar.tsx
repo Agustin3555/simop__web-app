@@ -13,27 +13,27 @@ export type ToggleKey =
 
 const toggles: Record<
   ToggleKey,
-  Required<Pick<ToggleProps, 'title' | 'faIcon'>>
+  Required<Pick<ToggleProps, 'title' | 'iconClass'>>
 > = {
   filters: {
     title: 'Filtrar',
-    faIcon: 'fa-solid fa-filter',
+    iconClass: 'fa-solid fa-filter',
   },
   simplifyMatches: {
     title: 'Simplificar coincidencias',
-    faIcon: 'fa-solid fa-down-left-and-up-right-to-center fa-rotate-by',
+    iconClass: 'fa-solid fa-down-left-and-up-right-to-center fa-rotate-by',
   },
   columnControl: {
     title: 'Controlar columnas',
-    faIcon: 'fa-solid fa-table-columns',
+    iconClass: 'fa-solid fa-table-columns',
   },
   stickHead: {
     title: 'Fijar cabecera de tabla',
-    faIcon: 'fa-regular fa-window-maximize',
+    iconClass: 'fa-regular fa-window-maximize',
   },
   stickFoot: {
     title: 'Fijar pie de tabla',
-    faIcon: 'fa-regular fa-window-maximize fa-rotate-180',
+    iconClass: 'fa-regular fa-window-maximize fa-rotate-180',
   },
 }
 
@@ -85,7 +85,7 @@ const Toolbar = ({
           {filteredDataLength !== dataLength && (
             <Value
               text={filteredDataLength}
-              faIcon="fa-solid fa-filter"
+              iconClass="fa-solid fa-filter"
               size="s"
               type="secondary"
               pill
@@ -93,7 +93,7 @@ const Toolbar = ({
           )}
           <Value
             text={dataLength}
-            faIcon="fa-solid fa-cubes-stacked"
+            iconClass="fa-solid fa-cubes-stacked"
             size="s"
             type="secondary"
             pill
@@ -103,7 +103,7 @@ const Toolbar = ({
           <Button
             text="Excel"
             title="Descargar Excel"
-            faIcon="fa-solid fa-file-arrow-down"
+            iconClass="fa-solid fa-file-arrow-down"
             size="s"
             type="secondary"
             onAction={onExportClick}

@@ -6,7 +6,7 @@ import { Cell, Pie, PieChart, ResponsiveContainer, Sector } from 'recharts'
 import { AnnotationLayer } from './components'
 import { PieSectorData } from './components/AnnotationLayer/AnnotationLayer'
 import { Button, Toggle } from '@/components'
-import { classList } from '@/helpers'
+import { clsx } from '@/helpers'
 import { COLOR_MATCHER, palColorGS, RGBColor } from '@/styles/palette'
 import { AddFn, Prop, WDND_MODE } from '@/pages/Admin/meta/utils'
 import { generateColorScaleFromKeys } from '../../helpers'
@@ -204,7 +204,7 @@ const PieByField = ({ propField }: PieByFieldProps) => {
   if (!(data && pieSectorData && sectorRefs)) return null
 
   return (
-    <div className={classList('cmp-pie-by-field', { captured })}>
+    <div className={clsx('cmp-pie-by-field', { captured })}>
       <header>
         <div className="left">
           <small>Por: </small>
@@ -218,7 +218,7 @@ const PieByField = ({ propField }: PieByFieldProps) => {
         </div>
         <Button
           title="Eliminar"
-          faIcon="fa-solid fa-xmark"
+          iconClass="fa-solid fa-xmark"
           size="s"
           type="secondary"
           onAction={handleDeleteClick}
@@ -250,7 +250,7 @@ const PieByField = ({ propField }: PieByFieldProps) => {
         </ResponsiveContainer>
         <Toggle
           title="Agregar al informe"
-          faIcon="fa-solid fa-paperclip"
+          iconClass="fa-solid fa-paperclip"
           value={captured}
           onChange={handleCaptureChange}
         />

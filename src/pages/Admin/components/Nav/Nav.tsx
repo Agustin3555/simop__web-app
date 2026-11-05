@@ -10,8 +10,8 @@ import FavoriteViews from '../FavoriteViews/FavoriteViews'
 type ViewMode = 'tree' | 'favorites'
 
 const VIEW_MODES_OPTIONS: SegmentedControlProps<ViewMode>['options'] = [
-  { value: 'tree', text: 'Secciones', faIcon: 'fa-solid fa-bars-staggered' },
-  { value: 'favorites', text: 'Favoritos', faIcon: 'fa-solid fa-star' },
+  { value: 'tree', text: 'Secciones', iconClass: 'fa-solid fa-bars-staggered' },
+  { value: 'favorites', text: 'Favoritos', iconClass: 'fa-solid fa-star' },
 ]
 
 const Nav = () => {

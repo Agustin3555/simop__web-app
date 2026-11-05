@@ -4,7 +4,7 @@ import { Fragment } from 'react/jsx-runtime'
 import { PieByField } from './components'
 import { Button, Separator } from '@/components'
 import { useMemo } from 'react'
-import { classList } from '@/helpers'
+import { clsx } from '@/helpers'
 import { useConfigModule } from '../../hooks/useConfigModule.hook'
 import { useGraphScreenshots } from '../../hooks/useGraphScreenshots.hook'
 import { useTableDef } from '../../hooks/useTableDef.hook'
@@ -27,10 +27,7 @@ const GraphList = ({ handlingClass }: GraphListProps) => {
     [],
   )
   return (
-    <div
-      className={classList('cmp-graph-list', handlingClass)}
-      ref={graphListRef}
-    >
+    <div className={clsx('cmp-graph-list', handlingClass)} ref={graphListRef}>
       {graphedFields.length ? (
         graphedFields.map((field, i) => (
           <Fragment key={field}>
@@ -41,7 +38,7 @@ const GraphList = ({ handlingClass }: GraphListProps) => {
       ) : (
         <FallbackBanner>
           Seleccione una columna con el interruptor{' '}
-          <Button faIcon="fa-solid fa-chart-pie" size="s" type="secondary" />
+          <Button iconClass="fa-solid fa-chart-pie" size="s" type="secondary" />
         </FallbackBanner>
       )}
     </div>

@@ -11,7 +11,7 @@ import { createPortal } from 'react-dom'
 import { UseFloatingReturn } from '@floating-ui/react'
 import { Button, Icon } from '@/components'
 import { Selected } from '..'
-import { classList } from '@/helpers'
+import { clsx } from '@/helpers'
 import { BaseComboboxProps } from '../../BaseCombobox'
 import { Option } from './components'
 import { useComboboxCore } from '@/pages/Admin/hooks/useComboboxCore.hook'
@@ -104,7 +104,7 @@ const Dropdown = ({
 
   return createPortal(
     <div
-      className={classList('cmp-base-combobox-drop-down', {
+      className={clsx('cmp-base-combobox-drop-down', {
         isMultiple,
         isOpen,
       })}
@@ -137,14 +137,14 @@ const Dropdown = ({
             <>
               <Button
                 title="Seleccionar todo"
-                faIcon="fa-solid fa-check-square"
+                iconClass="fa-solid fa-check-square"
                 size="s"
                 type="secondary"
                 onAction={handleSelectAllClick}
               />
               <Button
                 title="Deseleccionar todo"
-                faIcon="fa-regular fa-square"
+                iconClass="fa-regular fa-square"
                 size="s"
                 type="secondary"
                 onAction={handleDeselectAllClick}
@@ -156,7 +156,7 @@ const Dropdown = ({
       </header>
       {isVoid ? (
         <div className="void">
-          <Icon faIcon="fa-solid fa-frog" />
+          <Icon iconClass="fa-solid fa-frog" />
         </div>
       ) : (
         <fieldset {...(isEditMode && { disabled })}>

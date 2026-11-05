@@ -60,25 +60,25 @@ const ModuleView = ({ view, tableKey, queryPanels }: ModuleViewProps) => {
     () => [
       {
         title: 'Configurar',
-        faIcon: 'fa-solid fa-sliders',
+        iconClass: 'fa-solid fa-sliders',
         tabPanelKey: 'config',
         component: <LocalConfig />,
       },
       {
         title: 'Consultar',
-        faIcon: 'fa-solid fa-search',
+        iconClass: 'fa-solid fa-search',
         tabPanelKey: 'query',
         component: <LocalQuery panels={queryPanels} />,
       },
       {
         title: 'Agregar',
-        faIcon: 'fa-solid fa-plus',
+        iconClass: 'fa-solid fa-plus',
         tabPanelKey: 'add',
         component: <LocalAdd />,
       },
       // {
       //   title: 'Editar',
-      //   faIcon: 'fa-solid fa-pen',
+      //   iconClass: 'fa-solid fa-pen',
       //   tabPanelKey: 'edit',
       //   component: <LocalEdit />,
       // },

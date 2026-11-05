@@ -1,6 +1,6 @@
 :root {
   --cmp-option-group-color-target: var(--pal-color-b-500);
-  --cmp-option-group-color-border-inactive: var(--pal-color-n-500);
+  --cmp-option-group-color-border-inactive: var(--pal-color-a-100);
   --cmp-option-group-color-font-active: var(--pal-color-white);
 }
 
@@ -16,11 +16,7 @@
     gap: var(--ui-gap);
     border-width: var(--line-thickness);
     border-style: solid;
-    border-color: color-mix(
-      in srgb,
-      var(--cmp-option-group-color-border-inactive),
-      #fff 80%
-    );
+    border-color: var(--cmp-option-group-color-border-inactive);
     padding-inline: var(--ui-padding-inline);
     height: var(--ui-height);
 

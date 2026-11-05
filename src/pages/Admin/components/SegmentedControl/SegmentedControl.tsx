@@ -1,7 +1,7 @@
 import './SegmentedControl.css'
 import { Dispatch, SetStateAction } from 'react'
 import { useInputHandler } from '../../hooks/useInputHandler.hook'
-import { classList } from '@/helpers'
+import { clsx } from '@/helpers'
 import { Icon } from '@/components'
 
 export interface SegmentedControlProps<T> {
@@ -12,7 +12,7 @@ export interface SegmentedControlProps<T> {
     value: T
     title?: string
     text?: string
-    faIcon: string
+    iconClass: string
   }[]
   size?: 's' | 'm'
 }
@@ -27,11 +27,11 @@ const SegmentedControl = <T extends string>({
   const handleChange = useInputHandler(value => setSelected(value as T))
 
   return (
-    <fieldset className={classList('cmp-segmented-control', `ui-${size}`)}>
-      {options.map(({ value, title, text, faIcon }) => (
+    <fieldset className={clsx('cmp-segmented-control', `ui-${size}`)}>
+      {options.map(({ value, title, text, iconClass }) => (
         <label
           key={value}
-          className={classList({ square: text === undefined })}
+          className={clsx({ square: text === undefined })}
           {...{ title }}
         >
           {text}
@@ -41,7 +41,7 @@ const SegmentedControl = <T extends string>({
             onChange={handleChange}
             {...{ name, value }}
           />
-          <Icon {...{ faIcon }} />
+          <Icon {...{ iconClass }} />
         </label>
       ))}
     </fieldset>

@@ -1,6 +1,6 @@
 import './InputArea.css'
 import { TextareaHTMLAttributes } from 'react'
-import { classList } from '@/helpers'
+import { clsx } from '@/helpers'
 import { InputFieldPartial } from '@/types'
 
 interface InputAreaProps extends InputFieldPartial {
@@ -17,7 +17,7 @@ const InputArea = ({
   textareaHTMLAttrs,
 }: InputAreaProps) => {
   return (
-    <div className={classList('cmp-input-area', 'control')}>
+    <div className={clsx('cmp-input-area', 'control')}>
       <textarea
         className="input box text"
         name={keyName}

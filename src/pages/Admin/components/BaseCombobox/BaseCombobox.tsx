@@ -11,7 +11,7 @@ import {
 import { useInputField } from '@/hooks'
 import { InputField } from '@/types'
 import { Field, Icon } from '@/components'
-import { classList } from '@/helpers'
+import { clsx } from '@/helpers'
 import { Dropdown, Selected } from './components'
 import { OptionProps } from './components/Dropdown/components/Option/Option'
 import {
@@ -129,7 +129,7 @@ const BaseCombobox = ({
 
   return (
     <div
-      className={classList('cmp-base-combobox', 'control', { isOpen })}
+      className={clsx('cmp-base-combobox', 'control', { isOpen })}
       onMouseEnter={handleEnter}
     >
       <Field
@@ -163,7 +163,7 @@ const BaseCombobox = ({
           }}
         />
         <div className="arrow">
-          <Icon faIcon="fa-solid fa-angle-down" />
+          <Icon iconClass="fa-solid fa-angle-down" />
         </div>
       </fieldset>
       <Dropdown

@@ -1,5 +1,5 @@
 import { useMemo } from 'react'
-import { classList, varList } from '@/helpers'
+import { clsx, varList } from '@/helpers'
 
 const SIZES = ['s', 's', 's', 'm', 'm', 'l']
 
@@ -14,7 +14,7 @@ const Particles = () => {
   const particles = useMemo(() => generateParticles(16), [])
 
   return particles.map(({ x, y, size }, i) => (
-    <div key={i} className={classList('particle-container', size)}>
+    <div key={i} className={clsx('particle-container', size)}>
       <div style={varList({ x, y })} />
     </div>
   ))

@@ -137,7 +137,7 @@ const LocalEdit = () => {
           Seleccione un/a <strong>{title.singular}</strong> a editar en{' '}
           <Button
             text="Consultar"
-            faIcon="fa-solid fa-search"
+            iconClass="fa-solid fa-search"
             type="secondary"
             inverted
             onAction={handleClick}

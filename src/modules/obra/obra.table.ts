@@ -14,6 +14,7 @@ export const ObraTable = createTableDef({
   mutationColumnGroups: [
     {
       columnKeys: [
+        'numero',
         'nombre',
         'tipoEnteObra',
         'solicitante',

@@ -106,7 +106,7 @@ export const RefsCombobox = (props: RefsComboboxProps) => {
     >
       <Button
         title="Actualizar opciones"
-        faIcon="fa-solid fa-arrows-rotate"
+        iconClass="fa-solid fa-arrows-rotate"
         size="s"
         type="secondary"
         {...reloadOptionsAction}

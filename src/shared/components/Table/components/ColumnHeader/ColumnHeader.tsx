@@ -5,7 +5,7 @@ import { useTable } from '../../contexts/Table/useTable.hook'
 import { Button, Toggle } from '@/components'
 import { FilterMenu, SizeInput, SortButton } from './components'
 import { ColumnBehavior } from '@/shared/core/types'
-import { classList } from '@/helpers'
+import { clsx } from '@/helpers'
 
 interface ColumnHeaderProps {
   propBuilders: ColumnBehavior
@@ -35,7 +35,7 @@ export const ColumnHeader = ({
 
   return (
     <div
-      className={classList('cmp-column-header', { hidden, isDragging })}
+      className={clsx('cmp-column-header', { hidden, isDragging })}
       style={hidden ? undefined : { width: `var(--col-${key}-size)` }}
       ref={control ? ref : undefined}
     >
@@ -48,7 +48,7 @@ export const ColumnHeader = ({
           )}
           <Button
             title={hidden ? 'Mostrar' : 'Ocultar'}
-            faIcon={`fa-solid fa-eye${hidden ? '' : '-slash'}`}
+            iconClass={`fa-solid fa-eye${hidden ? '' : '-slash'}`}
             size="s"
             type="secondary"
             inverted
@@ -60,7 +60,7 @@ export const ColumnHeader = ({
         <h2 className="text">{title}</h2>
         {!hidden && (
           <div className="actions">
-            {/* <Toggle title="Graficar" faIcon="fa-solid fa-chart-pie" /> */}
+            {/* <Toggle title="Graficar" iconClass="fa-solid fa-chart-pie" /> */}
             <SortButton {...{ propBuilders }} />
             <FilterMenu {...{ propBuilders }} />
           </div>

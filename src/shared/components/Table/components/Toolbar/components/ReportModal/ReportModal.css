@@ -1,27 +1,25 @@
-.cmp-report-modal > dialog > .content {
-  --cmp-modal-max-width: max-content;
+.cmp-report-modal {
+  > dialog > .content {
+    --cmp-modal-max-width: max-content;
 
-  > form {
-    display: flex;
-    flex-direction: column;
-    gap: var(--pal-size-l);
-    padding: var(--pal-size-l);
-
-    > fieldset {
+    > form {
       display: flex;
       flex-direction: column;
-      gap: var(--pal-size-xs);
-      border: none;
+      gap: var(--pal-size-l);
+      padding: var(--pal-size-l);
 
-      > legend {
-        margin-bottom: var(--pal-size-s);
+      > fieldset {
+        display: flex;
+        flex-direction: column;
+        gap: var(--pal-size-xs);
+        border: none;
 
-        font-size: var(--pal-size-font-xs);
+        > legend {
+          margin-bottom: var(--pal-size-s);
+
+          font-size: var(--pal-size-font-xs);
+        }
       }
-    }
-
-    > .cmp-button {
-      color: var(--old-pal-color-white);
     }
   }
 }

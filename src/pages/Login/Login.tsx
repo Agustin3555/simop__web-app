@@ -37,7 +37,7 @@ const Login = () => {
           />
           <Button
             text="Acceder"
-            faIcon="fa-solid fa-arrow-right"
+            iconClass="fa-solid fa-arrow-right"
             submit
             {...{ actionState }}
           />

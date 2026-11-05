@@ -1,11 +1,11 @@
 import './ExternalLink.css'
 import { Icon } from '..'
-import { classList } from '@/helpers'
+import { clsx } from '@/helpers'
 
 interface Props {
   title?: string
   text?: string
-  faIcon?: string
+  iconClass?: string
   url: string
   type?: 'primary' | 'secondary' | 'tertiary'
   size?: 'l' | 'm' | 's'
@@ -14,14 +14,14 @@ interface Props {
 const ExternalLink = ({
   title,
   text,
-  faIcon,
+  iconClass,
   url,
   type = 'primary',
   size = 'm',
 }: Props) => (
   <a
-    className={classList('cmp-external-link', `ui-${size}`, type, {
-      square: faIcon !== undefined && text === undefined,
+    className={clsx('cmp-external-link', `ui-${size}`, type, {
+      square: iconClass !== undefined && text === undefined,
     })}
     title={title ?? text}
     href={url}
@@ -29,7 +29,7 @@ const ExternalLink = ({
     rel="noopener"
   >
     {text}
-    {faIcon && <Icon faIcon={faIcon} />}
+    {iconClass && <Icon iconClass={iconClass} />}
   </a>
 )
 

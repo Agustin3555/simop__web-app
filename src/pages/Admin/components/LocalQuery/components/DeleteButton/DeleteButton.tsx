@@ -26,8 +26,9 @@ const DeleteButton = () => {
     <Button
       text="Eliminar"
       title="Eliminar seleccionados"
-      faIcon="fa-solid fa-trash"
+      iconClass="fa-solid fa-trash"
       type="secondary"
+      size="l"
       hold
       {...deleteAction}
     />

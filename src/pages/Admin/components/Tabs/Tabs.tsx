@@ -3,12 +3,12 @@ import { ReactNode, useState } from 'react'
 import { useInputHandler } from '../../hooks/useInputHandler.hook'
 import { LocalViewContext } from '@/pages/Admin/contexts/localViewLocation.context'
 import { Icon } from '@/components'
-import { classList } from '@/helpers'
+import { clsx } from '@/helpers'
 
 export interface TabPanel {
   tabPanelKey: string
   title: string
-  faIcon: string
+  iconClass: string
   component: ReactNode
 }
 
@@ -32,9 +32,9 @@ const Tabs = ({ viewKey, title, tabPanels }: TabsProps) => {
     <div className="cmp-tabs">
       <header>
         <fieldset>
-          {tabPanels.map(({ tabPanelKey, title, faIcon }) => (
+          {tabPanels.map(({ tabPanelKey, title, iconClass }) => (
             <label key={tabPanelKey} className="ui-l">
-              {faIcon && <Icon {...{ faIcon }} />}
+              {iconClass && <Icon {...{ iconClass }} />}
               <div className="text">{title}</div>
               <input
                 type="radio"
@@ -53,7 +53,7 @@ const Tabs = ({ viewKey, title, tabPanels }: TabsProps) => {
           {tabPanels.map(({ tabPanelKey, component }) => (
             <div
               key={tabPanelKey}
-              className={classList({ active: tabPanelKey === localView })}
+              className={clsx({ active: tabPanelKey === localView })}
             >
               {component}
             </div>

@@ -16,7 +16,7 @@ import {
   Header as TsHeader,
 } from '@tanstack/react-table'
 import { LooseEntity } from '@/models/config'
-import { classList } from '@/helpers'
+import { clsx } from '@/helpers'
 import { steppedSizes } from '../../helpers'
 import { extractKeys } from '@/pages/Admin/helpers'
 
@@ -206,7 +206,7 @@ const Header = ({
 
   return (
     <div
-      className={classList('cmp-table-header cell', { dragging })}
+      className={clsx('cmp-table-header cell', { dragging })}
       style={{ width: `var(--col-${column.id}-size)` }}
     >
       <div className="content">
@@ -226,14 +226,14 @@ const Header = ({
             <div className="group">
               <Toggle
                 title="Graficar"
-                faIcon="fa-solid fa-chart-pie"
+                iconClass="fa-solid fa-chart-pie"
                 value={graphedFields.includes(column.id)}
                 onChange={handleToggleChange}
               />
               <Button
                 title="Ordenar"
                 text={sortIndex ? String(sortIndex) : undefined}
-                faIcon={
+                iconClass={
                   sortIcon ?? 'fa-solid fa-arrow-right-arrow-left fa-rotate-90'
                 }
                 size="s"
@@ -255,7 +255,7 @@ const Header = ({
         <div className="filter-container">{filter}</div>
       </div>
       <div
-        className={classList('resizer', { resizing: getIsResizing() })}
+        className={clsx('resizer', { resizing: getIsResizing() })}
         style={{ translate: calculateTranslate() }}
         onDoubleClick={() => resetSize()}
         onMouseDown={getResizeHandler()}
