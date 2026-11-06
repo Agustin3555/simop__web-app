@@ -2,7 +2,7 @@ import './GraphList.css'
 
 import { Fragment } from 'react/jsx-runtime'
 import { PieByField } from './components'
-import { Button, Separator } from '@/components'
+import { Separator } from '@/components'
 import { useMemo } from 'react'
 import { clsx } from '@/helpers'
 import { useConfigModule } from '../../hooks/useConfigModule.hook'
@@ -11,6 +11,7 @@ import { useTableDef } from '../../hooks/useTableDef.hook'
 import { useTable } from '../../hooks/useTable.hook'
 import FallbackBanner from '../FallbackBanner/FallbackBanner'
 import { useConfigs } from '@/shared/contexts/Configs/useConfigs.hook'
+import { NewButton } from '@/shared/components/Button/Button'
 
 interface GraphListProps {
   handlingClass?: string
@@ -38,7 +39,7 @@ const GraphList = ({ handlingClass }: GraphListProps) => {
       ) : (
         <FallbackBanner>
           Seleccione una columna con el interruptor{' '}
-          <Button iconClass="fa-solid fa-chart-pie" size="s" type="secondary" />
+          <NewButton iconClass="fa-solid fa-chart-pie" size="s" border />
         </FallbackBanner>
       )}
     </div>

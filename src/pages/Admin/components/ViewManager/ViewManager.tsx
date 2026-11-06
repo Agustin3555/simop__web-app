@@ -18,7 +18,6 @@ import { TipoRescision } from '@/modules/tipoRescision/TipoRescision'
 import { TipoTematicaObra } from '@/modules/tipoTematicaObra/TipoTematicaObra'
 import { Pais } from '@/modules/pais/Pais'
 import { Provincia } from '@/modules/provincia/Provincia'
-import { Config } from '../../views/Config/Config'
 import { Obra } from '@/modules/obra/Obra'
 import { Ampliacion } from '@/modules/ampliacion/Ampliacion'
 import { APG } from '@/modules/apg/APG'
@@ -82,9 +81,6 @@ const ViewManager = () => (
     <TipoRepresentante />
     <TipoRescision />
     <TipoTematicaObra />
-
-    {/* TODO: no debería ser una vista, si no abrirse desde un dropdown */}
-    <Config />
   </div>
 )
 

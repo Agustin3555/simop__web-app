@@ -25,11 +25,12 @@ export interface ButtonProps {
   bodyStretch?: boolean
   keepBody?: boolean
   actionState?: ActionState
+  progress?: number
   onAction?: MouseEventHandler<HTMLButtonElement>
   htmlAttrs?: ButtonHTMLAttributes<HTMLButtonElement>
 }
 
-export const Button = ({
+export const NewButton = ({
   handlingClass,
   text,
   title,
@@ -43,6 +44,7 @@ export const Button = ({
   bodyStretch = false,
   keepBody = false,
   actionState,
+  progress,
   onAction,
   htmlAttrs,
 }: ButtonProps) => {
@@ -107,6 +109,7 @@ export const Button = ({
               onScreen: actionState === 'loading',
             })}
           >
+            {progress && <p>{progress.toFixed(0)} %</p>}
             <Loader {...{ size }} />
           </div>
           <Icon

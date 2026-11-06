@@ -1,22 +1,28 @@
 .cmp-header {
   --gap: var(--pal-size-xs);
-  --cmp-button-progress-color: var(--old-pal-color-white);
 
   display: flex;
   justify-content: space-between;
   padding: var(--gap);
 
-  color: var(--old-pal-color-white);
-  background-color: var(--old-pal-color-a-d2);
+  color: var(--pal-color-white);
+  background-color: var(--pal-color-a-600);
+  box-shadow: var(--pal-shadow-0);
 
   transition: border-radius var(--pal-time-m) ease;
 
   > div {
-    display: flex;
-    gap: var(--gap);
+    --cmp-button-color-target: var(--pal-color-a-500);
 
-    > .sync {
-      --cmp-button-bg-color: var(--old-pal-color-c-d1);
+    display: flex;
+    gap: var(--pal-size-xs);
+    color: var(--pal-color-white);
+
+    &.left {
+      > .new-cmp-button.sync {
+        --cmp-button-color-target: var(--pal-color-white);
+        --cmp-button-color-progressbar: var(--old-pal-color-white);
+      }
     }
   }
 

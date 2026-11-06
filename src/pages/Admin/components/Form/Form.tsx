@@ -1,12 +1,13 @@
 import './Form.css'
 import { ReactNode, useEffect, useId, useState } from 'react'
 import { useSubmitAction } from '@/hooks'
-import { Button, Toggle } from '@/components'
+import { Toggle } from '@/components'
 import SegmentedControl, {
   SegmentedControlProps,
 } from '../SegmentedControl/SegmentedControl'
 import { clsx } from '@/helpers'
 import { TableKey } from '../../constants/metaModelKey.const'
+import { NewButton } from '@/shared/components/Button/Button'
 
 type LayoutMode = 'masonry' | 'rows'
 
@@ -80,7 +81,7 @@ const Form = ({
           ))}
         </div>
         <footer>
-          <Button
+          <NewButton
             text="Confirmar"
             iconClass="fa-solid fa-check"
             submit

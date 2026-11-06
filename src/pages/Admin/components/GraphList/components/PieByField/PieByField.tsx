@@ -5,7 +5,7 @@ import { useQueryClient } from '@tanstack/react-query'
 import { Cell, Pie, PieChart, ResponsiveContainer, Sector } from 'recharts'
 import { AnnotationLayer } from './components'
 import { PieSectorData } from './components/AnnotationLayer/AnnotationLayer'
-import { Button, Toggle } from '@/components'
+import { Toggle } from '@/components'
 import { clsx } from '@/helpers'
 import { COLOR_MATCHER, palColorGS, RGBColor } from '@/styles/palette'
 import { AddFn, Prop, WDND_MODE } from '@/pages/Admin/meta/utils'
@@ -14,6 +14,7 @@ import { useTableDef } from '@/pages/Admin/hooks/useTableDef.hook'
 import { useGraphScreenshots } from '@/pages/Admin/hooks/useGraphScreenshots.hook'
 import { useTable } from '@/pages/Admin/hooks/useTable.hook'
 import Select from '../../../Select/Select'
+import { NewButton } from '@/shared/components/Button/Button'
 
 const BASE_COLORS: RGBColor[] = [
   COLOR_MATCHER.A,
@@ -216,11 +217,11 @@ const PieByField = ({ propField }: PieByFieldProps) => {
             setSelected={setMode}
           />
         </div>
-        <Button
+        <NewButton
           title="Eliminar"
           iconClass="fa-solid fa-xmark"
           size="s"
-          type="secondary"
+          border
           onAction={handleDeleteClick}
         />
       </header>

@@ -36,7 +36,7 @@ body {
   font-weight: 550;
   word-spacing: 0.0625rem;
   letter-spacing: 0.0125rem;
-  color: var(--old-pal-color-a-d3);
+  color: var(--pal-color-a-800);
 }
 
 ::selection {

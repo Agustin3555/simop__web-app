@@ -1,8 +1,8 @@
 .cmp-favorite-views {
   display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 8.5rem), 1fr));
   gap: var(--pal-size-xs);
   max-width: 26rem;
-  grid-template-columns: repeat(auto-fill, minmax(min(100%, 8.5rem), 1fr));
 
   > .item {
     position: relative;
@@ -17,25 +17,22 @@
     border-color: var(--old-pal-color-a-l2);
     padding: var(--pal-size-m);
 
-    color: var(--old-pal-color-a-l1);
-
     border-radius: var(--ui-border-radius);
+    color: var(--old-pal-color-a-l1);
     cursor: pointer;
 
     transition:
       color var(--pal-time-xs) ease-out,
       background-color var(--pal-time-xs) ease-out;
 
-    > .cmp-button {
-      --separation: var(--pal-size-2xs);
-      --cmp-button-bg-color: var(--old-pal-color-a-l3);
-      --cmp-button-transition: opacity var(--pal-time-s) ease-out;
+    > .new-cmp-button {
+      --cmp-button-transition: opacity var(--pal-time-2xs) ease-out;
 
       position: absolute;
-      top: var(--separation);
-      right: var(--separation);
+      top: 0;
+      right: 0;
 
-      color: var(--old-pal-color-white);
+      margin: var(--pal-size-2xs);
 
       @media (hover: hover) {
         opacity: 0;
@@ -64,7 +61,7 @@
       background-color: var(--old-pal-color-a-l2);
     }
 
-    &:hover > .cmp-button {
+    &:hover > .new-cmp-button {
       opacity: initial;
     }
   }

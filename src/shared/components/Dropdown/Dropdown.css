@@ -9,7 +9,7 @@
     position-area: bottom;
     position-try-fallbacks: flip-block;
 
-    margin: var(--pal-size-2xs);
+    margin: var(--pal-size-xs);
     border-width: var(--line-thickness);
     border-color: var(--pal-color-a-200);
     max-width: var(--cmp-dropdown-max-width);

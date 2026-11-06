@@ -1,0 +1,25 @@
+.cmp-config-dropdown {
+  --cmp-dropdown-max-width: 22rem;
+
+  > .dropdown {
+    flex-direction: column;
+
+    > section {
+      display: flex;
+      flex-direction: column;
+      gap: var(--pal-size-s);
+      padding: var(--pal-size-s);
+
+      > small {
+        color: var(--pal-color-a-300);
+      }
+
+      &:not(:first-child) {
+        border-width: 0;
+        border-style: solid;
+        border-color: var(--pal-color-a-200);
+        border-top-width: var(--line-thickness);
+      }
+    }
+  }
+}

@@ -8,7 +8,7 @@ import { ReportModal } from './components'
 import { ColumnBehavior } from '@/shared/core/types'
 import { CalcResults } from '../../hooks/useTableModel.hook'
 import { Dropdown } from '@/shared/components/Dropdown/Dropdown'
-import { Button } from '@/shared/components/Button/Button'
+import { NewButton } from '@/shared/components/Button/Button'
 import {
   Option,
   OptionGroup,
@@ -119,7 +119,7 @@ export const Toolbar = ({
               type="secondary"
               pill
             />
-            <Button
+            <NewButton
               title="Limpiar filtros"
               iconClass="fa-solid fa-xmark"
               size="s"
@@ -139,7 +139,7 @@ export const Toolbar = ({
       <div className="right">
         <Dropdown
           opener={attrs => (
-            <Button
+            <NewButton
               text="Exportar"
               iconClass="fa-solid fa-file-arrow-down"
               size="s"
@@ -166,14 +166,14 @@ export const Toolbar = ({
                 selectedCalcResults,
               }}
             />
-            <Button
+            <NewButton
               text="Excel"
               title="Descargar .xlsx"
               iconClass="fa-regular fa-file-excel"
               border
               bodyStretch
             />
-            <Button
+            <NewButton
               text="Para IA"
               title="Copiar formato TOON"
               iconClass="fa-regular fa-copy"

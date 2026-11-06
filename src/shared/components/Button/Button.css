@@ -1,6 +1,7 @@
 :root {
   --cmp-button-color-target: transparent;
   --cmp-button-color-border: var(--pal-color-a-200);
+  --cmp-button-color-progressbar: var(--pal-color-d-500);
 }
 
 .new-cmp-button {
@@ -58,6 +59,7 @@
 
     > .loader {
       display: flex;
+      gap: var(--ui-gap);
     }
   }
 
@@ -89,7 +91,7 @@
       content: '';
 
       border-radius: var(--pill-radius);
-      background-color: var(--cmp-button-progress-color);
+      background-color: var(--cmp-button-color-progressbar);
 
       transition:
         width var(--width-transition-time) ease-out,

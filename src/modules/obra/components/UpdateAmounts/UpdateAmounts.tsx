@@ -13,6 +13,7 @@ import {
 } from '@/shared/core/column.helper'
 import { MontosActualizadosObra } from '../../obra.model'
 import { ObraServiceExtension } from '../../obra.service'
+import { NewButton } from '@/shared/components/Button/Button'
 
 const columns = createColumnBehaviors(
   toColumnDefs<MontosActualizadosObra>({
@@ -81,12 +82,13 @@ export const UpdateAmounts = () => {
   return (
     <div className="cmp-update-amounts">
       <header>
-        <Button
-          text="Actualizar"
-          title="Actualizar montos"
+        <NewButton
+          text="Actualizar todo"
           iconClass="fa-solid fa-arrows-rotate"
-          hold
-          {...{ ...updateAction, progress }}
+          holdToConfirm
+          border
+          {...updateAction}
+          {...{ progress }}
         />
         {/* <Toggle
           title="Actualizar solo los faltantes"

@@ -1,9 +1,10 @@
 import './FavoriteViews.css'
-import { Button, Icon } from '@/components'
+import { Icon } from '@/components'
 import { useViews } from '../../hooks/useViews.hook'
 import { useFavoriteTables } from '../../store/favoriteTables.store'
 import { TABLE_DEFS } from '../../constants/metaModelDefinitions.const'
 import { clsx } from '@/helpers'
+import { NewButton } from '@/shared/components/Button/Button'
 
 const FavoriteViews = () => {
   const { isActive, select } = useViews()
@@ -23,7 +24,7 @@ const FavoriteViews = () => {
             title={title.plural}
             onClick={() => select(tableKey)}
           >
-            <Button
+            <NewButton
               iconClass="fa-solid fa-minus"
               size="s"
               onAction={e => {
