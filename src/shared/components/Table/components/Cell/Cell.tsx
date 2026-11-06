@@ -1,9 +1,9 @@
 import './Cell.css'
 import { useSubmitAction } from '@/hooks'
-import { Button } from '@/components'
 import { ServiceData } from '@/infra/http/service.type'
 import { ColumnBehavior } from '@/shared/core/types'
 import { NewTableProps } from '../../NewTable'
+import { NewButton } from '@/shared/components/Button/Button'
 
 interface CellProps extends Pick<NewTableProps, 'updater'> {
   rowId: string
@@ -46,7 +46,7 @@ export const Cell = ({
       {updater && editMode && !isHidden ? (
         <form onSubmit={handleSubmit}>
           {getFormField(value, true)}
-          <Button
+          <NewButton
             iconClass="fa-solid fa-check"
             size="s"
             submit

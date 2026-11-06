@@ -1,12 +1,11 @@
-import './SortButton.css'
 import { useTable } from '@/shared/components/Table/contexts/Table/useTable.hook'
-import { Button } from '@/components'
+import { NewButton } from '@/shared/components/Button/Button'
 import { ColumnBehavior } from '@/shared/core/types'
 import { clsx } from '@/helpers'
 
 const SORT_ICON: Record<'asc' | 'desc', string> = {
-  asc: 'arrow-up-wide-short',
-  desc: 'arrow-down-short-wide',
+  asc: 'arrow-down-short-wide',
+  desc: 'arrow-up-wide-short',
 }
 
 interface SortButtonProps {
@@ -24,16 +23,14 @@ export const SortButton = ({
   const { sort, order } = columnSorting.find(s => s.columnKey === key) ?? {}
 
   return (
-    <Button
-      handlingClass={clsx('cmp-sort-button', {
-        sorting: sort !== undefined,
-      })}
-      title="Ordenar"
+    <NewButton
+      handlingClass={clsx({ isActive: !!sort })}
       text={order !== undefined ? String(order + 1) : undefined}
-      iconClass={`fa-solid fa-${sort ? SORT_ICON[sort] : 'arrow-right-arrow-left fa-rotate-90'}`}
+      title="Ordenar"
+      iconClass={`fa-solid fa-${sort ? SORT_ICON[sort] : 'sort'}`}
       size="s"
-      type="secondary"
-      inverted
+      iconPosition="start"
+      border={!sort}
       onAction={() => setColumnSorting(key)}
     />
   )

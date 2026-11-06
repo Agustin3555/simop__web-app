@@ -1,10 +1,11 @@
+import './DeleteButton.css'
 import { useMemo } from 'react'
 import { useHandleAction } from '@/hooks'
 import { useTable } from '@/shared/components/Table/contexts/Table/useTable.hook'
 import { useTableQuery } from '@/pages/Admin/hooks/useTableQuery.hook'
-import { Button } from '@/components'
+import { NewButton } from '@/shared/components/Button/Button'
 
-const DeleteButton = () => {
+export const DeleteButton = () => {
   const rowSelection = useTable(s => s.rowSelection)
   const deselectAllRows = useTable(s => s.deselectAllRows)
   const { deleteManyItems } = useTableQuery()
@@ -23,16 +24,15 @@ const DeleteButton = () => {
   })
 
   return (
-    <Button
+    <NewButton
+      handlingClass="cmp-delete-button"
       text="Eliminar"
       title="Eliminar seleccionados"
       iconClass="fa-solid fa-trash"
-      type="secondary"
       size="l"
-      hold
+      holdToConfirm
+      border
       {...deleteAction}
     />
   )
 }
-
-export default DeleteButton

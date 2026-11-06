@@ -1,12 +1,6 @@
 .cmp-filter-menu {
   --cmp-dropdown-max-width: 20rem;
 
-  > .cmp-button {
-    &.is-filtering {
-      --cmp-button-bg-color: var(--old-pal-color-b-l3);
-    }
-  }
-
   > .dropdown {
     flex-direction: column;
     gap: var(--pal-size-xs);

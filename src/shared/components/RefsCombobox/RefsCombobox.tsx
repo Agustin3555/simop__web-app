@@ -5,6 +5,7 @@ import { Button } from '@/components'
 import { ComboboxProps, NewCombobox } from '../Combobox/Combobox'
 import { ColumnDef, TableDef } from '@/shared/core/types'
 import { LooseEntity } from '@/infra/http/entity.types'
+import { NewButton } from '../Button/Button'
 
 interface RefsComboboxBaseProps {
   name: string
@@ -104,11 +105,11 @@ export const RefsCombobox = (props: RefsComboboxProps) => {
       {...{ name, options, multiple, required }}
       {...selectionProps}
     >
-      <Button
+      <NewButton
         title="Actualizar opciones"
         iconClass="fa-solid fa-arrows-rotate"
         size="s"
-        type="secondary"
+        border
         {...reloadOptionsAction}
       />
     </NewCombobox>

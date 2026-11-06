@@ -1,5 +1,5 @@
-.cmp-login > form > .cmp-button {
-  --cmp-button-bg-color: var(--old-pal-color-b);
+.cmp-login > form > .new-cmp-button {
+  --cmp-button-color-target: var(--pal-color-a-500);
 
-  color: var(--old-pal-color-white);
+  color: var(--pal-color-white);
 }

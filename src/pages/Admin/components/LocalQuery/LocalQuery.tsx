@@ -1,7 +1,7 @@
 import './LocalQuery.css'
 import { ReactNode, useCallback, useEffect, useMemo, useState } from 'react'
 import { useQueryActionState } from '@/hooks'
-import { Button, Toggle } from '@/components'
+import { Toggle } from '@/components'
 import { DeleteButton } from './components'
 import { clsx } from '@/helpers'
 import { useTableQuery } from '../../hooks/useTableQuery.hook'
@@ -14,6 +14,7 @@ import { NewTable, NewTableProps } from '@/shared/components'
 import { useConfigs } from '@/shared/contexts/Configs/useConfigs.hook'
 import { useTable } from '@/shared/components/Table/contexts/Table/useTable.hook'
 import { compareObjects } from '@/shared/helpers/compareObjects.helper'
+import { NewButton } from '@/shared/components/Button/Button'
 
 interface Panel {
   key: string
@@ -130,25 +131,26 @@ const LocalQueryBody = ({ panels: customPanels = [] }: LocalQueryProps) => {
           <div className="group">
             <header>
               <div className="left">
-                <Button
+                <NewButton
                   title="Consultar datos"
                   iconClass={`fa-solid fa-arrows-rotate`}
                   size="l"
+                  border
                   actionState={queryActionState}
                   onAction={refetch}
                 />
                 {!isSameStates && (
-                  <Button
+                  <NewButton
                     handlingClass="save-config"
                     text="Guardar configuración"
                     iconClass={`fa-solid fa-floppy-disk`}
-                    type="secondary"
                     size="l"
+                    border
                     onAction={handleSaveConfig}
                   />
                 )}
               </div>
-              <div className="actions">
+              <div className="right">
                 {rowSelection.length !== 0 && <DeleteButton />}
                 {panels.map(({ key, title, iconClass }) => (
                   <Toggle

@@ -1,12 +1,13 @@
 import './Node.css'
 import { MouseEventHandler, useCallback, useState } from 'react'
-import { Button, Icon } from '@/components'
+import { Icon } from '@/components'
 import { SectionNode } from '@/pages/Admin/constants/navTree.const'
 import { clsx } from '@/helpers'
 import { useViews } from '@/pages/Admin/hooks/useViews.hook'
 import { TABLE_DEFS } from '@/pages/Admin/constants/metaModelDefinitions.const'
 import { TableKey } from '@/pages/Admin/constants/metaModelKey.const'
 import { useFavoriteTables } from '@/pages/Admin/store/favoriteTables.store'
+import { NewButton } from '@/shared/components/Button/Button'
 
 interface LeafNodeProps {
   tableKey: TableKey
@@ -44,7 +45,7 @@ const LeafNode = ({ tableKey }: LeafNodeProps) => {
             'show-favorite': isFavorite(tableKey),
           })}
         >
-          <Button
+          <NewButton
             title={
               isFavorite(tableKey)
                 ? 'Eliminar de favoritos'

@@ -14,22 +14,25 @@
   > .header {
     display: flex;
 
+    color: var(--pal-color-a-500);
+
     > .grip-area {
       flex-grow: 1;
 
       padding: 0.0625rem;
-      padding-bottom: 0;
+      padding-right: 0.125rem;
 
       cursor: grab;
 
       > span {
         display: block;
+
         width: 100%;
-        height: var(--pal-size-m);
+        height: calc(100% - 0.0625rem);
 
         background-image: radial-gradient(
           circle at 0.125rem 0.125rem,
-          var(--old-pal-color-a-l3) 0.0625rem,
+          var(--pal-color-a-300) 0.0625rem,
           transparent 0
         );
         background-size: 0.25rem 0.25rem;
@@ -38,6 +41,10 @@
       &:active {
         cursor: grabbing;
       }
+    }
+
+    > .new-cmp-button {
+      border-top-right-radius: 0;
     }
   }
 
@@ -61,17 +68,13 @@
       display: flex;
       gap: var(--pal-size-2xs);
 
-      > .cmp-button {
-        &.primary {
-          color: var(--old-pal-color-white);
+      .new-cmp-button {
+        color: var(--pal-color-a-500);
 
-          background-color: var(--old-pal-color-a-l2);
-        }
+        &.is-active {
+          --cmp-button-color-target: var(--pal-color-b-500);
 
-        &.secondary {
-          border-color: var(--old-pal-color-a-l4);
-
-          color: var(--old-pal-color-gs-400);
+          color: var(--pal-color-white);
         }
       }
     }

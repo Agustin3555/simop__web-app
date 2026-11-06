@@ -105,7 +105,7 @@ export const Toolbar = ({
           title="Simplificar coincidencias"
           iconClass="fa-solid fa-compress"
           size="s"
-          type="secondary"
+          border
           onAction={handleHiddenColumnMatches}
         /> */}
       </div>

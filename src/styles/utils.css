@@ -199,6 +199,16 @@
   --ui-border-radius: var(--pal-size-2xs);
 }
 
+.ui-xs {
+  --ui-gap: var(--pal-size-2xs);
+  --ui-padding-inline: var(--pal-size-xs);
+  --ui-height: 1.25rem;
+  --ui-font-size: var(--pal-size-font-2xs);
+  --ui-icon-size: var(--pal-size-font-2xs);
+  --ui-loader-size: var(--pal-size-xs);
+  --ui-border-radius: var(--pal-size-2xs);
+}
+
 .section {
   display: flex;
   flex-direction: column;

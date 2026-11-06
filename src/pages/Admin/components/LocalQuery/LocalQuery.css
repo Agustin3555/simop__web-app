@@ -18,30 +18,17 @@
       justify-content: space-between;
       gap: var(--pal-size-s);
 
-      > .cmp-base-combobox {
-        width: 100%;
+      > div {
+        display: flex;
+        gap: var(--pal-size-s);
       }
 
       > .left {
         flex-grow: 1;
-
-        display: flex;
-        align-items: center;
-        gap: var(--pal-size-s);
-
-        > .cmp-button {
-          color: var(--old-pal-color-white);
-
-          &.save-config {
-            color: var(--old-pal-color-c);
-          }
-        }
       }
 
-      > .actions {
-        display: flex;
+      > .right {
         flex-wrap: wrap;
-        gap: var(--pal-size-s);
 
         .cmp-button {
           border-color: var(--old-pal-color-c);

@@ -2,10 +2,11 @@ import './ColumnHeader.css'
 import { useRef } from 'react'
 import { useSortable } from '@dnd-kit/react/sortable'
 import { useTable } from '../../contexts/Table/useTable.hook'
-import { Button, Toggle } from '@/components'
+import { Toggle } from '@/components'
 import { FilterMenu, SizeInput, SortButton } from './components'
 import { ColumnBehavior } from '@/shared/core/types'
 import { clsx } from '@/helpers'
+import { NewButton } from '@/shared/components/Button/Button'
 
 interface ColumnHeaderProps {
   propBuilders: ColumnBehavior
@@ -46,12 +47,10 @@ export const ColumnHeader = ({
               <span />
             </div>
           )}
-          <Button
+          <NewButton
             title={hidden ? 'Mostrar' : 'Ocultar'}
             iconClass={`fa-solid fa-eye${hidden ? '' : '-slash'}`}
-            size="s"
-            type="secondary"
-            inverted
+            size="xs"
             onAction={() => setColumnVisibility(key, hidden)}
           />
         </div>
@@ -61,8 +60,8 @@ export const ColumnHeader = ({
         {!hidden && (
           <div className="actions">
             {/* <Toggle title="Graficar" iconClass="fa-solid fa-chart-pie" /> */}
-            <SortButton {...{ propBuilders }} />
             <FilterMenu {...{ propBuilders }} />
+            <SortButton {...{ propBuilders }} />
           </div>
         )}
       </div>

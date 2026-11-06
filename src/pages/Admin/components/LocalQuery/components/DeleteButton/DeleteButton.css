@@ -1,0 +1,5 @@
+.cmp-delete-button {
+  --cmp-button-color-border: var(--pal-color-d-200);
+
+  color: var(--pal-color-d-500);
+}

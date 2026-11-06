@@ -8,6 +8,7 @@ import { Config } from '@/shared/contexts/Configs/configs.store'
 import { useConfigs } from '@/shared/contexts/Configs/useConfigs.hook'
 import { ComboboxProps, NewCombobox } from '@/shared/components'
 import { Checker } from '@/shared/components/Checker/Checker'
+import { NewButton } from '@/shared/components/Button/Button'
 
 interface ConfigProps {
   config: Config
@@ -34,19 +35,15 @@ const ConfigItem = ({
 
   const handleChange = useInputHandler(id => selectConfig(Number(id)))
 
-  const handleCloneClick = useCallback<MouseEventHandler<HTMLButtonElement>>(
-    e => {
-      clone(Number(e.currentTarget.name))
-      toasting('success', 'Copia creada con éxito')
-    },
-    [],
-  )
+  const handleCloneClick = () => {
+    clone(id)
+    toasting('success', 'Copia creada con éxito')
+  }
 
   const deleteAction = useHandleAction(async ({ setSuccess, setError }) => {
     try {
       remove(id)
       toasting('success', 'Eliminado con éxito')
-
       await setSuccess()
     } catch (error) {
       await setError()
@@ -81,22 +78,20 @@ const ConfigItem = ({
         />
         <div className="actions">
           {!isSelected && (
-            <Button
+            <NewButton
               title="Eliminar configuración"
-              name={String(id)}
               iconClass="fa-solid fa-trash"
               size="s"
-              type="secondary"
-              hold
+              holdToConfirm
+              border
               {...deleteAction}
             />
           )}
-          <Button
+          <NewButton
             title="Duplicar configuración"
-            name={String(id)}
             iconClass="fa-solid fa-clone"
             size="s"
-            type="secondary"
+            border
             onAction={handleCloneClick}
           />
         </div>

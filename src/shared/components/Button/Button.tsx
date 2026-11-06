@@ -113,13 +113,13 @@ export const NewButton = ({
             <Loader {...{ size }} />
           </div>
           <Icon
-            iconClass="ti ti-x"
+            iconClass="fa-solid fa-xmark"
             handlingClass={clsx('element', {
               onScreen: actionState === 'error',
             })}
           />
           <Icon
-            iconClass="ti ti-check"
+            iconClass="fa-solid fa-check"
             handlingClass={clsx('element', {
               onScreen: actionState === 'success',
             })}

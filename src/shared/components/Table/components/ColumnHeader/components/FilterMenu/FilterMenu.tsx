@@ -1,6 +1,5 @@
 import './FilterMenu.css'
 import { useTable } from '@/shared/components/Table/contexts/Table/useTable.hook'
-import { Button } from '@/components'
 import { Dropdown } from '@/shared/components'
 import { Field } from '@/shared/components/Field/Field'
 import {
@@ -9,6 +8,7 @@ import {
 } from '@/shared/components/OptionGroup/OptionGroup'
 import { ColumnBehavior } from '@/shared/core/types'
 import { clsx } from '@/helpers'
+import { NewButton } from '@/shared/components/Button/Button'
 
 interface FilterMenuProps {
   propBuilders: ColumnBehavior
@@ -58,14 +58,13 @@ export const FilterMenu = ({
     <Dropdown
       handlingClass="cmp-filter-menu"
       opener={attrs => (
-        <Button
-          handlingClass={clsx({ isFiltering: !!filters })}
+        <NewButton
+          handlingClass={clsx({ isActive: !!filters })}
           title="Filtrar"
           iconClass="fa-solid fa-filter"
           size="s"
-          type="secondary"
-          inverted
-          buttonHTMLAttrs={attrs}
+          border={!filters}
+          htmlAttrs={attrs}
         />
       )}
     >

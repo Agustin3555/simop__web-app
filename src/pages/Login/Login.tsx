@@ -2,8 +2,10 @@ import './Login.css'
 import { useSubmitAction } from '@/hooks'
 import { useAppStore } from '@/store/config'
 import { useLocation } from 'wouter'
-import { Button, CardPage, Input } from '@/components'
+import { CardPage, Input } from '@/components'
 import { uniquePass } from '@/env'
+import { NewButton } from '@/shared/components/Button/Button'
+import { Field } from '@/shared/components/Field/Field'
 
 const Login = () => {
   const [, navigate] = useLocation()
@@ -29,15 +31,17 @@ const Login = () => {
       <article className="cmp-login">
         <img src="/isologotipo-gobierno-ministerio.webp" />
         <form className="form-style" onSubmit={handleSubmit}>
-          <Input
-            keyName="pass"
-            title="Contraseña"
-            isRequired
-            inputHTMLAttrs={{ type: 'password' }}
-          />
-          <Button
+          <Field title="Contraseña">
+            <Input
+              keyName="pass"
+              isRequired
+              inputHTMLAttrs={{ type: 'password' }}
+            />
+          </Field>
+          <NewButton
             text="Acceder"
             iconClass="fa-solid fa-arrow-right"
+            size="l"
             submit
             {...{ actionState }}
           />
