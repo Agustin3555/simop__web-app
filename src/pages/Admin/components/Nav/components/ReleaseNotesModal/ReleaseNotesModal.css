@@ -1,8 +1,4 @@
 .cmp-release-notes-modal {
-  > .cmp-button {
-    border-color: rgba(var(--old-pal-color-base-a), 0.15);
-  }
-
   > dialog {
     z-index: 1;
     top: 0;

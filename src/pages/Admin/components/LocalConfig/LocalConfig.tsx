@@ -7,6 +7,7 @@ import { ConfigItem } from './components'
 import { useTableDef } from '../../hooks/useTableDef.hook'
 import { useConfigs } from '@/shared/contexts/Configs/useConfigs.hook'
 import { ComboboxProps, NewCombobox } from '@/shared/components'
+import { NewButton } from '@/shared/components/Button/Button'
 
 const STATIC_SELECTED = ['id']
 
@@ -67,11 +68,11 @@ const LocalConfig = () => {
               hideLabel
               inputHTMLAttrs={{ placeholder: 'Nombre...', required: true }}
             />
-            <Button
+            <NewButton
               title="Descartar configuración"
               iconClass="fa-solid fa-xmark"
               size="s"
-              type="secondary"
+              border
               onAction={handleCreatingClick}
             />
           </header>
@@ -83,7 +84,7 @@ const LocalConfig = () => {
               staticSelected={STATIC_SELECTED}
               {...{ options }}
             />
-            <Button
+            <NewButton
               text="Confirmar"
               iconClass="fa-solid fa-check"
               submit

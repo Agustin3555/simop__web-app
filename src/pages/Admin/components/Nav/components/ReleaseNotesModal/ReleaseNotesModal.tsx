@@ -1,12 +1,13 @@
 import './ReleaseNotesModal.css'
 import { MouseEventHandler, useCallback, useEffect, useState } from 'react'
 import { useToggle } from '@/pages/Admin/hooks/useToggle.hook'
-import { Button, Icon } from '@/components'
+import { Icon } from '@/components'
 import Note, { NoteProps } from './components/Note/Note'
 import { clsx, safe } from '@/helpers'
 import { lastSeenVersionEntity } from '@/pages/Admin/services/localStorage/entities/lastSeenVersion'
 import changelogRaw from '@/../CHANGELOG.md?raw'
 import pkg from '@/../package.json'
+import { NewButton } from '@/shared/components/Button/Button'
 
 const parseChangelog = (md: string) => {
   const normalized = md.replace(/\r\n/g, '\n')
@@ -125,28 +126,22 @@ const ReleaseNotesModal = () => {
     })
   }, [oldNotes, newNotes])
 
-  const newVersionAvailable =
-    compareVersions(pkg.version, lastSeenVersion) === 1
+  // TODO: abrir modal automáticamente si hay una nueva versión disponible
+  // const newVersionAvailable =
+  //   compareVersions(pkg.version, lastSeenVersion) === 1
 
   return (
     <div className="cmp-release-notes-modal">
-      <Button
+      <NewButton
         text={`v${pkg.version}`}
-        title={newVersionAvailable ? '¡Nueva versión disponible!' : undefined}
         size="s"
-        type="secondary"
-        badge={newVersionAvailable}
-        buttonHTMLAttrs={{ commandfor: 'notes-modal', command: 'show-modal' }}
+        border
+        htmlAttrs={{ commandfor: 'notes-modal', command: 'show-modal' }}
       />
       <dialog id="notes-modal" onClick={handleDialogClick}>
         <div className="content">
           <header>
             <h2>Notas de versión</h2>
-            <Button
-              text="Ok"
-              onAction={handleClose}
-              buttonHTMLAttrs={{ commandfor: 'notes-modal', command: 'close' }}
-            />
           </header>
           {newNotes.length !== 0 && (
             <section className="news notes">

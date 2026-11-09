@@ -26,10 +26,7 @@
   background-color: var(--cmp-button-color-target);
   overflow: hidden;
 
-  transition:
-    background-color var(--pal-time-2xs) ease-out,
-    scale var(--pal-time-xs) ease-out,
-    var(--cmp-button-transition, var(--transition-dummy));
+  transition: var(--cmp-button-transition, var(--transition-dummy));
 
   .element {
     scale: 0;

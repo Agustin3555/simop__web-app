@@ -21,27 +21,7 @@
       > div {
         display: flex;
         gap: var(--pal-size-s);
-      }
-
-      > .left {
-        flex-grow: 1;
-      }
-
-      > .right {
         flex-wrap: wrap;
-
-        .cmp-button {
-          border-color: var(--old-pal-color-c);
-
-          color: var(--old-pal-color-c-d1);
-
-          &.hold {
-            border-color: var(--old-pal-color-a-l1);
-            width: 8rem;
-
-            color: var(--old-pal-color-a);
-          }
-        }
       }
     }
   }

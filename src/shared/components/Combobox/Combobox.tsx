@@ -1,9 +1,10 @@
 import './Combobox.css'
 import { ReactNode, useMemo, useRef, useState } from 'react'
-import { Button, Icon } from '@/components'
+import { Icon } from '@/components'
 import { Dropdown } from '../Dropdown/Dropdown'
 import { SelectedOptions } from './components'
 import { clsx } from '@/helpers'
+import { NewButton } from '../Button/Button'
 
 interface ComboboxBaseProps {
   name: string
@@ -182,18 +183,18 @@ export const NewCombobox = (props: ComboboxProps) => {
               />
               {multiple && (
                 <>
-                  <Button
+                  <NewButton
                     title="Seleccionar todo"
                     iconClass="fa-solid fa-check-square"
                     size="s"
-                    type="secondary"
+                    border
                     onAction={handleSelectAll}
                   />
-                  <Button
+                  <NewButton
                     title="Deseleccionar todo"
                     iconClass="fa-regular fa-square"
                     size="s"
-                    type="secondary"
+                    border
                     onAction={handleDeselectAll}
                   />
                 </>

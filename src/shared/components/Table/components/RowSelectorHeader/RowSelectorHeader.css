@@ -26,10 +26,8 @@
 
   > .cmp-dropdown > .dropdown {
     flex-direction: column;
-
-    > .cmp-button {
-      justify-content: flex-start;
-    }
+    gap: var(--pal-size-2xs);
+    padding: var(--pal-size-2xs);
   }
 
   footer > & {
