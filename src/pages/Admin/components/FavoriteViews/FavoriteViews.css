@@ -25,7 +25,7 @@
       color var(--pal-time-xs) ease-out,
       background-color var(--pal-time-xs) ease-out;
 
-    > .new-cmp-button {
+    > .cmp-button {
       --cmp-button-transition: opacity var(--pal-time-2xs) ease-out;
 
       position: absolute;
@@ -61,7 +61,7 @@
       background-color: var(--old-pal-color-a-l2);
     }
 
-    &:hover > .new-cmp-button {
+    &:hover > .cmp-button {
       opacity: initial;
     }
   }

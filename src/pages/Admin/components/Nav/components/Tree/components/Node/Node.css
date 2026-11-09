@@ -43,7 +43,7 @@
     }
 
     > .actions {
-      > .new-cmp-button {
+      > .cmp-button {
         --cmp-button-transition: opacity var(--pal-time-xs) ease-out;
 
         color: var(--old-pal-color-a-l1);
@@ -53,7 +53,7 @@
         }
       }
 
-      &.show-favorite > .new-cmp-button {
+      &.show-favorite > .cmp-button {
         opacity: initial;
       }
     }
@@ -61,7 +61,7 @@
     &:hover {
       background-color: var(--old-pal-color-white);
 
-      > .actions > .new-cmp-button {
+      > .actions > .cmp-button {
         opacity: initial;
       }
     }
@@ -71,7 +71,7 @@
 
       background-color: var(--old-pal-color-a-l2);
 
-      > .actions > .new-cmp-button {
+      > .actions > .cmp-button {
         color: unset;
       }
     }

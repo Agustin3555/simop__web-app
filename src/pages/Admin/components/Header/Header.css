@@ -19,7 +19,7 @@
     color: var(--pal-color-white);
 
     &.left {
-      > .new-cmp-button.sync {
+      > .cmp-button.sync {
         --cmp-button-color-target: var(--pal-color-white);
         --cmp-button-color-progressbar: var(--old-pal-color-white);
       }

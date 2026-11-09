@@ -88,7 +88,7 @@
       justify-content: space-between;
       height: 100%;
 
-      > .new-cmp-button {
+      > .cmp-button {
         align-self: flex-start;
 
         color: var(--old-pal-color-white);

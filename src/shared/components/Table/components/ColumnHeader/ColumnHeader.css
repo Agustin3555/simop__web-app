@@ -43,7 +43,7 @@
       }
     }
 
-    > .new-cmp-button {
+    > .cmp-button {
       border-top-right-radius: 0;
     }
   }
@@ -68,7 +68,7 @@
       display: flex;
       gap: var(--pal-size-2xs);
 
-      .new-cmp-button {
+      .cmp-button {
         color: var(--pal-color-a-500);
 
         &.is-active {

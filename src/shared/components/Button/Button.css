@@ -4,7 +4,7 @@
   --cmp-button-color-progressbar: var(--pal-color-d-500);
 }
 
-.new-cmp-button {
+.cmp-button {
   --cmp-loader-size: var(--ui-loader-size);
   --cmp-icon-size: var(--ui-icon-size);
 

@@ -11,7 +11,7 @@
     align-content: flex-start;
     gap: var(--pal-size-s);
 
-    > .new-cmp-button {
+    > .cmp-button {
       --cmp-button-color-border: var(--pal-color-a-200);
     }
 

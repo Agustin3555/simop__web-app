@@ -14,7 +14,7 @@
     width: 100%;
     height: 100%;
 
-    > .new-cmp-button {
+    > .cmp-button {
       --cmp-button-color-target: var(--pal-color-b-500);
 
       position: absolute;
@@ -33,7 +33,7 @@
   }
 
   &:hover {
-    > form > .new-cmp-button {
+    > form > .cmp-button {
       opacity: 1;
     }
   }

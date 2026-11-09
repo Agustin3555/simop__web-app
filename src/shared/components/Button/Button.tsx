@@ -75,7 +75,7 @@ export const NewButton = ({
     [actionState, clearTimer, holdToConfirm, onAction],
   )
 
-  const classes = clsx('new-cmp-button', `ui-${size}`, handlingClass, {
+  const classes = clsx('cmp-button', `ui-${size}`, handlingClass, {
     iconStart: iconPosition === 'start',
     square: iconClass !== undefined && text === undefined,
     holdToConfirm,
