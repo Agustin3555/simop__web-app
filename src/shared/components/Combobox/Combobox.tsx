@@ -280,7 +280,10 @@ export const NewCombobox = (props: ComboboxProps) => {
                     {...(!multiple ? attrs : {})}
                     onClick={() => handleToggleOption(value)}
                   >
-                    <span className="primary-value text">{primaryValue}</span>
+                    <span className="primary-value text">
+                      {primaryValue}
+                      {isSelected && <Icon iconClass="fa-solid fa-check" />}
+                    </span>
                     {secondaryValues.length > 0 && (
                       <span className="secondary-values">
                         {secondaryValues.map(({ key, label, value }) => (
