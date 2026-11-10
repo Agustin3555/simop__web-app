@@ -175,6 +175,7 @@ export const buildNumberColumnBehavior = (
         <>
           <label>
             <span>Búsqueda exacta</span>
+            {/* TODO: agregar icono 'bullseye' */}
             <input
               type="number"
               step={isDecimal ? '0.000001' : '1'}
@@ -188,6 +189,7 @@ export const buildNumberColumnBehavior = (
           <div>
             <label>
               <span>Desde</span>
+              {/* TODO: agregar icono 'arrows-left-right-to-line' */}
               <input
                 type="number"
                 step={isDecimal ? '0.000001' : '1'}

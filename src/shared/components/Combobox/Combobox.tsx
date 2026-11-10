@@ -30,6 +30,8 @@ export type ComboboxProps = ComboboxBaseProps &
       }
   )
 
+// TODO: debe poder hacerse focus y abrirse con teclado, y navegar con flechas y enter
+
 export const NewCombobox = (props: ComboboxProps) => {
   const {
     name,

@@ -1,7 +1,6 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
 import { useHandleAction } from '@/hooks'
 import { useRefs } from '@/shared/hooks/useRefs.hook'
-import { Button } from '@/components'
 import { ComboboxProps, NewCombobox } from '../Combobox/Combobox'
 import { ColumnDef, TableDef } from '@/shared/core/types'
 import { LooseEntity } from '@/infra/http/entity.types'
@@ -62,9 +61,7 @@ export const RefsCombobox = (props: RefsComboboxProps) => {
       const request = (async () => {
         const result = await refetch()
         if (result.error) throw result.error
-        if (result.data?.rows) {
-          setOptions(result.data.rows.map(getOption))
-        }
+        if (result.data?.rows) setOptions(result.data.rows.map(getOption))
       })()
 
       loadingOptions.current = request
