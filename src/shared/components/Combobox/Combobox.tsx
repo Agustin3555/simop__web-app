@@ -5,10 +5,19 @@ import { Dropdown } from '../Dropdown/Dropdown'
 import { SelectedOptions } from './components'
 import { clsx } from '@/helpers'
 import { NewButton } from '../Button/Button'
+import { Select } from '../Select/Select'
+
+const EMPTY_SEARCH_FIELDS: { value: string; label: string }[] = []
 
 interface ComboboxBaseProps {
   name: string
-  options: { value: string; label: string }[]
+  options: {
+    value: string
+    label: string
+    searchValues?: Record<string, string>
+  }[]
+  searchFields?: { value: string; label: string }[]
+  defaultSearchField?: string
   staticSelected?: string[]
   required?: boolean
   multiple?: boolean
@@ -40,6 +49,8 @@ export const NewCombobox = (props: ComboboxProps) => {
     required = false,
     multiple = false,
     children,
+    searchFields = EMPTY_SEARCH_FIELDS,
+    defaultSearchField,
   } = props
 
   const invalidStaticValues = useMemo(
@@ -58,7 +69,16 @@ export const NewCombobox = (props: ComboboxProps) => {
   )
 
   const [search, setSearch] = useState('')
+  const [selectedSearchField, setSelectedSearchField] = useState('')
   const hasOpened = useRef(false)
+
+  const activeSearchField = searchFields.some(
+    ({ value }) => value === selectedSearchField,
+  )
+    ? selectedSearchField
+    : (searchFields.find(({ value }) => value === defaultSearchField)?.value ??
+      searchFields[0]?.value ??
+      '')
 
   const selected = [
     ...new Set([...(props.selected ?? internalSelected), ...staticSelected]),
@@ -75,7 +95,11 @@ export const NewCombobox = (props: ComboboxProps) => {
 
     return options
       .map((option, index) => {
-        const label = normalize(option.label)
+        const label = normalize(
+          activeSearchField
+            ? (option.searchValues?.[activeSearchField] ?? '')
+            : option.label,
+        )
 
         const matchIndex = normalizedSearch
           ? label.indexOf(normalizedSearch)
@@ -96,7 +120,7 @@ export const NewCombobox = (props: ComboboxProps) => {
       })
       .sort((a, b) => a.rank - b.rank || a.index - b.index)
       .map(({ option }) => option)
-  }, [options, search])
+  }, [activeSearchField, options, search])
 
   const updateSelected = (nextSelected: string[]) => {
     const nextSelectedWithStatic = [
@@ -183,6 +207,18 @@ export const NewCombobox = (props: ComboboxProps) => {
                 value={search}
                 onChange={e => setSearch(e.currentTarget.value)}
               />
+              {searchFields.length > 0 && (
+                <Select
+                  options={searchFields}
+                  size="s"
+                  htmlAttrs={{
+                    value: activeSearchField,
+                    onChange: e =>
+                      setSelectedSearchField(e.currentTarget.value),
+                    'aria-label': 'Campo para buscar',
+                  }}
+                />
+              )}
               {multiple && (
                 <>
                   <NewButton
@@ -208,9 +244,27 @@ export const NewCombobox = (props: ComboboxProps) => {
               role="listbox"
               aria-multiselectable={multiple}
             >
-              {orderedOptions.map(({ label, value }) => {
+              {orderedOptions.map(({ value, searchValues }) => {
                 const isSelected = selected.includes(value)
                 const isStatic = staticSelected.includes(value)
+
+                const primaryValue = searchValues?.[activeSearchField]
+                if (!primaryValue) return null
+
+                const secondaryValues = searchFields
+                  .filter(({ value: field }) => field !== activeSearchField)
+                  .flatMap(field => {
+                    const fieldValue = searchValues?.[field.value]
+                    return fieldValue
+                      ? [
+                          {
+                            key: field.value,
+                            label: field.label,
+                            value: fieldValue,
+                          },
+                        ]
+                      : []
+                  })
 
                 return (
                   <button
@@ -223,7 +277,17 @@ export const NewCombobox = (props: ComboboxProps) => {
                     {...(!multiple ? attrs : {})}
                     onClick={() => handleToggleOption(value)}
                   >
-                    <span>{label}</span>
+                    <span className="primary-value text">{primaryValue}</span>
+                    {secondaryValues.length > 0 && (
+                      <span className="secondary-values">
+                        {secondaryValues.map(({ key, label, value }) => (
+                          <span key={key} className="field">
+                            <span className="label text">{label}:</span>
+                            <span className="value text">{value}</span>
+                          </span>
+                        ))}
+                      </span>
+                    )}
                   </button>
                 )
               })}

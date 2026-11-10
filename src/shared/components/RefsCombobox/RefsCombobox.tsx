@@ -1,10 +1,11 @@
-import { useCallback, useEffect, useRef, useState } from 'react'
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { useHandleAction } from '@/hooks'
 import { useRefs } from '@/shared/hooks/useRefs.hook'
 import { ComboboxProps, NewCombobox } from '../Combobox/Combobox'
 import { ColumnDef, TableDef } from '@/shared/core/types'
 import { LooseEntity } from '@/infra/http/entity.types'
 import { NewButton } from '../Button/Button'
+import { createColumnBehaviors } from '@/shared/core/column.helper'
 
 interface RefsComboboxBaseProps {
   name: string
@@ -39,20 +40,54 @@ export const RefsCombobox = (props: RefsComboboxProps) => {
   const loadingOptions = useRef<Promise<void> | null>(null)
   const { query, refetch } = useRefs(key)
 
+  const columnBehaviors = useMemo(
+    () => createColumnBehaviors([...props.refTableDef.columnDefs]),
+    [props.refTableDef.columnDefs],
+  )
+
+  const searchFields = useMemo(() => {
+    const availableFields = new Set(query.data?.fields ?? [])
+
+    return columnBehaviors
+      .filter(({ usefulDef }) => availableFields.has(usefulDef.key))
+      .map(({ usefulDef }) => ({
+        value: usefulDef.key,
+        label: usefulDef.title,
+      }))
+  }, [columnBehaviors, query.data?.fields])
+
   const getOption = useCallback(
-    (item: Partial<LooseEntity>) => ({
-      label: item[anchorColumnKey],
-      value: String(item.id),
-    }),
+    (item: Partial<LooseEntity>, fields: string[]) => {
+      const searchValues: Record<string, string> = {}
+
+      fields.forEach(field => {
+        const value = item[field]
+        if (
+          typeof value === 'string' ||
+          typeof value === 'number' ||
+          typeof value === 'boolean'
+        ) {
+          searchValues[field] = String(value)
+        }
+      })
+
+      return {
+        label: item[anchorColumnKey],
+        value: String(item.id),
+        searchValues,
+      }
+    },
     [anchorColumnKey],
   )
 
   const loadOptions = useCallback(
     async (force = false) => {
-      const cachedRows = query.data?.rows
+      const cachedResult = query.data
 
-      if (!force && cachedRows) {
-        setOptions(cachedRows.map(getOption))
+      if (!force && cachedResult) {
+        setOptions(
+          cachedResult.rows.map(item => getOption(item, cachedResult.fields)),
+        )
         return
       }
 
@@ -61,7 +96,10 @@ export const RefsCombobox = (props: RefsComboboxProps) => {
       const request = (async () => {
         const result = await refetch()
         if (result.error) throw result.error
-        if (result.data?.rows) setOptions(result.data.rows.map(getOption))
+        const data = result.data
+        if (data?.rows) {
+          setOptions(data.rows.map(item => getOption(item, data.fields)))
+        }
       })()
 
       loadingOptions.current = request
@@ -100,6 +138,12 @@ export const RefsCombobox = (props: RefsComboboxProps) => {
     <NewCombobox
       onFirstOpen={loadOptions}
       {...{ name, options, multiple, required }}
+      searchFields={searchFields}
+      defaultSearchField={
+        searchFields.some(({ value }) => value === anchorColumnKey)
+          ? anchorColumnKey
+          : searchFields[0]?.value
+      }
       {...selectionProps}
     >
       <NewButton
