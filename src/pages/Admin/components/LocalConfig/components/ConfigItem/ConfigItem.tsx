@@ -1,7 +1,6 @@
-import { MouseEventHandler, useCallback, useState } from 'react'
+import { useCallback, useState } from 'react'
 import { useAppStore } from '@/store/config'
 import { useHandleAction } from '@/hooks'
-import { Button } from '@/components'
 import { useInputHandler } from '@/pages/Admin/hooks/useInputHandler.hook'
 import { useTableDef } from '@/pages/Admin/hooks/useTableDef.hook'
 import { Config } from '@/shared/contexts/Configs/configs.store'

@@ -244,11 +244,14 @@ export const NewCombobox = (props: ComboboxProps) => {
               role="listbox"
               aria-multiselectable={multiple}
             >
-              {orderedOptions.map(({ value, searchValues }) => {
+              {orderedOptions.map(({ value, label, searchValues }) => {
                 const isSelected = selected.includes(value)
                 const isStatic = staticSelected.includes(value)
 
-                const primaryValue = searchValues?.[activeSearchField]
+                const primaryValue = activeSearchField
+                  ? searchValues?.[activeSearchField]
+                  : label
+
                 if (!primaryValue) return null
 
                 const secondaryValues = searchFields
