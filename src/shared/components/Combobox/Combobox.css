@@ -57,10 +57,14 @@
     }
 
     > .dropdown {
+      position-area: end center;
+
       flex-direction: column;
+      margin-inline: initial;
+      width: 100%;
 
       > .cmp-selected-options {
-        height: 25dvh;
+        height: 30dvh;
       }
 
       > .header {
@@ -71,7 +75,6 @@
         border-width: 0;
         border-style: solid;
         border-color: var(--pal-color-a-200);
-        border-top-width: var(--line-thickness);
         border-bottom-width: var(--line-thickness);
         padding: var(--pal-size-2xs);
 
@@ -103,7 +106,7 @@
 
         display: flex;
         flex-direction: column;
-        max-height: 50dvh;
+        max-height: 40dvh;
 
         overflow: auto;
 
@@ -122,8 +125,6 @@
 
           font-size: var(--pal-size-font-xs);
           text-align: start;
-
-          content-visibility: auto;
 
           > .primary-value {
             font-weight: 700;
@@ -178,6 +179,10 @@
 
     > .cmp-selected-options {
       overflow: auto;
+    }
+
+    > .header {
+      border-top-width: var(--line-thickness);
     }
 
     > .list {
