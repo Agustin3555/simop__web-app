@@ -3,7 +3,7 @@ import { useMemo } from 'react'
 import { useHandleAction } from '@/hooks'
 import { useTable } from '@/shared/components/Table/contexts/Table/useTable.hook'
 import { useTableQuery } from '@/pages/Admin/hooks/useTableQuery.hook'
-import { NewButton } from '@/shared/components/Button/Button'
+import { Button } from '@/shared/components/Button/Button'
 
 export const DeleteButton = () => {
   const rowSelection = useTable(s => s.rowSelection)
@@ -24,7 +24,7 @@ export const DeleteButton = () => {
   })
 
   return (
-    <NewButton
+    <Button
       handlingClass="cmp-delete-button"
       text="Eliminar"
       title="Eliminar seleccionados"

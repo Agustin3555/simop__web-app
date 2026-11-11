@@ -11,7 +11,7 @@ import { useTableDef } from '../../hooks/useTableDef.hook'
 import { useTable } from '../../hooks/useTable.hook'
 import FallbackBanner from '../FallbackBanner/FallbackBanner'
 import { useConfigs } from '@/shared/contexts/Configs/useConfigs.hook'
-import { NewButton } from '@/shared/components/Button/Button'
+import { Button } from '@/shared/components/Button/Button'
 
 interface GraphListProps {
   handlingClass?: string
@@ -39,7 +39,7 @@ const GraphList = ({ handlingClass }: GraphListProps) => {
       ) : (
         <FallbackBanner>
           Seleccione una columna con el interruptor{' '}
-          <NewButton iconClass="fa-solid fa-chart-pie" size="s" border />
+          <Button iconClass="fa-solid fa-chart-pie" size="s" border />
         </FallbackBanner>
       )}
     </div>

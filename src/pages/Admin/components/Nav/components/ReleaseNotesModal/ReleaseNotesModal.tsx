@@ -7,7 +7,7 @@ import { clsx, safe } from '@/helpers'
 import { lastSeenVersionEntity } from '@/pages/Admin/services/localStorage/entities/lastSeenVersion'
 import changelogRaw from '@/../CHANGELOG.md?raw'
 import pkg from '@/../package.json'
-import { NewButton } from '@/shared/components/Button/Button'
+import { Button } from '@/shared/components/Button/Button'
 
 const parseChangelog = (md: string) => {
   const normalized = md.replace(/\r\n/g, '\n')
@@ -43,7 +43,7 @@ const compareVersions = (v1: string, v2?: string) => {
   return 0
 }
 
-const isNewer = (v1: string, v2?: string) => compareVersions(v1, v2) === 1
+const iser = (v1: string, v2?: string) => compareVersions(v1, v2) === 1
 
 const createIcon = (iconClass: string) => {
   const icon = window.document.createElement('i')
@@ -72,17 +72,17 @@ const ReleaseNotesModal = () => {
 
     const newEntries = [
       latest,
-      ...restEntries.filter(v => isNewer(v.version, lastSeenVersion)),
+      ...restEntries.filter(v => iser(v.version, lastSeenVersion)),
     ]
 
     const oldEntries = restEntries.filter(
-      v => !isNewer(v.version, lastSeenVersion),
+      v => !iser(v.version, lastSeenVersion),
     )
 
     return { newEntries, oldEntries }
   })
 
-  const [newNotes, setNewNotes] = useState(newEntries)
+  const [newNotes, setNotes] = useState(newEntries)
   const [oldNotes, setOldNotes] = useState(oldEntries)
 
   const [oldsExpanded, handleToggleClick, setOldsExpanded] = useToggle()
@@ -95,7 +95,7 @@ const ReleaseNotesModal = () => {
     if (1 < newNotes.length) {
       const [currentVersionNote, ...rest] = newNotes
 
-      setNewNotes([currentVersionNote])
+      setNotes([currentVersionNote])
       setOldNotes(prev => [...rest, ...prev])
     }
   }, [newNotes, setOldsExpanded])
@@ -132,7 +132,7 @@ const ReleaseNotesModal = () => {
 
   return (
     <div className="cmp-release-notes-modal">
-      <NewButton
+      <Button
         text={`v${pkg.version}`}
         size="s"
         border

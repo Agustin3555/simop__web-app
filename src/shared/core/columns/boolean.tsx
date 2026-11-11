@@ -1,5 +1,5 @@
 import Checkbox from '@/pages/Admin/components/Checkbox/Checkbox'
-import { NewCombobox } from '@/shared/components'
+import { Combobox } from '@/shared/components'
 import { StyleSheet, Text } from '@react-pdf/renderer'
 import {
   Column,
@@ -57,7 +57,7 @@ export const buildBooleanColumnBehavior = (
       return (
         <Field {...{ title }} hideTitle={isEditMode}>
           {allowNull ? (
-            <NewCombobox
+            <Combobox
               name={key}
               options={options}
               defaultSelected={
@@ -112,7 +112,7 @@ export const buildBooleanColumnBehavior = (
       const selectedValue = getBooleanFilterValue(filterValue)
 
       return (
-        <NewCombobox
+        <Combobox
           name={`${key}-filter`}
           options={options}
           selected={selectedValue === undefined ? [] : [String(selectedValue)]}

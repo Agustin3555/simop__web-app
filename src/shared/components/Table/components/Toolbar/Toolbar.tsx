@@ -7,7 +7,7 @@ import { ReportModal } from './components'
 import { ColumnBehavior } from '@/shared/core/types'
 import { CalcResults } from '../../hooks/useTableModel.hook'
 import { Dropdown } from '@/shared/components/Dropdown/Dropdown'
-import { NewButton } from '@/shared/components/Button/Button'
+import { Button } from '@/shared/components/Button/Button'
 import {
   Option,
   OptionGroup,
@@ -81,7 +81,7 @@ export const Toolbar = ({
   ]
 
   return (
-    <div className="new-cmp-toolbar">
+    <div className="cmp-toolbar">
       <div className="left">
         {Object.entries(TOGGLES_INFO).map(([key, props]) => (
           <Toggle
@@ -115,7 +115,7 @@ export const Toolbar = ({
               {renderedRows.length}
               <Icon iconClass="fa-solid fa-filter" />
             </div>
-            <NewButton
+            <Button
               title="Eliminar filtros"
               iconClass="fa-solid fa-xmark"
               size="s"
@@ -132,7 +132,7 @@ export const Toolbar = ({
       <div className="right">
         <Dropdown
           opener={attrs => (
-            <NewButton
+            <Button
               text="Exportar"
               iconClass="fa-solid fa-file-arrow-down"
               size="s"
@@ -159,14 +159,14 @@ export const Toolbar = ({
                 selectedCalcResults,
               }}
             />
-            <NewButton
+            <Button
               text="Excel"
               title="Descargar .xlsx"
               iconClass="fa-regular fa-file-excel"
               border
               bodyStretch
             />
-            <NewButton
+            <Button
               text="Para IA"
               title="Copiar formato TOON"
               iconClass="fa-regular fa-copy"

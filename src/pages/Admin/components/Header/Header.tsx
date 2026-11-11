@@ -1,6 +1,6 @@
 import './Header.css'
 import { useNavState } from '../../hooks/useNavState.hook'
-import { NewButton } from '@/shared/components/Button/Button'
+import { Button } from '@/shared/components/Button/Button'
 import { ExternalLink } from '@/components'
 import { ConfigDropdown } from './components'
 
@@ -10,7 +10,7 @@ const Header = () => {
   return (
     <div className="cmp-header">
       <div className="left">
-        <NewButton
+        <Button
           title={isOpen ? 'Cerrar' : 'Abrir'}
           iconClass="fa-solid fa-mattress-pillow"
           onAction={toggleNav}

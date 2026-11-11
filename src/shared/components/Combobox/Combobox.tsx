@@ -4,7 +4,7 @@ import { Icon } from '@/components'
 import { Dropdown } from '../Dropdown/Dropdown'
 import { SelectedOptions } from './components'
 import { clsx } from '@/helpers'
-import { NewButton } from '../Button/Button'
+import { Button } from '../Button/Button'
 import { Select } from '../Select/Select'
 
 const EMPTY_SEARCH_FIELDS: { value: string; label: string }[] = []
@@ -41,7 +41,7 @@ export type ComboboxProps = ComboboxBaseProps &
 
 // TODO: debe poder hacerse focus y abrirse con teclado, y navegar con flechas y enter
 
-export const NewCombobox = (props: ComboboxProps) => {
+export const Combobox = (props: ComboboxProps) => {
   const {
     name,
     options,
@@ -161,7 +161,7 @@ export const NewCombobox = (props: ComboboxProps) => {
   }
 
   return (
-    <div className={clsx('new-cmp-combobox', 'ui-l', { multiple })}>
+    <div className={clsx('cmp-combobox', 'ui-l', { multiple })}>
       <input
         value={selected.length ? JSON.stringify(selected) : ''}
         tabIndex={-1}
@@ -221,14 +221,14 @@ export const NewCombobox = (props: ComboboxProps) => {
               )}
               {multiple && (
                 <>
-                  <NewButton
+                  <Button
                     title="Seleccionar todo"
                     iconClass="fa-solid fa-check-square"
                     size="s"
                     border
                     onAction={handleSelectAll}
                   />
-                  <NewButton
+                  <Button
                     title="Deseleccionar todo"
                     iconClass="fa-regular fa-square"
                     size="s"

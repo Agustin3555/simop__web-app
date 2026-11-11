@@ -1,4 +1,4 @@
-.new-cmp-table {
+.cmp-table {
   display: flex;
   flex-direction: column;
   border-width: var(--line-thickness);
@@ -10,7 +10,7 @@
   background-color: var(--old-pal-color-white);
   overflow: auto;
 
-  > .new-table {
+  > .table {
     display: flex;
     flex-direction: column;
     max-width: 100%;

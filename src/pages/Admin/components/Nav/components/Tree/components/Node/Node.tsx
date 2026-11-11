@@ -7,7 +7,7 @@ import { useViews } from '@/pages/Admin/hooks/useViews.hook'
 import { TABLE_DEFS } from '@/pages/Admin/constants/metaModelDefinitions.const'
 import { TableKey } from '@/pages/Admin/constants/metaModelKey.const'
 import { useFavoriteTables } from '@/pages/Admin/store/favoriteTables.store'
-import { NewButton } from '@/shared/components/Button/Button'
+import { Button } from '@/shared/components/Button/Button'
 
 interface LeafNodeProps {
   tableKey: TableKey
@@ -45,7 +45,7 @@ const LeafNode = ({ tableKey }: LeafNodeProps) => {
             'show-favorite': isFavorite(tableKey),
           })}
         >
-          <NewButton
+          <Button
             title={
               isFavorite(tableKey)
                 ? 'Eliminar de favoritos'

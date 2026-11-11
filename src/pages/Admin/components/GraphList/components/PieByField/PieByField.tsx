@@ -14,7 +14,7 @@ import { useTableDef } from '@/pages/Admin/hooks/useTableDef.hook'
 import { useGraphScreenshots } from '@/pages/Admin/hooks/useGraphScreenshots.hook'
 import { useTable } from '@/pages/Admin/hooks/useTable.hook'
 import Select from '../../../Select/Select'
-import { NewButton } from '@/shared/components/Button/Button'
+import { Button } from '@/shared/components/Button/Button'
 
 const BASE_COLORS: RGBColor[] = [
   COLOR_MATCHER.A,
@@ -217,7 +217,7 @@ const PieByField = ({ propField }: PieByFieldProps) => {
             setSelected={setMode}
           />
         </div>
-        <NewButton
+        <Button
           title="Eliminar"
           iconClass="fa-solid fa-xmark"
           size="s"

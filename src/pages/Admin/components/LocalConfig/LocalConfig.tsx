@@ -6,8 +6,8 @@ import { Icon, Input } from '@/components'
 import { ConfigItem } from './components'
 import { useTableDef } from '../../hooks/useTableDef.hook'
 import { useConfigs } from '@/shared/contexts/Configs/useConfigs.hook'
-import { ComboboxProps, NewCombobox } from '@/shared/components'
-import { NewButton } from '@/shared/components/Button/Button'
+import { ComboboxProps, Combobox } from '@/shared/components'
+import { Button } from '@/shared/components/Button/Button'
 
 const STATIC_SELECTED = ['id']
 
@@ -59,7 +59,7 @@ const LocalConfig = () => {
         />
       ))}
       {creating ? (
-        <form className="new-config form-style" onSubmit={handleSubmit}>
+        <form className="config form-style" onSubmit={handleSubmit}>
           <header>
             <Input
               keyName="title"
@@ -68,7 +68,7 @@ const LocalConfig = () => {
               hideLabel
               inputHTMLAttrs={{ placeholder: 'Nombre...', required: true }}
             />
-            <NewButton
+            <Button
               title="Descartar configuración"
               iconClass="fa-solid fa-xmark"
               size="s"
@@ -77,14 +77,14 @@ const LocalConfig = () => {
             />
           </header>
           <div className="content">
-            <NewCombobox
+            <Combobox
               name="columnFetch"
               multiple
               required
               staticSelected={STATIC_SELECTED}
               {...{ options }}
             />
-            <NewButton
+            <Button
               text="Confirmar"
               iconClass="fa-solid fa-check"
               submit

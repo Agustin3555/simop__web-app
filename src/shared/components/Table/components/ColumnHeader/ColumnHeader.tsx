@@ -6,7 +6,7 @@ import { Toggle } from '@/components'
 import { FilterMenu, SizeInput, SortButton } from './components'
 import { ColumnBehavior } from '@/shared/core/types'
 import { clsx } from '@/helpers'
-import { NewButton } from '@/shared/components/Button/Button'
+import { Button } from '@/shared/components/Button/Button'
 
 interface ColumnHeaderProps {
   propBuilders: ColumnBehavior
@@ -47,7 +47,7 @@ export const ColumnHeader = ({
               <span />
             </div>
           )}
-          <NewButton
+          <Button
             title={hidden ? 'Mostrar' : 'Ocultar'}
             iconClass={`fa-solid fa-eye${hidden ? '' : '-slash'}`}
             size="xs"

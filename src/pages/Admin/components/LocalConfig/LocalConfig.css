@@ -16,7 +16,7 @@
   }
 
   > .cmp-config-item,
-  .new-config {
+  .config {
     > header {
       display: flex;
       align-items: center;
@@ -74,7 +74,7 @@
     }
   }
 
-  > .new-config {
+  > .config {
     gap: 0;
 
     > header {

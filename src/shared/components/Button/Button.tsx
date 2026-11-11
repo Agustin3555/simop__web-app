@@ -30,7 +30,7 @@ export interface ButtonProps {
   htmlAttrs?: ButtonHTMLAttributes<HTMLButtonElement>
 }
 
-export const NewButton = ({
+export const Button = ({
   handlingClass,
   text,
   title,

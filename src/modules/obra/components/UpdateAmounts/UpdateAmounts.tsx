@@ -2,18 +2,18 @@ import './UpdateAmounts.css'
 import { useState } from 'react'
 import { useQuery } from '@tanstack/react-query'
 import { useHandleAction } from '@/hooks'
-import { Button, Toggle } from '@/components'
+import { Toggle } from '@/components'
 import { useAppStore } from '@/store/config'
 import { apiUrl } from '@/env'
 import { TableProvider } from '@/shared/components/Table/contexts/Table/Table.context'
-import { NewTable } from '@/shared/components'
+import { Table } from '@/shared/components'
 import {
   createColumnBehaviors,
   toColumnDefs,
 } from '@/shared/core/column.helper'
 import { MontosActualizadosObra } from '../../obra.model'
 import { ObraServiceExtension } from '../../obra.service'
-import { NewButton } from '@/shared/components/Button/Button'
+import { Button } from '@/shared/components/Button/Button'
 
 const columns = createColumnBehaviors(
   toColumnDefs<MontosActualizadosObra>({
@@ -82,7 +82,7 @@ export const UpdateAmounts = () => {
   return (
     <div className="cmp-update-amounts">
       <header>
-        <NewButton
+        <Button
           text="Actualizar todo"
           iconClass="fa-solid fa-arrows-rotate"
           holdToConfirm
@@ -103,7 +103,7 @@ export const UpdateAmounts = () => {
         </small>
       </header>
       <TableProvider>
-        <NewTable {...{ columns, data }} />
+        <Table {...{ columns, data }} />
       </TableProvider>
     </div>
   )

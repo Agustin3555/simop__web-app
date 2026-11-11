@@ -1,4 +1,4 @@
-.new-cmp-toolbar {
+.cmp-toolbar {
   display: flex;
   justify-content: space-between;
   gap: var(--pal-size-2xs);

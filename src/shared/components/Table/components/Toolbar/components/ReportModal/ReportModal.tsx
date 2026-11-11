@@ -14,7 +14,7 @@ import { ColumnBehavior } from '@/shared/core/types'
 import { CalcResults } from '@/shared/components/Table/hooks/useTableModel.hook'
 import { getSelectedRefIds } from '@/shared/core/columns/ref'
 import { TABLE_DEFS } from '@/pages/Admin/constants/metaModelDefinitions.const'
-import { NewButton } from '@/shared/components/Button/Button'
+import { Button } from '@/shared/components/Button/Button'
 
 type SelectionType = 'rendered' | 'selected'
 
@@ -171,7 +171,7 @@ export const ReportModal = ({
     <Modal
       handlingClass="cmp-report-modal"
       opener={attrs => (
-        <NewButton
+        <Button
           text="Informe"
           title="Descargar .pdf"
           iconClass="fa-regular fa-file-pdf"
@@ -207,7 +207,7 @@ export const ReportModal = ({
           <input type="checkbox" name="rowNumber" defaultChecked />
           Columna índice
         </label>
-        <NewButton
+        <Button
           text="Generar"
           iconClass="fa-regular fa-file-pdf"
           submit

@@ -1,10 +1,10 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { useHandleAction } from '@/hooks'
 import { useRefs } from '@/shared/hooks/useRefs.hook'
-import { ComboboxProps, NewCombobox } from '../Combobox/Combobox'
+import { ComboboxProps, Combobox } from '../Combobox/Combobox'
 import { ColumnDef, TableDef } from '@/shared/core/types'
 import { LooseEntity } from '@/infra/http/entity.types'
-import { NewButton } from '../Button/Button'
+import { Button } from '../Button/Button'
 import { createColumnBehaviors } from '@/shared/core/column.helper'
 
 interface RefsComboboxBaseProps {
@@ -135,7 +135,7 @@ export const RefsCombobox = (props: RefsComboboxProps) => {
   }, [props.defaultSelected, loadOptions])
 
   return (
-    <NewCombobox
+    <Combobox
       onFirstOpen={loadOptions}
       {...{ name, options, multiple, required }}
       searchFields={searchFields}
@@ -146,13 +146,13 @@ export const RefsCombobox = (props: RefsComboboxProps) => {
       }
       {...selectionProps}
     >
-      <NewButton
+      <Button
         title="Actualizar opciones"
         iconClass="fa-solid fa-arrows-rotate"
         size="s"
         border
         {...reloadOptionsAction}
       />
-    </NewCombobox>
+    </Combobox>
   )
 }

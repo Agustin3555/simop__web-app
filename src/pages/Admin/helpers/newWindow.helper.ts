@@ -1,7 +1,7 @@
 import { ReactNode } from 'react'
 import { createRoot } from 'react-dom/client'
 
-interface NewWindowProps {
+interface WindowProps {
   title: string
   content: ReactNode
   width?: number
@@ -13,7 +13,7 @@ export const newWindow = ({
   content,
   width = 800,
   height = 600,
-}: NewWindowProps) => {
+}: WindowProps) => {
   const newWindow = window.open(
     '',
     title,

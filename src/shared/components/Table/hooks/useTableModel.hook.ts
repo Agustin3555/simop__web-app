@@ -46,7 +46,7 @@ const validateRows = (
     // La selección de filas necesita una clave estable y compatible con React.
     if (typeof key !== 'string' && typeof key !== 'number') {
       throw new Error(
-        `NewTable: rowKey "${rowKey}" must reference a string or number in every data row.`,
+        `Table: rowKey "${rowKey}" must reference a string or number in every data row.`,
       )
     }
 

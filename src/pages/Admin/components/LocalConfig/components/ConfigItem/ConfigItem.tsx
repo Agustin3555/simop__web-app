@@ -5,9 +5,9 @@ import { useInputHandler } from '@/pages/Admin/hooks/useInputHandler.hook'
 import { useTableDef } from '@/pages/Admin/hooks/useTableDef.hook'
 import { Config } from '@/shared/contexts/Configs/configs.store'
 import { useConfigs } from '@/shared/contexts/Configs/useConfigs.hook'
-import { ComboboxProps, NewCombobox } from '@/shared/components'
+import { ComboboxProps, Combobox } from '@/shared/components'
 import { Checker } from '@/shared/components/Checker/Checker'
-import { NewButton } from '@/shared/components/Button/Button'
+import { Button } from '@/shared/components/Button/Button'
 
 interface ConfigProps {
   config: Config
@@ -77,7 +77,7 @@ const ConfigItem = ({
         />
         <div className="actions">
           {!isSelected && (
-            <NewButton
+            <Button
               title="Eliminar configuración"
               iconClass="fa-solid fa-trash"
               size="s"
@@ -86,7 +86,7 @@ const ConfigItem = ({
               {...deleteAction}
             />
           )}
-          <NewButton
+          <Button
             title="Duplicar configuración"
             iconClass="fa-solid fa-clone"
             size="s"
@@ -104,7 +104,7 @@ const ConfigItem = ({
           isMultiple
           {...{ staticSelected, options }}
         /> */}
-        <NewCombobox
+        <Combobox
           name={`columns-${key}`}
           selected={states.columnFetch}
           multiple

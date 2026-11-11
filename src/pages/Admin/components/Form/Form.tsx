@@ -7,7 +7,7 @@ import SegmentedControl, {
 } from '../SegmentedControl/SegmentedControl'
 import { clsx } from '@/helpers'
 import { TableKey } from '../../constants/metaModelKey.const'
-import { NewButton } from '@/shared/components/Button/Button'
+import { Button } from '@/shared/components/Button/Button'
 
 type LayoutMode = 'masonry' | 'rows'
 
@@ -81,7 +81,7 @@ const Form = ({
           ))}
         </div>
         <footer>
-          <NewButton
+          <Button
             text="Confirmar"
             iconClass="fa-solid fa-check"
             submit

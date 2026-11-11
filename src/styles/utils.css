@@ -1,3 +1,43 @@
+.ui-l {
+  --ui-gap: var(--pal-size-s);
+  --ui-padding-inline: var(--pal-size-m);
+  --ui-height: var(--pal-size-2xl);
+  --ui-font-size: var(--pal-size-font-s);
+  --ui-icon-size: var(--pal-size-m);
+  --ui-loader-size: var(--pal-size-s);
+  --ui-border-radius: 0.375rem;
+}
+
+.ui-m {
+  --ui-gap: var(--pal-size-xs);
+  --ui-padding-inline: var(--pal-size-s);
+  --ui-height: var(--pal-size-xl);
+  --ui-font-size: var(--pal-size-font-xs);
+  --ui-icon-size: var(--pal-size-s);
+  --ui-loader-size: var(--pal-size-s);
+  --ui-border-radius: var(--pal-size-2xs);
+}
+
+.ui-s {
+  --ui-gap: var(--pal-size-2xs);
+  --ui-padding-inline: var(--pal-size-xs);
+  --ui-height: var(--pal-size-l);
+  --ui-font-size: var(--pal-size-font-2xs);
+  --ui-icon-size: var(--pal-size-s);
+  --ui-loader-size: var(--pal-size-xs);
+  --ui-border-radius: var(--pal-size-2xs);
+}
+
+.ui-xs {
+  --ui-gap: var(--pal-size-2xs);
+  --ui-padding-inline: var(--pal-size-xs);
+  --ui-height: 1.25rem;
+  --ui-font-size: var(--pal-size-font-2xs);
+  --ui-icon-size: var(--pal-size-font-2xs);
+  --ui-loader-size: var(--pal-size-xs);
+  --ui-border-radius: var(--pal-size-2xs);
+}
+
 .button-look {
   --gap: var(--pal-size-s);
 
@@ -169,46 +209,6 @@
   }
 }
 
-.ui-l {
-  --ui-gap: var(--pal-size-s);
-  --ui-padding-inline: var(--pal-size-m);
-  --ui-height: var(--pal-size-2xl);
-  --ui-font-size: var(--pal-size-font-s);
-  --ui-icon-size: var(--pal-size-m);
-  --ui-loader-size: var(--pal-size-s);
-  --ui-border-radius: 0.375rem;
-}
-
-.ui-m {
-  --ui-gap: var(--pal-size-xs);
-  --ui-padding-inline: var(--pal-size-s);
-  --ui-height: var(--pal-size-xl);
-  --ui-font-size: var(--pal-size-font-xs);
-  --ui-icon-size: var(--pal-size-s);
-  --ui-loader-size: var(--pal-size-s);
-  --ui-border-radius: var(--pal-size-2xs);
-}
-
-.ui-s {
-  --ui-gap: var(--pal-size-2xs);
-  --ui-padding-inline: var(--pal-size-xs);
-  --ui-height: var(--pal-size-l);
-  --ui-font-size: var(--pal-size-font-2xs);
-  --ui-icon-size: var(--pal-size-s);
-  --ui-loader-size: var(--pal-size-xs);
-  --ui-border-radius: var(--pal-size-2xs);
-}
-
-.ui-xs {
-  --ui-gap: var(--pal-size-2xs);
-  --ui-padding-inline: var(--pal-size-xs);
-  --ui-height: 1.25rem;
-  --ui-font-size: var(--pal-size-font-2xs);
-  --ui-icon-size: var(--pal-size-font-2xs);
-  --ui-loader-size: var(--pal-size-xs);
-  --ui-border-radius: var(--pal-size-2xs);
-}
-
 .section {
   display: flex;
   flex-direction: column;
@@ -241,102 +241,4 @@
 
   width: 0;
   overflow: auto;
-}
-
-.table-container {
-  border-width: var(--line-thickness);
-  border-style: solid;
-  border-color: var(--old-pal-color-a-l4);
-
-  border-radius: var(--pal-size-xs);
-  background-color: var(--old-pal-color-white);
-}
-
-.table {
-  --cell-padding-inline: var(--pal-size-s);
-  --table-border-radius: var(--pal-size-xs);
-
-  border-spacing: 0;
-  width: max-content;
-
-  overflow: auto;
-
-  .row {
-    display: flex;
-
-    > .cell {
-      flex-shrink: 0;
-    }
-  }
-
-  > .head {
-    border-bottom-width: var(--line-thickness);
-    border-bottom-style: solid;
-    border-bottom-color: var(--old-pal-color-a-l4);
-
-    background-color: var(--old-pal-color-a-l5);
-
-    > .row {
-      .main {
-        gap: var(--cell-padding-inline);
-        padding: var(--cell-padding-inline);
-
-        > .text {
-          font-weight: 850;
-          text-align: start;
-          text-transform: uppercase;
-          color: var(--old-pal-color-a-d3);
-        }
-      }
-
-      > * {
-        border-right-width: var(--line-thickness);
-        border-right-style: solid;
-        border-right-color: var(--old-pal-color-a-l4);
-
-        &:last-child {
-          border: none;
-        }
-      }
-    }
-  }
-
-  > :is(.body, .foot) > .row {
-    align-items: center;
-    padding-block: var(--pal-size-xs);
-  }
-
-  > .body {
-    display: flex;
-    flex-direction: column;
-
-    > .row {
-      border-bottom-width: var(--line-thickness);
-      border-bottom-style: solid;
-      border-bottom-color: var(--old-pal-color-a-l5);
-
-      > .cell {
-        display: flex;
-        flex-wrap: wrap;
-        gap: var(--pal-size-2xs);
-        padding-inline: var(--cell-padding-inline);
-      }
-
-      &:last-of-type {
-        border: none;
-      }
-
-      &:hover {
-        background-color: var(--old-pal-color-a-l5);
-      }
-    }
-  }
-
-  > .foot {
-    border-top-width: var(--line-thickness);
-    border-top-style: solid;
-    border-top-color: var(--old-pal-color-a-l4);
-
-    background-color: var(--old-pal-color-a-l5);
-  }
 }

@@ -16,7 +16,7 @@ export const RowSelectorCell = ({ rowKey }: RowSelectorCellProps) => {
   )
 
   return (
-    <div className="new-cmp-row-selector-cell">
+    <div className="cmp-row-selector-cell">
       <label title="Alternar selección">
         <input
           type="checkbox"

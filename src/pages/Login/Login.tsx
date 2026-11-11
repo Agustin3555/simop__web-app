@@ -4,7 +4,7 @@ import { useAppStore } from '@/store/config'
 import { useLocation } from 'wouter'
 import { CardPage, Input } from '@/components'
 import { uniquePass } from '@/env'
-import { NewButton } from '@/shared/components/Button/Button'
+import { Button } from '@/shared/components/Button/Button'
 import { Field } from '@/shared/components/Field/Field'
 
 const Login = () => {
@@ -38,7 +38,7 @@ const Login = () => {
               inputHTMLAttrs={{ type: 'password' }}
             />
           </Field>
-          <NewButton
+          <Button
             text="Acceder"
             iconClass="fa-solid fa-arrow-right"
             size="l"

@@ -1,5 +1,5 @@
 import { useTable } from '@/shared/components/Table/contexts/Table/useTable.hook'
-import { NewButton } from '@/shared/components/Button/Button'
+import { Button } from '@/shared/components/Button/Button'
 import { ColumnBehavior } from '@/shared/core/types'
 import { clsx } from '@/helpers'
 
@@ -23,7 +23,7 @@ export const SortButton = ({
   const { sort, order } = columnSorting.find(s => s.columnKey === key) ?? {}
 
   return (
-    <NewButton
+    <Button
       handlingClass={clsx({ isActive: !!sort })}
       text={order !== undefined ? String(order + 1) : undefined}
       title="Ordenar"

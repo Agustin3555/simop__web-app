@@ -1,10 +1,7 @@
 import './CalcSelector.css'
 import { useTable } from '@/shared/components/Table/contexts/Table/useTable.hook'
 import { ColumnBehavior } from '@/shared/core/types'
-import {
-  ComboboxProps,
-  NewCombobox,
-} from '@/shared/components/Combobox/Combobox'
+import { ComboboxProps, Combobox } from '@/shared/components/Combobox/Combobox'
 import { CalcResults } from '@/shared/components/Table/hooks/useTableModel.hook'
 
 interface CalcSelectorProps {
@@ -28,7 +25,7 @@ export const CalcSelector = ({
 
   return (
     <div className="cmp-calc-selector">
-      <NewCombobox
+      <Combobox
         name="calcs"
         selected={calcResult ? [calcResult.calc] : []}
         onChange={selected => {

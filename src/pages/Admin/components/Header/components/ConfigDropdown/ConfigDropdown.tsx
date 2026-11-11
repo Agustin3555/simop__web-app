@@ -4,7 +4,7 @@ import { useAppStore } from '@/store/config'
 import { useConfig } from '../../../../store'
 import { Input } from '@/components'
 import { Dropdown } from '@/shared/components'
-import { NewButton } from '@/shared/components/Button/Button'
+import { Button } from '@/shared/components/Button/Button'
 import InputArea from '../../../InputArea/InputArea'
 import { publicInstance } from '@/services/config'
 import { apiAdminPath } from '@/env'
@@ -32,7 +32,7 @@ export const ConfigDropdown = () => {
     <Dropdown
       handlingClass="cmp-config-dropdown"
       opener={attrs => (
-        <NewButton
+        <Button
           title="Ajustes"
           iconClass="fa-solid fa-gear"
           htmlAttrs={attrs}
@@ -50,7 +50,7 @@ export const ConfigDropdown = () => {
           />
         </Field>
         {mainServerUrl && (
-          <NewButton
+          <Button
             handlingClass="sync"
             text="Sincronizar"
             iconClass="fa-solid fa-database"

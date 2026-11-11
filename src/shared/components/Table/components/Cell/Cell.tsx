@@ -2,10 +2,10 @@ import './Cell.css'
 import { useSubmitAction } from '@/hooks'
 import { ServiceData } from '@/infra/http/service.type'
 import { ColumnBehavior } from '@/shared/core/types'
-import { NewTableProps } from '../../NewTable'
-import { NewButton } from '@/shared/components/Button/Button'
+import { TableProps } from '../../Table'
+import { Button } from '@/shared/components/Button/Button'
 
-interface CellProps extends Pick<NewTableProps, 'updater'> {
+interface CellProps extends Pick<TableProps, 'updater'> {
   rowId: string
   column: ColumnBehavior
   value: unknown
@@ -42,11 +42,11 @@ export const Cell = ({
   )
 
   return (
-    <div className="new-cmp-cell" style={{ width: `var(--col-${key}-size)` }}>
+    <div className="cmp-cell" style={{ width: `var(--col-${key}-size)` }}>
       {updater && editMode && !isHidden ? (
         <form onSubmit={handleSubmit}>
           {getFormField(value, true)}
-          <NewButton
+          <Button
             iconClass="fa-solid fa-check"
             size="s"
             submit

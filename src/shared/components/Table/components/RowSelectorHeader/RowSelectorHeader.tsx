@@ -2,7 +2,7 @@ import './RowSelectorHeader.css'
 import { useTable } from '../../contexts/Table/useTable.hook'
 import { Dropdown } from '@/shared/components'
 import { RowKey } from '../../contexts/Table/table.store'
-import { NewButton } from '@/shared/components/Button/Button'
+import { Button } from '@/shared/components/Button/Button'
 
 interface RowSelectorHeaderProps {
   allRowKeys: RowKey[]
@@ -26,7 +26,7 @@ export const RowSelectorHeader = ({
       </div>
       <Dropdown
         opener={attrs => (
-          <NewButton
+          <Button
             title="Acciones de selección"
             iconClass="fa-solid fa-ellipsis-vertical"
             size="s"
@@ -37,7 +37,7 @@ export const RowSelectorHeader = ({
       >
         {attrs => (
           <>
-            <NewButton
+            <Button
               text="Seleccionar filtrados"
               iconClass="fa-solid fa-check-square"
               border
@@ -45,7 +45,7 @@ export const RowSelectorHeader = ({
               htmlAttrs={attrs}
               onAction={() => selectFilteredRows(filteredRowKeys)}
             />
-            <NewButton
+            <Button
               text="Deseleccionar filtrados"
               iconClass="fa-regular fa-square"
               border
@@ -53,7 +53,7 @@ export const RowSelectorHeader = ({
               htmlAttrs={attrs}
               onAction={() => deselectFilteredRows(filteredRowKeys)}
             />
-            <NewButton
+            <Button
               text="Seleccionar todo"
               iconClass="fa-solid fa-check-square"
               border
@@ -61,7 +61,7 @@ export const RowSelectorHeader = ({
               htmlAttrs={attrs}
               onAction={() => selectAllRows(allRowKeys)}
             />
-            <NewButton
+            <Button
               text="Deseleccionar todo"
               iconClass="fa-regular fa-square"
               border

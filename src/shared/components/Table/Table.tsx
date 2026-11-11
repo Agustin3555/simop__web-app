@@ -1,4 +1,4 @@
-import './NewTable.css'
+import './Table.css'
 import { useEffect, useState } from 'react'
 import { useTable } from './contexts/Table/useTable.hook'
 import { useTableModel } from './hooks/useTableModel.hook'
@@ -24,19 +24,19 @@ const togglesStateInit: TogglesState = {
   stickFooter: false,
 }
 
-export interface NewTableProps {
+export interface TableProps {
   columns: ColumnBehavior[]
   rowKey?: string
   updater?: (id: string, data: ServiceData) => Promise<void>
   data: object[]
 }
 
-export const NewTable = ({
+export const Table = ({
   columns,
   rowKey = 'id',
   updater,
   data,
-}: NewTableProps) => {
+}: TableProps) => {
   const editModeState = useState(false)
   const [editMode] = editModeState
 
@@ -69,7 +69,7 @@ export const NewTable = ({
     useInfiniteRows(renderedRows)
 
   return (
-    <div className="new-cmp-table" style={varList(columnSizeVars)}>
+    <div className="cmp-table" style={varList(columnSizeVars)}>
       {/* {JSON.stringify(state)} */}
       <Toolbar
         dataLength={data.length}
@@ -83,7 +83,7 @@ export const NewTable = ({
           togglesState,
         }}
       />
-      <article className="new-table" ref={containerRef}>
+      <article className="table" ref={containerRef}>
         <DragDropProvider
           modifiers={[RestrictToHorizontalAxis]}
           onDragEnd={handleColumnDragEnd}

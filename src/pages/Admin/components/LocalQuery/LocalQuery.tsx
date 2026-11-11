@@ -10,11 +10,11 @@ import { GraphScreenshotsProvider } from '../../providers/graphScreenshots.provi
 import DataDownloadBanner from '../DataDownloadBanner/DataDownloadBanner'
 import GraphList from '../GraphList/GraphList'
 // import Table from '../Table/Table'
-import { NewTable, NewTableProps } from '@/shared/components'
+import { Table, TableProps } from '@/shared/components'
 import { useConfigs } from '@/shared/contexts/Configs/useConfigs.hook'
 import { useTable } from '@/shared/components/Table/contexts/Table/useTable.hook'
 import { compareObjects } from '@/shared/helpers/compareObjects.helper'
-import { NewButton } from '@/shared/components/Button/Button'
+import { Button } from '@/shared/components/Button/Button'
 
 interface Panel {
   key: string
@@ -109,7 +109,7 @@ const LocalQueryBody = ({ panels: customPanels = [] }: LocalQueryProps) => {
 
   const handleSaveConfig = () => setSelectedStates(tableStates)
 
-  const updater: NewTableProps['updater'] = async (id, data) => {
+  const updater: TableProps['updater'] = async (id, data) => {
     return await updateItem(Number(id), data)
   }
 
@@ -131,7 +131,7 @@ const LocalQueryBody = ({ panels: customPanels = [] }: LocalQueryProps) => {
           <div className="group">
             <header>
               <div className="left">
-                <NewButton
+                <Button
                   title="Consultar datos"
                   iconClass={`fa-solid fa-arrows-rotate`}
                   size="l"
@@ -140,7 +140,7 @@ const LocalQueryBody = ({ panels: customPanels = [] }: LocalQueryProps) => {
                   onAction={refetch}
                 />
                 {!isSameStates && (
-                  <NewButton
+                  <Button
                     handlingClass="save-config"
                     text="Guardar configuración"
                     iconClass={`fa-solid fa-floppy-disk`}
@@ -164,7 +164,7 @@ const LocalQueryBody = ({ panels: customPanels = [] }: LocalQueryProps) => {
                 ))}
               </div>
             </header>
-            <NewTable columns={fetchedColumns} {...{ updater, data }} />
+            <Table columns={fetchedColumns} {...{ updater, data }} />
           </div>
           <div
             className={clsx('panels', {
