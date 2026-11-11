@@ -2,10 +2,11 @@ import './Combobox.css'
 import { ReactNode, useMemo, useRef, useState } from 'react'
 import { Icon } from '@/components'
 import { Dropdown } from '../Dropdown/Dropdown'
-import { SelectedOptions } from './components'
-import { clsx } from '@/helpers'
 import { Button } from '../Button/Button'
 import { Select } from '../Select/Select'
+import { SelectedOptions } from './components'
+import { useInfiniteScroll } from '@/shared/hooks/useInfiniteScroll.hook'
+import { clsx } from '@/helpers'
 
 const EMPTY_SEARCH_FIELDS: { value: string; label: string }[] = []
 
@@ -121,6 +122,14 @@ export const Combobox = (props: ComboboxProps) => {
       .sort((a, b) => a.rank - b.rank || a.index - b.index)
       .map(({ option }) => option)
   }, [activeSearchField, options, search])
+
+  const {
+    containerRef: optionsRef,
+    visibleItems: visibleOptions,
+    loadMoreTrigger,
+  } = useInfiniteScroll<(typeof orderedOptions)[number], HTMLDivElement>(
+    orderedOptions,
+  )
 
   const updateSelected = (nextSelected: string[]) => {
     const nextSelectedWithStatic = [
@@ -241,10 +250,11 @@ export const Combobox = (props: ComboboxProps) => {
             </div>
             <div
               className="list"
+              ref={optionsRef}
               role="listbox"
               aria-multiselectable={multiple}
             >
-              {orderedOptions.map(({ value, label, searchValues }) => {
+              {visibleOptions.map(({ value, label, searchValues }) => {
                 const isSelected = selected.includes(value)
                 const isStatic = staticSelected.includes(value)
 
@@ -297,6 +307,7 @@ export const Combobox = (props: ComboboxProps) => {
                   </button>
                 )
               })}
+              {loadMoreTrigger}
             </div>
           </>
         )}

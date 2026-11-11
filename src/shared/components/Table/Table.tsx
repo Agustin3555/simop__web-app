@@ -2,7 +2,7 @@ import './Table.css'
 import { useEffect, useState } from 'react'
 import { useTable } from './contexts/Table/useTable.hook'
 import { useTableModel } from './hooks/useTableModel.hook'
-import { useInfiniteRows } from './hooks/useInfiniteRowsTable.hook'
+import { useInfiniteRows } from './hooks/useInfiniteRows.hook'
 import {
   Cell,
   ColumnFooter,
@@ -119,8 +119,8 @@ export const Table = ({
               ))}
             </li>
           ))}
-          {loadMoreTrigger}
         </ol>
+        {loadMoreTrigger}
         <footer className={clsx({ stick: toggles.stickFooter })}>
           <RowSelectorHeader {...{ allRowKeys, filteredRowKeys }} />
           {renderedColumns.map((c, i) => (
