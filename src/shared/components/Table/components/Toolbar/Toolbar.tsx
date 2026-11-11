@@ -1,9 +1,8 @@
 import './Toolbar.css'
 import { useTable } from '../../contexts/Table/useTable.hook'
 import { Dispatch, SetStateAction } from 'react'
-import { Toggle } from '@/components'
+import { Icon, Toggle } from '@/components'
 import { ToggleProps } from '@/components/Toggle/Toggle'
-import Value from '@/pages/Admin/components/Value/Value'
 import { ReportModal } from './components'
 import { ColumnBehavior } from '@/shared/core/types'
 import { CalcResults } from '../../hooks/useTableModel.hook'
@@ -109,32 +108,26 @@ export const Toolbar = ({
           onAction={handleHiddenColumnMatches}
         /> */}
       </div>
-      <div className="center">
+      <div className="center ui-s">
         {columnFilters.length !== 0 && (
-          <>
-            <Value
-              text={renderedRows.length}
-              iconClass="fa-solid fa-filter"
-              size="s"
-              type="secondary"
-              pill
-            />
+          <div className="filtered">
+            <div className="field">
+              {renderedRows.length}
+              <Icon iconClass="fa-solid fa-filter" />
+            </div>
             <NewButton
-              title="Limpiar filtros"
+              title="Eliminar filtros"
               iconClass="fa-solid fa-xmark"
               size="s"
               border
               onAction={cleanFilters}
             />
-          </>
+          </div>
         )}
-        <Value
-          text={dataLength}
-          iconClass="fa-solid fa-cubes-stacked"
-          size="s"
-          type="secondary"
-          pill
-        />
+        <div className="field total">
+          {dataLength}
+          <Icon iconClass="fa-solid fa-cubes-stacked" />
+        </div>
       </div>
       <div className="right">
         <Dropdown
