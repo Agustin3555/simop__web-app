@@ -1,6 +1,6 @@
 :root {
   --cmp-button-color-target: transparent;
-  --cmp-button-color-border: var(--pal-color-a-200);
+  --cmp-button-color-border: var(--pal-color-a-150);
   --cmp-button-color-progressbar: var(--pal-color-d-500);
 }
 
@@ -136,14 +136,6 @@
 
   &.keep-body > .status-group {
     position: relative;
-  }
-
-  &:hover {
-    background-color: color-mix(
-      in srgb,
-      var(--cmp-button-color-target),
-      #000 5%
-    );
   }
 
   &:hover {

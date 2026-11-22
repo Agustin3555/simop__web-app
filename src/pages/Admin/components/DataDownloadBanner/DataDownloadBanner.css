@@ -7,24 +7,26 @@
   width: 100%;
   height: 100%;
 
+  overflow: hidden;
+
   .local-views:has(&) {
     overflow: hidden;
   }
 
   > .particle-container {
-    --function: ease;
+    --time-function: ease;
 
     position: absolute;
 
     aspect-ratio: 1;
     width: 10rem;
 
-    scale: 4;
-    rotate: 0.6turn;
+    scale: 5;
+    rotate: 2turn;
 
     transition:
-      scale var(--fall-time) var(--function),
-      rotate var(--fall-time) var(--function);
+      scale var(--fall-time) var(--time-function),
+      rotate var(--fall-time) var(--time-function);
 
     > * {
       position: absolute;
@@ -36,27 +38,27 @@
 
       border-radius: var(--pill-radius);
       background-color: var(--bg-color);
-      filter: blur(14px);
+      filter: blur(10px);
 
-      transition: filter var(--pal-time-xl) var(--function);
+      transition: filter var(--pal-time-xl) var(--time-function);
     }
 
     &.s {
       --size: var(--pal-size-xs);
       --bg-color: var(--old-pal-color-a);
-      --fall-time: 3s;
+      --fall-time: 2s;
     }
 
     &.m {
       --size: var(--pal-size-s);
       --bg-color: var(--old-pal-color-a-l4);
-      --fall-time: 6s;
+      --fall-time: 4s;
     }
 
     &.l {
       --size: var(--pal-size-l);
       --bg-color: var(--old-pal-color-a-l5);
-      --fall-time: 9s;
+      --fall-time: 8s;
     }
   }
 
@@ -79,7 +81,7 @@
     background-color: var(--old-pal-color-a-l5);
     box-shadow: 0 0 var(--shadow-blur) var(--old-pal-color-a);
 
-    transition: box-shadow var(--pal-time-m) ease-out;
+    transition: box-shadow var(--pal-time-s) ease-out;
 
     > * {
       position: absolute;
@@ -88,8 +90,8 @@
       opacity: 0;
 
       transition:
-        scale var(--pal-time-m) ease,
-        opacity var(--pal-time-m) ease;
+        scale var(--pal-time-s) ease,
+        opacity var(--pal-time-s) ease;
     }
 
     > .active {
@@ -104,11 +106,11 @@
 
   &:hover:not(.downloading) {
     > .particle-container {
-      scale: 3;
-      rotate: 0.55turn;
+      scale: 4;
+      rotate: 1.875turn;
 
       > * {
-        filter: blur(8px);
+        filter: blur(6px);
       }
     }
 
@@ -119,7 +121,7 @@
 
   &.downloading {
     > .particle-container {
-      scale: 0.25;
+      scale: 0;
       rotate: initial;
 
       > * {

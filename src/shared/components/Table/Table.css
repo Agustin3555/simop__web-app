@@ -1,12 +1,12 @@
 .cmp-table {
   display: flex;
   flex-direction: column;
-  border-width: var(--line-thickness);
+  border-width: 0;
   border-style: solid;
   border-color: var(--old-pal-color-a-l4);
+  border-top-width: var(--line-thickness);
   max-width: max-content;
 
-  border-radius: var(--pal-size-xs);
   background-color: var(--old-pal-color-white);
   overflow: auto;
 

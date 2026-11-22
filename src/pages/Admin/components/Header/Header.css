@@ -1,34 +1,21 @@
 .cmp-header {
+  --cmp-button-color-border: var(--pal-color-a-200);
   --gap: var(--pal-size-xs);
 
   display: flex;
   justify-content: space-between;
+  border-width: 0;
+  border-style: solid;
+  border-color: var(--pal-color-a-100);
+  border-bottom-width: var(--line-thickness);
   padding: var(--gap);
 
-  color: var(--pal-color-white);
-  background-color: var(--pal-color-a-600);
-  box-shadow: var(--pal-shadow-0);
-
-  transition: border-radius var(--pal-time-m) ease;
+  background-color: var(--pal-color-white);
 
   > div {
-    --cmp-button-color-target: var(--pal-color-a-500);
-
     display: flex;
     gap: var(--pal-size-xs);
-    color: var(--pal-color-white);
 
-    &.left {
-      > .cmp-button.sync {
-        --cmp-button-color-target: var(--pal-color-white);
-        --cmp-button-color-progressbar: var(--old-pal-color-white);
-      }
-    }
-  }
-
-  @media (50rem < width) {
-    [data-nav-open='true'] & {
-      border-bottom-left-radius: var(--pal-size-xs);
-    }
+    color: var(--pal-color-a-600);
   }
 }

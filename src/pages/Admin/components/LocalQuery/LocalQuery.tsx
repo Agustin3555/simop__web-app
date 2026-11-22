@@ -1,49 +1,17 @@
 import './LocalQuery.css'
-import { ReactNode, useCallback, useEffect, useMemo, useState } from 'react'
+import { useEffect, useMemo } from 'react'
 import { useQueryActionState } from '@/hooks'
-import { Toggle } from '@/components'
-import { DeleteButton } from './components'
-import { clsx } from '@/helpers'
 import { useTableQuery } from '../../hooks/useTableQuery.hook'
 import { useTableDef } from '../../hooks/useTableDef.hook'
-import { GraphScreenshotsProvider } from '../../providers/graphScreenshots.provider'
-import DataDownloadBanner from '../DataDownloadBanner/DataDownloadBanner'
-import GraphList from '../GraphList/GraphList'
-// import Table from '../Table/Table'
-import { Table, TableProps } from '@/shared/components'
 import { useConfigs } from '@/shared/contexts/Configs/useConfigs.hook'
 import { useTable } from '@/shared/components/Table/contexts/Table/useTable.hook'
+import { DeleteButton } from './components'
+import DataDownloadBanner from '../DataDownloadBanner/DataDownloadBanner'
+import { Table, TableProps } from '@/shared/components'
 import { compareObjects } from '@/shared/helpers/compareObjects.helper'
 import { Button } from '@/shared/components/Button/Button'
 
-interface Panel {
-  key: string
-  title: string
-  iconClass: string
-  component: ReactNode
-}
-
-export interface LocalQueryProps {
-  panels?: Panel[]
-}
-
-const LocalQueryBody = ({ panels: customPanels = [] }: LocalQueryProps) => {
-  const panels = useMemo(() => {
-    const graphListPanel: Panel = {
-      key: 'graphsList',
-      title: 'Gráficos',
-      iconClass: 'fa-solid fa-chart-pie',
-      component: <p>GraphList</p>,
-      // component: <GraphList />,
-    }
-
-    return [graphListPanel, ...customPanels]
-  }, [])
-
-  const [panelToggles, setPanelToggles] = useState(
-    Object.fromEntries(panels.map(v => [v.key, false])),
-  )
-
+const LocalQueryBody = () => {
   const { columns } = useTableDef()
 
   const selectedConfig = useConfigs(s =>
@@ -97,16 +65,6 @@ const LocalQueryBody = ({ panels: customPanels = [] }: LocalQueryProps) => {
 
   const queryActionState = useQueryActionState({ status, isFetching })
 
-  const handleChange = useCallback<(key: string) => () => void>(
-    key => () =>
-      setPanelToggles(prev => {
-        const newState = { ...prev }
-        newState[key] = !newState[key]
-        return newState
-      }),
-    [],
-  )
-
   const handleSaveConfig = () => setSelectedStates(tableStates)
 
   const updater: TableProps['updater'] = async (id, data) => {
@@ -127,60 +85,34 @@ const LocalQueryBody = ({ panels: customPanels = [] }: LocalQueryProps) => {
   return (
     <div className="cmp-local-query">
       {data ? (
-        <GraphScreenshotsProvider>
-          <div className="group">
-            <header>
-              <div className="left">
+        <>
+          <header>
+            <div className="left">
+              <Button
+                title="Consultar datos"
+                iconClass={`fa-solid fa-arrows-rotate`}
+                size="l"
+                border
+                actionState={queryActionState}
+                onAction={refetch}
+              />
+              {!isSameStates && (
                 <Button
-                  title="Consultar datos"
-                  iconClass={`fa-solid fa-arrows-rotate`}
+                  handlingClass="save-config"
+                  text="Guardar configuración"
+                  iconClass={`fa-solid fa-floppy-disk`}
                   size="l"
                   border
-                  actionState={queryActionState}
-                  onAction={refetch}
+                  onAction={handleSaveConfig}
                 />
-                {!isSameStates && (
-                  <Button
-                    handlingClass="save-config"
-                    text="Guardar configuración"
-                    iconClass={`fa-solid fa-floppy-disk`}
-                    size="l"
-                    border
-                    onAction={handleSaveConfig}
-                  />
-                )}
-              </div>
-              <div className="right">
-                {rowSelection.length !== 0 && <DeleteButton />}
-                {panels.map(({ key, title, iconClass }) => (
-                  <Toggle
-                    key={key}
-                    title={`Mostrar ${title}`}
-                    value={panelToggles[key]}
-                    size="l"
-                    onChange={handleChange(key)}
-                    {...{ iconClass }}
-                  />
-                ))}
-              </div>
-            </header>
-            <Table columns={fetchedColumns} {...{ updater, data }} />
-          </div>
-          <div
-            className={clsx('panels', {
-              active: Object.values(panelToggles).find(v => v === true)!,
-            })}
-          >
-            {panels.map(({ key, component }) => (
-              <div
-                key={key}
-                className={clsx('panel', { active: panelToggles[key] })}
-              >
-                {component}
-              </div>
-            ))}
-          </div>
-        </GraphScreenshotsProvider>
+              )}
+            </div>
+            <div className="right">
+              {rowSelection.length !== 0 && <DeleteButton />}
+            </div>
+          </header>
+          <Table columns={fetchedColumns} {...{ updater, data }} />
+        </>
       ) : (
         <DataDownloadBanner
           actionState={queryActionState}
@@ -191,7 +123,7 @@ const LocalQueryBody = ({ panels: customPanels = [] }: LocalQueryProps) => {
   )
 }
 
-const LocalQuery = (props: LocalQueryProps) => {
+const LocalQuery = () => {
   // TODO: se puede optimizar
 
   const selectedId = useConfigs(s => s.selectedId)
@@ -201,7 +133,7 @@ const LocalQuery = (props: LocalQueryProps) => {
     resetQuery()
   }, [selectedId])
 
-  return <LocalQueryBody key={selectedId} {...props} />
+  return <LocalQueryBody key={selectedId} />
 }
 
 export default LocalQuery

@@ -2,7 +2,8 @@
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(min(100%, 28rem), 1fr));
   grid-template-rows: repeat(auto-fill, minmax(min(100%, 12rem), 1fr));
-  gap: var(--pal-size-m);
+  gap: var(--pal-size-xs);
+  padding: var(--pal-size-xs);
 
   overflow: auto;
 

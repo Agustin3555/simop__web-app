@@ -1,11 +1,9 @@
 import './Admin.css'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
-import { publicInstance } from '@/services/config'
 import { apiAdminPath } from '@/env'
-import { useNavState } from './hooks/useNavState.hook'
-import { NavStateProvider } from './providers/navState.provider'
 import { ViewsProvider } from './providers/views.provider'
+import { publicInstance } from '@/services/config'
 import Header from './components/Header/Header'
 import Nav from './components/Nav/Nav'
 import ViewManager from './components/ViewManager/ViewManager'
@@ -22,10 +20,8 @@ const client = new QueryClient({
 })
 
 const AdminBody = () => {
-  const { isOpen } = useNavState()
-
   return (
-    <div className="cmp-admin" data-nav-open={isOpen}>
+    <div className="cmp-admin">
       <Nav />
       <div className="main-panel">
         <Header />
@@ -38,9 +34,7 @@ const AdminBody = () => {
 const Admin = () => (
   <QueryClientProvider {...{ client }}>
     <ViewsProvider>
-      <NavStateProvider>
-        <AdminBody />
-      </NavStateProvider>
+      <AdminBody />
     </ViewsProvider>
     <ReactQueryDevtools />
   </QueryClientProvider>

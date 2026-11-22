@@ -1,5 +1,5 @@
 :root {
-  --cmp-external-link-bg-color: var(--old-pal-color-a);
+  --cmp-external-link-bg-color: var(--pal-color-white);
 }
 
 .cmp-external-link {
@@ -21,11 +21,6 @@
   text-decoration: none;
 
   border-radius: var(--ui-border-radius);
-  background-color: color-mix(
-    in srgb,
-    var(--interact-color) 8.75%,
-    var(--cmp-external-link-bg-color)
-  );
 
   transition:
     background-color var(--pal-time-s) ease-out,

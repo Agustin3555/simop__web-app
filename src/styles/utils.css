@@ -19,7 +19,7 @@
 }
 
 .ui-s {
-  --ui-gap: var(--pal-size-2xs);
+  --ui-gap: var(--pal-size-xs);
   --ui-padding-inline: var(--pal-size-xs);
   --ui-height: var(--pal-size-l);
   --ui-font-size: var(--pal-size-font-2xs);
@@ -206,27 +206,6 @@
 
   :not(button)[disabled] {
     opacity: 0.6;
-  }
-}
-
-.section {
-  display: flex;
-  flex-direction: column;
-  gap: var(--pal-size-2xl);
-  border-width: var(--line-thickness);
-  border-style: solid;
-  border-color: var(--old-pal-color-a-l4);
-  padding: var(--pal-size-m);
-
-  border-radius: var(--pal-size-xs);
-
-  > small {
-    display: flex;
-    align-items: center;
-    gap: var(--gap);
-
-    font-size: var(--pal-size-font-m);
-    color: var(--old-pal-color-a-l1);
   }
 }
 

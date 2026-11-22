@@ -1,0 +1,68 @@
+.cmp-module-view {
+  container: cmp-module-view / inline-size;
+  display: flex;
+  gap: var(--pal-size-s);
+  padding: var(--pal-size-m);
+  width: 100%;
+  height: 100%;
+
+  overflow: auto;
+  content-visibility: auto;
+
+  > .cmp-panel {
+    flex-grow: 1;
+
+    width: 0;
+  }
+
+  > .cmp-dropdown {
+    > button.add {
+      flex-shrink: 0;
+
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: var(--pal-size-xs);
+      border-width: var(--line-thickness);
+      border-style: solid;
+      border-color: var(--pal-color-a-150);
+      padding: var(--pal-size-m);
+
+      border-radius: var(--pal-size-xs);
+
+      > * {
+        opacity: 0.5;
+      }
+
+      > span {
+        font-size: var(--pal-size-font-2xs);
+      }
+
+      &:hover {
+        background-color: color-mix(in srgb, transparent, #000 3.75%);
+      }
+
+      &:active {
+        background-color: color-mix(in srgb, transparent, #fff 10%);
+      }
+    }
+
+    > .dropdown {
+      flex-direction: column;
+    }
+  }
+
+  &:not(.active) {
+    display: none;
+  }
+
+  @container cmp-view-manager (width <= 60rem) {
+    flex-direction: column;
+
+    > .cmp-panel {
+      width: unset;
+      min-height: 75dvh;
+    }
+  }
+}

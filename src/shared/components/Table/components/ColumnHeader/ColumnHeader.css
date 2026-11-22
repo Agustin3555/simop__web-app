@@ -4,7 +4,7 @@
   display: flex;
   flex-direction: column;
 
-  background-color: var(--old-pal-color-a-l5);
+  background-color: var(--pal-color-a-50);
 
   transition:
     width var(--pal-time-s) ease,

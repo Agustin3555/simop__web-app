@@ -1,30 +1,37 @@
 .cmp-form {
   display: flex;
   flex-direction: column;
-  gap: var(--pal-size-m);
-  width: 100%;
+
+  overflow: auto;
 
   > header {
     display: flex;
-    gap: var(--pal-size-2xs);
-    border-bottom: var(--line-thickness) solid var(--old-pal-color-a-l4);
-    padding-bottom: var(--pal-size-m);
+    gap: var(--pal-size-xs);
+    border-bottom: var(--line-thickness) solid var(--pal-color-a-150);
+    padding: var(--pal-size-xs);
   }
 
   > form {
-    align-items: flex-start;
-    width: 100%;
+    flex-grow: 1;
+
+    overflow: auto;
 
     > .field-groups {
-      --gap: var(--pal-size-m);
-
-      gap: var(--gap);
+      gap: var(--pal-size-xs);
+      padding: var(--pal-size-xs);
       width: 100%;
 
-      > .section > .fields {
-        display: grid;
-        align-items: flex-end;
-        gap: var(--gap);
+      > .section {
+        padding: var(--pal-size-m);
+
+        border-radius: var(--pal-size-xs);
+        background-color: var(--pal-color-white);
+
+        > .fields {
+          display: grid;
+          align-items: flex-end;
+          gap: var(--pal-size-m);
+        }
       }
 
       &.masonry {
@@ -35,7 +42,7 @@
         > .section > .fields {
           grid-template-columns: repeat(2, 1fr);
 
-          @container cmp-view (width < 35rem) {
+          @container cmp-module-view (width < 35rem) {
             grid-template-columns: 1fr;
           }
         }
@@ -55,7 +62,7 @@
           > .cmp-input-area {
             grid-column: span 2;
 
-            @container cmp-view (width < 35rem) {
+            @container cmp-module-view (width < 35rem) {
               grid-column: span 1;
             }
           }
@@ -72,12 +79,11 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      border-top: var(--line-thickness) solid var(--old-pal-color-a-l4);
-      padding-top: var(--pal-size-m);
-      width: 100%;
+      border-top: var(--line-thickness) solid var(--pal-color-a-150);
+      padding: var(--pal-size-xs);
 
       color: var(--pal-color-white);
-      background-color: var(--old-pal-color-white);
+      background-color: var(--pal-color-a-50);
     }
   }
 }

@@ -1,8 +1,8 @@
 .cmp-local-add {
+  flex-grow: 1;
+
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
-  gap: var(--pal-size-l);
 
   overflow: auto;
 }

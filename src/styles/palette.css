@@ -169,26 +169,26 @@
   --pal-color-n-100: #f0f0f2;
   --pal-color-white: #ffffff;
 
-  /* https://hihayk.github.io/scale/#9/9/90/90/0/0/-25/-25/5059BC/80/89/188/white */
-  --pal-color-a-950: #08080e;
-  --pal-color-a-900: #111220;
-  --pal-color-a-850: #1a1c33;
-  --pal-color-a-800: #222545;
-  --pal-color-a-750: #2b2f58;
-  --pal-color-a-700: #33386c;
-  --pal-color-a-650: #3b407f;
-  --pal-color-a-600: #424993;
-  --pal-color-a-550: #4951a7;
-  --pal-color-a-500: #5059bc;
-  --pal-color-a-450: #636bc2;
-  --pal-color-a-400: #767dc7;
-  --pal-color-a-350: #898fcd;
-  --pal-color-a-300: #9ba0d4;
-  --pal-color-a-250: #adb1db;
-  --pal-color-a-200: #bfc2e2;
-  --pal-color-a-150: #d0d2e9;
-  --pal-color-a-100: #e1e3f1;
-  --pal-color-a-50: #f2f3f9;
+  /* https://hihayk.github.io/scale/#9/9/93/93/0/0/-25/-25/af005f/175/0/95/white */
+  --pal-color-a-950: #0b0207;
+  --pal-color-a-900: #1b0310;
+  --pal-color-a-850: #2c051a;
+  --pal-color-a-800: #3d0624;
+  --pal-color-a-750: #4f062d;
+  --pal-color-a-700: #610637;
+  --pal-color-a-650: #740541;
+  --pal-color-a-600: #87044b;
+  --pal-color-a-550: #9b0255;
+  --pal-color-a-500: #af005f;
+  --pal-color-a-450: #b51d6f;
+  --pal-color-a-400: #bc3980;
+  --pal-color-a-350: #c35490;
+  --pal-color-a-300: #ca6fa1;
+  --pal-color-a-250: #d38ab1;
+  --pal-color-a-200: #dba4c2;
+  --pal-color-a-150: #e4bdd2;
+  --pal-color-a-100: #eed6e3;
+  --pal-color-a-50: #f8eff4;
 
   /* https://hihayk.github.io/scale/#9/9/90/90/0/0/-25/-25/50BC86/80/188/134/white */
   --pal-color-b-950: #080e0b;

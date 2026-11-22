@@ -2,12 +2,13 @@ import './Form.css'
 import { ReactNode, useEffect, useId, useState } from 'react'
 import { useSubmitAction } from '@/hooks'
 import { Toggle } from '@/components'
-import SegmentedControl, {
-  SegmentedControlProps,
-} from '../SegmentedControl/SegmentedControl'
 import { clsx } from '@/helpers'
 import { TableKey } from '../../constants/metaModelKey.const'
 import { Button } from '@/shared/components/Button/Button'
+import {
+  SegmentedControl,
+  SegmentedControlProps,
+} from '@/shared/components/SegmentedControl/SegmentedControl'
 
 type LayoutMode = 'masonry' | 'rows'
 

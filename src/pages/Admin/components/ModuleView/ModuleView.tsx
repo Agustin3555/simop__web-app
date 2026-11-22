@@ -1,31 +1,39 @@
+import './ModuleView.css'
 import { useMemo } from 'react'
-import { TableKey } from '../../constants/metaModelKey.const'
-import { TableDefContext } from '../../contexts/tableDef.context'
-import LocalQuery, { LocalQueryProps } from '../LocalQuery/LocalQuery'
-import ViewTabs, { ViewTabsProps } from '../ViewTabs/ViewTabs'
-import { TabPanel } from '../Tabs/Tabs'
-import LocalAdd from '../LocalAdd/LocalAdd'
-import LocalConfig from '../LocalConfig/LocalConfig'
-import LocalEdit from '../LocalEdit/LocalEdit'
-import { TABLE_DEFS } from '../../constants/metaModelDefinitions.const'
-import { TableProvider } from '@/shared/components/Table/contexts/Table/Table.context'
-import { ConfigsProvider } from '@/shared/contexts/Configs/Configs.context'
 import { useConfigs } from '@/shared/contexts/Configs/useConfigs.hook'
+import { useViews } from '../../hooks/useViews.hook'
+import { PanelsDef, usePanels } from './hooks/usePanels.hook'
+import { TableDefContext } from '../../contexts/tableDef.context'
+import { TableProvider } from '@/shared/components/Table/contexts/Table/Table.context'
+import { TableKey } from '../../constants/metaModelKey.const'
+import { TABLE_DEFS } from '../../constants/metaModelDefinitions.const'
+import { ConfigsProvider } from '@/shared/contexts/Configs/Configs.context'
+import { Panel } from './components'
 import { createColumnBehaviors } from '@/shared/core/column.helper'
+import { clsx } from '@/helpers'
+import { Dropdown } from '@/shared/components'
+import Icon from '@/components/Icon/Icon'
+import { Button } from '@/shared/components/Button/Button'
+import { GraphScreenshotsProvider } from '../../providers/graphScreenshots.provider'
 
 interface ModuleViewContentProps {
-  viewKey: ViewTabsProps['viewKey']
-  title: ViewTabsProps['title']
-  tabPanels: ViewTabsProps['tabPanels']
+  viewKey: string
+  extension?: PanelsDef
 }
 
-const ModuleViewContent = ({
-  viewKey,
-  title,
-  tabPanels,
-}: ModuleViewContentProps) => {
+const ModuleViewBody = ({ viewKey, extension }: ModuleViewContentProps) => {
+  const { isActive } = useViews()
   const selectedId = useConfigs(s => s.selectedId)
   const getSelectedConfig = useConfigs(s => s.getSelectedConfig)
+
+  const {
+    panelsDef,
+    panels,
+    availablePanels,
+    addPanel,
+    removePanel,
+    replacePanel,
+  } = usePanels(extension)
 
   const init = useMemo(
     () => getSelectedConfig().states,
@@ -33,68 +41,64 @@ const ModuleViewContent = ({
   )
 
   return (
-    <TableProvider {...{ init }}>
-      <ViewTabs {...{ viewKey, title, tabPanels }} />
-    </TableProvider>
+    <div
+      className={clsx('cmp-module-view', viewKey, {
+        active: isActive(viewKey),
+      })}
+    >
+      <TableProvider {...{ init }}>
+        <GraphScreenshotsProvider>
+          {panels.map(key => (
+            <Panel
+              key={key}
+              panelKey={key}
+              {...{ panelsDef, availablePanels, removePanel, replacePanel }}
+            >
+              {panelsDef[key].component}
+            </Panel>
+          ))}
+          {availablePanels.length > 0 && (
+            <Dropdown
+              opener={attrs => (
+                <button className="add" {...attrs}>
+                  <Icon iconClass="fa-regular fa-window-maximize" />
+                  <span>Nuevo panel</span>
+                </button>
+              )}
+            >
+              {availablePanels.map(key => (
+                <Button
+                  key={key}
+                  iconClass={panelsDef[key].iconClass}
+                  text={panelsDef[key].text}
+                  bodyStretch
+                  onAction={() => addPanel(key)}
+                />
+              ))}
+            </Dropdown>
+          )}
+        </GraphScreenshotsProvider>
+      </TableProvider>
+    </div>
   )
 }
 
 interface ModuleViewProps {
-  view?: Partial<ViewTabsProps>
+  extension?: PanelsDef
   tableKey: TableKey
-  queryPanels?: LocalQueryProps['panels']
 }
 
-const ModuleView = ({ view, tableKey, queryPanels }: ModuleViewProps) => {
-  const { viewKey, title, tabPanels } = view ?? {}
-
+const ModuleView = ({ extension, tableKey }: ModuleViewProps) => {
   const tableDefCtx = useMemo(() => {
     const tableDef = TABLE_DEFS[tableKey]
     const columns = createColumnBehaviors(tableDef.columnDefs)
     return { tableDef, columns }
   }, [tableKey])
 
-  const { tableDef } = tableDefCtx
-
-  const panels = useMemo<TabPanel[]>(
-    () => [
-      {
-        title: 'Configurar',
-        iconClass: 'fa-solid fa-sliders',
-        tabPanelKey: 'config',
-        component: <LocalConfig />,
-      },
-      {
-        title: 'Consultar',
-        iconClass: 'fa-solid fa-search',
-        tabPanelKey: 'query',
-        component: <LocalQuery panels={queryPanels} />,
-      },
-      {
-        title: 'Agregar',
-        iconClass: 'fa-solid fa-plus',
-        tabPanelKey: 'add',
-        component: <LocalAdd />,
-      },
-      // {
-      //   title: 'Editar',
-      //   iconClass: 'fa-solid fa-pen',
-      //   tabPanelKey: 'edit',
-      //   component: <LocalEdit />,
-      // },
-      ...(tabPanels ?? []),
-    ],
-    [],
-  )
-
   return (
     <TableDefContext.Provider value={tableDefCtx}>
       <ConfigsProvider>
-        <ModuleViewContent
-          viewKey={viewKey ?? tableDef.key}
-          title={title ?? tableDef.title.plural}
-          tabPanels={panels}
-        />
+        <ModuleViewBody viewKey={tableDefCtx.tableDef.key} {...{ extension }} />
       </ConfigsProvider>
     </TableDefContext.Provider>
   )

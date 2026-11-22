@@ -1,6 +1,5 @@
 .cmp-release-notes-modal {
   > dialog {
-    z-index: 1;
     top: 0;
 
     align-content: center;
