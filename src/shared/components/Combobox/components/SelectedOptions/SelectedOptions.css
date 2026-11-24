@@ -8,9 +8,12 @@
   padding: var(--gap);
 
   > span {
-    align-self: center;
+    padding-inline: 0.25em;
 
-    opacity: 0.625;
+    font-size: var(--pal-size-font-2xs);
+    text-align: start;
+
+    opacity: 0.5;
   }
 
   > .chip {
@@ -19,20 +22,22 @@
     display: flex;
     border-width: var(--line-thickness);
     border-style: solid;
-    border-color: var(--old-pal-color-a-l4);
+    border-color: var(--pal-color-a-100);
     max-width: 10rem;
     height: calc(var(--ui-height) - (var(--gap) + var(--line-thickness)) * 2);
 
-    border-radius: var(--pal-size-3xs);
+    border-radius: 0.1875rem;
     overflow: hidden;
     cursor: auto;
 
     > span {
       align-self: center;
 
-      padding-inline: var(--pal-size-2xs);
+      padding-inline: 0.5em;
 
+      font-size: var(--pal-size-font-xs);
       line-height: normal;
+      font-weight: 700;
       white-space: nowrap;
       text-overflow: ellipsis;
 
@@ -48,11 +53,15 @@
 
         margin-inline: auto;
 
-        color: var(--old-pal-color-b-l1);
+        color: var(--pal-color-a-500);
       }
 
       &:hover {
-        background-color: var(--old-pal-color-b-l5);
+        background-color: color-mix(
+          in srgb,
+          var(--pal-color-a-800) 5%,
+          transparent
+        );
       }
     }
   }

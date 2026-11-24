@@ -19,8 +19,8 @@ export const SelectedOptions = ({
   return (
     <div className="cmp-selected-options" aria-live="polite">
       {selected.length === 0 ? (
-        <span>
-          Selecciona una {multiple ? 'o varias opciones' : 'opción'}...
+        <span className="text">
+          Selecciona una {multiple ? 'o varias opciones' : 'opción'}
         </span>
       ) : (
         selected.map(value => {
