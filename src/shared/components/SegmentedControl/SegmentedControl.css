@@ -9,7 +9,13 @@
 
   position: relative;
 
-  border-radius: calc(var(--ui-border-radius) + var(--padding));
+  border-width: var(--line-thickness);
+  border-style: solid;
+  border-color: var(--pal-color-n-150);
+
+  border-radius: calc(
+    var(--ui-border-radius) + var(--padding) + var(--line-thickness)
+  );
   background-color: var(--pal-color-n-100);
   overflow: hidden;
 
