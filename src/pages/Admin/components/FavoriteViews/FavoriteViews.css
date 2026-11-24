@@ -40,7 +40,7 @@
     }
 
     > .cmp-icon {
-      color: var(--pal-color-a-400);
+      color: var(--pal-color-a-500);
     }
 
     > p {
@@ -69,9 +69,9 @@
     }
 
     &.active {
-      border-color: var(--pal-color-a-400);
+      border-color: var(--pal-color-a-500);
 
-      background-color: var(--pal-color-a-400);
+      background-color: var(--pal-color-a-500);
 
       > .cmp-button {
         color: var(--pal-color-white);

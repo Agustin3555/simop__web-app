@@ -32,7 +32,7 @@
 
         background-image: radial-gradient(
           circle at 0.125rem 0.125rem,
-          var(--pal-color-a-300) 0.0625rem,
+          var(--pal-color-a-200) 0.0625rem,
           transparent 0
         );
         background-size: 0.25rem 0.25rem;
@@ -85,7 +85,7 @@
 
     border: none !important;
     border-radius: var(--pal-size-2xs);
-    background-color: var(--old-pal-color-c-l5);
+    background-color: var(--pal-color-b-50);
     box-shadow: var(--pal-shadow-1);
   }
 
