@@ -44,8 +44,6 @@
 
         font-size: var(--pal-size-font-2xs);
 
-        background-color: var(--pal-color-white);
-
         > .counter {
           --cmp-icon-size: 0.625rem;
 

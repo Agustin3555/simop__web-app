@@ -62,14 +62,18 @@
         display: flex;
         gap: var(--pal-size-2xs);
       }
-
-      &:has(input:checked) {
-        background-color: var(--pal-color-a-100);
-      }
     }
 
     > .content {
       overflow: auto;
+    }
+
+    &:has(input:checked) {
+      background-color: var(--pal-color-white);
+
+      > header {
+        background-color: var(--pal-color-a-100);
+      }
     }
   }
 
