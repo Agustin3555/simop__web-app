@@ -95,7 +95,7 @@ const LocalConfig = () => {
       ) : (
         <button title="Crear nueva configuración" onClick={handleCreatingClick}>
           <Icon iconClass="fa-solid fa-circle-plus" />
-          Crear configuración
+          <span>Nueva configuración</span>
         </button>
       )}
     </div>

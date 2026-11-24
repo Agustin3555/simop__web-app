@@ -1,15 +1,15 @@
 .cmp-local-config {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(min(100%, 28rem), 1fr));
-  grid-template-rows: repeat(auto-fill, minmax(min(100%, 12rem), 1fr));
   gap: var(--pal-size-xs);
   padding: var(--pal-size-xs);
 
   overflow: auto;
 
   > * {
+    border-width: var(--line-thickness);
     border-style: solid;
-    border-color: var(--old-pal-color-a-l4);
+    border-color: var(--pal-color-a-150);
     min-height: 12rem;
 
     border-radius: var(--pal-size-xs);
@@ -25,7 +25,7 @@
       gap: var(--pal-size-s);
       border-width: 0;
       border-style: solid;
-      border-color: var(--old-pal-color-a-l4);
+      border-color: var(--pal-color-a-150);
       border-bottom-width: var(--line-thickness);
     }
 
@@ -55,8 +55,6 @@
 
         border: none;
 
-        color: var(--old-pal-color-a);
-
         background-color: transparent;
       }
 
@@ -66,7 +64,7 @@
       }
 
       &:has(input:checked) {
-        background-color: var(--old-pal-color-a-l5);
+        background-color: var(--pal-color-a-100);
       }
     }
 
@@ -84,15 +82,15 @@
     }
 
     > .content {
-      --cmp-button-color-target: var(--pal-color-a-500);
-
       justify-content: space-between;
       height: 100%;
 
       > .cmp-button {
+        --cmp-button-color-target: var(--pal-color-a-500);
+
         align-self: flex-start;
 
-        color: var(--old-pal-color-white);
+        color: var(--pal-color-white);
       }
     }
   }
@@ -106,20 +104,23 @@
     padding: var(--pal-size-m);
 
     font-size: var(--pal-size-font-xs);
-    color: var(--old-pal-color-a);
 
-    background-color: var(--old-pal-color-a-l5);
+    > * {
+      opacity: 0.5;
+    }
 
     > .cmp-icon {
-      --cmp-icon-size: var(--pal-size-2xl);
-
-      color: var(--old-pal-color-a-l4);
+      --cmp-icon-size: var(--pal-size-xl);
 
       transition: scale var(--pal-time-m) ease;
     }
 
-    &:hover > .cmp-icon {
-      scale: 1.15;
+    &:hover {
+      background-color: color-mix(
+        in srgb,
+        var(--pal-color-a-800) 5%,
+        transparent
+      );
     }
   }
 }
