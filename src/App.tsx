@@ -9,6 +9,7 @@ const Admin = lazy(() => import('./pages/Admin/Admin'))
 
 const App = () => (
   <main className="cmp-app">
+    {/* <span className="background" /> */}
     <Switch>
       <Route path="/" component={Login} />
       <Route

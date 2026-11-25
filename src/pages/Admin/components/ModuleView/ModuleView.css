@@ -40,11 +40,11 @@
       }
 
       &:hover {
-        background-color: color-mix(in srgb, transparent, #000 3.75%);
-      }
-
-      &:active {
-        background-color: color-mix(in srgb, transparent, #fff 10%);
+        background-color: color-mix(
+          in srgb,
+          var(--pal-color-a-800) 5%,
+          transparent
+        );
       }
     }
 

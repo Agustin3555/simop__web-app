@@ -6,6 +6,8 @@
   border-color: var(--pal-color-a-150);
 
   border-radius: var(--pal-size-xs);
+  background-color: var(--pal-color-a-50);
+  box-shadow: var(--pal-shadow-0);
   overflow: hidden;
 
   > header {
