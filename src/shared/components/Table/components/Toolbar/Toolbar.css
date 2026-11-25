@@ -16,7 +16,7 @@
 
   > .left {
     > .edit-mode {
-      --cmp-toggle-color: var(--pal-color-d-500);
+      --cmp-toggle-color: var(--pal-color-b-500);
     }
   }
 

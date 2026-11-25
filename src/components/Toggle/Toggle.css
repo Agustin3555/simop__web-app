@@ -1,5 +1,5 @@
 :root {
-  --cmp-toggle-color: var(--old-pal-color-a-l2);
+  --cmp-toggle-color: var(--pal-color-a-500);
 }
 
 .cmp-toggle {
@@ -37,7 +37,7 @@
     .cmp-toggle:has(input:checked) > & {
       border-color: var(--cmp-toggle-color);
 
-      color: var(--old-pal-color-white);
+      color: var(--pal-color-white);
       background-color: var(--cmp-toggle-color);
     }
   }
@@ -76,7 +76,7 @@
       height: 100%;
 
       border-radius: calc(var(--border-radius) - var(--line-thickness));
-      background-color: var(--old-pal-color-white);
+      background-color: var(--pal-color-white);
 
       transition: left var(--pal-time-s) ease;
 
