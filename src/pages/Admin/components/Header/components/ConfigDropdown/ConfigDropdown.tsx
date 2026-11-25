@@ -9,6 +9,7 @@ import InputArea from '../../../InputArea/InputArea'
 import { publicInstance } from '@/services/config'
 import { apiAdminPath } from '@/env'
 import { Field } from '@/shared/components/Field/Field'
+import { Section } from '@/shared/components/Section/Section'
 
 export const ConfigDropdown = () => {
   const toasting = useAppStore(s => s.toasting)
@@ -39,8 +40,7 @@ export const ConfigDropdown = () => {
         />
       )}
     >
-      <section>
-        <small className="text">Sincronización de datos</small>
+      <Section label="Sincronización de datos">
         <Field title="Intranet URL">
           <Input
             inputHTMLAttrs={{
@@ -58,9 +58,8 @@ export const ConfigDropdown = () => {
             {...syncAction}
           />
         )}
-      </section>
-      <section>
-        <small className="text">Informe</small>
+      </Section>
+      <Section label="Informe">
         <Field title="Comentarios">
           <InputArea
             textareaHTMLAttrs={{
@@ -69,7 +68,7 @@ export const ConfigDropdown = () => {
             }}
           />
         </Field>
-      </section>
+      </Section>
     </Dropdown>
   )
 }

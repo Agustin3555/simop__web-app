@@ -14,57 +14,30 @@
   > form {
     flex-grow: 1;
 
+    display: flex;
+    flex-direction: column;
+
     overflow: auto;
 
     > .field-groups {
-      gap: var(--pal-size-xs);
-      padding: var(--pal-size-xs);
-      width: 100%;
+      display: flex;
+      flex-direction: column;
+      background-color: var(--pal-color-white);
 
-      > .section {
-        padding: var(--pal-size-m);
+      overflow: auto;
 
-        border-radius: var(--pal-size-xs);
-        background-color: var(--pal-color-white);
-
-        > .fields {
-          display: grid;
-          align-items: flex-end;
-          gap: var(--pal-size-m);
-        }
-      }
-
-      &.masonry {
+      > .cmp-section > .fields {
         display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(min(100%, 30rem), 1fr));
-        align-items: start;
+        grid-template-columns: repeat(auto-fill, minmax(min(100%, 15rem), 1fr));
+        grid-auto-flow: dense;
+        align-items: flex-end;
+        gap: var(--pal-size-s);
 
-        > .section > .fields {
-          grid-template-columns: repeat(2, 1fr);
+        > .cmp-input-area {
+          grid-column: span 2;
 
           @container cmp-module-view (width < 35rem) {
-            grid-template-columns: 1fr;
-          }
-        }
-      }
-
-      &.rows {
-        display: flex;
-        flex-direction: column;
-
-        > .section > .fields {
-          grid-template-columns: repeat(
-            auto-fill,
-            minmax(min(100%, 15rem), 1fr)
-          );
-          grid-auto-flow: dense;
-
-          > .cmp-input-area {
-            grid-column: span 2;
-
-            @container cmp-module-view (width < 35rem) {
-              grid-column: span 1;
-            }
+            grid-column: span 1;
           }
         }
       }
@@ -73,9 +46,6 @@
     > footer {
       --cmp-button-color-target: var(--pal-color-a-500);
 
-      position: sticky;
-      bottom: 0;
-
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -83,7 +53,6 @@
       padding: var(--pal-size-xs);
 
       color: var(--pal-color-white);
-      background-color: var(--pal-color-a-50);
     }
   }
 }

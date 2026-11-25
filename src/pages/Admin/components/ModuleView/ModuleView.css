@@ -61,7 +61,7 @@
     flex-direction: column;
 
     > .cmp-panel {
-      width: unset;
+      width: auto;
       min-height: 75dvh;
     }
   }

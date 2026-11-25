@@ -1,29 +1,10 @@
 import './Form.css'
-import { ReactNode, useEffect, useId, useState } from 'react'
+import { ReactNode, useEffect, useState } from 'react'
+import { Section } from '@/shared/components/Section/Section'
 import { useSubmitAction } from '@/hooks'
 import { Toggle } from '@/components'
-import { clsx } from '@/helpers'
 import { TableKey } from '../../constants/metaModelKey.const'
 import { Button } from '@/shared/components/Button/Button'
-import {
-  SegmentedControl,
-  SegmentedControlProps,
-} from '@/shared/components/SegmentedControl/SegmentedControl'
-
-type LayoutMode = 'masonry' | 'rows'
-
-const LAYOUT_MODES_OPTIONS: SegmentedControlProps<LayoutMode>['options'] = [
-  {
-    value: 'masonry',
-    title: 'Por columnas',
-    iconClass: 'fa-solid fa-chart-simple fa-rotate-180',
-  },
-  {
-    value: 'rows',
-    title: 'Por filas',
-    iconClass: 'fa-solid fa-pause fa-rotate-90',
-  },
-]
 
 interface FormProps extends ReturnType<typeof useSubmitAction> {
   tableKey: TableKey
@@ -43,9 +24,6 @@ const Form = ({
 }: FormProps) => {
   const [resetOnSuccess, setResetOnSuccess] = useState(true)
   const [resetKey, setResetKey] = useState(0)
-  const [layoutMode, setLayoutMode] = useState<LayoutMode>('masonry')
-
-  const id = useId()
 
   useEffect(() => {
     if (enableReset && resetOnSuccess && actionState === 'success') {
@@ -56,13 +34,6 @@ const Form = ({
   return (
     <div className="cmp-form">
       <header>
-        <SegmentedControl
-          name={`layoutMode-${tableKey}-${id}`}
-          selected={layoutMode}
-          setSelected={setLayoutMode}
-          options={LAYOUT_MODES_OPTIONS}
-          size="s"
-        />
         {enableReset && (
           <Toggle
             title="Limpiar después de crear"
@@ -72,13 +43,12 @@ const Form = ({
           />
         )}
       </header>
-      <form className="form-style" onSubmit={handleSubmit}>
-        <div key={resetKey} className={clsx('field-groups', layoutMode)}>
+      <form onSubmit={handleSubmit}>
+        <div key={resetKey} className="field-groups">
           {fieldGroups?.map(({ title, fields }, i) => (
-            <div key={i} className="section">
-              {title && <small>{title}</small>}
+            <Section key={i} label={title}>
               <div className="fields">{fields}</div>
-            </div>
+            </Section>
           ))}
         </div>
         <footer>
