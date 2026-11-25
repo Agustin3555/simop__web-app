@@ -65,7 +65,7 @@
         padding: var(--pal-size-m);
 
         > .cmp-view-switcher {
-          gap: var(--pal-size-2xl);
+          gap: var(--pal-size-xl);
         }
 
         > footer {
