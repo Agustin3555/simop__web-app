@@ -13,9 +13,6 @@ export type SectionNode =
     }
 
 export const TREE: SectionNode[] = [
-  { tableKey: 'pais' },
-  { tableKey: 'provincia' },
-
   {
     title: 'Sobre Obras',
     sections: [
@@ -55,9 +52,11 @@ export const TREE: SectionNode[] = [
   {
     title: 'Ubicación',
     sections: [
-      { tableKey: 'apg' },
-      { tableKey: 'departamento' },
       { tableKey: 'localidad' },
+      { tableKey: 'departamento' },
+      { tableKey: 'apg' },
+      { tableKey: 'provincia' },
+      { tableKey: 'pais' },
     ],
   },
   {

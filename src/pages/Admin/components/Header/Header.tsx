@@ -2,7 +2,7 @@ import './Header.css'
 import { useSidebar } from '../../store'
 import { Button } from '@/shared/components/Button/Button'
 import { ExternalLink } from '@/components'
-import { ConfigDropdown } from './components'
+import { ConfigDropdown, Breadcrumb } from './components'
 
 const Header = () => {
   const isOpen = useSidebar(s => s.isOpen)
@@ -17,6 +17,7 @@ const Header = () => {
           onAction={toggle}
         />
       </div>
+      <Breadcrumb />
       <div className="right">
         <ExternalLink
           title="Manual"

@@ -1,0 +1,45 @@
+.cmp-breadcrumb {
+  flex-grow: 1;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--pal-size-xs);
+  width: 0;
+
+  font-size: var(--pal-size-font-2xs);
+
+  list-style: none;
+
+  > li {
+    display: flex;
+    gap: var(--pal-size-xs);
+
+    overflow: hidden;
+
+    > * {
+      line-height: initial;
+    }
+
+    > .label {
+      white-space: nowrap;
+      text-overflow: ellipsis;
+
+      overflow: hidden;
+    }
+
+    &:not(.is-active) {
+      opacity: 0.5;
+
+      @media (width <= 24rem) {
+        display: none;
+      }
+    }
+
+    &.is-active {
+      font-weight: 800;
+
+      color: var(--pal-color-a-500);
+    }
+  }
+}
