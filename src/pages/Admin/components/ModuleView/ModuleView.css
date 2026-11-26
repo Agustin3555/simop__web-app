@@ -49,6 +49,9 @@
     }
 
     > .dropdown {
+      position-area: right;
+      position-try-fallbacks: flip-inline;
+
       flex-direction: column;
     }
   }
@@ -63,6 +66,11 @@
     > .cmp-panel {
       width: auto;
       min-height: 75dvh;
+    }
+
+    > .cmp-dropdown > .dropdown {
+      position-area: bottom;
+      position-try-fallbacks: flip-block;
     }
   }
 }
