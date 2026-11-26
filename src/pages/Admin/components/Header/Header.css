@@ -3,6 +3,7 @@
   --gap: var(--pal-size-xs);
 
   display: flex;
+  justify-content: space-between;
   gap: var(--gap);
   border-width: 0;
   border-style: solid;
