@@ -6,8 +6,8 @@
   line-height: 1;
   font-weight: inherit;
   letter-spacing: inherit;
-  color: inherit;
 
+  color: inherit;
   scroll-behavior: smooth;
   scrollbar-width: thin;
   scrollbar-color: var(--pal-color-a-200) transparent;
@@ -36,6 +36,7 @@ body {
   font-weight: 550;
   word-spacing: 0.0625rem;
   letter-spacing: 0.0125rem;
+
   color: var(--pal-color-a-800);
 }
 
@@ -62,6 +63,7 @@ strong {
 ul,
 ol {
   display: flex;
+
   list-style: none;
 }
 
@@ -79,7 +81,6 @@ textarea {
 
   &::placeholder {
     color: var(--old-pal-color-a-d3);
-
     opacity: 0.5;
   }
 }

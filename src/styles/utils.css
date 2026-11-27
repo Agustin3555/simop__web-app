@@ -99,3 +99,60 @@
   width: 0;
   overflow: auto;
 }
+
+@property --l {
+  syntax: '<length>';
+  inherits: false;
+  initial-value: 0;
+}
+
+@property --r {
+  syntax: '<length>';
+  inherits: false;
+  initial-value: 0;
+}
+
+.scroll-fade {
+  --mask-width: var(--pal-size-xl);
+
+  animation: edge-fade linear both;
+
+  &:not(.inline) {
+    mask-image: linear-gradient(
+      transparent,
+      #000 var(--l),
+      #000 calc(100% - var(--r)),
+      transparent
+    );
+
+    animation-timeline: scroll(self block);
+  }
+
+  &.inline {
+    mask-image: linear-gradient(
+      90deg,
+      transparent,
+      #000 var(--l),
+      #000 calc(100% - var(--r)),
+      transparent
+    );
+
+    animation-timeline: scroll(self inline);
+  }
+}
+
+@keyframes edge-fade {
+  from {
+    --l: 0;
+    --r: var(--mask-width);
+  }
+  2.5%,
+  97.5% {
+    --l: var(--mask-width);
+    --r: var(--mask-width);
+  }
+  to {
+    --l: var(--mask-width);
+    --r: 0;
+  }
+}

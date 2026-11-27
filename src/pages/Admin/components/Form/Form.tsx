@@ -44,7 +44,7 @@ const Form = ({
         )}
       </header>
       <form onSubmit={handleSubmit}>
-        <div key={resetKey} className="field-groups">
+        <div key={resetKey} className="field-groups scroll-fade">
           {fieldGroups?.map(({ title, fields }, i) => (
             <Section key={i} label={title}>
               <div className="fields">{fields}</div>
