@@ -1,4 +1,5 @@
-import { Input } from '@/components'
+import { Field } from '@/shared/components/Field/Field'
+import { Input } from '@/shared/components/Input/Input'
 import {
   ColumnBehavior,
   Size,
@@ -7,7 +8,6 @@ import {
   ColumnConfig,
 } from '../types'
 import { StyleSheet, Text } from '@react-pdf/renderer'
-import { Field } from '@/shared/components/Field/Field'
 
 interface NumberRange {
   exact: string
@@ -99,17 +99,16 @@ export const buildNumberColumnBehavior = (
       return (
         <Field {...{ title }} hideTitle={isEditMode}>
           <Input
-            keyName={key}
-            value={
-              typeof value === 'string' || typeof value === 'number'
-                ? value
-                : undefined
-            }
-            {...(!isEditMode && { isRequired })}
-            {...{ title, isEditMode }}
-            inputHTMLAttrs={{
+            minimal={isEditMode}
+            htmlAttrs={{
+              name: key,
               type: 'number',
               step: isDecimal ? '0.000001' : undefined,
+              ...(!isEditMode && { required: isRequired }),
+              defaultValue:
+                typeof value === 'string' || typeof value === 'number'
+                  ? value
+                  : undefined,
             }}
           />
         </Field>

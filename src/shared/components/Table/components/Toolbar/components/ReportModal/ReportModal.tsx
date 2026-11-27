@@ -4,7 +4,8 @@ import { useSubmitAction } from '@/hooks'
 import { useTableDef } from '@/pages/Admin/hooks/useTableDef.hook'
 import { useTable } from '@/shared/components/Table/contexts/Table/useTable.hook'
 import { Modal } from '@/shared/components/Modal/Modal'
-import { Input } from '@/components'
+import { Button } from '@/shared/components/Button/Button'
+import { Input } from '@/shared/components/Input/Input'
 import { pdf } from '@react-pdf/renderer'
 import { sleep } from '@/helpers'
 import ReportInTable, {
@@ -14,7 +15,6 @@ import { ColumnBehavior } from '@/shared/core/types'
 import { CalcResults } from '@/shared/components/Table/hooks/useTableModel.hook'
 import { getSelectedRefIds } from '@/shared/core/columns/ref'
 import { TABLE_DEFS } from '@/pages/Admin/constants/metaModelDefinitions.const'
-import { Button } from '@/shared/components/Button/Button'
 
 type SelectionType = 'rendered' | 'selected'
 
@@ -183,9 +183,11 @@ export const ReportModal = ({
     >
       <form onSubmit={handleSubmit}>
         <Input
-          keyName="title"
-          title="Título"
-          value={`Lista de ${title.plural}`}
+          htmlAttrs={{
+            name: 'title',
+            required: true,
+            defaultValue: `Lista de ${title.plural}`,
+          }}
         />
         <fieldset className="selection-type">
           <legend>Incluir filas</legend>

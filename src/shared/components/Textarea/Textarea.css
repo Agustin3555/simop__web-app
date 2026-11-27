@@ -1,0 +1,31 @@
+.cmp-textarea {
+  resize: vertical;
+  border-width: 0;
+  border-style: solid;
+  border-color: var(--pal-color-a-200);
+  padding-block: 0.5em;
+  field-sizing: content;
+  min-height: var(--ui-height);
+
+  font-size: var(--ui-font-size);
+  line-height: 1.3;
+
+  border-radius: var(--ui-border-radius);
+  background-color: transparent;
+
+  transition:
+    padding-inline var(--pal-time-s) ease,
+    border-color var(--pal-time-xs) ease;
+
+  grid-column: 1 / -1;
+
+  &:not(.minimal),
+  &.minimal:focus {
+    border-width: var(--line-thickness);
+    padding-inline: 0.75em;
+  }
+
+  &:focus {
+    border-color: var(--pal-color-a-500);
+  }
+}

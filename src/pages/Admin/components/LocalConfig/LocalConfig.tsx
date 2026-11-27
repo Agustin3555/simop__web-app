@@ -2,12 +2,13 @@ import './LocalConfig.css'
 import { useCallback, useMemo, useState } from 'react'
 import { useAppStore } from '@/store/config'
 import { useSubmitAction } from '@/hooks'
-import { Icon, Input } from '@/components'
+import { Icon } from '@/components'
 import { ConfigItem } from './components'
 import { useTableDef } from '../../hooks/useTableDef.hook'
 import { useConfigs } from '@/shared/contexts/Configs/useConfigs.hook'
 import { ComboboxProps, Combobox } from '@/shared/components'
 import { Button } from '@/shared/components/Button/Button'
+import { Input } from '@/shared/components/Input/Input'
 
 const STATIC_SELECTED = ['id']
 
@@ -62,11 +63,11 @@ const LocalConfig = () => {
         <form className="config form-style" onSubmit={handleSubmit}>
           <header>
             <Input
-              keyName="title"
-              title="Nombre"
-              isRequired
-              hideLabel
-              inputHTMLAttrs={{ placeholder: 'Nombre...', required: true }}
+              htmlAttrs={{
+                name: 'title',
+                placeholder: 'Nombre...',
+                required: true,
+              }}
             />
             <Button
               title="Descartar configuración"

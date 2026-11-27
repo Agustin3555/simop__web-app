@@ -33,7 +33,7 @@
         align-items: flex-end;
         gap: var(--pal-size-s);
 
-        > .cmp-input-area {
+        > .cmp-textarea {
           grid-column: span 2;
 
           @container cmp-module-view (width < 35rem) {

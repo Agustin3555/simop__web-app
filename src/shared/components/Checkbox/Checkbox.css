@@ -1,0 +1,35 @@
+.cmp-checkbox {
+  position: relative;
+
+  display: flex;
+  align-items: center;
+  gap: var(--ui-gap);
+  height: var(--ui-height);
+
+  font-size: var(--ui-font-size);
+
+  border-radius: var(--ui-border-radius);
+  cursor: pointer;
+
+  &:not(.minimal) {
+    border-width: var(--line-thickness);
+    border-style: solid;
+    border-color: var(--pal-color-a-200);
+    padding-inline: 0.4375rem;
+    padding-block: 0.5em;
+  }
+
+  &:has(input:checked) {
+    > .false {
+      display: none;
+    }
+
+    > .true {
+      display: initial;
+    }
+  }
+
+  > .true {
+    display: none;
+  }
+}

@@ -1,0 +1,25 @@
+.cmp-input {
+  border-width: 0;
+  border-style: solid;
+  border-color: var(--pal-color-a-200);
+
+  font-size: var(--ui-font-size);
+
+  border-radius: var(--ui-border-radius);
+  background-color: transparent;
+
+  transition:
+    padding-inline var(--pal-time-s) ease,
+    border-color var(--pal-time-xs) ease;
+
+  &:not(.minimal),
+  &.minimal:focus {
+    border-width: var(--line-thickness);
+    padding-inline: 0.75em;
+    height: var(--ui-height);
+  }
+
+  &:focus {
+    border-color: var(--pal-color-a-500);
+  }
+}

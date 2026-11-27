@@ -1,4 +1,3 @@
-import InputArea from '@/pages/Admin/components/InputArea/InputArea'
 import {
   Column,
   ColumnBehavior,
@@ -6,10 +5,11 @@ import {
   InputConfig,
   Size,
 } from '../types'
-import { Input } from '@/components'
 import { StyleSheet, Text } from '@react-pdf/renderer'
 import { COLOR_MATCHER, palColor } from '@/styles/palette'
 import { Field } from '@/shared/components/Field/Field'
+import { Input } from '@/shared/components/Input/Input'
+import { Textarea } from '@/shared/components/Textarea/Textarea'
 
 export interface TextColumn extends Column {
   type: 'text'
@@ -46,19 +46,23 @@ export const buildTextColumnBehavior = (def: TextColumn): ColumnBehavior => {
       return (
         <Field {...{ title }} hideTitle={isEditMode}>
           {domain === 'longText' ? (
-            <InputArea
-              keyName={key}
-              value={typeof value === 'string' ? value : undefined}
-              {...(!isEditMode && { isRequired })}
-              {...{ title, isEditMode }}
+            <Textarea
+              minimal={isEditMode}
+              htmlAttrs={{
+                name: key,
+                ...(!isEditMode && { required: isRequired }),
+                defaultValue: typeof value === 'string' ? value : undefined,
+              }}
             />
           ) : (
             <Input
-              keyName={key}
-              value={typeof value === 'string' ? value : undefined}
-              {...(domain === 'url' && { inputHTMLAttrs: { type: 'url' } })}
-              {...(!isEditMode && { isRequired })}
-              {...{ title, isEditMode }}
+              minimal={isEditMode}
+              htmlAttrs={{
+                name: key,
+                ...(domain === 'url' && { type: 'url' }),
+                ...(!isEditMode && { required: isRequired }),
+                defaultValue: typeof value === 'string' ? value : undefined,
+              }}
             />
           )}
         </Field>

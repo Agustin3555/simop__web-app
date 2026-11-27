@@ -1,4 +1,5 @@
-import Checkbox from '@/pages/Admin/components/Checkbox/Checkbox'
+import { Field } from '@/shared/components/Field/Field'
+import { Checkbox } from '@/shared/components/Checkbox/Checkbox'
 import { Combobox } from '@/shared/components'
 import { StyleSheet, Text } from '@react-pdf/renderer'
 import {
@@ -8,7 +9,6 @@ import {
   InputConfig,
   Size,
 } from '../types'
-import { Field } from '@/shared/components/Field/Field'
 
 export interface BooleanColumn extends Column {
   type: 'boolean'
@@ -67,10 +67,12 @@ export const buildBooleanColumnBehavior = (
             />
           ) : (
             <Checkbox
-              keyName={key}
-              value={typeof value === 'boolean' ? value : undefined}
-              {...(!isEditMode && { isRequired })}
-              {...{ title, isEditMode, falseText, trueText }}
+              minimal={isEditMode}
+              {...{ falseText, trueText }}
+              htmlAttrs={{
+                name: key,
+                defaultChecked: typeof value === 'boolean' ? value : undefined,
+              }}
             />
           )}
         </Field>

@@ -19,13 +19,11 @@ export const Field = ({
   children,
 }: FieldProps) => {
   const content = useMemo(() => {
-    const titleClassName = clsx('title', 'text', {
-      visuallyHidden: hideTitle,
-    })
+    const titleClassName = clsx('title', { visuallyHidden: hideTitle })
 
     const titleContent = (
       <>
-        {title}
+        <div className="text">{title}</div>
         <Icon iconClass="fa-solid fa-asterisk" />
       </>
     )

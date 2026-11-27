@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { Input } from '@/components'
-import { InputProps } from '@/components/Input/Input'
+import { InputProps } from '@/shared/components/Input/Input'
 import { useInputHandler } from '../../hooks/useInputHandler.hook'
 
 export interface DebouncedInputProps extends InputProps {
@@ -16,7 +16,7 @@ const DebouncedInput = ({
   isRequired = false,
   isEditMode = false,
   handleChange,
-  inputHTMLAttrs,
+  htmlAttrs: inputHTMLAttrs,
 }: DebouncedInputProps) => {
   const [value, setValue] = useState(initialValue)
 
@@ -35,7 +35,7 @@ const DebouncedInput = ({
   return (
     <Input
       {...{ keyName, title, hideLabel, isRequired, isEditMode }}
-      inputHTMLAttrs={{
+      htmlAttrs={{
         ...inputHTMLAttrs,
         value: String(value),
         onChange: handleInputChange,

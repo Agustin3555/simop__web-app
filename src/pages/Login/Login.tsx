@@ -2,10 +2,11 @@ import './Login.css'
 import { useSubmitAction } from '@/hooks'
 import { useAppStore } from '@/store/config'
 import { useLocation } from 'wouter'
-import { CardPage, Input } from '@/components'
-import { uniquePass } from '@/env'
+import { CardPage } from '@/components'
 import { Button } from '@/shared/components/Button/Button'
 import { Field } from '@/shared/components/Field/Field'
+import { Input } from '@/shared/components/Input/Input'
+import { uniquePass } from '@/env'
 
 const Login = () => {
   const [, navigate] = useLocation()
@@ -33,9 +34,7 @@ const Login = () => {
         <form className="form-style" onSubmit={handleSubmit}>
           <Field title="Contraseña">
             <Input
-              keyName="pass"
-              isRequired
-              inputHTMLAttrs={{ type: 'password' }}
+              htmlAttrs={{ name: 'pass', type: 'password', required: true }}
             />
           </Field>
           <Button

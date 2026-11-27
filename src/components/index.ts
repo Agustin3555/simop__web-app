@@ -1,7 +1,6 @@
 export { default as CardPage } from './CardPage/CardPage'
 export { default as ExternalLink } from './ExternalLink/ExternalLink'
 export { default as Icon } from './Icon/Icon'
-export { default as Input } from './Input/Input'
 export { default as Loader } from './Loader/Loader'
 export { default as Separator } from './Separator/Separator'
 export { default as Snackbar } from './Snackbar/Snackbar'

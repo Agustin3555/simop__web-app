@@ -2,14 +2,14 @@ import './ConfigDropdown.css'
 import { useHandleAction } from '@/hooks'
 import { useAppStore } from '@/store/config'
 import { useConfig } from '../../../../store'
-import { Input } from '@/components'
-import { Dropdown } from '@/shared/components'
 import { Button } from '@/shared/components/Button/Button'
-import InputArea from '../../../InputArea/InputArea'
+import { Dropdown } from '@/shared/components'
+import { Section } from '@/shared/components/Section/Section'
+import { Field } from '@/shared/components/Field/Field'
+import { Input } from '@/shared/components/Input/Input'
+import { Textarea } from '@/shared/components/Textarea/Textarea'
 import { publicInstance } from '@/services/config'
 import { apiAdminPath } from '@/env'
-import { Field } from '@/shared/components/Field/Field'
-import { Section } from '@/shared/components/Section/Section'
 
 export const ConfigDropdown = () => {
   const toasting = useAppStore(s => s.toasting)
@@ -43,7 +43,7 @@ export const ConfigDropdown = () => {
       <Section label="Sincronización de datos">
         <Field title="Intranet URL">
           <Input
-            inputHTMLAttrs={{
+            htmlAttrs={{
               defaultValue: mainServerUrl as string,
               onBlur: e => setConfig('mainServerUrl', e.target.value),
             }}
@@ -61,8 +61,8 @@ export const ConfigDropdown = () => {
       </Section>
       <Section label="Informe">
         <Field title="Comentarios">
-          <InputArea
-            textareaHTMLAttrs={{
+          <Textarea
+            htmlAttrs={{
               defaultValue: commentsReports as string,
               onBlur: e => setConfig('commentsReports', e.target.value),
             }}

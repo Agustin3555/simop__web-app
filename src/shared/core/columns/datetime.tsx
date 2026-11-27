@@ -1,4 +1,3 @@
-import { Input } from '@/components'
 import { format } from '@formkit/tempo'
 import { StyleSheet, Text } from '@react-pdf/renderer'
 import {
@@ -9,6 +8,7 @@ import {
   Size,
 } from '../types'
 import { Field } from '@/shared/components/Field/Field'
+import { Input } from '@/shared/components/Input/Input'
 
 export const formatter = (value: string, withTime: boolean) =>
   withTime
@@ -82,20 +82,22 @@ export const buildDatetimeColumnBehavior = (
       column: { size },
     },
 
-    getFormField: (value, isEditMode = false) => (
-      <Field {...{ title }} hideTitle={isEditMode}>
-        <Input
-          keyName={key}
-          value={getInputValue(value, withTime)}
-          {...(!isEditMode && { isRequired })}
-          {...{ title, isEditMode }}
-          inputHTMLAttrs={{
-            type: withTime ? 'datetime-local' : 'date',
-            min: withTime ? '1900-01-01T00:00' : '1900-01-01',
-          }}
-        />
-      </Field>
-    ),
+    getFormField: (value, isEditMode = false) => {
+      return (
+        <Field {...{ title }} hideTitle={isEditMode}>
+          <Input
+            minimal={isEditMode}
+            htmlAttrs={{
+              name: key,
+              type: withTime ? 'datetime-local' : 'date',
+              min: withTime ? '1900-01-01T00:00' : '1900-01-01',
+              ...(!isEditMode && { required: isRequired }),
+              defaultValue: getInputValue(value, withTime),
+            }}
+          />
+        </Field>
+      )
+    },
 
     writeFormValue: (formValues, accData) => {
       const value = formValues.get.string(key)

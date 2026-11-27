@@ -13,15 +13,19 @@
 
       display: flex;
       align-items: center;
-      gap: var(--pal-size-2xs);
+      gap: var(--pal-size-xs);
 
       font-size: var(--pal-size-font-xs);
       font-weight: 800;
 
-      color: var(--old-pal-color-a-d1);
+      > .text {
+        opacity: 0.75;
+      }
 
       > .cmp-icon {
-        color: var(--old-pal-color-b);
+        --cmp-icon-size: 0.625rem;
+
+        color: var(--pal-color-b-500);
       }
 
       &.visually-hidden {
